@@ -17,5 +17,14 @@ I'm going to detail here the process of trying to install this.
 
 ### Downloading the code:
 
-The E3SM source seems to be available [here](https://github.com/E3SM-Project/E3SM)
+The E3SM source seems to be available [here](https://github.com/E3SM-Project/E3SM).
+*Note, you should clone this code rather than rely on any releases.*
+
+According to the instructions, I'm going to assume that the working directory should be on t
+`/scratch` somewhere.
+
+#### Figuring out which machine file to use:
+The suggested file in the tutorial is `mach = $homme/cmake/machineFiles/cori-knl.cmake.`
+\
+
 
