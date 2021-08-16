@@ -33,6 +33,9 @@ None of the perl modules on greatlakes seem useful, so I do the following:
 - Add the following to your .bashrc `eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"`
 - Then for every module listed in `e3sm_check_env`, run `cpan {MODULENAME}`. You may need to read
   error messages to determine what dependencies are, because perl is terrible.
+- The `e3sm_check_env` script has a bug in it: line 54 should read `stat = run_cmd('perl -e "require {};"'.format(module_name))[0] `
+
+  
 
 #### Figuring out which machine file to use:
 
