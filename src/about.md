@@ -4,10 +4,7 @@ layout: layouts/page.njk
 
 ## About this site
 
-Here you can write some details about you and your new blog: 
+This is a little experiment I'm trying. I already take all of my lab notes in Markdown,
+so I'm going to try setting up an online notebook. It probably won't be worth reading, 
+but I'll see if there's a good idea that can come out of this.
 
-- 🎉 I love blogging
-- 💥 I built this site using [Eleventy](https://www.11ty.dev/) on [Glitch](https://glitch.com/)
-- 🌈 Thanks for reading!
-
-You can also make your project available for other people to remix in Glitch! 🎏✨
