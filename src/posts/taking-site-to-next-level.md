@@ -19,17 +19,15 @@ I'm going to detail here the process of trying to install this.
 
 The E3SM source seems to be available [here](https://github.com/E3SM-Project/E3SM).
 *Note, you should clone this code rather than rely on any releases.*
+Run `git checkout maint-1.2`
 
-According to the instructions, I'm going to assume that the working directory should be on t
+According to the instructions, I'm going to assume that the working directory should be on 
 `/scratch` somewhere.
 
 #### Figuring out which machine file to use:
 The suggested file in the tutorial is `mach = $homme/cmake/machineFiles/cori-knl.cmake.`
 
-This default file contains many of the files I used to install MPAS standalone,
-so I'm assuming this is a good starting point if I make the necessary modifications.
-I trust the Greatlakes build system about as far as I can spit a rat, so I'm going to use
-my standalone builds with the exception of MKL which cannot be built from source.
+The default centos configuration seems to be promising, so I'm going to use that as my starting point.
 
 
 
