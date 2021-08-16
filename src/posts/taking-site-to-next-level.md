@@ -25,6 +25,12 @@ According to the instructions, I'm going to assume that the working directory sh
 
 #### Figuring out which machine file to use:
 The suggested file in the tutorial is `mach = $homme/cmake/machineFiles/cori-knl.cmake.`
-\
+
+This default file contains many of the files I used to install MPAS standalone,
+so I'm assuming this is a good starting point if I make the necessary modifications.
+I trust the Greatlakes build system about as far as I can spit a rat, so I'm going to use
+my standalone builds with the exception of MKL which cannot be built from source.
+
+
 
 
