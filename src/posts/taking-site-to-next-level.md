@@ -13,3 +13,9 @@ I decided that it was time to try to install the Higher Order Method Modeling En
 
 After some googling I found the following [instructions](https://acme-climate.atlassian.net/wiki/spaces/DOC/pages/2735079654/Standalone+HOMME)
 
+I'm going to detail here the process of trying to install this.
+
+### Downloading the code:
+
+The E3SM source seems to be available [here](https://github.com/E3SM-Project/E3SM)
+

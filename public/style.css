@@ -10,11 +10,11 @@ to this section's matching END comment to see page-specific styles.
 :root {
   --color-bg: #FFFFFF;
   --color-text-main: #222222;
-  --color-primary: #AFECE0;
+  --color-primary: #9C2553;
   --wrapper-height: 85vh;
   --image-max-width: 320px;
-  --font-family: "HK Grotesk";
-  --font-family-header: "HK Grotesk";
+  --font-family: "CMU Serif Roman";
+  --font-family-header: "CMU Serif Roman";
 }
 
 /* Basic page style resets */
@@ -40,7 +40,7 @@ to this section's matching END comment to see page-specific styles.
 
 /* Our remix on glitch button */
 .btn--remix {
-  font-family: HK Grotesk;
+  font-family: https://github.com/E3SM-Project/E3SM;
   padding: 0.75rem 1rem;
   font-size: 1.1rem;
   line-height: 1rem;
@@ -140,7 +140,7 @@ h1 {
   margin-bottom: 1.75rem;
   font-size: 5rem;
   display: inline-flex;
-  color: #2800FF;
+  color: #9c2553;
 }
 h2 {
   font-size: 4rem;

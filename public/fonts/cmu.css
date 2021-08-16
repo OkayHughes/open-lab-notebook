@@ -4,7 +4,7 @@
     font-family: 'CMU Serif Roman';
     font-style: normal;
     font-weight: normal;
-    src: local('CMU Serif Roman'), url('cmunrm.woff') format('woff');
+    src: local('CMU Serif Roman'), url('/public/fonts/cmunrm.woff') format('woff');
     }
     
 
@@ -12,7 +12,7 @@
     font-family: 'CMU Serif Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('CMU Serif Italic'), url('cmunti.woff') format('woff');
+    src: local('CMU Serif Italic'), url('/public/fonts/cmunti.woff') format('woff');
     }
     
 
@@ -20,7 +20,7 @@
     font-family: 'CMU Serif Bold';
     font-style: normal;
     font-weight: normal;
-    src: local('CMU Serif Bold'), url('cmunbx.woff') format('woff');
+    src: local('CMU Serif Bold'), url('/public/fonts/cmunbx.woff') format('woff');
     }
     
 
@@ -28,5 +28,5 @@
     font-family: 'CMU Serif BoldItalic';
     font-style: normal;
     font-weight: normal;
-    src: local('CMU Serif BoldItalic'), url('cmunbi.woff') format('woff');
+    src: local('CMU Serif BoldItalic'), url('/public/fonts/cmunbi.woff') format('woff');
     }
