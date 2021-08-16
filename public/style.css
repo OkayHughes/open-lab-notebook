@@ -40,7 +40,7 @@ to this section's matching END comment to see page-specific styles.
 
 /* Our remix on glitch button */
 .btn--remix {
-  font-family: https://github.com/E3SM-Project/E3SM;
+  font-family: CMU Serif Roman;
   padding: 0.75rem 1rem;
   font-size: 1.1rem;
   line-height: 1rem;
@@ -77,7 +77,7 @@ to this section's matching END comment to see page-specific styles.
 
 .footer a:not(.btn--remix):link,
 a:not(.btn--remix):visited {
-  font-family: HK Grotesk;
+  font-family: CMU Serif Roman;
   font-style: normal;
   font-weight: normal;
   font-size: 1.1rem;
