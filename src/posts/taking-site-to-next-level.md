@@ -196,3 +196,6 @@ prefix=r50    ; run $NCPU
 #### Reconstructing my method of installing Perl dependencies
 
 Since I didn't take good enough notes last time I installed stuff I'm going to redo this.
+
+In order to do a fresh install, remove the HOMME directory from scratch and from ~, remove the ~/perl5 directory as well as the ~/.cpan directory.
+
