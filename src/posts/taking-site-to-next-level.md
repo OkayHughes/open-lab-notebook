@@ -29,11 +29,14 @@ It appears that some perl modules are necessary, and that `cime/scripts/Tools/ge
 None of the perl modules on greatlakes seem useful, so I do the following:
 
 - Use the default `perl` in `/usr/bin`
-- Run the following to get perl to install locally `perl -MCPAN -Mlocal::lib -e 'CPAN::install(LWP)'`
-- Add the following to your .bashrc `eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"; export PERL5LIB=$HOME/.perl5:$PERL5LIB`
-- Then for every module listed in `e3sm_check_env`, run `cpan {MODULENAME}`. You may need to read
-  error messages to determine what dependencies are, because perl is terrible.
+- Add the following to your .bashrc `eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"; export PERL5LIB=$HOME/perl5:$PERL5LIB`
+- Restart terminal
+- Run the following to get perl to install locally `cpan App::cpanminus`
+- Run `cpanm LWP`
 - The `e3sm_check_env` script has a bug in it: line 54 should read `stat = run_cmd('perl -e "require {};"'.format(module_name))[0] `
+- To avoid a warning about the git version, you can run `module load git/2.20.1`.
+- Then for every module listed in `e3sm_check_env`, run `cpanm {MODULENAME}`. You may need to read
+  error messages to determine what dependencies are, because perl is terrible.
 
   
 
