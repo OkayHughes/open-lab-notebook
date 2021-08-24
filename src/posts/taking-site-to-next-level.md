@@ -114,7 +114,9 @@ export wdir="$scratch/HOMME"
 export mach="$homme/cmake/machineFiles/greatlakes.cmake"
 ```
 
-and unfortuna
+and unfortunately I haven't kept good notes on the extremely finnicky PERL installation that I had to do to get this code to work. 
+
+
 #### The jobscript for submitting
 I modified the following script for use with slurm on greatlakes. 
 Each greatlakes node has 36 "cores", i.e. 18 physical cores with 2 virtual cores after hyperthreading.
