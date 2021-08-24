@@ -131,9 +131,11 @@ export mach="$homme/cmake/machineFiles/greatlakes.cmake"
 #### Running BW wave with precip:
 * Run the following:
 ```
+make install
 cd dcmip_tests/dcmip2016_test1_baroclinic_wave/
 make install
 cd theta-l
+make install
 ```
 
 #### The jobscript for submitting
@@ -151,7 +153,7 @@ This would be worth investigating further, but as it is it appears that this run
 #SBATCH --ntasks-per-node=36
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=1000m 
-#SBATCH --time=2:00:00
+#SBATCH --time=0:60:00
 #
 # 25 nodes, 30min sufficient for all 5 runs
 # 12 nodes, 10min for r400 an r100
@@ -159,8 +161,21 @@ This would be worth investigating further, but as it is it appears that this run
 
 source /home/owhughes/HOMME/E3SM/setup.sh
 export OMP_NUM_THREADS=1
+#export OMP_STACKSIZE=16M     #  Cori has 96GB per node. had to lower to 8M on 3K nodes
 export MV2_ENABLE_AFFINITY=0
 NCPU=36
+#if [ -n "$PBS_ENVIRONMENT" ]; then
+#  NCPU=$PBS_NNODES
+#  [ "$PBS_ENVIRONMENT" = "PBS_BATCH" ] && cd $PBS_O_WORKDIR 
+#  NCPU=$PBS_NNODES
+#  let NCPU/=$OMP_NUM_THREADS
+#fi
+#if [ -n "$SLURM_NNODES" ]; then
+#    NCPU=$SLURM_NNODES
+#    let NCPU*=16
+#    let NCPU/=$OMP_NUM_THREADS
+#fi
+#let PPN=36/$OMP_NUM_THREADS
 
 # hydrostatic preqx
 EXEC=../../../test_execs/theta-l-nlev30/theta-l-nlev30
@@ -212,6 +227,9 @@ prefix=r50    ; run $NCPU
 
 
 ```
+
+Copy the above into a file located at `$wdir/dcmip_tests/dcmip2016_test1_baroclinic_wave/theta-l/jobscript-greatlakes.sh`
+
 
 #### Reconstructing my method of installing Perl dependencies
 
