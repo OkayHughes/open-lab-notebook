@@ -33,7 +33,7 @@ None of the perl modules on greatlakes seem useful, so I do the following:
 - Restart terminal
 - Run the following to get perl to install locally `cpan App::cpanminus`
 - Run `cpanm LWP`
-- The `e3sm_check_env` script has a bug in it: line 54 should read `stat = run_cmd('perl -e "require {};"'.format(module_name))[0] `
+- The `cime/scripts/Tools/e3sm_check_env` script has a bug in it: line 54 should read `stat = run_cmd('perl -e "require {};"'.format(module_name))[0] `
 - To avoid a warning about the git version, you can run `module load git/2.20.1`.
 - Then for every module listed in `e3sm_check_env`, run `cpanm {MODULENAME}`. You may need to read
   error messages to determine what dependencies are, because perl is terrible.
@@ -42,7 +42,7 @@ None of the perl modules on greatlakes seem useful, so I do the following:
 
 #### Figuring out which machine file to use:
 
-The suggested file in the tutorial is `mach = $homme/cmake/machineFiles/cori-knl.cmake.`
+The suggested file in the tutorial is `mach = $homme/cmake/machineFiles/cori-knl.cmake`.
 
 The default centos configuration seems to be promising, so I'm going to use that as my starting point.
 
@@ -87,7 +87,9 @@ SET (HOMME_FIND_BLASLAPACK TRUE CACHE BOOL "")
 
 ```
 
-*However,* this relies on environment variables set in 
+which is located at `mach = $homme/cmake/machineFiles/greatlakes.cmake`
+
+*However,* this relies on environment variables set in a file I called `setup.sh` which contains
 ```
 module load gcc/8.2.0
 
@@ -118,6 +120,9 @@ export mach="$homme/cmake/machineFiles/greatlakes.cmake"
 ```
 
 and unfortunately I haven't kept good notes on the extremely finnicky PERL installation that I had to do to get this code to work. 
+
+#### Compiling
+Start by sourcing `setup.sh`
 
 #### The jobscript for submitting
 I modified the following script for use with slurm on greatlakes. 
