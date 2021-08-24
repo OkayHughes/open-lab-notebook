@@ -113,16 +113,28 @@ export LD_LIBRARY_PATH="$PNETCDF/lib:${NETCDF_C}/lib:${NETCDF_F}/lib:${hdf5}/lib
 
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib):"
 
-export e3sm="/home/owhughes/HOMME/E3SM"
+export e3sm="$HOME/HOMME/E3SM"
 export homme="$e3sm/components/homme"
 export wdir="$scratch/HOMME"
 export mach="$homme/cmake/machineFiles/greatlakes.cmake"
 ```
 
-and unfortunately I haven't kept good notes on the extremely finnicky PERL installation that I had to do to get this code to work. 
 
 #### Compiling
-Start by sourcing `setup.sh`
+
+* Edit the `setup.sh` file to point to relevant directories.
+* Start by running `source setup.sh` after installing all dependencies following the MPAS installation instructions given [here]().
+* Run `cd $wdir`
+* Run `cmake -C  $mach $homme`
+* In order to check whether compilation works, run `make -j4 theta-l`
+
+#### Running BW wave with precip:
+* Run the following:
+```
+cd dcmip_tests/dcmip2016_test1_baroclinic_wave/
+make install
+cd theta-l
+```
 
 #### The jobscript for submitting
 I modified the following script for use with slurm on greatlakes. 
