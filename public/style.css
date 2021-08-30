@@ -225,3 +225,9 @@ a:hover {
 .controls {
   margin: 3rem 0 2rem;
 }
+
+
+pre {
+  background-color:#dddddd;
+  padding:1em;
+}
