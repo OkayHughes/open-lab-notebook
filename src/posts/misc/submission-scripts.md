@@ -86,4 +86,5 @@ Note: When `-bind-to=core` is applied to MPAS, it runs in a much more sensible t
 is that the default is that it tries to bind to a socket, and that causes it to hang, or at least eat up an absurdly wasteful 
 amount of resources.
 
-### 
+### `seff ${JOBID}`
+Evidently you can do `seff ${JOBID}` 
