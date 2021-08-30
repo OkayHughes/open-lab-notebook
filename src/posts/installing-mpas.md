@@ -360,21 +360,24 @@ prefix=$PNETCDF
 
 ---
 
-	module load gcc/8.2.0
-	export PATH=$scratch/dependencies/mpich/bin:$PATH
-	export MPICH_CC=gcc
-	export MPICH_FC=gfortran
-	export CC=mpicc
-	export FC=mpif90
-	hdf5=$scratch/dependencies/hdf5
-	zlib=$scratch/dependencies/zlib
-	pnetcdf=$scratch/dependencies/pnetcdf
-	prefix=$scratch/dependencies/netcdf_c
-	export CPPFLAGS="-I$hdf5/include -I$zlib/include -I$pnetcdf/include"
-	export LDFLAGS="-L$hdf5/lib -L$zlib/lib -L$pnetcdf/lib"
-	export LIBS="-ldl -lhdf5 -lpnetcdf"
-	export CFLAGS="-g -Wall"
-	./configure --prefix=$prefix --disable-shared --enable-parallel-tests --enable-static --enable-pnetcdf --enable-netcdf4 --disable-dap --enable-cdf5 
+```
+module load gcc/8.2.0
+export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export MPICH_FC=gfortran
+export CC=mpicc
+export FC=mpif90
+hdf5=$scratch/dependencies/hdf5
+zlib=$scratch/dependencies/zlib
+pnetcdf=$scratch/dependencies/pnetcdf
+prefix=$scratch/dependencies/netcdf_c
+export CPPFLAGS="-I$hdf5/include -I$zlib/include -I$pnetcdf/include"
+export LDFLAGS="-L$hdf5/lib -L$zlib/lib -L$pnetcdf/lib"
+export LIBS="-ldl -lhdf5 -lpnetcdf"
+export CFLAGS="-g -Wall"
+export LD_LIBRARY_PATH=$scratch/dependencies/mpich/lib:${zlib}/lib:${hdf5}/lib:${NETCDF_C}/lib:${NETCDF_F}/lib:${pnetcdf}/lib:${LD_LIBRARY_PATH}
+./configure --prefix=$prefix --enable-shared --enable-parallel-tests --enable-static --enable-pnetcdf --enable-netcdf4 --disable-dap --enable-cdf5
+```
 
 ---
 
@@ -382,24 +385,26 @@ prefix=$PNETCDF
 
 ---
 
-	module load gcc/8.2.0
-	export PATH=$scratch/dependencies/mpich/bin:$PATH
-	export MPICH_CC=gcc
-	export MPICH_FC=gfortran
-	export MPICH_F90=gfortran
-	export CC=mpicc
-	export FC=mpif90
-	export NETCDF_C=$scratch/dependencies/netcdf_c
-	export NETCDF_F=$scratch/dependencies/netcdf_fortran
-	export PNETCDF=$scratch/dependencies/pnetcdf
-	hdf5=$scratch/dependencies/hdf5
-	zlib=$scratch/dependencies/zlib
-	curld=$scratch/dependencies/curl
-	export CPPFLAGS="-I${NETCDF_C}/include -I$hdf5/include -I$zlib/include -I$curld/include"
-	export LDFLAGS="-L${NETCDF_C}/lib -L$hdf5/lib -L$zlib/lib -L$curld/lib -L$PNETCDF/lib"
-	export LD_LIBRARY_PATH="${NETCDF_C}/lib:${LD_LIBRARY_PATH}"
-	export LIBS="-lnetcdf -lhdf5_hl -lm -lz -ldl -lhdf5 -lpnetcdf"
-	./configure --prefix=$NETCDF_F --disable-shared --enable-static
+```
+module load gcc/8.2.0
+export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export MPICH_FC=gfortran
+export MPICH_F90=gfortran
+export CC=mpicc
+export FC=mpif90
+export NETCDF_C=$scratch/dependencies/netcdf_c
+export NETCDF_F=$scratch/dependencies/netcdf_fortran
+export PNETCDF=$scratch/dependencies/pnetcdf
+hdf5=$scratch/dependencies/hdf5
+zlib=$scratch/dependencies/zlib
+curld=$scratch/dependencies/curl
+export CPPFLAGS="-I${NETCDF_C}/include -I$hdf5/include -I$zlib/include -I$curld/include"
+export LDFLAGS="-L${NETCDF_C}/lib -L$hdf5/lib -L$zlib/lib -L$curld/lib -L$PNETCDF/lib"
+export LIBS="-lnetcdf -lhdf5_hl -lm -lz -ldl -lhdf5 -lpnetcdf"
+export LD_LIBRARY_PATH=$scratch/dependencies/mpich/lib:${zlib}/lib:${hdf5}/lib:${NETCDF_C}/lib:${NETCDF_F}/lib:${PNETCDF}/lib:${LD_LIBRARY_PATH}
+./configure --prefix=$NETCDF_F --enable-shared --enable-static
+```
 
 ---
 
@@ -407,48 +412,54 @@ prefix=$PNETCDF
 
 --- 
 
-	module load gcc/8.2.0
-	export PATH=$scratch/dependencies/mpich/bin:$PATH
-	export MPICH_CC=gcc
-	export MPICH_FC=gfortran
-	export MPICH_F77=gfortran
-	export MPICH_F90=gfortran
-	export CC=mpicc
-	export FC=mpif90
-	NETCDF_C=$scratch/dependencies/netcdf_c
-	NETCDF_F=$scratch/dependencies/netcdf_fortran
-	PNETCDF=$scratch/dependencies/pnetcdf
-	hdf5=$scratch/dependencies/hdf5
-	zlib=$scratch/dependencies/zlib
-	export CPPFLAGS="-I${NETCDF_C}/include -I${NETCDF_F}/include -I${PNETCDF}/include -I$hdf5/include -I$zlib/include -I"
-	export LDFLAGS="-L${NETCDF_C}/lib -L${NETCDF_F}/lib -L${PNETCDF}/lib -L${hdf5}/lib -L${zlib}/lib"
-	export LD_LIBRARY_PATH="$PNETCDF/lib:${NETCDF_C}/lib:${LD_LIBRARY_PATH}"
-	export LIBS="-lnetcdf -lpnetcdf -lhdf5_hl -lm -lz -lcurl -ldl -lhdf5"
-	export CFLAGS="-g -Wall -std=c11"
-	prefix=$scratch/dependencies/PIO
-	cmake -DNetCDF_C_PATH=$NETCDF_C -DNetCDF_Fortran_PATH=$NETCDF_F -DPnetCDF_PATH=$PNETCDF -DHDF5_PATH=$hdf5 -DCMAKE_INSTALL_PREFIX=$prefix -DPIO_USE_MALLOC=ON -DCMAKE_VERBOSE_MAKEFILE=1 -DPIO_ENABLE_TIMING=OFF .
+```
+module load gcc/8.2.0
+module load cmake/3.17.3
+export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export MPICH_FC=gfortran
+export MPICH_F77=gfortran
+export MPICH_F90=gfortran
+export CC=mpicc
+export FC=mpifort
+NETCDF_C=$scratch/dependencies/netcdf_c
+NETCDF_F=$scratch/dependencies/netcdf_fortran
+PNETCDF=$scratch/dependencies/pnetcdf
+hdf5=$scratch/dependencies/hdf5
+zlib=$scratch/dependencies/zlib
+export CPPFLAGS="-I${NETCDF_C}/include -I${NETCDF_F}/include -I${PNETCDF}/include -I$hdf5/include -I$zlib/include -I"
+export LDFLAGS="-L${NETCDF_C}/lib -L${NETCDF_F}/lib -L${PNETCDF}/lib -L${hdf5}/lib -L${zlib}/lib"
+export LD_LIBRARY_PATH="$PNETCDF/lib:${NETCDF_C}/lib:${NETCDF_F}/lib:${hdf5}/lib:${zlib}/lib:${LD_LIBRARY_PATH}"
+export LIBS="-lnetcdf -lpnetcdf -lhdf5_hl -lm -lz -lcurl -ldl -lhdf5"
+export CFLAGS="-g -Wall -std=c11"
+prefix=$scratch/dependencies/PIO
+cmake   -DNetCDF_C_PATH=$NETCDF_C -DNetCDF_Fortran_PATH=$NETCDF_F -DPnetCDF_PATH=$PNETCDF -DHDF5_PATH=$hdf5 -DCMAKE_INSTALL_PREFIX=$prefix -DPIO_USE_MALLOC=ON -DCMAKE_VERBOSE_MAKEFILE=true -DPIO_ENABLE_TIMING=OFF
+```
 
 ---
 
 ## setup_MPAS.sh
 
---- 
+---
 
-	module load gcc/8.2.0
-	export PATH=$scratch/dependencies/mpich/bin:$PATH
-	export MPICH_CC=gcc
-	export MPICH_FC=gfortran
-	export MPICH_F90=gfortran
-	export CC=mpicc
-	export FC=mpif90
-	export NETCDF=$scratch/dependencies/netcdf_c
-	export NETCDFF=$scratch/dependencies/netcdf_fortran
-	export PNETCDF=$scratch/dependencies/pnetcdf
-	export PIO=$scratch/dependencies/PIO
-	hdf5=$scratch/dependencies/hdf5
-	zlib=$scratch/dependencies/zlib
-	export MPAS_EXTERNAL_INCLUDES="-I$hdf5/include -I$zlib/include"
-	export MPAS_EXTERNAL_LIBS="-L$hdf5/lib -L$zlib/lib -lhdf5_hl -lhdf5 -lz -ldl"
-
+```
+module load gcc/8.2.0
+export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export MPICH_FC=gfortran
+export MPICH_F90=gfortran
+export CC=mpicc
+export FC=mpif90
+export NETCDF=$scratch/dependencies/netcdf_c
+export NETCDFF=$scratch/dependencies/netcdf_fortran
+export PNETCDF=$scratch/dependencies/pnetcdf
+export PIO=$scratch/dependencies/PIO
+hdf5=$scratch/dependencies/hdf5
+zlib=$scratch/dependencies/zlib
+export MPAS_EXTERNAL_INCLUDES="-I$hdf5/include -I$zlib/include"
+export MPAS_EXTERNAL_LIBS="-L${hdf5}/lib -L$zlib/lib -lhdf5_hl -lhdf5 -lz -ldl"
+export LD_LIBRARY_PATH="${PIO}/lib:$PNETCDF/lib:${NETCDF_C}/lib:${NETCDF_F}/lib:${hdf5}/lib:${zlib}/lib:${LD_LIBRARY_PATH}"
+export FFLAGS="-freal-4-real-8"
+```
 
 ---
