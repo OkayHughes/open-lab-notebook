@@ -74,10 +74,16 @@ prefix=r50    ; run $NCPU
 
 
 As far as I can tell this indicates that `ntasks-per-node` dictates the number of tasks that can be directly spawned by 
-mpirun. `-bind-to=core` seems to play better with hyperthreaded processors?
+mpirun. `-bind-to=core` seems to play better with hyperthreaded processors? THIS IS THE IMPORTANT ONE!
 
 However, one can increase `$OMP_NUM_THREADS` seemingly _ad infinitum_ without it complaining; seemingly it can support more than
 36 threads at a time on one node. (Note: I haven't directly checked that it's allocating only one node to my job).
 
-However, this appears to be the correct approach to allocating resources as all jobs from ne4 up to ne60 seem to run reasonably fast 
-and scripts run fast enough to 
+However, this appears to be the correct approach to allocating resources as all jobs from ne4 up to ne60 seem to run reasonably fast.
+
+
+Note: When `-bind-to=core` is applied to MPAS, it runs in a much more sensible time frame and complains less. My guess
+is that the default is that it tries to bind to a socket, and that causes it to hang, or at least eat up an absurdly wasteful 
+amount of resources.
+
+### 
