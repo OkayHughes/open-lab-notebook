@@ -9,8 +9,10 @@ layout: layouts/post.njk
 
 The Eulerian Spectral dycore in [CAM](https://www.cesm.ucar.edu/models/atm-cam/)
 is one of the most computationally efficient ways of solving the primitive equations of motion
-for atmospheric flows. 
+for atmospheric flows. Oh nooo
 
 However, it has several important design considerations
 that make it useful for studying the gravity wave that's been giving us so much trouble.
-Firstly, it is formulated using Temperature in 
+Firstly, it is formulated using Temperature in `$$ a $$`
+
+which is miserable

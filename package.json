@@ -7,9 +7,9 @@
     "build": "NODE_ENV=production eleventy"
   },
   "dependencies": {
-    "eleventy-plugin-seo": "^0.5.1",
-    "luxon": "^1.26.0",
-    "katex":"^0.0.0"
+    "eleventy-plugin-seo": "^0.5.2",
+    "luxon": "^2.0.2",
+    "katex": "^0.13.16"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.11.1"

@@ -10,7 +10,7 @@
     <meta name="description" content="Your new 11ty blog" />
     <link rel="stylesheet" type="text/css" href="/public/style.css" />
     <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
-
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
     {% seo "" %}
   </head>
   <body>
@@ -18,7 +18,7 @@
     
     {# Page or post content will appear here #}
   
-    {{ content | latex | safe }}
+    {{ content |   safe }}
 
       <footer class="footer">
         <div class="links">

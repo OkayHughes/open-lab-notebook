@@ -1,5 +1,6 @@
 const { DateTime } = require("luxon");
 const pluginSEO = require("eleventy-plugin-seo");
+const katex = require('katex');
 
 /**
 * This is the JavaScript code that determines the config for your Eleventy site
@@ -41,7 +42,19 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter("htmlDateString", dateObj => {
     return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
   });
+  
+  // KaTeX CONFIG:
+  eleventyConfig.addFilter('latex', content => {
+  return content.replace(/\$\$(.+?)\$\$/g, (_, equation) => {
+    const cleanEquation = equation
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
 
+    return katex.renderToString(cleanEquation, { throwOnError: true })
+  })
+  });
+
+  
   eleventyConfig.setBrowserSyncConfig({ ghostMode: false });
 
   /* Build the collection of posts to list in the site
