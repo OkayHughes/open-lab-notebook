@@ -1,4 +1,5 @@
 dependencies:
+  eleventy-plugin-link_to: 0.4.0
   eleventy-plugin-seo: 0.5.2
   katex: 0.13.16
   luxon: 2.0.2
@@ -165,7 +166,6 @@ packages:
   /ansi-styles/4.3.0:
     dependencies:
       color-convert: 2.0.1
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -456,6 +456,15 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==
+  /chalk/4.1.2:
+    dependencies:
+      ansi-styles: 4.3.0
+      supports-color: 7.2.0
+    dev: false
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
   /character-parser/2.2.0:
     dependencies:
       is-regex: 1.1.2
@@ -513,13 +522,11 @@ packages:
   /color-convert/2.0.1:
     dependencies:
       color-name: 1.1.4
-    dev: true
     engines:
       node: '>=7.0.0'
     resolution:
       integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==
   /color-name/1.1.4:
-    dev: true
     resolution:
       integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
   /commander/2.20.3:
@@ -734,6 +741,14 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==
+  /eleventy-plugin-link_to/0.4.0:
+    dependencies:
+      chalk: 4.1.2
+    dev: false
+    peerDependencies:
+      '@11ty/eleventy': '>=0.11.0'
+    resolution:
+      integrity: sha512-2aAuv4V/1468T6ALJcLQSLVrrE6r35GxoXRmHDaMxc7DAxdBYdStnknq5pb6md/Py/v/wtQVUhc9hqvDAeciZA==
   /eleventy-plugin-seo/0.5.2:
     dependencies:
       html-entities: 1.4.0
@@ -1053,7 +1068,6 @@ packages:
     resolution:
       integrity: sha1-XkdHk/fqmEPRu5nCPu9J/xJv/zk=
   /has-flag/4.0.0:
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -2280,7 +2294,6 @@ packages:
   /supports-color/7.2.0:
     dependencies:
       has-flag: 4.0.0
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -2557,6 +2570,7 @@ shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
   '@11ty/eleventy': ^0.11.1
+  eleventy-plugin-link_to: ^0.4.0
   eleventy-plugin-seo: ^0.5.2
   katex: ^0.13.16
   luxon: ^2.0.2

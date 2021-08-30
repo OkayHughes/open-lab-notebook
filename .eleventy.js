@@ -25,6 +25,7 @@ module.exports = function(eleventyConfig) {
     "woff2"
   ]);
   eleventyConfig.addPassthroughCopy("public");
+  eleventyConfig.addPlugin(require('eleventy-plugin-link_to'));
 
   /* From: https://github.com/artstorm/eleventy-plugin-seo
   
