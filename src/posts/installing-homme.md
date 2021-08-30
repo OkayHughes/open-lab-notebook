@@ -16,7 +16,7 @@ I'm going to detail here the process of trying to install this.
 
 ### Downloading the code:
 
-Note: follow the instructions for installing dependencies (up to ParallelIO) from this post: {% link_to "src/posts/installing-mpas" %}
+Note: follow the instructions for installing dependencies (up to ParallelIO) from [this post](/posts/installing-mpas)
 
 The E3SM source seems to be available [here](https://github.com/E3SM-Project/E3SM).
 _Note, you should clone this code rather than rely on any releases._

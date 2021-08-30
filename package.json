@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "eleventy-plugin-seo": "^0.5.2",
-    "eleventy-plugin-link_to": "^0.4.0",
     "luxon": "^2.0.2",
-    "katex": "^0.13.16"
+    "katex": "^0.13.16",
+    "eleventy-plugin-link_to": "^0.4.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.11.1"

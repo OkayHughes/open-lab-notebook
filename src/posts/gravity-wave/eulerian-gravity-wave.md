@@ -106,3 +106,4 @@ analytic_ic_type = 'dry_baroclinic_wave_dcmip2016'
 which should create a T341 case with two-mountain topography.
 
 I ran `./case.build`
+

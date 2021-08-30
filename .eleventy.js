@@ -26,7 +26,6 @@ module.exports = function(eleventyConfig) {
     "woff2"
   ]);
   eleventyConfig.addPassthroughCopy("public");
-  eleventyConfig.addPlugin(linkTo);
 
   /* From: https://github.com/artstorm/eleventy-plugin-seo
   
@@ -55,6 +54,7 @@ module.exports = function(eleventyConfig) {
     return katex.renderToString(cleanEquation, { throwOnError: true })
   })
   });
+  eleventyConfig.addPlugin(linkTo);
 
   
   eleventyConfig.setBrowserSyncConfig({ ghostMode: false });
