@@ -1,13 +1,11 @@
 ---
-title: Installing MPAS
+title: Installing MPAS on Greatlakes
 date: 2021-08-30
 tags:
   - posts
 layout: layouts/post.njk
 ---
 
-Installing MPAS on GL:
-=================================================================
  
 ## Introductory notes:
 ### Installation was done without shared libraries.

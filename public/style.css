@@ -218,7 +218,7 @@ a:hover {
 }
 .postTitle {
   font-size: 4rem;
-  color: #000;
+  color: var(--color-primary);
   line-height: 1.1;
   margin-bottom: 2rem;
 }
