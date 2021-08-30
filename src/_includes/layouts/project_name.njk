@@ -11,7 +11,9 @@ templateClass: tmpl-home
     
     {# After the the content defined in index.md, list the blog posts in the collection #}
     <ul>
-
+      <h3>
+        Tagged {{ tag }}:
+      </h2>
       <ol>
       {% set taglist = collections[ tag ] %}
       {% for post in taglist | reverse %}

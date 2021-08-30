@@ -4,7 +4,9 @@ date: 2021-08-31
 tags:
   - posts
   - gravity_wave
-layout: layouts/post.njk
+tag:
+  - gravity_wave
+layout: layouts/project_name.njk
 ---
 
 Exploring the two-mountain gravity wave.
@@ -16,3 +18,5 @@ Exploring the two-mountain gravity wave.
  
  Said gravity wave develops in all tested dynamical cores to date, but in all but the Spectral Element dycore (CAM version)
  it is quickly damped out.
+ 
+ 
