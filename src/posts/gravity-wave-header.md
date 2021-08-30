@@ -3,7 +3,7 @@ title: The two-mountain gravity wave
 date: 2021-08-31
 tags:
   - posts
-  - gravity-wave
+  - gravity_wave
 layout: layouts/post.njk
 ---
 
