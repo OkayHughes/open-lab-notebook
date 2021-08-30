@@ -16,4 +16,6 @@ Documenting NCL scripts
 The sheer amount of copy-pasting that I do when I make a version of an NCL script makes it so
 I never remember anything about the language or what I did. The purpose of these posts
 are to create online documentation that can be referenced by other posts here.
+
+
  

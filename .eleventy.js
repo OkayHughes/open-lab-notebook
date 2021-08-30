@@ -1,6 +1,6 @@
 const { DateTime } = require("luxon");
 const pluginSEO = require("eleventy-plugin-seo");
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const linkTo = require('eleventy-plugin-link_to');
 const katex = require('katex');
 
 /**
@@ -26,8 +26,7 @@ module.exports = function(eleventyConfig) {
     "woff2"
   ]);
   eleventyConfig.addPassthroughCopy("public");
-  eleventyConfig.addPlugin(require('eleventy-plugin-link_to'));
-  eleventyConfig.addPlugin(syntaxHighlight);
+  eleventyConfig.addPlugin(linkTo);
 
   /* From: https://github.com/artstorm/eleventy-plugin-seo
   
