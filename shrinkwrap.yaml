@@ -1,5 +1,6 @@
 dependencies:
   eleventy-plugin-seo: 0.5.1
+  katex: 0.13.16
   luxon: 1.26.0
 devDependencies:
   '@11ty/eleventy': 0.11.1
@@ -531,6 +532,12 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg==
+  /commander/6.2.1:
+    dev: false
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==
   /component-bind/1.0.0:
     dev: true
     resolution:
@@ -1338,6 +1345,13 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-h75jSIZJy9ym9Tqzm+yczSNH9ZI=
+  /katex/0.13.16:
+    dependencies:
+      commander: 6.2.1
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-Q+odt4vx4Og/B5CbuMqE1uiTLnS5EWUFic40xsx8drbqYYiuPPHct7PNj84dFiJ5AFxSZhNPkeBULAtxzEndNg==
   /kind-of/3.2.2:
     dependencies:
       is-buffer: 1.1.6
@@ -2539,4 +2553,5 @@ shrinkwrapVersion: 3
 specifiers:
   '@11ty/eleventy': ^0.11.1
   eleventy-plugin-seo: ^0.5.1
+  katex: ''
   luxon: ^1.26.0

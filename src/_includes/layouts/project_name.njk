@@ -7,7 +7,7 @@ templateClass: tmpl-home
 
 <div class="wrapper home">
   <div class="content">
-    {{ content | safe }}
+    {{ content | latex | safe }}
     
     {# After the the content defined in index.md, list the blog posts in the collection #}
     <ul>
