@@ -3,6 +3,8 @@ title: Installing HOMME
 date: 2021-08-16
 tags:
   - posts
+eleventyNavigation:
+  key: Installing HOMME
 layout: layouts/post.njk
 ---
 

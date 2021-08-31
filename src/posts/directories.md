@@ -6,6 +6,7 @@ tags:
   - directory
 tag:
   - directory
+
 layout: layouts/project_name.njk
 ---
 
