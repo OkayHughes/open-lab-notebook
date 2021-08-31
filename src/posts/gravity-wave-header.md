@@ -7,7 +7,9 @@ tags:
   - directory
 tag:
   - gravity_wave
-layout: layouts/project_name.njk
+eleventyNavigation:
+  key: The two-mountain gravity wave
+layout: layouts/post.njk
 ---
 
 Exploring the two-mountain gravity wave.
