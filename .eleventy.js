@@ -52,7 +52,7 @@ module.exports = function(eleventyConfig) {
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
 
-    return katex.renderToString(cleanEquation, { throwOnError: true })
+    return katex.renderToString(cleanEquation, { throwOnError: true, displayMode: true })
   })
   });
   eleventyConfig.addPlugin(linkTo);
