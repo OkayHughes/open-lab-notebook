@@ -13,7 +13,7 @@ for atmospheric flows.
 
 However, it has several important design considerations
 that make it useful for studying the gravity wave that's been giving us so much trouble.
-Firstly, it is formulated using Temperature in `$$ ^\circ K $$`. The second is that 
+Firstly, it is formulated using Temperature in `$$ K $$` rather than potential temperature `$$ \theta $$`. The second is that 
 there is no implicit representation of diffusion and it must be added as a namelist parameter.
 This allows us to test whether decreasing the strength of horizontal diffusion prevents the wave from being damped.
 
