@@ -29,3 +29,5 @@ var_tmp := var_all({time_ind}, :, :, :)
 
 ; if you want to take a subset of latitude and longitude
 var = interpolated_var(0, {0:45}, {-180:180})
+
+```

@@ -2,6 +2,7 @@ const { DateTime } = require("luxon");
 const pluginSEO = require("eleventy-plugin-seo");
 const linkTo = require('eleventy-plugin-link_to');
 const katex = require('katex');
+const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 
 /**
 * This is the JavaScript code that determines the config for your Eleventy site
@@ -55,6 +56,7 @@ module.exports = function(eleventyConfig) {
   })
   });
   eleventyConfig.addPlugin(linkTo);
+  eleventyConfig.addPlugin(eleventyNavigationPlugin);
 
   
   eleventyConfig.setBrowserSyncConfig({ ghostMode: false });
