@@ -1,9 +1,11 @@
 ---
-title: NCL Interpolation Cookbook
 date: 2021-08-16
 tags:
   - posts
   - ncl
+eleventyNavigation:
+  key: NCL Interpolation Cookbook
+  parent: NCL Script Documentation
 layout: layouts/post.njk
 ---
 

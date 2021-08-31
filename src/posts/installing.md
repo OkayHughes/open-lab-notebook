@@ -1,10 +1,9 @@
 ---
-title: Installing Dycores
 date: 2021-08-16
 tags:
   - posts
 eleventyNavigation:
-  key: Installing
+  key: Installing Dycores
 layout: layouts/post.njk
 ---
 

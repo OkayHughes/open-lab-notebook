@@ -4,6 +4,9 @@ date: 2021-08-30
 tags:
   - posts
   - gravity_wave
+eleventyNavigation:
+  key: Using the CAM Eulerian dynamical core to explore the 2MGW
+  parent: The two-mountain gravity wave
 layout: layouts/post.njk
 ---
 

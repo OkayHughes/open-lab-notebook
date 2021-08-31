@@ -1,11 +1,10 @@
 ---
-title: Installing MPAS on Greatlakes
 date: 2021-08-30
 tags:
   - posts
 eleventyNavigation:
   key: Installing MPAS on GreatLakes
-  parent: Installing
+  parent: Installing Dycores
 layout: layouts/post.njk
 ---
 

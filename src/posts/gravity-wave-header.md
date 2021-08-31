@@ -5,8 +5,6 @@ tags:
   - posts
   - gravity_wave
   - directory
-tag:
-  - gravity_wave
 eleventyNavigation:
   key: The two-mountain gravity wave
 layout: layouts/post.njk

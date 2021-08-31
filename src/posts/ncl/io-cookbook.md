@@ -1,9 +1,11 @@
 ---
-title: NCL IO Cheat Sheet
 date: 2021-08-16
 tags:
   - posts
   - ncl
+eleventyNavigation:
+  key: NCL IO Cheat Sheet
+  parent: NCL Script Documentation
 layout: layouts/post.njk
 ---
 

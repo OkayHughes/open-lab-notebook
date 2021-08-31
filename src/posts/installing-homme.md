@@ -1,11 +1,10 @@
 ---
-title: Installing HOMME
 date: 2021-08-16
 tags:
   - posts
 eleventyNavigation:
   key: Installing HOMME
-  parent: Installing
+  parent: Installing Dycores
 layout: layouts/post.njk
 ---
 
