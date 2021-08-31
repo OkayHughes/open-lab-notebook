@@ -1,5 +1,5 @@
 ---
-title: NCL Cookbook
+title: NCL IO Cheat Sheet
 date: 2021-08-16
 tags:
   - posts
@@ -35,6 +35,3 @@ This can also be used for general script calling from within ncl.
 ``` wks_frame = gsn_open_wks("png", "figures/" + dir_fig + "/" + comp_identifier + "/" +  label + level ) ```
 
 
-### Getting the dimensions of a variable:
-
-``` dimsz = dimsizes(fnames) ```

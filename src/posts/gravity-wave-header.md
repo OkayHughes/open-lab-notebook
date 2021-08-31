@@ -4,6 +4,7 @@ date: 2021-08-31
 tags:
   - posts
   - gravity_wave
+  - directory
 tag:
   - gravity_wave
 layout: layouts/project_name.njk
