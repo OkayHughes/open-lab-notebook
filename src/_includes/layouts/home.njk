@@ -16,7 +16,7 @@ templateClass: tmpl-home
       {%- endfor -%}
       <li><a href="/posts">View all posts</a></li>
     </ul> -->
-    
+    {{ collections.all | eleventyNavigation | eleventyNavigationToHtml | safe }}
   </div>
 </div>
 
