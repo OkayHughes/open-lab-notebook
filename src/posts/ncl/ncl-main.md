@@ -4,6 +4,7 @@ date: 2021-08-31
 tags:
   - posts
   - ncl
+  - directory
 tag:
   - ncl
 layout: layouts/project_name.njk
