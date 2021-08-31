@@ -36,5 +36,22 @@ latsize = dimsizes(lat)
 ```
 
 
+### `if else`
+
+```
+if (max_val .lt. 10) then
+
+else
+
+end if
+```
+
+
+### Accessing `$$ \pi $$`
+
+```
+pi_const = get_pi(0.0)
+```
+
 
 
