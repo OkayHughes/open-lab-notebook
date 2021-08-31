@@ -5,7 +5,7 @@ tags:
   - posts
 eleventyNavigation:
   key: Installing HOMME
-  
+  parent: Installing
 layout: layouts/post.njk
 ---
 
