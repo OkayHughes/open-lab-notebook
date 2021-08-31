@@ -47,12 +47,18 @@ module.exports = function(eleventyConfig) {
   
   // KaTeX CONFIG:
   eleventyConfig.addFilter('latex', content => {
-  return content.replace(/\$\$(.+?)\$\$/g, (_, equation) => {
+  return content.replace(/\$\$\$(.+?)\$\$\$/g, (_, equation) => {
     const cleanEquation = equation
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
 
     return katex.renderToString(cleanEquation, { throwOnError: true, displayMode: true })
+  }).replace(/\$\$(.+?)\$\$/g, (_, equation) => {
+    const cleanEquation = equation
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+
+    return katex.renderToString(cleanEquation, { throwOnError: true, displayMode: false })
   })
   });
   eleventyConfig.addPlugin(linkTo);

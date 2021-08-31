@@ -34,13 +34,34 @@ In order to have some heirarchical navigation, I installed the `eleventy-navigat
 This allows me to have heirarchical categories and to have it autogenerate some navigation for me.
 Follow the instructions [here](https://www.11ty.dev/docs/plugins/navigation/) to get started.
 
-## Installing latex support:
-Currently on the site, I can do e.g. `$$\frac{\mathrm{d}}{\mathrm{d}t}\int_0^t f(x) \, \mathrm{d}x $$` using KaTeX.
+## Installing `$$\LaTeX$$` support:
+Currently on the site, I can do e.g. `$$$\frac{\mathrm{d}}{\mathrm{d}t}\int_0^t f(x) \, \mathrm{d}x $$$` using KaTeX.
 Follow the instructions [here](https://benborgers.com/posts/eleventy-katex) to get started with that.
 
+I made the following modification to the latex filter:
+```
+  eleventyConfig.addFilter('latex', content => {
+  return content.replace(/\$\$\$(.+?)\$\$\$/g, (_, equation) => {
+    const cleanEquation = equation
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+
+    return katex.renderToString(cleanEquation, { throwOnError: true, displayMode: true })
+  }).replace(/\$\$(.+?)\$\$/g, (_, equation) => {
+    const cleanEquation = equation
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+
+    return katex.renderToString(cleanEquation, { throwOnError: true, displayMode: false })
+  })
+  });
+```
+which adds support for both inline and display mode LaTeX. 
+  
 ## Changing the color scheme:
 In the file `public/style.css` find the line `  --color-primary: #9C2553;` and change the `#9C2553` to some other hex color.
 E.g. [this colorpicker](https://www.google.com/search?client=firefox-b-1-d&q=hex+color+picker).
+
 
 
 
