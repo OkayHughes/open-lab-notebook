@@ -16,8 +16,8 @@ templateClass: tmpl-home
     {{ content | latex | safe }}
     <div class="controls">
     {# The previous and next post data is added in .eleventy.js #}
-      {% set navPages = collections.all | eleventyNavigation(eleventyNavigation.key, { includeSelf: true }) %}
-      {{ navPages | dump | safe }}
+      
+      {{ collections.all | eleventyNavigation | eleventyNavigationToHtml | safe }}
     </div>
   </div>
 </div>
