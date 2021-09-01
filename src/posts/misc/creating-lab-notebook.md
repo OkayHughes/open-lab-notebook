@@ -1,9 +1,11 @@
 ---
-title: Creating an online lab notebook.
 date: 2021-08-31
 tags:
   - posts
   - science-communication
+eleventyNavigation:
+  key: Creating an online lab notebook.
+  parent: Scientific Computing
 layout: layouts/post.njk
 ---
 

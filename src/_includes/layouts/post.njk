@@ -15,9 +15,10 @@ templateClass: tmpl-home
     {# Content from the body of the post markdown appears here #}
     {{ content | latex | safe }}
     <div class="controls">
+      <h1 
     {# The previous and next post data is added in .eleventy.js #}
       
-      {{  collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) | dump | safe }}
+      {{  collections.all | eleventyNavigation(eleventyNavigation.key) | eleventyNavigationToHtml | safe }}
     </div>
   </div>
 </div>
