@@ -5,7 +5,7 @@ tags:
   - science-communication
 eleventyNavigation:
   key: Creating an online lab notebook.
-  parent: Scientific Computing
+  parent: Science Communication
 layout: layouts/post.njk
 ---
 

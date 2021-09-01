@@ -21,7 +21,7 @@ templateClass: tmpl-home
           <h3>
             Parent post:
       </h3>
-          {{  collections.all | eleventyNavigation(eleventyNavigation.parent) | eleventyNavigationToHtml | safe }}
+          {{  collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) | eleventyNavigationToHtml | safe }}
       {% endif %}
       {% set postdata = collections.all | eleventyNavigation(eleventyNavigation.key)  %}
       {% if postdata|length %}
