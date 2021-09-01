@@ -65,6 +65,7 @@ echo ${CASE_NAME}
 
 Then used the following setup script:
 
+
 ```
 CAM_CONFIG_OPTS="--phys adiabatic  --analytic_ic"
 STOP_OPTION=ndays
@@ -90,8 +91,9 @@ echo "${additions}" >> user_nl_cam
 cp ${MY_CESM_CASES}/comp_mods/${BC_COMP_MOD} SourceMods/src.cam/ic_baroclinic.F90
 ```
 
-The `user_nl_cam` used was:
-
+The `user_nl_cam` used was:]
+<details>
+<summary>Click to expand!</summary>
 ```
 empty_htapes     = .TRUE.
 avgflag_pertape  = 'I'
@@ -103,6 +105,8 @@ eul_nsplit       = 1
 eul_hdif_coef    = 1.5D13
 analytic_ic_type = 'dry_baroclinic_wave_dcmip2016'
 ```
+  
+</details>
 
 
 which should create a T341 case with two-mountain topography.
@@ -110,4 +114,7 @@ which should create a T341 case with two-mountain topography.
 I ran `./case.build`
 
 
-### Creating
+### Creating a dry SE case in NE60 resolution.
+
+
+I created a new case in NE60 resolution using 

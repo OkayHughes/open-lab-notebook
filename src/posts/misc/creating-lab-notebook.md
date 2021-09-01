@@ -20,7 +20,7 @@ tags:
   - science-communication
 eleventyNavigation:
   key: (This is the title of the page!) Creating an online lab notebook.
-  parent: (This is the title of a parent page. Make sure this title exists or the site won't compile!) Science Communication
+  parent: (This is the title of a parent page. Make sure this title exists or the site won't compile (or delete it, it's optional)!) Science Communication
 layout: layouts/post.njk
 ---
 
@@ -33,7 +33,7 @@ into the top of the file. (make )
 ## Installing navigation
 In order to have some heirarchical navigation, I installed the `eleventy-navigation` plugin. 
 This allows me to have heirarchical categories and to have it autogenerate some navigation for me.
-Follow the instructions [here](https://www.11ty.dev/docs/plugins/navigation/) to get started.
+Follow the instructions [here](https://www.11ty.dev/docs/plugins/navigation/) to get started (this is somewhat advanced).
 
 ## Installing `$$\LaTeX$$` support:
 Currently on the site, I can do e.g. `$$$\frac{\mathrm{d}}{\mathrm{d}t}\int_0^t f(x) \, \mathrm{d}x $$$` using KaTeX.
