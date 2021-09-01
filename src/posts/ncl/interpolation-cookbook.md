@@ -9,7 +9,7 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
-### CESM Interpolating to constant pressure levels:
+### CESM Interpolating to one constant pressure level:
 
 ```
 time_ind = 5 ; in days, interpolating all fields is quite expensive!
@@ -33,3 +33,5 @@ var_tmp := var_all({time_ind}, :, :, :)
 var = interpolated_var(0, {0:45}, {-180:180})
 
 ```
+
+###
