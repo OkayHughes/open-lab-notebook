@@ -25,7 +25,10 @@ This allows us to test whether decreasing the strength of horizontal diffusion p
 
 Created a new case in T341 resolution using 
 
-```
+<details>
+<summary>View create.sh </summary>
+<pre>
+<code>
 change_cesm
 
 CASE_ID="two_mountain_eulerian_base"
@@ -60,7 +63,9 @@ ln -s ${CASE_DIR} ${MY_CESM_ROOT}/output/${CASE_NAME}
 cp ${MY_CESM_CASES}/setup_scripts/${SETUP_SCRIPT} ${CASE_DIR}/setup.sh
 
 echo ${CASE_NAME}
-```
+</code>
+</pre>
+</details>
 
 
 Then used the following setup script:
@@ -92,8 +97,9 @@ cp ${MY_CESM_CASES}/user_nl_cams/eulerian/eulerian_T341_user_nl_cam user_nl_cam
 additions="analytic_ic_type = '$ANALYTIC_IC'"
 echo "${additions}" >> user_nl_cam
 cp ${MY_CESM_CASES}/comp_mods/${BC_COMP_MOD} SourceMods/src.cam/ic_baroclinic.F90
-</pre>
+
 </code>
+</pre>
 </details>
 
 The `user_nl_cam` used was:
@@ -110,8 +116,9 @@ NDENS            = 2
 eul_nsplit       = 1
 eul_hdif_coef    = 1.5D13
 analytic_ic_type = 'dry_baroclinic_wave_dcmip2016'
-</pre>
+
 </code>
+</pre>
 </details>
 
 
@@ -129,7 +136,7 @@ I created a new case in NE60 resolution using
 <details>
 <summary>View setup.sh</summary>
 <pre>
-<code class="language-bash">
+<code>
 CAM_CONFIG_OPTS="--phys adiabatic  --analytic_ic"
 STOP_OPTION=ndays
 STOP_N=6
@@ -152,6 +159,30 @@ cp ${MY_CESM_CASES}/user_nl_cams/user_nl_cam user_nl_cam
 additions="analytic_ic_type = '$ANALYTIC_IC'"
 echo "${additions}" >> user_nl_cam
 cp ${MY_CESM_CASES}/comp_mods/${BC_COMP_MOD} SourceMods/src.cam/ic_baroclinic.F90
-</pre>
+
 </code>
+</pre>
+</details>
+
+and ran it using 
+
+<details>
+<summary>View user_nl_cam</summary>
+<pre>
+<code>
+empty_htapes     = .TRUE.
+avgflag_pertape  = 'I'
+fincl1      = 'PS','T','U','V','OMEGA','T850','U850','V850','OMEGA850','PHIS','PSL','Z3'
+MFILT            = 180
+NHTFRQ           = -6
+NDENS            = 2
+fv3_nord         = 2
+fv3_hord_mt      = 5
+fv3_hord_vt      = 5
+fv3_hord_tm      = 5
+fv3_hord_dp      = -5
+fv3_hord_tr      = 8
+analytic_ic_type = 'dry_baroclinic_wave_dcmip2016'
+</code>
+</pre>
 </details>
