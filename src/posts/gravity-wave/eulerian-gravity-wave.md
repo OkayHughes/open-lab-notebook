@@ -179,6 +179,7 @@ MFILT            = 180
 NHTFRQ           = -6
 NDENS            = 2
 analytic_ic_type = 'dry_baroclinic_wave_dcmip2016'
+interpolate_output = .true.
 </code>
 </pre>
 </details>

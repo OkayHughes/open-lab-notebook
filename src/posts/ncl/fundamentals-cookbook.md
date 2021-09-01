@@ -37,6 +37,11 @@ f     = addfile(diri + fname,"r")
 latsize = dimsizes(lat)
 ```
 
+### getting dimensions from a file:
+
+```
+phis_size = getfilevardimsizes(f, "PHIS")
+```
 
 ### `if else`
 
