@@ -185,3 +185,6 @@ analytic_ic_type = 'dry_baroclinic_wave_dcmip2016'
 
 
 Resultant case is named `cesm_2.1.3.ne60_ne60_mg16.FADIAB.gravity_wave.two_mountain_ne60_dry`
+
+
+## Analyzing the results:
