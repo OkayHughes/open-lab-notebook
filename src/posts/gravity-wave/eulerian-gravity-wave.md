@@ -446,7 +446,7 @@ and
 <code>
 CAM_CONFIG_OPTS="--phys adiabatic  --analytic_ic"
 STOP_OPTION=ndays
-STOP_N=1
+STOP_N=6
 hours=0
 minutes=15
 seconds=00
