@@ -126,6 +126,8 @@ which should create a T341 case with two-mountain topography.
 
 I ran `./case.build`
 
+Resultant case is named `cesm_2.1.3.T341_f02_t12.FADIAB.gravity_wave.two_mountain_eulerian_base`
+
 
 ### Creating a dry SE case in NE60 resolution.
 
@@ -176,13 +178,10 @@ fincl1      = 'PS','T','U','V','OMEGA','T850','U850','V850','OMEGA850','PHIS','P
 MFILT            = 180
 NHTFRQ           = -6
 NDENS            = 2
-fv3_nord         = 2
-fv3_hord_mt      = 5
-fv3_hord_vt      = 5
-fv3_hord_tm      = 5
-fv3_hord_dp      = -5
-fv3_hord_tr      = 8
 analytic_ic_type = 'dry_baroclinic_wave_dcmip2016'
 </code>
 </pre>
 </details>
+
+
+Resultant case is named `cesm_2.1.3.ne60_ne60_mg16.FADIAB.gravity_wave.two_mountain_ne60_dry`
