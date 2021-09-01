@@ -10,12 +10,8 @@ layout: layouts/post.njk
 ---
 
 
-### Creating a new array of plots:
 
 
-``` plot_tmp = new(NUMBER_OF_PLOTS, graphic) ```
-
-### 
 
 
 
