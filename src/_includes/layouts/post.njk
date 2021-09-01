@@ -20,8 +20,8 @@ templateClass: tmpl-home
       {% if "parent" in eleventyNavigation %}
           <h3>
             Parent post:
-          </h3>
-          {{  collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.parent) | eleventyNavigationToHtml | safe }}
+      </h3>
+          {{  collections.all | eleventyNavigation(eleventyNavigation.parent) | eleventyNavigationToHtml | safe }}
       {% endif %}
       {% set postdata = collections.all | eleventyNavigation(eleventyNavigation.key)  %}
       {% if postdata|length %}
