@@ -129,10 +129,58 @@ I ran `./case.build`
 Resultant case is named `cesm_2.1.3.T341_f02_t12.FADIAB.gravity_wave.two_mountain_eulerian_base`
 
 
-### Creating a dry SE case in NE60 resolution.
+### Creating a dry SE case in NE30 resolution.
 
 
-I created a new case in NE60 resolution using 
+I created a new case in NE30 resolution using
+
+
+<details>
+<summary>View create.sh</summary>
+<pre>
+<code>
+change_cesm
+
+CASE_ID="two_mountain_ne30_dry"
+COMPSET="ne30_ne30_mg16"
+SETUP_SCRIPT=basic_dry.sh
+PE_COUNT=72
+export CESM_GROUP="gravity_wave"
+PHYSICS="FADIAB"
+CASE_NAME="${CESM_VERSION}.${COMPSET}.${PHYSICS}.${CESM_GROUP}.${CASE_ID}"
+CASE_DIR=${MY_CESM_CASES}/${CESM_GROUP}/${CASE_NAME}
+
+
+if [ -d "${CASE_DIR}" ] 
+then
+	read -p "Case exists: overwrite it? [y, N]: " flag
+	echo ${flag}
+	if [ ${flag} != "y" ]
+	then
+		exit 0
+	fi
+	rm -rf "${CASE_DIR}"
+fi
+
+
+yes r | ~/cesm/cime/scripts/create_newcase --compset ${PHYSICS} --run-unsupported --res ${COMPSET} --case ${CASE_DIR} --pecount ${PE_COUNT}
+
+ln -s ${MY_CESM_ROOT}/output/${CESM_GROUP}/${CASE_NAME} ${CASE_DIR}/out_dir
+
+
+
+cp ${MY_CESM_CASES}/setup_scripts/${SETUP_SCRIPT} ${CASE_DIR}/setup.sh
+
+cd ${CASE_DIR}
+source setup.sh
+cd ${currentdir}
+
+ln -sf ${CASE_DIR} ${MY_CESM_ROOT}/output/${CESM_GROUP}/${CASE_NAME}/case_dir
+
+echo ${CASE_NAME}
+</code>
+</pre>
+</details>
 
 
 <details>
