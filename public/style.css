@@ -232,3 +232,22 @@ pre {
   background-color:#dddddd;
   padding:1em;
 }
+
+img.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img.large{
+    width: 70%;
+}
+img.medium{
+    width: 50%;
+}
+img.small{
+    width: 30%;
+}
+img.tiny{
+    width: 15%;
+}

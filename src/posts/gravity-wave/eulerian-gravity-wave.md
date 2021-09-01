@@ -239,3 +239,8 @@ Resultant case is named `cesm_2.1.3.ne60_ne60_mg16.FADIAB.gravity_wave.two_mount
 ### Analyzing the results:
 
 
+<img class="center small" alt="Omega 850 day 0.5" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2FOMEGA0.5.png?v=1630526845505">
+<img class="center small" alt="Omega 850 day 1" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2FOMEGA1.png?v=1630526872273">
+<img class="center small" alt="Omega 850 day 1.5" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2FOMEGA1.5.png?v=1630526866345">
+<img class="center small" alt="Omega 850 day 2" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2FOMEGA2.png?v=1630526876815">
+
