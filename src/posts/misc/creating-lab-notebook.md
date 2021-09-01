@@ -14,19 +14,18 @@ layout: layouts/post.njk
 1. Posts are listed under `src/posts`. When creating a new post, copy and paste a header like
 ```
 ---
-title: Creating an online web notebook.
 date: 2021-08-31
 tags:
   - posts
-  - some
-  - other
-  - tags
-  - here
+  - science-communication
+eleventyNavigation:
+  key: (This is the title of the page!) Creating an online lab notebook.
+  parent: (This is the title of a parent page. Make sure this title exists or the site won't compile!) Science Communication
 layout: layouts/post.njk
 ---
 
 ```
-into the top of the file. 
+into the top of the file. (make )
 1. Edit the `about.md`, `index.md`, and `posts.md` to set up the main pages for your website.
 1. Markdown is a pretty powerful way of rendering rich text, see e.g. [this tutorial](https://www.writethedocs.org/guide/writing/markdown/)
 
