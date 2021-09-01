@@ -5,6 +5,9 @@ tags:
   - posts
   - slurm
   - scientific-computing
+eleventyNavigation:
+  key: Some slurm hacks
+  parent: Scientific Computing
 layout: layouts/post.njk
 ---
 

@@ -5,8 +5,7 @@ tags:
   - slurm
   - scientific-computing
 eleventyNavigation:
-  key: Efficiently allocating resources in sbatch scripts
-  parent: Scientific Computing
+  key: Scientific Computing
 layout: layouts/post.njk
 
 ---
