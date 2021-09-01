@@ -66,7 +66,10 @@ echo ${CASE_NAME}
 Then used the following setup script:
 
 
-```
+<details>
+<summary>View setup.sh </summary>
+<pre>
+<code>
 CAM_CONFIG_OPTS="--phys adiabatic  --analytic_ic"
 STOP_OPTION=ndays
 STOP_N=6
@@ -89,12 +92,15 @@ cp ${MY_CESM_CASES}/user_nl_cams/eulerian/eulerian_T341_user_nl_cam user_nl_cam
 additions="analytic_ic_type = '$ANALYTIC_IC'"
 echo "${additions}" >> user_nl_cam
 cp ${MY_CESM_CASES}/comp_mods/${BC_COMP_MOD} SourceMods/src.cam/ic_baroclinic.F90
-```
+</pre>
+</code>
+</details>
 
-The `user_nl_cam` used was:]
+The `user_nl_cam` used was:
 <details>
-<summary>Click to expand!</summary>
-```
+<summary>View user_nl_cam </summary>
+<pre>
+<code>
 empty_htapes     = .TRUE.
 avgflag_pertape  = 'I'
 fincl1      = 'PS','T','U','V','OMEGA','T850','U850','V850','OMEGA850','PHIS','PSL','Z3'
@@ -104,8 +110,8 @@ NDENS            = 2
 eul_nsplit       = 1
 eul_hdif_coef    = 1.5D13
 analytic_ic_type = 'dry_baroclinic_wave_dcmip2016'
-```
-  
+</pre>
+</code>
 </details>
 
 
@@ -118,3 +124,34 @@ I ran `./case.build`
 
 
 I created a new case in NE60 resolution using 
+
+
+<details>
+<summary>View setup.sh</summary>
+<pre>
+<code class="language-bash">
+CAM_CONFIG_OPTS="--phys adiabatic  --analytic_ic"
+STOP_OPTION=ndays
+STOP_N=6
+hours=0
+minutes=15
+seconds=00
+ANALYTIC_IC="moist_baroclinic_wave_dcmip2016"
+MAX_RUNTIME=${hours}:${minutes}:${seconds}
+BC_COMP_MOD=ic_gravity.F90
+
+./xmlchange STOP_OPTION=${STOP_OPTION},STOP_N=${STOP_N}
+./xmlchange DOUT_S=FALSE
+./xmlchange JOB_WALLCLOCK_TIME=${MAX_RUNTIME}
+./xmlquery CAM_CONFIG_OPTS
+./case.setup
+
+./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val "${CAM_CONFIG_OPTS}"
+
+cp ${MY_CESM_CASES}/user_nl_cams/user_nl_cam user_nl_cam
+additions="analytic_ic_type = '$ANALYTIC_IC'"
+echo "${additions}" >> user_nl_cam
+cp ${MY_CESM_CASES}/comp_mods/${BC_COMP_MOD} SourceMods/src.cam/ic_baroclinic.F90
+</pre>
+</code>
+</details>

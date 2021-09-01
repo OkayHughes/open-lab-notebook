@@ -2,6 +2,7 @@ dependencies:
   '@11ty/eleventy-navigation': 0.3.2
   eleventy-plugin-link_to: 0.4.0
   eleventy-plugin-seo: 0.5.2
+  highlight.js: 11.2.0
   katex: 0.13.16
   luxon: 2.0.2
 devDependencies:
@@ -1099,6 +1100,12 @@ packages:
       node: '>= 0.4.0'
     resolution:
       integrity: sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
+  /highlight.js/11.2.0:
+    dev: false
+    engines:
+      node: '>=12.0.0'
+    resolution:
+      integrity: sha512-JOySjtOEcyG8s4MLR2MNbLUyaXqUunmSnL2kdV/KuGJOmHZuAR5xC54Ko7goAXBWNhf09Vy3B+U7vR62UZ/0iw==
   /html-entities/1.4.0:
     dev: false
     resolution:
@@ -2586,5 +2593,6 @@ specifiers:
   '@11ty/eleventy-navigation': ^0.3.2
   eleventy-plugin-link_to: ^0.4.0
   eleventy-plugin-seo: ^0.5.2
+  highlight.js: ^11.1.0
   katex: ^0.13.16
   luxon: ^2.0.2
