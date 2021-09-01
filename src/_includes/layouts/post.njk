@@ -15,17 +15,24 @@ templateClass: tmpl-home
     {# Content from the body of the post markdown appears here #}
     {{ content | latex | safe }}
     <div class="controls">
-      <h3>
-        Descendent posts:
-      </h3>
+
     {# The previous and next post data is added in .eleventy.js #}
       {% if "parent" in eleventyNavigation %}
-          {% set key = eleventyNavigation.parent %}
-      {% else %}
-          {% set key = eleventyNavigation.key %}
+          <h3>
+            Parent post:
+          </h3>
+          {{  collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.parent) | eleventyNavigationToHtml | safe }}
       {% endif %}
-      {#  collections.all | eleventyNavigation(key) | eleventyNavigationToHtml | safe #}
-      {#  key | dump | safe #}
+      {% set postdata = collections.all | eleventyNavigation(eleventyNavigation.key)  %}
+      {% if postdata|length %}
+          <h3>
+            Descendent posts:
+          </h3>
+          {{  postdata | eleventyNavigationToHtml | safe }}
+
+      {% endif %}
+      
+      
     </div>
   </div>
 </div>
