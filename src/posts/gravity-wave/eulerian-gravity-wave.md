@@ -496,3 +496,12 @@ analytic_ic_type = 'dry_baroclinic_wave_dcmip2016'
 
 The resulting case name is `cesm_2.1.3.T341_f02_t12.FADIAB.gravity_wave.two_mountain_T341_red_diffusion`.
 
+
+### Comparing T341 cases with decreased diffusion
+
+<img class="center medium" alt="Omega 850 day 0.5" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fdiff_compare_OMEGA0.5.png?v=1630552295507">
+<img class="center medium" alt="Omega 850 day 1.0" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fdiff_compare_OMEGA1.png?v=1630552349466">
+<img class="center medium" alt="Omega 850 day 1.5" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fdiff_compare_OMEGA1.5.png?v=1630552365888">
+<img class="center medium" alt="Omega 850 day 2.0" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fdiff_compare_OMEGA2.png?v=1630552380247">
+
+Clearly decreasing diffusion does not change the evolution of this gravity wave.
