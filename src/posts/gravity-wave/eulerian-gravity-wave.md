@@ -373,10 +373,10 @@ These images were created with
 </p>
 </details>
 
-<img class="center small" alt="Omega 850 day 0.5" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2FOMEGA0.5.png?v=1630526845505">
-<img class="center small" alt="Omega 850 day 1" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2FOMEGA1.png?v=1630526872273">
-<img class="center small" alt="Omega 850 day 1.5" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2FOMEGA1.5.png?v=1630526866345">
-<img class="center small" alt="Omega 850 day 2" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2FOMEGA2.png?v=1630526876815">
+<img class="center small" alt="Omega 850 day 0.5" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/eulerian_dycore_compare/OMEGA0.5.png">
+<img class="center small" alt="Omega 850 day 1" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/eulerian_dycore_compare/OMEGA1.png">
+<img class="center small" alt="Omega 850 day 1.5" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/eulerian_dycore_compare/OMEGA1.5.png">
+<img class="center small" alt="Omega 850 day 2" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/eulerian_dycore_compare/OMEGA2.png">
 
 This shows propagation of the gravity wave in the Spectral Eulerian dynamical core. 
 
@@ -499,9 +499,9 @@ The resulting case name is `cesm_2.1.3.T341_f02_t12.FADIAB.gravity_wave.two_moun
 
 ### Comparing T341 cases with decreased diffusion
 
-<img class="center medium" alt="Omega 850 day 0.5" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fdiff_compare_OMEGA0.5.png?v=1630552295507">
-<img class="center medium" alt="Omega 850 day 1.0" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fdiff_compare_OMEGA1.png?v=1630552349466">
-<img class="center medium" alt="Omega 850 day 1.5" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fdiff_compare_OMEGA1.5.png?v=1630552365888">
-<img class="center medium" alt="Omega 850 day 2.0" src="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fdiff_compare_OMEGA2.png?v=1630552380247">
+<img class="center medium" alt="Omega 850 day 0.5" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/diff_compare/OMEGA0.5.png">
+<img class="center medium" alt="Omega 850 day 1.0" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/diff_compare/OMEGA1.png">
+<img class="center medium" alt="Omega 850 day 1.5" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/diff_compare/OMEGA1.5.png">
+<img class="center medium" alt="Omega 850 day 2.0" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/diff_compare/OMEGA2.png">
 
 Clearly decreasing the strength of horizontal diffusion does not change the evolution of this gravity wave.
