@@ -16,5 +16,6 @@ At the moment I'm kind of terrified of the only thing in academia that I'm alway
 finally discovering that I'm actually not as good as I think I am and I'm a fraud.
 Doing this application will firstly and foremostly be an exercise in combatting that urge.
 
-
+### 09/03/2021: Notes on example GRFP applications
+C.W.'s application:
 
