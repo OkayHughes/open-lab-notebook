@@ -23,4 +23,7 @@ C.W.'s application:
 Their application emphasizes leadership, which I think my application COULD talk about if I rope in the correct 
 letters of recommendation. GOD I wish I hadn't done such a poor job of mentoring the poor high school kid. 
 Chalk it up to mental health and use it as a learning experience going forward.
-* Broader impacts stress outreach efforts. Uses a concrete example that demonstrates
+* Broader impacts stress outreach efforts. Uses a concrete example that demonstrates a commitment
+to helping broaden engagement of underrepresented groups in science. I don't have the demonstrated track record 
+that I want to have (however, I think I know enough people that I can actually do so safely now).
+* 
