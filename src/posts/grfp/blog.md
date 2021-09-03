@@ -19,3 +19,8 @@ Doing this application will firstly and foremostly be an exercise in combatting 
 ### 09/03/2021: Notes on example GRFP applications
 C.W.'s application:
 
+* Description of research experiences as an undergraduate (pretty straightforward). 
+Their application emphasizes leadership, which I think my application COULD talk about if I rope in the correct 
+letters of recommendation. GOD I wish I hadn't done such a poor job of mentoring the poor high school kid. 
+Chalk it up to mental health and use it as a learning experience going forward.
+* Broader impacts stress outreach efforts. Uses a concrete example that demonstrates
