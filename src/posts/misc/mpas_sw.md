@@ -193,6 +193,13 @@ Make sure to configure `config_stop_time = "YEAR-MM-DD_HH:MM:SS"` in `namelist.s
 I'm going to run for 5 days, or `config_stop_time = '0000-01-05_00:00:00'`.
 
 
+## A problem
+
+When I'm running the model I'm getting the following error:
+```
+
+```
+
 
 
 
