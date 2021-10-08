@@ -29,7 +29,18 @@ This command seems to finish correctly. I'm going to search for either the Willi
 
 It appears that in the file `src/core_sw/mpas_sw_test_cases.F` there are several Williamson shallow water test cases.
 
-### Trying to get ``
+### Trying to get `sw_test_case_2` working:
+This is the "Global  steady state non-linear zonal geostrophic flow" test case.
+
+First I'm going to see if I can find an example shallow water namelist on the mpas repository (I'm not hopeful.)
+
+Turns out a good default namelist is found in `src/core_sw/default_inputs/namelist.sw` and `streams.sw`.
+
+
+Let's try creating a case directory after the fashion of `core_atmosphere`:
+
+
+</details>
 
 
   
