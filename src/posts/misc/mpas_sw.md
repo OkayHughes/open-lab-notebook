@@ -248,6 +248,13 @@ git checkout 50300ae871fb183421517b909fc4e6d1867f8829 -- mesh_tools/periodic_hex
 Make sure that you go into your netcdf dependencies and symlink all of the files in your netcdf_fortran `include, lib, bin` files
 to your netcdf_c dependency `include, lib, bin` folders. 
 
+Now run `make` in the directory `mesh_tools/periodic_hex/`
+
+Note: running `./periodic_grid` will generate a mesh. The namelist options for this 
+grid are given in `mesh_tools/periodic_hex/namelist.input`.
+
+My example grid can be found at [this link](https://drive.google.com/file/d/1nvzUdMqfNWcUmBRP2m6QyBPTw4zyWVnd/view?usp=sharing)
+
 
 
 
