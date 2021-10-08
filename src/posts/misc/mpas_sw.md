@@ -223,11 +223,19 @@ this commit:
 *h
 *vh
 *circulation
-  vorticity
-  ke
-  tracers
+*vorticity
+*ke
+*tracers
 >Additionally, the dimensions nVertLevels and nTracers have also been
 removed.
+
+For more info see [this github issue](https://github.com/MPAS-Dev/MPAS-Tools/pull/241)
+
+So this will take some cleverness:
+
+
+## Building a modified MPAS-tools
+
 
 
 
