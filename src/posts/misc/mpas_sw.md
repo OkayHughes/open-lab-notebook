@@ -206,6 +206,30 @@ The function `sw_core_init` in `core_sw/mpas_sw_core.F` probably has info.
 
 Let's try to figure out where `sw_core_init` is called:
 
+Ok so I've found the problem: in commit `55a0fc8ea754547434c847751d30a8bbf555572d` in the MPAS-tools
+supplemental repository, the following problem is introduced:
+
+>The periodic_hex mesh generator previously added fields to the grid.nc
+file to serve as placeholders for ICs for the shallow-water model.
+However, these fields are not part of the MPAS mesh specification, and
+have been removed. Specifically, the following fields are deleted in
+this commit:
+*fEdge
+*fVertex
+*h_s
+*u
+*uBC
+*v
+*h
+*vh
+*circulation
+  vorticity
+  ke
+  tracers
+>Additionally, the dimensions nVertLevels and nTracers have also been
+removed.
+
+
 
 
 
