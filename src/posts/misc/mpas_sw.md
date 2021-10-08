@@ -96,7 +96,95 @@ directory, hence why I've called one version `MPAS-skamaroc`. Yours is probably 
 For cost's sake, I'll download the grid file from [here](http://www2.mmm.ucar.edu/projects/mpas/atmosphere_meshes/x1.2562.tar.gz)
 with a nominal grid resolution of 480km.
 
-From within your case directory, run `wget http://www2.mmm.ucar.edu/projects/mpas/atmosphere_meshes/x1.2562.tar.gz`
+From within your case directory, run 
+```
+wget http://www2.mmm.ucar.edu/projects/mpas/atmosphere_meshes/x1.2562.tar.gz
+tar -xf ./x1.2562.tar.gz
+
+```
+
+This gets you the mesh files.
+
+In order to use my case management infrastructure, make sure that the `${mpas_output}` variable
+points to a directory where you want to spit out mpas output files (which in general might be _very_ large).
+
+
+I use a file called `CONFIG.sh` to configure my MPAS directory structure:
+
+
+
+<details>
+<summary>View CONFIG.sh </summary>
+<p>
+<pre>
+<code>
+if [ -z ${mpas_output+x} ]
+then
+	echo "\$mpas_output is not set in the current environment"
+	exit 1
+fi
+
+case_group="shallow_water"
+casename="test_case_5"
+# CHANGE THIS TO MATCH YOURS
+case_dir="${HOME}/MPAS/cases/${case_group}/${casename}"
+out_dir="${mpas_output}/${case_group}/${casename}"
+grid_prefix="x1.2562"
+log_dir="${case_dir}/logs"
+
+
+# ==================================================
+# Ensure configure variables are set correctly
+# ==================================================
+
+if [ -z ${case_dir+x} ] || [ -z ${out_dir+x} ] || [ -z ${casename+x} ] || [ -z ${grid_prefix+x} ] || [ -z ${log_dir+x} ]
+then
+	echo "CONFIG.sh is misconfigured, ensure it contains case_dir, out_dir, casename, grid_prefix, log_dir"
+	exit 1
+fi
+
+if [ ! -d "${case_dir}" ]
+then
+	echo "Case directory ${case_dir} does not exist! "
+	exit 1
+fi
+
+if [ ! -f "${case_dir}/${grid_prefix}.grid.nc" ] && [ ! -f "${out_dir}/${grid_prefix}.grid.nc" ]
+then
+	echo "File ${grid_prefix}.grid.nc should exist in either ${case_dir} or ${out_dir}"
+	exit 1
+fi
+
+mkdir -p $out_dir 
+
+mkdir -p $log_dir
+
+</code>
+</pre>
+</p>
+</details>
+</details>
+
+where you need to make sure that `${case_dir}` actually points to your case directory.
+
+
+Next, the slurm script I use to submit the job to the compute nodes in the cluster is given here:
+
+<details>
+<summary>View run.sh </summary>
+<p>
+<pre>
+<code>
+
+</code>
+</pre>
+</p>
+</details>
+</details>
+
+Note that the file `setup.sh` should be sourced at the top of the run script, 
+i.e., `source ${PATH_TO_SETUP}.sh` should come after the slurm directives a the top of the file.
+
 
 
 
