@@ -236,6 +236,19 @@ So this will take some cleverness:
 
 ## Building a modified MPAS-tools
 
+Clone the repository []()
+
+Run the following:
+```
+
+git checkout 50300ae871fb183421517b909fc4e6d1867f8829 -- mesh_tools/periodic_hex/module_write_netcdf.F
+git checkout 50300ae871fb183421517b909fc4e6d1867f8829 -- mesh_tools/periodic_hex/periodic_grid.F
+```
+
+Make sure that you go into your netcdf dependencies and symlink all of the files in your netcdf_fortran `include, lib, bin` files
+to your netcdf_c dependency `include, lib, bin` folders. 
+
+
 
 
 
