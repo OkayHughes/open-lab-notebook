@@ -186,6 +186,14 @@ Note that the file `setup.sh` should be sourced at the top of the run script,
 i.e., `source ${PATH_TO_SETUP}.sh` should come after the slurm directives a the top of the file.
 
 
+## Running the model:
+
+
+Make sure to configure `config_stop_time = "YEAR-MM-DD_HH:MM:SS"` in `namelist.sw`. 
+I'm going to run for 5 days, or `config_stop_time = '0000-01-05_00:00:00'`.
+
+
+
 
 
 
