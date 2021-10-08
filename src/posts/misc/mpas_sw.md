@@ -197,8 +197,14 @@ I'm going to run for 5 days, or `config_stop_time = '0000-01-05_00:00:00'`.
 
 When I'm running the model I'm getting the following error:
 ```
-
+CRITICAL ERROR: Dimension 'nTracers' required by field 'tracers' was neither read nor defined.
 ```
+
+Which means that it's not generating an input file. I need to determine why that is.
+
+The function `sw_core_init` in `core_sw/mpas_sw_core.F` probably has info.
+
+Let's try to figure out where `sw_core_init` is called:
 
 
 
