@@ -43,18 +43,64 @@ Let's try creating a case directory after the fashion of `core_atmosphere`:
 
 The executable we need is `src/sw_model`.
 
-The correct 
+The correct file to get all of the dependencies set up (assuming you built with shared libraries) is
 <details>
-<summary>View create.sh </summary>
+<summary>View setup.sh </summary>
 <p>
 <pre>
 <code>
 
+module load gcc/8.2.0
+export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export MPICH_FC=gfortran
+export MPICH_F90=gfortran
+export CC=mpicc
+export FC=mpif90
+export NETCDF=$scratch/dependencies/netcdf_c
+export NETCDFF=$scratch/dependencies/netcdf_fortran
+export PNETCDF=$scratch/dependencies/pnetcdf
+export PIO=$scratch/dependencies/PIO
+hdf5=$scratch/dependencies/hdf5
+zlib=$scratch/dependencies/zlib
+export MPAS_EXTERNAL_INCLUDES="-I$hdf5/include -I$zlib/include"
+export MPAS_EXTERNAL_LIBS="-L${hdf5}/lib -L$zlib/lib -lhdf5_hl -lhdf5 -lz -ldl"
+export LD_LIBRARY_PATH="$PNETCDF/lib:${NETCDF}/lib:${hdf5}/lib:${hdf5}/lib:${PIO}/lib:${NETCDFF}/lib:${LD_LIBRARY_PATH}"
+export FFLAGS="-freal-4-real-8"
 </code>
 </pre>
 </p>
 </details>
 </details>
+
+where you have to ensure that the shell variables point to the base directory of the 
+corresponding dependency installs (i.e. it should have `bin`, `lib`, `include` subdirectories etc)
+
+
+
+I created a case directory as follows:
+```
+mkdir ${MPAS_ROOT}/cases
+mkdir ${MPAS_ROOT}/cases/shallow_water_test_case_5
+
+
+ln -s ${MPAS_ROOT}/MPAS-skamaroc/sw_model ${MPAS_ROOT}/shallow_water/test_case_2/
+# This copies the default namelists to our case version
+cp ${MPAS_ROOT}/MPAS-skamaroc/src/core_sw/default_inputs/* ${MPAS_ROOT}/shallow_water/test_case_2/
+
+```
+
+where `MPAS_ROOT` is an absolute path to the directory. I have multiple source versions of MPAS in my `$MPAS_ROOT`
+directory, hence why I've called one version `MPAS-skamaroc`. Yours is probably just called `MPAS` or something.
+
+For cost's sake, I'll download the grid file from [here](http://www2.mmm.ucar.edu/projects/mpas/atmosphere_meshes/x1.2562.tar.gz)
+with a nominal grid resolution of 480km.
+
+From within your case directory, run `wget http://www2.mmm.ucar.edu/projects/mpas/atmosphere_meshes/x1.2562.tar.gz`
+
+
+
+
 
 
   
