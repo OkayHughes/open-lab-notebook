@@ -37,9 +37,23 @@ First I'm going to see if I can find an example shallow water namelist on the mp
 Turns out a good default namelist is found in `src/core_sw/default_inputs/namelist.sw` and `streams.sw`.
 
 
+
+
 Let's try creating a case directory after the fashion of `core_atmosphere`:
 
+The executable we need is `src/sw_model`.
 
+The correct 
+<details>
+<summary>View create.sh </summary>
+<p>
+<pre>
+<code>
+
+</code>
+</pre>
+</p>
+</details>
 </details>
 
 
