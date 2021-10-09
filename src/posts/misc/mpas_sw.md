@@ -323,7 +323,7 @@ My example grid can be found at [this link](https://drive.google.com/file/d/1nvz
 
 
 Todo on this:  Try using points-mpas.cpp which seems to have the shallow water fields but should account for metric terms?
-
+Link to ideally unfucked grid file [here](https://drive.google.com/file/d/1fNvt6LyqnUjxVeF_NvxVd6lN7t1K5jes/view?usp=sharing)
 
 
 
