@@ -323,6 +323,14 @@ My example grid can be found at [this link](https://drive.google.com/file/d/1nvz
 
 
 Todo on this:  Try using points-mpas.cpp which seems to have the shallow water fields but should account for metric terms?
+
+Ok so the long and short of it is that if you build points-mpas.cpp with netcdf-cxx (not the netcdf4 version, that will cause problems)
+it will generate a file that works straight away. With the default time stepping the output ends up with NaNs, so remains to see if the 
+metric terms are actually being set correctly.
+
+I've set it to a 5 second ``$dt$``
+
+
 Link to ideally unfucked grid file [here](https://drive.google.com/file/d/1fNvt6LyqnUjxVeF_NvxVd6lN7t1K5jes/view?usp=sharing)
 
 
