@@ -330,7 +330,7 @@ metric terms are actually being set correctly.
 
 I've set it to a 5 second `$$ dt $$`
 
-Ah, it runs. There's defaultly _no diffusion in the model!_
+Ah, it runs. There's defaultly _no diffusion in the model!_ gonna try to change that
 
 
 Link to ideally unfucked grid file [here](https://drive.google.com/file/d/1fNvt6LyqnUjxVeF_NvxVd6lN7t1K5jes/view?usp=sharing)
