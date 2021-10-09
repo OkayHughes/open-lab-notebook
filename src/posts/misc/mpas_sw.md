@@ -328,7 +328,9 @@ Ok so the long and short of it is that if you build points-mpas.cpp with netcdf-
 it will generate a file that works straight away. With the default time stepping the output ends up with NaNs, so remains to see if the 
 metric terms are actually being set correctly.
 
-I've set it to a 5 second ``$dt$``
+I've set it to a 5 second `$$ dt $$`
+
+Ah, it runs. There's defaultly _no diffusion in the model!_
 
 
 Link to ideally unfucked grid file [here](https://drive.google.com/file/d/1fNvt6LyqnUjxVeF_NvxVd6lN7t1K5jes/view?usp=sharing)
