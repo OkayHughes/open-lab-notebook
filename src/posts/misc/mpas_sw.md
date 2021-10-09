@@ -29,7 +29,7 @@ This command seems to finish correctly. I'm going to search for either the Willi
 
 It appears that in the file `src/core_sw/mpas_sw_test_cases.F` there are several Williamson shallow water test cases.
 
-### Trying to get `sw_test_case_2` working:
+### Trying to get `sw_test_case_5` working:
 This is the "Global  steady state non-linear zonal geostrophic flow" test case.
 
 First I'm going to see if I can find an example shallow water namelist on the mpas repository (I'm not hopeful.)
@@ -84,9 +84,9 @@ mkdir ${MPAS_ROOT}/cases
 mkdir ${MPAS_ROOT}/cases/shallow_water_test_case_5
 
 
-ln -s ${MPAS_ROOT}/MPAS-skamaroc/sw_model ${MPAS_ROOT}/shallow_water/test_case_2/
+ln -s ${MPAS_ROOT}/MPAS-skamaroc/sw_model ${MPAS_ROOT}/shallow_water/test_case_5/
 # This copies the default namelists to our case version
-cp ${MPAS_ROOT}/MPAS-skamaroc/src/core_sw/default_inputs/* ${MPAS_ROOT}/shallow_water/test_case_2/
+cp ${MPAS_ROOT}/MPAS-skamaroc/src/core_sw/default_inputs/* ${MPAS_ROOT}/shallow_water/test_case_5/
 
 ```
 
@@ -175,7 +175,70 @@ Next, the slurm script I use to submit the job to the compute nodes in the clust
 <p>
 <pre>
 <code>
+#!/bin/bash
 
+#SBATCH --job-name=sw_test_case_5
+
+#SBATCH --mail-user=owhughes@umich.edu
+#SBATCH --mail-type=BEGIN,END
+#SBATCH --time=12:00:00
+#SBATCH --account=cjablono1
+#SBATCH --ntasks-per-node=8
+#SBATCH --cpus-per-task 1
+#SBATCH --nodes=1
+#SBATCH --mem=1000m 
+
+source ~/.MPAS/setup.bash
+
+source CONFIG.sh
+
+
+count=-1
+if [ -f "${out_dir}/output.nc" ] 
+then
+	count=0
+	while [ -f "${out_dir}/output.${count}.nc" ]
+	do
+		count=$((count+1))
+	done
+	echo "Moving ${out_dir}/output.nc to ${out_dir}/output.${count}.nc"
+	mv ${out_dir}/output.nc ${out_dir}/output.${count}.nc
+fi 
+
+if [ -f "${out_dir}/diag.moist.nc" ]
+then
+	mv ${out_dir}/diag.moist.nc ${out_dir}/diag.moist.old.nc
+fi
+
+if [ ! -f "${case_dir}/${grid_prefix}.graph.info.part.${SLURM_NTASKS}" ] 
+then
+	echo "Missing ${grid_prefix}.graph.info.part.${SLURM_NTASKS} or a symlink to it"
+	exit 1
+fi
+
+ln -sf "${case_dir}/${grid_prefix}.grid.nc" "${case_dir}/grid.nc"
+ln -sf "${case_dir}/${grid_prefix}.graph.info.part.${SLURM_NTASKS}" "${case_dir}/graph.info.part.${SLURM_NTASKS}"
+
+command="./sw_model"
+
+current_dir=`pwd`
+ls ${case_dir} | xargs -n1 -I {} ln -sf $case_dir/{} $out_dir/{}
+cd $out_dir
+mpiexec -bind-to=core -n ${SLURM_NTASKS} $command
+find $out_dir -type l | xargs -n1 rm
+cd $current_dir
+
+
+
+
+run_log_dir=${log_dir}/run/$((count + 1))
+
+mkdir -p ${run_log_dir}
+if [ `ls $out_dir/log.* | wc -l` -gt 0 ]
+then
+	ls $out_dir/log.* | xargs -n1 -I {} mv {} ${run_log_dir}
+fi
+cp ${case_dir}/namelist.atmosphere ${run_log_dir}
 </code>
 </pre>
 </p>
