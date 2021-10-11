@@ -330,11 +330,17 @@ metric terms are actually being set correctly.
 
 I've set it to a 5 second `$$ dt $$`
 
-Ah, it runs. There's defaultly _no diffusion in the model!_ gonna try to change that
+Ah, it runs. There's defaultly _no diffusion in the model!_ gonna try to change that.
+
+Provisionally the problem is that the grid assumes a sphere of radius 1.
+
+I'm going to use the values from the default mpas grid to create inputs to the points-mpas.cpp program.
 
 
+
+<!--
 Link to ideally unfucked grid file [here](https://drive.google.com/file/d/1fNvt6LyqnUjxVeF_NvxVd6lN7t1K5jes/view?usp=sharing)
-
+-->
 
 
 
