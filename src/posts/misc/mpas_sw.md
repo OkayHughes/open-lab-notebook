@@ -354,8 +354,10 @@ files.
 
 
 
+<details>
+<summary>View mpas_to_text.py </summary>
 
-
+```
 import xarray as xr
 import numpy as np
 
@@ -364,7 +366,7 @@ ds_disk = xr.open_dataset("x1.2562.grid.nc") #change this to the grid file downl
 edge_info = ds_disk["cellsOnEdge"].values
 neighbors = {}
 for edge_id in range(edge_info.shape[0]):
-  edge = edge_info[edge_id]
+        edge = edge_info[edge_id]
         if edge[0] not in neighbors.keys():
                 neighbors[edge[0]] = []
         if edge[1] not in neighbors.keys():
@@ -383,7 +385,9 @@ tris = np.array([list(x) for x in tris], dtype=np.int32)
 
 lat_cell = ds_disk["latCell"].values
 lon_cell = ds_disk["lonCell"].values
+```
 
+</details>
 
 Once you have `SaveVertices` and `SaveTriangles` (delete the file that's named something like `SaveDensity`),
 copy them into the `MPAS-Tools/mesh_tools/points-mpas` directory. This generates a MPAS grid file called `grid.nc`
