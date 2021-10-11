@@ -127,9 +127,10 @@ fi
 
 case_group="shallow_water"
 casename="test_case_5"
-# CHANGE THIS TO MATCH YOURS
+# CHANGE THIS TO MATCH YOUR MPAS LOCATION
 case_dir="${HOME}/MPAS/cases/${case_group}/${casename}"
 out_dir="${mpas_output}/${case_group}/${casename}"
+# MAKE SURE THIS AGREES WITH YOUR GRID FILES
 grid_prefix="x1.2562"
 log_dir="${case_dir}/logs"
 
@@ -261,11 +262,11 @@ When I'm running the model I'm getting the following error:
 CRITICAL ERROR: Dimension 'nTracers' required by field 'tracers' was neither read nor defined.
 ```
 
-Which means that it's not generating an input file. I need to determine why that is.
+~~Which means that it's not generating an input file. I need to determine why that is.~~
 
-The function `sw_core_init` in `core_sw/mpas_sw_core.F` probably has info.
+~~The function `sw_core_init` in `core_sw/mpas_sw_core.F` probably has info.~~
 
-Let's try to figure out where `sw_core_init` is called:
+~~Let's try to figure out where `sw_core_init` is called:~~
 
 Ok so I've found the problem: in commit `55a0fc8ea754547434c847751d30a8bbf555572d` in the MPAS-tools
 supplemental repository, the following problem is introduced:
@@ -333,17 +334,32 @@ Ensure that `${NETCDF}` points to a directory containing the `include, lib, bin`
 the netcdf-c and netcdf-c++ library. 
 
 Install the netcdf-c++ library i.e. run ``` https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-cxx-4.2.tar.gz ```
-and use the `setup.sh` file from the netcdf-c setup. 
+and use the `setup.sh` file from the netcdf-c setup. Symlink the contents of 
+`$NETCDF_CPP_LOCATION/include` to `$NETCDF_C_LOCATION/include` and the same for the `lib` folder.
 
 
-In the directory `MPAS-Tools/mesh_tools/points-mpas` run `make`.
+In the directory `MPAS-Tools/mesh_tools/points-mpas/` run `make`.
 
 
 
 ### Creating the input files to `PointsToMpas.x`
-The main files you need to use to generate a grid are `SaveVertices`, `SaveTriangles` and `SaveParams`. The `readme` for 
-this code describes how it works. What you need to know is that if you change `SaveParams` to use
-lat-lon coordinates, and you can use the following python script (where I used anaconda to install the netcdf4 and xarray
+The main files you need to use to generate a grid are `SaveVertices`, `SaveTriangles` and Params`. The `readme` for 
+this code describes how it works. Change `SaveParams` to use
+lat-lon coordinates, e.g.
+
+
+<details>
+<summary>View SaveParams </summary>
+  
+```
+  
+  
+  
+```
+  
+  
+</details>
+and you can use the following python script (where I used anaconda to install the netcdf4 and xarray
 modules) to turn the files that you can download from [https://mpas-dev.github.io/] into `SaveVertices` and `SaveTriangles`
 files.
 
