@@ -418,16 +418,21 @@ tris = np.array([list(x) for x in tris], dtype=np.int32)
 
 lat_cell = ds_disk["latCell"].values
 lon_cell = ds_disk["lonCell"].values
+  
+np.savetxt("SaveVertices", np.stack((lat_cell, lon_cell)).T, fmt="%.8f")
+np.savetxt("SaveTriangles", tris, fmt="%d")
+  
 ```
 
 </details>
 
-Once you have `SaveVertices` and `SaveTriangles` (delete the file that's named something like `SaveDensity`),
-copy them into the `MPAS-Tools/mesh_tools/points-mpas` directory. This generates a MPAS grid file called `grid.nc`
+Once you have `SaveVertices` and `SaveTriangles` ,
+copy them into the `MPAS-Tools/mesh_tools/points-mpas` directory (delete the file that's named something like `SaveDensity`). 
+This generates a MPAS grid file called `grid.nc`
 and a graph partitioning file called `graph.info`, see below for more on this.
 
 
-###
+### Grid decomposition
 
 If you want to run MPAS in parallel (i.e. on 8 cores a 10 day shallow water run will take 11 seconds),
 then you need to install Metis, which partitions MPAS grids for parallel computing, i.e. run
