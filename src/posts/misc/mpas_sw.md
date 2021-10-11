@@ -325,9 +325,77 @@ grid are given in `mesh_tools/periodic_hex/namelist.input`.
 My example grid can be found at [this link](https://drive.google.com/file/d/1nvzUdMqfNWcUmBRP2m6QyBPTw4zyWVnd/view?usp=sharing)
 -->
 
+### Building the software:
+
+Run:
+
+```
+git clone https://github.com/MPAS-Dev/MPAS-Tools.git.
+cd MPAS-Tools/mesh_tools/points-mpas
+```
+
+Ensure that `${NETCDF}` points to a directory containing the `include, lib, bin` files for a static build of 
+the netcdf-c and netcdf-c++ library. 
+
+Install the netcdf-c++ library i.e. run ``` https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-cxx-4.2.tar.gz ```
+and use the `setup.sh` file from the netcdf-c setup. 
 
 
-Run `git clone `
+In the directory `MPAS-Tools/mesh_tools/points-mpas` run `make`.
+
+
+
+### Creating the input files to `PointsToMpas.x`
+The main files you need to use to generate a grid are `SaveVertices`, `SaveTriangles` and `SaveParams`. The `readme` for 
+this code describes how it works. What you need to know is that if you change `SaveParams` to use
+lat-lon coordinates, and you can use the following python script (where I used anaconda to install the netcdf4 and xarray
+modules) to turn the files that you can download from [https://mpas-dev.github.io/] into `SaveVertices` and `SaveTriangles`
+files.
+
+
+
+<details>
+<summary>View mpas_to_text.py </summary>
+<p>
+<pre>
+<code>
+
+import xarray as xr
+import numpy as np
+
+ds_disk = xr.open_dataset("x1.2562.grid.nc") #change this to the grid file downloaded from the MPAS website
+
+edge_info = ds_disk["cellsOnEdge"].values
+neighbors = {}
+for edge_id in range(edge_info.shape[0]):
+        edge = edge_info[edge_id]
+        if edge[0] not in neighbors.keys():
+                neighbors[edge[0]] = []
+        if edge[1] not in neighbors.keys():
+                 neighbors[edge[1]] = []
+        neighbors[edge[0]].append(edge[1])
+        neighbors[edge[1]].append(edge[0]) 
+
+tris = set()
+for cell in neighbors.keys():
+        for neighbor in neighbors[cell]:
+                for neighbor_2 in set(neighbors[cell]).intersection(set(neighbors[neighbor])):
+                        tris.add(frozenset({cell, neighbor, neighbor_2}))
+
+
+tris = np.array([list(x) for x in tris], dtype=np.int32)
+
+lat_cell = ds_disk["latCell"].values
+lon_cell = ds_disk["lonCell"].values
+
+</code>
+</pre>
+</p>
+</details>
+
+Once you have 
+
+
 
 Try using points-mpas.cpp which seems to have the shallow water fields but should account for metric terms?
 
