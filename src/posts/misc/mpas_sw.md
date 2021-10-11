@@ -393,30 +393,46 @@ lon_cell = ds_disk["lonCell"].values
 </p>
 </details>
 
-Once you have 
+Once you have `SaveVertices` and `SaveTriangles` (delete the file that's named something like `SaveDensity`),
+copy them into the `MPAS-Tools/mesh_tools/points-mpas` directory. This generates a MPAS grid file called `grid.nc`
+and a graph partitioning file called `graph.info`, see below for more on this.
+
+
+###
+
+If you want to run MPAS in parallel (i.e. on 8 cores a 10 day shallow water run will take 11 seconds),
+then you need to install Metis, which partitions MPAS grids for parallel computing, i.e. run
+
+```
+wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz
+
+tar -xf metis-5.1.0.tar.gz
+module load cmake/3.21.3
+make
+```
+
+and follow the instructions. The result will be a file called `metis-5.1.0/build/Linux-x86_64/programs/gpmetis`,
+and this can be invoked like 
+```
+${PATH_TO_METIS}/build/Linux-x86_64/programs/gpmetis ${PATH_TO_graph.info}/graph.info ${NPROCS}
+```
+
+which creates a `graph.info.part.${NPROCS}` file. Copy these into your MPAS directory. 
+Make sure that your `grid.nc` file and your `graph.info.part.{}` have a prefix that agrees with `${grid_prefix}`
+if you're using my `CONFIG.sh` script above. i.e. in this case I would rename `grid.nc` to `x1.2562.grid.nc` 
+and `graph.info.part.8` to `x1.2562.graph.info.part.8`.
 
 
 
-Try using points-mpas.cpp which seems to have the shallow water fields but should account for metric terms?
-
-Ok so the long and short of it is that if you build points-mpas.cpp with netcdf-cxx (not the netcdf4 version, that will cause problems)
-it will generate a file that works straight away. With the default time stepping the output ends up with NaNs, so remains to see if the 
-metric terms are actually being set correctly.
+Once you do this you can run `sbatch run.sh` and a file will be generated 
 
 
+### Making `convert_mpas`
 
+Make sure that you go into your netcdf dependencies and symlink all of the files in your netcdf_fortran `include, lib, bin` files
+to your netcdf_c dependency `include, lib, bin` folders. 
 
-
-
-
-<!--
-Link to ideally unfucked grid file [here](https://drive.google.com/file/d/1fNvt6LyqnUjxVeF_NvxVd6lN7t1K5jes/view?usp=sharing)
--->
-
-
-
-
-
+In your `MPAS-Tools` repository,
 
   
 
