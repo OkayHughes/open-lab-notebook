@@ -343,27 +343,49 @@ In the directory `MPAS-Tools/mesh_tools/points-mpas/` run `make`.
 
 
 ### Creating the input files to `PointsToMpas.x`
-The main files you need to use to generate a grid are `SaveVertices`, `SaveTriangles` and Params`. The `readme` for 
-this code describes how it works. Change `SaveParams` to use
+The main files you need to use to generate a grid are `SaveVertices`, `SaveTriangles` and `Params`. The `readme` for 
+this code describes how it works. Change `Params` to use
 lat-lon coordinates, e.g.
 
 
 <details>
-<summary>View SaveParams </summary>
+<summary>View Params </summary>
   
 ```
-  
-  
-  
+Is the input Cartesian or Latitude-Longitude (0 - Cartesian, 1 - Lat-lon)
+1
+Are the triangles base zero or base one? (0 - base 0, 1 - base 1)
+1
+What is the radius of the sphere these points are defined on?
+1.0
+How many vertical levels do you want in the output grid?
+1
+How many tracers do you want in the output grid?
+1
+What was the convergence criteria used to make this grid?
+0.0
+Should this grid be vordraw compatible?
+0
+
 ```
-  
-  
+
+
 </details>
-and you can use the following python script (where I used anaconda to install the netcdf4 and xarray
-modules) to turn the files that you can download from [https://mpas-dev.github.io/] into `SaveVertices` and `SaveTriangles`
-files.
+The fact that the radius of the sphere is considered to be 1 is an MPAS default that exists in the prefab meshes that 
+can be downloaded from MPAS' website.
 
+You can use the following python script  to turn the files that you can download from [https://mpas-dev.github.io/] into `SaveVertices` and `SaveTriangles`
+files. Start by doing something like
 
+```
+module load python3.8-anaconda;
+yes | conda create --name mpas_gridding
+conda activate mpas_gridding
+yes | conda install netcdf4
+yes | conda install xarray
+```
+
+Then you can use the following python script:
 
 <details>
 <summary>View mpas_to_text.py </summary>
