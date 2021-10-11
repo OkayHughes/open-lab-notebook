@@ -354,11 +354,7 @@ files.
 
 
 
-<details>
-<summary>View mpas_to_text.py </summary>
-<p>
-<pre>
-<code>
+
 
 import xarray as xr
 import numpy as np
@@ -368,7 +364,7 @@ ds_disk = xr.open_dataset("x1.2562.grid.nc") #change this to the grid file downl
 edge_info = ds_disk["cellsOnEdge"].values
 neighbors = {}
 for edge_id in range(edge_info.shape[0]):
-        edge = edge_info[edge_id]
+  edge = edge_info[edge_id]
         if edge[0] not in neighbors.keys():
                 neighbors[edge[0]] = []
         if edge[1] not in neighbors.keys():
@@ -388,10 +384,6 @@ tris = np.array([list(x) for x in tris], dtype=np.int32)
 lat_cell = ds_disk["latCell"].values
 lon_cell = ds_disk["lonCell"].values
 
-</code>
-</pre>
-</p>
-</details>
 
 Once you have `SaveVertices` and `SaveTriangles` (delete the file that's named something like `SaveDensity`),
 copy them into the `MPAS-Tools/mesh_tools/points-mpas` directory. This generates a MPAS grid file called `grid.nc`
@@ -424,7 +416,8 @@ and `graph.info.part.8` to `x1.2562.graph.info.part.8`.
 
 
 
-Once you do this you can run `sbatch run.sh` and a file will be generated 
+Once you do this you can run `sbatch run.sh` and a file will be generated in your `${MPAS_OUTPUT}/${case_name}`
+directory called `output.nc`. Follow the instructions below to visualize this.
 
 
 ### Making `convert_mpas`
@@ -432,8 +425,28 @@ Once you do this you can run `sbatch run.sh` and a file will be generated
 Make sure that you go into your netcdf dependencies and symlink all of the files in your netcdf_fortran `include, lib, bin` files
 to your netcdf_c dependency `include, lib, bin` folders. 
 
-In your `MPAS-Tools` repository,
+Run 
+```
+git clone https://github.com/mgduda/convert_mpas.git
+cd convert_mpas
+source #${some setup.sh file that sets the necessary variables}
+make
+```
 
+You can then run this like 
+```
+${PATH_TO_convert_mpas}/convert_mpas ${OPTIONAL_GRID_FILE} output.nc
+```
+
+In order to preserve features like topography, replace `${OPTIONAL_GRID_FILE}` with something like `x1.2562.grid.nc`.
+
+This will create a netcdf file on a lat-lon grid which you can view by doing
+
+```
+module load ncview
+ncview latlon.nc
+
+```
   
 
 
