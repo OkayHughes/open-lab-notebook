@@ -17,7 +17,7 @@ Do the dependency process listed [here](https://open-lab-notebook.glitch.me/post
 
 ### Clean build system
 
-Try the command `make clean CORE=PREVIOUS_CORE_BUILD` if you have a previous build left on the filesystem
+Try the command `make clean CORE=${PREVIOUS_CORE_BUILD}` if you have a previous build left on the filesystem
 
 ### Make shallow water core:
 
@@ -30,7 +30,7 @@ This command seems to finish correctly. I'm going to search for either the Willi
 It appears that in the file `src/core_sw/mpas_sw_test_cases.F` there are several Williamson shallow water test cases.
 
 ### Trying to get `sw_test_case_5` working:
-This is the "Global  steady state non-linear zonal geostrophic flow" test case.
+This is the "Zonal flow over an idealized mountain" test case.
 
 First I'm going to see if I can find an example shallow water namelist on the mpas repository (I'm not hopeful.)
 
@@ -46,9 +46,8 @@ The executable we need is `src/sw_model`.
 The correct file to get all of the dependencies set up (assuming you built with shared libraries) is
 <details>
 <summary>View setup.sh </summary>
-<p>
-<pre>
-<code>
+
+```
 
 module load gcc/8.2.0
 export PATH=$scratch/dependencies/mpich/bin:$PATH
@@ -67,10 +66,9 @@ export MPAS_EXTERNAL_INCLUDES="-I$hdf5/include -I$zlib/include"
 export MPAS_EXTERNAL_LIBS="-L${hdf5}/lib -L$zlib/lib -lhdf5_hl -lhdf5 -lz -ldl"
 export LD_LIBRARY_PATH="$PNETCDF/lib:${NETCDF}/lib:${hdf5}/lib:${hdf5}/lib:${PIO}/lib:${NETCDFF}/lib:${LD_LIBRARY_PATH}"
 export FFLAGS="-freal-4-real-8"
-</code>
-</pre>
-</p>
-</details>
+
+```
+
 </details>
 
 where you have to ensure that the shell variables point to the base directory of the 
@@ -93,13 +91,13 @@ cp ${MPAS_ROOT}/MPAS-skamaroc/src/core_sw/default_inputs/* ${MPAS_ROOT}/shallow_
 where `MPAS_ROOT` is an absolute path to the directory. I have multiple source versions of MPAS in my `$MPAS_ROOT`
 directory, hence why I've called one version `MPAS-skamaroc`. Yours is probably just called `MPAS` or something.
 
-For cost's sake, I'll download the grid file from [here](http://www2.mmm.ucar.edu/projects/mpas/atmosphere_meshes/x1.2562.tar.gz)
-with a nominal grid resolution of 480km.
+~~For cost's sake, I'll download the grid file from [here](http://www2.mmm.ucar.edu/projects/mpas/atmosphere_meshes/x1.2562.tar.gz)
+with a nominal grid resolution of 480km.~~
 
-From within your case directory, run 
+~~From within your case directory, run~~
 ```
-wget http://www2.mmm.ucar.edu/projects/mpas/atmosphere_meshes/x1.2562.tar.gz
-tar -xf ./x1.2562.tar.gz
+#wget http://www2.mmm.ucar.edu/projects/mpas/atmosphere_meshes/x1.2562.tar.gz
+#tar -xf ./x1.2562.tar.gz
 
 ```
 
@@ -118,9 +116,9 @@ I use a file called `CONFIG.sh` to configure my MPAS directory structure:
 
 <details>
 <summary>View CONFIG.sh </summary>
-<p>
-<pre>
-<code>
+
+  
+```
 if [ -z ${mpas_output+x} ]
 then
 	echo "\$mpas_output is not set in the current environment"
@@ -162,10 +160,8 @@ mkdir -p $out_dir
 
 mkdir -p $log_dir
 
-</code>
-</pre>
-</p>
-</details>
+```
+  
 </details>
 
 where you need to make sure that `${case_dir}` actually points to your case directory.
@@ -175,9 +171,9 @@ Next, the slurm script I use to submit the job to the compute nodes in the clust
 
 <details>
 <summary>View run.sh </summary>
-<p>
-<pre>
-<code>
+
+```
+  
 #!/bin/bash
 
 #SBATCH --job-name=sw_test_case_5
@@ -242,10 +238,9 @@ then
 	ls $out_dir/log.* | xargs -n1 -I {} mv {} ${run_log_dir}
 fi
 cp ${case_dir}/namelist.atmosphere ${run_log_dir}
-</code>
-</pre>
-</p>
-</details>
+
+```
+
 </details>
 
 Note that the file `setup.sh` should be sourced at the top of the run script, 
