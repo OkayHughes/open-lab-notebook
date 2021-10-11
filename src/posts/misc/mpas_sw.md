@@ -103,6 +103,9 @@ tar -xf ./x1.2562.tar.gz
 
 ```
 
+*NOTE: SEE BELOW, THESE GRID FILES ARE INCOMPATIBLE WITH THE SHALLOW WATER CORE AND MORE WORK IS NEEDED*. You can download a quickstart grid that
+I generated [here](https://drive.google.com/file/d/1TEfbfk68jsO_NRYXNZZXbAr8qCBu9g7I/view?usp=sharing)
+
 This gets you the mesh files.
 
 In order to use my case management infrastructure, make sure that the `${mpas_output}` variable
@@ -299,6 +302,8 @@ So this will take some cleverness:
 
 ## Building a modified MPAS-tools
 
+
+<!--
 Clone the repository []()
 
 Run the following:
@@ -307,6 +312,7 @@ Run the following:
 git checkout 50300ae871fb183421517b909fc4e6d1867f8829 -- mesh_tools/periodic_hex/module_write_netcdf.F
 git checkout 50300ae871fb183421517b909fc4e6d1867f8829 -- mesh_tools/periodic_hex/periodic_grid.F
 ```
+
 
 Make sure that you go into your netcdf dependencies and symlink all of the files in your netcdf_fortran `include, lib, bin` files
 to your netcdf_c dependency `include, lib, bin` folders. 
@@ -317,12 +323,13 @@ Note: running `./periodic_grid` will generate a mesh. The namelist options for t
 grid are given in `mesh_tools/periodic_hex/namelist.input`.
 
 My example grid can be found at [this link](https://drive.google.com/file/d/1nvzUdMqfNWcUmBRP2m6QyBPTw4zyWVnd/view?usp=sharing)
+-->
 
 
 
+Run `git clone `
 
-
-Todo on this:  Try using points-mpas.cpp which seems to have the shallow water fields but should account for metric terms?
+Try using points-mpas.cpp which seems to have the shallow water fields but should account for metric terms?
 
 Ok so the long and short of it is that if you build points-mpas.cpp with netcdf-cxx (not the netcdf4 version, that will cause problems)
 it will generate a file that works straight away. With the default time stepping the output ends up with NaNs, so remains to see if the 
