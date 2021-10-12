@@ -106,8 +106,8 @@ begin
 ;************************************************
 ;plot resources [options]
 ;************************************************
-  plot = new(3 * 4,graphic)
-  plot_over = new(3 * 4,graphic)
+  plot = new(4 * 4,graphic)
+  plot_over = new(4* 4,graphic)
   wks = gsn_open_wks(type,plotname)
   
 ; ********************
@@ -138,6 +138,8 @@ do i=0,3
   PRECL   = PRECL*8.64e7
   PRECL@units = "mm/day"
   PRECL@long_name = "Precipitation rate"
+  
+  TMQ = f1->TMQ(pday,:,:)  
   
 ;************************************************
   ; interpolate to constant pressure levels.
