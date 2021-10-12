@@ -34,7 +34,17 @@ Convergence of eddy kinetic energy etc from the paper
 
 Dynamical core comparison:
 
-Vertically averaged omega for showcasing physics-dynamics coupling strategy ()
+Vertically averaged omega for showcasing physics-dynamics coupling strategy
+
+Still unsure of gravity wave propagation. 
+
+FV3 outlier.
+
+To think about: actually topographic differences?
+
+Close reading of precipitation structure & e.g. TPW over the mountain at time of impact! 
+
+(Make these figures! These might help form a story!)
 
 
 
