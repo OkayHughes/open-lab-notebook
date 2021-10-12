@@ -199,10 +199,10 @@ end do
   pres@amJust           = "TopLeft"
   pres@gsnFrame         = False   
 
-  subplot_1 = gsn_panel(wks,plot(0:3),(/1,4/),pres)
-  subplot_2 = gsn_panel(wks,plot(4:7),(/1,4/),pres)
   
-  gsn_panel(wks,(/subplot_1, subplot_2 /),(/2,1/),pres)
+  gsn_panel(wks,plot(0:3),(/1,4/),pres)
+  frame(wks)    ; now frame the plot and we're done
+  gsn_panel(wks,plot(4:7),(/1,4/),pres)
   frame(wks)    ; now frame the plot and we're done
 
 
