@@ -251,3 +251,7 @@ img.small{
 img.tiny{
     width: 15%;
 }
+
+span.todo{
+  color:red;
+}

@@ -4,7 +4,7 @@ tags:
   - posts
   - misc
 eleventyNavigation:
-  key: BW Topo figures document
+  key: BW Topo outline
   parent: Baroclinic Wave Test Case with Topography
 layout: layouts/post.njk
 ---

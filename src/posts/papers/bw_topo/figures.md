@@ -10,15 +10,21 @@ layout: layouts/post.njk
 ---
 
 
-### Outline of what figures are needed:
+## Outline of what figures are needed:
 
 How to establish atmospheric river like characteristics? Stereographic projection sales plot?
 
 Evolution:
-5 days of MSLP in NE60
 
 
-5 days of precipitation in NE60 (possibly day 8)
+
+### 5 days of MSLP in NE60
+What does this figure need to do? 
+* Establishes that until day 5 it is nonlinear but well behaved (lead in to convergence)
+* Showcases evolving wave in relation to topography
+* Showcases difference between dry and moist cases (e.g. why does the addition of moisture)
+
+<span class="todo">Possible evolution plot centered on the mountain at e.g. 850hPa</span> 
 
 
 Moist vs dry comparison (possibly show omega?)
