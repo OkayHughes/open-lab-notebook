@@ -67,9 +67,20 @@ region over the mountain</span>
 
 ### Quantitative comparison of over-mountain evolution at 850hPa (downsampled from highest resolution)
 What does this show?
-* 
 
-Convergence of eddy kinetic energy etc from the paper
+
+
+### Possible precipitation histogram
+* Focus on time of hitting mountain, area directly over mountain.
+
+
+
+### eddy kinetic energy plot: convergence
+
+
+
+
+
 
 ## Dynamical core comparison:
 
