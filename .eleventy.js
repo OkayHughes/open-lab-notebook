@@ -3,6 +3,7 @@ const pluginSEO = require("eleventy-plugin-seo");
 const linkTo = require('eleventy-plugin-link_to');
 const katex = require('katex');
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
+const pluginTOC = require('eleventy-plugin-toc')
 
 /**
 * This is the JavaScript code that determines the config for your Eleventy site
