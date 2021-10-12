@@ -12,11 +12,29 @@ layout: layouts/post.njk
 
 ### Outline of what figures are needed:
 
+How to establish atmospheric river like characteristics? Stereographic projection sales plot?
+
 Evolution:
 5 days of MSLP in NE60
+
 
 5 days of precipitation in NE60 (possibly day 8)
 
 
-How to establish 
+Moist vs dry comparison (possibly show omega?)
+
+
+minimum PSL showing convergence and clustering in moist/dry case.
+
+
+Quantitative comparison of over-mountain evolution at 850hPa (downsampled from highest resolution)
+
+
+Convergence of eddy kinetic energy etc from the paper
+
+Dynamical core comparison:
+
+Vertically averaged omega for showcasing physics-dynamics coupling strategy ()
+
+
 
