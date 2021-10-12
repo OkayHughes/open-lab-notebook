@@ -46,9 +46,9 @@ Times:
   
 ```
 ;*************************************
-; tracer_time_series_plots.ncl
+; SE_NE50L30_evolution.ncl
 ; Example usage: 
-; ncl level=850 'pfmt="eps"' tracer_time_series_plots.ncl
+; ncl level=850 'pfmt="eps"'
 ;***********************************************
 
 
@@ -67,9 +67,6 @@ begin
 
 
 ;=====
-; dycore   = "SLDT85L30"           ; label in plot, name your dycore
-;  dycore   = "EULT85L30"           ; label in plot, name your dycore
-; dycore   = "FV1x1L30"             ; label in plot, name your dycore
  dycore   = "SEne60L30"             ; label in plot, name your dycore
 
 ;=====
@@ -96,24 +93,28 @@ begin
   end if
 
 ;************************************************
-; read variables
+; read grid variables
 ;************************************************
   lev  = f1->lev
   lon  = f1->lon
   lat  = f1->lat
-;  klev  = dimsizes(lev) - 1              ; index counts from 0 ... klev (30 values)
   klev   = getfilevardimsizes(f1, "lev" ) ; read number of vertical levels (hybrid coordinates)
-
+  
   P0   = 100000.      ; Pa
   P0mb = P0*0.01      ; hPa
+
 ;************************************************
 ;plot resources [options]
 ;************************************************
   plot = new(3 * 4,graphic)
   plot_over = new(3 * 4,graphic)
-  wks = gsn_open_wks(type,plotname)   
+  wks = gsn_open_wks(type,plotname)
+  
+; ********************
+; FOR LOOP STARTS HERE
+; ********************
 do i=0,3
-  pday = times(i)  ; day 5 
+  pday = times(i)  ; day 5
 ;*************   
 ; read surface geopotential (first time index)
 ;*************   
@@ -138,6 +139,9 @@ do i=0,3
   PRECL@units = "mm/day"
   PRECL@long_name = "Precipitation rate"
   
+;************************************************
+  ; interpolate to constant pressure levels.
+;************************************************
   p    := pres_hybrid_ccm(ps1,P0,f1->hyam,f1->hybm)          ; pressure thickness 
   copy_VarCoords(f1->Z3(pday, :, :, :), p)
   printVarSummary(p)
