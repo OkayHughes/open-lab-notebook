@@ -10,18 +10,17 @@ layout: layouts/post.njk
 ---
 
 
-## Outline of what figures are needed:
 
 
 
-## Atmospheric river similarity plot
+### Atmospheric river similarity plot
 What does this figure need to do?
 * Motivate latitudinal extent and aspect ratio of wave
 * Showcase moisture transport properties of wave for use in dynamical core intercomparisons
 * Precipitation patterns
 
 
-Evolution:
+## Evolution:
 
 
 
@@ -42,30 +41,37 @@ Times:
 this might be valuable to contrast dry with moist! </span> 
 
 
-## #Evolution of precipitation over mountain
+### Evolution of precipitation over mountain
 Difference between PRECL in nominal 30km grid with second and without. 
 * Potential lead-in to close-up comparison of structure over the mountain. 
 * Hypothesis: structural characteristics of precipitation at hitting time on hill 
 
 Fields:
-Omega
+* Omega
 Time: day 5.
 
 
-## Moist/dry comparison
+### Moist/dry comparison
 * Showcases difference between dry and moist cases (e.g. why does the addition of moisture add something to this case)
-* Closeup on `$$\omega $$`
+* Closeup on `$$\omega $$` over mountain? Think more about this
 
 
-minimum PSL showing convergence and clustering in moist/dry case.
+### minimum PSL showing convergence and clustering in moist/dry case.
+* shows that there is clustered agreement at high resolution in moist case, and standard
+presumed "convergence" in dry case.
+
+<span class="todo">Check whether these plots look as compelling when you just look at the 
+region over the mountain</span>
 
 
-Quantitative comparison of over-mountain evolution at 850hPa (downsampled from highest resolution)
 
+### Quantitative comparison of over-mountain evolution at 850hPa (downsampled from highest resolution)
+What does this show?
+* 
 
 Convergence of eddy kinetic energy etc from the paper
 
-Dynamical core comparison:
+## Dynamical core comparison:
 
 Closeup on evolution of precipitation in nominal 30km case over the mountain
 
@@ -75,11 +81,7 @@ Still unsure of gravity wave propagation.
 
 FV3 outlier.
 
-To think about: actually topographic differences?
 
-Close reading of precipitation structure & e.g. TPW over the mountain at time of impact! 
-
-(Make these figures! These might help form a story!)
 
 
 
