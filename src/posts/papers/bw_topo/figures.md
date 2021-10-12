@@ -12,7 +12,14 @@ layout: layouts/post.njk
 
 ## Outline of what figures are needed:
 
-How to establish atmospheric river like characteristics? Stereographic projection sales plot?
+
+
+## Atmospheric river similarity plot
+What does this figure need to do?
+* Motivate latitudinal extent and aspect ratio of wave
+* Showcase moisture transport properties of wave for use in dynamical core intercomparisons
+* Precipitation patterns
+
 
 Evolution:
 
@@ -21,13 +28,33 @@ Evolution:
 ### 5 days of MSLP in NE60
 What does this figure need to do? 
 * Establishes that until day 5 it is nonlinear but well behaved (lead in to convergence)
-* Showcases evolving wave in relation to topography
-* Showcases difference between dry and moist cases (e.g. why does the addition of moisture)
+* Showcases evolving wave in relation to location of topography
 
-<span class="todo">Possible evolution plot centered on the mountain at e.g. 850hPa</span> 
+Fields: 
+* MSLP
+* PRECL
+* Precipitable water
+
+Times: 
+(day 2?) day 3, day 4, day 5, (day 6)
+
+<span class="todo">Possible evolution plot centered on the mountain at e.g. 850hPa,
+this might be valuable to contrast dry with moist! </span> 
 
 
-Moist vs dry comparison (possibly show omega?)
+## #Evolution of precipitation over mountain
+Difference between PRECL in nominal 30km grid with second and without. 
+* Potential lead-in to close-up comparison of structure over the mountain. 
+* Hypothesis: structural characteristics of precipitation at hitting time on hill 
+
+Fields:
+Omega
+Time: day 5.
+
+
+## Moist/dry comparison
+* Showcases difference between dry and moist cases (e.g. why does the addition of moisture add something to this case)
+* Closeup on `$$\omega $$`
 
 
 minimum PSL showing convergence and clustering in moist/dry case.
@@ -39,6 +66,8 @@ Quantitative comparison of over-mountain evolution at 850hPa (downsampled from h
 Convergence of eddy kinetic energy etc from the paper
 
 Dynamical core comparison:
+
+Closeup on evolution of precipitation in nominal 30km case over the mountain
 
 Vertically averaged omega for showcasing physics-dynamics coupling strategy
 
