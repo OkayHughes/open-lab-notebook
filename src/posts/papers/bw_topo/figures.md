@@ -12,5 +12,11 @@ layout: layouts/post.njk
 
 ### Outline of what figures are needed:
 
+Evolution:
+5 days of MSLP in NE60
 
+5 days of precipitation in NE60 (possibly day 8)
+
+
+How to establish 
 
