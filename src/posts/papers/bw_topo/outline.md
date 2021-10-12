@@ -10,7 +10,5 @@ layout: layouts/post.njk
 ---
 
 
-### Outline of what figures are needed:
-
 
 

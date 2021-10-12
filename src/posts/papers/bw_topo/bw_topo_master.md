@@ -10,4 +10,4 @@ layout: layouts/post.njk
 ---
 
 
-This contains a directory for the 
+This contains a directory for the baroclinic wave test case with topography
