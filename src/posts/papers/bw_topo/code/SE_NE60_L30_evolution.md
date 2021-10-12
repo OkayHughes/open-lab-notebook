@@ -1,11 +1,9 @@
-
 ---
 date: 2021-09-01
 tags:
   - posts
-  - misc
 eleventyNavigation:
-  key: BW Topo outline
+  key: SE_NE60L30_evolution.ncl
   parent: Baroclinic Wave Test Case with Topography
 layout: layouts/post.njk
 ---
@@ -75,8 +73,8 @@ begin
 ;************************************************
 ;plot resources [options]
 ;************************************************
-  plot = new(4 * 4,graphic)
-  plot_over = new(4* 4,graphic)
+  plot = new(2 * 4,graphic)
+  plot_over = new(2 * 4,graphic)
   wks = gsn_open_wks(type,plotname)
   
 ; ********************
@@ -108,24 +106,6 @@ do i=0,3
   PRECL@units = "mm/day"
   PRECL@long_name = "Precipitation rate"
   
-  TMQ = f1->TMQ(pday,:,:)  
-  
-;************************************************
-  ; interpolate to constant pressure levels.
-;************************************************
-  p    := pres_hybrid_ccm(ps1,P0,f1->hyam,f1->hybm)          ; pressure thickness 
-  copy_VarCoords(f1->Z3(pday, :, :, :), p)
-  printVarSummary(p)
-  temp := f1->T(pday, :, {45:45}, {30:255})
-  theta := pot_temp(p(:, {45:45}, {30:255}), temp, 0, False)
-  Z3 := f1->Z3(pday, :, {45:45}, {30:255})
-  levels = fspan(500, 15000, 60)
-  levels@units = "m"
-  theta := wrf_user_interp_level(theta, Z3, levels, 0)
-  printVarSummary(theta)
-  theta&lon = lon({30:255})
-  theta&level = levels
-  printVarSummary(theta&lon)  
 ;=======
 ; open plot and define color table
 ;=======
@@ -200,30 +180,12 @@ do i=0,3
   plot_over(4 + i) = gsn_csm_contour(wks,zs({0:90},{30:255}),res_overlay)
   overlay (plot(4 + i),plot_over(4 + i))
   
-  res@cnLevelSelectionMode = "ManualLevels"
-  res@cnMinLevelValF    = 260.                  ; set min contour level
-  res@cnMaxLevelValF    = 400.               ; set max contour level
-  res@cnLevelSpacingF   = 20.                ; set contour spacing 
-  res1 = True
-  res1@gsnFrame = False
-  res1@gsnDraw  = False
-  plot(8 + i) = gsn_csm_contour(wks,theta(:,{30:255}),res) 
-  plot_over(8+i) = gsn_csm_xy (wks,lon({30:255}),zs({45}, {30:255}),res1)
-  overlay (plot(8+i),plot_over(8+i))
+
   
-  res@cnLevelSelectionMode = "ManualLevels"
-  res@cnMinLevelValF    = 0.                  ; set min contour level
-  res@cnMaxLevelValF    = 50.               ; set max contour level
-  res@cnLevelSpacingF   = 5.                ; set contour spacing 
-  res1 = True
-  res1@gsnFrame = False
-  res1@gsnDraw  = False
-  plot(12 + i) = gsn_csm_contour(wks,theta(:,{30:255}),res) 
-  plot_over(12+i) = gsn_csm_xy (wks,lon({30:255}),zs({45}, {30:255}),res1)
-  overlay (plot(12+i),plot_over(12+i))
  
 
 end do
+  subplots = new(2,graphic)
    pres := True               ; panel
 ;  pres@gsnMaximize = True   ; [e]ps, pdf  make  large 
   pres@gsnMaximize = False   ; [e]ps, pdf  make  large 
@@ -238,7 +200,7 @@ end do
   pres@amJust           = "TopLeft"
   pres@gsnFrame         = False   
 
- gsn_panel(wks,plot,(/4,4/),pres)
+ gsn_panel(wks,plot,(/2,4/),pres)
   frame(wks)    ; now frame the plot and we're done
 
 
