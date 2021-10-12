@@ -185,7 +185,6 @@ do i=0,3
  
 
 end do
-  subplots = new(2,graphic)
    pres := True               ; panel
 ;  pres@gsnMaximize = True   ; [e]ps, pdf  make  large 
   pres@gsnMaximize = False   ; [e]ps, pdf  make  large 
@@ -200,7 +199,10 @@ end do
   pres@amJust           = "TopLeft"
   pres@gsnFrame         = False   
 
- gsn_panel(wks,plot,(/2,4/),pres)
+  subplot_1 = gsn_panel(wks,plot(0:3),(/1,4/),pres)
+  subplot_2 = gsn_panel(wks,plot(4:7),(/1,4/),pres)
+  
+  gsn_panel(wks,(/subplot_1, subplot_2 /),(/2,1/),pres)
   frame(wks)    ; now frame the plot and we're done
 
 
