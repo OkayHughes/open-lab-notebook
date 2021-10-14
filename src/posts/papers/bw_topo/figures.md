@@ -30,8 +30,6 @@ What does this figure need to do?
 * Showcases evolving wave in relation to location of topography
 
 
-
-
 Fields: 
 * MSLP
 * PRECL
