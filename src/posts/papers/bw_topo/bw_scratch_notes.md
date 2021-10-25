@@ -13,3 +13,5 @@ layout: layouts/post.njk
 Interesting paper [https://journals.ametsoc.org/view/journals/hydr/18/6/jhm-d-16-0209_1.xml](https://journals.ametsoc.org/view/journals/hydr/18/6/jhm-d-16-0209_1.xml)
 
 Useful term: "Hydrograph"
+
+Paper that uses gridpoint histograms to evaluate 
