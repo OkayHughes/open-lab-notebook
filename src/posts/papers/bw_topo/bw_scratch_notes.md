@@ -20,3 +20,9 @@ at (I think) nominal 50km spacing [https://journals.ametsoc.org/view/journals/cl
 - Todo: check whether validation paper references contain anything fruitful
 
 Atmospheric river specific: [https://www.nature.com/articles/ngeo2894]
+
+
+Precipitation intercomparison: [https://link.springer.com/article/10.1007/s00382-015-2959-5](A multimodel intercomparison of resolution effects on precipitation: simulations and theory)
+
+2014 evaluation: [https://link.springer.com/article/10.1007/s10584-014-1117-0](Changes in extremes and hydroclimatic regimes in the CREMA ensemble projections)
+(Contains mentions of some useful precipitation metrics)
