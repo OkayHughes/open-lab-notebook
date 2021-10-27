@@ -31,3 +31,12 @@ Precipitation intercomparison: [https://link.springer.com/article/10.1007/s00382
 
 
 [https://journals.ametsoc.org/view/journals/clim/21/7/2007jcli1494.1.xml](On the Verification and Comparison of Extreme Rainfall Indices from Climate Models)
+
+
+## Methodology:
+* Using the area average interpretation of model intercomparison output, choose a nominal grid spacing most consistent with the coarsest grid spacing chosen (nominally 1 degree or so). 
+
+* Remap by averaging across spatial scales (use area average assumption to deal with offsets in latlon grid) to coarse grid at each 6h output 
+
+
+Question: What is treated as an IID sample? 
