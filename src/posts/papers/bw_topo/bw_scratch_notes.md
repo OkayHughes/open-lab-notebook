@@ -15,11 +15,11 @@ Interesting paper [https://journals.ametsoc.org/view/journals/hydr/18/6/jhm-d-16
 Useful term: "Hydrograph"
 
 Paper that uses gridpoint histograms to evaluate accuracy of prediction
-at (I think) nominal 50km spacing [https://journals.ametsoc.org/view/journals/clim/16/22/1520-0442_2003_016_3841_tsooas_2.0.co_2.xml](Temporal–Spatial Scales of Observed and Simulated Precipitation in Central U.S. Climate)
+at (I think) nominal 50km spacing [Temporal–Spatial Scales of Observed and Simulated Precipitation in Central U.S. Climate](https://journals.ametsoc.org/view/journals/clim/16/22/1520-0442_2003_016_3841_tsooas_2.0.co_2.xml)
 
 - Todo: check whether validation paper references contain anything fruitful
 
-Atmospheric river specific: [https://www.nature.com/articles/ngeo2894]
+Atmospheric river specific: (ttps://www.nature.com/articles/ngeo2894)[https://www.nature.com/articles/ngeo2894]
 
 
 Precipitation intercomparison: [https://link.springer.com/article/10.1007/s00382-015-2959-5](A multimodel intercomparison of resolution effects on precipitation: simulations and theory)
@@ -27,10 +27,10 @@ Precipitation intercomparison: [https://link.springer.com/article/10.1007/s00382
 2014 evaluation: [https://link.springer.com/article/10.1007/s10584-014-1117-0](Changes in extremes and hydroclimatic regimes in the CREMA ensemble projections)
 (Contains mentions of some useful precipitation metrics
 
-[https://journals.ametsoc.org/view/journals/clim/27/14/jcli-d-13-00320.1.xml#bib5](How Well Are the Distribution and Extreme Values of Daily Precipitation over North America Represented in the Community Climate System Model? A Comparison to Reanalysis, Satellite, and Gridded Station Data )
+[How Well Are the Distribution and Extreme Values of Daily Precipitation over North America Represented in the Community Climate System Model? A Comparison to Reanalysis, Satellite, and Gridded Station Data ](https://journals.ametsoc.org/view/journals/clim/27/14/jcli-d-13-00320.1.xml#bib5)
 
 
-[https://journals.ametsoc.org/view/journals/clim/21/7/2007jcli1494.1.xml](On the Verification and Comparison of Extreme Rainfall Indices from Climate Models)
+[On the Verification and Comparison of Extreme Rainfall Indices from Climate Models](https://journals.ametsoc.org/view/journals/clim/21/7/2007jcli1494.1.xml)
 
 
 ## Methodology:
