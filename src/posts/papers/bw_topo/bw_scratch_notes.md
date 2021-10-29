@@ -40,3 +40,8 @@ Precipitation intercomparison: [https://link.springer.com/article/10.1007/s00382
 
 
 Question: What is treated as an IID sample? 
+
+
+## Concatenating netcdf files along unlimited dimension
+
+`ncrcat 0*.nc -O precip_all.nc`
