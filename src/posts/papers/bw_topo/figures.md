@@ -46,6 +46,7 @@ Times:
 this might be valuable to contrast dry with moist! </span> 
 
 
+
 ### Evolution of precipitation over mountain
 Difference between PRECL in nominal 30km grid with second and without. 
 * Potential lead-in to close-up comparison of structure over the mountain. 
@@ -60,6 +61,8 @@ Time: day 5.
 * Showcases difference between dry and moist cases (e.g. why does the addition of moisture add something to this case)
 * Closeup on `$$\omega $$` over mountain? Think more about this
 
+<span class="todo">model intercomparison of omega evolution over the mountain lon height</span>
+
 
 ### minimum PSL showing convergence and clustering in moist/dry case.
 * shows that there is clustered agreement at high resolution in moist case, and standard
@@ -67,6 +70,7 @@ presumed "convergence" in dry case.
 
 <span class="todo">Check whether these plots look as compelling when you just look at the 
 region over the mountain</span>
+
 
 
 
