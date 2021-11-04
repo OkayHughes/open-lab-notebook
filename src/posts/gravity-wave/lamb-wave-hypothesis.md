@@ -32,42 +32,33 @@ We multiply through by `$$-g$$` to get
 
 `$$$ \left(\frac{\partial}{\partial t} + \overline{u} \frac{\partial}{\partial x} \right) \frac{\partial p'}{\partial z} -g \overline{\rho} \frac{\partial u'}{\partial x} = 0 $$$`
 
-Before we go further that if `$$\rho = \overline{\rho} + \rho'$$` and `$$ p = \overline{p} + p',$$` then we find that `$$\frac{\partial p}{\partial z} = - \rho g$$` which gives us `$$\frac{\partial p'}{\partial z} + \frac{\partial \overline{p}}{\partial z} = - g \left(\overline{\rho} + \rho' \right)$$` and using what we know about $\rho'$ and $p'$ we get that $\pder{\overline{p}}{z} = -g\overline{\rho}$ which should be true just from physical intuition. We note that $\gamma \neq 0$ and $\overline{p} \neq 0$ and thus
-\begin{align*}
-    \overline{p} \gamma \left(\pder{}{t} + \overline{u} \pder{}{x} \right) \pder{p'}{z} - g \gamma \overline{p} \overline{\rho}  \pder{u'}{x} &= 0 \\
-        g \overline{\rho} \left(\pder{}{t} + \overline{u} \pder{}{x} \right)p'  + g \gamma \overline{\rho} \overline{p} \pder{u'}{x}  &= 0
-\end{align*}
+Before we go further that if `$$\rho = \overline{\rho} + \rho'$$` and `$$ p = \overline{p} + p',$$` then we find that `$$\frac{\partial p}{\partial z} = - \rho g$$` which gives us `$$\frac{\partial p'}{\partial z} + \frac{\partial \overline{p}}{\partial z} = - g \left(\overline{\rho} + \rho' \right)$$` and using what we know 
+about `$$\rho'$$` and `$$p'$$` we get that `$$\frac{\partial\overline{p}}{\partial z} = -g\overline{\rho}$$` which should be true just from physical intuition. We note that `$$\gamma \neq 0$$` and `$$\overline{p} \neq 0$$` and thus
+
+`$$$ \overline{p} \gamma \left(\frac{\partial}\partial {t} + \overline{u} \frac{\partial}{\partial x} \right) \frac{\partial p'}{\partial z} - g \gamma \overline{p} \overline{\rho}  \frac{\partial u'}{\partial x} = 0 $$$`
+`$$$ g \overline{\rho} \left(\frac{\partial}{\partial t} + \overline{u} \frac{\partial}{\partial x} \right)p'  + g \gamma \overline{\rho} \overline{p} \frac{\partial u'}{\partial x}  = 0 $$$`
 
 and we add these equations to get 
 
-\begin{align*}    
-    \overline{p} \gamma \left(\pder{}{t} + \overline{u} \pder{}{x} \right) \pder{p'}{z} + g \overline{\rho} \left(\pder{}{t} + \overline{u} \pder{}{x} \right)p'  &= 0 \\
-    \left(\pder{}{t} + \overline{u} \pder{}{x} \right)u'  + \frac{1}{\overline{\rho}} \pder{p'}{x} &= 0
-\end{align*}
 
-Which allows us to solve for $p'$ (note we started with 3 equations and 4 unknowns) and then back-substitute to get other values: assume that $p' = \hat{p}\exp(ik(x - ct))$ $\hat{p}(z=0) = p_{00}$ and get
+`$$$ \overline{p} \gamma \left(\frac{\partial }{\partial t} + \overline{u} \frac{\partial}{\partial x} \right) \frac{\partial p'}{\partial z} + g \overline{\rho} \left(\frac{\partial }{\partial t} + \overline{u} \frac{\partial }{\partial x} \right)p'  = 0 $$$`
+`$$$ \left(\frac{\partial}{\partial t} + \overline{u} \frac{\partial}{\partial x} \right)u'  + \frac{1}{\overline{\rho}} \frac{\partial p'}{\partial x} = 0 $$$`
 
-\begin{align*}
-    i\overline{p}\gamma\left( -kc + \overline{u}k \right)\left(\pder{\hat{p}}{z} \right)\Psi + ig\overline{\rho} \left( k\overline{u} - k c\right)\hat{p}\Psi = 0
-\end{align*}
 
-and therefore we find the following:
+Which allows us to solve for `$$p'$$` (note we started with 3 equations and 4 unknowns) and then back-substitute to get other values: assume that `$$ p' = \hat{p}\exp(ik(x - ct))$$`, `$$\hat{p}(z=0, \phi) = p_{00}$$` and get
 
-\begin{align*}
-    ik\overline{p}\gamma\left( \overline{u} -c \right)\left(\pder{\hat{p}}{z} \right)\Psi + ik g\overline{\rho} \left( \overline{u} - c\right)\hat{p}\Psi = 0
-\end{align*}
 
-and by canceling we find:
-\begin{align*}
-    &\qquad \overline{p}\gamma\left(\pder{\hat{p}}{z} \right) +  g\overline{\rho}\hat{p}  = 0\\
-    &\implies \left(\pder{\hat{p}}{z} \right)   = -\frac{g\overline{\rho}}{\overline{p}\gamma}\hat{p}
-\end{align*}
+`$$$ \overline{p}\gamma\left( -kc + \overline{u}k \right)\left(\frac{\partial \hat{p}}{\partial z} \right)\Psi + ig\overline{\rho} \left( k\overline{u} - k c\right)\hat{p}\Psi = 0 $$$`
 
-and we use the ideal gas law to find $\overline{p} = \overline{\rho} R_d \overline{T} \implies \frac{\overline{p}}{\overline{\rho}} =  R_d \overline{T}$ and therefore
+`$$$ \implies ik\overline{p}\gamma\left( \overline{u} -c \right)\left(\frac{\partial \hat{p}}{\partial z} \right)\Psi + ik g\overline{\rho} \left( \overline{u} - c\right)\hat{p}\Psi = 0$$$`
 
-\begin{align*}
-         \left(\pder{\hat{p}}{z} \right) = - \frac{g}{R_d\gamma \overline{T}}\hat{p}
-\end{align*}
+`$$$ \implies \overline{p}\gamma\left(\frac{\partial \hat{p}}{\partial z} \right) +  g\overline{\rho}\hat{p}  = 0 $$$`
+`$$$ \implies \left(\frac{\partial \hat{p}}{\partial z} \right)   = -\frac{g\overline{\rho}}{\overline{p}\gamma}\hat{p} $$$`
+
+
+and we use the ideal gas law to find `$$ \overline{p} = \overline{\rho} R_d \overline{T} \implies \frac{\overline{p}}{\overline{\rho}} =  R_d \overline{T}$$` and therefore
+
+  \left(\pder{\hat{p}}{z} \right) = - \frac{g}{R_d\gamma \overline{T}}\hat{p}
 
 The righthand size has units $\Pa/\m$ which agrees with the lefthand side. Clearly this has solution $\ln(\hat{p}(z)) - \ln(\hat{p}(z=0)) = - \frac{g}{R_d \gamma \overline{T}}(z - 0)$ and therefore
 \begin{align*}
