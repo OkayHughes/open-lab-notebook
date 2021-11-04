@@ -58,22 +58,27 @@ Which allows us to solve for `$$p'$$` (note we started with 3 equations and 4 un
 
 and we use the ideal gas law to find `$$ \overline{p} = \overline{\rho} R_d \overline{T} \implies \frac{\overline{p}}{\overline{\rho}} =  R_d \overline{T}$$` and therefore
 
-  \left(\pder{\hat{p}}{z} \right) = - \frac{g}{R_d\gamma \overline{T}}\hat{p}
+`$$$\left(\frac{\partial \hat{p}}{\partial z} \right) = - \frac{g}{R_d\gamma \overline{T}(z)}\hat{p}$$$`
 
-The righthand size has units $\Pa/\m$ which agrees with the lefthand side. Clearly this has solution $\ln(\hat{p}(z)) - \ln(\hat{p}(z=0)) = - \frac{g}{R_d \gamma \overline{T}}(z - 0)$ and therefore
-\begin{align*}
-    \hat{p}(z) = p_{00}\exp\left(- \frac{g}{R_d \gamma \overline{T}}z\right)
-\end{align*}
+The righthand size has units Pa/m which agrees with the lefthand side. Clearly this has solution `$$\ln(\hat{p}(z)) - \ln(\hat{p}(z=0)) = - \int_{z=0}^z\frac{g}{R_d \gamma \overline{T}(z)}\, \mathrm{d}z$$` and therefore
+`$$$\hat{p}(z) = p_{00}\exp\left(- \int_{z=0}^z\frac{g}{R_d \gamma \overline{T}(z)}\, \mathrm{d}z\right)$$$`
 
-In order to find the physical solution we take 
-\begin{align*}
-    p' &= \Re \left(p_{00}\exp\left(- \frac{g}{R_d \gamma \overline{T}} z\right) \exp \left(ik(x - ct) \right)  \right)\\
-    &= p_{00}\exp\left(- \frac{g}{R_d \gamma \overline{T}} z\right) \Re \left( \exp \left(ik(x - ct) \right)  \right)\\
-    &= p_{00}\exp\left(- \frac{g}{R_d \gamma \overline{T}} z\right) \Re \left( \cos(k(x - ct)) + i \sin(k(x - ct)) \right)\\
-    &= p_{00}\exp\left(- \frac{g}{R_d \gamma \overline{T}} z\right) \cos(k(x - ct))\\
-\end{align*}
+In order to find the physical solution we take
 
-
+<table>
+  <tr>
+    <td>`$$ p'</td> <td> $$`  `$$= \Re \left(p_{00}\exp\left(- \frac{g}{R_d \gamma \overline{T}} z\right) \exp \left(ik(x - ct) \right)  \right) $$`</td>
+  </tr>
+  <tr>
+            `$$\quad= p_{00}\exp\left(- \frac{g}{R_d \gamma \overline{T}} z\right) \Re \left( \exp \left(ik(x - ct) \right)  \right) $$`</td>
+  </tr>
+  <tr>
+            `$$\quad= p_{00}\exp\left(- \frac{g}{R_d \gamma \overline{T}} z\right) \Re \left( \cos(k(x - ct)) + i \sin(k(x - ct)) \right) $$`</td>
+  </tr>
+  <tr>
+            `$$ = p_{00}\exp\left(- \frac{g}{R_d \gamma \overline{T}} z\right) \cos(k(x - ct)) $$`</td>
+  </tr>
+</table>
 And we use the linearized hydrostatic equation $\pder{p'}{z} = -\rho' g$ to find
 
 \begin{align*}
