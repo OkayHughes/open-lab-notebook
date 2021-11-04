@@ -14,39 +14,25 @@ layout: layouts/post.njk
 In the atmosphere there is a special kind of acoustic wave called a Lamb wave, which is a horizontally propagating sound wave 
 with no vertical velocity propagation (`$$w'$$` = 0). They are supported by a hydrostatic equation set. It has been observed that the amplitudes of the oscillations of a Lamb wave vary with height.
 
-Use the equations: `$$$ \left(\frac{\partial}{\partial t} + \overline{u} \frac{\partial}{\partial x} \right)u'  + \frac{1}{\overline{\rho}} \pder{p'}{x} = 0 $$$`
-    \left(\pder{}{t} + \overline{u} \pder{}{x} \right)p'  + \gamma \overline{p} \pder{u'}{x}  &= 0
-\end{align*}
+Use the equations: 
+`$$$ \left(\frac{\partial}{\partial t} + \overline{u} \frac{\partial}{\partial x} \right)u'  + \frac{1}{\overline{\rho}} \frac{\partial p'}{\partial x} = 0 $$$`
+`$$$ \left(\frac{\partial}{\partial t} + \overline{u} \frac{\partial}{\partial x} \right)p'  + \gamma \overline{p} \frac{\partial u'}{\partial x}  = 0 $$$`
 
-and
-
-\begin{align*}
-    \pder{p'}{z} &= -\rho' g \\
-    \left(\pder{}{t} + \overline{u} \pder{}{x} \right) \rho' + \overline{\rho} \pder{u'}{x} &= 0 
-\end{align*}
-
-$\overline{p}(z)$,  $\overline{\rho}(z)$ depend on height, $\overline{u}$ is constant, $\overline{T}$ is isothermal, and $\gamma \equiv c_p/c_v$
-
-\subsection*{Derive the physical solutions for the Lamb wave equations for $p', u', \rho'$ assuming that the pressure perturbation has the form $p' = \hat{p}\exp(ik(x - ct))$, $\hat{p}(z=0) = p_{00}$}
+`$$$\frac{\partial p'}{\partial z} = -\rho' g $$$`
+`$$$\left(\frac{\partial}{\partial t} + \overline{u} \frac{\partial}{\partial x} \right) \rho' + \overline{\rho} \frac{\partial u'}{\partial x} = 0 $$$` 
 
 
-We start by writing 
+Where `$$\overline{p}(z)$$`,  `$$\overline{\rho}(z)$$` depend on height, `$$\overline{u}(z, \phi)$$` , `$$\overline{T}(z, \phi)$$` are taken as parameters and `$$\gamma \equiv c_p/c_v$$`
+and eliminate `$$\rho'$$` in the last equation:
 
-\begin{align*}
-    -\frac{1}{g}\pder{p'}{z} &= \rho' \\
-\end{align*}
-and eliminate $\rho'$ in the last equation:
-\begin{align*}
-    -\frac{1}{g}\left(\pder{}{t} + \overline{u} \pder{}{x} \right) \pder{p'}{z} + \overline{\rho} \pder{u'}{x} &= 0 
-\end{align*}
+`$$$-\frac{1}{g}\left(\frac{\partial}{\partial t} + \overline{u} \frac{\partial}{\partial x} \right) \frac{\partial p'}{\partial z} + \overline{\rho} \frac{\partial u'}{\partial x} = 0 $$$`
 
-We multiply through by $-g$ to get 
+We multiply through by `$$-g$$` to get 
 
-\begin{align*}
-    \left(\pder{}{t} + \overline{u} \pder{}{x} \right) \pder{p'}{z} -g \overline{\rho} \pder{u'}{x} &= 0 
-\end{align*}
 
-Before we go further that if $\rho = \overline{\rho} + \rho'$ and $p = \overline{p} + p',$ then we find that $\pder{p}{z} = - \rho g$ which gives us $\pder{p'}{z} + \pder{\overline{p}}{z} = - g \left(\overline{\rho} + \rho' \right)$ and using what we know about $\rho'$ and $p'$ we get that $\pder{\overline{p}}{z} = -g\overline{\rho}$ which should be true just from physical intuition. We note that $\gamma \neq 0$ and $\overline{p} \neq 0$ and thus
+`$$$ \left(\frac{\partial}{\partial t} + \overline{u} \frac{\partial}{\partial x} \right) \frac{\partial p'}{\partial z} -g \overline{\rho} \frac{\partial u'}{\partial x} = 0 $$$`
+
+Before we go further that if `$$\rho = \overline{\rho} + \rho'$$` and `$$ p = \overline{p} + p',$$` then we find that `$$\frac{\partial p}{\partial z} = - \rho g$$` which gives us `$$\frac{\partial p'}{\partial z} + \frac{\partial \overline{p}}{\partial z} = - g \left(\overline{\rho} + \rho' \right)$$` and using what we know about $\rho'$ and $p'$ we get that $\pder{\overline{p}}{z} = -g\overline{\rho}$ which should be true just from physical intuition. We note that $\gamma \neq 0$ and $\overline{p} \neq 0$ and thus
 \begin{align*}
     \overline{p} \gamma \left(\pder{}{t} + \overline{u} \pder{}{x} \right) \pder{p'}{z} - g \gamma \overline{p} \overline{\rho}  \pder{u'}{x} &= 0 \\
         g \overline{\rho} \left(\pder{}{t} + \overline{u} \pder{}{x} \right)p'  + g \gamma \overline{\rho} \overline{p} \pder{u'}{x}  &= 0
