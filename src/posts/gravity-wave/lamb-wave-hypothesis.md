@@ -104,6 +104,18 @@ We return to the remaining equation `$$\left(
 `$$p' $$` decays vertically like `$$ \exp\left(- \int_{z=0}^z\frac{g}{R_d \gamma \overline{T}(z)}\, \mathrm{d}z\right) $$`.
 We know from the dcmip document that
 
-`$$$T_v(z, \phi) = \frac{1}{\tau_1(z) - \tau_2(z)I_T(z)}$$$`
-``
+`$$$T_v(z, \phi) = \frac{1}{\tau_1(z) - \tau_2(z)I_T(\phi)}$$$`
+`$$$I_T(\phi) = (\cos \phi)^K - \frac{K}{K+2}(\cos \phi)^{K+2} $$$`
+`$$$\tau_{\mathrm{int}, 1}(z) = \frac{1}{\Gamma}\left[\exp\left(\frac{\Gamma z}{T_0} \right) - 1 \right] + z\left(\frac{T_0-T_P}{T_0T_P}\right)\exp\left[-\left( \frac{gz}{bR_dT_0}\right)^2 \right] $$$`
+`$$$\tau_{\mathrm{int}, 2}(z) =  \frac{K+2}{2}\left( \frac{T_E-T_P}{T_E T_P}\right)z\exp\left[ -\left( \frac{gz}{bR_dT_0}\right)^2\right]$$$`
 
+Where we note that 
+
+<table class="eqn">
+  <tr>
+    <td>$$\exp\left(- \int_{z=0}^z\frac{g}{R_d \gamma \overline{T}(z)}\, \mathrm{d}z\right)$$ </td> <td> $$= \exp\left(- \frac{g}{R_d \gamma} \int_{z=0}^z\left[\tau_1(z) - \tau_2(z)I_T(\phi)\right] \, \mathrm{d}z\right)$$ </td>
+  </tr>
+  <tr>
+    <td></td> <td> $$ = \exp\left(- \frac{g}{R_d \gamma} \left[\tau_{\mathrm{int}, 1}(z) - \tau_{\mathrm{int}, 2}(z)I_T(\phi)\right] \right]\right)$$</td>
+  </tr>
+</table>
