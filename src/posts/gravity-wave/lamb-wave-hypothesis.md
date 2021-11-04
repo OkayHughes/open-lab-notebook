@@ -121,3 +121,7 @@ Where we note that
 </table>
 
 and so we want to look for this kind of decay signature in the pressure field.
+
+* SE increased divergence damping --> look for figures
+* Check phase speed of lamb wave
+* FV3 0.25 is probably available
