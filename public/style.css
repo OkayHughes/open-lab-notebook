@@ -255,3 +255,11 @@ img.tiny{
 span.todo{
   color:red;
 }
+
+table.eqn{
+   margin: 0 auto;
+}
+
+table.eqn > td{
+  float:left
+}

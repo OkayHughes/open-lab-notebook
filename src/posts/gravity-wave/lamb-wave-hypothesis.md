@@ -65,28 +65,30 @@ The righthand size has units Pa/m which agrees with the lefthand side. Clearly t
 
 In order to find the physical solution we take
 
-<table>
+<table class="eqn">
   <tr>
-    <td>`$$ p'</td> <td> $$`  `$$= \Re \left(p_{00}\exp\left(- \frac{g}{R_d \gamma \overline{T}} z\right) \exp \left(ik(x - ct) \right)  \right) $$`</td>
+    <td> $$ p' $$ </td> <td>  $$= \Re \left(p_{00}\exp\left(- \int_{z=0}^z\frac{g}{R_d \gamma \overline{T}(z)}\, \mathrm{d}z\right) \exp \left(ik(x - ct) \right)  \right) $$</td>
   </tr>
   <tr>
-            `$$\quad= p_{00}\exp\left(- \frac{g}{R_d \gamma \overline{T}} z\right) \Re \left( \exp \left(ik(x - ct) \right)  \right) $$`</td>
+    <td></td> <td>   $$= p_{00}\exp\left(- \int_{z=0}^z\frac{g}{R_d \gamma \overline{T}(z)}\, \mathrm{d}z\right) \Re \left( \exp \left(ik(x - ct) \right)  \right) $$</td>
   </tr>
   <tr>
-            `$$\quad= p_{00}\exp\left(- \frac{g}{R_d \gamma \overline{T}} z\right) \Re \left( \cos(k(x - ct)) + i \sin(k(x - ct)) \right) $$`</td>
+    <td></td><td>     $$= p_{00}\exp\left(- \int_{z=0}^z\frac{g}{R_d \gamma \overline{T}(z)}\, \mathrm{d}z\right) \Re \left( \cos(k(x - ct)) + i \sin(k(x - ct)) \right) $$</td>
   </tr>
   <tr>
-            `$$ = p_{00}\exp\left(- \frac{g}{R_d \gamma \overline{T}} z\right) \cos(k(x - ct)) $$`</td>
+    <td></td><td>      $$ = p_{00}\exp\left(- \int_{z=0}^z\frac{g}{R_d \gamma \overline{T}(z)}\, \mathrm{d}z\right) \cos(k(x - ct)) $$</td>
   </tr>
 </table>
-And we use the linearized hydrostatic equation $\pder{p'}{z} = -\rho' g$ to find
+And we use the linearized hydrostatic equation `$$\frac{\partial p'}{\partial z} = -\rho' g$$` to find
 
-\begin{align*}
-    \rho' &= -\frac{1}{g} \pder{p'}{z} \\
-    &= -\frac{1}{g}\pder{}{z}\left(p_{00}\exp\left(-\frac{g}{R_d\gamma \overline{T}}z\right)\cos(k(x-ct))  \right) \\
-    &= \frac{1}{g}\cdot\frac{g}{R_d\gamma \overline{T}}\left(p_{00}\exp\left(-\frac{g}{R_d\gamma \overline{T}}z\right)\cos(k(x-ct))  \right) \\
-    &= \frac{p_{00}}{R_d\gamma \overline{T}}\exp\left(-\frac{g}{R_d\gamma \overline{T}}z\right)\cos(k(x-ct))\\
-\end{align*}
+<table class="eqn">
+  <tr>
+    <td>$$\rho'$$ </td> <td> $$= -\frac{1}{g} \frac{\partial p'}{\partial z}$$ </td>
+  </tr>
+  <tr>
+    <td></td> <td> $$= - \right) $$ </td>
+  </tr>
+</table>
 
 which we check has units $\frac{\unit{N}/\m^2}{\K\m \unit{N}/\kg/\K} = \frac{\kg}{\m^3}$ which is the units for density. 
 
