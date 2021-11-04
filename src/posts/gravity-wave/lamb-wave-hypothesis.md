@@ -116,6 +116,8 @@ Where we note that
     <td>$$\exp\left(- \int_{z=0}^z\frac{g}{R_d \gamma \overline{T}(z)}\, \mathrm{d}z\right)$$ </td> <td> $$= \exp\left(- \frac{g}{R_d \gamma} \int_{z=0}^z\left[\tau_1(z) - \tau_2(z)I_T(\phi)\right] \, \mathrm{d}z\right)$$ </td>
   </tr>
   <tr>
-    <td></td> <td> $$ = \exp\left(- \frac{g}{R_d \gamma} \left[\tau_{\mathrm{int}, 1}(z) - \tau_{\mathrm{int}, 2}(z)I_T(\phi)\right] \right]\right)$$</td>
+    <td></td> <td> $$ = \exp\left(- \frac{g}{R_d \gamma} \left[\tau_{\mathrm{int}, 1}(z) - \tau_{\mathrm{int}, 2}(z)I_T(\phi)\right] \right)$$</td>
   </tr>
 </table>
+
+and so we want to look for this kind of decay signature in the pressure field.
