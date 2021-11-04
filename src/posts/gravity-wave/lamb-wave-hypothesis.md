@@ -79,28 +79,31 @@ In order to find the physical solution we take
     <td></td><td>      $$ = p_{00}\exp\left(- \int_{z=0}^z\frac{g}{R_d \gamma \overline{T}(z)}\, \mathrm{d}z\right) \cos(k(x - ct)) $$</td>
   </tr>
 </table>
-And we use the linearized hydrostatic equation `$$\frac{\partial p'}{\partial z} = -\rho' g$$` to find
+And we use the linearized hydrostatic equation $$\frac{\partial p'}{\partial z} = -\rho' g$$ to find
 
 <table class="eqn">
   <tr>
     <td>$$\rho'$$ </td> <td> $$= -\frac{1}{g} \frac{\partial p'}{\partial z}$$ </td>
   </tr>
   <tr>
-    <td></td> <td> $$= - \right) $$ </td>
+    <td></td> <td> $$= - \frac{p_{00}}{R_d\gamma \overline{T}(z)}\exp\left(- \int_{z=0}^z\frac{g}{R_d \gamma \overline{T}(z)}\, \mathrm{d}z\right) \cos(k(x-ct))$$ </td>
   </tr>
 </table>
 
-which we check has units $\frac{\unit{N}/\m^2}{\K\m \unit{N}/\kg/\K} = \frac{\kg}{\m^3}$ which is the units for density. 
 
-We return to the remaining equation $\left(
-\pder{}{t} + \overline{u} \pder{}{x}\right)u' + \frac{1}{\overline{\rho}} \pder{p'}{x} = 0$ and assume that $u' = \Re \left[\hat{u}(z) \exp(ik(x-ct)) \right]$ to find
+We return to the remaining equation `$$\left(
+\frac{\partial}{\partial t} + \overline{u} \frac{\partial}{\partial x}\right)u' + \frac{1}{\overline{\rho}} \frac{\partial p'}{\partial x} = 0$$` and assume that `$$u' = \Re \left[\hat{u}(z) \exp(ik(x-ct)) \right]$$` to find
 
-\begin{align*}
-   &\qquad (-ikc + i\overline{u}k)\hat{u}(z)\Psi + \frac{1}{\overline{\rho}} (ik) \hat{p} \Psi \\
-   &\implies (-c + \overline{u})\hat{u}(z) + \frac{\hat{p}}{\overline{\rho}}   \\
-    &\implies \hat{u}(z)  = - \frac{\hat{p}}{\overline{\rho}( \overline{u}-c)}   \\
-    &\implies \hat{u}(z)  = - \frac{p_{00}}{\overline{\rho}( \overline{u}-c)} \exp\left(-\frac{g}{R_d\gamma \overline{T}}z\right) \cos(k(x-ct)) \\
-\end{align*}
+`$$$ (-ikc + i\overline{u}k)\hat{u}(z)\Psi + \frac{1}{\overline{\rho}} (ik) \hat{p} \Psi $$$`
+`$$$ \implies (-c + \overline{u})\hat{u}(z) + \frac{\hat{p}}{\overline{\rho}}   $$$`
+`$$$ \implies \hat{u}(z)  = - \frac{\hat{p}}{\overline{\rho}( \overline{u}-c)}   $$$`
+`$$$    \implies \hat{u}(z)  = - \frac{p_{00}}{\overline{\rho}( \overline{u}(z)-c)} \exp\left(-\frac{g}{R_d\gamma \overline{T}}z\right) \cos(k(x-ct)) $$$`
 
-Where we check that this has units $\frac{\kg\cdot\m/\s^2/\m^2}{\kg/\m^3 \cdot \m/\s} = \frac{\m}{\s}$ which is what we would expect.
+
+## The conclusions for our data:
+`$$p' $$` decays vertically like `$$ \exp\left(- \int_{z=0}^z\frac{g}{R_d \gamma \overline{T}(z)}\, \mathrm{d}z\right) $$`.
+We know from the dcmip document that
+
+`$$$T_v(z, \phi) = \frac{1}{\tau_1(z) - \tau_2(z)I_T(z)}$$$`
+``
 
