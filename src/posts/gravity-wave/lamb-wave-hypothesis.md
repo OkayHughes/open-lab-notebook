@@ -126,3 +126,9 @@ and so we want to look for this kind of decay signature in the pressure field.
 * Check phase speed of lamb wave
 * FV3 0.25 is probably available
 * DCMIP 2012: gravity wave test case
+
+
+
+### Tracking down the actual speed of the wave:
+
+We'll do this in python using Omega 850 masked so that it doesn't catch the baroclinic instability,
