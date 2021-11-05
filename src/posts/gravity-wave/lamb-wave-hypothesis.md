@@ -10,7 +10,7 @@ layout: layouts/post.njk
 ---
 
 
-##The mathematics of lamb waves
+## The mathematics of lamb waves
 In the atmosphere there is a special kind of acoustic wave called a Lamb wave, which is a horizontally propagating sound wave 
 with no vertical velocity propagation (`$$w'$$` = 0). They are supported by a hydrostatic equation set. It has been observed that the amplitudes of the oscillations of a Lamb wave vary with height.
 
@@ -100,6 +100,25 @@ We return to the remaining equation `$$\left(
 `$$$    \implies \hat{u}(z)  = - \frac{p_{00}}{\overline{\rho}( \overline{u}(z)-c)} \exp\left(-\frac{g}{R_d\gamma \overline{T}}z\right) \cos(k(x-ct)) $$$`
 
 
+We also return to the equation `$$ \left(\frac{\partial}{\partial t} + \overline{u} \frac{\partial}{\partial x} \right)p'  + \gamma \overline{p} \frac{\partial u'}{\partial x}  = 0 $$` in order to get a dispersion relation 
+
+
+
+<table class="eqn">
+  <tr>
+    <td>$$0$$ </td> <td> $$= \left(\frac{\partial}{\partial t} + \overline{u} \frac{\partial}{\partial x} \right)p'  + \gamma \overline{p} \frac{\partial u'}{\partial x}$$ </td>
+  </tr>
+  <tr>
+    <td></td> <td> $$ = \left(-ikc + \overline{u}ik  \right)\hat{p}\Psi  - \gamma \overline{p} \frac{ik}{\overline{\rho}(\overline{u} -c)} \hat{p}\Psi$$</td>
+  </tr>
+  <tr>
+    <td></td> <td> $$= \left[\left(-c + \overline{u}  \right)  - \gamma \overline{p} \frac{1}{\overline{\rho}(\overline{u} -c)} \right]\hat{p}\Psi $$ </td>
+  </tr>
+</table>
+
+And by rearranging this we get `$$$ c = \overline{u} + \sqrt{\gamma R_d \overline{T}} $$$` which agrees with Lamb waves being acoustic
+
+
 ## The conclusions for our data:
 `$$p' $$` decays vertically like `$$ \exp\left(- \int_{z=0}^z\frac{g}{R_d \gamma \overline{T}(z)}\, \mathrm{d}z\right) $$`.
 We know from the dcmip document that
@@ -153,16 +172,16 @@ wave.
   </th>
   </tr>
   <tr>
-    <td> $$\phi_{\mathrm{min}} =  $$</td> <td>0 </td> <td>-40 </td> <td>-90</td> 
+    <td> $$\phi_{\mathrm{bottom}} =  $$</td> <td>0 </td> <td>-40 </td> <td>-90</td> 
   </tr>
   <tr>
-    <td> $$\phi_{\mathrm{max}} =  $$</td> <td>25 </td> <td>0 </td> <td>0</td> 
+    <td> $$\phi_{\mathrm{top}} =  $$</td> <td>25 </td> <td>0 </td> <td>0</td> 
   </tr>
   <tr>
-    <td> $$\lambda_{\mathrm{min}} =  $$</td> <td>120 </td> <td>150 </td> <td>180</td> 
+    <td> $$\lambda_{\mathrm{left}} =  $$</td> <td>120 </td> <td>150 </td> <td>180</td> 
   </tr>
   <tr>
-    <td> $$\lambda_{\mathrm{max}} =  $$</td> <td>150 </td> <td>200</td> <td>360</td> 
+    <td> $$\lambda_{\mathrm{right}} =  $$</td> <td>150 </td> <td>200</td> <td>360</td> 
   </tr>
 </table>
 
@@ -183,9 +202,15 @@ And locating the gridpoint at which `$$\omega_{850} $$` is maximized gives
   </th>
   </tr>
   <tr>
-    <td> $$\phi_{\mathrm{max}} =  $$</td> <td>0 </td> <td>-40 </td> <td>-90</td> 
+    <td> $$\phi_{\mathrm{argmax}} =  $$</td> <td>21.09 </td> <td>-21.796 </td> <td>-47.81</td> 
+  </tr>
+  <tr>
+    <td> $$\lambda_{\mathrm{argmax}} =  $$</td> <td>141.32 </td> <td>184.9</td> <td>257.3</td> 
   </tr>
 </table>
+
+
+According to the 
 
 <span class="todo">
 Interesting idea: try to zero out u velocity in northern hemisphere, create pure gravity wave that propagates to see if it
