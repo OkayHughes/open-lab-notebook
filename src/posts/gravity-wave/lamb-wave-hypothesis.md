@@ -129,10 +129,63 @@ and so we want to look for this kind of decay signature in the pressure field.
 
 
 
-### Tracking down the actual speed of the wave:
+## Tracking down the actual speed of the wave:
 
 We'll do this in python using Omega 850 masked so that it doesn't catch the baroclinic instability.
 
+### Method:
+We're looking at time 6, 12, and 18 hours after start of run.
+
+I'm calculating the maximum value of (signed) `$$\omega_{850} $$` at each time stamp over a small region containing just the 
+wave. 
+
+<table class="eqn">
+  <tr>
+    <th></th>
+  <th>
+    $$t=6$$ ,
+  </th>
+  <th>
+    $$t=12$$ ,
+  </th>
+  <th>
+    $$t=18$$ 
+  </th>
+  </tr>
+  <tr>
+    <td> $$\phi_{\mathrm{min}} =  $$</td> <td>0 </td> <td>-40 </td> <td>-90</td> 
+  </tr>
+  <tr>
+    <td> $$\phi_{\mathrm{max}} =  $$</td> <td>25 </td> <td>0 </td> <td>0</td> 
+  </tr>
+  <tr>
+    <td> $$\lambda_{\mathrm{min}} =  $$</td> <td>120 </td> <td>150 </td> <td>180</td> 
+  </tr>
+  <tr>
+    <td> $$\lambda_{\mathrm{max}} =  $$</td> <td>150 </td> <td>200</td> <td>360</td> 
+  </tr>
+</table>
+
+
+And locating the gridpoint at which `$$\omega_{850} $$` is maximized gives
+
+<table class="eqn">
+  <tr>
+    <th></th>
+  <th>
+    $$t=6$$ ,
+  </th>
+  <th>
+    $$t=12$$ ,
+  </th>
+  <th>
+    $$t=18$$ 
+  </th>
+  </tr>
+  <tr>
+    <td> $$\phi_{\mathrm{max}} =  $$</td> <td>0 </td> <td>-40 </td> <td>-90</td> 
+  </tr>
+</table>
 
 <span class="todo">
 Interesting idea: try to zero out u velocity in northern hemisphere, create pure gravity wave that propagates to see if it
