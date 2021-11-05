@@ -8,6 +8,9 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
+Note: if you're on the greatlakes cluster and its not too long after the date 05/11/21, there 
+should be a tar.gz file with the dependencies with the correct permissions at `/nfs/turbo/cjablono2/owhughes/dependencies.tar.gz`.
+
 Ok so after talking to some very talented folks over at the DOE,
 I decided that it was time to try to install the Higher Order Method Modeling Environment
 (HOMME) on our local cluster computer at U of M.
