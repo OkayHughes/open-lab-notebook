@@ -131,4 +131,10 @@ and so we want to look for this kind of decay signature in the pressure field.
 
 ### Tracking down the actual speed of the wave:
 
-We'll do this in python using Omega 850 masked so that it doesn't catch the baroclinic instability,
+We'll do this in python using Omega 850 masked so that it doesn't catch the baroclinic instability.
+
+
+<span class="todo">
+Interesting idea: try to zero out u velocity in northern hemisphere, create pure gravity wave that propagates to see if it
+  triggers baroclinic development in southern hemisphere?
+</span>
