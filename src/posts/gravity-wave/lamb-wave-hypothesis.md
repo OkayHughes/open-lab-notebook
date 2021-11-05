@@ -141,10 +141,14 @@ Where we note that
 
 and so we want to look for this kind of decay signature in the pressure field.
 
-* SE increased divergence damping --> look for figures
-* Check phase speed of lamb wave
-* FV3 0.25 is probably available
-* DCMIP 2012: gravity wave test case
+<span class="todo">
+
+  * SE increased divergence damping --> look for figures
+  * Check phase speed of lamb wave
+  * FV3 0.25 is probably available
+  * DCMIP 2012: gravity wave test case
+  
+</span>
 
 
 
@@ -210,7 +214,7 @@ And locating the gridpoint at which `$$\omega_{850} $$` is maximized gives
 </table>
 
 
-According to the 
+According to the formula for greatcircle distance `$$$ d_{gc} = a \arccos {\bigl (}\sin \phi _{1}\sin \phi _{2}+\cos \phi _{1}\cos \phi _{2}\cos(\Delta \lambda ){\bigr )}. $$$`
 
 <span class="todo">
 Interesting idea: try to zero out u velocity in northern hemisphere, create pure gravity wave that propagates to see if it
