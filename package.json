@@ -1,0 +1,36 @@
+{
+  "name": "hello-eleventy",
+  "version": "0.0.1",
+  "description": "A simple blog, set up with Eleventy.",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "NODE_ENV=production eleventy"
+  },
+  "dependencies": {
+    "eleventy-plugin-seo": "^0.5.2",
+    "luxon": "^2.0.2",
+    "katex": "^0.13.16",
+    "eleventy-plugin-link_to": "^0.4.0",
+    "@11ty/eleventy-navigation": "^0.3.2",
+    "highlight.js": "^11.1.0",
+    "eleventy-plugin-toc": "^1.1.5"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^0.11.1"
+  },
+  "engines": {
+    "node": "12"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/open-lab-notebook"
+  },
+  "glitch": {
+    "projectType": "generated_static"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}

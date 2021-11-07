@@ -1,0 +1,13 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-home
+---
+
+{# This is the template for the Posts page–it lists the posts in the collection #}
+
+<div class="wrapper home">
+  <div class="content">
+    {{ content | latex | safe }}
+      {{ collections.all | eleventyNavigation | eleventyNavigationToHtml | safe }}
+  </div>
+</div>
