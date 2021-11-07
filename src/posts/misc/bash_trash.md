@@ -1,0 +1,46 @@
+---
+title: A quick to set up trash alias for bash
+date: 2021-08-31
+tags:
+  - posts
+  - slurm
+  - scientific-computing
+eleventyNavigation:
+  key: A quick to set up trash alias for bash
+  parent: Scientific Computing
+layout: layouts/post.njk
+---
+
+Create the following script
+
+<details>
+<summary>~/.local/bin/move_to_trash.sh</summary>
+
+```
+#!/bin/sh
+
+dir=$scratch/trash/$(date '+%Y/%m/%d/%H_%M');
+mkdir -p $dir;
+
+mv "$@" $dir
+
+echo "Files moved to ${dir}"
+```
+  
+</details>
+
+
+
+Run `chmod +x ~/.local/bin/move_to_trash.sh,`
+
+add `alias trash="~/.local/bin/move_to_trash.sh"` to `.bashrc`
+
+
+
+
+
+
+
+
+
+
