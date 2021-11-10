@@ -337,9 +337,12 @@ print(gc/dt)
   
   
 Ok so computing this `$$c = \overline{u} + \sqrt{\gamma R_d \overline{T}} $$`. Taking `$$ \overline{T} = 280 \mathrm{K} $$`
-And in the lower atmosphere `$$ \overline{u} \approx 10\mathrm{m}/\mathrm{s} $$`
+and in the lower atmosphere `$$ \overline{u} \approx 10\mathrm{m}/\mathrm{s} $$`, and `$$ \gamma = 1003  / (1003 - 287.3) = 1.40 $$`, and `$$ R_d = 287.3 \mathrm{J}\cdot \mathrm{kg}^{-1}\cdot \mathrm{K}^{-1} $$`
+we therefore find that `$$$ c = 10\mathrm{m}/\mathrm{s} + \sqrt{1.4 \cdot 280 \mathrm{K} \cdot 287.3 \mathrm{J}\cdot \mathrm{kg}^{-1} \cdot \mathrm{K}^{-1}} = 345.5 \mathrm{m}/\mathrm{s}.$$$`
   
-<span class="todo">
-Interesting idea: try to zero out u velocity in northern hemisphere, create pure gravity wave that propagates to see if it
-  triggers baroclinic development in southern hemisphere?
-</span>
+  
+The calculated speeds of the wave from the scripts above vary from `$$ 356.95 \mathrm{m}/\mathrm{s} $$` at hour 3, and
+  `$$ 316.35 \mathrm{m}/\mathrm{s}.$$` 
+  
+This seems to be compatible. This is deeply curious to me, as it indicates that the wave may be acoustic?
+  
