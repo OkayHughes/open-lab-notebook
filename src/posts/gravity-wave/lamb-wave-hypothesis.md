@@ -346,3 +346,13 @@ The calculated speeds of the wave from the scripts above vary from `$$ 356.95 \m
   
 This seems to be compatible. This is deeply curious to me, as it indicates that the wave may be acoustic?
   
+
+Idea: increase temperature by 90 degrees, i.e. `$$ T_E = 400\mathrm{K} ,\ T_P = 330 \mathrm{K} $$`
+  
+## Propagation under increased temperature
+  
+  
+  In this case `latmin = [33.0468, 30.937, 22.5, 14.062, 7.031, 0.7031] `, 
+  `lonmin = [182.812, 197.57, 206.71, 215.85, 224.29, 234.84]`
+  
+  Using the same calculation as above, we find
