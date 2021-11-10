@@ -179,13 +179,13 @@ wave.
     <td> $$\phi_{\mathrm{bottom}} =  $$</td> <td>-90 </td> <td>-90 </td> <td>-90 </td> 
   </tr>
   <tr>
-    <td> $$\phi_{\mathrm{top}} =  $$</td> <td>90</td> <td>90</td> 
+    <td> $$\phi_{\mathrm{top}} =  $$</td> <td>90</td> <td>90</td> <td>90</td> 
   </tr>
   <tr>
-    <td> $$\lambda_{\mathrm{left}} =  $$</td> <td>150 </td> <td>190 </td> 
+    <td> $$\lambda_{\mathrm{left}} =  $$</td> <td>150 </td> <td>190 </td>  <td>220 </td>
   </tr>
   <tr>
-    <td> $$\lambda_{\mathrm{right}} =  $$</td> <td>220 </td> <td>260 </td> 
+    <td> $$\lambda_{\mathrm{right}} =  $$</td> <td>220 </td> <td>290</td> 
   </tr>
 </table>
 
