@@ -168,19 +168,24 @@ wave.
   <th>
     $$t\in \{3, 4, 5\}$$ ,
   </th>
-    
+  <th>
+    $$t\in \{6, 7, 8\}$$ ,
+  </th>
+  <th>
+    $$t\in \{9, 10, 11\}$$ ,
+  </th>
   </tr>
   <tr>
-    <td> $$\phi_{\mathrm{bottom}} =  $$</td> <td>-90 </td> 
+    <td> $$\phi_{\mathrm{bottom}} =  $$</td> <td>-90 </td> <td>-90 </td> <td>-90 </td> 
   </tr>
   <tr>
-    <td> $$\phi_{\mathrm{top}} =  $$</td> <td>90</td> 
+    <td> $$\phi_{\mathrm{top}} =  $$</td> <td>90</td> <td>90</td> 
   </tr>
   <tr>
-    <td> $$\lambda_{\mathrm{left}} =  $$</td> <td>150 </td> 
+    <td> $$\lambda_{\mathrm{left}} =  $$</td> <td>150 </td> <td>190 </td> 
   </tr>
   <tr>
-    <td> $$\lambda_{\mathrm{right}} =  $$</td> <td>220 </td> 
+    <td> $$\lambda_{\mathrm{right}} =  $$</td> <td>220 </td> <td>260 </td> 
   </tr>
 </table>
 
@@ -222,10 +227,10 @@ And locating the gridpoint at which `$$\omega_{850} $$` is maximized gives
   </th>
   </tr>
   <tr>
-    <td> $$\phi_{\mathrm{argmax}} =  $$</td> <td>35.1562 </td> <td>34.453</td> <td>27.421</td> 
+    <td> $$\phi_{\mathrm{argmax}} =  $$</td> <td>35.1562 </td> <td>34.453</td> <td>27.421</td> <td>21.796</td> <td>12.65</td> <td> 7.0312 </td> <td> 0.0 </td>
   </tr>
   <tr>
-    <td> $$\lambda_{\mathrm{argmax}} =  $$</td> <td>177.89</td> <td> 191.95</td> <td> 201.09</td>
+    <td> $$\lambda_{\mathrm{argmax}} =  $$</td> <td>177.89</td> <td> 191.95</td> <td> 201.09</td> <td> 210.23 </td> <td> 215.85 </td> <td> 224.29 </td> <td> 232.03</td>
   </tr>
 </table>
 
