@@ -237,6 +237,108 @@ And locating the gridpoint at which `$$\omega_{850} $$` is maximized gives
 
 According to the formula for greatcircle distance `$$$ d_{gc} = a \arccos {\bigl (}\sin \phi _{1}\sin \phi _{2}+\cos \phi _{1}\cos \phi _{2}\cos(\Delta \lambda ){\bigr )}. $$$`
 
+
+I used the following script
+<details>
+<summary>View track_gw_speed.py</summary>
+  
+```
+import xarray as xr
+import numpy as np
+import matplotlib.pyplot as plt
+import cartopy
+import cartopy.crs as ccrs
+from os.path import join
+
+
+fdir = "/nfs/turbo/cjablono2/owhughes/mountain_test_case_netcdf/"
+fname = "ne30_1h_output.nc"
+
+ne30_ds = xr.open_dataset(join(fdir, fname))
+t =  12
+t0 = 2
+
+bounds = [[-90, 90, 150, 220], [-90, 90, 150, 220], [-90, 90, 150, 220], [-90, 90, 150, 220],
+	  [-90, 90, 190, 260], [-90, 90, 190, 260], [-90, 90, 190, 260], [-90, 90, 190, 260],
+	  [-90, 90, 220, 290], [-90, 90, 220, 290], [-90, 90, 220, 290] ]
+lons = ne30_ds['lon']
+lon_mask = np.logical_and(lons > bounds[ (t-t0)][2], lons < bounds[ (t-t0)][3])
+lats = ne30_ds['lat']
+lat_mask = np.logical_and(lats > bounds[ (t-t0)][0], lats < bounds[ (t-t0)][1]) 
+print(ne30_ds['time'][2 * t])
+omega850 = ne30_ds['OMEGA850'][2 * t, :, :] #- ne30_ds['OMEGA850'][1, :, :]
+omega850 = omega850.where(lat_mask).where(lon_mask)
+res = omega850.argmax(dim=("lat", "lon"))
+latmax = (omega850.lat[res['lat']].values)
+lonmax = (omega850.lon[res['lon']].values)
+
+print(f"lat: {latmax}, lon:{lonmax}")
+plt.figure()
+
+
+ax = plt.axes(projection=ccrs.PlateCarree())
+
+plt.contourf(lons.where(lon_mask), lats.where(lat_mask), omega850,
+             transform=ccrs.PlateCarree())
+plt.text(lonmax, latmax, 'Max',c="white",
+         horizontalalignment='center',
+         transform=ccrs.PlateCarree())
+
+a = 6371 #km
+
+
+plt.savefig(f"{t}_omega_test.pdf")
+  
+  
+```
+</details>
+  
+  
+<details>
+<summary>View comp_gw_speed.py</summary>
+  
+```
+import xarray as xr
+import numpy as np
+import matplotlib.pyplot as plt
+import cartopy
+import cartopy.crs as ccrs
+from os.path import join
+
+fdir = "/nfs/turbo/cjablono2/owhughes/mountain_test_case_netcdf/"
+fname = "ne30_1h_output.nc"
+
+ne30_ds = xr.open_dataset(join(fdir, fname))
+
+a = 6371e3 #km
+dt = 60 * 60
+gamma = 1003/(1003 - 287.3)
+Rd = 287.3
+
+lambdamax = np.array([177.89, 191.95, 201.09, 210.23, 215.85, 224.29, 232.03, 237.65, 246.79, 253.82 ])
+phimax = np.array([35.1562, 34.453, 27.421, 21.796, 12.65, 7.0312, 0.0, -8.43, -13.35, -21.09])
+print(ne30_ds['lon'])
+subset = ne30_ds.isel(indexers={"time": [0],
+			       }).sel(indexers={"lon": lambdamax, "lat": phimax}, method="nearest")
+lambdamax = np.deg2rad(lambdamax)
+phimax = np.deg2rad(phimax)
+T = subset["T850"]
+u = subset["U850"]
+print("predicted speeds: ")
+print(u + np.sqrt(gamma * T * Rd))
+
+gc = a * np.arccos(np.sin(phimax[1:]) * np.sin(phimax[:-1]) + np.cos(phimax[1:]) * np.cos(phimax[:-1]) * np.cos(lambdamax[1:] - lambdamax[:-1]))
+
+print("calculated speeds: ")
+print(gc/dt)
+  
+```
+</details>
+  
+  
+Ok so computing this `$$c = \overline{u} + \sqrt{\gamma R_d \overline{T}} $$`. Taking `$$ \overline{T} = 280 \mathrm{K} $$`
+And in the lower atmosphere `$$ \overline{u} \approx 10\mathrm{m}/\mathrm{s} $$`
+  
 <span class="todo">
 Interesting idea: try to zero out u velocity in northern hemisphere, create pure gravity wave that propagates to see if it
   triggers baroclinic development in southern hemisphere?
