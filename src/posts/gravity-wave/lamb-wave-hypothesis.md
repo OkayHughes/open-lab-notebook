@@ -342,7 +342,7 @@ we therefore find that `$$$ c = 10\mathrm{m}/\mathrm{s} + \sqrt{1.4 \cdot 280 \m
   
   
 The calculated speeds of the wave from the scripts above vary from `$$ 356.95 \mathrm{m}/\mathrm{s} $$` at hour 3, and
-  `$$ 316.35 \mathrm{m}/\mathrm{s}.$$` 
+  `$$ 316.35 \mathrm{m}/\mathrm{s}.$$` at hour 12
   
 This seems to be compatible. This is deeply curious to me, as it indicates that the wave may be acoustic?
   
@@ -352,7 +352,14 @@ Idea: increase temperature by 90 degrees, i.e. `$$ T_E = 400\mathrm{K} ,\ T_P = 
 ## Propagation under increased temperature
   
   
-  In this case `latmin = [33.0468, 30.937, 22.5, 14.062, 7.031, 0.7031] `, 
-  `lonmin = [182.812, 197.57, 206.71, 215.85, 224.29, 234.84]`
+  In this case `latmin = [33.0468, 30.937, 22.5, 14.062, 7.031, 0.7031, -11.95, -19.68, -24.60, -32.34] `, 
+  `lonmin = [182.812, 197.57, 206.71, 215.85, 224.29, 234.84, 237.65, 246.79, 258.75, 269.29]`
   
-  Using the same calculation as above, we find
+  Using the same calculation as above, we find that the calculated speeds are between `$$460 \mathrm{m} / \mathrm{s} $$` and 
+  `$$ 349 \mathrm{m} / \mathrm{s} $$` at time 8.
+  
+  Under a `$$ 90^\circ\mathrm{C} $$` change in temperature, 
+  `$$$ c = 10\mathrm{m}/\mathrm{s} + \sqrt{1.4 \cdot 370 \mathrm{K} \cdot 287.3 \mathrm{J}\cdot \mathrm{kg}^{-1} \cdot \mathrm{K}^{-1}} = 395.5 \mathrm{m}/\mathrm{s}.$$$`
+  
+Without being very careful to check whether changing the two temperature parameters changes anything else, this indicates
+  that we might expect about a `$$ + 50 \mathrm{m}/\mathrm{s} $$` change in wave speed, 
