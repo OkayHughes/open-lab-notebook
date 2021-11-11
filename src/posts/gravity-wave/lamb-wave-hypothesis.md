@@ -371,3 +371,20 @@ With `$$ T + 45\mathrm{K} $$`: `latmax = [33.04, 30.23, 24.60]`, `lonmax = [180.
   
 * Todo: divergence damping redo 
 * read lin again
+  
+  
+## Increasing divergence damping in the SE model:
+
+  If this were actually a gravity wave, we would expect that increasing divergence damping would severely
+curtail the ability of the wave to propagate (see lecture notes on gravity waves). In order to test this
+  we increase `se_nu_div` from `$$0.1 \times 10^{16} $$` by a factor of 4 to `$$0.1 \times 10^{16} $$`
+
+<span class="figure">
+<img class="small" alt="Omega 850 day 0.25" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/se_nu_div_inc/OMEGA1.png">
+<img class="small" alt="Omega 850 day 0.75" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/se_nu_div_inc/OMEGA3.png">
+<img class="small" alt="Omega 850 day 1.25" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/se_nu_div_inc/OMEGA5.png">
+</span>
+  
+  
+
+  

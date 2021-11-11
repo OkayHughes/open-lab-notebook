@@ -251,6 +251,12 @@ img.small{
 img.tiny{
     width: 15%;
 }
+span.figure{
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+  align-items:center;
+}
 
 span.todo{
   color:red;
