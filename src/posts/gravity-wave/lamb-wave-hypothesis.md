@@ -368,3 +368,6 @@ Without being very careful to check whether changing the two temperature paramet
   complicates things somewhat.
   
 With `$$ T + 45\mathrm{K} $$`: `latmax = [33.04, 30.23, 24.60]`, `lonmax = [180.0, 192.65, 203.90]`
+  
+* Todo: divergence damping redo 
+* read lin again
