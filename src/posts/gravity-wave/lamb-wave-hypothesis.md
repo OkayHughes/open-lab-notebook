@@ -367,10 +367,4 @@ Without being very careful to check whether changing the two temperature paramet
   Something important to note: changing the temperature creates an increase in the strength of the zonal jet. This 
   complicates things somewhat.
   
-Redoing the calculation with `$$ T + 180 \mathrm{K} $$`.
-  
-  We get `latmax = [33.74, 26.01, 18.28, 10.54, -2.10, -10.54, -19.68, -27.42, -33.75, -39.37]`, 
-  `lonmax = [189.14, 201.09, 213.04, 222.89, 227.10, 237.65, 246.79, 258.75, 272.10, 287.57]`.
-  
-
-  
+With `$$ T + 45\mathrm{K} $$`: `latmax = [33.04, 30.23, 24.60]`, `lonmax = [180.0, 192.65, 203.90]`
