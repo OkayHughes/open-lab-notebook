@@ -367,7 +367,9 @@ Without being very careful to check whether changing the two temperature paramet
   Something important to note: changing the temperature creates an increase in the strength of the zonal jet. This 
   complicates things somewhat.
   
-  Something to try: only calculate meridional wave velocity which should be less confounded by the zonal jet (neglecting impacts
-  of the coriolis force on this wave).
+Redoing the calculation with `$$ T + 180 \mathrm{K} $$`.
   
-  Neglecting `$$ \Delta \lambda $$`, in the base temp
+  We get `latmax = [33.74, 26.01]`, `lonmax = [189.14]`.
+  
+
+  
