@@ -19,4 +19,12 @@ caused mild grid-scale static instability in the horse (?) latitudes).
 Put it in an oven preheated to around 36 PE for 5-10 minutes.
 
 
-This seems to result in an extremely benign atmosphere with no flow conditions.
+This seems to result in an extremely benign atmosphere with no flow at all
+
+## Adding topography back in
+
+Set `mountain_height=2000.0_r8` in `ic_baroclinic.F90`.
+
+
+
+
