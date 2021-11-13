@@ -27,5 +27,10 @@ Set `mountain_height=2000.0_r8` in `ic_baroclinic.F90`.
 
 Model runs.
 
+Topography creates a gravity wave that shows up as a signature in `$$ \omega_{850} $$` which shows up if you set
+the plotting range to `[-0.02, 0.02]`.
+
+## Reproducing gravity wave signature with purely 1-gridpoint U perter
+
 
 
