@@ -175,7 +175,7 @@ which we derived our very simple formula for the lamb wave.
 
 Use the same setup as in the previous section with the equatorial mountain. Set `$$\Gamma = 0.00005 \mathrm{K}/\mathrm{m} $$`.
 Track it using the same script as the previous section. Note: the third row shows
-  speeds calculated using the _minimum_ `$$ \omega_{850}
+  speeds calculated using the lat/lon at which `$$ \omega_{850} $$` reaches a _minimum_.
 
 <table class="eqn">
   <tr>
@@ -194,7 +194,10 @@ Track it using the same script as the previous section. Note: the third row show
     <td> $$c_{\mathrm{predicted}, 850\mathrm{hPa}} $$</td> <td>325.8 </td> <td>352.0</td>  <td>380.67 </td> <td>403.76</td>
   </tr>
   <tr>
-    <td> $$c_{\mathrm{measured}, 850\mathrm{hPa}}  $$</td> <td>332.37 </td> <td> 351.12 </td> <td> 372.83 </td> <td> 394.95 </td>
+    <td> $$c_{\textrm{measured from max at } 850\mathrm{hPa}}  $$</td> <td>332.37 </td> <td> 351.12 </td> <td> 372.83 </td> <td> 394.95 </td>
+  </tr>
+  <tr>
+    <td> $$c_{\textrm{measured from min at } 850\mathrm{hPa}}  $$</td> <td>335.61</td> <td> 355.75 </td> <td> 372.83 </td> <td> 400.15 </td>
   </tr>
 </table>
   
