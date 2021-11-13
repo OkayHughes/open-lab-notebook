@@ -33,7 +33,8 @@ the plotting range to `[-0.02, 0.02]`.
 ## Tailor topography to trigger an equatorial wave of this form
 
 Increase `$$ \phi_{\mathrm{scale}} = 6^\circ $$`, `$$ \lambda_{\mathrm{scale}} = 6^\circ $$`, increase
-the latitudinal and longitudinal powers to 6. I'll leave the mountain height at 2000m for the moment.
+the latitudinal and longitudinal powers to 6. I'll leave the mountain height at 2000m for the moment. We move 
+`$$ \phi_{\mathrm{center}} = 0^\circ $$` and remove one of the mountains.
 
 At frame 10 (hourly output), wave signature has approximate magnitude of 0.02 Pa/s
 Increasing divergence damping doesn't change the maximum of this wave. With this in mind, 
@@ -44,10 +45,11 @@ temperatures.
 
 This demonstrates that propagation speed appears to increase continuously with baseline temperature.
 
+<span class="todo"> Still left  to do: calculate propagation speed in a equatorial channel.</span>
 
 ## creating an FV model run for comparison
 
 In the FV model there is _no signature what so ever_ at day 10! If you set the colorbar range
-to `[-0.05, 0.05]` at hour 2, you can see the signature of this wave propagating and decaying 
-exponentially.
+to `[-0.005, 0.005]` at hour 2, you can see the signature of this wave propagating and decaying 
+exponentially(?).
 
