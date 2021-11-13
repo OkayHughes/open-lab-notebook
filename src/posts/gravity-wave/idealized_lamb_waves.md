@@ -46,6 +46,9 @@ temperatures.
 This demonstrates that propagation speed appears to increase continuously with baseline temperature.
 
 ### Quantitative calculation of `$$ c $$` as `$$ T $$` increases:
+
+Script for tracking 
+
 I used ne60 runs at `$$ T = \{270\mathrm{K}, 315\mathrm{K}, 360\mathrm{K}, 450\mathrm{K}\} $$`.
 I calculated the wave speeds based on the simplified equation derived in the original lamb wave post
 based on the temperature using `$$ \overline{T} =  \langle T_{850} \rangle_h. $$`. I calculated the speed by
@@ -82,6 +85,15 @@ The `$$ \Delta c $$` agrees very well between the predicted and measured speeds 
 however there still seems to be a constant offset. Possibly this is due to the presence of diffusion in 
 the model, or it is due to the fact that the atmosphere is not isothermal like the one in
 which we derived our very simple formula for the lamb wave.
+
+
+
+
+### Testing the wave in an approximately isothermal atmosphere
+
+Use the same setup as in the previous section with the equatorial mountain. Set `$$\Gamma = 0.00005 \mathrm{K}/\mathrm{m} $$`.
+Track it using the same script as the previous section.
+
 
 ### Creating an FV model run for comparison:
 
