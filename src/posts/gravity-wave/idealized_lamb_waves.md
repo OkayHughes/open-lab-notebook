@@ -21,7 +21,7 @@ Put it in an oven preheated to around 36 PE for 5 minutes.
 
 This seems to result in an extremely benign atmosphere with no flow at all
 
-## Adding topography back in
+### Adding topography back in
 
 Set `mountain_height=2000.0_r8` in `ic_baroclinic.F90`.
 
@@ -30,7 +30,12 @@ Model runs.
 Topography creates a gravity wave that shows up as a signature in `$$ \omega_{850} $$` which shows up if you set
 the plotting range to `[-0.02, 0.02]`.
 
-## Reproducing gravity wave signature with purely 1-gridpoint U perter
+### Reproducing gravity wave signature with purely 1-gridpoint `$$ u $$` perturbation.
+
+Set `$$ u_{\mathrm{pert}} = 70 \mathrm{m}/\mathrm{s} $$`.  I'm setting the perturbation radius 
+to `$$ r_{\mathrm{pert}} = 0.02 a_{\mathrm{earth}} $$`. Provisionally I'm going to set `$$ \phi_{\mathrm{pert}} = 0 $$`
+on the assumption that a part of the resulting wave will propagate along the equator.
+
 
 
 
