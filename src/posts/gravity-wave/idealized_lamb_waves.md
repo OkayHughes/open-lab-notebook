@@ -170,11 +170,34 @@ which we derived our very simple formula for the lamb wave.
 
 
 
+
 ### Testing the wave in an approximately isothermal atmosphere
 
 Use the same setup as in the previous section with the equatorial mountain. Set `$$\Gamma = 0.00005 \mathrm{K}/\mathrm{m} $$`.
 Track it using the same script as the previous section.
 
+<table class="eqn">
+  <tr>
+    <th></th>
+  <th>
+    $$T_{\mathrm{surface}}=270\mathrm{K}$$ ,
+  </th>
+  <th>
+    $$T_{\mathrm{surface}}=315\mathrm{K}$$ ,
+  </th>
+  <th>
+    $$T_{\mathrm{surface}}=360\mathrm{K}$$ 
+  </th>
+  </tr>
+  <tr>
+    <td> $$c_{\mathrm{predicted}, 850\mathrm{hPa}} $$</td> <td>325.8 </td> <td>352.0</td>  <td>376.3 </td> 
+  </tr>
+  <tr>
+    <td> $$c_{\mathrm{measured}, 850\mathrm{hPa}}  $$</td> <td>332.37 </td> <td> 351.12 </td> <td> 372.83 </td> <td> 385.49 </td>
+  </tr>
+</table>
+  
+  If this wave isn't acoustic, I'll eat my hat.
 
 ### Creating an FV model run for comparison:
 
