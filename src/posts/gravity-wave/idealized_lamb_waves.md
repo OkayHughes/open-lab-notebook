@@ -30,12 +30,9 @@ Model runs.
 Topography creates a gravity wave that shows up as a signature in `$$ \omega_{850} $$` which shows up if you set
 the plotting range to `[-0.02, 0.02]`.
 
-### Reproducing gravity wave signature with purely 1-gridpoint `$$ u $$` perturbation.
+## Tailor topography to trigger an equatorial wave of this form
 
-Set `$$ u_{\mathrm{pert}} = 70 \mathrm{m}/\mathrm{s} $$`.  I'm setting the perturbation radius 
-to `$$ r_{\mathrm{pert}} = 0.02 a_{\mathrm{earth}} $$`. Provisionally I'm going to set `$$ \phi_{\mathrm{pert}} = 0 $$`
-on the assumption that a part of the resulting wave will propagate along the equator.
-
-
+Increase `$$ \phi_{\mathrm{scale}} = 6^\circ $$`, `$$ \lambda_{\mathrm{scale}} = 6^\circ $$`, increase
+the latitudinal and longitudinal powers to `$$  $$`
 
 
