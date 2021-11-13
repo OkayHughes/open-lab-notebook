@@ -35,8 +35,10 @@ the plotting range to `[-0.02, 0.02]`.
 Increase `$$ \phi_{\mathrm{scale}} = 6^\circ $$`, `$$ \lambda_{\mathrm{scale}} = 6^\circ $$`, increase
 the latitudinal and longitudinal powers to 6. I'll leave the mountain height at 2000m for the moment.
 
-At frame 10, wave signature has approximate magnitude of 0.02 hPa/s
+At frame 10 (hourly output), wave signature has approximate magnitude of 0.02 Pa/s
+Increasing divergence damping doesn't change the maximum of this wave. With this in mind, 
+I'm going to analyze the speed of this wave using my scripts, then try running the same wave at different
+temperatures.
 
-
-
+## creating an FV model run for comparison
 
