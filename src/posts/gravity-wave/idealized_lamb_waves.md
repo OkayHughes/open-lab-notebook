@@ -30,7 +30,7 @@ Model runs.
 Topography creates a gravity wave that shows up as a signature in `$$ \omega_{850} $$` which shows up if you set
 the plotting range to `[-0.02, 0.02]`.
 
-## Tailor topography to trigger an equatorial wave of this form
+### Tailor topography to trigger an equatorial wave of this form
 
 Increase `$$ \phi_{\mathrm{scale}} = 6^\circ $$`, `$$ \lambda_{\mathrm{scale}} = 6^\circ $$`, increase
 the latitudinal and longitudinal powers to 6. I'll leave the mountain height at 2000m for the moment. We move 
@@ -45,12 +45,45 @@ temperatures.
 
 This demonstrates that propagation speed appears to increase continuously with baseline temperature.
 
-<span class="todo"> Still left  to do: calculate propagation speed in a equatorial channel.</span>
-
+### Quantitative calculation of `$$ c $$` as `$$ T $$` increases:
 I used ne60 runs at `$$ T = \{270\mathrm{K}, 315\mathrm{K}, 360\mathrm{K}, 450\mathrm{K}\} $$`.
 I calculated the wave speeds based on the simplified equation derived in the original lamb wave post
+based on the temperature using `$$ \overline{T} =  \langle T_{850} \rangle_h. $$`. I calculated the speed by
+measuring great circle distance traveled in 6 hours on day 1 (looking at 1 hour measurements shows that 
+the speed is approximately constant, but these are more noisy)
+Tomorrow I will repeat several of these runs with a properly isothermal atmosphere in order to see if it changes the results in the
+following table
 
-## creating an FV model run for comparison
+<table class="eqn">
+  <tr>
+    <th></th>
+  <th>
+    $$T_{\mathrm{surface}}=270\mathrm{K}$$ ,
+  </th>
+  <th>
+    $$T_{\mathrm{surface}}=315\mathrm{K}$$ ,
+  </th>
+  <th>
+    $$T_{\mathrm{surface}}=360\mathrm{K}$$ 
+  </th>
+  <th>
+    $$T_{\mathrm{surface}}=450\mathrm{K}$$ 
+  </th>
+  </tr>
+  <tr>
+    <td> $$c_{\mathrm{predicted}, 850\mathrm{hPa}} $$</td> <td>325.8 </td> <td>352.0</td>  <td>376.3 </td> <td>420.7</td>
+  </tr>
+  <tr>
+    <td> $$c_{\mathrm{measured}, 850\mathrm{hPa}}  $$</td> <td>303.9 </td> <td> 323.95 </td> <td> 345.67 </td> <td> 385.49 </td>
+  </tr>
+</table>
+
+The `$$ \Delta c $$` agrees very well between the predicted and measured speeds when `$$T $$` is increased,
+however there still seems to be a constant offset. Possibly this is due to the presence of diffusion in 
+the model, or it is due to the fact that the atmosphere is not isothermal like the one in
+which we derived our very simple formula for the lamb wave.
+
+### Creating an FV model run for comparison:
 
 In the FV model there is _no signature what so ever_ at day 10! If you set the colorbar range
 to `[-0.005, 0.005]` at hour 2, you can see the signature of this wave propagating and decaying 
