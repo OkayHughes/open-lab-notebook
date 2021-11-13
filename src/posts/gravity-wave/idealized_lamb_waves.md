@@ -197,8 +197,10 @@ Track it using the same script as the previous section.
   </tr>
 </table>
   
-  If this wave isn't acoustic, I'll eat my hat.
 
+
+  
+  
 ### Creating an FV model run for comparison:
 
 In the FV model there is _no signature what so ever_ at day 10! If you set the colorbar range
