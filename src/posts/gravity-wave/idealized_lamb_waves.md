@@ -47,7 +47,88 @@ This demonstrates that propagation speed appears to increase continuously with b
 
 ### Quantitative calculation of `$$ c $$` as `$$ T $$` increases:
 
-Script for tracking 
+Script for tracking speed in an equatorial band:
+
+<details>
+<summary>View track_eq_mtn_wave.py</summary>
+  
+```
+import xarray as xr
+import numpy as np
+import matplotlib.pyplot as plt
+import cartopy
+import cartopy.crs as ccrs
+from os.path import join
+from os import makedirs
+
+#fdir = "/nfs/turbo/cjablono2/owhughes/mountain_test_case_netcdf/lamb_wave_minimal_model"
+fdir = "/scratch/cjablono_root/cjablono1/owhughes/CESM_ROOT/output/gravity_wave/cesm_2.1.3.ne60_ne60_mg16.FADIAB.gravity_wave.lamb_wave_minimal_model/run"
+#fname = "ne30_1h_output.nc"
+fnames = ["ne60_isotherm_equatorial_mountain_temp_270.nc",
+          "ne60_equatorial_mountain_temp_315.nc",
+          "ne60_equatorial_mountain_temp_360.nc",
+          "ne60_equatorial_mountain_temp_450.nc"]
+times = [x for x in range(4, 12)]
+
+lambda_max = np.zeros((len(fnames), len(times)))
+phi_max = np.zeros_like(lambda_max)
+tvals = np.zeros(len(fnames))
+for find, fname in enumerate(fnames):
+        print(fname)
+        ds = xr.open_dataset(join(fdir, fname))
+        for ind, tind in enumerate(times):
+                bounds = [-10, 10, 130 + 10 * tind, 200 + 10 * tind]
+                lons = ds['lon']
+                lon_mask = np.logical_and(lons > bounds[2], lons < bounds[3])
+                lats = ds['lat']
+                lat_mask = np.logical_and(lats > bounds[0], lats < bounds[1])
+                print(tind)
+                omega850 = ds['OMEGA850'][tind*4, :, :]
+                omega850 = omega850.where(lat_mask).where(lon_mask)
+                res = omega850.argmax(dim=("lat", "lon"))
+                latmax = (omega850.lat[res['lat']].values)
+                lonmax = (omega850.lon[res['lon']].values)
+                lambda_max[find, ind] = lonmax
+                phi_max[find, ind] = latmax
+                plt.figure()
+                ax = plt.axes(projection=ccrs.PlateCarree())
+                plt.contourf(lons.where(lon_mask), lats.where(lat_mask), omega850,
+                        transform=ccrs.PlateCarree())
+                plt.text(lonmax, latmax, 'Max',c="white",
+                        horizontalalignment='center',
+                        transform=ccrs.PlateCarree())
+                makedirs("figures", exist_ok=True)
+                plt.savefig(f"figures/{find}_{tind}_omega.pdf")
+                plt.close()
+        tvals[find] = ds.isel(indexers={"time": [0]})["T850"].where(lat_mask).where(lon_mask).mean()
+
+
+
+
+
+a = 6371e3 #km
+dt = 60 * 60 
+gamma = 1003/(1003 - 287.3)
+Rd = 287.3
+
+
+lambda_max = np.deg2rad(lambda_max)
+phi_max = np.deg2rad(phi_max)
+print("predicted speeds: ")
+compute = np.sqrt(gamma * tvals * Rd)
+print(compute)
+
+
+gc = a * np.arccos(np.sin(phi_max[:, 1:]) * np.sin(phi_max[:, :-1]) + np.cos(phi_max[:, 1:]) * np.cos(phi_max[:, :-1]) * np.cos(lambda_max[:, 1:] - lambda_max[:, :-1]))
+gc_one = a * np.arccos(np.sin(phi_max[:,  1]) * np.sin(phi_max[:,  7]) + np.cos(phi_max[:,  1]) * np.cos(phi_max[:,  7]) * np.cos(lambda_max[:,  1] - lambda_max[:,  7]))
+print("calculated speeds: ")
+print(gc/dt)
+print(gc_one/(6 * dt))
+  
+```
+  
+  
+</details>
 
 I used ne60 runs at `$$ T = \{270\mathrm{K}, 315\mathrm{K}, 360\mathrm{K}, 450\mathrm{K}\} $$`.
 I calculated the wave speeds based on the simplified equation derived in the original lamb wave post
