@@ -42,3 +42,6 @@ temperatures.
 
 ## creating an FV model run for comparison
 
+In the FV model there is _no signature what so ever_ at day 10! If you set the colorbar range
+to `[-0.05, 0.05]` at hour 2, you can see the signature of this wave propagating and decaying 
+exponentially.
