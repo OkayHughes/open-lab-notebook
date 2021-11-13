@@ -16,7 +16,7 @@ but set `$$ T_0 = T_E = T_P = 270 \mathrm{K} $$`.)
 
 In `ic_baroclinic.F90` set `T0E = T0P = 270.0_r8`, and set `moistq0 = 1.0e-12_r8` (not changing the moisture coefficient
 caused mild grid-scale static instability in the horse (?) latitudes).
-Put it in an oven preheated to around 36 PE for 5 minutes.
+Put it in an oven preheated to around 36 PE for 5 minutes (translation: run the case with PE=36).
 
 
 This seems to result in an extremely benign atmosphere with no flow at all
@@ -30,7 +30,7 @@ Model runs.
 Topography creates a gravity wave that shows up as a signature in `$$ \omega_{850} $$` which shows up if you set
 the plotting range to `[-0.02, 0.02]`.
 
-### Tailor topography to trigger an equatorial wave of this form
+### Tailor topography to trigger an equatorial wave of this form:
 
 Increase `$$ \phi_{\mathrm{scale}} = 6^\circ $$`, `$$ \lambda_{\mathrm{scale}} = 6^\circ $$`, increase
 the latitudinal and longitudinal powers to 6. I'll leave the mountain height at 2000m for the moment. We move 
@@ -49,8 +49,8 @@ This demonstrates that propagation speed appears to increase continuously with b
 I used ne60 runs at `$$ T = \{270\mathrm{K}, 315\mathrm{K}, 360\mathrm{K}, 450\mathrm{K}\} $$`.
 I calculated the wave speeds based on the simplified equation derived in the original lamb wave post
 based on the temperature using `$$ \overline{T} =  \langle T_{850} \rangle_h. $$`. I calculated the speed by
-measuring great circle distance traveled in 6 hours on day 1 (looking at 1 hour measurements shows that 
-the speed is approximately constant, but these are more noisy)
+measuring great circle distance traveled in 6 hours starting from 01:00:00 on day 1 (looking at 1 hour measurements shows that 
+the speed is approximately constant, but these are more noisy). I measured the wave traveling east of the orography.
 Tomorrow I will repeat several of these runs with a properly isothermal atmosphere in order to see if it changes the results in the
 following table
 
