@@ -47,6 +47,9 @@ This demonstrates that propagation speed appears to increase continuously with b
 
 <span class="todo"> Still left  to do: calculate propagation speed in a equatorial channel.</span>
 
+I used ne60 runs at `$$ T = \{270\mathrm{K}, 315\mathrm{K}, 360\mathrm{K}, 450\mathrm{K}\} $$`.
+I calculated the wave speeds based on the simplified equation derived in the original lamb wave post
+
 ## creating an FV model run for comparison
 
 In the FV model there is _no signature what so ever_ at day 10! If you set the colorbar range
