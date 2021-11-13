@@ -33,6 +33,7 @@ the plotting range to `[-0.02, 0.02]`.
 ## Tailor topography to trigger an equatorial wave of this form
 
 Increase `$$ \phi_{\mathrm{scale}} = 6^\circ $$`, `$$ \lambda_{\mathrm{scale}} = 6^\circ $$`, increase
-the latitudinal and longitudinal powers to `$$  $$`
+the latitudinal and longitudinal powers to 6. I'll leave the mountain height at 2000m for the moment.
+
 
 
