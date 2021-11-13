@@ -40,8 +40,14 @@ Increasing divergence damping doesn't change the maximum of this wave. With this
 I'm going to analyze the speed of this wave using my scripts, then try running the same wave at different
 temperatures.
 
+<img class="center medium" src="https://open-lab-notebook-assets.glitch.me/assets/lamb_wave/minimal_model/speed_comparison.png">
+
+This demonstrates that propagation speed appears to increase continuously with baseline temperature.
+
+
 ## creating an FV model run for comparison
 
 In the FV model there is _no signature what so ever_ at day 10! If you set the colorbar range
 to `[-0.05, 0.05]` at hour 2, you can see the signature of this wave propagating and decaying 
 exponentially.
+
