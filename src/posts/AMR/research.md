@@ -55,6 +55,23 @@ see if there's a way to FOIA the registering documents.
 
 Note: they list their donation address as `1224 Sequoia Place, Davis, CA  95616`
 
-## Idea: Use google to search their site for info
+## Use google to search their site for info
 
-Use google search query `site:amathr.org 501(c)(3)`
+* Use google search query `site:amathr.org 501(c)(3)`
+Result: this text is in the footer so it just 
+returns every page on the site. Dead end
+* Use google search query `site:amathr.org 1224 Sequoia Place, Davis, CA  95616`
+Only shows up in their donate page.
+
+## Search google more generally
+
+Use the google search query `"1224 Sequoia Place, Davis, CA  95616"` (quotes important)
+turns up the [following site:](https://opencorporates.com/companies/us_ca/C4724700)
+
+This links to the [following registry page!!!](https://businesssearch.sos.ca.gov/CBS/SearchResults?SearchType=NUMBER&SearchCriteria=C4724700)
+
+
+There are documents illustrating nothing aside from what we already know. Presumably Prof. Barany
+already 
+
+
