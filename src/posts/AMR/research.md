@@ -70,8 +70,16 @@ turns up the [following site:](https://opencorporates.com/companies/us_ca/C47247
 
 This links to the [following registry page!!!](https://businesssearch.sos.ca.gov/CBS/SearchResults?SearchType=NUMBER&SearchCriteria=C4724700)
 
+The language for incorporation includes a ban on "Propaganda" and other
+political actions, however it appears that this is fairly specific to electoral
+politics etc. [c.f.](https://forpurposelaw.com/501c3-political-ban-history/)
+
 
 There are documents illustrating nothing aside from what we already know. Presumably Prof. Barany
-already 
+and others found these fairly quickly. Is there PDF
+metadata?
+
+
+
 
 
