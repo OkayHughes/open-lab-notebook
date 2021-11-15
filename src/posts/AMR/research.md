@@ -74,12 +74,25 @@ The language for incorporation includes a ban on "Propaganda" and other
 political actions, however it appears that this is fairly specific to electoral
 politics etc. [c.f.](https://forpurposelaw.com/501c3-political-ban-history/)
 
+As has been probably been pointed out, it does not appear that the AMR has a federal EIN 
+or has file Form 990s. <span class="todo"> Does this open them up to legal trouble
+from the state of CA, i.e. are there missed deadlines?</span> A potential complicating factor is
+that the IRS is still processing a backlog of Form 990s from after April 2020. 
 
 There are documents illustrating nothing aside from what we already know. Presumably Prof. Barany
-and others found these fairly quickly. Is there PDF
-metadata?
+and others found these fairly quickly. 
 
+## Is there PDF metadata?
+Nothing interesting. 
 
+## Idea: can we use the UC conflict of interest code
+Can we use the UC conflict of interest code to identify
+specific forms and declarations that would lead to a concrete FOIA
+request.
 
+See the [code](https://www.ucop.edu/uc-legal/_files/uc_coi_code.pdf) and 
+[designated positions](https://www.ucop.edu/uc-legal/_files/2020-designated-positions.pdf)
+
+Two promising leads: "Dean without real estate-related authority"
 
 
