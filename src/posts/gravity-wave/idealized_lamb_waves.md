@@ -211,3 +211,12 @@ In the FV model there is _no signature what so ever_ at day 10! If you set the c
 to `[-0.005, 0.005]` at hour 2, you can see the signature of this wave propagating and decaying 
 exponentially(?).
 
+  
+  
+## Todo
+  * disable coriolis
+  * Do actually isothermal atmosphere
+  * Set omega in namelists
+  * 2012 Topography acid test
+  * Analyze eulerian runs with no diffusion!
+  * 
