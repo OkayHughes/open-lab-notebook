@@ -36,9 +36,15 @@ Elementary fourier transform theory [see reference](https://open-lab-notebook-as
 to calculate `$$$ \hat{\delta}(k, m) = \frac{1}{2\pi}  \int_{-\infty}^\infty \int_{-\infty}^\infty \delta(x, z) e^{-i(kx + mz)} \, \mathrm{d} x  \, \mathrm{d} z \qquad \textrm{ with inverse } \qquad \delta(k, m) = 2 \mathrm{Re}  \int_{0}^\infty \int_0^ \infty  \hat{\delta}(k, m) e^{i(kx + mz)} \, \mathrm{d} k \, \mathrm{d} m $$$`
 <table class="eqn">
   <tr>
-    <td> $$ \nabla^2 \delta + \frac{N^2}{U^2} \delta  $$ </td> <td> $$ = \nabla^2 \delta + l^2 \delta $$ </td>
+    <td> $$ (\nabla^2 \delta + \frac{N^2}{U^2} \delta)(x, z) $$ </td> <td> $$ = (\nabla^2 \delta + l^2 \delta)(x, z) $$ </td>
   </tr>
   <tr>
-    <td> </td> <td> $$ = \nabla^2 \delta + l^2 \delta $$ </td>
+    <td> </td> <td> $$ = 2 \mathrm{Re} \left[\nabla^2 \left( \int_{0}^\infty \int_0^ \infty  \hat{\delta}(k, m) e^{i(kx + mz)} \, \mathrm{d} k \, \mathrm{d} m \right)\right](x, z) + l^2  \left[\int_{0}^\infty \int_0^ \infty  \hat{\delta}(k, m) e^{i(kx + mz)} \, \mathrm{d} k \, \mathrm{d} m\right](x, z)  $$ </td>
+  </tr>
+  <tr>
+    <td> </td> <td> $$ = 2 \mathrm{Re} \left[ \left( \int_{0}^\infty \int_0^ \infty \nabla^2 \hat{\delta}(k, m) e^{i(kx + mz)} \, \mathrm{d} k \, \mathrm{d} m \right)\right](x, z) + l^2  \left[\int_{0}^\infty \int_0^ \infty  \hat{\delta}(k, m) e^{i(kx + mz)} \, \mathrm{d} k \, \mathrm{d} m\right](x, z)  $$ </td>
+  </tr>
+  <tr>
+    <td> </td> <td> $$ = 2 \mathrm{Re} \partial_{zz}  + l^2  \left[\int_{0}^\infty \int_0^ \infty  \hat{\delta}(k, m) e^{i(kx + mz)} \, \mathrm{d} k \, \mathrm{d} m\right](x, z)  $$ </td>
   </tr>
 </table>
