@@ -12,7 +12,7 @@ layout: layouts/post.njk
 
 In this project I will examine the (mildly nonlinear) behaviour of flows over complex topography. 
 Special attention will be paid to the behaviour as steepness of topography increases to infinity.
-
+I'm following the techniques of chapter 5 of [this book](https://search.lib.umich.edu/catalog/record/99187273286006381?query=lin+mesoscale)
 
 ## Mathematical prerequisites
 
@@ -32,10 +32,11 @@ which is a linear second order elliptic equation to which we apply the non-linea
 `$$$ \Psi(x, z) = h(x) \textrm{ at } z = h(x) $$$`
 where we are applying the boundary condition at `$$ (x, h(x)) $$` rather than at `$$ (x, 0) $$` in the linear case.
 
-Elementary fourier transform theory gives that
+Elementary fourier transform theory [see reference](https://open-lab-notebook-assets.glitch.me/assets/mathematical_references/lin_mesoscale/LinYuhLang_2007_Appendix5_1.pdf) leads us
+to calculate `$$\hat{f}(k) = \frac{1}{2\pi}  \int_0$$`
 <table class="eqn">
   <tr>
-    <td> $$\int_0^\infty &=  $$</td> <td>-90 </td> <td>-90 </td> <td>-90 </td> 
+    <td> $$ $$</td> <td>-90 </td> <td>-90 </td> <td>-90 </td> 
   </tr>
   </tr>
 </table>
