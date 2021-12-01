@@ -63,3 +63,22 @@ for the nonlinear boundary conditions later. Under linear boundary conditions we
 `$$$ \delta(x, z) = \mathrm{Re} \left[ \int_0^l \hat{\delta}(k, 0) e^{imz} e^{ikz} \, \mathrm{d} k + \int_l^\infty \hat{\delta}(k, 0) e^{-\lambda z} e^{ikx} \, \mathrm{d} k \right] \qquad \mathscr{E} \textrm{ IFT Linear} $$$`
 
 In order to find the proper nonlinear boundary condition iteratively see [this reference](https://www.researchgate.net/profile/Rene-Laprise/publication/234530395_On_the_Structural_Characteristics_of_Steady_Finite-Amplitude_Mountain_Waves_over_Bell-Shaped_Topography/links/0912f51098946a08d4000000/On-the-Structural-Characteristics-of-Steady-Finite-Amplitude-Mountain-Waves-over-Bell-Shaped-Topography.pdf?origin=publication_detail)
+
+
+Ok so we have a 3-step pseudocode using a pointwise predictor corrector numerical minimization problem
+
+<table class="eqn">
+  <tr>
+    <td>Step 0: </td> <td> $$ \delta_1(z=0) $$ </td> <td> $$ = h(x) $$ </td>
+  </tr>
+  <tr>
+    <td>Step 1: </td> <td> $$ E_n(z=h(x)) $$ </td> <td> $$ = \delta_n(z=h(x)) - h(x) $$ </td>
+  </tr>
+  <tr>
+    <td>Step 2: </td> <td> $$ \delta_{n+1}(z=0)$$ </td> <td> $$ = \delta_n(z=0) - E_n(z = h(x_))$$ </td>
+  </tr>
+</table>
+
+Where each step merely involves a fourier transform. The final solution can be 
+extracted by taking a fourier transform along model levels. All that needs
+to be passed into the model is the surface coefficients. 
