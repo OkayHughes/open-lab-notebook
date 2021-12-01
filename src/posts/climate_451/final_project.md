@@ -33,7 +33,8 @@ which is a linear second order elliptic equation to which we apply the non-linea
 where we are applying the boundary condition at `$$ (x, h(x)) $$` rather than at `$$ (x, 0) $$` in the linear case.
 
 Elementary fourier transform theory [see reference](https://open-lab-notebook-assets.glitch.me/assets/mathematical_references/lin_mesoscale/LinYuhLang_2007_Appendix5_1.pdf) leads us
-to calculate `$$\hat{f}(k) = \frac{1}{2\pi}  \int_0$$`
+to calculate `$$\hat{\delta}(k, l) = \frac{1}{2\pi}  \int_{-\infty}^\infty \int_{-\infty}^\infty f(x, y) e^{-i(kx + ly)}} \, \mathrm{d} x  \, \mathrm{d} y$$`, with inverse `$$\delta(k, l) = 2 \mathrm{Re}  \int_{0}^\infty \int_0^ \infty  \hat{f}(k, l) e^{i(kx + ly)} \, \mathrm{d} k \, \mathrm{d} l $$`
+for `$$ \delta = \sum_{i=0}^\infty $$`
 <table class="eqn">
   <tr>
     <td> $$ $$</td> <td>-90 </td> <td>-90 </td> <td>-90 </td> 
