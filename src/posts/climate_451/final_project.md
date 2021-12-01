@@ -48,13 +48,17 @@ to calculate `$$$ \hat{\delta}(k, m) = \frac{1}{2\pi}  \int_{-\infty}^\infty \in
     <td> </td> <td> $$ = 2 \mathrm{Re} \int_{0}^\infty \int_0^ \infty  (l^2  - (k^2 + m^2))  \hat{\delta}(k, m) e^{i(kx + mz)} \, \mathrm{d} k \, \mathrm{d} m  $$ </td>
   </tr>
     <tr>
-    <td> </td> <td> $$ = \partial_{zz} \hat{delta}  + (l^2 - k^2) \hat{\delta} </td>
+    <td> </td> <td> $$ = \partial_{zz} \hat{\delta}  + (l^2 - k^2) \hat{\delta} $$ </td>
   </tr>
 </table>
 
-where we have left the `$$\partial_zz $$`
 
 
-Positing solutions `$$$ \hat{\delta}  $$$`
+where we have left the `$$\partial_zz $$` term unexpanded because we will use a separable ansatz,
+namely `$$ \hat{\delta}(k, z) = \delta(k, 0) e^{-imz} $$` for `$$ l > k $$`, with `$$ m = \sqrt{l^2 - k^2} $$` and `$$ \hat{\delta}(k, z) = \delta(k, 0) e^{-\lambda z}  $$` with `$$ \lambda = \sqrt{k^2-l^2}$$`. Note that these
+are implementations of the linear boundary conditions. We will implement a newton-raphson method 
+for the nonlinear boundary conditions later. Under linear boundary conditions we can use FFT to find
+
+`$$$ \delta(x, z) = \mathrm{Re} \left[ \int_0^l \hat{\delta}(k, 0) e^{imz} e^{ikz} \right] $$$``
 
 In order to find the proper nonlinear boundary condition iteratively see [this reference](https://www.researchgate.net/profile/Rene-Laprise/publication/234530395_On_the_Structural_Characteristics_of_Steady_Finite-Amplitude_Mountain_Waves_over_Bell-Shaped_Topography/links/0912f51098946a08d4000000/On-the-Structural-Characteristics-of-Steady-Finite-Amplitude-Mountain-Waves-over-Bell-Shaped-Topography.pdf?origin=publication_detail)
