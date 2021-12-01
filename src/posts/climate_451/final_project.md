@@ -36,7 +36,7 @@ Elementary fourier transform theory [see reference](https://open-lab-notebook-as
 to calculate `$$$ \hat{\delta}(k, m) = \frac{1}{2\pi}  \int_{-\infty}^\infty \int_{-\infty}^\infty \delta(x, z) e^{-i(kx + mz)} \, \mathrm{d} x  \, \mathrm{d} z \qquad \textrm{ with inverse } \qquad \delta(k, m) = 2 \mathrm{Re}  \int_{0}^\infty \int_0^ \infty  \hat{\delta}(k, m) e^{i(kx + mz)} \, \mathrm{d} k \, \mathrm{d} m $$$`
 <table class="eqn">
   <tr>
-    <td> $$ (\nabla^2 \delta + \frac{N^2}{U^2} \delta)(x, z) $$ </td> <td> $$ = (\nabla^2 \delta + l^2 \delta)(x, z) $$ </td>
+    <td> $$ 0 = (\nabla^2 \delta + \frac{N^2}{U^2} \delta)(x, z) $$ </td> <td> $$ = (\nabla^2 \delta + l^2 \delta)(x, z) $$ </td>
   </tr>
   <tr>
     <td> </td> <td> $$ = 2 \mathrm{Re} \left[\nabla^2 \left( \int_{0}^\infty \int_0^ \infty  \hat{\delta}(k, m) e^{i(kx + mz)} \, \mathrm{d} k \, \mathrm{d} m \right)\right](x, z) + l^2  \left[\int_{0}^\infty \int_0^ \infty  \hat{\delta}(k, m) e^{i(kx + mz)} \, \mathrm{d} k \, \mathrm{d} m\right](x, z)  $$ </td>
@@ -45,6 +45,16 @@ to calculate `$$$ \hat{\delta}(k, m) = \frac{1}{2\pi}  \int_{-\infty}^\infty \in
     <td> </td> <td> $$ = 2 \mathrm{Re} \left[ \left( \int_{0}^\infty \int_0^ \infty \nabla^2 \hat{\delta}(k, m) e^{i(kx + mz)} \, \mathrm{d} k \, \mathrm{d} m \right)\right](x, z) + l^2  \left[\int_{0}^\infty \int_0^ \infty  \hat{\delta}(k, m) e^{i(kx + mz)} \, \mathrm{d} k \, \mathrm{d} m\right](x, z)  $$ </td>
   </tr>
   <tr>
-    <td> </td> <td> $$ = 2 \mathrm{Re} \partial_{zz}  + l^2  \left[\int_{0}^\infty \int_0^ \infty  \hat{\delta}(k, m) e^{i(kx + mz)} \, \mathrm{d} k \, \mathrm{d} m\right](x, z)  $$ </td>
+    <td> </td> <td> $$ = 2 \mathrm{Re} \int_{0}^\infty \int_0^ \infty  (l^2  - (k^2 + m^2))  \hat{\delta}(k, m) e^{i(kx + mz)} \, \mathrm{d} k \, \mathrm{d} m  $$ </td>
+  </tr>
+    <tr>
+    <td> </td> <td> $$ = \partial_{zz} \hat{delta}  + (l^2 - k^2) \hat{\delta} </td>
   </tr>
 </table>
+
+where we have left the `$$\partial_zz $$`
+
+
+Positing solutions `$$$ \hat{\delta}  $$$`
+
+In order to find the proper nonlinear boundary condition iteratively see [this reference](https://www.researchgate.net/profile/Rene-Laprise/publication/234530395_On_the_Structural_Characteristics_of_Steady_Finite-Amplitude_Mountain_Waves_over_Bell-Shaped_Topography/links/0912f51098946a08d4000000/On-the-Structural-Characteristics-of-Steady-Finite-Amplitude-Mountain-Waves-over-Bell-Shaped-Topography.pdf?origin=publication_detail)
