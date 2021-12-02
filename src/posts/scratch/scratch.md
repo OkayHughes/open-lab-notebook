@@ -5,7 +5,7 @@ tags:
   - directory
 eleventyNavigation:
   key: scratch
-layout: layouts/project_name.njk
+layout: layouts/post.njk
 ---
 
 ### Deletable junk
