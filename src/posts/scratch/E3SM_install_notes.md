@@ -332,3 +332,12 @@ C++14-compliant compiler detected, but unable to compile C++14 or later
   check that correct library headers are being used). 
   
   ```
+  
+  
+[Good info](https://github.com/kokkos/kokkos/pull/3809)
+
+Idea: use `module load make/4.3` to fix the issue
+
+
+* Add `module load make/4.3` to `~/.cime/bash.source`
+* On line 75 of `~/.cime/config_machines.xml` change `<GMAKE>gmake</GMAKE>` to `<GMAKE>make</GMAKE>`
