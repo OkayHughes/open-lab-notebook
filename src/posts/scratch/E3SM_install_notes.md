@@ -321,3 +321,14 @@ resubmit_num 0
 </details>
 
 
+### Details of the aquaplanet build
+
+The error that I'm encountering is in kokkos, and the most informative line is
+
+```   
+
+C++14-compliant compiler detected, but unable to compile C++14 or later
+  program.  Verify that Intel:18.0.5.20180823 is set up correctly (e.g.,
+  check that correct library headers are being used). 
+  
+  ```
