@@ -321,6 +321,3 @@ resubmit_num 0
 </details>
 
 
-
-### Useful context
-
