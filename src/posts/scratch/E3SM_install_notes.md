@@ -345,3 +345,7 @@ Unsuccessful
 
 
 Idea: modify kokkos configuration to force it not to use `/usr/bin/gmake` 
+
+
+The central issue:
+`/home/owhughes/E3SM/CLDERA-E3SM/externals/kokkos/cmake/compile_tests/cplusplus14.cpp`
