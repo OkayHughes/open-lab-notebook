@@ -341,6 +341,4 @@ Idea: use `module load make/4.3` to fix the issue
 
 * Add `module load make/4.3` to `~/.cime/bash.source`
 * On line 75 of `~/.cime/config_machines.xml` change `<GMAKE>gmake</GMAKE>` to `<GMAKE>make</GMAKE>`
-
-
-Attempting `alias gmake="make"` in `bash.source`
+Unsuccessful
