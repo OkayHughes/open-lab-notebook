@@ -342,3 +342,6 @@ Idea: use `module load make/4.3` to fix the issue
 * Add `module load make/4.3` to `~/.cime/bash.source`
 * On line 75 of `~/.cime/config_machines.xml` change `<GMAKE>gmake</GMAKE>` to `<GMAKE>make</GMAKE>`
 Unsuccessful
+
+
+Idea: modify kokkos configuration to force it not to use `/usr/bin/gmake` 
