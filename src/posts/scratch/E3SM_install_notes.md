@@ -348,4 +348,14 @@ Idea: modify kokkos configuration to force it not to use `/usr/bin/gmake`
 
 
 The central issue:
-`/home/owhughes/E3SM/CLDERA-E3SM/externals/kokkos/cmake/compile_tests/cplusplus14.cpp`
+`/home/owhughes/E3SM/CLDERA-E3SM/externals/kokkos/cmake/compile_tests/cplusplus14.cpp` will not compile
+correctly with `mpicc -std=c++14 cplusplus14.cpp` with `openmpi/3.1.4` on the `intel 18.2` stack.
+
+Current attempt: change `gnu` to the default compiler stack 
+
+Need to modify `~/.cime/config_compilers.xml` to match the intel stack (deleted some intel specific options)
+
+NB: it appears that using Kokkos on the intel stack with C++14 features necessary is
+pretty demonstrably scuffed, c.f. [This issue](https://github.com/trilinos/Trilinos/issues/8710)
+
+Kokkos now builds, but there is a linker time error because Lapack can't be found
