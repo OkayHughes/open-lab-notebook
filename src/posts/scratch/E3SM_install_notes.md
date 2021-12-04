@@ -359,3 +359,54 @@ NB: it appears that using Kokkos on the intel stack with C++14 features necessar
 pretty demonstrably scuffed, c.f. [This issue](https://github.com/trilinos/Trilinos/issues/8710)
 
 Kokkos now builds, but there is a linker time error because Lapack can't be found
+
+Ok, the idea is to include MKL, which has support for the gnu stack.
+However, this is the most miserable library to link against.
+In your module loads add `module load mkl/2018.0.4`
+
+
+
+
+Tool for linking against this library [here](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl-link-line-advisor.html)
+
+
+In order to get this blasted library to build:
+add the line `<command name="load">mkl/2018.0.4</command>` to around line 135 in `~/.cime/config_machines.mkl`.
+
+Using the above library tool, we add the following lines to `~/.cime/config_compilers.xml`:
+
+```
+<compiler COMPILER="gnu" MACH="greatlakes">
+
+  <!-- This varibale seems to be completely ignored by E3SM 
+       (test this by appending some bogus flags; they will not appear in the logs)
+  -->
+  <!-- 
+  <CFLAGS>
+    <append> -I$ENV{MKL_INCLUDE} </append> 
+  </CFLAGS>
+  
+
+  
+  <FFLAGS>
+    <append>  -I$ENV{MKL_INCLUDE}</append>
+  </FFLAGS>
+  -->
+  <LDFLAGS>
+    <append> -L$ENV{MKL_LIB} -lmkl_scalapack_ilp64 -Wl,--no-as-needed -lmkl_intel_ilp64 -lmkl_gnu_thread -lmkl_core -lmkl_blacs_intelmpi_ilp64 -lgomp -lpthread -lm -ldl  </append>
+  </LDFLAGS>
+
+
+  <!-- needed here for E3SM, not just in config_machines -->
+  <!-- https://github.com/E3SM-Project/E3SM/issues/2974 -->
+  <NETCDF_C_PATH>$ENV{NCDIR}</NETCDF_C_PATH>
+  <NETCDF_FORTRAN_PATH>$ENV{NFDIR}</NETCDF_FORTRAN_PATH>
+
+</compiler>
+
+```
+
+
+[Why this fucks up](https://community.intel.com/t5/Intel-oneAPI-Math-Kernel-Library/problem-with-dgetrf/td-p/818787)
+
+Solution: use `lp` rather than `ilp`. Back to the intel link advisor.
