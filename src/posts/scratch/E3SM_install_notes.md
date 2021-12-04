@@ -421,3 +421,8 @@ again because it's less jank.
 ## Trying intel stack again
 
 [Maybe this will work](https://community.intel.com/t5/Intel-C-Compiler/icpc-c-fail-std-c-14-with-gcc-version-4-8-5/td-p/1153327)
+
+
+The central problem: we need to delineate between `mpicc` and `mpic++`
+
+Nope: the 
