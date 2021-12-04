@@ -425,4 +425,24 @@ again because it's less jank.
 
 The central problem: we need to delineate between `mpicc` and `mpic++`
 
-Nope: the 
+Nope: the command being called is `/sw/arcts/centos7/intel/18.0.5/compilers_and_libraries_2018.5.274/linux/bin/intel64/icpc`. Resulting error is:
+
+```
+
+
+Error: A license for Comp-CL could not be obtained (-1,359,2).
+
+Is your license file in the right location and readable?
+The location of your license file should be specified via
+the $INTEL_LICENSE_FILE environment variable.
+
+License file(s) used were (in this order):
+**  1.  /sw/arcts/centos7/intel/18.0.5/compilers_and_libraries_2018.5.274/linux/bin/intel64/../../Licenses
+**  2.  /home/owhughes/Licenses
+**  3.  /opt/intel/licenses
+**  4.  /Users/Shared/Library/Application Support/Intel/Licenses
+**  5.  /sw/arcts/centos7/intel/18.0.5/compilers_and_libraries_2018.5.274/linux/bin/intel64/*.lic
+
+```
+
+Let's fuck around with configure_compilers to fix this.
