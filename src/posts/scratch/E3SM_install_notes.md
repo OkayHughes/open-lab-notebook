@@ -410,3 +410,5 @@ Using the above library tool, we add the following lines to `~/.cime/config_comp
 [Why this fucks up](https://community.intel.com/t5/Intel-oneAPI-Math-Kernel-Library/problem-with-dgetrf/td-p/818787)
 
 Solution: use `lp` rather than `ilp`. Back to the intel link advisor.
+
+Presently trying to run it with 32 bit integer interfaces. Builds, but 99% chance it crashes instantly.
