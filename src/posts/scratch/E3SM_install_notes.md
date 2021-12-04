@@ -446,3 +446,6 @@ License file(s) used were (in this order):
 ```
 
 Let's fuck around with configure_compilers to fix this.
+
+Alright how do I install gnu headers without unloading the intel stack?
+
