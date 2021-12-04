@@ -412,3 +412,12 @@ Using the above library tool, we add the following lines to `~/.cime/config_comp
 Solution: use `lp` rather than `ilp`. Back to the intel link advisor.
 
 Presently trying to run it with 32 bit integer interfaces. Builds, but 99% chance it crashes instantly.
+
+
+Ok so attempting with a fortran 32 bit interface causes fewer problems, but still causes segfaults. I'm going to try the intel stack
+again because it's less jank.
+
+
+## Trying intel stack again
+
+[Maybe this will work](https://community.intel.com/t5/Intel-C-Compiler/icpc-c-fail-std-c-14-with-gcc-version-4-8-5/td-p/1153327)
