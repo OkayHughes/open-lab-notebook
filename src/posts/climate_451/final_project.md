@@ -164,4 +164,6 @@ how we might calculate these, but for now it's probably easier to just solve it 
 Note: for fixed `$$ \mu $$` (i.e. `$$ c $$` and `$$ N $$`) we can calculate this function to extremely high precision offline. 
 
 
+For our purposes `$$ \beta^2 \approx 0 $$`, and exists in the paper only for mathematical reasons.
+
 
