@@ -105,4 +105,19 @@ Keller makes the rather cursèd definition `$$\beta \equiv \frac{\mathrm{d}}{\ma
 
 
 We will assume linear shear in the vertical, and that we are still working at horizontal scales
-at which non-hydrostatic effects are significant. We define `$$$ \tilde{z} \equiv 1 + cz $$$`
+at which non-hydrostatic effects are significant. We define `$$$ \tilde{z} \equiv 1 + cz $$$` and thus assume that 
+`$$$ \overline{u} = u_0 \tilde{z}. $$$`
+
+Although we will assume non-hydrostatic dynamics, we will assume that our base state (in particular, `$$ \overline{\rho} $$`
+obeys `$$ \partial_z p = -\rho g $$`). For simplicity I'll assume an isothermal atmosphere 
+because thermodynamics will play no role in the evolution of the dynamical core experiments for this mode.
+With this assumption, we know that if we let `$$ T \equiv \overline{T}$$`, then we solve `$$ \partial_z \overline{p} = - \overline{\rho}g$$`
+which gives us that
+`$$$ \overline{p}(z) = p_0 \exp\left[-\frac{g}{R_d \overline{T}}z\right]$$$``
+
+
+
+<span class="todo">
+  Note: the dependence of this profile on `$$ $$`
+</span>
+
