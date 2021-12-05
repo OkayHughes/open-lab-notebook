@@ -100,5 +100,5 @@ meaningfully contribute to deviations from `$$ \overline{\rho}(z) $$`, and so we
 ### Extending my code to work with a vertically varying `$$ l $$`
 
 
-From Keller, if we assume that we have background profiles `$$ \overline{N}(z), $$` `$$ \overline{u}(z) $$`.
-Keller makes the rather cursèd definition `$$ $$`
+From Keller, if we assume that we have background profiles `$$ \overline{N}(z), $$` `$$ \overline{u}(z), \overline{\rho}(z)$$`.
+Keller makes the rather cursèd definition `$$\beta \equiv \frac{\mathrm{d}}{\mathrm{d} z} \ln \overline{\rho}(z) $$`
