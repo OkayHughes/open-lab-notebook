@@ -101,4 +101,8 @@ meaningfully contribute to deviations from `$$ \overline{\rho}(z) $$`, and so we
 
 
 From Keller, if we assume that we have background profiles `$$ \overline{N}(z), $$` `$$ \overline{u}(z), \overline{\rho}(z)$$`.
-Keller makes the rather cursèd definition `$$\beta \equiv \frac{\mathrm{d}}{\mathrm{d} z} \ln \overline{\rho}(z) $$`
+Keller makes the rather cursèd definition `$$\beta \equiv \frac{\mathrm{d}}{\mathrm{d} z} \ln \overline{\rho}(z)$$` which we will call `$$\varepsilon $$`
+
+
+We will assume linear shear in the vertical, and that we are still working at horizontal scales
+at which non-hydrostatic effects are significant. We define `$$$ \tilde{z} \equiv 1 + cz $$$`
