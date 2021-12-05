@@ -154,5 +154,9 @@ Ok we don't actually have to support fully complex orders. Our order is given by
 `$$ i\mu = i\sqrt{\mathrm{Ri} - 1/4},$$` which is either real or purely imaginary.
 We will try to deal with this using the ideas found [here](https://dlmf.nist.gov/10.24).
 
+Suppose we are only interested in `$$ \kappa \in \mathbb{R} $$` with order `$$i\nu $$` for `$$ \nu \in \mathbb{R} $$` then
+
+`$$$ \mathcal{J}_{\nu}(x) = \mathrm{sech}\left(\frac{\pi}{\nu} \right)\mathrm{Re} \mathcal{J}_{i\nu}(x) $$$`
+
 
 
