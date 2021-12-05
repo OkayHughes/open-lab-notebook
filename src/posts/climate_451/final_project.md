@@ -123,18 +123,28 @@ and we can use the ideal gas law to conclude
   boundary condition
 </span>
 
-With these preliminaries we are ready to define the equation we will be solving in this project,
-
-
+With these preliminaries we are ready to define the most complex equation we will be solving in this project. We define `$$\kappa^2 \equiv \frac{k^2 + \beta^2/4}{c^2} $$` to be a non-dimensional wavenumber
 <table class="eqn">
   <tr>
-    <td> $$ 0 $$ </td> <td> $$ =  \frac{\mathrm{d}^2 \Psi}{\mathrm{d}\tilde{z}^2} + \left( \frac{N^2(\partial_{z}\overline{u})^{-2}}{\tilde{z}^2}\right)  $$ </td>
+    <td> $$ 0 $$ </td> <td> $$ =  \frac{\mathrm{d}^2 \hat{\Psi}}{\mathrm{d}\tilde{z}^2} + \left( \frac{N^2(\partial_{z}\overline{u})^{-2}}{\tilde{z}^2} - \kappa^2 \right)\hat{\Psi}  $$ </td>
   </tr>
   <tr>
-    <td> </td> <td> $$ =  \frac{\mathrm{d}^2 \Psi}{\mathrm{d}\tilde{z}^2} + \left( \right)  $$ </td>
+    <td>  </td> <td> $$ =  \frac{\mathrm{d}^2 \hat{\Psi}}{\mathrm{d}\tilde{z}^2} + \left( \frac{N^2(u_0c)^{-2}}{\tilde{z}^2} - \kappa^2 \right)\hat{\Psi}  $$ </td>
+  </tr>
+  <tr>
+    <td> </td> <td> $$ =  \frac{\mathrm{d}^2 \Psi}{\mathrm{d}\tilde{z}^2} + \left( \frac{\mathrm{Ri}}{\tilde{z}^2} - \kappa^2 \right)  $$</td>
   </tr>
 
 </table>
+
+
+If we define `$$ \mu \equiv \sqrt{\mathrm{Ri} - 1/4},$$` we can define the solutions of this equation
+in terms of bessel functions, and thus find
+
+`$$$ \Psi(x, z) = u_0 h \sqrt{\frac{\overline{\rho})}{}}$$$`
+
+which is presumably the equation that, over the next few days, will pin us down, steal our ice cream cone,
+and force us to watch it melt while it laughs at us.
 
 
 
