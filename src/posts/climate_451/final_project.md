@@ -85,13 +85,20 @@ to be passed into the model is the surface coefficients.
 
 
 
-## Todo 12/05/2021
+### Todo 12/05/2021
 
-* Test to see that one-step solver works for constant `$$ l $$` and linear lower boundary constraint
+* Test to see that one-step solver works for constant `$$ l $$` and linear lower boundary constraint. Done.
 * Test that solution resulting from iterative solver actually solves the equation that I 
-think I'm solving
+think I'm solving. Done. 
 * Extend results to use non-constant `$$ l $$` parameters from the [Keller](https://ui.adsabs.harvard.edu/abs/1994JAtS...51.1915K/abstract) paper.
 Note: I think the derivation made here is valid under the assumption that `$$ \delta $$` does not
 meaningfully contribute to deviations from `$$ \overline{\rho}(z) $$`, and so we can assume that
 `$$ \rho_{z=C}(x) $$` is approximately constant.
 
+
+
+### Extending my code to work with a vertically varying `$$ l $$`
+
+
+From Keller, if we assume that we have background profiles `$$ \overline{N}(z), $$` `$$ \overline{u}(z) $$`.
+Keller makes the rather cursèd definition `$$ $$`
