@@ -141,10 +141,14 @@ With these preliminaries we are ready to define the most complex equation we wil
 If we define `$$ \mu \equiv \sqrt{\mathrm{Ri} - 1/4},$$` we can define the solutions of this equation
 in terms of bessel functions, and thus find
 
-`$$$ \Psi(x, z) = u_0 h \sqrt{\frac{\overline{\rho})}{}}$$$`
+`$$$ \Psi(x, z) = u_0 h \sqrt{\left[\frac{\overline{\rho}(0)}{\overline{\rho}(z)}\tilde{z}\right]} \mathrm{Re} \int_0^\infty \hat{\Psi}(x, z=0)\frac{\mathrm{K}_{i\mu}(\kappa z)}{\mathrm{K}_{i\mu}(\kappa z)} e^{ikx} \, \mathrm{d} k $$$`
 
-which is presumably the equation that, over the next few days, will pin us down, steal our ice cream cone,
-and force us to watch it melt while it laughs at us.
+which is presumably the equation that will now pin me down, steal my ice cream cone,
+and force me to watch it melt while it laughs at me.
+
+We need to find a way to evaluate Bessel functions with complex order and real arguments.
+
+### Evaluating exotic bessel functions in python
 
 
 
