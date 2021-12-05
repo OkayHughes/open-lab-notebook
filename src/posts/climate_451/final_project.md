@@ -150,6 +150,9 @@ We need to find a way to evaluate Bessel functions with complex order and real a
 
 ### Evaluating exotic bessel functions in python
 
+Ok we don't actually have to support fully complex orders. Our order is given by 
+`$$ i\mu = i\sqrt{\mathrm{Ri} - 1/4},$$` which is either real or purely imaginary.
+We will try to deal with this using the ideas found [here](https://dlmf.nist.gov/10.24).
 
 
 
