@@ -158,5 +158,8 @@ Suppose we are only interested in `$$ \kappa \in \mathbb{R} $$` with order `$$i\
 
 `$$$ \mathcal{J}_{\nu}(x) = \mathrm{sech}\left(\frac{\pi}{\nu} \right)\mathrm{Re} \mathcal{J}_{i\nu}(x) $$$`
 
+There is a [paper](https://epubs.siam.org/doi/pdf/10.1137/0521055) that illustrates
+how we might calculate these, but for now it's probably easier to just solve it numerically. 
+
 
 
