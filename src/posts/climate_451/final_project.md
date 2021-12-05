@@ -100,7 +100,7 @@ meaningfully contribute to deviations from `$$ \overline{\rho}(z) $$`, and so we
 ### Extending my code to work with a vertically varying `$$ l $$`
 
 
-From Keller, if we assume that we have background profiles `$$ \overline{N}(z), $$` `$$ \overline{u}(z), \overline{\rho}(z)$$`.
+From Keller, if we assume that we have background profiles `$$ N(z), $$` `$$ \overline{u}(z), \overline{\rho}(z)$$`.
 Keller makes the rather cursèd definition `$$\beta \equiv \frac{\mathrm{d}}{\mathrm{d} z} \ln \overline{\rho}(z)$$` which we will call `$$\varepsilon $$`
 
 
@@ -113,11 +113,29 @@ obeys `$$ \partial_z p = -\rho g $$`). For simplicity I'll assume an isothermal 
 because thermodynamics will play no role in the evolution of the dynamical core experiments for this mode.
 With this assumption, we know that if we let `$$ T \equiv \overline{T}$$`, then we solve `$$ \partial_z \overline{p} = - \overline{\rho}g$$`
 which gives us that
-`$$$ \overline{p}(z) = p_0 \exp\left[-\frac{g}{R_d \overline{T}}z\right]$$$``
-
+`$$$ \overline{p}(z) = p_0 \exp\left[-\frac{g}{R_d \overline{T}}z\right]$$$`
+and we can use the ideal gas law to conclude
+`$$$ \overline{\rho}(z) = \rho_0 \exp\left[-\frac{g}{R_d \overline{T}}z\right] $$$`
 
 
 <span class="todo">
-  Note: the dependence of this profile on `$$ $$`
+  Note: the dependence of this profile on `$$ z $$` means we have to take care when we are trying to apply a nonlinear
+  boundary condition
 </span>
+
+With these preliminaries we are ready to define the equation we will be solving in this project,
+
+
+<table class="eqn">
+  <tr>
+    <td> $$ 0 $$ </td> <td> $$ =  \frac{\mathrm{d}^2 \Psi}{\mathrm{d}\tilde{z}^2} + \left( \frac{N^2(\partial_{z}\overline{u})^{-2}}{\tilde{z}^2}\right)  $$ </td>
+  </tr>
+  <tr>
+    <td> </td> <td> $$ =  \frac{\mathrm{d}^2 \Psi}{\mathrm{d}\tilde{z}^2} + \left( \right)  $$ </td>
+  </tr>
+
+</table>
+
+
+
 
