@@ -82,3 +82,14 @@ Ok so we have a 3-step pseudocode using a pointwise predictor corrector numerica
 Where each step merely involves a fourier transform. The final solution can be 
 extracted by taking a fourier transform along model levels. All that needs
 to be passed into the model is the surface coefficients. 
+
+
+
+## Todo 12/05/2021
+
+* Test to see that one-step solver works for constant `$$ l $$` and linear lower boundary constraint
+* Test that solution resulting from iterative solver actually solves the equation that I 
+think I'm solving
+* Extend results to use non-constant `$$ l $$` parameters from the [Keller](https://ui.adsabs.harvard.edu/abs/1994JAtS...51.1915K/abstract) paper.
+Note: I think the derivation made here is valid under the assumption that `$$ \delta $$` does not
+meaningfully contribute to deviations from `$$ \overline{\rho}(z) $$`
