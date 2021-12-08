@@ -451,3 +451,11 @@ Alright how do I install gnu headers without unloading the intel stack?
 
 Ok following a clue from [this link](https://stackoverflow.com/questions/46355820/compiling-c-code-with-intel-compiler-on-mac-error-expected-an-identifier)
 
+
+I've made the following change using the executable directory that gets added to `$PATH` when you run `module load gcc/8.2.0`.
+On or around line 160 of `~/.cime/config_machines.xml` add the following line
+```
+  <env name="PATH">/sw/arcts/centos7/gcc/8.2.0/bin/gcc:$ENV{PATH}</env>
+```
+
+After you do this the model builds successfully. Model hasn't started running yet. Will update this later.
