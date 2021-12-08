@@ -459,3 +459,8 @@ On or around line 160 of `~/.cime/config_machines.xml` add the following line
 ```
 
 After you do this the model builds successfully. Model hasn't started running yet. Will update this later.
+
+
+Execution fails with segfault. Attempting to change to openmpi 4.0.2.
+
+Next attempt is to literally just do all of the compiler config myself with my MPAS dependencies.
