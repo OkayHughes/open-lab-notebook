@@ -11,6 +11,7 @@ layout: layouts/post.njk
 
 Outline of slides for 451 final presentation:
 
-Main takeaway message: The linearized equation sets that I initially set out  
+Main takeaway message: The linearized equation sets that I initially set out to use
+are not well suited to studying the impact of sharpness of topography.
 
 * 
