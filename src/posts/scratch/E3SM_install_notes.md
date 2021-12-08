@@ -464,3 +464,11 @@ After you do this the model builds successfully. Model hasn't started running ye
 Execution fails with segfault. Attempting to change to openmpi 4.0.2.
 
 Next attempt is to literally just do all of the compiler config myself with my MPAS dependencies.
+
+
+### $$ \mathscr{LOBOTOMY}\ \mathscr{TIME} $$
+
+
+Alright let's entirely replace the infrastructure. Here's a backup of my `~/.cime/config_machines.xml`
+
+
