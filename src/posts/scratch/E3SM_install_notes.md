@@ -449,3 +449,5 @@ Let's fuck around with configure_compilers to fix this.
 
 Alright how do I install gnu headers without unloading the intel stack?
 
+Ok following a clue from [this link](https://stackoverflow.com/questions/46355820/compiling-c-code-with-intel-compiler-on-mac-error-expected-an-identifier)
+
