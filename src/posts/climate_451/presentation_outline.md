@@ -36,9 +36,10 @@ Optional: *  Long's notes on existence and uniqueness
   * A quick jaunt through fourier transformations (with a dispersion relation)
   * Gives us solution for gravity wave in the absence of wind shear. Very solvable.
 * A brief deviation into energy transport and topography in the steady state
-  * Mild mountain.
+  * Weirstrauss mountain. low-pass filtered weirstrauss mountain
   * Mountain with extremely steep gradients
   * Enforcing a non-linear boundary condition (impacts).
+  * Low-pass filter the topography
 * Returning to the complex equations: Keller's solution
   * Suppose that we have linear wind shear. 
   * Derive new equations with Z variable.
@@ -47,7 +48,8 @@ Optional: *  Long's notes on existence and uniqueness
   * nonhydrostatic Solutions for different topography
   * Energy transport using same topography.
   * Vertical and horizontal structure.
-  * Potentially indicates decreased dependence on topographic steepness?
+  * low-pass filtered weirstrauss mountain
+  * Potentially indicates decreased dependence on topographic steepness? Promising?
 
 * Conclusions:
   * Impact of wind shear on energy transport.
