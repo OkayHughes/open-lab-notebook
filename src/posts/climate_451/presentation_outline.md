@@ -23,8 +23,25 @@ are not well suited to studying the impact of sharpness of topography.
 * Coming at this from a different angle: long's model
   * maximum 4 equation derivation.
   * Introduce stream function. 
+  * Assumptions
 * Long's notes on existence and uniqueness
   * Main takeaway: tbd
+  * The first pin: come back to this.
   
-
-  
+* Re-deriving what we already know: 
+  * Without linearizing at the start, assume \partial_z u = 0, N constant.
+  * We get the same dispersion relation.
+* Boundary conditions:
+  * A quick jaunt through fourier transformations (with a dispersion relation)
+  * Gives us solution for gravity wave in the absence of wind shear. Very solvable.
+* A brief deviation into energy transport and topography in the steady state
+  * Mild mountain
+  * Mountain with extremely steep gradients
+  * How does this model break down? 
+* Returning to the complex equations: Keller's solution
+  * Suppose that we have linear wind shear. 
+  * Derive new equations with Z variable.
+  * Scale analysis 
+* Same thing but hydrostatic.
+* Hydrostatic vs non-hydrostatic version
+  * Energy transport using same topography as before in nonhydrostatic and hydrostatic case.
