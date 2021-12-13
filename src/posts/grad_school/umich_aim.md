@@ -12,6 +12,11 @@ layout: layouts/post.njk
 
 Concise academic statement of purpose
 
+* Interested in complex computational models
+* How to create computationally tractable models with 
+the potential for uncertainty quantification using state-of-the-art mathematical 
+and statistical methods.
+* 
 
 
 
