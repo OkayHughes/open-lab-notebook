@@ -9,6 +9,10 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
+### Joe's excellent notes:
+
+[Here](https://github.com/jhollowed/e3sm_greatlakes_install)
+
 ### Installing
 
 After installing public ssh key for greatlakes, I ran 
