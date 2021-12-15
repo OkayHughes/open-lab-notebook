@@ -476,3 +476,7 @@ Next attempt is to literally just do all of the compiler config myself with my M
 Alright let's entirely replace the infrastructure. Here's a backup of my `~/.cime/config_machines.xml`
 
 
+
+### Another useful github issue
+
+[https://github.com/trilinos/Trilinos/issues/8720]
