@@ -166,26 +166,26 @@ wave.
   <tr>
     <th></th>
   <th>
-    $$t=6$$ ,
+    $$t\in \{3, 4, 5\}$$ ,
   </th>
   <th>
-    $$t=12$$ ,
+    $$t\in \{6, 7, 8, 9\}$$ ,
   </th>
   <th>
-    $$t=18$$ 
+    $$t\in \{10, 11, 12\}$$ ,
   </th>
   </tr>
   <tr>
-    <td> $$\phi_{\mathrm{bottom}} =  $$</td> <td>0 </td> <td>-40 </td> <td>-90</td> 
+    <td> $$\phi_{\mathrm{bottom}} =  $$</td> <td>-90 </td> <td>-90 </td> <td>-90 </td> 
   </tr>
   <tr>
-    <td> $$\phi_{\mathrm{top}} =  $$</td> <td>25 </td> <td>0 </td> <td>0</td> 
+    <td> $$\phi_{\mathrm{top}} =  $$</td> <td>90</td> <td>90</td> <td>90</td> 
   </tr>
   <tr>
-    <td> $$\lambda_{\mathrm{left}} =  $$</td> <td>120 </td> <td>150 </td> <td>180</td> 
+    <td> $$\lambda_{\mathrm{left}} =  $$</td> <td>150 </td> <td>190 </td>  <td>220 </td>
   </tr>
   <tr>
-    <td> $$\lambda_{\mathrm{right}} =  $$</td> <td>150 </td> <td>200</td> <td>360</td> 
+    <td> $$\lambda_{\mathrm{right}} =  $$</td> <td>220 </td> <td>290</td> 
   </tr>
 </table>
 
@@ -196,27 +196,202 @@ And locating the gridpoint at which `$$\omega_{850} $$` is maximized gives
   <tr>
     <th></th>
   <th>
-    $$t=6$$ ,
+    $$t=3$$ ,
   </th>
   <th>
-    $$t=12$$ ,
+    $$t=4$$ ,
   </th>
   <th>
-    $$t=18$$ 
+    $$t=5$$ 
+  </th>
+    <th>
+    $$t=6$$ 
+  </th>
+  <th>
+    $$t=7$$ 
+  </th>
+  <th>
+    $$t=8$$
+  </th>
+  <th>
+    $$t=9$$ 
+  </th>
+  <th>
+    $$t=10$$ 
+  </th>
+  <th>
+    $$t=11$$ 
+  </th>
+  <th>
+    $$t=12$$ 
   </th>
   </tr>
   <tr>
-    <td> $$\phi_{\mathrm{argmax}} =  $$</td> <td>21.09 </td> <td>-21.796 </td> <td>-47.81</td> 
+    <td> $$\phi_{\mathrm{argmax}} =  $$</td> <td>35.1562 </td> <td>34.453</td> <td>27.421</td> <td>21.796</td> <td>12.65</td> <td> 7.0312 </td> <td> 0.0 </td> <td> -8.43</td> <td> -13.35 </td> <td> -21.09 </td>
   </tr>
   <tr>
-    <td> $$\lambda_{\mathrm{argmax}} =  $$</td> <td>141.32 </td> <td>184.9</td> <td>257.3</td> 
+    <td> $$\lambda_{\mathrm{argmax}} =  $$</td> <td>177.89</td> <td> 191.95</td> <td> 201.09</td> <td> 210.23 </td> <td> 215.85 </td> <td> 224.29 </td> <td> 232.03</td> <td>237.65</td> <td> 246.79 </td> <td> 253.82 </td>
   </tr>
 </table>
 
 
 According to the formula for greatcircle distance `$$$ d_{gc} = a \arccos {\bigl (}\sin \phi _{1}\sin \phi _{2}+\cos \phi _{1}\cos \phi _{2}\cos(\Delta \lambda ){\bigr )}. $$$`
 
-<span class="todo">
-Interesting idea: try to zero out u velocity in northern hemisphere, create pure gravity wave that propagates to see if it
-  triggers baroclinic development in southern hemisphere?
+
+I used the following script
+<details>
+<summary>View track_gw_speed.py</summary>
+  
+```
+import xarray as xr
+import numpy as np
+import matplotlib.pyplot as plt
+import cartopy
+import cartopy.crs as ccrs
+from os.path import join
+
+
+fdir = "/nfs/turbo/cjablono2/owhughes/mountain_test_case_netcdf/"
+fname = "ne30_1h_output.nc"
+
+ne30_ds = xr.open_dataset(join(fdir, fname))
+t =  12
+t0 = 2
+
+bounds = [[-90, 90, 150, 220], [-90, 90, 150, 220], [-90, 90, 150, 220], [-90, 90, 150, 220],
+	  [-90, 90, 190, 260], [-90, 90, 190, 260], [-90, 90, 190, 260], [-90, 90, 190, 260],
+	  [-90, 90, 220, 290], [-90, 90, 220, 290], [-90, 90, 220, 290] ]
+lons = ne30_ds['lon']
+lon_mask = np.logical_and(lons > bounds[ (t-t0)][2], lons < bounds[ (t-t0)][3])
+lats = ne30_ds['lat']
+lat_mask = np.logical_and(lats > bounds[ (t-t0)][0], lats < bounds[ (t-t0)][1]) 
+print(ne30_ds['time'][2 * t])
+omega850 = ne30_ds['OMEGA850'][2 * t, :, :] #- ne30_ds['OMEGA850'][1, :, :]
+omega850 = omega850.where(lat_mask).where(lon_mask)
+res = omega850.argmax(dim=("lat", "lon"))
+latmax = (omega850.lat[res['lat']].values)
+lonmax = (omega850.lon[res['lon']].values)
+
+print(f"lat: {latmax}, lon:{lonmax}")
+plt.figure()
+
+
+ax = plt.axes(projection=ccrs.PlateCarree())
+
+plt.contourf(lons.where(lon_mask), lats.where(lat_mask), omega850,
+             transform=ccrs.PlateCarree())
+plt.text(lonmax, latmax, 'Max',c="white",
+         horizontalalignment='center',
+         transform=ccrs.PlateCarree())
+
+a = 6371 #km
+
+
+plt.savefig(f"{t}_omega_test.pdf")
+  
+  
+```
+</details>
+  
+  
+<details>
+<summary>View comp_gw_speed.py</summary>
+  
+```
+import xarray as xr
+import numpy as np
+import matplotlib.pyplot as plt
+import cartopy
+import cartopy.crs as ccrs
+from os.path import join
+
+fdir = "/nfs/turbo/cjablono2/owhughes/mountain_test_case_netcdf/"
+fname = "ne30_1h_output.nc"
+
+ne30_ds = xr.open_dataset(join(fdir, fname))
+
+a = 6371e3 #km
+dt = 60 * 60
+gamma = 1003/(1003 - 287.3)
+Rd = 287.3
+
+lambdamax = np.array([177.89, 191.95, 201.09, 210.23, 215.85, 224.29, 232.03, 237.65, 246.79, 253.82 ])
+phimax = np.array([35.1562, 34.453, 27.421, 21.796, 12.65, 7.0312, 0.0, -8.43, -13.35, -21.09])
+print(ne30_ds['lon'])
+subset = ne30_ds.isel(indexers={"time": [0],
+			       }).sel(indexers={"lon": lambdamax, "lat": phimax}, method="nearest")
+lambdamax = np.deg2rad(lambdamax)
+phimax = np.deg2rad(phimax)
+T = subset["T850"]
+u = subset["U850"]
+print("predicted speeds: ")
+print(u + np.sqrt(gamma * T * Rd))
+
+gc = a * np.arccos(np.sin(phimax[1:]) * np.sin(phimax[:-1]) + np.cos(phimax[1:]) * np.cos(phimax[:-1]) * np.cos(lambdamax[1:] - lambdamax[:-1]))
+
+print("calculated speeds: ")
+print(gc/dt)
+  
+```
+</details>
+  
+  
+Ok so computing this `$$c = \overline{u} + \sqrt{\gamma R_d \overline{T}} $$`. Taking `$$ \overline{T} = 280 \mathrm{K} $$`
+and in the lower atmosphere `$$ \overline{u} \approx 10\mathrm{m}/\mathrm{s} $$`, and `$$ \gamma = 1003  / (1003 - 287.3) = 1.40 $$`, and `$$ R_d = 287.3 \mathrm{J}\cdot \mathrm{kg}^{-1}\cdot \mathrm{K}^{-1} $$`
+we therefore find that `$$$ c = 10\mathrm{m}/\mathrm{s} + \sqrt{1.4 \cdot 280 \mathrm{K} \cdot 287.3 \mathrm{J}\cdot \mathrm{kg}^{-1} \cdot \mathrm{K}^{-1}} = 345.5 \mathrm{m}/\mathrm{s}.$$$`
+  
+  
+The calculated speeds of the wave from the scripts above vary from `$$ 356.95 \mathrm{m}/\mathrm{s} $$` at hour 3, and
+  `$$ 316.35 \mathrm{m}/\mathrm{s}.$$` at hour 12
+  
+This seems to be compatible. This is deeply curious to me, as it indicates that the wave may be acoustic?
+  
+
+Idea: increase temperature by 90 degrees, i.e. `$$ T_E = 400\mathrm{K} ,\ T_P = 330 \mathrm{K} $$`
+  
+## Propagation under increased temperature
+  
+  
+  In this case `latmax = [33.0468, 30.937, 22.5, 14.062, 7.031, 0.7031, -11.95, -19.68, -24.60, -32.34] `, 
+  `lonmax = [182.812, 197.57, 206.71, 215.85, 224.29, 234.84, 237.65, 246.79, 258.75, 269.29]`
+  
+  Using the same calculation as above, we find that the calculated speeds are between `$$391 \mathrm{m} / \mathrm{s} $$` and 
+  `$$ 372 \mathrm{m} / \mathrm{s} $$` at time 6.
+  
+  Under a `$$ 90^\circ\mathrm{C} $$` change in temperature, 
+  `$$$ c = 10\mathrm{m}/\mathrm{s} + \sqrt{1.4 \cdot 370 \mathrm{K} \cdot 287.3 \mathrm{J}\cdot \mathrm{kg}^{-1} \cdot \mathrm{K}^{-1}} = 395.5 \mathrm{m}/\mathrm{s}.$$$`
+  
+Without being very careful to check whether changing the two temperature parameters changes anything else, this indicates
+  that we might expect about a `$$ + 50 \mathrm{m}/\mathrm{s} $$` change in wave speed. This once again seems consistent.
+  
+  Something important to note: changing the temperature creates an increase in the strength of the zonal jet. This 
+  complicates things somewhat.
+  
+With `$$ T + 45\mathrm{K} $$`: `latmax = [33.04, 30.23, 24.60]`, `lonmax = [180.0, 192.65, 203.90]`
+  
+
+  
+  
+## Increasing divergence damping in the SE model:
+
+  If this were actually a gravity wave, we would expect that increasing divergence damping would severely
+curtail the ability of the wave to propagate (see lecture notes on gravity waves). In order to test this
+  we increase `se_nu_div` from `$$0.1 \times 10^{16} $$` (the CAM default) by a factor of 4 to `$$0.4 \times 10^{16} $$`
+  
+  This is shown below, i.e. with default divergence hyperviscosity on top and with increased hyperviscosity below. 
+<span class="row">
+<img class="small" alt="Omega 850 day 0.25" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/se_nu_div_inc/OMEGA1.png">
+<img class="small" alt="Omega 850 day 0.75" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/se_nu_div_inc/OMEGA3.png">
+<img class="small" alt="Omega 850 day 1.25" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/se_nu_div_inc/OMEGA5.png">
 </span>
+  
+  This seems to show that increasing divergence damping does little to curtail the propagation of this wave.
+  This is evidence that we are, in fact, not observing a gravity wave. 
+  
+
+  
+  ## Next steps:
+  
+  * read lin again
+  * read Vallis chapter
+  * Look in holton?
