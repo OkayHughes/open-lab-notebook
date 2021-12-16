@@ -74,3 +74,10 @@ readonly CASE_ROOT="/scratch/cjablono_root/cjablono1/owhughes/E3SM/E3SMv2/${CASE
 
 Do `cd ~/e3sm_greatlakes_install`
 
+
+Do `bash run_e3sm.template.greatlakes.sh`. It should run correctly and fail in the first timestep.
+An error indicates that the tracer advection scheme `slmm_csl` is failing because the remapping timestep
+`dt_remap` may be too large (one of the `sl` means "semilagrangian", hence the need to remap to a fixed grid).
+
+
+
