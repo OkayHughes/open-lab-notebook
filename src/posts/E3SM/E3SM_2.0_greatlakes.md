@@ -12,6 +12,7 @@ layout: layouts/post.njk
 Follow the installation notes from [Joe's excellent README](https://github.com/jhollowed/e3sm_greatlakes_install).
 
 
+
 In order to proceed you will need to either 1) follow the installation instructions [here](https://open-lab-notebook.glitch.me/posts/installing-mpas/) or 2) obtain 
 the dependencies from me (if you're on greatlakes, check `/nfs/turbo/cjablono2/owhughes/dependencies.tar.gz`)
 
@@ -63,10 +64,12 @@ Likewise use the following [~/.cime/config_machines.xml](https://open-lab-notebo
 Note: the `config_machines.xml` depends on environment variables set in `~/.cime/bash.source`, so make sure
 to run `source ${HOME}/.cime/bash.source` before trying to create cases.
 
+### Creating the case:
+
 Make sure to edit the lines 
 ```
-readonly CODE_ROOT="/home/hollowed/E3SM/CLDERA-E3SM"
-readonly CASE_ROOT="/scratch/cjablono_root/cjablono1/hollowed/E3SM/E3SMv2/${CASE_NAME}"
+readonly CODE_ROOT="/home/owhughes/E3SM/CLDERA-E3SM"
+readonly CASE_ROOT="/scratch/cjablono_root/cjablono1/owhughes/E3SM/E3SMv2/${CASE_NAME}"
 ```
 
 Do `cd ~/e3sm_greatlakes_install`

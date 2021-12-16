@@ -105,6 +105,7 @@ END Glitch hello-app default styles
 body {
   font-family: var(--font-family);
   background-color: var(--color-bg);
+  margin:10vw;
 }
 .wrapper {
   min-height: var(--wrapper-height);
@@ -121,7 +122,7 @@ body {
 /* Typography */
 p {
   margin: 0 0 1rem 0;
-  line-height: 1.5 !important;
+  line-height: 2.0 !important;
   font-size: 1rem;
 }
 h1,
@@ -231,6 +232,7 @@ a:hover {
 pre {
   background-color:#dddddd;
   padding:1em;
+  overflow-x:scroll;
 }
 
 img.center {
