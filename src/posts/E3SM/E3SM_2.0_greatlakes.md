@@ -13,6 +13,6 @@ Follow the installation notes from [Joe's excellent README](https://github.com/j
 
 
 In order to proceed you will need to either 1) follow the installation instructions [here](https://open-lab-notebook.glitch.me/posts/installing-mpas/) or 2) obtain 
-the dependencies 
+the dependencies from me (if you're on greatlakes, check `/nfs/turbo/cjablono2/owhughes/dependencies.tar.gz`)
 
-
+With 
