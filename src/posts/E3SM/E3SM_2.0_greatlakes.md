@@ -31,7 +31,8 @@ module load cmake/3.17.3
 
   
   
-# 
+# Change these to suit your installation!
+# ====================================================
 # for E3SM
 INPUT_NAME=inputData 
 export MY_E3SM_ROOT=${PATH_TO_E3SM}/CLDERA-E3SM
@@ -40,21 +41,26 @@ export MY_E3SM_CASES=${PATH_TO_CASES}
 export MY_SLURM_ACCOUNT=cjablono1
 export MY_E3SM_SCRATCH=${PATH_TO_E3SM_SCRATCH}
 
+# for jank dependencies
+DEPENDENCIES="${scratch}/dependencies"
+# ====================================================
 
-export PATH=$scratch/dependencies/mpich/bin:$PATH
-#export MPICH_CC=gcc
-#export MPICH_FC=gfortran
-#export MPICH_F90=gfortran
-#export CC=mpicc
-#export FC=mpif90
-export NETCDF_C_PATH=$scratch/dependencies/netcdf_c
-export NETCDF_F_PATH=$scratch/dependencies/netcdf_fortran
-export NETCDF_CPP_PATH=$scratch/dependencies/netcdf_cpp 
-export PNETCDF_PATH=$scratch/dependencies/pnetcdf
-#export PIO=$scratch/dependencies/PIO
-export HDF5_PATH=$scratch/dependencies/hdf5
-export ZLIB_PATH=$scratch/dependencies/zlib
+
+export PATH=${DEPENDENCIES}/mpich/bin:$PATH
+export NETCDF_C_PATH=${DEPENDENCIES}/netcdf_c
+export NETCDF_F_PATH=${DEPENDENCIES}/netcdf_fortran
+export NETCDF_CPP_PATH=${DEPENDENCIES}/netcdf_cpp 
+export PNETCDF_PATH=${DEPENDENCIES}/pnetcdf
+export HDF5_PATH=${DEPENDENCIES}/hdf5
+export ZLIB_PATH=${DEPENDENCIES}/zlib
 export LD_LIBRARY_PATH="${PNETCDF_PATH}/lib:${NETCDF_C_PATH}/lib:${HDF5_PATH}/lib:${NETCDF_CPP_PATH}/lib:${NETCDF_F_PATH}/lib:${LD_LIBRARY_PATH}"
-  
+
 ```
 </details>
+
+
+<details>
+<summary>~/.cime/config_machines.xml</summary
+
+
+<details>
