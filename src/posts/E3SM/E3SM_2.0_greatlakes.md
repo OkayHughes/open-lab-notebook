@@ -59,8 +59,15 @@ export LD_LIBRARY_PATH="${PNETCDF_PATH}/lib:${NETCDF_C_PATH}/lib:${HDF5_PATH}/li
 </details>
 
 
-<details>
-<summary>~/.cime/config_machines.xml</summary
+Likewise use the following [~/.cime/config_machines.xml](https://open-lab-notebook.glitch.me/posts/E3SM/config_machines/), [~/.cime/config_compilers.xml](https://open-lab-notebook.glitch.me/posts/E3SM/config_compilers/).
+Note: the `config_machines.xml` depends on environment variables set in `~/.cime/bash.source`, so make sure
+to run `source ${HOME}/.cime/bash.source` before trying to create cases.
 
+Make sure to edit the lines 
+```
+readonly CODE_ROOT="/home/hollowed/E3SM/CLDERA-E3SM"
+readonly CASE_ROOT="/scratch/cjablono_root/cjablono1/hollowed/E3SM/E3SMv2/${CASE_NAME}"
+```
 
-<details>
+Do `cd ~/e3sm_greatlakes_install`
+

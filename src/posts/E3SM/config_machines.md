@@ -4,8 +4,8 @@ tags:
   - posts
   - misc
 eleventyNavigation:
-  key: Installing E3SM 2.0 on Greatlakes using my jank MPAS dependencies
-  parent: E3SM
+  key: config_machines.xml
+  parent: Installing E3SM 2.0 on Greatlakes using my jank MPAS dependencies
 layout: layouts/post.njk
 ---
 
@@ -143,7 +143,7 @@ layout: layouts/post.njk
       <modules compiler="gnu">
         <command name="purge"></command>
         <command name="load">gcc/8.2.0</command>
-  	<command name="load">cmake/3.17.3</command>
+  	    <command name="load">cmake/3.17.3</command>
       </modules>
     </module_system>
 
