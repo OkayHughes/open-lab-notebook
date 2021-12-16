@@ -43,7 +43,7 @@ export MY_SLURM_ACCOUNT=cjablono1
 export MY_E3SM_SCRATCH=${PATH_TO_E3SM_SCRATCH}
 
 # for jank dependencies
-DEPENDENCIES="${scratch}/dependencies"
+export DEPENDENCIES="${scratch}/dependencies"
 # ====================================================
 
 

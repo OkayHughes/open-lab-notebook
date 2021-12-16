@@ -118,7 +118,7 @@ layout: layouts/post.njk
       <executable>mpirun</executable>
       <!-- arguments to the mpiexec command, the name attribute here is ignored-->
       <arguments>
-	<arg name="num_tasks">-np {{ total_tasks }}</arg>
+        <arg name="num_tasks">-np {{ total_tasks }}  -bind-to=core </arg>
       </arguments>
     </mpirun>
     <mpirun mpilib="mpi-serial">
@@ -151,7 +151,7 @@ layout: layouts/post.njk
     <environment_variables>
       <env name="NETCDF_C_PATH">$ENV{NETCDF_C_PATH}</env>
       <env name="NETCDF_F_PATH">$ENV{NETCDF_F_PATH}</env>
-      <env name="PNETCDF_PATH">$ENV{PNETCDF_PATH}/env>
+      <env name="PNETCDF_PATH">$ENV{PNETCDF_PATH}</env>
       <env name="HDF5_PATH">$ENV{HDF5_PATH}</env>
       <env name="PATH">$ENV{DEPENDENCIES}/mpich/bin:$ENV{PATH}</env>
       <env name="LD_LIBRARY_PATH">$ENV{PNETCDF_PATH}/lib:$ENV{NETCDF_C_PATH}/lib:$ENV{HDF5_PATH}/lib:$ENV{LD_LIBRARY_PATH}</env>

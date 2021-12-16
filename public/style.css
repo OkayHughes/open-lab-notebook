@@ -105,7 +105,7 @@ END Glitch hello-app default styles
 body {
   font-family: var(--font-family);
   background-color: var(--color-bg);
-  margin:10vw;
+  margin:5vw;
 }
 .wrapper {
   min-height: var(--wrapper-height);
