@@ -18,13 +18,20 @@ Create the following script
 
 ```
 #!/bin/sh
+readonly PROGNAME=$(basename $0)
+readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly ARGS="$@"
 
-dir=$scratch/trash/$(date '+%Y/%m/%d/%H_%M');
-mkdir -p $dir;
+main() {
+    local dir="/glade/scratch/${USER}/trash/$(date '+%Y/%m/%d/%H_%M')"
+    mkdir -p $dir \
+        && mv ${ARGS} ${dir} \
+        && echo "Files moved to ${dir}"
 
-mv "$@" $dir
+}
 
-echo "Files moved to ${dir}"
+
+main
 ```
   
 </details>
