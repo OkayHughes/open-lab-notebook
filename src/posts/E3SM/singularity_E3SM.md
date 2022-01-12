@@ -13,9 +13,14 @@ layout: layouts/post.njk
 Get the singularity image:
 
 ```
-cp /nfs/turbo/cjablono2/owhughes
-
+PATH_TO_IMAGE="/set/your/path/here"
+cp /nfs/turbo/cjablono2/owhughes/e3sm.sif ${PATH_TO_IMAGE}
 ```
+
+
+
+
+
 
 # Step 0:
 * If you're on Mac, install [Docker](https://docs.docker.com/desktop/mac/install/) and create an Ubuntu image.
