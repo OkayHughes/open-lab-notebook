@@ -39,7 +39,7 @@ main() {
 # --- Configuration flags ----
 
 # Machine and project
-readonly MACHINE=singularity
+readonly MACHINE=singularity_gl
 readonly PROJECT="e3sm"
 
 # Simulation

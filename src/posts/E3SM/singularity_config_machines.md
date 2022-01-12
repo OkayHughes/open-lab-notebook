@@ -15,7 +15,7 @@ layout: layouts/post.njk
 <config_machines version="2.0">
 <!-- MACH is the name that you will use in machine options -->
 
-  <machine MACH="singularity">
+  <machine MACH="singularity_gl">
     <DESC>Singularity container</DESC>
     <NODENAME_REGEX>singularity</NODENAME_REGEX>
     <OS>LINUX</OS>

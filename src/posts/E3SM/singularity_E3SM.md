@@ -17,6 +17,13 @@ PATH_TO_IMAGE="/set/your/path/here"
 cp /nfs/turbo/cjablono2/owhughes/e3sm.sif ${PATH_TO_IMAGE}
 ```
 
+Run:
+
+
+Run: 
+```
+singularity run ${PATH_TO_IMAGE} "./singularity_run_e3sm.sh"
+```
 
 
 
