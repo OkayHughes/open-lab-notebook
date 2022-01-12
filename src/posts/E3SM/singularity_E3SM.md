@@ -9,6 +9,8 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 # Quickstart:
+Go through Joe's installation process. 
+
 
 Get the singularity image:
 
@@ -19,7 +21,9 @@ cp /nfs/turbo/cjablono2/owhughes/e3sm.sif ${PATH_TO_IMAGE}
 
 Run:
 
-
+```
+source ~/.cime/bash.source
+```
 Run: 
 ```
 singularity run ${PATH_TO_IMAGE} "./singularity_run_e3sm.sh"
