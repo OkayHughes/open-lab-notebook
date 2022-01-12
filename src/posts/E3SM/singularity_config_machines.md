@@ -5,7 +5,7 @@ tags:
   - misc
 eleventyNavigation:
   key: config_machines.xml
-  parent: Installing E3SM 2.0 on Greatlakes using my jank MPAS dependencies
+  parent: Singularity Container
 layout: layouts/post.njk
 ---
 
@@ -62,3 +62,5 @@ layout: layouts/post.njk
 
 </config_machines>
 ```
+
+
