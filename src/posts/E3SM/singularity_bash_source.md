@@ -19,7 +19,7 @@ fail() {
 
 # for E3SM
 INPUT_NAME=inputData 
-export MY_E3SM_ROOT=${USER}/E3SM/CLDERA-E3SM
+export MY_E3SM_ROOT=${HOME}/E3SM/CLDERA-E3SM
 export DIN_LOC_ROOT=${MY_E3SM_ROOT}/${INPUT_NAME}
 export MY_E3SM_CASES=${USER}/E3SM/E3SMv2_cases
 fail \
