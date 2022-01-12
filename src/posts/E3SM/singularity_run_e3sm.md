@@ -82,7 +82,13 @@ readonly RUN_REFDATE="1001-01-01"   # same as MODEL_START_DATE for 'branch', can
 # if you are setting do_fetch_code=true and want the script to handle everything
 #readonly CODE_ROOT="${HOME}/E3SMv2/code/${CHECKOUT}"
 #readonly CASE_ROOT="/global/cscratch1/sd/${USER}/E3SMv2/${CASE_NAME}"
-FL
+
+fail() {
+  echo "ctrl-f for 'fail' in order to find code to change!'
+  exit 1
+}
+
+fail
 readonly CODE_ROOT="/home/owhughes/E3SM/CLDERA-E3SM"
 readonly CASE_ROOT="/scratch/cjablono_root/cjablono1/owhughes/E3SM/E3SMv2/${CASE_NAME}"
 
