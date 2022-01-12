@@ -32,7 +32,6 @@ layout: layouts/post.njk
   </SLIBS>
 </compiler>
  
-</compiler>
 
 </config_compilers>
 ```
