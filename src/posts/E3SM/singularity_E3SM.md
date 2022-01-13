@@ -37,7 +37,7 @@ singularity shell ${PATH_TO_IMAGE}
 source ~/.cime/bash.source
 ```
 
-Modify the case creation script `~/.cime/` (you can ctrl-f "fail" to see where to change things)
+Modify the case creation script `~/.cime/singularity_create_aquaplanet.sh` (you can ctrl-f "fail" to see where to change things)
 
 
 
