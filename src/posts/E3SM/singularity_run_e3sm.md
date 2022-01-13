@@ -4,7 +4,7 @@ tags:
   - posts
   - misc
 eleventyNavigation:
-  key: singularity_run_e3sm.sh
+  key: singularity_create_aquaplanet.sh
   parent: Singularity Container
 layout: layouts/post.njk
 ---
@@ -159,7 +159,7 @@ do_fetch_code=false
 do_create_newcase=true
 do_case_setup=true
 do_case_build=true
-do_case_submit=true
+do_case_submit=false
 
 # --- Now, do the work ---
 
