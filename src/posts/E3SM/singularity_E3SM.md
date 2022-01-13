@@ -12,6 +12,8 @@ layout: layouts/post.njk
 Go through Joe's installation process. 
 
 
+Install the `mpich` mpi library, see here []()
+
 Get the singularity image:
 
 ```
@@ -26,8 +28,11 @@ source ~/.cime/bash.source
 ```
 Run: 
 ```
-singularity run ${PATH_TO_IMAGE} "./singularity_run_e3sm.sh"
+singularity shell ${PATH_TO_IMAGE} 
+source 
 ```
+
+
 
 
 

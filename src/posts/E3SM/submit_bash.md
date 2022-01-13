@@ -18,7 +18,7 @@ layout: layouts/post.njk
 #SBATCH --ntasks-per-node=36
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=1000m 
-#SBATCH --time=0:60:00
+#SBATCH --time=0:05:00
 #SBATCH --container=/home/owhughes/containers/singularity/e3sm.sif
 #
 # 25 nodes, 30min sufficient for all 5 runs
@@ -28,9 +28,9 @@ layout: layouts/post.njk
 
 
 
+export PATH="/scratch/cjablono_root/cjablono1/owhughes/dependencies/mpich/bin:$PATH"
 
-
-singularity exec /home/owhughes/containers/singularity/e3sm.sif "./case.submit"
+srun singularity exec /home/owhughes/containers/singularity/e3sm.sif "./case.submit"
 ```
 
 
