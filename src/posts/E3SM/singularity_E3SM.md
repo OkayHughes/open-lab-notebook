@@ -58,9 +58,12 @@ Run `sbatch submit.sh.` See if it works.
 
 # Step 0:
 * If you're on Mac, install [Docker](https://docs.docker.com/desktop/mac/install/) and create an Ubuntu image.
+* Install an Ubuntu 18.04 image.
+* Install singularity within this image.
 
+The `e3sm.def` file for building the `e3sm.sif` file is given [here](https://open-lab-notebook.glitch.me/posts/E3SM/e3sm_container/)
 
-The `e3sm.def` file for building the `e3sm.sif` file is given [here]()
+Look up a tutorial for how to build this image using singularity within ubuntu.
 
 
 
