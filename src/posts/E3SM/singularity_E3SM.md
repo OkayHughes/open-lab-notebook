@@ -39,6 +39,16 @@ source ~/.cime/bash.source
 
 Modify the case creation script `~/.cime/singularity_create_aquaplanet.sh` (you can ctrl-f "fail" to see where to change things)
 
+From within the singularity container, run the case script. After it finishes 
+navigate to the `case_scripts` directory in our aquaplanet case 
+and run `./case.build` again, because the build script seems to not
+install all the files that need to be placed somewhere.
+
+Once this is done, copy `~/.cime/submit.sh` to the `case_scripts` directory.
+
+Modify this verison of `submit.sh` to match your filesystem. 
+
+Run `sbatch submit.sh.` See if it works.
 
 
 
@@ -48,8 +58,9 @@ Modify the case creation script `~/.cime/singularity_create_aquaplanet.sh` (you 
 
 # Step 0:
 * If you're on Mac, install [Docker](https://docs.docker.com/desktop/mac/install/) and create an Ubuntu image.
-* 
 
+
+The `e3sm.def` file for building the `e3sm.sif` file is given [here]()
 
 
 
