@@ -12,7 +12,9 @@ layout: layouts/post.njk
 Go through Joe's installation process. 
 
 
-Install the `mpich` mpi library, see here []()
+Install the `mpich` mpi library, see e.g. [here](https://open-lab-notebook.glitch.me/posts/installing-mpas/)
+
+
 
 Get the singularity image:
 
@@ -21,11 +23,8 @@ PATH_TO_IMAGE="/set/your/path/here"
 cp /nfs/turbo/cjablono2/owhughes/e3sm.sif ${PATH_TO_IMAGE}
 ```
 
-Run:
+Clone [this repo](https://github.com/OkayHughes/cime.e3sm.singularity)
 
-```
-source ~/.cime/bash.source
-```
 Run: 
 ```
 singularity shell ${PATH_TO_IMAGE} 
