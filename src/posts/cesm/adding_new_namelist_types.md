@@ -11,6 +11,7 @@ layout: layouts/post.njk
 
 <details>
 <summary>Where analytic_ic_type appears in the code</summary>
+  
 ```
 ./components/cam/bld/namelist_files/namelist_defaults_cam.xml:<analytic_ic_type                   > none </analytic_ic_type>
 ./components/cam/bld/namelist_files/namelist_defaults_cam.xml:<analytic_ic_type phys="adiabatic"  > held_suarez_1994 </analytic_ic_type>
