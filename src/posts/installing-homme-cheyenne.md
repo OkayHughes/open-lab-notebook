@@ -63,42 +63,39 @@ The file `cime/scripts/Tools/e3sm_check_env`  shows that some perl modules need 
 - Run `cpanm LWP`
 - The `${E3SM}/cime/scripts/Tools/e3sm_check_env` script has a bug in it: line 54 should read `stat = run_cmd('perl -e "require {};"'.format(module_name))[0] `
 <span class="todo"> You might not need to fix this if you're using newer code than I am.</span>
-- Then for every module listed in `e3sm_check_env`, run `cpanm {MODULENAME}`. You may need to read
-  error messages to determine what dependencies are, because perl is terrible.
-    
+- Then for every module listed in `e3sm_check_env`, run `cpanm {MODULENAME}`, e.g. `cmapm XML::LibXML && cpanm XML::SAX && XML::SAX::Exception && Switch`
+
+
 
   
 
-#### Figuring out which machine file to use:
+### Creating a Cheyenne-specific machine file
 
-The suggested file in the tutorial is `mach = $homme/cmake/machineFiles/cori-knl.cmake`.
+<span class="todo">This is very brittle to the compilers and netcdf verions that
+you use</span>
 
-The default centos configuration seems to be promising, so I'm going to use that as my starting point.
 
-The machine file that worked for me was 
+
+My machine file is located at `mach = $homme/cmake/machineFiles/cheyenne.cmake`
+
+<details>
+<summary>cheyenne.cmake</summary>
+
 ```
-# CMake initial cache file for Linux 64bit RHEL7/CENTOS7
-# tested with stock gcc/gfortran and packages from EPEL:
-#    openmpi-devel 
-#    blas-devel
-#    lapack-devel
-#    netcdf-fortran-devel
-#
-#
 SET (CMAKE_Fortran_COMPILER mpif90 CACHE FILEPATH "")
 SET (CMAKE_C_COMPILER mpicc CACHE FILEPATH "")
 SET (CMAKE_CXX_COMPILER mpicc CACHE FILEPATH "")
-SET (NetCDF_C $ENV{NETCDF_C} CACHE FILEPATH "") 
-SET (NetCDF_C_LIBRARY $ENV{NETCDF_C}/lib/libnetcdf.so CACHE FILEPATH "")
-SET (NetCDF_C_INCLUDE_DIR $ENV{NETCDF_C}/include CACHE FILEPATH "")
-SET (NetCDF_Fortran $ENV{NETCDF_F} CACHE FILEPATH "") 
-SET (NetCDF_Fortran_LIBRARY $ENV{NETCDF_F}/lib/libnetcdff.so CACHE FILEPATH "")
-SET (NetCDF_Fortran_INCLUDE_DIR $ENV{NETCDF_F}/include CACHE FILEPATH "")
-SET (HDF5_C_LIBRARY $ENV{hdf5}/lib/libhdf5.so CACHE FILEPATH "")
-SET (HDF5_C_INCLUDE_DIR $ENV{hdf5}/include CACHE FILEPATH "")
-SET (HDF5_HL_LIBRARY $ENV{hdf5}/lib/libhdf5_hl.so CACHE FILEPATH "")
-SET (HDF5_HL_INCLUDE_DIR $ENV{hdf5}/include CACHE FILEPATH "")
-SET (PNETCDF_DIR $ENV{PNETCDF} CACHE FILEPATH "")
+SET (NetCDF_C /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/ CACHE FILEPATH "") 
+SET (NetCDF_C_LIBRARY /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/lib/libnetcdf.so CACHE FILEPATH "")
+SET (NetCDF_C_INCLUDE_DIR /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/include CACHE FILEPATH "")
+SET (NetCDF_Fortran /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/ CACHE FILEPATH "") 
+SET (NetCDF_Fortran_LIBRARY /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/lib/libnetcdff.so CACHE FILEPATH "")
+SET (NetCDF_Fortran_INCLUDE_DIR /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/include CACHE FILEPATH "")
+SET (HDF5_C_LIBRARY /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/lib/libhdf5.so CACHE FILEPATH "")
+SET (HDF5_C_INCLUDE_DIR /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/include CACHE FILEPATH "")
+SET (HDF5_HL_LIBRARY /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/lib/libhdf5_hl.so CACHE FILEPATH "")
+SET (HDF5_HL_INCLUDE_DIR /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/include CACHE FILEPATH "")
+SET (PNETCDF_DIR /glade/u/apps/ch/opt/pnetcdf/1.12.2/openmpi/4.0.5/gnu/8.3.0/ CACHE FILEPATH "")
 
 
 
@@ -114,48 +111,25 @@ SET (USE_QUEUING FALSE CACHE BOOL "")
 SET (HOMME_FIND_BLASLAPACK TRUE CACHE BOOL "")
 
 
-```
+```  
 
-which is located at `mach = $homme/cmake/machineFiles/greatlakes.cmake`
+</details>
 
-*However,* this relies on environment variables set in a file I called `setup.sh` which contains
-```
-module load gcc/8.2.0
+### Check point:
+This is probably extraneous for people are fluent in 
 
-#module load openmpi/4.0.3
-#module load mkl/2021.3.0 
-#module load netcdf-c/4.6.2
-#module load netcdf-fortran/4.4.5 
-#module load python3.6-anaconda/5.2.0 
-module load git/2.20.1
-export PATH=$scratch/dependencies/mpich/bin:$PATH
-export NETCDF_C=$scratch/dependencies/netcdf_c
-export NETCDF_F=$scratch/dependencies/netcdf_fortran
-export hdf5=$scratch/dependencies/hdf5
-export zlib=$scratch/dependencies/zlib
-export PNETCDF=$scratch/dependencies/pnetcdf
-export FFLAGS="-L${NETCDF_C}/lib -L$hdf5/lib -L$zlib/lib -L$curld/lib -L$PNETCDF/lib"
-export CPPFLAGS="-I${NETCDF_C}/include -I$hdf5/include -I$zlib/include -I$curld/include -I$PNETCDF/include"
-export LDFLAGS="-L${NETCDF_C}/lib -L$hdf5/lib -L$zlib/lib -L$curld/lib -L$PNETCDF/lib"
-export LD_LIBRARY_PATH="$PNETCDF/lib:${NETCDF_C}/lib:${NETCDF_F}/lib:${hdf5}/lib:${zlib}/lib:${LD_LIBRARY_PATH}"
+* Ensure that your `.e3sm.source.bash` points to the correct directories.
+* Ensure that you have checked if there is an error in `${E3SM}/cime/scripts/Tools/e3sm_check_env`, then it is fixed
+* Ensure that the necessary `perl` dependencies are installed.
+* Ensure that the file `${HOMME}/cmake/machineFiles/cheyenne.cmake` exists and points to
+folders that are consistent with the modules loaded in `.e3sm.source.bash`.
+* Ensure that you have run `source ${HOME}/.e3sm.source.bash` in your current shell.
 
 
-eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib):"
-
-export e3sm="$HOME/HOMME/E3SM"
-export homme="$e3sm/components/homme"
-export wdir="$scratch/HOMME"
-export mach="$homme/cmake/machineFiles/greatlakes.cmake"
-```
-
-
-#### Compiling
-
-* Edit the `setup.sh` file to point to relevant directories.
-* Start by running `source setup.sh` after installing all dependencies following the MPAS installation instructions given [here]().
+### Build the 
 * Run `cd $wdir`
 * Run `cmake -C  $mach $homme`
-* In order to check whether compilation works, run `make -j4 theta-l`
+* In order to check whether compilation works, run `make -j8 all`
 
 #### Running BW wave with precip:
 * Run the following:
