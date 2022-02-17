@@ -11,32 +11,61 @@ layout: layouts/post.njk
 
 This is 
 
-### Downloading the code:
+### 1: Download the code:
 
 The E3SM source seems to be available [here](https://github.com/E3SM-Project/E3SM).
 _Note, you should clone this code rather than rely on any releases._
 Run `git checkout maint-1.2`.
 <span class="todo">
-  asdf
-</p>
+  Note for Peter: I haven't tried this on the newer code you sent me yet.
+  It's on my todo list.
+</span>
 
-According to the instructions, I'm going to assume that the working directory should be on
-`/scratch` somewhere.
+Clone this into `${HOME}/E3SM/E3SM` (I use this extra directory because I have several versions
+of E3SM to keep track of, e.g. `${HOME}/E3SM/E3SM_v2`).
 
-It appears that some perl modules are necessary, and that `cime/scripts/Tools/get_case_env` has been renamed to
-`cime/scripts/Tools/e3sm_check_env` which shows that some perl modules need to be installed.
+### 2: Create script which configures shell env and source it.
+Cheyenne-specific configuration is done in a file that I placed at `${HOME}/.e3sm.source.bash`
 
-None of the perl modules on greatlakes seem useful, so I do the following:
 
-- Use the default `perl` in `/usr/bin`
-- Add the following to your .bashrc `eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"; export PERL5LIB=$HOME/perl5:$PERL5LIB`
-- Restart terminal
+<details>
+<summary>.e3sm.source.bash</summary>
+  
+```
+  
+module load intel/18.0.5  openmpi/4.0.5
+module load netcdf-mpi/4.7.4
+module load pnetcdf/1.12.2
+
+export PATH="/usr/local/packages/mpich/bin:$PATH"
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib):"
+export PERL5LIB=$HOME/perl5:$PERL5LIB
+
+
+export E3SM="$HOME/E3SM/E3SM"
+export HOMME="$E3SM/components/homme"
+export wdir="/glade/scratch/${USER}/HOMME"
+export mach="${HOMME}/cmake/machineFiles/cheyenne.cmake"
+  
+```
+</details>
+
+At this point run `source ${HOME}/.e3sm.source.bash` this the perl command will cause an error message. 
+This is actually fine for the moment.
+
+### Install `perl` dependencies.
+
+
+
+The file `cime/scripts/Tools/e3sm_check_env`  shows that some perl modules need to be installed.
+
 - Run the following to get perl to install locally `cpan App::cpanminus`
 - Run `cpanm LWP`
-- The `cime/scripts/Tools/e3sm_check_env` script has a bug in it: line 54 should read `stat = run_cmd('perl -e "require {};"'.format(module_name))[0] `
-- To avoid a warning about the git version, you can run `module load git/2.20.1`.
+- The `${E3SM}/cime/scripts/Tools/e3sm_check_env` script has a bug in it: line 54 should read `stat = run_cmd('perl -e "require {};"'.format(module_name))[0] `
+<span class="todo"> You might not need to fix this if you're using newer code than I am.</span>
 - Then for every module listed in `e3sm_check_env`, run `cpanm {MODULENAME}`. You may need to read
   error messages to determine what dependencies are, because perl is terrible.
+    
 
   
 
