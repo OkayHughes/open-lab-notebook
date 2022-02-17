@@ -9,9 +9,8 @@ layout: layouts/post.njk
 ---
 
 
-This is 
 
-### 1: Download the code:
+### 1: Download the code
 
 The E3SM source seems to be available [here](https://github.com/E3SM-Project/E3SM).
 _Note, you should clone this code rather than rely on any releases._
@@ -24,7 +23,7 @@ Run `git checkout maint-1.2`.
 Clone this into `${HOME}/E3SM/E3SM` (I use this extra directory because I have several versions
 of E3SM to keep track of, e.g. `${HOME}/E3SM/E3SM_v2`).
 
-### 2: Create script which configures shell env and source it.
+### 2: Create script which configures shell env and source it
 Cheyenne-specific configuration is done in a file that I placed at `${HOME}/.e3sm.source.bash`
 
 
@@ -37,7 +36,6 @@ module load intel/18.0.5  openmpi/4.0.5
 module load netcdf-mpi/4.7.4
 module load pnetcdf/1.12.2
 
-export PATH="/usr/local/packages/mpich/bin:$PATH"
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib):"
 export PERL5LIB=$HOME/perl5:$PERL5LIB
 
@@ -53,7 +51,7 @@ export mach="${HOMME}/cmake/machineFiles/cheyenne.cmake"
 At this point run `source ${HOME}/.e3sm.source.bash` this the perl command will cause an error message. 
 This is actually fine for the moment.
 
-### Install `perl` dependencies.
+### 3: Install `perl` dependencies
 
 
 
@@ -69,7 +67,7 @@ The file `cime/scripts/Tools/e3sm_check_env`  shows that some perl modules need 
 
   
 
-### Creating a Cheyenne-specific machine file
+### 4: Creating a Cheyenne-specific machine file
 
 <span class="todo">This is very brittle to the compilers and netcdf verions that
 you use</span>
@@ -115,7 +113,7 @@ SET (HOMME_FIND_BLASLAPACK TRUE CACHE BOOL "")
 
 </details>
 
-### Check point:
+### 5: Check point
 This is probably extraneous for people are fluent in 
 
 * Ensure that your `.e3sm.source.bash` points to the correct directories.
@@ -126,62 +124,43 @@ folders that are consistent with the modules loaded in `.e3sm.source.bash`.
 * Ensure that you have run `source ${HOME}/.e3sm.source.bash` in your current shell.
 
 
-### Build the 
+### 6: Build the dycore executables
 * Run `cd $wdir`
-* Run `cmake -C  $mach $homme`
+* Run `cmake -C  $mach $HOMME`
 * In order to check whether compilation works, run `make -j8 all`
 
-#### Running BW wave with precip:
-* Run the following:
-```
-make install
-cd dcmip_tests/dcmip2016_test1_baroclinic_wave/
-make install
-cd theta-l
-make install
-```
+### 7: Prepare the acid test
 
-#### The jobscript for submitting
-I modified the following script for use with slurm on greatlakes. 
-Each greatlakes node has 36 "cores", i.e. 18 physical cores with 2 virtual cores after hyperthreading.
-I still don't know how to translate between the "PE" numbers in CESM and manual slurm ones (or how to use openmp to its fullest).
-This would be worth investigating further, but as it is it appears that this runs in about 2 hours which is shamefully slow for an NE30 run.
+- Run `cd $wdir/dcmip_tests/dcmip2012_test2.0_steady_state_with_orography/preqx/`
+- Run `make install` (note, this generates default namelist files and such)
+
+### 8: The jobscript for submitting
+This is a modified submission script that seems to work on cheyenne. Add it to the folder that you just `cd`'d into.
+
+<details>
+<summary>
+preqx.jobscript-cheyenne.sh
+</summary>
 
 ```
 #!/bin/bash
 #
-#SBATCH --job-name d16-1-preqx 
-#SBATCH --account=cjablono1
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=36
-#SBATCH --cpus-per-task=1
-#SBATCH --mem-per-cpu=1000m 
-#SBATCH --time=0:60:00
+#PBS -N PREQX_ACID_TEST
+#PBS -A YOUR_PROJECT
+#PBS -l walltime=01:00:00
+#PBS -q regular
+#PBS -M YOUR_USERNAME
+#PBS -l select=1:ncpus=36:mpiprocs=36
 #
 # 25 nodes, 30min sufficient for all 5 runs
 # 12 nodes, 10min for r400 an r100
 # 
 
-source /home/owhughes/HOMME/E3SM/setup.sh
-export OMP_NUM_THREADS=1
-#export OMP_STACKSIZE=16M     #  Cori has 96GB per node. had to lower to 8M on 3K nodes
+source ${HOME}/.e3sm.source.bash
+export OMP_NUM_THREADS=2
 export MV2_ENABLE_AFFINITY=0
 NCPU=36
-#if [ -n "$PBS_ENVIRONMENT" ]; then
-#  NCPU=$PBS_NNODES
-#  [ "$PBS_ENVIRONMENT" = "PBS_BATCH" ] && cd $PBS_O_WORKDIR 
-#  NCPU=$PBS_NNODES
-#  let NCPU/=$OMP_NUM_THREADS
-#fi
-#if [ -n "$SLURM_NNODES" ]; then
-#    NCPU=$SLURM_NNODES
-#    let NCPU*=16
-#    let NCPU/=$OMP_NUM_THREADS
-#fi
-#let PPN=36/$OMP_NUM_THREADS
-
-# hydrostatic preqx
-EXEC=../../../test_execs/theta-l-nlev30/theta-l-nlev30
+EXEC=../../../test_execs/preqx-nlev30-interp/preqx-nlev30-interp
 
 
 
@@ -191,52 +170,25 @@ echo "NCPU = $NCPU"
 namelist=namelist-$prefix.nl
 \cp -f $namelist input.nl
 date
-mpirun -bind-to=core -np $NCPU $EXEC < input.nl
+mpirun -np ${NCPU} $EXEC < input.nl
 date
 
-ncl plot-baroclinicwave-init.ncl
-ncl plot-lat-lon-TPLSPS.ncl 'var_choice=1'
-ncl plot-lat-lon-TPLSPS.ncl 'var_choice=2'
-ncl plot-lat-lon-TPLSPS.ncl 'var_choice=3'
-\mv -f plot_baroclinicwave_init.pdf  ${prefix}_init.pdf
-\mv -f preqx-test16-1latlonT850.pdf  ${prefix}_T850.pdf
-\mv -f preqx-test16-1latlonPS.pdf  ${prefix}_PS.pdf
-\mv -f preqx-test16-1latlonPRECL.pdf  ${prefix}_PRECL.pdf
-
-\mv -f movies/dcmip2016_test11.nc    movies/${prefix}_dcmip2016_test11.nc
 }
 
-prefix=r400    ; run $(($NCPU>384?384:NCPU))
-
-prefix=r100-dry; run $NCPU
-prefix=r100-h  ; run $NCPU
-prefix=r100    ; run $NCPU
-
-prefix=r50    ; run $NCPU
-
-# high res cases
-#prefix=ne120  ; run $NCPU       
-#prefix=ne256  ; run $NCPU       
-#prefix=ne512  ; run $NCPU       
-#prefix=ne1024  ; run $NCPU      
-
-# timings on ANVIL
-#ne120  72 nodes, 2h Anvil:  6s
-#ne256  72 nodes, 2h Anvil:  55s
-#ne512  100 nodes 2h Anvil:  611s (can run on 25 nodes)
-#ne1024 100 nodes 2h Anvi:   4642s  (6min init)
-#       100 nodes  270 timesteps:  1836s (6min init)
-#
+prefix=default    ; run $(($NCPU>384?384:NCPU))
 
 
 ```
+  
+</details>
 
-Copy the above into a file located at `$wdir/dcmip_tests/dcmip2016_test1_baroclinic_wave/theta-l/jobscript-greatlakes.sh`
+### 9: Running the model and viewing output
+  
+- As usual, run `qsub preqx.jobscript-cheyenne.sh`
+- Use your NetCDF viewer of choice to view `$wdir/dcmip_tests/dcmip2012_test2.0_steady_state_with_orography/preqx/movies/dcmip2012_test2_01.nc`
+  
 
+  
+  
 
-#### Reconstructing my method of installing Perl dependencies
-
-Since I didn't take good enough notes last time I installed stuff I'm going to redo this.
-
-In order to do a fresh install, remove the HOMME directory from scratch and from ~, remove the ~/perl5 directory as well as the ~/.cpan directory.
 
