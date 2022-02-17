@@ -59,7 +59,7 @@ The file `cime/scripts/Tools/e3sm_check_env`  shows that some perl modules need 
 - Run `cpanm LWP`
 - The `${E3SM}/cime/scripts/Tools/e3sm_check_env` script has a bug in it: line 54 should read `stat = run_cmd('perl -e "require {};"'.format(module_name))[0] `
 <span class="todo"> You might not need to fix this if you're using newer code than I am.</span>
-- Then for every module listed in `e3sm_check_env`, run `cpan {MODULENAME}`, e.g. `cpan XML::LibXML && cpan XML::SAX && XML::SAX::Exception && Switch`
+- Then for every module listed in `e3sm_check_env`, run `cpan {MODULENAME}`, e.g. `cpan XML::LibXML && cpan XML::SAX && cpan XML::SAX::Exception && cpan Switch`
 
 
 
