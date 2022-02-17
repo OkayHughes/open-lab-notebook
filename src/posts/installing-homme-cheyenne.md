@@ -16,8 +16,7 @@ The E3SM source seems to be available [here](https://github.com/E3SM-Project/E3S
 _Note, you should clone this code rather than rely on any releases._
 Run `git checkout maint-1.2`.
 <span class="todo">
-  Note for Peter: I haven't tried this on the newer code you sent me yet.
-  It's on my todo list.
+  Notes: apparently if you don't run this checkout, the cime directory is empty. So don't worry if this happens! (it took me like half an hour to figure this out when I was first doing this install.)
 </span>
 
 Clone this into `${HOME}/E3SM/E3SM` (I use this extra directory because I have several versions
@@ -57,11 +56,10 @@ This is actually fine for the moment.
 
 The file `cime/scripts/Tools/e3sm_check_env`  shows that some perl modules need to be installed.
 
-- Run the following to get perl to install locally `cpan App::cpanminus`
 - Run `cpanm LWP`
 - The `${E3SM}/cime/scripts/Tools/e3sm_check_env` script has a bug in it: line 54 should read `stat = run_cmd('perl -e "require {};"'.format(module_name))[0] `
 <span class="todo"> You might not need to fix this if you're using newer code than I am.</span>
-- Then for every module listed in `e3sm_check_env`, run `cpanm {MODULENAME}`, e.g. `cmapm XML::LibXML && cpanm XML::SAX && XML::SAX::Exception && Switch`
+- Then for every module listed in `e3sm_check_env`, run `cpan {MODULENAME}`, e.g. `cpan XML::LibXML && cpan XML::SAX && XML::SAX::Exception && Switch`
 
 
 
