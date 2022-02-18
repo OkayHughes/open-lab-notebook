@@ -91,7 +91,7 @@ SET (HDF5_C_LIBRARY /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18
 SET (HDF5_C_INCLUDE_DIR /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/include CACHE FILEPATH "")
 SET (HDF5_HL_LIBRARY /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/lib/libhdf5_hl.so CACHE FILEPATH "")
 SET (HDF5_HL_INCLUDE_DIR /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/include CACHE FILEPATH "")
-SET (PNETCDF_DIR /glade/u/apps/ch/opt/pnetcdf/1.12.2/openmpi/4.0.5/gnu/8.3.0/ CACHE FILEPATH "")
+SET (PNETCDF_DIR /glade/u/apps/ch/opt/pnetcdf/1.12.2/openmpi/4.0.5/intel/18.0.5/ CACHE FILEPATH "")
 
 
 
