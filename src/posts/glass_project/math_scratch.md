@@ -92,7 +92,9 @@ solve for the numerical integration weights, we solve a system of linear equatio
 
 `$$$\begin{bmatrix}
 1 & 1 & 1 & 1 \\
-
+1 & 1 & 0 & 0 \\
+1 & 1 & 4 & 0 \\
+1 & 1 & 1 & 9
 \end{bmatrix}
 \begin{bmatrix}
 w_0\\
@@ -107,3 +109,35 @@ w_3
 1
 \end{bmatrix}
 $$$`
+
+Which I calculated with the following code
+<details>
+<summary>eval.py</summary>
+
+```
+import numpy as np
+  
+def evl(x, y, z):
+  p1 = np.ones_like(x)
+  p2 = 2 * x + 1 * y + 1 * z - 1
+  p3 = 0 * x + 3 * y + 1 * z - 1
+  p4 = 0 * x + 0 * y + 4 * z - 1
+  return (p1, p2, p3, p4)
+x = np.array([0, 1, 0, 0])
+y = np.array([0, 0, 1, 0])
+z = np.array([0, 0, 0, 1])
+print(evl(x, y, z))
+  
+  
+A = np.array([[1,1,1,1],
+              [1,1,0,1,],
+              [1,1,4,0,],
+              [1,1,1,9]])
+b = np.ones(4)
+
+w = np.linalg.solve(A,b)
+print(w)
+```
+
+</details>
+
