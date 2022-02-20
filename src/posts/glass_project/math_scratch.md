@@ -142,5 +142,5 @@ print(w)
 </details>
 
 and we conclude that
-`$$$ $$$`
+`$$$ w = \begin{bmatrix} 9/50 & 9/50 &  \end{bmatrix} $$$`
 
