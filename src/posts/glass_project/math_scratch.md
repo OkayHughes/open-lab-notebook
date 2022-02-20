@@ -174,5 +174,10 @@ Write these coordinates in the form of `$$ ~_{KR}\mathbf{g}_k$$`, (using convex 
 `$$$~_L\mathbf{U}_l =  (~_{KR}\mathbf{g}_k ~_{K}\mathbf{U}^k)_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}\det{Q})^r  $$$`
 
 
+## Shape functions and matrices:
 
+### The mass matrix
+
+From the paper this has the form
+`$$$ \rho \iiint_{\mathcal{S}^t} \begin{$$$`
 
