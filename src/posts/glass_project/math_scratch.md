@@ -179,5 +179,8 @@ Write these coordinates in the form of `$$ ~_{KR}\mathbf{g}_k$$`, (using convex 
 ### The mass matrix
 
 From the paper this has the form
-`$$$ \rho \iiint_{\mathcal{S}^t} \begin{$$$`
+`$$$ \mathbf{M} = \rho \iiint_{\mathcal{S}^s} \begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}(\mathbf{a})\begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}^\top(\mathbf{a}) \det(Q) \, \mathrm{d} V$$$`
 
+And we can thus find that 
+
+`$$$ ~_{LM}\mathbf{M} = rho \left(~_{LR}\mathbf{P}_l ~_{MR}\mathbf{P}_m\right)_r ~_R\mathbf{w}^r \det(Q)  $$$`
