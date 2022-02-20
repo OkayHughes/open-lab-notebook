@@ -85,7 +85,7 @@ such that`$$~_K\mathbf{U}_k = \sum_{l} ~_L\mathbf{U}_l P_{l}(\mathbf{k}_k) $$` f
 In full dimensionality, these can be calculated by
 `$$$~_L\mathbf{U}_l = \iiint_{S^s} U(\mathbf{x}(\mathbf{a}))P_l(\mathbf{a}) \det{Q} \,\mathrm{d} V  $$$`
 
-Thankfully, for first order simplical elements the lobatto points for `$$\mathcal{S}^s$$` are merely its vertices. In order to 
+Thankfully, for first order simplical elements decent quadrature points for `$$\mathcal{S}^s$$` are merely its vertices. In order to 
 solve for the numerical integration weights, we solve a system of linear equations. The matrix can be best understood as
 `$$\mathbf{P}_{kl} = P_l(\mathbf{a}(\mathbf{k}_k) $$` such that if we have `$$~_{K}\mathbf{w}_k $$` integration weights, then
 `$$\mathbf{P}_{kl} \mathbf{w}^k = ~_L\mathbf{1}.$$` Because I'm a moron let's write this system out in gory detail:
@@ -149,7 +149,7 @@ which we'll take from [this useful site](https://www.cfd-online.com/Wiki/Code:_Q
 <details>
 <summary>gauss_quadrature.py</summary>
 
-  ```
+```
 xa=np.array([0.2500000000000000, 0.0000000000000000, 0.3333333333333333, 0.3333333333333333, 0.3333333333333333, 
      0.7272727272727273, 0.0909090909090909, 0.0909090909090909, 0.0909090909090909, 0.4334498464263357, 
      0.0665501535736643, 0.0665501535736643, 0.0665501535736643, 0.4334498464263357, 0.4334498464263357])
@@ -162,8 +162,17 @@ za=np.array([0.2500000000000000, 0.3333333333333333, 0.3333333333333333, 0.00000
 wt=np.array([0.1817020685825351, 0.0361607142857143, 0.0361607142857143, 0.0361607142857143, 0.0361607142857143, 
      0.0698714945161738, 0.0698714945161738, 0.0698714945161738, 0.0698714945161738, 0.0656948493683187, 
      0.0656948493683187, 0.0656948493683187, 0.0656948493683187, 0.0656948493683187, 0.0656948493683187])/6
-  
-  ```
+ 
+```
   
   
 </details>
+
+$$$~_L\mathbf{U}_l =  U(\mathbf{x}(\mathbf{a}))P_l(\mathbf{a}) \det{Q} \,\mathrm{d} V  $$$
+
+
+
+
+### Interpolating the quantity
+
+
