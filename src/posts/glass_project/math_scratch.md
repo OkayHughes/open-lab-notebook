@@ -103,10 +103,10 @@ w_2\\
 w_3
 \end{bmatrix}
 = \begin{bmatrix}
-1\\
-1\\
-1\\
-1
+1/6\\
+1/60\\
+1/20\\
+1/10
 \end{bmatrix}
 $$$`
 
@@ -133,7 +133,7 @@ A = np.array([[1,1,1,1],
               [1,1,0,1,],
               [1,1,4,0,],
               [1,1,1,9]])
-b = np.ones(4)
+b = np.array([])
 
 w = np.linalg.solve(A,b)
 print(w)
