@@ -24,4 +24,19 @@ This allows us to express a point `$$\mathbf{x}^t \in \mathcal{S}^t $$` as `$$$ 
 with `$$\mathbf{a} \geq 0 $$` and `$$ \sum_i \mathbf{a} \leq 1 $$`.
 
 Now note: these stipulations guarantee that `$$ \mathbf{a} \in \mathcal{S}^s $$`, which means that we have constructed an affine bijection
-`$$$ \mathbf{x} : \mathcal{S}^s \mapsto \mathcal{S}^t $$$` which justifies that `$$\S$$`
+`$$$ \mathbf{x} : \mathcal{S}^s \mapsto \mathcal{S}^t $$$` which justifies that `$$\mathcal{S}^s$$` and `$$\mathcal{S}^t $$` are the source and target simplices,
+respectively (we will later have indexed `$$\mathcal{S}_i^t $$` to function with our triangulation). 
+
+Finally, if we have some `$$\mathbf{x}^t \in \mathcal{S}^t, $$` then `$$$\mathbf{a}^s = Q^{-1}(\mathbf{x}^t - \mathbf{k_0}) $$$` and
+this quantity is defined if and only if `$$\mathbf{S}^t $$` is non-degenerate (i.e. it has non-zero volume). This justifies the importance
+of using an Delaunay triangulation to maintain good condition numbers for these change-of-basis matrices.
+
+## The spectral basis:
+
+In the first draft of this work we will work with linear basis functions for simplicity.
+However, in order to gain automatic mass lumping for numerical convenience later, we will work directly with 
+a set of linear basis functions which are orthogonal w.r.t. integration on the standard simplex.
+Note that because the change of variables to and from the canonical element `$$\mathcal{S}^s $$` is affine, the change-of-variables
+formula for 3d integration means that 
+`$$$\iiint $$$`
+
