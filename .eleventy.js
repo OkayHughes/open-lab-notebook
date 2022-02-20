@@ -54,12 +54,14 @@ module.exports = function(eleventyConfig) {
     const cleanEquation = equation
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&')
 
     return katex.renderToString(cleanEquation, { throwOnError: true, displayMode: true })
   }).replace(/\$\$(.+?)\$\$/g, (_, equation) => {
     const cleanEquation = equation
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '>')
 
     return katex.renderToString(cleanEquation, { throwOnError: true, displayMode: false })
   })
