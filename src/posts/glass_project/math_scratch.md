@@ -53,13 +53,22 @@ are given in [this paper](https://ieeexplore.ieee.org/document/8146193), along w
 
 ### The basis functions:
 <table class="eqn">
-  <tr><td>$$P_{000} $$</td><td> $$= 1 $$</td>
+  <tr><td>$$P_{000}(\mathbf{a}) $$</td><td> $$= 1 $$</td>
   </tr>
-  <tr><td>$$P_{000} $$</td><td> $$= 1 $$</td>
+  <tr><td>$$P_{100}(\mathbf{a}) $$</td><td> $$= \begin{bmatrix} 2 & 1 & 1\end{bmatrix}\mathbf{a}- 1$$</td>
   </tr>
-  <tr><td>$$P_{000} $$</td><td> $$= 1 $$</td>
+  <tr><td>$$P_{010}(\mathbf{a}) $$</td><td> $$= \begin{bmatrix} 0 & 3 & 1\end{bmatrix}\mathbf{a}- 1$$</td>
   </tr>
-  <tr><td>$$P_{000} $$</td><td> $$= 1 $$</td>
+  <tr><td>$$P_{001}(\mathbf{a}) $$</td><td> $$= \begin{bmatrix} 0 & 0 & 4\end{bmatrix}\mathbf{a}- 1$$</td>
   </tr>
 </table>
+Note that in this project I will be making strong distinction between a vector (i.e. an element of a vector space) and a functional (i.e. an element of its dual).
+This means that `$$\mathbf{a} $$` is a vector (in engineering terminology, a "column vector") and `$$ \mathbf{a}^\top $$` is a linear functional
+which lies in the dual vector space. This terminology and notation is a compromise between the convenience and practicality of engineering
+and the underlying intuition which comes from the language of PDEs.
 
+
+## Interpolation
+
+Suppose that we have a quantity `U(\mathbf{x})` and we have point evaluations at `$$\mathbf{k}_{0,1,2,3} $$` i.e. we are working on a finite 
+element with values stored at the vertices ()
