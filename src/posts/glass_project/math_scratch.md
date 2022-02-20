@@ -87,14 +87,14 @@ In full dimensionality, these can be calculated by
 
 Thankfully, for first order simplical elements the lobatto points for `$$\mathcal{S}^s$$` are merely its vertices. In order to 
 solve for the numerical integration weights, we solve a system of linear equations. The matrix can be best understood as
-`$$\mathbf{P}_{kl} = P_l(\mathbf{a}(\mathbf{k}_k))^2 $$` such that if we have `$$~_{K}\mathbf{w}_k $$` integration weights, then
+`$$\mathbf{P}_{kl} = P_l(\mathbf{a}(\mathbf{k}_k) $$` such that if we have `$$~_{K}\mathbf{w}_k $$` integration weights, then
 `$$\mathbf{P}_{kl} \mathbf{w}^k = ~_L\mathbf{1}.$$` Because I'm a moron let's write this system out in gory detail:
 
 `$$$\begin{bmatrix}
 1 & 1 & 1 & 1 \\
-1 & 1 & 0 & 0 \\
-1 & 1 & 4 & 0 \\
-1 & 1 & 1 & 9
+-1 & 1 & 0 & 0 \\
+-1 & -1 & 4 & 0 \\
+-1 & -1 & -1 & 9
 \end{bmatrix}
 \begin{bmatrix}
 w_0\\
@@ -103,10 +103,10 @@ w_2\\
 w_3
 \end{bmatrix}
 = \begin{bmatrix}
-1/6\\
-1/60\\
-1/20\\
-1/10
+1\\
+0\\
+0\\
+0
 \end{bmatrix}
 $$$`
 
@@ -130,10 +130,10 @@ print(evl(x, y, z))
   
   
 A = np.array([[1,1,1,1],
-              [1,1,0,1,],
-              [1,1,4,0,],
-              [1,1,1,9]])
-b = np.array([])
+              [-1,1,0,0,],
+              [-1,-1,4,0,],
+              [-1,-1,-1,9]])
+b = np.array([1,0,0,0])
 
 w = np.linalg.solve(A,b)
 print(w)
