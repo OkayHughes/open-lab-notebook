@@ -169,6 +169,10 @@ wt=np.array([0.1817020685825351, 0.0361607142857143, 0.0361607142857143, 0.03616
   
 </details>
 
-Write these coordinates in the form of `$$ ~_{KR}\mathbf{g}_k$$`, where `$$ ~_{DR}\mathbf{g} =  ~_{KR}\mathbf{g}_k ~_{KD} \mathbf{k}^k $$`
+Write these coordinates in the form of `$$ ~_{KR}\mathbf{g}_k$$`, (using convex combinations) where `$$ ~_{DR}\mathbf{g} =  ~_{KR}\mathbf{g}_k ~_{KD} \mathbf{k}^k $$`
 
-`$$$~_L\mathbf{U}_l =  (~_{KR}\mathbf{g}_k ~_{K}\mathbf{U}^k)_r  ~_{LR}\mathbf{P}^r ~_R\mathbf{w}\det{Q}  $$$`
+`$$$~_L\mathbf{U}_l =  (~_{KR}\mathbf{g}_k ~_{K}\mathbf{U}^k)_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}\det{Q})^r  $$$`
+
+
+
+
