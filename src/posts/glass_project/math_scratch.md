@@ -10,6 +10,11 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
+## A brief note on indexing and notation
+In order to keep track of tensors e.g. in point space and spectral space, I like to do the following:
+indices for point space will be indexed by `$$i$$` and indices for spectral space will use variable `$$k$$`,
+in which case `$$_iU`
+
 ## Affine transformations:
 
 Suppose we have an arbitrary simplex `$$ \mathcal{S}^t $$` which has vertices `$$\mathbf{k}_{0,1,2,3}$$` whose convex hull is our simplex.
@@ -70,5 +75,8 @@ and the underlying intuition which comes from the language of PDEs.
 
 ## Interpolation
 
-Suppose that we have a quantity `U(\mathbf{x})` and we have point evaluations at `$$\mathbf{k}_{0,1,2,3} $$` i.e. we are working on a finite 
-element with values stored at the vertices ()
+Suppose that we have a quantity `$$U(\mathbf{x})$$` and we have point evaluations at `$$\mathbf{k}_{0,1,2,3} $$`, respectively `$$\mathbf{U}_{0,1,2,3} $$` i.e. we are working on a finite 
+element with values stored at the vertices (often referred to as "nodes" in the FEM literature for some reason). Here I introduce a trick that I used on
+a previous finite element implementation
+In full dimensionality, these can be calculated by
+`$$$  $$$`
