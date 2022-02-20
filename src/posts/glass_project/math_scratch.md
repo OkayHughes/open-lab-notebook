@@ -37,6 +37,29 @@ In the first draft of this work we will work with linear basis functions for sim
 However, in order to gain automatic mass lumping for numerical convenience later, we will work directly with 
 a set of linear basis functions which are orthogonal w.r.t. integration on the standard simplex.
 Note that because the change of variables to and from the canonical element `$$\mathcal{S}^s $$` is affine, the change-of-variables
-formula for 3d integration means that 
-`$$$\iiint $$$`
+formula for 3d integration means that for basis functions `$$P_{0, 1, 2, 3} $$`
+<table class="eqn">
+  <tr><td>$$\iiint_{\mathcal{S}^s} P_i(\mathbf{a})P_j(\mathbf{a})\, \mathrm{d} V $$</td><td> $$= \iiint_{\mathcal{S}^t} P_i(\mathbf{x}(\mathbf{a}))P_j(\mathbf{x}(\mathbf{a})) \det(\mathrm{D}\mathbf{x} )\, \mathrm{d} V$$</td>
+  </tr>
+  <tr>
+    <td></td><td> $$= \iiint_{\mathcal{S}^t} P_i(\mathbf{x}(\mathbf{a}))P_j(\mathbf{x}(\mathbf{a})) \det(Q)\, \mathrm{d} V$$</td>
+  </tr>
+</table>
+and so orthogonality is preserved under this affine transformation. 
+
+It's actually surprisingly hard to find a systematic derivation of orthogonal polynomials on the standard tetrahedron (note, don't
+search for "on the simplex" because this gets you references that are more technical than you need). However, the first-order functions
+are given in [this paper](https://ieeexplore.ieee.org/document/8146193), along with an algorithmic method for deriving higher-order bases.
+
+### The basis functions:
+<table class="eqn">
+  <tr><td>$$P_{000} $$</td><td> $$= 1 $$</td>
+  </tr>
+  <tr><td>$$P_{000} $$</td><td> $$= 1 $$</td>
+  </tr>
+  <tr><td>$$P_{000} $$</td><td> $$= 1 $$</td>
+  </tr>
+  <tr><td>$$P_{000} $$</td><td> $$= 1 $$</td>
+  </tr>
+</table>
 
