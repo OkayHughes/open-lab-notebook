@@ -169,6 +169,6 @@ wt=np.array([0.1817020685825351, 0.0361607142857143, 0.0361607142857143, 0.03616
   
 </details>
 
-Write these coordinates in the form of `$$ ~_K\mathbf{g}_k$$`, where `$$ ~_D\mathbf{g} =  ~_K\mathbf{g}_k ~_{KD}\mathbf{k}^k $$`
+Write these coordinates in the form of `$$ ~_{KR}\mathbf{g}_k$$`, where `$$ ~_{DR}\mathbf{g} =  ~_{KR}\mathbf{g}_k ~_{KD} \mathbf{k}^k $$`
 
-`$$$~_L\mathbf{U}_l =  ~_{K}\mathbf{U}_k ~_K\mathbf{U}_k P_l(\mathbf{a}) \det{Q} \,\mathrm{d} V  $$$`
+`$$$~_L\mathbf{U}_l =  (~_{KR}\mathbf{g}_k ~_{K}\mathbf{U}^k)_r  ~_{LR}\mathbf{P}^r ~_R\mathbf{w}\det{Q}  $$$`
