@@ -81,6 +81,9 @@ and the underlying intuition which comes from the language of PDEs.
 
 Suppose that we have a quantity `$$U(\mathbf{x})$$` and we have point evaluations at `$$\mathbf{k}_{0,1,2,3} $$`, respectively `$$_K\mathbf{U}_{0,1,2,3} $$` i.e. we are working on a finite 
 element with values stored at the vertices (often referred to as "nodes" in the FEM literature for some reason). We want to find a vector `$$_L\mathbf{U}$$`
-such that`$$_K\mathbf{U}_k = \sum_l _L\mathbf{U}_l P_l(\mathbf{k}_k) $$`
+such that`$$~_K\mathbf{U}_k = \sum_{l} ~_L\mathbf{U}_l P_{l}(\mathbf{k}_k) $$` for `$$k = 0,1,2,3$$`.
 In full dimensionality, these can be calculated by
-`$$$  $$$`
+`$$$~_L\mathbf{U}_l = \iiint_{S^s} U(\mathbf{x}(\mathbf{a}))P_l(\mathbf{a}) \det{Q} \,\mathrm{d} V  $$$`
+
+Thankfully, for first order simplical elements the lobatto points for `$$\mathcal{S}^s$$` are merely its vertices, 
+and the weights can be simply derived as 
