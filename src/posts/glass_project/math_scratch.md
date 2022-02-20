@@ -12,8 +12,12 @@ layout: layouts/post.njk
 
 ## A brief note on indexing and notation
 In order to keep track of tensors e.g. in point space and spectral space, I like to do the following:
-indices for point space will be indexed by `$$i$$` and indices for spectral space will use variable `$$k$$`,
-in which case `$$_iU`
+* The index for tetrahedra will be `$$i$$`
+* The index for vertex number will be `$$k$$` 
+* The index for spectral coefficients will use variable `$$l$$`
+* this allows us to write variables `$$_{IK}\mathbf{U}$$` and `$$_{IL}\mathbf{U}$$` which are two tensors containing, respectively, 
+point evaluations of the quantity `$$U$$` on tetrahedron `$$i$$` and vertex `$$k = 0,1,2,3$$`, or basis function coefficients
+to reconstruct `$$U$$` on tetrahedron `$$i$$` and basis function `$$l=0,1,2,3 $$`
 
 ## Affine transformations:
 
@@ -75,8 +79,8 @@ and the underlying intuition which comes from the language of PDEs.
 
 ## Interpolation
 
-Suppose that we have a quantity `$$U(\mathbf{x})$$` and we have point evaluations at `$$\mathbf{k}_{0,1,2,3} $$`, respectively `$$\mathbf{U}_{0,1,2,3} $$` i.e. we are working on a finite 
-element with values stored at the vertices (often referred to as "nodes" in the FEM literature for some reason). Here I introduce a trick that I used on
-a previous finite element implementation
+Suppose that we have a quantity `$$U(\mathbf{x})$$` and we have point evaluations at `$$\mathbf{k}_{0,1,2,3} $$`, respectively `$$_K\mathbf{U}_{0,1,2,3} $$` i.e. we are working on a finite 
+element with values stored at the vertices (often referred to as "nodes" in the FEM literature for some reason). We want to find a vector `$$_L\mathbf{U}$$`
+such that`$$_K\mathbf{U}_k = \sum_l _L\mathbf{U}_l P_l(\mathbf{k}_k) $$`
 In full dimensionality, these can be calculated by
 `$$$  $$$`
