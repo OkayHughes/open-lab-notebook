@@ -166,13 +166,9 @@ wt=np.array([0.1817020685825351, 0.0361607142857143, 0.0361607142857143, 0.03616
 ```
   
   
+  
 </details>
 
-$$$~_L\mathbf{U}_l =  U(\mathbf{x}(\mathbf{a}))P_l(\mathbf{a}) \det{Q} \,\mathrm{d} V  $$$
+Write these coordinates in the form of `$$ ~_K\mathbf{g}_k$$`, where `$$ ~_D\mathbf{g} =  ~_K\mathbf{g}_k ~_{KD}\mathbf{k}^k $$`
 
-
-
-
-### Interpolating the quantity
-
-
+`$$$~_L\mathbf{U}_l =  ~_{K}\mathbf{U}_k ~_K\mathbf{U}_k P_l(\mathbf{a}) \det{Q} \,\mathrm{d} V  $$$`
