@@ -85,5 +85,7 @@ such that`$$~_K\mathbf{U}_k = \sum_{l} ~_L\mathbf{U}_l P_{l}(\mathbf{k}_k) $$` f
 In full dimensionality, these can be calculated by
 `$$$~_L\mathbf{U}_l = \iiint_{S^s} U(\mathbf{x}(\mathbf{a}))P_l(\mathbf{a}) \det{Q} \,\mathrm{d} V  $$$`
 
-Thankfully, for first order simplical elements the lobatto points for `$$\mathcal{S}^s$$` are merely its vertices, 
-and the weights can be simply derived as 
+Thankfully, for first order simplical elements the lobatto points for `$$\mathcal{S}^s$$` are merely its vertices. In order to 
+solve for the numerical integration weights, we solve a system of linear equations. The matrix can be best understood as
+`$$\mathbf{P}_{kl} = P_l(\mathbf{a}(\mathbf{k}_k))^2 $$` such that if we have `$$~_{K}\mathbf{w}_k $$` integration weights, then
+`$$\mathbf{P}_{kl} \mathbf{w}^k = ~_L\mathbf{1}.$$` Because I'm a moron 
