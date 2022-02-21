@@ -206,3 +206,6 @@ which in tensor form gives
 `$$$ ~_{DLM}\mathbf{G} = (~_{DLR}\mathbf{J}_{ld} ~_{MR}\mathbf{P}_m)_r ~_{R}\mathbf{w}^r \det(Q)$$$`
 
 ### The forcing term
+
+This has the form 
+`$$$ \mathbf{F} = \iiint_{\mathcal{S}^t} \begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}  \, \mathrm{d} V $$$`
