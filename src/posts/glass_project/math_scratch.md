@@ -179,7 +179,7 @@ Write these coordinates in the form of `$$ ~_{KR}\mathbf{g}_k$$`, (using convex 
 ### The mass matrix
 
 From the paper this has the form
-`$$$ \mathbf{M} = \rho \iiint_{\mathcal{S}^s} \begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}(\mathbf{a})\begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}^\top(\mathbf{a}) \det(Q) \, \mathrm{d} V$$$`
+`$$$ \mathbf{M} = \rho \iiint_{\mathcal{S}^s} \begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}^\top(\mathbf{a})\begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}(\mathbf{a}) \det(Q) \, \mathrm{d} V$$$`
 
 And we can thus find that 
 
@@ -190,5 +190,8 @@ However, we note that for `$$l\neq m$$` the orthogonality of the polynomials sho
 ### The laplacian
 
 The paper gives
-`$$$ \mathbf{M} = \iiint_{\mathcal{S}^s} \begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix}(\mathbf{a})\begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix}^\top(\mathbf{a}) \det(Q) \, \mathrm{d} V$$$`
+`$$$ \mathbf{L} = \iiint_{\mathcal{S}^s} \begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix}^\top(\mathbf{a})\begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix}(\mathbf{a}) \det(Q) \, \mathrm{d} V$$$`
 
+and in tensor form this gives
+
+`$$$ ~_{LM} L = (~_{DLR}\mathbf{J}_{ld} ~_{DMR}\mathbf{J}_{m}^d) $$$`
