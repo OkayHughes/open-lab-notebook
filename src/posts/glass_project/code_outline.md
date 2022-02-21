@@ -19,3 +19,6 @@ parallel fashion.
 Presumably the main implementation of these libraries will use the parMETIS algorithm for graph partitioning
 and Trilinos NOX for nonlinear solvers.
 
+This is a good example of how to do this in an MPI compliant fashion:
+  [source](https://github.com/trilinos/Trilinos/blob/master/packages/nox/examples/epetra/NOX_1DFEMNonlinear/FiniteElementProblem.C)
+
