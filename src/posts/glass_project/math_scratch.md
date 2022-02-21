@@ -212,4 +212,5 @@ This has the form
 
 This is ostensibly due to the paper, but this seems kind of wrong.
 
-`$$$ ~_DL\mathbf{F} =  $$$`
+`$$$ ~_{DL}\mathbf{F} = (~_{DR}\mathbf{g}_r ~_{LR}\mathbf{P}_r) ~_{R}\mathbf{w}^r   $$$`
+h
