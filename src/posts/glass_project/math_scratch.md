@@ -183,4 +183,12 @@ From the paper this has the form
 
 And we can thus find that 
 
-`$$$ ~_{LM}\mathbf{M} = rho \left(~_{LR}\mathbf{P}_l ~_{MR}\mathbf{P}_m\right)_r ~_R\mathbf{w}^r \det(Q)  $$$`
+`$$$ ~_{LM}\mathbf{M} = \rho \left(~_{LR}\mathbf{P}_l ~_{MR}\mathbf{P}_m\right)_r ~_R\mathbf{w}^r \det(Q)  $$$`
+
+However, we note that for `$$l\neq m$$` the orthogonality of the polynomials show that we can treat `$$~_{LM}\mathbf{M} = \mathrm{diag} ~_{L}\mathbf{M} $$`
+
+### The laplacian
+
+The paper gives
+`$$$ \mathbf{M} = \iiint_{\mathcal{S}^s} \begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix}(\mathbf{a})\begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix}^\top(\mathbf{a}) \det(Q) \, \mathrm{d} V$$$`
+
