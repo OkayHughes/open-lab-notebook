@@ -209,3 +209,7 @@ which in tensor form gives
 
 This has the form 
 `$$$ \mathbf{F} = \iiint_{\mathcal{S}^t} \rho \begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix} \mathbf{g} \, \mathrm{d} V  + \iint_{\partial_k \mathcal{S}^t} p_a \mathbf{n} \, \mathrm{d} A$$$`
+
+This is a bit absurd, so I think in tensor form this would take the form 
+
+`$$$ ~_DL =  $$$`
