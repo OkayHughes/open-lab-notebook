@@ -15,3 +15,7 @@ is solving an extremely sparse matrix (each line of the system contains at most 
 
 It is clear that formulation of the `$$ H $$` dynamic tangent matrix can be computed node-by-node in an embarassingly
 parallel fashion. 
+
+Presumably the main implementation of these libraries will use the parMETIS algorithm for graph partitioning
+and Trilinos NOX for nonlinear solvers.
+
