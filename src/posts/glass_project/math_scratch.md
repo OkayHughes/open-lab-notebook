@@ -204,3 +204,5 @@ and in tensor form this gives
 which in tensor form gives
 
 `$$$ ~_{DLM}\mathbf{G} = (~_{DLR}\mathbf{J}_{ld} ~_{MR}\mathbf{P}_m)_r ~_{R}\mathbf{w}^r \det(Q)$$$`
+
+### The forcing term
