@@ -212,4 +212,4 @@ This has the form
 
 This is a bit absurd, so I think in tensor form this would take the form 
 
-`$$$ ~_DL =  $$$`
+`$$$ ~_DL = ~  $$$`
