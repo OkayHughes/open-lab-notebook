@@ -48,10 +48,10 @@ a set of linear basis functions which are orthogonal w.r.t. integration on the s
 Note that because the change of variables to and from the canonical element `$$\mathcal{S}^s $$` is affine, the change-of-variables
 formula for 3d integration means that for basis functions `$$P_{0, 1, 2, 3} $$`
 <table class="eqn">
-  <tr><td>$$\iiint_{\mathcal{S}^s} P_i(\mathbf{a})P_j(\mathbf{a})\, \mathrm{d} V $$</td><td> $$= \iiint_{\mathcal{S}^t} P_i(\mathbf{x}(\mathbf{a}))P_j(\mathbf{x}(\mathbf{a})) \det(\mathrm{D}\mathbf{x} )\, \mathrm{d} V$$</td>
+  <tr><td>$$\iiint_{\mathcal{S}^s} P_i(\mathbf{a})P_j(\mathbf{a})\, \mathrm{d} V $$</td><td> $$= \iiint_{\mathcal{S}^t} P_i(\mathbf{a}(\mathbf{x}))P_j(\mathbf{a}(\mathbf{x})) \det(\mathrm{D}\mathbf{a} )\, \mathrm{d} V$$</td>
   </tr>
   <tr>
-    <td></td><td> $$= \iiint_{\mathcal{S}^t} P_i(\mathbf{x}(\mathbf{a}))P_j(\mathbf{x}(\mathbf{a})) \det(Q)\, \mathrm{d} V$$</td>
+    <td></td><td> $$= \iiint_{\mathcal{S}^t} P_i(\mathbf{a}(\mathbf{x}))P_j(\mathbf{a}(\mathbf{x})) \det(Q^{-1})\, \mathrm{d} V$$</td>
   </tr>
 </table>
 and so orthogonality is preserved under this affine transformation. 
@@ -83,7 +83,7 @@ Suppose that we have a quantity `$$U(\mathbf{x})$$` and we have point evaluation
 element with values stored at the vertices (often referred to as "nodes" in the FEM literature for some reason). We want to find a vector `$$_L\mathbf{U}$$`
 such that`$$~_K\mathbf{U}_k = \sum_{l} ~_L\mathbf{U}_l P_{l}(\mathbf{k}_k) $$` for `$$k = 0,1,2,3$$`.
 In full dimensionality, these can be calculated by
-`$$$~_L\mathbf{U}_l = \iiint_{S^s} U(\mathbf{x}(\mathbf{a}))P_l(\mathbf{a}) \det{Q} \,\mathrm{d} V  $$$`
+`$$$~_L\mathbf{U}_l = \iiint_{S^s} U(\mathbf{x}(\mathbf{a}))P_l(\mathbf{a}) \det(Q^{-1}) \,\mathrm{d} V  $$$`
 
 Thankfully, for first order simplical elements decent quadrature points for `$$\mathcal{S}^s$$` are merely its vertices. In order to 
 solve for the numerical integration weights, we solve a system of linear equations. The matrix can be best understood as
@@ -171,7 +171,7 @@ wt=np.array([0.1817020685825351, 0.0361607142857143, 0.0361607142857143, 0.03616
 
 Write these coordinates in the form of `$$ ~_{KR}\mathbf{g}_k$$`, (using convex combinations) where `$$ ~_{DR}\mathbf{G} =  ~_{KR}\mathbf{G}_k ~_{KD} \mathbf{k}^k $$`
 
-`$$$~_L\mathbf{U}_l =  (~_{KR}\mathbf{G}_k ~_{K}\mathbf{U}^k)_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}\det{Q})^r  $$$`
+`$$$~_L\mathbf{U}_l =  (~_{KR}\mathbf{G}_k ~_{K}\mathbf{U}^k)_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}\det(Q^{-1}))^r  $$$`
 
 
 ## Shape functions and matrices:
@@ -179,31 +179,31 @@ Write these coordinates in the form of `$$ ~_{KR}\mathbf{g}_k$$`, (using convex 
 ### The mass matrix
 
 From the paper this has the form
-`$$$ \mathbf{M} = \rho \iiint_{\mathcal{S}^s} \begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}^\top(\mathbf{a})\begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}(\mathbf{a}) \det(Q) \, \mathrm{d} V$$$`
+`$$$ \mathbf{M} = \rho \iiint_{\mathcal{S}^s} \begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}^\top(\mathbf{a})\begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}(\mathbf{a}) \det(Q^{-1}) \, \mathrm{d} V$$$`
 
 And we can thus find that 
 
-`$$$ ~_{LM}\mathbf{M} = \rho \left(~_{LR}\mathbf{P}_l ~_{MR}\mathbf{P}_m\right)_r ~_R\mathbf{w}^r \det(Q)  $$$`
+`$$$ ~_{LM}\mathbf{M} = \rho \left(~_{LR}\mathbf{P}_l ~_{MR}\mathbf{P}_m\right)_r ~_R\mathbf{w}^r \det(Q^{-1}) $$$`
 
 However, we note that for `$$l\neq m$$` the orthogonality of the polynomials show that we can treat `$$~_{LM}\mathbf{M} = \mathrm{diag} ~_{L}\mathbf{M} $$`
 
 ### The laplacian
 
 The paper gives
-`$$$ \mathbf{L} = \iiint_{\mathcal{S}^s} \begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix}^\top(\mathbf{a})\begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix}(\mathbf{a}) \det(Q) \, \mathrm{d} V$$$`
+`$$$ \mathbf{L} = \iiint_{\mathcal{S}^s} \begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix}^\top(\mathbf{a})\begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix}(\mathbf{a}) \det(Q^{-1}) \, \mathrm{d} V$$$`
 
 and in tensor form this gives
 
-`$$$ ~_{LM} L = (~_{DLR}\mathbf{J}_{ld} ~_{DMR}\mathbf{J}_{m}^d)_r ~_R\mathbf{w}^r \det(Q) $$$`
+`$$$ ~_{LM} L = (~_{DLR}\mathbf{J}_{ld} ~_{DMR}\mathbf{J}_{m}^d)_r ~_R\mathbf{w}^r \det(Q^{-1}) $$$`
 
 
 ### The gradient
 
-`$$$ \mathbf{G} = \iiint_{\mathcal{S}^s} \begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix} (\mathbf{a})\begin{bmatrix}  P_0 &  P_1 & P_2 &  P_3 \end{bmatrix}^\top(\mathbf{a}) \det(Q) \, \mathrm{d} V$$$`
+`$$$ \mathbf{G} = \iiint_{\mathcal{S}^s} \begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix} (\mathbf{a})\begin{bmatrix}  P_0 &  P_1 & P_2 &  P_3 \end{bmatrix}^\top(\mathbf{a}) \det(Q^{-1}) \, \mathrm{d} V$$$`
 
 which in tensor form gives
 
-`$$$ ~_{DLM}\mathbf{G} = (~_{DLR}\mathbf{J}_{ld} ~_{MR}\mathbf{P}_m)_r ~_{R}\mathbf{w}^r \det(Q)$$$`
+`$$$ ~_{DLM}\mathbf{G} = (~_{DLR}\mathbf{J}_{ld} ~_{MR}\mathbf{P}_m)_r ~_{R}\mathbf{w}^r \det(Q^{-1}) $$$`
 
 ### The forcing term
 
@@ -212,4 +212,4 @@ This has the form
 
 This is ostensibly due to the paper, but this seems kind of wrong.
 
-`$$$ ~_{DL}\mathbf{F} = (~_{DR}\mathbf{g}_r ~_{LR}\mathbf{P}_r) ~_{R}\mathbf{w}^r\det(Q) + (((~_{T}\mathbf{p}_t ~_{D}\mathbf{n}_d)_t ~_{T}\mathbf{w'}^t \det(Q'))_d~_{LR}\mathbf{P}_r)_r\mathbf{w}^r\det(Q) $$$`
+`$$$ ~_{DL}\mathbf{F} = (~_{DR}\mathbf{g}_r ~_{LR}\mathbf{P}_r) ~_{R}\mathbf{w}^r\det(Q^{-1}) + (((~_{T}\mathbf{p}_t ~_{D}\mathbf{n}_d)_t ~_{T}\mathbf{w'}^t \det(Q'^{-1}))_d~_{LR}\mathbf{P}_r)_r\mathbf{w}^r\det(Q^{-1}) $$$`
