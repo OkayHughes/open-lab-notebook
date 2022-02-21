@@ -169,9 +169,9 @@ wt=np.array([0.1817020685825351, 0.0361607142857143, 0.0361607142857143, 0.03616
   
 </details>
 
-Write these coordinates in the form of `$$ ~_{KR}\mathbf{g}_k$$`, (using convex combinations) where `$$ ~_{DR}\mathbf{g} =  ~_{KR}\mathbf{g}_k ~_{KD} \mathbf{k}^k $$`
+Write these coordinates in the form of `$$ ~_{KR}\mathbf{g}_k$$`, (using convex combinations) where `$$ ~_{DR}\mathbf{G} =  ~_{KR}\mathbf{G}_k ~_{KD} \mathbf{k}^k $$`
 
-`$$$~_L\mathbf{U}_l =  (~_{KR}\mathbf{g}_k ~_{K}\mathbf{U}^k)_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}\det{Q})^r  $$$`
+`$$$~_L\mathbf{U}_l =  (~_{KR}\mathbf{G}_k ~_{K}\mathbf{U}^k)_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}\det{Q})^r  $$$`
 
 
 ## Shape functions and matrices:
@@ -208,4 +208,4 @@ which in tensor form gives
 ### The forcing term
 
 This has the form 
-`$$$ \mathbf{F} = \iiint_{\mathcal{S}^t} \begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}  \, \mathrm{d} V $$$`
+`$$$ \mathbf{F} = \iiint_{\mathcal{S}^t} \rho \begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix} \mathbf{g} \, \mathrm{d} V  + \iint_{\partial_k \mathcal{S}^t} p_a \mathbf{n} \, \mathrm{d} A$$$`
