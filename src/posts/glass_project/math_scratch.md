@@ -194,4 +194,13 @@ The paper gives
 
 and in tensor form this gives
 
-`$$$ ~_{LM} L = (~_{DLR}\mathbf{J}_{ld} ~_{DMR}\mathbf{J}_{m}^d) $$$`
+`$$$ ~_{LM} L = (~_{DLR}\mathbf{J}_{ld} ~_{DMR}\mathbf{J}_{m}^d)_r ~_R\mathbf{w}^r \det(Q) $$$`
+
+
+### The gradient
+
+`$$$ \mathbf{G} = \iiint_{\mathcal{S}^s} \begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix} (\mathbf{a})\begin{bmatrix}  P_0 &  P_1 & P_2 &  P_3 \end{bmatrix}^\top(\mathbf{a}) \det(Q) \, \mathrm{d} V$$$`
+
+which in tensor form gives
+
+`$$$ ~_{DLM}\mathbf{G} = (~_{DLR}\mathbf{J}_{ld} ~_{MR}\mathbf{P}_m)_r ~_{R}\mathbf{w}^r \det(Q)$$$`
