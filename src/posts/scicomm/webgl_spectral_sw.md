@@ -75,3 +75,20 @@ Then we get the following set of continuous equations:
 
 ### Extracting velocity components:
 
+Use helmholz theorem to decompose:
+`$$$\mathbf{v} = \mathbf{k} \times \nabla \psi + \nabla \chi.$$$`
+
+Rearranging this and substituting the above definitions gives that 
+`$$$\eta = \nabla^2 \Psi + f $$$`
+and
+`$$$ \delta = \nabla^2 \chi $$$`
+where we finally find
+`$$$ U = \frac{1}{a} \partial_\lambda \chi - \frac{(1-\mu^2)}{a} \partial_\mu \psi $$$`
+and
+`$$$ V = \frac{1}{a} \partial_\lambda \psi + \frac{(1-\mu^2)}{a} \partial_\mu \chi.$$$`
+
+## Discretizing:
+
+Any scalar quantity `$$\xi(\lambda, \varphi) $$` will be represented by
+`$$$\xi(\lambda, \varphi) = \sum_{m=-M}^M \sum_{n=|m|}^N \xi_{nm}P_{n}(\mu)e^{im\lambda} $$$`
+
