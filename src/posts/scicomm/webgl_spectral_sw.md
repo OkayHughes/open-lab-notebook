@@ -35,4 +35,43 @@ I'll be following the details of [Hack and Jakob, 92](https://opensky.ucar.edu/i
   </tr>
 </table>
 
+note that this assumes no baseline topography for the moment, and the equations are inviscid.
+
+### Rewriting the equations
+
+Make the following definitions:
+<table class="eqn">
+  <tr>
+  <td>$$ \mu $$</td><td>$$ = \sin \varphi $$</td>
+  </tr>
+  <tr>
+  <td>$$ U $$</td><td> $$= u\cos \varphi $$</td>
+  </tr>
+  <tr>
+  <td>$$ V $$</td><td> $$= v\cos \varphi$$</td>
+  </tr>
+  <tr>
+    <td>$$ \eta $$ </td><td> $$ \equiv \zeta + f  = \frac{1}{a(1-\mu^2)} \partial_\lambda V - \frac{1}{a}\partial_\mu U + f$$</td>
+  </tr>
+  <tr>
+    <td>$$ \delta $$ </td><td> $$  = \frac{1}{a(1-\mu^2)} \partial_\lambda U + \frac{1}{a}\partial_\mu V $$</td>
+  </tr>
+</table>
+
+Then we get the following set of continuous equations:
+
+<table class="eqn">
+  <tr>
+    <td>$$ \partial_t \eta $$</td><td>$$= -\frac{1}{a(1-\mu^2)}\partial_\lambda \left[U\eta \right] - \frac{1}{a} \partial_\mu \left[V\eta \right] $$</td>
+  </tr>
+  <tr>
+    <td>$$ \partial_t \delta $$</td><td>$$= \frac{1}{a(1-\mu^2)}\partial_\lambda \left[V\eta \right] - \frac{1}{a} \partial_\mu \left[U\eta \right] - \nabla^2 \left(\Phi + \frac{U^2 + V^2}{2} \right) $$</td>
+  </tr>
+  <tr>
+    <td>$$ \partial_t \Phi $$</td><td>$$= -\frac{1}{a(1-\mu^2)}\partial_\lambda \left[U\Phi \right] - \frac{1}{a} \partial_\mu \left[V\Phi \right] - \overline{\Phi} \delta $$</td>
+  </tr>
+</table>
+
+
+### Extracting velocity components:
 
