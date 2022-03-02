@@ -90,5 +90,5 @@ and
 ## Discretizing:
 
 Any scalar quantity `$$\xi(\lambda, \varphi) $$` will be represented by
-`$$$\xi(\lambda, \varphi) = \sum_{m=-M}^M \sum_{n=|m|}^N \xi_{nm}P_{n}(\mu)e^{im\lambda} $$$`
+`$$$\xi(\lambda, \varphi) = \sum_{m=-M}^M \sum_{n=|m|}^N \xi_{n,m}P_{n,m}(\mu)e^{im\lambda} $$$`
 
