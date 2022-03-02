@@ -6,7 +6,7 @@ tags:
   - science-communication
 eleventyNavigation:
   parent: Science Communication
-  key: WebGL spectral transform shallow water model.
+  key: WebGPU spectral transform shallow water model.
 layout: layouts/post.njk
 
 ---
@@ -21,8 +21,8 @@ primitive equations (HPE).
 ## The paper:
 I'll be following the details of [Hack and Jakob, 92](https://opensky.ucar.edu/islandora/object/technotes%3A112/datastream/PDF/download/Description_of_a_Global_Shallow_Water_Model_Based_on_the_Spectral_Transform_Method.citation)
 
-Provisionally [this paper](https://link.springer.com/content/pdf/10.1007/978-3-642-29737-3_40.pdf)
-might be usable if there's a way to do cuda-style parallelism in webgl.
+Provisionally [this paper](https://openresearch-repository.anu.edu.au/bitstream/1885/64769/2/01_Huang_Efficient_Computation_of_2011.pdf)
+which indicates that we really should just use webGPU for this project.
 
 
 ## The equation sets:
