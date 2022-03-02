@@ -21,6 +21,9 @@ primitive equations (HPE).
 ## The paper:
 I'll be following the details of [Hack and Jakob, 92](https://opensky.ucar.edu/islandora/object/technotes%3A112/datastream/PDF/download/Description_of_a_Global_Shallow_Water_Model_Based_on_the_Spectral_Transform_Method.citation)
 
+Provisionally [this paper](https://link.springer.com/content/pdf/10.1007/978-3-642-29737-3_40.pdf)
+might be usable if there's a way to do cuda-style parallelism in webgl.
+
 
 ## The equation sets:
 ### The simpler continuous equation set for vorticity/divergence formulation
