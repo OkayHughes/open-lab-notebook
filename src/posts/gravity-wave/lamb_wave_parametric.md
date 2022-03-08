@@ -28,14 +28,10 @@ From one of Christiane's presentations we get
 
 
 
-## looking at equations:
-Neglecting curavture:
+## idea: use topography to induce above pressure profile under assumption of isothermal atmosphere. 
 
-`$$$\mathrm{D}_t u = - \frac{1}{\rho} \nabla p  $$$`
-`$$$\mathrm{D}_t v = - \frac{1}{\rho} \nabla p  $$$`
-`$$$\mathrm{D}_t w = - \frac{1}{\rho} \nabla p - g  $$$`
-`$$$\mathrm{D}_t \theta = 0  $$$`
-`$$$p = \rho R_d T $$$`
+`$$$z(\phi, \lambda) = f(\phi) \cos(k(\lambda - c t)) $$$`
+`$$$ w = -\frac{u}{}$$$`
 
 
 
