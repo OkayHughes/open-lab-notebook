@@ -24,14 +24,17 @@ From one of Christiane's presentations we get
 
 `$$$\omega = \left(\frac{R_dT}{pc_p}  - \partial_p T\right)^{-1} \left(\partial_t T + u \partial_x T + v \partial_y T \right) $$$`
 
-`$$$ \frac{p}{\overline{\rho} R_d} = T $$$`
+
 
 
 
 ## idea: use topography to induce above pressure profile under assumption of isothermal atmosphere. 
 
-`$$$z(\phi, \lambda) = f(\phi) \cos(k(\lambda - c t)) $$$`
-`$$$ w = -\frac{u}{}$$$`
+`$$$ \partial_p \Phi = - \frac{R_dT}{p}$$$`
+Apply at `$$ p=p_0$$`
 
+
+
+## Using pressure coordinates along 
 
 
