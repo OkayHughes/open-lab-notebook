@@ -22,5 +22,7 @@ From one of Christiane's presentations we get
 
 `$$$\omega = \mathrm{D}_t p = \partial_t p + \mathbf{v} \cdot \nabla p + w \partial_z p $$$`
 
+`$$$\omega = \left(\frac{R_dT}{pc_p} \right)^{-1} \left(\partial_t T + u \partial_x T + v \partial_ \right) $$$`
+
 
 
