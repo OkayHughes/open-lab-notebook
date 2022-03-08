@@ -26,15 +26,11 @@ From one of Christiane's presentations we get
 
 
 
-
-
-## idea: use topography to induce above pressure profile under assumption of isothermal atmosphere. 
-
-`$$$ \partial_p \Phi = - \frac{R_dT}{p}$$$`
-Apply at `$$ p=p_0$$`
+Allow variation in horizontal structure of temperature but not vertical. Assume that density is constant.
 
 
 
-## Using pressure coordinates along 
+
+
 
 
