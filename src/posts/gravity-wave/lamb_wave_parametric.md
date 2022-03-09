@@ -37,7 +37,11 @@ And canceling gives `$$$ T'(x) = \frac{p_0}{\rho_0T_d} \cos(k(x-c t)) $$$`
 
 Let's linearize the nonhydrostatic equation in height coordinates to try to figure this out:
 `$$$ \mathrm{D}_t w = -\rho^{-1}\partial_z p - g $$$`
-`$$$ = -\rho^{-1}\partial_z p - g $$$`
+`$$$ \overline{\rho}\partial_t w = -\partial_z\overline{p} - \partial_z p' - \overline{\rho} g $$$`
+`$$$ \overline{\rho}\partial_t w = - \partial_z p'  $$$`
+
+So I think this gives us full linearized closure of our equations. This can now be implemented.
+
 
 
 
