@@ -12,11 +12,11 @@ layout: layouts/post.njk
 Define `$$k $$` to be a single wavelength of zonally propagating lamb wave.
 
 Relevant quantities: 
-`$$$p' = p_0 \exp\left(- \int_{z=0}^z \frac{g}{R_d\gamma \overline{T}}\, \mathrm{d} z\right) \cos(k(x-ct))$$$`
+`$$$p' = p_0 \exp\left(- \int_{z=0}^z \frac{g}{R_d\overline{T}}\, \mathrm{d} z\right) \cos(k(x-ct))$$$`
 
 `$$$ c = \sqrt{\gamma R_d \overline{T}}$$$`
 
-`$$$ u'(z) = - \frac{p_0}{(-c)\overline{\rho}} \exp\left(\frac{g}{R_d\gamma \overline{T}} z\right) \cos(k(x-ct)) $$$`
+`$$$ u'(z) = - \frac{p_0}{(-c)\overline{\rho}} \exp\left(\frac{g}{R_d \overline{T}} z\right) \cos(k(x-ct)) $$$`
 
 From one of Christiane's presentations we get
 
@@ -26,7 +26,12 @@ From one of Christiane's presentations we get
 
 
 
-Allow variation in horizontal structure of temperature but not vertical. Assume that density is constant.
+Allow variation in horizontal structure of temperature but not vertical. Assume that density is constant in horizontal, vary in vertical.
+
+
+
+`$$$(\overline{p}(z) + p'(x, z)) = \overline{\rho}(z) R_d (\overline{T} + T'(x)) $$$`
+`$$$ p'(x, z) = \overline{\rho}(z) R_d T'(x)$$$`
 
 
 
