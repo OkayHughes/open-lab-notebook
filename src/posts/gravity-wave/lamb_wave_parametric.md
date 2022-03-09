@@ -33,6 +33,11 @@ Allow variation in horizontal structure of temperature but not vertical. Assume 
 `$$$(\overline{p}(z) + p'(x, z)) = \overline{\rho}(z) R_d (\overline{T} + T'(x)) $$$`
 `$$$ p'(x, z) = \overline{\rho}(z) R_d T'(x)$$$`
 
+And canceling gives `$$$ T'(x) = \frac{p_0}{\rho_0T_d} \cos(k(x-c t)) $$$`
+
+Let's linearize the nonhydrostatic equation in height coordinates to try to figure this out:
+`$$$ \mathrm{D}_t w = -\rho^{-1}\partial_z p - g $$$`
+`$$$ = -\rho^{-1}\partial_z p - g $$$`
 
 
 
