@@ -18,6 +18,8 @@ Relevant quantities:
 
 `$$$ u'(z) = - \frac{p_0}{(-c)\overline{\rho}} \exp\left(\frac{g}{R_d \overline{T}} z\right) \cos(k(x-ct)) $$$`
 
+`$$$ u'(z) =  \frac{p_0}{c\rho_0} \cos(k(x-ct)) $$$`
+
 From one of Christiane's presentations we get
 
 `$$$\omega = \mathrm{D}_t p = \partial_t p + \mathbf{v} \cdot \nabla p + w \partial_z p $$$`
@@ -33,7 +35,7 @@ Allow variation in horizontal structure of temperature but not vertical. Assume 
 `$$$(\overline{p}(z) + p'(x, z)) = \overline{\rho}(z) R_d (\overline{T} + T'(x)) $$$`
 `$$$ p'(x, z) = \overline{\rho}(z) R_d T'(x)$$$`
 
-And canceling gives `$$$ T'(x) = \frac{p_0}{\rho_0T_d} \cos(k(x-c t)) $$$`
+And canceling gives `$$$ T'(x) = \frac{p_0}{\rho_0R_d} \cos(k(x-c t)) $$$`
 
 Let's linearize the nonhydrostatic equation in height coordinates to try to figure this out:
 `$$$ \mathrm{D}_t w = -\rho^{-1}\partial_z p - g $$$`
