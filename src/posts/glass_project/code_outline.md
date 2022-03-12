@@ -24,5 +24,18 @@ This is a good example of how to do this in an MPI compliant fashion:
 
 ## Data input etc
 
-I'm going to make the assumption that input data will contain triangulation.
+I'm going to make the assumption that input data will contain triangulation data. Might be worth creating a separate program
+that reads OBJ + vertex data files so I can design initial setups in blender.
 
+### necessary field data:
+_Vertices:_
+* position
+* velocity
+* temperature
+* pressure?
+
+
+_Tetrahedra:_
+* point ids
+* inlet_pressure (4 values)
+* 
