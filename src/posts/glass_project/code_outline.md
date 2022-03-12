@@ -33,9 +33,9 @@ _Vertices:_
 * velocity
 * temperature
 * pressure?
-
+  
 
 _Tetrahedra:_
 * point ids
-* inlet_pressure (4 values)
+* inlet_pressure (4 values per face)
 * 
