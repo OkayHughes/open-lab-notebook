@@ -48,23 +48,6 @@ Let's use hdf5 because it seems relatively standardized and has parallel IO supp
 
 Because all of this is kind of for artistic purposes, I'm going to default to single precision file storage.
 
-Let's think about some code
-
-```
-#include “hdf5.h”
-
-int main() {
-
-    
-    hid_t       file_id;
-    
-    herr_t      status;
-    
-    file_id = H5Fcreate ("file.h5", H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
-    
-    status = H5Fclose (file_id);
-}
-
-
-```
+Actually let us use https://cgns.github.io/CGNS_docs_current/index.html
+because it feels suitable
 
