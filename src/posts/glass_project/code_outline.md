@@ -44,4 +44,10 @@ _Tetrahedra:_
 
 
 ### Storage format:
-Let's use hdf5 because it seems relatively standardized 
+Let's use hdf5 because it seems relatively standardized and has parallel IO support.
+
+Because all of this is kind of for artistic purposes, I'm going to default to single precision file storage.
+
+
+
+
