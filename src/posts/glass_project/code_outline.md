@@ -33,9 +33,15 @@ _Vertices:_
 * velocity
 * temperature
 * pressure?
+* iswall
+* isfree
   
 
 _Tetrahedra:_
 * point ids
 * inlet_pressure (4 values per face)
-* 
+* placeholder (for boundary tracking)
+
+
+### Storage format:
+Let's use hdf5 because it seems relatively standardized 
