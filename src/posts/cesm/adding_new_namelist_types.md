@@ -126,11 +126,20 @@ end function jw_06_brunt_vaisala
 
 
 Another potential alternative to using a `private` variable with a getter function is using the 
-`protected` keyword, in which subroutines within the module are allowed to modify this variable
-but not modules that `use` the module in which it is defined.
+`public, protected` keyword, in which subroutines within the module are allowed to modify this variable
+but not modules that `use` the module in which it is defined. This keyword was introduced in Fortran 2003,
+so I don't know how well it will play with different compilers.
 
 Within the subroutine in which you call `mpi_bcast` before this is called, you can modify or validate the value
 of your namelist variable. You can report issues using `write(iulog, *) msg` with `use cam_logfile, only: iulog` 
 at the top of your module.
 
+### step 4:
+In the case directory, I make the following definitions:
+
+* In `user_nl_cam` I add `jw_06_BV_factor  = 2.0`.
+* In `SourceMods/src.cam/ic_baro_dry_jw06.F90` I add `use inic_analytic_utils, only: jw_06_brunt_vaisala` and `gamma = jw_06_brunt_vaisala() * gamma_0`
+
+
+If you use the `public, protected` style of accessor then you could, I think, just do `gamma = jw_06_BV_factor * gamma_0`
 
