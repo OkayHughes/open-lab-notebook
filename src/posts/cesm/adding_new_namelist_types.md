@@ -86,4 +86,6 @@ Chains of different CIME variables can be used e.g.
 ### step 3:
 
 This is going to vary based on which module you want to read your namelist variable from.
-In order to 
+In order to figure out where this was done in my case I used grep to find a F90 file that contained 
+`analytic_ic_nl.` In my case this is `${SRCROOT}/src/dynamics/tests/inic_analytic_utils.F90`.
+
