@@ -25,7 +25,7 @@ In order to figure out where this is used in the code run
 grep -r "analytic_ic_type" ${SRCROOT}
 ```
 
-## Actually adding my own namelist
+## actually adding my own namelist doohickey
 
 ### step 1:
 In the file `${SRCROOT}/bld/namelist_files/namelist_definition.xml`
@@ -112,7 +112,9 @@ call mpi_bcast(jw_06_BV_factor, 1, mpi_real8, masterprocid, mpicom, ierr)
 I followed the conventions of the `inic_analytic_utils` and created an getter function. At the top where
 public interfaces are declared, add:
 
-`public :: jw_06_brunt_vaisala ! accessor`
+```
+public :: jw_06_brunt_vaisala ! accessor
+```
 
 and add the definition of this function below the `contains` statement
 
