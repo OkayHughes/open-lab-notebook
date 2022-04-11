@@ -243,7 +243,9 @@ of the file. <span class="todo">This is crucial for using your grid within the C
 
 The `mpas_scrip.nc` is useful for regridding. I'll write more about this if I end up using it at some point.
 
-I move `mpas_esmf.nc` 
+I move `mpas_esmf.nc` to `~/grids/x4.${NCELLS}/x4.${NCELLS}.esmf.coupling.nc`.
+
+If you know how to use MPAS 
 
 
 
