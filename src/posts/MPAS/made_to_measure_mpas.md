@@ -245,7 +245,9 @@ The `mpas_scrip.nc` is useful for regridding. I'll write more about this if I en
 
 I move `mpas_esmf.nc` to `~/grids/x4.${NCELLS}/x4.${NCELLS}.esmf.coupling.nc`.
 
-If you know how to use MPAS 
+If you know how to use MPAS, then you can now use these exactly like the files provided by MPAS themselves.
+
+
 
 
 
