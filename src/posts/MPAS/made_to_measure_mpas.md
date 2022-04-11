@@ -170,6 +170,21 @@ for the `nCells` dimension.
 This directory contains a utility to generate processor decompositions so that 
 your grid can be used with different numbers of MPI processes.
 
+### Installing metis:
+This repository requires the use of the `gpmetis` program.
+You can download the source by running (note the last command is very bash-specific)
+
+```
+wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz \
+  && tar -xf http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz \
+  && cd metis-5.1.0 \
+  && make config \
+  && make \
+  && find ~+ -name "gpmetis"
+```
+
+Note the output from the last line. This is the value for `${PATH_TO_GPMETIS}` referenced below.
+
 I use the following script to create processor decomposition files and automatically move them to the `~/grids/x4.${NCELLS}`
 directory I mentioned earlier. 
 
@@ -184,7 +199,7 @@ readonly NCELLS="92067"
 readonly GRID_PREFIX="x4.${NCELLS}"
 readonly GRID_DIR="/glade/u/home/owhughes/grids/x4.92067"
 readonly FILE="${GRID_DIR}/${GRID_PREFIX}.grid.nc"
-readonly METIS_PATH="${PATH_TO_METIS}"
+readonly METIS_PATH="${PATH_TO_GPMETIS}"
 readonly NPROC="288"
 readonly NBLOCK="288"
 python make_partition_files.py --file ${FILE} --metis ${METIS_PATH} --procs ${NPROC} --blocks ${NBLOCK}
@@ -198,6 +213,12 @@ mv "block.graph.info.part.${NPROC}" "${GRID_DIR}/${GRID_PREFIX}.block.graph.info
 </details>
 
 And note once again that this must be called as `bash -l invoke.sh.`
+Here `${NPROC}` references the number of MPI processes. `${NBLOCK}` sets the decomposition
+so that processes are split up so that grid cells assigned to a particular MPI process will
+be in the memory of that node, and minimize communication. I rarely use this and only see minor
+performance decreases. It doesn't play very well with the CESM CIME framework.
+
+This file will create the following files for `x4.${NCELLS}.block.graph.info.part.288
 
 
 
