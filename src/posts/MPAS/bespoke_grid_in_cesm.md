@@ -73,7 +73,7 @@ in `${GRID_DIR}`.
 **I make the assumption that you have generated the following files:**
 
 * `${GRID_DIR}/${GRID_PREFIX}.grid.nc` contains a 2d representation of your MPAS grid connectivity.
-* Several files `${GRID_DIR}/${GRID_PREFIX}.graph.graph.info.part.${NPROC}` where `${NPROC}` includes
+* Several files `${GRID_DIR}/${GRID_PREFIX}.graph.info.part.${NPROC}` where `${NPROC}` includes
 any number of MPI processes with which you want to run an MPAS model. It should probably be a multiple of the 
 number of physical cores in a node within your cluster (or threads if your system has [HT](https://en.wikipedia.org/wiki/Hyper-threading, 
 but I've had mixed success with this).
@@ -91,11 +91,17 @@ Make sure to look in namelist files for referenced grid files and change them to
 your custom generated mesh files. I would recommended symlinking them to 
 your case directory with 
 ```
-ln -s ${GRID_DIR}/${GRID_PREFIX}.grid.nc ${MPAS_CASE_DIR}
-ln -s ${GRID_DIR}/
+ln -s ${GRID_DIR}/${GRID_PREFIX}.grid.nc ${MPAS_CASE_DIR} 
+ln -s ${GRID_DIR}/$GRID_PREFIX}.graph.info.part.${NPROC} ${MPAS_CASE_DIR}
 ```
 
-Continue until you call `mpirun -n ${NPROC} ./init_atmosphere_model` with namelists chosen so that
+Continue until you call `mpirun -n ${NPROC} ./init_atmosphere_model` which generates a NetCDF file 
+that contains a dimension called `nVertLevels.` 
+
+### Vital considerations:
+As of 2022-04-11 the CAM MPAS implementation does not understand how to generate 3d metric terms for
+MPAS. My understanding is that it knows how to correctly overwrite prognostic fields like edge wind flux
+components 
 
 
 
