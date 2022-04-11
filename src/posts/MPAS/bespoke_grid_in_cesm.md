@@ -97,12 +97,19 @@ ln -s ${GRID_DIR}/$GRID_PREFIX}.graph.info.part.${NPROC} ${MPAS_CASE_DIR}
 
 Continue until you call `mpirun -n ${NPROC} ./init_atmosphere_model` which generates a NetCDF file 
 that contains a dimension called `nVertLevels.` 
+I'm going to assume that this file is moved to `${GRID_DIR}/${GRID_PREFIX}.init.nc`.
 
 ### Vital considerations:
 As of 2022-04-11 the CAM MPAS implementation does not understand how to generate 3d metric terms for
 MPAS. My understanding is that it knows how to correctly overwrite prognostic fields like edge wind flux
-components. However, because MPAS uses height as a vertical coordinate, generation of 
-clou
+components. However, because MPAS uses height as a vertical coordinate, generation of
+terrain following coordinates is rather involved. 
+As such, <span class="todo">_any topography that you intend to include in your CAM run must be in
+  your `${GRID_DIR}/${GRID_PREFIX}.init.nc`_</span>
+  
+Similarly <span class="todo">_your vertical level number and location will be set by
+creating this file. Ensure it matches the CAM vertical level configuration that you want to use.
+</span>
 
 
 
