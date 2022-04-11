@@ -218,9 +218,16 @@ so that processes are split up so that grid cells assigned to a particular MPI p
 be in the memory of that node, and minimize communication. I rarely use this and only see minor
 performance decreases. It doesn't play very well with the CESM CIME framework.
 
-This file will create the following files for `x4.${NCELLS}.block.graph.info.part.288
+This file will create the following files for `x4.${NCELLS}.block.graph.info.part.${NBLOCK}` and
+`x4.${NCELLS}.graph.info.part.${NPROC}` files in `${GRID_DIR}`. 
+
+This will allow you to invoke MPI-enabled MPAS executables using `mpirun -np ${NPROC} ${PATH_TO_EXECUTABLE}`
 
 
+## Step 3: creating ESMF and SCRIP files for this grid
+If you want to use your generated grid with any non-MPAS related grid utilities, follow the instructions in this section.
+
+In the root of the MPAS-Tools repository
 
 
 
