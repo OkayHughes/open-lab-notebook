@@ -62,7 +62,7 @@ make ifort CORE=atmosphere PRECISION=single USE_PIO2=true
 * Run the commands in order listed in `build.mpas.sh`.
 
 
-## Step 0: generating the grid
+## Step 0: generating the horizontal grid
 Follow the instructions in my [other post](https://open-lab-notebook.glitch.me/posts/MPAS/made_to_measure_mpas/).
 
 At this point I assume that you have a folder referred to by the variable `${GRID_DIR}`, and that
@@ -74,8 +74,33 @@ in `${GRID_DIR}`.
 
 * `${GRID_DIR}/${GRID_PREFIX}.grid.nc` contains a 2d representation of your MPAS grid connectivity.
 * Several files `${GRID_DIR}/${GRID_PREFIX}.graph.graph.info.part.${NPROC}` where `${NPROC}` includes
-any number of MPI processes with which you want to run an MPAS model. It should probably be 
-divisible by the number of 
+any number of MPI processes with which you want to run an MPAS model. It should probably be a multiple of the 
+number of physical cores in a node within your cluster (or threads if your system has [HT](https://en.wikipedia.org/wiki/Hyper-threading, 
+but I've had mixed success with this).
+* `${GRID_DIR}/${GRID_PREFIX}.esmf.coupling.nc` which will be needed by the coupler within CAM.
+
+
+## Step 1: Generating a 3D grid with metric terms
+
+Follow one of the [MPAS tutorials](https://www2.mmm.ucar.edu/projects/mpas/tutorial/Boulder2019/index.html)
+Use their tutorials to find an atmospheric configuration that matches the run you want to do (I'll explain what I mean in
+a moment).
+
+<span class="todo">Include a concrete example of what to do here</span>
+Make sure to look in namelist files for referenced grid files and change them to 
+your custom generated mesh files. I would recommended symlinking them to 
+your case directory with 
+```
+ln -s ${GRID_DIR}/${GRID_PREFIX}.grid.nc ${MPAS_CASE_DIR}
+ln -s ${GRID_DIR}/
+```
+
+Continue until you call `mpirun -n ${NPROC} ./init_atmosphere_model` with namelists chosen so that
+
+
+
+
+
 
 
 
