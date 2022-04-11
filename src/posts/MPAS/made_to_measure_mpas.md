@@ -22,11 +22,33 @@ However, I have uploaded my modified version of the code [here](https://github.c
 
 ## Step 1 installation:
 
-This package plays very nicely with the `conda` environment manager for python. I cannot recommend enough 
+This package plays very nicely with the `conda` environment manager for python. I cannot recommend enough following
+an install process based on this toolkit. A minimal `conda` install can be done by running one of the scripts
+found [here](https://docs.conda.io/en/latest/miniconda.html) (it doesn't even need `root` permissions!!).
+
+Once you have your shell configured to run `conda`, you can follow these instructions:
+asdfasdf
+<details>
+  <summary><code>create_env.run_once.sh</code></summary>
+  
+```
+conda create --name mpas_grid_gen python=3.8 
+# I typically specify a python version which differs
+# from the system version so that e.g. python and python3 both
+# point to the conda version of python.
+conda activate mpas_grid_gen
+conda install --file dev-spec.txt
+conda install mpas_tools
+```
+  
+</details>
 
 
+Actually running the code must be done after running `conda activate mpas_grid_gen`.
 
-Follow the installation instructions given at the top of spherical_grid.py
+
+<span class="todo">Warning: the original code from Peixoto specifies grid spacings in km on a sphere
+of radius `$$a=6371\mathrm{km} $$` but my code uses a reduced radius sphere with `$$a=3185\mathrm{km} $$`</span>
 These routines assume that the radius of earth is a=6371 km but we needn't worry about this if we are using a reduced radius earth later. This only matters in that you will specify grid spacing in kilometers on a sphere of this radius, i.e. 30km~1 degree. 
 The density function definition can be found in the function localrefVsLatLon inside jigsaw_util.py. My implementation of the above density function is given here.
 My version of this code uses a radius that is reduced by a factor of two.
