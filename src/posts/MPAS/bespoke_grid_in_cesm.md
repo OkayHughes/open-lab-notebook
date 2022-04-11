@@ -101,7 +101,8 @@ that contains a dimension called `nVertLevels.`
 ### Vital considerations:
 As of 2022-04-11 the CAM MPAS implementation does not understand how to generate 3d metric terms for
 MPAS. My understanding is that it knows how to correctly overwrite prognostic fields like edge wind flux
-components 
+components. However, because MPAS uses height as a vertical coordinate, generation of 
+clou
 
 
 
