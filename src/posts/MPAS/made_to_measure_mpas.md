@@ -227,7 +227,16 @@ This will allow you to invoke MPI-enabled MPAS executables using `mpirun -np ${N
 ## Step 3: creating ESMF and SCRIP files for this grid
 If you want to use your generated grid with any non-MPAS related grid utilities, follow the instructions in this section.
 
-In the root of the MPAS-Tools repository
+In the root of the MPAS-Tools repository, run `cd mesh_tools/mpas2esmf`.
+
+Run `make` (just that command, nothing else needed) and keep adding dependencies until it compiles correctly.
+
+In order to generate the files run 
+
+```
+./mpas2esmf ${PATH_TO_GRID}
+
+```
 
 
 
