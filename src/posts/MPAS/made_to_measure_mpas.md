@@ -234,9 +234,16 @@ Run `make` (just that command, nothing else needed) and keep adding dependencies
 In order to generate the files run 
 
 ```
-./mpas2esmf ${GRID_DIR}/x4.${NCELLS}.grid.nc ${informative_description_of_grid} `date "+%F"` 
+./mpas2esmf ${GRID_DIR}/x4.${NCELLS}.grid.nc "${informative_description_of_grid}" `date "+%F"` 
 
 ```
+
+The output file `mpas_esmf.nc` contains an [ESMF](https://earthsystemmodeling.org/regrid/) description 
+of the file. <span class="todo">This is crucial for using your grid within the CIME/CESM framework.</span>
+
+The `mpas_scrip.nc` is useful for regridding. I'll write more about this if I end up using it at some point.
+
+I move `mpas_esmf.nc` 
 
 
 
