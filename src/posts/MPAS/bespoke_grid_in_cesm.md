@@ -3,7 +3,7 @@ date: 2021-08-16
 tags:
   - posts
 eleventyNavigation:
-  key: Creating a 
+  key: Adding a variable resolution grid to CAM via CIME
   parent: MPAS tutorials
 layout: layouts/post.njk
 ---
@@ -20,7 +20,54 @@ necessarily limits the number of horizontal grid spacings that you can use.
 This post is designed to show you how to add a new variable resolution MPAS grid
 to CIME.
 
-In order to run this you will regrettably need access to a working standalone 
+In order to run this you will regrettably need access to a working standalone version of the MPAS-A model
+available [here](https://github.com/MPAS-Dev/MPAS-Model).
+I am working on a containerized version that is easy to run on a laptop [here](https://open-lab-notebook.glitch.me/posts/MPAS/singularity_mpas_def/)
+which is currently a work in progress.
+
+## Step -1: install MPAS
+
+For the time being, I have [instructions](https://open-lab-notebook.glitch.me/posts/installing-mpas/) on how I installed MPAS on the [Great Lakes Cluster](https://arc.umich.edu/greatlakes/)
+located at the University of Michigan.
+
+If you have access to NCAR's Cheyenne, then your life is _much_ easier.
+
+In order to compile MPAS on Cheyenne as of 2022-04-11, you can use the following scripts:
+
+<details>
+  <summary><code>setup.mpas.sh</code></summary>
+  
+```
+module unload netcdf
+module load intel/19.1.1  mpt/2.22
+module load netcdf-mpi/4.7.4 pnetcdf/1.12.1 pio/2.5.2
+```
+</details>
+
+and 
+<details>
+<summary><code>build.mpas.sh</code></summary>
+  
+```
+make ifort CORE=init_atmosphere PRECISION=single USE_PIO2=true
+make clean CORE=atmosphere
+make ifort CORE=atmosphere PRECISION=single USE_PIO2=true  
+```
+
+</details>
+
+* Before you proceed, run `source ${SOURCE_TO_SCRIPT}/setup.mpas.sh`.
+* Download the MPAS code mentioned above. 
+* Change directories into the root of the repository.
+* Run the commands in order listed in `build.mpas.sh`.
+
+
+  
+
+
+
+
+
 
 
 
