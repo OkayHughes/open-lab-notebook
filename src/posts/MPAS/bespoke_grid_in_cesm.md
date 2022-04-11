@@ -62,7 +62,20 @@ make ifort CORE=atmosphere PRECISION=single USE_PIO2=true
 * Run the commands in order listed in `build.mpas.sh`.
 
 
-  
+## Step 0: generating the grid
+Follow the instructions in my [other post](https://open-lab-notebook.glitch.me/posts/MPAS/made_to_measure_mpas/).
+
+At this point I assume that you have a folder referred to by the variable `${GRID_DIR}`, and that
+your grid has a unique prefix referred to in the variable `${GRID_PREFIX}`. This
+prefix needs to uniquely identify your grid files so that they don't overlap with other MPAS files
+in `${GRID_DIR}`.
+
+**I make the assumption that you have generated the following files:**
+
+* `${GRID_DIR}/${GRID_PREFIX}.grid.nc` contains a 2d representation of your MPAS grid connectivity.
+* Several files `${GRID_DIR}/${GRID_PREFIX}.graph.graph.info.part.${NPROC}` where `${NPROC}` includes
+any number of MPI processes with which you want to run an MPAS model. It should probably be 
+divisible by the number of 
 
 
 
