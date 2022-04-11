@@ -49,8 +49,89 @@ Actually running the code must be done after running `conda activate mpas_grid_g
 
 <span class="todo">Warning: the original code from Peixoto specifies grid spacings in km on a sphere
 of radius `$$a=6371\mathrm{km} $$` but my code uses a reduced radius sphere with `$$a=3185\mathrm{km} $$`</span>
-These routines assume that the radius of earth is a=6371 km but we needn't worry about this if we are using a reduced radius earth later. This only matters in that you will specify grid spacing in kilometers on a sphere of this radius, i.e. 30km~1 degree. 
-The density function definition can be found in the function localrefVsLatLon inside jigsaw_util.py. My implementation of the above density function is given here.
+
+
+The function `localrevVsLatLon` inside of `jigsaw_util.py` defines the density function. In this project I 
+care about creating a factor of 4 refinement of the grid in an axisymmetric band about the equator. 
+If we define  the smallest grid spacing `$$r_0 =15\mathrm{km}, $$` the nominal width of the band of refinement `$$\varphi_0 = 7^\circ $$`
+and the power which defines the sharpness of transition (larger power means sharper transition) to be `p = 4` then 
+the density function which has units of kilometers is given by
+`$$$ \textrm{dist}(\varphi) = r_0 \left(4 - 3 \left[ \frac{1}{\left(\frac{\varphi}{\varphi_0}\right)^p + 1} \right] \right) $$$`
+
+My implementation of the above density function is given 
+
+<details>
+<summary>here:</summary>
+  
+```
+def localrefVsLatLon(r, earth_radius=6371e3/2, p=False):
+  """
+  Create cell width array for this mesh on a locally refined latitude-longitude grid.
+  Input
+  ---------
+  r : float
+      minimun desired cell width resolution in km
+  Returns
+  -------
+  cellWidth : ndarray
+      m x n array of cell width in km
+  lon : ndarray
+      longitude in degrees (length n and between -180 and 180)
+  lat : ndarray
+      longitude in degrees (length m and between -90 and 90)
+  """
+  dlat = 0.125 #Make the lat-lon grid ~ 10x finer than resolution at equator, where 1deg ~ 100km
+  dlon = dlat
+  constantCellWidth = r  #in km
+
+  nlat = int(180./dlat) + 1
+  nlon = int(360./dlon) + 1
+
+  lat = np.linspace(-90., 90., nlat)
+  lon = np.linspace(-180., 180., nlon)
+
+  lons, lats = np.meshgrid(lon, lat)
+
+  if p:
+      h = plt.contourf(lons, lats, dists)
+      plt.axis('scaled')
+      plt.colorbar()
+      plt.show()
+
+  #Parameters
+  #------------------------------
+
+  # Radius (in degrees) of high resolution area
+  maxdist = 7
+  #ratio of largest grid spacing to smallest grid spacing
+  reduction_factor = 4.0
+  # defines sharpness of transition. You can play with how this looks here:
+  # https://www.desmos.com/calculator/xx4sypedm4
+  power = 4
+
+
+
+  # initialize with resolution = r (min resolution)
+  factor = 1.0/(np.power(1/maxdist * lats, power) + 1)
+  resolution = r * (reduction_factor - (reduction_factor-1) * factor)
+
+
+
+
+
+  if p:
+      h = plt.contourf(lons, lats, resolution, cmap="viridis", levels=100)
+      plt.axis('scaled')
+      plt.colorbar()
+      plt.show()
+
+  print(np.min(resolution), np.max(resolution))
+
+  cellWidth = resolution #constantCellWidth * np.ones((lat.size, lon.size))
+
+```
+</details>
+
 My version of this code uses a radius that is reduced by a factor of two.
 The command to invoke the grid generation is given on the second line in invoke.sh where the number after the -r flag specifies the radius on a sphere with radius 3185km. 
 Invoking this command will create a folder called 120_30_grid which contains a file called 120_30_grid_mpas.nc which is the file which is the closest analogue of the mesh files provided on the MPAS website.
