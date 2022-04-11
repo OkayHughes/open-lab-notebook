@@ -12,7 +12,7 @@ layout: layouts/post.njk
 
 <span class="todo"> Add introduction here</span>
 
-I'm doing this work on NCAR's cheyenne so I defaultly have access to the Netcdf cinematic universe without much setup.
+I'm doing this work on NCAR's cheyenne so I defaultly have access to the Netcdf Cinematic Universe without much setup.
 
 ## Step 0: get code
 
@@ -129,10 +129,42 @@ def localrefVsLatLon(r, earth_radius=6371e3/2, p=False):
 
   cellWidth = resolution #constantCellWidth * np.ones((lat.size, lon.size))
 
+  return cellWidth, lon, lat
+  
 ```
 </details>
 
-My version of this code uses a radius that is reduced by a factor of two.
-The command to invoke the grid generation is given on the second line in invoke.sh where the number after the -r flag specifies the radius on a sphere with radius 3185km. 
-Invoking this command will create a folder called 120_30_grid which contains a file called 120_30_grid_mpas.nc which is the file which is the closest analogue of the mesh files provided on the MPAS website.
-I copied this file to a new directory which I called 
+
+I use the file `invoke.sh` to generate grids. This activates the `conda` environment I need to activate and calls
+the python script. <span class="todo">This script must be called like `bash -l invoke.sh` because `conda` expects to run in 
+a login shell.</span>
+
+Breaking down the invocation,
+
+```
+python spherical_grid.py -r "15" -o "120_30_grid"  -g "localref" #--plot 0
+```
+
+* `-r "15"` specifies that the minimum grid spacing is `$$15\mathrm{km} $$` on a sphere with `$$ a=3185 \mathrm{km} $$`
+* `-o "120_30_grid"` specifies the output directory and grid prefix that the command will generate.
+* `-g "localref"` indicates that you want to generate a locally refined unstructured grid. Other options
+are icosahedral grids, or quasiuniform grids.
+* `--plot 0` specifies that you want to see numpy plots of the density function. This takes forever.
+
+
+
+
+Invoking this command will create a folder called `120_30_grid` which contains a file called `120_30_grid_mpas.nc` which is the file which is the closest analogue of the mesh files provided on the MPAS
+website.
+
+I copy this file to a new directory `~/grids/x4.${NCELLS}` where `x4` designates
+a 4x grid refinement and `$NCELLS` can be found by running `ncdump -h 120_30_grid/120_30_grid_mpas.nc` and looking
+for the `n`
+
+## Step 2: Creating processor decompositions 
+* Download the MPAS-Tools repository.
+
+
+
+
+
