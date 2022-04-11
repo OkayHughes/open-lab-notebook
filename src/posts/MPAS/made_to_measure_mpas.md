@@ -234,7 +234,7 @@ Run `make` (just that command, nothing else needed) and keep adding dependencies
 In order to generate the files run 
 
 ```
-./mpas2esmf ${PATH_TO_GRID}
+./mpas2esmf ${GRID_DIR}/x4.${NCELLS}.grid.nc ${informative_description_of_grid} `date "+%F"` 
 
 ```
 
