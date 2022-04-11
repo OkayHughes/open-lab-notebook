@@ -58,6 +58,8 @@ and the power which defines the sharpness of transition (larger power means shar
 the density function which has units of kilometers is given by
 `$$$ \textrm{dist}(\varphi) = r_0 \left(4 - 3 \left[ \frac{1}{\left(\frac{\varphi}{\varphi_0}\right)^p + 1} \right] \right) $$$`
 
+you can play with this functional form [here](https://www.desmos.com/calculator/xx4sypedm4).
+
 My implementation of the above density function is given 
 
 <details>
@@ -157,12 +159,47 @@ are icosahedral grids, or quasiuniform grids.
 Invoking this command will create a folder called `120_30_grid` which contains a file called `120_30_grid_mpas.nc` which is the file which is the closest analogue of the mesh files provided on the MPAS
 website.
 
-I copy this file to a new directory `~/grids/x4.${NCELLS}` where `x4` designates
+I copy this file to a new directory `~/grids/x4.${NCELLS}/x4.${NCELLS}.grid.nc` where `x4` designates
 a 4x grid refinement and `$NCELLS` can be found by running `ncdump -h 120_30_grid/120_30_grid_mpas.nc` and looking
-for the `n`
+for the `nCells` dimension.
 
 ## Step 2: Creating processor decompositions 
-* Download the MPAS-Tools repository.
+* Download the MPAS-Tools repository [here](https://github.com/MPAS-Dev/MPAS-Tools)
+* in the base directory of the repository, run `cd mesh_tools/processor_decompositions`
+
+This directory contains a utility to generate processor decompositions so that 
+your grid can be used with different numbers of MPI processes.
+
+I use the following script to create processor decomposition files and automatically move them to the `~/grids/x4.${NCELLS}`
+directory I mentioned earlier. 
+
+
+
+<details>
+<summary><code>invoke.sh</code></summary>
+
+```
+conda activate project_2
+readonly NCELLS="92067"
+readonly GRID_PREFIX="x4.${NCELLS}"
+readonly GRID_DIR="/glade/u/home/owhughes/grids/x4.92067"
+readonly FILE="${GRID_DIR}/${GRID_PREFIX}.grid.nc"
+readonly METIS_PATH="${PATH_TO_METIS}"
+readonly NPROC="288"
+readonly NBLOCK="288"
+python make_partition_files.py --file ${FILE} --metis ${METIS_PATH} --procs ${NPROC} --blocks ${NBLOCK}
+
+
+mv "graph.info.part.${NPROC}" "${GRID_DIR}/${GRID_PREFIX}.graph.info.part.${NPROC}"
+mv "block.graph.info.part.${NPROC}" "${GRID_DIR}/${GRID_PREFIX}.block.graph.info.part.${NPROC}"
+
+```
+  
+</details>
+
+And note once again that this must be called as `bash -l invoke.sh.`
+
+
 
 
 
