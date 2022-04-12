@@ -91,16 +91,27 @@ tracer quantity will be added to the state in its entirety at the physics time s
 unless you force it to do "dribbling" which would be a wild choice
 for a non-thermodynamic tracer. 
 
-As such the main issue that we face is that `$$ \rho_{\mathrm{air}}$$` may be time varying,
+If the addition is happening all at once at the time of the physics update, then for
+the purposes of conservation all we care about is that _we add a total amount of tracer mass to
+the grid point at this sudden update_.
+
+To make this fully concrete, suppose when we calculate the temperature and 
+pressure tendencies for the other parts of the HSW physics routine. At this point we are
+right at the end of calculating the tendencies, and so we know ,
+`$$\{T, U, V, P\}_{\textrm{end of physics}} $$`
+
+<!-- As such the main issue that we face is that `$$ \rho_{\mathrm{air}}$$` may be time varying,
 which makes calculation of `$$ c = \frac{\rho_i}{\rho_{\mathrm{air}}}.$$`
 
 However, we are using a first-order scheme. The continuous identity that
 we want our discretized system to satisfy is 
 
-`$$$ \rho_{\mathrm{air}}(t_{i+1}) c_i(t_{i+1}) - \rho_{\mathrm{air}}(t_{i}) c_i(t_{i}) = \int_{t_i}^{t_i+1} \rho_{\mathrm{air}}(t) (\partial_t c_i)(t) \, \mathrm{d} t $$$`
+`$$$ \rho_{\mathrm{air}}(t_{i+1}) c_i(t_{i+1}) - \rho_{\mathrm{air}}(t_{i}) c_i(t_{i}) = \rho_i(t_{i+1}) - \rho_i(t_i)$$$`
 where `$$t_{i+1} = t_i + \Delta t_{\mathrm{phys}} $$`
 
 We know the righthand side analytically. 
 At a given physics update we know `$$\rho_i(t)$$`, `$$\rho_{\mathrm{air}}(t_i).$$`
 
+If we add a variable to the physics routine we can keep track of `$$\rho_{i-1} $$` which would make the lefthand
 
+ -->
