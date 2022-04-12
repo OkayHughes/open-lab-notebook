@@ -82,6 +82,6 @@ actually a first order explicit scheme, and so we have control over
 `$$\Delta c, $$` where `$$ c(t_0 + \Delta t) = c(t_0) + \frac{\Delta c}{\Delta t} \Delta t.$$`
 Note that we know the timestep `$$\Delta t $$` so we can cancel it automatically.
 
-
-Here's the assumption that lets us 
+Note that the `$$\Delta t $$` given here is the `$$ \Delta t_{\textrm{phys}} $$` using the notation
+of 
 
