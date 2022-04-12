@@ -108,13 +108,26 @@ given `$$\{T, U, V, P, c_m\}_{\textrm{end of physics}}$$` we want that
 
 `$$$ \rho_m(t_{i, \textrm{after injection}}) - \rho_m(t_{i, \textrm{before injection}}) =  \int_{t_{i-1}}^{t_{i}} \frac{\mathrm{d}}{\mathrm{d}t}\left[\rho_{m, \textrm{analytic}}(t)\right] \, \mathrm{d}t$$$`
 
-where the sudden injection that is happening at `$$t + \Delta t_\mathrm{\phys}$$` is compensating for 
+where the sudden injection that is happening at `$$t + \Delta t_\mathrm{\mathrm{phys}}$$` is compensating for 
 the injection over the last time step neglecting dynamics.
 
 As such, we can calculate 
 `$$$ \rho_m(t_{i, \textrm{after injection}}) = \rho_{\mathrm{air}}(t_i) \cdot c_m(t_{i, \textrm{after injection}}) $$$`
 
+and 
+`$$$ \rho_m(t_{i, \textrm{before injection}}) = \rho_{\mathrm{air}}(t_i) \cdot c_m(t_{i, \textrm{before injection}}) $$$`
 
+And we can rearrange to find
+
+`$$$ \rho_{\mathrm{air}}(t_i) \cdot c_m(t_{i, \textrm{after injection}}) - \rho_{\mathrm{air}}(t_i) \cdot c_m(t_{i, \textrm{before injection}}) = \Delta \rho_{m, \textrm{analytic}}$$$`
+`$$$ \rho_{\mathrm{air}}(t_i) \cdot \left(c_m(t_{i, \textrm{before injection}}) + \Delta t \frac{\Delta c_m}{\Delta t}\right)  - \rho_{\mathrm{air}}(t_i) \cdot c_m(t_{i, \textrm{before injection}}) = \Delta \rho_{m, \textrm{analytic}}$$$`
+`$$$ \rho_{\mathrm{air}}(t_i) \cdot \left(c_m(t_{i, \textrm{before injection}}) + \Delta t \frac{\Delta c_m}{\Delta t}\right)  - \rho_{\mathrm{air}}(t_i) \cdot c_m(t_{i, \textrm{before injection}}) = \Delta \rho_{m, \textrm{analytic}}$$$`
+
+
+
+The long and short of it is, this will precisely control the amount of mass added but will not spread tracer insertion
+over tracer advection timesteps. If you really want to have both, set the dynamics and the physics time step
+to be the same. In the HSW idealized setup the added time will be negligible.
 
 <!-- As such the main issue that we face is that `$$ \rho_{\mathrm{air}}$$` may be time varying,
 which makes calculation of `$$ c = \frac{\rho_i}{\rho_{\mathrm{air}}}.$$`
