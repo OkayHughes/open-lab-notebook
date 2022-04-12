@@ -9,11 +9,11 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
-Suppose we have a prescribed function `$$ \rho_m(r, z, t) $$` with units of `$$ \frac{\mathrm{kg}}{\mathrm{m}^3} $$` and for the purposes
+Suppose we have a prescribed injection function `$$ \dot{rho}_m(r, z, t) $$` with units of `$$ \frac{\mathrm{kg}}{\mathrm{m}^3\cdot \mathrm{s}} $$` and for the purposes
 of physics update I will assume we are looking at a single point and thus we only care about
-`$$ \rho_m(r_0, z_0, t) \equiv \rho_m(t) $$`
+`$$ \dot{rho}_m(r_0, z_0, t) \equiv \dot{rho}_m(t) $$`
 
-In fact with in CAM we only have control over `$$ c = \frac{\rho_m(t)}{\rho_{\textrm{air}}(t)} $$`
+In fact with in CAM we only have control over `$$ \dot{c} = \frac{\dot{rho}_m(t)}{\rho_{\textrm{air}}(t)} $$`
 
 From the following code snippet 
 
@@ -106,10 +106,10 @@ we have added `$$\Delta \rho_m$$` of this tracer to the atmosphere.
 As such, the discrete equation we need to satisfy is
 given `$$\{T, U, V, P, c_m\}_{\textrm{before physics}}$$` we want that 
 
-`$$$ \rho_m(t_{i, \textrm{after injection}}) - \rho_m(t_{i, \textrm{before injection}}) =  \int_{t_{i-1}}^{t_{i}} \frac{\mathrm{d}}{\mathrm{d}t}\left[\rho_{m, \textrm{analytic}}(t)\right] \, \mathrm{d}t$$$`
+`$$$ \rho_m(t_{i, \textrm{after injection}}) - \rho_m(t_{i, \textrm{before injection}}) =  \Delta \rho_{m, \textrm{analytic}} \equiv \int_{t_{i-1}}^{t_{i}} \rho_{m, \textrm{analytic}}(t) \, \mathrm{d}t$$$`
 
 where the sudden injection that is happening at `$$t + \Delta t_\mathrm{\mathrm{phys}}$$` is compensating for 
-the injection over the last time step neglecting dynamics.
+the injection over the last time step neglecting dynamics. 
 
 As such, we can calculate 
 `$$$ \rho_m(t_{i, \textrm{after injection}}) = \rho_{\mathrm{air}}(t_i) \cdot c_m(t_{i, \textrm{after injection}}) $$$`
