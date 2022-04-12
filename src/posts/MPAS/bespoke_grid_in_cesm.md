@@ -108,8 +108,10 @@ As such, <span class="todo">_any topography that you intend to include in your C
   your `${GRID_DIR}/${GRID_PREFIX}.init.nc`_</span>
   
 Similarly <span class="todo">_your vertical level number and location will be set by
-creating this file. Ensure it matches the CAM vertical level configuration that you want to use.
+creating this file. Ensure it matches the CAM vertical level configuration that you want to use._
 </span>
+
+<span class="todo">Todo: expand section about how to specify different vertical configurations.</span>
 
 
 
