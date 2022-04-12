@@ -9,11 +9,11 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
-Suppose we have a prescribed injection function `$$ \dot{rho}_m(r, z, t) $$` with units of `$$ \frac{\mathrm{kg}}{\mathrm{m}^3\cdot \mathrm{s}} $$` and for the purposes
+Suppose we have a prescribed injection function `$$ \dot{\rho}_m(r, z, t) $$` with units of `$$ \frac{\mathrm{kg}}{\mathrm{m}^3\cdot \mathrm{s}} $$` and for the purposes
 of physics update I will assume we are looking at a single point and thus we only care about
-`$$ \dot{rho}_m(r_0, z_0, t) \equiv \dot{rho}_m(t) $$`
+`$$ \dot{\rho}_m(r_0, z_0, t) \equiv \dot{\rho}_m(t) $$`
 
-In fact with in CAM we only have control over `$$ \dot{c} = \frac{\dot{rho}_m(t)}{\rho_{\textrm{air}}(t)} $$`
+In CAM one might think  that they have control over `$$ \dot{c} = \frac{\mathrm{d}}{\mathrm{d}t}\frac{\rho_m(t)}{\rho_{\textrm{air}}(t)} $$`
 
 From the following code snippet 
 
@@ -77,7 +77,7 @@ From the following code snippet
 
 
 we find that although we theoretically believe that we can set the
-tracer tendency `$$(\partial_t \, c)(t_0)$$`, the physics update is 
+tracer tendency `$$\dot{c}(t_0)$$`, the physics update is 
 actually a first order explicit scheme, and so we have control over 
 `$$\Delta c, $$` where `$$ c(t_0 + \Delta t) = c(t_0) + \frac{\Delta c}{\Delta t} \Delta t.$$`
 Note that we know the timestep `$$\Delta t $$` so we can cancel it automatically.
