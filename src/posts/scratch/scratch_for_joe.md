@@ -95,16 +95,16 @@ If the addition is happening all at once at the time of the physics update, then
 the purposes of conservation all we care about is that _we add a total amount of tracer mass to
 the grid point at this sudden update_.
 
-To make this fully concrete, suppose when we calculate the temperature and 
-pressure tendencies for the other parts of the HSW physics routine. At this point we are
-right at the end of calculating the tendencies, and so we know ,
-`$$\{T, U, V, P, c_m\}_{\textrm{end of physics}}$$`.
+To make this fully concrete, suppose we take our state before the physics update is called:
+`$$\{T, U, V, P, c_m\}_{\textrm{before physics}}$$`. This state represents
+the diagnostic state of the atmosphere at the current time step _after the previous dynamics
+and physics are finished_. 
 If what we care about is the total mass added to the atmosphere over the injection period,
 then all we are about is that _from the time of the last physics update to this physics update_
-we have added `$$\Delta \rho_m$$` of this tracer. 
+we have added `$$\Delta \rho_m$$` of this tracer to the atmosphere. 
 
 As such, the discrete equation we need to satisfy is
-given `$$\{T, U, V, P, c_m\}_{\textrm{end of physics}}$$` we want that 
+given `$$\{T, U, V, P, c_m\}_{\textrm{before physics}}$$` we want that 
 
 `$$$ \rho_m(t_{i, \textrm{after injection}}) - \rho_m(t_{i, \textrm{before injection}}) =  \int_{t_{i-1}}^{t_{i}} \frac{\mathrm{d}}{\mathrm{d}t}\left[\rho_{m, \textrm{analytic}}(t)\right] \, \mathrm{d}t$$$`
 
@@ -121,13 +121,24 @@ And we can rearrange to find
 
 `$$$ \rho_{\mathrm{air}}(t_i) \cdot c_m(t_{i, \textrm{after injection}}) - \rho_{\mathrm{air}}(t_i) \cdot c_m(t_{i, \textrm{before injection}}) = \Delta \rho_{m, \textrm{analytic}}$$$`
 `$$$ \rho_{\mathrm{air}}(t_i) \cdot \left(c_m(t_{i, \textrm{before injection}}) + \Delta t \frac{\Delta c_m}{\Delta t}\right)  - \rho_{\mathrm{air}}(t_i) \cdot c_m(t_{i, \textrm{before injection}}) = \Delta \rho_{m, \textrm{analytic}}$$$`
-`$$$ \rho_{\mathrm{air}}(t_i) \cdot \left(c_m(t_{i, \textrm{before injection}}) + \Delta t \frac{\Delta c_m}{\Delta t}\right)  - \rho_{\mathrm{air}}(t_i) \cdot c_m(t_{i, \textrm{before injection}}) = \Delta \rho_{m, \textrm{analytic}}$$$`
+`$$$   \Delta c_m  = \frac{\Delta \rho_{m, \textrm{analytic}}}{\rho_{\mathrm{air}}(t_i)}$$$`
 
 
 
 The long and short of it is, this will precisely control the amount of mass added but will not spread tracer insertion
 over tracer advection timesteps. If you really want to have both, set the dynamics and the physics time step
 to be the same. In the HSW idealized setup the added time will be negligible.
+
+To sum up the single trick that I used, because the code can be made to instantaneously update
+the tracer by a quantity before dynamics or tracer advection starts up again,
+we get to make a principled assumption that `$$ \rho_{\mathrm{air}} $$` is constant
+during our update step, which is actually what the code is doing.
+
+The reason I'm using the `$$\{T, U, V, P, c_m\}_{\textrm{before physics}}$$` state is that sometimes
+these quantities are dribbled over the previous dynamics substepping. By doing the update right when the
+physics step begins, your update will be consistent with the diagnosed density at the beginning of the physics timestep.
+
+
 
 <!-- As such the main issue that we face is that `$$ \rho_{\mathrm{air}}$$` may be time varying,
 which makes calculation of `$$ c = \frac{\rho_i}{\rho_{\mathrm{air}}}.$$`
