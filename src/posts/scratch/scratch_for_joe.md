@@ -79,4 +79,9 @@ From the following code snippet
 we find that although we theoretically believe that we can set the
 tracer tendency `$$(\partial_t \, c)(t_0)$$`, the physics update is 
 actually a first order explicit scheme, and so we have control over 
-`$\del`
+`$$\Delta c, $$` where `$$ c(t_0 + \Delta t) = c(t_0) + \frac{\Delta c}{\Delta t} \Delta t.$$`
+Note that we know the timestep `$$\Delta t $$` so we can cancel it automatically.
+
+
+Here's the assumption that lets us 
+
