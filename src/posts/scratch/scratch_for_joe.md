@@ -97,9 +97,10 @@ which makes calculation of `$$ c = \frac{\rho_i}{\rho_{\mathrm{air}}}.$$`
 However, we are using a first-order scheme. The continuous identity that
 we want our discretized system to satisfy is 
 
-`$$$ \rho_{\mathrm{air}}(t_{i+1}) \rho_i(t_{i+1}) - \rho_{\mathrm{air}}(t_{i}) \rho_i(t_{i}) = \int_{t_i}^{t_i+1} \rho_{\mathrm{air}}(t) \rho_i(t) \, \mathrm{d} t $$$`
+`$$$ \rho_{\mathrm{air}}(t_{i+1}) c_i(t_{i+1}) - \rho_{\mathrm{air}}(t_{i}) c_i(t_{i}) = \int_{t_i}^{t_i+1} \rho_{\mathrm{air}}(t) (\partial_t c_i)(t) \, \mathrm{d} t $$$`
 where `$$t_{i+1} = t_i + \Delta t_{\mathrm{phys}} $$`
 
 We know the righthand side analytically. 
-At a given physics update we know `$$\rho_i(t)$$`
+At a given physics update we know `$$\rho_i(t)$$`, `$$\rho_{\mathrm{air}}(t_i).$$`
+
 
