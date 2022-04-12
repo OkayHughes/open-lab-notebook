@@ -83,5 +83,23 @@ actually a first order explicit scheme, and so we have control over
 Note that we know the timestep `$$\Delta t $$` so we can cancel it automatically.
 
 Note that the `$$\Delta t $$` given here is the `$$ \Delta t_{\textrm{phys}} $$` using the notation
-of 
+of [this presentation](https://www.cesm.ucar.edu/events/tutorials/2018/files/Lecture2-lauritzen.pdf)
+
+I only really understand the time substepping scheme for SE, but as far as I can tell the of
+the three options laid out in [this article](https://www.osti.gov/servlets/purl/1706688)
+tracer quantity will be added to the state in its entirety at the physics time step
+unless you force it to do "dribbling" which would be a wild choice
+for a non-thermodynamic tracer. 
+
+As such the main issue that we face is that `$$ \rho_{\mathrm{air}}$$` may be time varying,
+which makes calculation of `$$ c = \frac{\rho_i}{\rho_{\mathrm{air}}}.$$`
+
+However, we are using a first-order scheme. The continuous identity that
+we want our discretized system to satisfy is 
+
+`$$$ \rho_{\mathrm{air}}(t_{i+1}) \rho_i(t_{i+1}) - \rho_{\mathrm{air}}(t_{i}) \rho_i(t_{i}) = \int_{t_i}^{t_i+1} \rho_{\mathrm{air}}(t) \rho_i(t) \, \mathrm{d} t $$$`
+where `$$t_{i+1} = t_i + \Delta t_{\mathrm{phys}} $$`
+
+We know the righthand side analytically. 
+At a given physics update we know `$$\rho_i(t)$$`
 
