@@ -9,11 +9,11 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
-Suppose we have a prescribed function `$$ \rho_i(r, z, t) $$` with units of `$$ \frac{\mathrm{kg}}{\mathrm{m}^3} $$` and for the purposes
+Suppose we have a prescribed function `$$ \rho_m(r, z, t) $$` with units of `$$ \frac{\mathrm{kg}}{\mathrm{m}^3} $$` and for the purposes
 of physics update I will assume we are looking at a single point and thus we only care about
-`$$ \rho_i(r_0, z_0, t) \equiv \rho_i(t) $$`
+`$$ \rho_m(r_0, z_0, t) \equiv \rho_m(t) $$`
 
-In fact with in CAM we only have control over `$$ c = \frac{\rho_i(t)}{\rho_{\textrm{air}}(t)} $$`
+In fact with in CAM we only have control over `$$ c = \frac{\rho_m(t)}{\rho_{\textrm{air}}(t)} $$`
 
 From the following code snippet 
 
@@ -98,7 +98,23 @@ the grid point at this sudden update_.
 To make this fully concrete, suppose when we calculate the temperature and 
 pressure tendencies for the other parts of the HSW physics routine. At this point we are
 right at the end of calculating the tendencies, and so we know ,
-`$$\{T, U, V, P\}_{\textrm{end of physics}} $$`
+`$$\{T, U, V, P, c_m\}_{\textrm{end of physics}}$$`.
+If what we care about is the total mass added to the atmosphere over the injection period,
+then all we are about is that _from the time of the last physics update to this physics update_
+we have added `$$\Delta \rho_m$$` of this tracer. 
+
+As such, the discrete equation we need to satisfy is
+given `$$\{T, U, V, P, c_m\}_{\textrm{end of physics}}$$` we want that 
+
+`$$$ \rho_m(t_{i, \textrm{after injection}}) - \rho_m(t_{i, \textrm{before injection}}) =  \int_{t_{i-1}}^{t_{i}} \frac{\mathrm{d}}{\mathrm{d}t}\left[\rho_{m, \textrm{analytic}}(t)\right] \, \mathrm{d}t$$$`
+
+where the sudden injection that is happening at `$$t + \Delta t_\mathrm{\phys}$$` is compensating for 
+the injection over the last time step neglecting dynamics.
+
+As such, we can calculate 
+`$$$ \rho_m(t_{i, \textrm{after injection}}) = \rho_{\mathrm{air}}(t_i) \cdot c_m(t_{i, \textrm{after injection}}) $$$`
+
+
 
 <!-- As such the main issue that we face is that `$$ \rho_{\mathrm{air}}$$` may be time varying,
 which makes calculation of `$$ c = \frac{\rho_i}{\rho_{\mathrm{air}}}.$$`
