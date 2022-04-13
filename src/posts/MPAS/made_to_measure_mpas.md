@@ -31,15 +31,16 @@ asdfasdf
 <details>
   <summary><code>create_env.run_once.sh</code></summary>
   
-```
-conda create --name mpas_grid_gen python=3.8 
-# I typically specify a python version which differs
-# from the system version so that e.g. python and python3 both
-# point to the conda version of python.
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">conda create --name mpas_grid_gen <span style="color: #aa0000">python</span>=3.8 
+<span style="color: #aaaaaa; font-style: italic"># I typically specify a python version which differs</span>
+<span style="color: #aaaaaa; font-style: italic"># from the system version so that e.g. python and python3 both</span>
+<span style="color: #aaaaaa; font-style: italic"># point to the conda version of python.</span>
 conda activate mpas_grid_gen
 conda install --file dev-spec.txt
 conda install mpas_tools
-```
+</pre></div>
+
   
 </details>
 
