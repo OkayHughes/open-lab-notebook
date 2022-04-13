@@ -201,8 +201,43 @@ ds.to_netcdf(path="atmsrf_mpasa120-30.nc")
 I then add the following definition to the xml file:
 
 ```
-<drydep_srf_file hgrid="mpasa120">atm/cam/chem/trop_mam/atmsrf_mpasa120_c090720.nc</drydep_srf_file>
+<drydep_srf_file hgrid="mpasa120-30">/glade/u/home/owhughes/grids/x4.92067/atmsrf_mpasa120-30.nc</drydep_srf_file>
 ```
 
+#### Default timestep and diffusion:
+
+You will find a line similar to 
+```
+<mpas_dt hgrid="mpasa120"     >  900.0D0 </mpas_dt>
+```
+
+This sets the dynamics timestep for the MPAS dynamical core. <span class="todo">
+You will need to set `ATM_NCPL` using `./xmlchange` so that the total physics timestep
+(i.e. `86400/ATM_NCPL`) is an integer multiple of `mpas_dt`. Otherwise CAM will throw a
+runtime error right at the beginning of the run.</span>
+
+This time step is chosen to obey numerical stability conditions (namely the [CFL](https://en.wikipedia.org/wiki/Courant%E2%80%93Friedrichs%E2%80%93Lewy_condition) condition).
+For practical purposes, `900.0` seconds is sufficient for a `$$1^\circ $$` grid. When you halve the 
+horizontal grid spacing, you must also halve the time step. Accordingly, for a grid with
+minimum grid spacing `$$\frac{1}{4}^\circ $$`,
+a timestep of 200 seconds is sufficient. I thus add the line
+
+```
+<mpas_dt hgrid="mpasa120-30"     >  200.0D0 </mpas_dt>
+```
+
+MPAS's default diffusion scheme requires only one parameter 
+which is set via a line like 
+```
+<mpas_len_disp hgrid="mpasa120">120000.0D0</mpas_len_disp>
+```
+
+This value is set to the minimum grid spacing in meters, and thus we add
+
+```
+<mpas_len_disp hgrid="mpasa120-30">30000.0D0</mpas_len_disp>
+```
+
+#### 
 
 
