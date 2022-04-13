@@ -238,6 +238,54 @@ This value is set to the minimum grid spacing in meters, and thus we add
 <mpas_len_disp hgrid="mpasa120-30">30000.0D0</mpas_len_disp>
 ```
 
-#### 
+#### Block decomposition files:
 
+You will find a line similar to
+```
+<mpas_block_decomp_file_prefix hgrid="mpasa120">atm/cam/inic/mpas/mpasa120.graph.info.part.</mpas_block_decomp_file_prefix>
+```
+
+Here we leverage the processor decompositions we created when we generated our grid (mind you,
+if you want to change the number of processors you're using for your run, you must ensure that
+you have a suitable file in your `${GRID_DIR}` directory.) I thus add the line:
+
+```
+<mpas_block_decomp_file_prefix hgrid="mpasa120-30">glade/u/home/owhughes/grids/x4.92067/x4.92067.graph.info.part.</mpas_block_decomp_file_prefix>
+```
+
+
+
+### Modifications to `${CAM_ROOT}/cime/config/cesm/config_grids.xml`
+Note we have changed xml files
+#### Defining a grid alias
+
+In this file you will find a snippet of code similar to
+```
+    <model_grid alias="mpasa120_mpasa120" not_compset="_POP">
+      <grid name="atm">mpasa120</grid>
+      <grid name="lnd">mpasa120</grid>
+      <grid name="ocnice">mpasa120</grid>
+      <mask>gx1v7</mask>
+    </model_grid>
+```
+
+This defines the grids on which different components are defined. So far I have only
+run aquaplanet simulations which are fairly robust to grid changes. The following definitions
+work for running aquaplanet configurations but may break if you try to run AMIP.
+<span class="todo">Test whether this is true lol.</span>
+I add the following lines for my custom grid:
+
+```
+    <model_grid alias="mpasa120-30_mpasa120-30" not_compset="_POP">
+      <grid name="atm">mpasa120-30</grid>
+      <grid name="lnd">mpasa120-30</grid>
+      <grid name="ocnice">mpasa120-30</grid>
+      <mask>gx1v7</mask>
+    </model_grid>
+```
+
+This will allow us to do something like the following when we're creating a new case:
+```
+mpasa120-30_mpasa120-30
+```
 
