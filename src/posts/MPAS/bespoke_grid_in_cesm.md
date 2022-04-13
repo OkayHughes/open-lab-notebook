@@ -137,9 +137,9 @@ creating this file. Ensure it matches the CAM vertical level configuration that 
 
 #### analytic initialization grid files
 In this file there are lines reading something like 
-```
-<ncdata hgrid="mpasa120" nlev="32" analytic_ic="1" phys="cam_dev" >atm/cam/inic/mpas/mpasa120_L32_topo_coords_c201022.nc</ncdata>
-```
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;ncdata</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120&quot;</span> <span style="color: #a6e22e">nlev=</span><span style="color: #e6db74">&quot;32&quot;</span> <span style="color: #a6e22e">analytic_ic=</span><span style="color: #e6db74">&quot;1&quot;</span> <span style="color: #a6e22e">phys=</span><span style="color: #e6db74">&quot;cam_dev&quot;</span> <span style="color: #f92672">&gt;</span>atm/cam/inic/mpas/mpasa120_L32_topo_coords_c201022.nc<span style="color: #f92672">&lt;/ncdata&gt;</span>
+</pre></div>
+
 
 Here `mpasa120` refers to an approximately `$$1^\circ $$` grid with a nominal grid spacing of 120km. 
 These files are used in the case that you are starting from analytic initial conditions, such as 
@@ -149,15 +149,16 @@ to provide vertical levels and associated metric terms for such a run.
 
 I make use of the file that I generated using the standalone version of MPAS, and make the following definition
 
-```
-<ncdata hgrid="mpasa120-30" nlev="32" analytic_ic="1" >/glade/u/home/owhughes/grids/x4.92067/x4.92067.init.nc</ncdata>
-```
+
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;ncdata</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120-30&quot;</span> <span style="color: #a6e22e">nlev=</span><span style="color: #e6db74">&quot;32&quot;</span> <span style="color: #a6e22e">analytic_ic=</span><span style="color: #e6db74">&quot;1&quot;</span> <span style="color: #f92672">&gt;</span>/glade/u/home/owhughes/grids/x4.92067/x4.92067.init.nc<span style="color: #f92672">&lt;/ncdata&gt;</span>
+</pre></div>
+
 
 #### problem: `bnd_topo` grid file
 The definition 
-```
- <bnd_topo hgrid="mpasa120" >atm/cam/topo/mpas/mpas_120_nc3000_Co060_Fi001_MulG_PF_Nsw042_c200921.nc</bnd_topo>
-```
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"> <span style="color: #f92672">&lt;bnd_topo</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120&quot;</span> <span style="color: #f92672">&gt;</span>atm/cam/topo/mpas/mpas_120_nc3000_Co060_Fi001_MulG_PF_Nsw042_c200921.nc<span style="color: #f92672">&lt;/bnd_topo&gt;</span>
+</pre></div>
+
 sets the location of a topography file. <span class="todo"> I don't know how to generate
 this file yet.</span> 
 
@@ -165,9 +166,9 @@ this file yet.</span>
 #### `drydep_srf_file`
 
 The definition
-```
-<drydep_srf_file hgrid="mpasa120">atm/cam/chem/trop_mam/atmsrf_mpasa120_c090720.nc</drydep_srf_file>
-```
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;drydep_srf_file</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120&quot;</span><span style="color: #f92672">&gt;</span>atm/cam/chem/trop_mam/atmsrf_mpasa120_c090720.nc<span style="color: #f92672">&lt;/drydep_srf_file&gt;</span>
+</pre></div>
+
 defines land use fields that are required when doing an aquaplanet run for some reason.
 
 For the sake of my current runs I create a dummy file which has the correct dimensions but all
@@ -178,44 +179,45 @@ then you can use the following python script:
 <details>
   <summary><code>create_srf.py</code></summary>
   
-```
-import xarray as xr
-import numpy as np
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">xarray</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">xr</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">numpy</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">np</span>
 
-ncol = 92067 # modify this to match your grid!
-nclass = 11
-nmonth = 12
-fraction_landuse = np.zeros((nclass, ncol))
-soilw = np.zeros((nmonth,ncol))
-ds = xr.Dataset(
-    {
-       "fraction_landuse": (["class", "ncol"], fraction_landuse),
-        "soilw": (["month", "ncol"], soilw),
-    }
- )
+<span style="color: #f8f8f2">ncol</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">92067</span> <span style="color: #75715e"># modify this to match your grid!</span>
+<span style="color: #f8f8f2">nclass</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">11</span>
+<span style="color: #f8f8f2">nmonth</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">12</span>
+<span style="color: #f8f8f2">fraction_landuse</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros((nclass,</span> <span style="color: #f8f8f2">ncol))</span>
+<span style="color: #f8f8f2">soilw</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros((nmonth,ncol))</span>
+<span style="color: #f8f8f2">ds</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">xr</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Dataset(</span>
+    <span style="color: #f8f8f2">{</span>
+       <span style="color: #e6db74">&quot;fraction_landuse&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">([</span><span style="color: #e6db74">&quot;class&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;ncol&quot;</span><span style="color: #f8f8f2">],</span> <span style="color: #f8f8f2">fraction_landuse),</span>
+        <span style="color: #e6db74">&quot;soilw&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">([</span><span style="color: #e6db74">&quot;month&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;ncol&quot;</span><span style="color: #f8f8f2">],</span> <span style="color: #f8f8f2">soilw),</span>
+    <span style="color: #f8f8f2">}</span>
+ <span style="color: #f8f8f2">)</span>
 
 
-ds.to_netcdf(path="atmsrf_mpasa120-30.nc")
+<span style="color: #f8f8f2">ds</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">to_netcdf(path</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;atmsrf_mpasa120-30.nc&quot;</span><span style="color: #f8f8f2">)</span>
+</pre></div>
 
-```
+
+
   
 </details>
 
 
 I then add the following definition to the xml file:
 
-```
-<drydep_srf_file hgrid="mpasa120-30">/glade/u/home/owhughes/grids/stub_data/atmsrf_mpasa120-30.nc</drydep_srf_file>
-```
+<!-- HTML generated using hilite.me --><div style="background: #172822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;drydep_srf_file</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120-30&quot;</span><span style="color: #f92672">&gt;</span>/glade/u/home/owhughes/grids/stub_data/atmsrf_mpasa120-30.nc<span style="color: #f92672">&lt;/drydep_srf_file&gt;</span>
+</pre></div>
+
 
 (note that I have put this in a separate directory from `${GRID_DIR}`).
 
 #### Default timestep and diffusion:
 
 You will find a line similar to 
-```
-<mpas_dt hgrid="mpasa120"     >  900.0D0 </mpas_dt>
-```
+
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;mpas_dt</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120&quot;</span>     <span style="color: #f92672">&gt;</span>  900.0D0 <span style="color: #f92672">&lt;/mpas_dt&gt;</span>
+</pre></div>
 
 This sets the dynamics timestep for the MPAS dynamical core. <span class="todo">
 You will need to set `ATM_NCPL` using `./xmlchange` so that the total physics timestep
@@ -228,36 +230,36 @@ horizontal grid spacing, you must also halve the time step. Accordingly, for a g
 minimum grid spacing `$$\frac{1}{4}^\circ $$`,
 a timestep of 200 seconds is sufficient. I thus add the line
 
-```
-<mpas_dt hgrid="mpasa120-30"     >  200.0D0 </mpas_dt>
-```
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;mpas_dt</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120-30&quot;</span>     <span style="color: #f92672">&gt;</span>  200.0D0 <span style="color: #f92672">&lt;/mpas_dt&gt;</span>
+</pre></div>
+
 
 MPAS's default diffusion scheme requires only one parameter 
 which is set via a line like 
-```
-<mpas_len_disp hgrid="mpasa120">120000.0D0</mpas_len_disp>
-```
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;mpas_len_disp</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120&quot;</span><span style="color: #f92672">&gt;</span>120000.0D0<span style="color: #f92672">&lt;/mpas_len_disp&gt;</span>
+</pre></div>
+
 
 This value is set to the minimum grid spacing in meters, and thus we add
 
-```
-<mpas_len_disp hgrid="mpasa120-30">30000.0D0</mpas_len_disp>
-```
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;mpas_len_disp</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120-30&quot;</span><span style="color: #f92672">&gt;</span>30000.0D0<span style="color: #f92672">&lt;/mpas_len_disp&gt;</span>
+</pre></div>
+
 
 #### Block decomposition files:
 
 You will find a line similar to
-```
-<mpas_block_decomp_file_prefix hgrid="mpasa120">atm/cam/inic/mpas/mpasa120.graph.info.part.</mpas_block_decomp_file_prefix>
-```
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;mpas_block_decomp_file_prefix</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120&quot;</span><span style="color: #f92672">&gt;</span>atm/cam/inic/mpas/mpasa120.graph.info.part.<span style="color: #f92672">&lt;/mpas_block_decomp_file_prefix&gt;</span>
+</pre></div>
+
 
 Here we leverage the processor decompositions we created when we generated our grid (mind you,
 if you want to change the number of processors you're using for your run, you must ensure that
 you have a suitable file in your `${GRID_DIR}` directory.) I thus add the line:
 
-```
-<mpas_block_decomp_file_prefix hgrid="mpasa120-30">glade/u/home/owhughes/grids/x4.92067/x4.92067.graph.info.part.</mpas_block_decomp_file_prefix>
-```
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;mpas_block_decomp_file_prefix</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120-30&quot;</span><span style="color: #f92672">&gt;</span>glade/u/home/owhughes/grids/x4.92067/x4.92067.graph.info.part.<span style="color: #f92672">&lt;/mpas_block_decomp_file_prefix&gt;</span>
+</pre></div>
+
 
 
 
