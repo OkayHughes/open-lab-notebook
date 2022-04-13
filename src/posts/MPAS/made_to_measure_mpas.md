@@ -68,7 +68,7 @@ My implementation of the above density function is given
 <summary>here:</summary>
   
 
-<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">def localrefVsLatLon<span style="color: #f92672">(</span>r, <span style="color: #f8f8f2">earth_radius</span><span style="color: #f92672">=</span>6371e3/2, <span style="color: #f8f8f2">p</span><span style="color: #f92672">=</span>False<span style="color: #f92672">)</span>:
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%;background:none"><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">localrefVsLatLon</span><span style="color: #f8f8f2">(r,</span> <span style="color: #f8f8f2">earth_radius</span><span style="color: #f92672">=</span><span style="color: #ae81ff">6371e3</span><span style="color: #f92672">/</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">p</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">False):</span>
 
 <span style="color: #e6db74">&quot;&quot;&quot;</span>
 <span style="color: #e6db74">  Create cell width array for this mesh on a locally refined latitude-longitude grid.</span>
@@ -85,55 +85,57 @@ My implementation of the above density function is given
 <span style="color: #e6db74">  lat : ndarray</span>
 <span style="color: #e6db74">      longitude in degrees (length m and between -90 and 90)</span>
 <span style="color: #e6db74">  &quot;&quot;&quot;</span>
-<span style="color: #f8f8f2">dlat</span> <span style="color: #f92672">=</span> 0.125 <span style="color: #75715e">#Make the lat-lon grid ~ 10x finer than resolution at equator, where 1deg ~ 100km</span>
-<span style="color: #f8f8f2">dlon</span> <span style="color: #f92672">=</span> dlat
-<span style="color: #f8f8f2">constantCellWidth</span> <span style="color: #f92672">=</span> r  <span style="color: #75715e">#in km</span>
+<span style="color: #f8f8f2">dlat</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0.125</span> <span style="color: #75715e">#Make the lat-lon grid ~ 10x finer than resolution at equator, where 1deg ~ 100km</span>
+<span style="color: #f8f8f2">dlon</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">dlat</span>
+<span style="color: #f8f8f2">constantCellWidth</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">r</span>  <span style="color: #75715e">#in km</span>
 
-<span style="color: #f8f8f2">nlat</span> <span style="color: #f92672">=</span> int<span style="color: #f92672">(</span>180./dlat<span style="color: #f92672">)</span> + 1
-<span style="color: #f8f8f2">nlon</span> <span style="color: #f92672">=</span> int<span style="color: #f92672">(</span>360./dlon<span style="color: #f92672">)</span> + 1
+<span style="color: #f8f8f2">nlat</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">int(</span><span style="color: #ae81ff">180.</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">dlat)</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">1</span>
+<span style="color: #f8f8f2">nlon</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">int(</span><span style="color: #ae81ff">360.</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">dlon)</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">1</span>
 
-<span style="color: #f8f8f2">lat</span> <span style="color: #f92672">=</span> np.linspace<span style="color: #f92672">(</span>-90., 90., nlat<span style="color: #f92672">)</span>
-<span style="color: #f8f8f2">lon</span> <span style="color: #f92672">=</span> np.linspace<span style="color: #f92672">(</span>-180., 180., nlon<span style="color: #f92672">)</span>
+<span style="color: #f8f8f2">lat</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">linspace(</span><span style="color: #f92672">-</span><span style="color: #ae81ff">90.</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">90.</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">nlat)</span>
+<span style="color: #f8f8f2">lon</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">linspace(</span><span style="color: #f92672">-</span><span style="color: #ae81ff">180.</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">180.</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">nlon)</span>
 
-lons, <span style="color: #f8f8f2">lats</span> <span style="color: #f92672">=</span> np.meshgrid<span style="color: #f92672">(</span>lon, lat<span style="color: #f92672">)</span>
+<span style="color: #f8f8f2">lons,</span> <span style="color: #f8f8f2">lats</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">meshgrid(lon,</span> <span style="color: #f8f8f2">lat)</span>
 
-<span style="color: #66d9ef">if </span>p:
-<span style="color: #f8f8f2">h</span> <span style="color: #f92672">=</span> plt.contourf<span style="color: #f92672">(</span>lons, lats, dists<span style="color: #f92672">)</span>
-plt.axis<span style="color: #f92672">(</span><span style="color: #e6db74">&#39;scaled&#39;</span><span style="color: #f92672">)</span>
-plt.colorbar<span style="color: #f92672">()</span>
-plt.show<span style="color: #f92672">()</span>
+<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">p:</span>
+<span style="color: #f8f8f2">h</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">contourf(lons,</span> <span style="color: #f8f8f2">lats,</span> <span style="color: #f8f8f2">dists)</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">axis(</span><span style="color: #e6db74">&#39;scaled&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">colorbar()</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">show()</span>
 
 <span style="color: #75715e">#Parameters</span>
 <span style="color: #75715e">#------------------------------</span>
 
 <span style="color: #75715e"># Radius (in degrees) of high resolution area</span>
-<span style="color: #f8f8f2">maxdist</span> <span style="color: #f92672">=</span> 7
+<span style="color: #f8f8f2">maxdist</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">7</span>
 <span style="color: #75715e">#ratio of largest grid spacing to smallest grid spacing</span>
-<span style="color: #f8f8f2">reduction_factor</span> <span style="color: #f92672">=</span> 4.0
+<span style="color: #f8f8f2">reduction_factor</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">4.0</span>
 <span style="color: #75715e"># defines sharpness of transition. You can play with how this looks here:</span>
 <span style="color: #75715e"># https://www.desmos.com/calculator/xx4sypedm4</span>
-<span style="color: #f8f8f2">power</span> <span style="color: #f92672">=</span> 4
+<span style="color: #f8f8f2">power</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">4</span>
 
 <span style="color: #75715e"># initialize with resolution = r (min resolution)</span>
-<span style="color: #f8f8f2">factor</span> <span style="color: #f92672">=</span> 1.0/<span style="color: #f92672">(</span>np.power<span style="color: #f92672">(</span>1/maxdist  lats, power<span style="color: #f92672">)</span> + 1<span style="color: #f92672">)</span>
-<span style="color: #f8f8f2">resolution</span> <span style="color: #f92672">=</span> r  <span style="color: #f92672">(</span>reduction_factor - <span style="color: #f92672">(</span>reduction_factor-1<span style="color: #f92672">)</span> * factor<span style="color: #f92672">)</span>
+<span style="color: #f8f8f2">factor</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1.0</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">(np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">power(</span><span style="color: #ae81ff">1</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">maxdist</span>  <span style="color: #f8f8f2">lats,</span> <span style="color: #f8f8f2">power)</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">resolution</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">r</span>  <span style="color: #f8f8f2">(reduction_factor</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">(reduction_factor</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">factor)</span>
 
-<span style="color: #66d9ef">if </span>p:
-<span style="color: #f8f8f2">h</span> <span style="color: #f92672">=</span> plt.contourf<span style="color: #f92672">(</span>lons, lats, resolution, <span style="color: #f8f8f2">cmap</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;viridis&quot;</span>, <span style="color: #f8f8f2">levels</span><span style="color: #f92672">=</span>100<span style="color: #f92672">)</span>
-plt.axis<span style="color: #f92672">(</span><span style="color: #e6db74">&#39;scaled&#39;</span><span style="color: #f92672">)</span>
-plt.colorbar<span style="color: #f92672">()</span>
-plt.show<span style="color: #f92672">()</span>
+<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">p:</span>
+<span style="color: #f8f8f2">h</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">contourf(lons,</span> <span style="color: #f8f8f2">lats,</span> <span style="color: #f8f8f2">resolution,</span> <span style="color: #f8f8f2">cmap</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;viridis&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">levels</span><span style="color: #f92672">=</span><span style="color: #ae81ff">100</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">axis(</span><span style="color: #e6db74">&#39;scaled&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">colorbar()</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">show()</span>
 
-print<span style="color: #f92672">(</span>np.min<span style="color: #f92672">(</span>resolution<span style="color: #f92672">)</span>, np.max<span style="color: #f92672">(</span>resolution<span style="color: #f92672">))</span>
+<span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">min(resolution),</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">max(resolution))</span>
 
-<span style="color: #f8f8f2">cellWidth</span> <span style="color: #f92672">=</span> resolution <span style="color: #75715e">#constantCellWidth * np.ones((lat.size, lon.size))</span>
+<span style="color: #f8f8f2">cellWidth</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">resolution</span> <span style="color: #75715e">#constantCellWidth * np.ones((lat.size, lon.size))</span>
 
-<span style="color: #66d9ef">return </span>cellWidth, lon, lat
+<span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">cellWidth,</span> <span style="color: #f8f8f2">lon,</span> <span style="color: #f8f8f2">lat</span>
 </pre></div>
 
 
 
 </details>
+
+
 
 
 I use the file `invoke.sh` to generate grids. This activates the `conda` environment I need to activate and calls
@@ -192,22 +194,22 @@ directory I mentioned earlier.
 <details>
 <summary><code>invoke.sh</code></summary>
 
-```
-conda activate project_2
-readonly NCELLS="92067"
-readonly GRID_PREFIX="x4.${NCELLS}"
-readonly GRID_DIR="/glade/u/home/owhughes/grids/x4.92067"
-readonly FILE="${GRID_DIR}/${GRID_PREFIX}.grid.nc"
-readonly METIS_PATH="${PATH_TO_GPMETIS}"
-readonly NPROC="288"
-readonly NBLOCK="288"
-python make_partition_files.py --file ${FILE} --metis ${METIS_PATH} --procs ${NPROC} --blocks ${NBLOCK}
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">conda activate project_2
+<span style="color: #00aaaa">readonly </span><span style="color: #aa0000">NCELLS</span>=<span style="color: #aa5500">&quot;92067&quot;</span>
+<span style="color: #00aaaa">readonly </span><span style="color: #aa0000">GRID_PREFIX</span>=<span style="color: #aa5500">&quot;x4.${NCELLS}&quot;</span>
+<span style="color: #00aaaa">readonly </span><span style="color: #aa0000">GRID_DIR</span>=<span style="color: #aa5500">&quot;/glade/u/home/owhughes/grids/x4.92067&quot;</span>
+<span style="color: #00aaaa">readonly </span><span style="color: #aa0000">FILE</span>=<span style="color: #aa5500">&quot;${GRID_DIR}/${GRID_PREFIX}.grid.nc&quot;</span>
+<span style="color: #00aaaa">readonly </span><span style="color: #aa0000">METIS_PATH</span>=<span style="color: #aa5500">&quot;${PATH_TO_GPMETIS}&quot;</span>
+<span style="color: #00aaaa">readonly </span><span style="color: #aa0000">NPROC</span>=<span style="color: #aa5500">&quot;288&quot;</span>
+<span style="color: #00aaaa">readonly </span><span style="color: #aa0000">NBLOCK</span>=<span style="color: #aa5500">&quot;288&quot;</span>
+python make_partition_files.py --file <span style="color: #0000aa">${</span><span style="color: #aa0000">FILE</span><span style="color: #0000aa">}</span> --metis <span style="color: #0000aa">${</span><span style="color: #aa0000">METIS_PATH</span><span style="color: #0000aa">}</span> --procs <span style="color: #0000aa">${</span><span style="color: #aa0000">NPROC</span><span style="color: #0000aa">}</span> --blocks <span style="color: #0000aa">${</span><span style="color: #aa0000">NBLOCK</span><span style="color: #0000aa">}</span>
 
 
-mv "graph.info.part.${NPROC}" "${GRID_DIR}/${GRID_PREFIX}.graph.info.part.${NPROC}"
-mv "block.graph.info.part.${NPROC}" "${GRID_DIR}/${GRID_PREFIX}.block.graph.info.part.${NPROC}"
+mv <span style="color: #aa5500">&quot;graph.info.part.${NPROC}&quot;</span> <span style="color: #aa5500">&quot;${GRID_DIR}/${GRID_PREFIX}.graph.info.part.${NPROC}&quot;</span>
+mv <span style="color: #aa5500">&quot;block.graph.info.part.${NPROC}&quot;</span> <span style="color: #aa5500">&quot;${GRID_DIR}/${GRID_PREFIX}.block.graph.info.part.${NPROC}&quot;</span>
+</pre></div>
 
-```
   
 </details>
 

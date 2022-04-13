@@ -37,22 +37,26 @@ In order to compile MPAS on Cheyenne as of 2022-04-11, you can use the following
 <details>
   <summary><code>setup.mpas.sh</code></summary>
   
-```
-module unload netcdf
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">module unload netcdf
 module load intel/19.1.1  mpt/2.22
 module load netcdf-mpi/4.7.4 pnetcdf/1.12.1 pio/2.5.2
-```
+</pre></div>
+
+
+  
 </details>
 
 and 
 <details>
 <summary><code>build.mpas.sh</code></summary>
 
-```
-make ifort CORE=init_atmosphere PRECISION=single USE_PIO2=true
-make clean CORE=atmosphere
-make ifort CORE=atmosphere PRECISION=single USE_PIO2=true
-```
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">make ifort <span style="color: #aa0000">CORE</span>=init_atmosphere <span style="color: #aa0000">PRECISION</span>=single <span style="color: #aa0000">USE_PIO2</span>=<span style="color: #00aaaa">true</span>
+make clean <span style="color: #aa0000">CORE</span>=atmosphere
+make ifort <span style="color: #aa0000">CORE</span>=atmosphere <span style="color: #aa0000">PRECISION</span>=single <span style="color: #aa0000">USE_PIO2</span>=<span style="color: #00aaaa">true</span>
+</pre></div>
+
 
 </details>
 
