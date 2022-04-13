@@ -117,9 +117,8 @@ creating this file. Ensure it matches the CAM vertical level configuration that 
 
 
 
+## Modifying CIME!
 
 
-
-
-
+### Modifications to `${CAM_ROOT}/bld/namelist_files/namelist_defaults_cam.xml`
 
