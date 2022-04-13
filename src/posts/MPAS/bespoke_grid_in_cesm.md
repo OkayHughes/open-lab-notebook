@@ -201,8 +201,10 @@ ds.to_netcdf(path="atmsrf_mpasa120-30.nc")
 I then add the following definition to the xml file:
 
 ```
-<drydep_srf_file hgrid="mpasa120-30">/glade/u/home/owhughes/grids/x4.92067/atmsrf_mpasa120-30.nc</drydep_srf_file>
+<drydep_srf_file hgrid="mpasa120-30">/glade/u/home/owhughes/grids/stub_data/atmsrf_mpasa120-30.nc</drydep_srf_file>
 ```
+
+(note that I have put this in a separate directory from `${GRID_DIR}`).
 
 #### Default timestep and diffusion:
 
@@ -548,8 +550,18 @@ main
 ```
 </details>
 
+Where you navigate to the case directory and run the following in order:
+```
+bash xml_config_helper.sh
+bash case_build_helper.sh
+./case.submit
+```
 
+### Regridding output to a lat-lon grid:
 
+Download the [following repository](https://github.com/mgduda/convert_mpas) and build the `convert_mpas` tool.
 
-
-
+The tl;dr of how to use this tool is 
+```
+${ABSOLUTE_PATH_TO_CONVERT_MPAS}/convert_mpas ${GRID_DIR}/${GRID_PREFIX}.init.nc $P
+```
