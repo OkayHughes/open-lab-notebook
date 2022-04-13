@@ -259,7 +259,7 @@ you have a suitable file in your `${GRID_DIR}` directory.) I thus add the line:
 Note we have changed xml files
 #### Defining a grid alias
 
-In this file you will find a snippet of code similar to
+In this file you will find a snippet of text similar to
 ```
     <model_grid alias="mpasa120_mpasa120" not_compset="_POP">
       <grid name="atm">mpasa120</grid>
@@ -286,6 +286,33 @@ I add the following lines for my custom grid:
 
 This will allow us to do something like the following when we're creating a new case:
 ```
-mpasa120-30_mpasa120-30
+${SRC_DIR}/cime/scripts/create_newcase --compset "${COMPSET}" --res "mpasa120-30_mpasa120-30" --case ${CASE_DIR}/${CASE_NAME} --run-unsupported --project ${PROJECT} --pecount ${NPROCS}
+
 ```
+which uses the alias we set in the xml snippet above.
+
+#### Creating a grid specification
+We find a snippet of text like
+```
+    <domain name="mpasa120">
+      <nx>40962</nx> <ny>1</ny>
+      <mesh driver="nuopc">$DIN_LOC_ROOT/share/meshes/mpasa120z32_ESMFmesh_cdf5_c20210120.nc</mesh>
+      <desc>MPAS-A 120-km quasi-uniform mesh:</desc>
+    </domain>
+```
+The `mesh` specification is what will force us to use the `${GRID_PREFIX}.esmf.coupling.nc` that we 
+created above. Because MPAS is an unstructured grid, the only dimension you 
+need to specify is the `nx` tag, which contains the number of columns. In my case I add
+the following text:
+```
+    <domain name="mpasa120-30">
+      <nx>92067</nx> <ny>1</ny>
+      <mesh driver="nuopc">/glade/u/home/owhughes/grids/x4.92067/x4.92067.esmf.coupling.nc</mesh>
+      <desc>MPAS-A 120km-30km variable resolution grid:</desc>
+    </domain>
+```
+
+
+
+
 
