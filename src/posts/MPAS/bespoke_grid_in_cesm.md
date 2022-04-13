@@ -47,7 +47,7 @@ module load netcdf-mpi/4.7.4 pnetcdf/1.12.1 pio/2.5.2
 and 
 <details>
 <summary><code>build.mpas.sh</code></summary>
-  
+
 ```
 make ifort CORE=init_atmosphere PRECISION=single USE_PIO2=true
 make clean CORE=atmosphere
@@ -69,6 +69,11 @@ At this point I assume that you have a folder referred to by the variable `${GRI
 your grid has a unique prefix referred to in the variable `${GRID_PREFIX}`. This
 prefix needs to uniquely identify your grid files so that they don't overlap with other MPAS files
 in `${GRID_DIR}`.
+
+In these instructions I will be using my particular use case as an example.
+On Cheyenne, `GRID_DIR="${HOME}/grids/${GRID_PREFIX}/"` and `GRID_PREFIX="x4.92067"` where `x4` refers
+to a 4x grid refinement in a band near the equator and the resulting grid has `92067` horizontal cells.
+
 
 **I make the assumption that you have generated the following files:**
 
@@ -121,4 +126,16 @@ creating this file. Ensure it matches the CAM vertical level configuration that 
 
 
 ### Modifications to `${CAM_ROOT}/bld/namelist_files/namelist_defaults_cam.xml`
+
+In this file there are lines reading something like 
+```
+<ncdata hgrid="mpasa120" nlev="32" analytic_ic="1" phys="cam_dev" >atm/cam/inic/mpas/mpasa120_L32_topo_coords_c201022.nc</ncdata>
+```
+
+Here `mpasa120` refers to an approximately `$$1^\circ $$` grid with a nominal grid spacing of 120km. 
+These files are used in the case that you are starting from analytic initial conditions, such as 
+the [UMJS Moist Baroclinic Wave](https://www.cesm.ucar.edu/models/simpler-models-indev/fkessler/index.html)
+which can be used to spin up aquaplanets. The purpose of these files is
+to provide vertical levels and associated metric terms for such a run. 
+
 
