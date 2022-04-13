@@ -18,7 +18,7 @@ The CIME infrastructure that makes creating new cases and component sets
 necessarily limits the number of horizontal grid spacings that you can use.
 
 This post is designed to show you how to add a new variable resolution MPAS grid
-to CIME.
+to CIME. <span class="todo">I have used this for aquaplanet runs, but I have not tried AMIP runs _yet_.</span>
 
 In order to run this you will regrettably need access to a working standalone version of the MPAS-A model
 available [here](https://github.com/MPAS-Dev/MPAS-Model).
@@ -130,6 +130,8 @@ creating this file. Ensure it matches the CAM vertical level configuration that 
 
 ### Modifications to `${CAM_ROOT}/bld/namelist_files/namelist_defaults_cam.xml`
 
+
+#### analytic initialization grid files
 In this file there are lines reading something like 
 ```
 <ncdata hgrid="mpasa120" nlev="32" analytic_ic="1" phys="cam_dev" >atm/cam/inic/mpas/mpasa120_L32_topo_coords_c201022.nc</ncdata>
@@ -145,6 +147,61 @@ I make use of the file that I generated using the standalone version of MPAS, an
 
 ```
 <ncdata hgrid="mpasa120-30" nlev="32" analytic_ic="1" >/glade/u/home/owhughes/grids/x4.92067/x4.92067.init.nc</ncdata>
+```
+
+#### problem: `bnd_topo` grid file
+The definition 
+```
+ <bnd_topo hgrid="mpasa120" >atm/cam/topo/mpas/mpas_120_nc3000_Co060_Fi001_MulG_PF_Nsw042_c200921.nc</bnd_topo>
+```
+sets the location of a topography file. <span class="todo"> I don't know how to generate
+this file yet.</span> 
+
+
+#### `drydep_srf_file`
+
+The definition
+```
+<drydep_srf_file hgrid="mpasa120">atm/cam/chem/trop_mam/atmsrf_mpasa120_c090720.nc</drydep_srf_file>
+```
+defines land use fields that are required when doing an aquaplanet run for some reason.
+
+For the sake of my current runs I create a dummy file which has the correct dimensions but all
+fields are identically 0. Assuming that you have access to the `xarray` and `numpy` python packages (
+e.g. by installing [miniconda](https://docs.conda.io/en/latest/miniconda.html) and running `conda install xarray`)
+then you can use the following python script:
+
+<details>
+  <summary><code>create_srf.py</code></summary>
+  
+```
+import xarray as xr
+import numpy as np
+
+ncol = 92067 # modify this to match your grid!
+nclass = 11
+nmonth = 12
+fraction_landuse = np.zeros((nclass, ncol))
+soilw = np.zeros((nmonth,ncol))
+ds = xr.Dataset(
+    {
+       "fraction_landuse": (["class", "ncol"], fraction_landuse),
+        "soilw": (["month", "ncol"], soilw),
+    }
+ )
+
+
+ds.to_netcdf(path="atmsrf_mpasa120-30.nc")
+
+```
+  
+</details>
+
+
+I then add the following definition to the xml file:
+
+```
+<drydep_srf_file hgrid="mpasa120">atm/cam/chem/trop_mam/atmsrf_mpasa120_c090720.nc</drydep_srf_file>
 ```
 
 
