@@ -561,20 +561,22 @@ main
 </details>
 
 Where you navigate to the case directory and run the following in order:
-```
-bash xml_config_helper.sh
+
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bash xml_config_helper.sh
 bash case_build_helper.sh
 ./case.submit
-```
+</pre></div>
+
 
 ### Regridding output to a lat-lon grid:
 
 Download the [following repository](https://github.com/mgduda/convert_mpas) and build the `convert_mpas` tool.
 
 The tl;dr of how to use this tool is 
-```
-${ABSOLUTE_PATH_TO_CONVERT_MPAS}/convert_mpas ${GRID_DIR}/${GRID_PREFIX}.init.nc ${ABSOLUTE_PATH_TO_NETCDF}/output_on_mpas_grid.nc
-```
+
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #66d9ef">${</span><span style="color: #f8f8f2">ABSOLUTE_PATH_TO_CONVERT_MPAS</span><span style="color: #66d9ef">}</span>/convert_mpas <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">GRID_DIR</span><span style="color: #66d9ef">}</span>/<span style="color: #66d9ef">${</span><span style="color: #f8f8f2">GRID_PREFIX</span><span style="color: #66d9ef">}</span>.init.nc <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">ABSOLUTE_PATH_TO_NETCDF</span><span style="color: #66d9ef">}</span>/output_on_mpas_grid.nc
+</pre></div>
+
 
 The first file specifies all of the metric terms and topography that were used for your run. The second file is the output data.
 After this command is finished it will have created a file called `latlon.nc` which you can view with your NetCDF

@@ -1,0 +1,814 @@
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">diff -r CAM_Jan22_backup/src/dynamics/mpas/driver/cam_mpas_subdriver.F90 CAM_Jan22_deep_mpas_fix/src/dynamics/mpas/driver/cam_mpas_subdriver.F90
+
+330a331
+&gt;        <span style="color: #f8f8f2">type</span> <span style="color: #f92672">(</span>field2DReal<span style="color: #f92672">)</span>, pointer :: rTildeCell
+387a389
+&gt;        call mpas_pool_get_subpool<span style="color: #f92672">(</span>domain_ptr % blocklist % structs, <span style="color: #e6db74">&#39;mesh&#39;</span>, mesh<span style="color: #f92672">)</span>
+391,392c393,396
+&lt;
+&lt;        call mpas_pool_get_subpool<span style="color: #f92672">(</span>domain_ptr % blocklist % structs, <span style="color: #e6db74">&#39;mesh&#39;</span>, mesh<span style="color: #f92672">)</span>
+---
+&gt;
+
+&gt;        !call mpas_pool_get_field<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeCell&#39;</span>, rTildeCell<span style="color: #f92672">)</span>
+&gt;        !call mpas_dmpar_exch_halo_field<span style="color: #f92672">(</span>rTildeCell,<span style="color: #f92672">(</span>/1/<span style="color: #f92672">))</span>
+&gt;        !call mpas_pool_get_subpool<span style="color: #f92672">(</span>domain_ptr % blocklist % structs, <span style="color: #e6db74">&#39;mesh&#39;</span>, mesh<span style="color: #f92672">)</span>
+962a967,968
+&gt;
+
+&gt;        <span style="color: #f8f8f2">type</span> <span style="color: #f92672">(</span>field2DReal<span style="color: #f92672">)</span>, pointer :: rTildeVertex, rTildeCell, rTildeEdge, rTildeLayer
+964d969
+&lt;
+1034a1040,1043
+&gt;        call mpas_pool_get_field<span style="color: #f92672">(</span>meshPool, <span style="color: #e6db74">&#39;rTildeVertex&#39;</span>, rTildeVertex<span style="color: #f92672">)</span>
+&gt;        call mpas_pool_get_field<span style="color: #f92672">(</span>meshPool, <span style="color: #e6db74">&#39;rTildeCell&#39;</span>, rTildeCell<span style="color: #f92672">)</span>
+&gt;        call mpas_pool_get_field<span style="color: #f92672">(</span>meshPool, <span style="color: #e6db74">&#39;rTildeLayer&#39;</span>, rTildeLayer<span style="color: #f92672">)</span>
+&gt;        call mpas_pool_get_field<span style="color: #f92672">(</span>meshPool, <span style="color: #e6db74">&#39;rTildeEdge&#39;</span>, rTildeEdge<span style="color: #f92672">)</span>
+1154a1164,1176
+&gt;        call MPAS_streamAddField<span style="color: #f92672">(</span>mesh_stream, rTildeCell, <span style="color: #f8f8f2">ierr</span><span style="color: #f92672">=</span>ierr<span style="color: #f92672">)</span>
+&gt;        <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>ierr /<span style="color: #f92672">=</span> MPAS_STREAM_NOERR<span style="color: #f92672">)</span> <span style="color: #f8f8f2">ierr_total</span> <span style="color: #f92672">=</span> ierr_total + 1
+&gt;        call MPAS_streamAddField<span style="color: #f92672">(</span>mesh_stream, rTildeVertex, <span style="color: #f8f8f2">ierr</span><span style="color: #f92672">=</span>ierr<span style="color: #f92672">)</span>
+&gt;        <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>ierr /<span style="color: #f92672">=</span> MPAS_STREAM_NOERR<span style="color: #f92672">)</span> <span style="color: #f8f8f2">ierr_total</span> <span style="color: #f92672">=</span> ierr_total + 1
+&gt;        call MPAS_streamAddField<span style="color: #f92672">(</span>mesh_stream, rTildeEdge, <span style="color: #f8f8f2">ierr</span><span style="color: #f92672">=</span>ierr<span style="color: #f92672">)</span>
+&gt;        <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>ierr /<span style="color: #f92672">=</span> MPAS_STREAM_NOERR<span style="color: #f92672">)</span> <span style="color: #f8f8f2">ierr_total</span> <span style="color: #f92672">=</span> ierr_total + 1
+&gt;        call MPAS_streamAddField<span style="color: #f92672">(</span>mesh_stream, rTildeLayer, <span style="color: #f8f8f2">ierr</span><span style="color: #f92672">=</span>ierr<span style="color: #f92672">)</span>
+&gt;        <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>ierr /<span style="color: #f92672">=</span> MPAS_STREAM_NOERR<span style="color: #f92672">)</span> <span style="color: #f8f8f2">ierr_total</span> <span style="color: #f92672">=</span> ierr_total + 1
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+1232a1255,1260
+&gt;
+
+&gt;
+&gt;        call MPAS_dmpar_exch_halo_field<span style="color: #f92672">(</span>rTildeVertex<span style="color: #f92672">)</span>
+&gt;        call MPAS_dmpar_exch_halo_field<span style="color: #f92672">(</span>rTildeEdge<span style="color: #f92672">)</span>
+&gt;        call MPAS_dmpar_exch_halo_field<span style="color: #f92672">(</span>rTildeCell<span style="color: #f92672">)</span>
+&gt;        call MPAS_dmpar_exch_halo_field<span style="color: #f92672">(</span>rTildeLayer<span style="color: #f92672">)</span>
+1341a1370
+&gt;        <span style="color: #f8f8f2">type</span> <span style="color: #f92672">(</span>field2DReal<span style="color: #f92672">)</span>, pointer :: rTildeVertex, rTildeCell, rTildeLayer, rTildeEdge
+1449a1479,1484
+&gt;        call mpas_pool_get_field<span style="color: #f92672">(</span>allFields, <span style="color: #e6db74">&#39;rTildeVertex&#39;</span>, rTildeVertex<span style="color: #f92672">)</span>
+&gt;        call mpas_pool_get_field<span style="color: #f92672">(</span>allFields, <span style="color: #e6db74">&#39;rTildeCell&#39;</span>, rTildeCell<span style="color: #f92672">)</span>
+&gt;        call mpas_pool_get_field<span style="color: #f92672">(</span>allFields, <span style="color: #e6db74">&#39;rTildeLayer&#39;</span>, rTildeLayer<span style="color: #f92672">)</span>
+&gt;        call mpas_pool_get_field<span style="color: #f92672">(</span>allFields, <span style="color: #e6db74">&#39;rTildeEdge&#39;</span>, rTildeEdge<span style="color: #f92672">)</span>
+&gt;
+
+&gt;
+1607a1643,1654
+&gt;
+&gt;        call MPAS_streamAddField<span style="color: #f92672">(</span>restart_stream, rTildeCell, <span style="color: #f8f8f2">ierr</span><span style="color: #f92672">=</span>ierr<span style="color: #f92672">)</span>
+&gt;        <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>ierr /<span style="color: #f92672">=</span> MPAS_STREAM_NOERR<span style="color: #f92672">)</span> <span style="color: #f8f8f2">ierr_total</span> <span style="color: #f92672">=</span> ierr_total + 1
+&gt;        call MPAS_streamAddField<span style="color: #f92672">(</span>restart_stream, rTildeVertex, <span style="color: #f8f8f2">ierr</span><span style="color: #f92672">=</span>ierr<span style="color: #f92672">)</span>
+&gt;        <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>ierr /<span style="color: #f92672">=</span> MPAS_STREAM_NOERR<span style="color: #f92672">)</span> <span style="color: #f8f8f2">ierr_total</span> <span style="color: #f92672">=</span> ierr_total + 1
+&gt;        call MPAS_streamAddField<span style="color: #f92672">(</span>restart_stream, rTildeEdge, <span style="color: #f8f8f2">ierr</span><span style="color: #f92672">=</span>ierr<span style="color: #f92672">)</span>
+&gt;        <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>ierr /<span style="color: #f92672">=</span> MPAS_STREAM_NOERR<span style="color: #f92672">)</span> <span style="color: #f8f8f2">ierr_total</span> <span style="color: #f92672">=</span> ierr_total + 1
+&gt;        call MPAS_streamAddField<span style="color: #f92672">(</span>restart_stream, rTildeLayer, <span style="color: #f8f8f2">ierr</span><span style="color: #f92672">=</span>ierr<span style="color: #f92672">)</span>
+&gt;        <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>ierr /<span style="color: #f92672">=</span> MPAS_STREAM_NOERR<span style="color: #f92672">)</span> <span style="color: #f8f8f2">ierr_total</span> <span style="color: #f92672">=</span> ierr_total + 1
+&gt;
+&gt;
+&gt;
+1834a1882,1886
+&gt;
+&gt;        call cam_mpas_update_halo<span style="color: #f92672">(</span><span style="color: #e6db74">&#39;rTildeCell&#39;</span>, endrun<span style="color: #f92672">)</span>
+&gt;        call cam_mpas_update_halo<span style="color: #f92672">(</span><span style="color: #e6db74">&#39;rTildeVertex&#39;</span>, endrun<span style="color: #f92672">)</span>
+&gt;        call cam_mpas_update_halo<span style="color: #f92672">(</span><span style="color: #e6db74">&#39;rTildeLayer&#39;</span>, endrun<span style="color: #f92672">)</span>
+&gt;        call cam_mpas_update_halo<span style="color: #f92672">(</span><span style="color: #e6db74">&#39;rTildeEdge&#39;</span>, endrun<span style="color: #f92672">)</span>
+diff -r CAM_Jan22_backup/src/dynamics/mpas/dycore/src/core_atmosphere/diagnostics/pv_diagnostics.F CAM_Jan22_deep_mpas_fix/src/dynamics/mpas/dycore/src/core_atmosphere/diagnostics/pv_diagnostics.F
+20d19
+&lt;
+66d64
+&lt;
+142d139
+&lt;
+1244a1242,1243
+&gt;       ! deep
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>, pointer :: rTildeCell
+1259a1259,1260
+&gt;       ! deep
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeCell&#39;</span>, rTildeCell<span style="color: #f92672">)</span>
+1264c1265,1266
+&lt;             rho<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> rho_zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>
+---
+&gt;             ! deep Eq. <span style="color: #f92672">(</span>13<span style="color: #f92672">)</span>
+&gt;             rho<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> rho_zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> / rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>2
+diff -r CAM_Jan22_backup/src/dynamics/mpas/dycore/src/core_atmosphere/dynamics/mpas_atm_time_integration.F CAM_Jan22_deep_mpas_fix/src/dynamics/mpas/dycore/src/core_atmosphere/dynamics/mpas_atm_time_integration.F
+2020a2021,2022
+&gt;       ! deep
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>, pointer :: rTildeCell, rTildeLayer
+2027a2030,2031
+&gt;       logical, pointer :: config_weak_temperature_gradient
+&gt;
+2029a2034
+&gt;       call mpas_pool_get_config<span style="color: #f92672">(</span>configs, <span style="color: #e6db74">&#39;config_weak_temperature_gradient&#39;</span>, config_weak_temperature_gradient<span style="color: #f92672">)</span>
+2036a2042,2045
+&gt;       ! deep
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeCell&#39;</span>, rTildeCell<span style="color: #f92672">)</span>
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeLayer&#39;</span>, rTildeLayer<span style="color: #f92672">)</span>
+&gt;
+2062a2072
+&gt;                                    rTildeCell, rTildeLayer, &amp; ! deep
+2065c2075
+&lt;                                    cellSolveStart, cellSolveEnd, edgeSolveStart, edgeSolveEnd<span style="color: #f92672">)</span>
+---
+&gt;                                    cellSolveStart, cellSolveEnd, edgeSolveStart, edgeSolveEnd, config_weak_temperature_gradient<span style="color: #f92672">)</span>
+2072a2083
+&gt;                                    rTildeCell, rTildeLayer, &amp; ! deep
+2075c2086
+&lt;                                    cellSolveStart, cellSolveEnd, edgeSolveStart, edgeSolveEnd<span style="color: #f92672">)</span>
+---
+&gt;                                    cellSolveStart, cellSolveEnd, edgeSolveStart, edgeSolveEnd, config_weak_temperature_gradient<span style="color: #f92672">)</span>
+2103a2115,2117
+&gt;       ! deep
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>nVertLevels,nCells+1<span style="color: #f92672">)</span> :: rTildeCell
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>nVertLevels+1,nCells+1<span style="color: #f92672">)</span> :: rTildeLayer
+2114c2128
+&lt;
+---
+&gt;       logical :: config_weak_temperature_gradient
+2125,2126c2139,2145
+&lt;       <span style="color: #f8f8f2">rcv</span> <span style="color: #f92672">=</span> rgas/<span style="color: #f92672">(</span>cp-rgas<span style="color: #f92672">)</span>
+&lt;       <span style="color: #f8f8f2">c2</span> <span style="color: #f92672">=</span> cprcv
+---
+&gt;       <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>config_weak_temperature_gradient<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;         <span style="color: #f8f8f2">rcv</span> <span style="color: #f92672">=</span> 0.0_RKIND
+&gt;         <span style="color: #f8f8f2">c2</span> <span style="color: #f92672">=</span> rgas
+&gt;       <span style="color: #66d9ef">else</span>
+&gt;         <span style="color: #f8f8f2">rcv</span> <span style="color: #f92672">=</span> rgas/<span style="color: #f92672">(</span>cp-rgas<span style="color: #f92672">)</span>
+&gt;         <span style="color: #f8f8f2">c2</span> <span style="color: #f92672">=</span> cprcv
+&gt;       end <span style="color: #66d9ef">if</span>
+2137c2156,2157
+&lt;             cofwr<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span>.5dtsepsgravity*<span style="color: #f92672">(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>zz<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>
+---
+&gt;            cofwr<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span>.5dtsepsgravity*<span style="color: #f92672">(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>zz<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)</span> &amp;
+&gt;                                                  +fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>zz<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>
+2142,2144c2162,2165
+&lt;             cofwz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> dtsepsc2<span style="color: #f92672">(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*zz<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>  &amp;
+&lt;                  *rdzu<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>cqw<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*p <span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>p <span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>
+&lt;             coftz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> dtseps   <span style="color: #f92672">(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>t <span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>t <span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>
+---
+&gt;            cofwz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> dtsepsc2<span style="color: #f92672">(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*zz<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>  &amp;
+&gt;                *rdzu<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>cqw<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*p <span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>p <span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>  &amp;
+&gt;                <span style="color: #f92672">(</span>rTildeLayer<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>*2<span style="color: #f92672">)</span>
+&gt;            coftz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> dtseps   <span style="color: #f92672">(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>t <span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>t <span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>
+2155,2157c2176,2178
+&lt;
+&lt;             cofwt<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> .5dtsepsrcvzz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>gravityrb<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>/<span style="color: #f92672">(</span>1.+qtotal<span style="color: #f92672">)</span>  &amp;
+&lt;                                 p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>/<span style="color: #f92672">((</span>rtb<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+rt<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">))</span>pb<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">))</span>
+---
+&gt;             ! deep Eq. <span style="color: #f92672">(</span>31<span style="color: #f92672">)</span>
+&gt;             cofwt<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> .5dtsepsrcvzz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>gravity/rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>**2rb<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>/<span style="color: #f92672">(</span>1.+qtotal<span style="color: #f92672">)</span>  &amp;
+&gt;                                         p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>/<span style="color: #f92672">((</span>rtb<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+rt<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">))</span>pb<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">))</span>
+2412a2434,2436
+&gt;       ! deep
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>, pointer :: rTildeCell, rTildeEdge
+&gt;
+2425a2450,2451
+&gt;       logical, pointer :: config_weak_temperature_gradient
+&gt;
+2482a2509,2512
+&gt;       ! deep
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeCell&#39;</span>, rTildeCell<span style="color: #f92672">)</span>
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeEdge&#39;</span>, rTildeEdge<span style="color: #f92672">)</span>
+&gt;
+2491a2522
+&gt;       call mpas_pool_get_config<span style="color: #f92672">(</span>configs, <span style="color: #e6db74">&#39;config_weak_temperature_gradient&#39;</span>, config_weak_temperature_gradient<span style="color: #f92672">)</span>
+2500,2501c2531,2533
+&lt;                                    specZoneMaskEdge, specZoneMaskCell &amp;
+&lt;                                    <span style="color: #f92672">)</span>
+---
+&gt;                                    rTildeCell, rTildeEdge, &amp; ! deep
+&gt;                                    specZoneMaskEdge, specZoneMaskCell, &amp;
+&gt;                                    config_weak_temperature_gradient<span style="color: #f92672">)</span>
+2513,2514c2545,2547
+&lt;                                    specZoneMaskEdge, specZoneMaskCell &amp;
+&lt;                                    <span style="color: #f92672">)</span>
+---
+&gt;                                    rTildeCell, rTildeEdge, &amp; ! deep
+&gt;                                    specZoneMaskEdge, specZoneMaskCell, &amp;
+&gt;                                    config_weak_temperature_gradient<span style="color: #f92672">)</span>
+2562a2596,2599
+&gt;       ! deep
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>nVertLevels,nCells+1<span style="color: #f92672">)</span> :: rTildeCell
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>nVertLevels,nEdges+1<span style="color: #f92672">)</span> :: rTildeEdge
+&gt;
+2584a2622,2624
+&gt;
+&gt;       logical :: config_weak_temperature_gradient
+&gt;
+2591a2632
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span> :: rTildeTmp1, rTildeTmp2
+2593,2595c2634,2640
+&lt;
+&lt;       <span style="color: #f8f8f2">rcv</span> <span style="color: #f92672">=</span> rgas / <span style="color: #f92672">(</span>cp - rgas<span style="color: #f92672">)</span>
+&lt;       <span style="color: #f8f8f2">c2</span> <span style="color: #f92672">=</span> cp * rcv
+---
+&gt;       <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>config_weak_temperature_gradient<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;         <span style="color: #f8f8f2">rcv</span> <span style="color: #f92672">=</span> 0.0_RKIND
+&gt;         <span style="color: #f8f8f2">c2</span> <span style="color: #f92672">=</span> rgas
+&gt;       <span style="color: #66d9ef">else</span>
+&gt;         <span style="color: #f8f8f2">rcv</span> <span style="color: #f92672">=</span> rgas / <span style="color: #f92672">(</span>cp - rgas<span style="color: #f92672">)</span>
+&gt;         <span style="color: #f8f8f2">c2</span> <span style="color: #f92672">=</span> cp * rcv
+&gt;       end <span style="color: #66d9ef">if</span>
+2621,2624c2666,2683
+&lt;                  <span style="color: #f8f8f2">pgrad</span> <span style="color: #f92672">=</span> <span style="color: #f92672">((</span>rtheta_pp<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>-rtheta_pp<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">))</span>invDcEdge<span style="color: #f92672">(</span>iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">)</span>/<span style="color: #f92672">(</span>.5<span style="color: #f92672">(</span>zz<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>+zz<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)))</span>
+&lt;                  <span style="color: #f8f8f2">pgrad</span> <span style="color: #f92672">=</span> cqu<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>0.5c2<span style="color: #f92672">(</span>exner<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>+exner<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">))</span>pgrad
+&lt;                  <span style="color: #f8f8f2">pgrad</span> <span style="color: #f92672">=</span> pgrad + 0.5zxu<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>gravity<span style="color: #f92672">(</span>rho_pp<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>+rho_pp<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">))</span>
+&lt;                  ru_p<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> ru_p<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> + dts<span style="color: #f92672">(</span>tend_ru<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> - <span style="color: #f92672">(</span>1.0_RKIND - specZoneMaskEdge<span style="color: #f92672">(</span>iEdge<span style="color: #f92672">))</span>*pgrad<span style="color: #f92672">)</span>
+---
+&gt;                 <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>rTildeCell<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span> &gt; 1e-10<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;                   <span style="color: #f8f8f2">rTildeTmp1</span> <span style="color: #f92672">=</span> rTildeCell<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>
+&gt;                 <span style="color: #66d9ef">else</span>
+&gt;                   <span style="color: #f8f8f2">rTildeTmp1</span> <span style="color: #f92672">=</span> 1.0
+&gt;                 end <span style="color: #66d9ef">if</span>
+&gt;                 <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>rTildeCell<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span> &gt; 1e-10<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;                   <span style="color: #f8f8f2">rTildeTmp2</span> <span style="color: #f92672">=</span> rTildeCell<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>
+&gt;                 <span style="color: #66d9ef">else</span>
+&gt;                   <span style="color: #f8f8f2">rTildeTmp2</span> <span style="color: #f92672">=</span> 1.0
+&gt;                 end <span style="color: #66d9ef">if</span>
+&gt;                 ! deep Eq. <span style="color: #f92672">(</span>19<span style="color: #f92672">)</span>
+&gt;                 <span style="color: #f8f8f2">pgrad</span> <span style="color: #f92672">=</span> <span style="color: #f92672">((</span>rtheta_pp<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>/rTildeTmp22-rtheta_pp<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>/rTildeTmp22<span style="color: #f92672">)</span>invDcEdge<span style="color: #f92672">(</span>iEdge<span style="color: #f92672">))</span>&amp;
+&gt;                         /<span style="color: #f92672">(</span>.5<span style="color: #f92672">(</span>zz<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>+zz<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)))</span>
+&gt;                 <span style="color: #f8f8f2">pgrad</span> <span style="color: #f92672">=</span> cqu<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>0.5c2*<span style="color: #f92672">(</span>exner<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>+exner<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">))</span>pgrad
+&gt;                 ! deep Eq. <span style="color: #f92672">(</span>19<span style="color: #f92672">)</span> and <span style="color: #f92672">(</span>31<span style="color: #f92672">)</span>
+&gt;                 <span style="color: #f8f8f2">pgrad</span> <span style="color: #f92672">=</span> pgrad + 0.5zxu<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>*gravity/rTildeEdge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>2 &amp; ! deep Eq. <span style="color: #f92672">(</span>31<span style="color: #f92672">)</span>
+&gt;                         *<span style="color: #f92672">(</span>rho_pp<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>/rTildeTmp12+rho_pp<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>/rTildeTmp22<span style="color: #f92672">)</span> ! deep Eq. <span style="color: #f92672">(</span>19<span style="color: #f92672">)</span>
+&gt;                 ru_p<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> ru_p<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> + dts*<span style="color: #f92672">(</span>tend_ru<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> - <span style="color: #f92672">(</span>1.0_RKIND - specZoneMaskEdge<span style="color: #f92672">(</span>iEdge<span style="color: #f92672">))</span>pgrad<span style="color: #f92672">)</span>
+2720,2728c2779,2787
+&lt;             rw_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> rw_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> +  dtstend_rw<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>                       &amp;
+&lt;                        - cofwz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)((</span>zz<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)</span>ts<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>                           &amp;
+&lt;                                      -zz<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)</span>ts<span style="color: #f92672">(</span>k-1<span style="color: #f92672">))</span>                            &amp;
+&lt;                                +resm<span style="color: #f92672">(</span>zz<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)</span>rtheta_pp<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)</span>                &amp;
+&lt;                                      -zz<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)</span>rtheta_pp<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)))</span>              &amp;
+&lt;                        - cofwr<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)((</span>rs<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>+rs<span style="color: #f92672">(</span>k-1<span style="color: #f92672">))</span>                                &amp;
+&lt;                                +resm<span style="color: #f92672">(</span>rho_pp<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+rho_pp<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)))</span>               &amp;
+&lt;                        + cofwt<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)(</span>ts<span style="color: #f92672">(</span>k  <span style="color: #f92672">)</span>+resmrtheta_pp<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">))</span>           &amp;
+&lt;                        + cofwt<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)(</span>ts<span style="color: #f92672">(</span>k-1<span style="color: #f92672">)</span>+resmrtheta_pp<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>
+---
+&gt;            ! deep Eq. <span style="color: #f92672">(</span>21<span style="color: #f92672">)</span>.
+&gt;            rw_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> rw_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> +  dtstend_rw<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>                       &amp;
+&gt;              - cofwz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)(</span> zz<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)(</span>ts<span style="color: #f92672">(</span>k  <span style="color: #f92672">)</span>+resmrtheta_pp<span style="color: #f92672">(</span>k,  iCell<span style="color: #f92672">))</span>/rTildeCell<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)</span>2   &amp;
+&gt;              -zz<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)(</span>ts<span style="color: #f92672">(</span>k-1<span style="color: #f92672">)</span>+resmrtheta_pp<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>/rTildeCell<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)</span>2 <span style="color: #f92672">)</span> &amp;
+&gt;               - cofwr<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)((</span>rs<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>/rTildeCell<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)</span>**2+rs<span style="color: #f92672">(</span>k-1<span style="color: #f92672">)</span>/rTildeCell<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)</span>*2<span style="color: #f92672">)</span>                                 &amp;
+&gt;               +resm<span style="color: #f92672">(</span>rho_pp<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>/rTildeCell<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)</span>**2+rho_pp<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)</span>/rTildeCell<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)</span>**2<span style="color: #f92672">))</span>               &amp;
+&gt;              + cofwt<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)(</span>ts<span style="color: #f92672">(</span>k  <span style="color: #f92672">)</span>+resmrtheta_pp<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">))</span>           &amp;
+&gt;               + cofwt<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)(</span>ts<span style="color: #f92672">(</span>k-1<span style="color: #f92672">)</span>+resmrtheta_pp<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>
+&gt;
+2798a2858,2859
+&gt;       ! deep
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>, pointer :: rTildeCell, rTildeEdge
+2807a2869
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span> :: rTildeTmp1, rTildeTmp2
+2811a2874,2877
+&gt;
+&gt;       ! deep
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeCell&#39;</span>, rTildeCell<span style="color: #f92672">)</span>
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeEdge&#39;</span>, rTildeEdge<span style="color: #f92672">)</span>
+2837c2903,2912
+&lt;
+---
+&gt;               <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>rTildeCell<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span> &gt; 1e-10<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;                  <span style="color: #f8f8f2">rTildeTmp1</span> <span style="color: #f92672">=</span> rTildeCell<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>
+&gt;               <span style="color: #66d9ef">else</span>
+&gt;                  <span style="color: #f8f8f2">rTildeTmp1</span> <span style="color: #f92672">=</span> 1.0
+&gt;               end <span style="color: #66d9ef">if</span>
+&gt;               <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>rTildeCell<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span> &gt; 1e-10<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;                  <span style="color: #f8f8f2">rTildeTmp2</span> <span style="color: #f92672">=</span> rTildeCell<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>
+&gt;               <span style="color: #66d9ef">else</span>
+&gt;                 <span style="color: #f8f8f2">rTildeTmp2</span> <span style="color: #f92672">=</span> 1.0
+&gt;               end <span style="color: #66d9ef">if</span>
+2845,2849c2920,2926
+&lt;                <span style="color: #f8f8f2">divCell1</span> <span style="color: #f92672">=</span> -<span style="color: #f92672">(</span>rtheta_pp<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>-rtheta_pp_old<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">))</span>
+&lt;                <span style="color: #f8f8f2">divCell2</span> <span style="color: #f92672">=</span> -<span style="color: #f92672">(</span>rtheta_pp<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>-rtheta_pp_old<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">))</span>
+&lt;                ru_p<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> ru_p<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> + coef_divdamp<span style="color: #f92672">(</span>divCell2-divCell1<span style="color: #f92672">)</span>*<span style="color: #f92672">(</span>1.0_RKIND - specZoneMaskEdge<span style="color: #f92672">(</span>iEdge<span style="color: #f92672">))</span> &amp;
+&lt;                                                       /<span style="color: #f92672">(</span>theta_m<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>+theta_m<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">))</span>
+&lt;
+---
+&gt;               ! deep Eq. <span style="color: #f92672">(</span>30<span style="color: #f92672">)</span>
+&gt;               <span style="color: #f8f8f2">divCell1</span> <span style="color: #f92672">=</span> -<span style="color: #f92672">(</span>rtheta_pp<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>-rtheta_pp_old<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">))</span>/rTildeTmp12
+&gt;               ! deep Eq. <span style="color: #f92672">(</span>30<span style="color: #f92672">)</span>
+&gt;               <span style="color: #f8f8f2">divCell2</span> <span style="color: #f92672">=</span> -<span style="color: #f92672">(</span>rtheta_pp<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>-rtheta_pp_old<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">))</span>/rTildeTmp22
+&gt;               ! deep Eq. <span style="color: #f92672">(</span>30<span style="color: #f92672">)</span>
+&gt;               ru_p<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> ru_p<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> + coef_divdamp*<span style="color: #f92672">(</span>divCell2-divCell1<span style="color: #f92672">)(</span>1.0_RKIND - specZoneMaskEdge<span style="color: #f92672">(</span>iEdge<span style="color: #f92672">))</span> &amp;
+&gt;                                 /<span style="color: #f92672">(</span>theta_m<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>+theta_m<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">))</span> * rTildeEdge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>
+2883a2961,2962
+&gt;       ! deep
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>, pointer :: rTildeCell, rTildeEdge
+2897a2977,2978
+&gt;       logical, pointer :: config_weak_temperature_gradient
+&gt;
+2953a3035,3037
+&gt;       ! deep
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeCell&#39;</span>, rTildeCell<span style="color: #f92672">)</span>
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeEdge&#39;</span>, rTildeEdge<span style="color: #f92672">)</span>
+2954a3039
+&gt;       call mpas_pool_get_config<span style="color: #f92672">(</span>configs, <span style="color: #e6db74">&#39;config_weak_temperature_gradient&#39;</span>, config_weak_temperature_gradient<span style="color: #f92672">)</span>
+2960a3046
+&gt;                              rTildeCell, rTildeEdge, &amp; ! deep
+2963c3049
+&lt;                              cellSolveStart, cellSolveEnd, vertexSolveStart, vertexSolveEnd, edgeSolveStart, edgeSolveEnd<span style="color: #f92672">)</span>
+---
+&gt;                              cellSolveStart, cellSolveEnd, vertexSolveStart, vertexSolveEnd, edgeSolveStart, edgeSolveEnd, config_weak_temperature_gradient<span style="color: #f92672">)</span>
+2973a3060
+&gt;                              rTildeCell, rTildeEdge, &amp; ! deep
+2976c3063
+&lt;                              cellSolveStart, cellSolveEnd, vertexSolveStart, vertexSolveEnd, edgeSolveStart, edgeSolveEnd<span style="color: #f92672">)</span>
+---
+&gt;                              cellSolveStart, cellSolveEnd, vertexSolveStart, vertexSolveEnd, edgeSolveStart, edgeSolveEnd, config_weak_temperature_gradient<span style="color: #f92672">)</span>
+3017a3105,3107
+&gt;       ! deep
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>nVertLevels,nCells+1<span style="color: #f92672">)</span> :: rTildeCell
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>nVertLevels,nEdges+1<span style="color: #f92672">)</span> :: rTildeEdge
+3035c3125
+&lt;
+---
+&gt;       logical :: config_weak_temperature_gradient
+3040a3131
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span> :: rTildeTmp1, rTildeTmp2
+3042,3043c3133,3137
+&lt;
+&lt;       <span style="color: #f8f8f2">rcv</span> <span style="color: #f92672">=</span> rgas/<span style="color: #f92672">(</span>cp-rgas<span style="color: #f92672">)</span>
+---
+&gt;       <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>config_weak_temperature_gradient<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;         <span style="color: #f8f8f2">rcv</span> <span style="color: #f92672">=</span> 0.0_RKIND
+&gt;       <span style="color: #66d9ef">else</span>
+&gt;         <span style="color: #f8f8f2">rcv</span> <span style="color: #f92672">=</span> rgas/<span style="color: #f92672">(</span>cp-rgas<span style="color: #f92672">)</span>
+&gt;       end <span style="color: #66d9ef">if</span>
+3083,3089c3177,3187
+&lt;                rtheta_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> rtheta_p_save<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> + rtheta_pp<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> &amp;
+&lt;                                  - dt * rho_zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * rt_diabatic_tend<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>
+&lt;                theta_m<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> <span style="color: #f92672">(</span>rtheta_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> + rtheta_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">))</span>/rho_zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>
+&lt;                exner<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> <span style="color: #f92672">(</span>zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)(</span>rgas/p0<span style="color: #f92672">)(</span>rtheta_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+rtheta_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)))</span>*rcv
+&lt;                ! pressure_p is perturbation pressure
+&lt;                pressure_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * rgas * <span style="color: #f92672">(</span>exner<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>rtheta_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+rtheta_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>  &amp;
+&lt;                                                           * <span style="color: #f92672">(</span>exner<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>-exner_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)))</span>
+---
+&gt;               rtheta_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> rtheta_p_save<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> + rtheta_pp<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> &amp;
+&gt;                     - dt * rho_zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * rt_diabatic_tend<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>
+&gt;               theta_m<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> <span style="color: #f92672">(</span>rtheta_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> + rtheta_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">))</span>/rho_zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>
+&gt;               ! deep Eq. <span style="color: #f92672">(</span>23<span style="color: #f92672">)</span>
+&gt;               exner<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> <span style="color: #f92672">(</span>zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>/rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>*2<span style="color: #f92672">(</span>rgas/p0<span style="color: #f92672">)(</span>rtheta_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+rtheta_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)))</span>rcv
+&gt;               ! pressure_p is perturbation pressure
+&gt;               ! deep Eq. <span style="color: #f92672">(</span>23<span style="color: #f92672">)</span>
+&gt;               pressure_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> / rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>2 * rgas &amp;
+&gt;                         *<span style="color: #f92672">(</span>exner<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>rtheta_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> + rtheta_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)(</span>&amp;
+&gt;                         exner<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>-exner_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)))</span>
+&gt;
+
+3113a3212,3221
+&gt;             <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>rTildeCell<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span> &gt; 1e-10<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;                 <span style="color: #f8f8f2">rTildeTmp1</span> <span style="color: #f92672">=</span> rTildeCell<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>
+&gt;             <span style="color: #66d9ef">else</span>
+&gt;                 <span style="color: #f8f8f2">rTildeTmp1</span> <span style="color: #f92672">=</span> 1.0
+&gt;             end <span style="color: #66d9ef">if</span>
+&gt;             <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>rTildeCell<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span> &gt; 1e-10<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;                 <span style="color: #f8f8f2">rTildeTmp2</span> <span style="color: #f92672">=</span> rTildeCell<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>
+&gt;             <span style="color: #66d9ef">else</span>
+&gt;                 <span style="color: #f8f8f2">rTildeTmp2</span> <span style="color: #f92672">=</span> 1.0
+&gt;             end <span style="color: #66d9ef">if</span>
+3116c3224,3225
+&lt;             u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> 2.*ru<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>/<span style="color: #f92672">(</span>rho_zz<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>+rho_zz<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">))</span>
+---
+&gt;              u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> 2.*ru<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>/<span style="color: #f92672">(</span>rho_zz<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>/rTildeTmp12+rho_zz<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>/rTildeTmp22<span style="color: #f92672">)</span> &amp;
+&gt;                          /rTildeEdge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>
+
+4346a4456,4458
+&gt;       ! deep
+&gt;       real<span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>, pointer :: rTildeCell, rTildeLayer, rTildeEdge
+&gt;
+4359a4472,4474
+&gt;       logical, pointer :: config_deep_atmosphere
+&gt;       logical, pointer :: on_a_sphere
+&gt;
+
+4384a4500,4502
+&gt;       call mpas_pool_get_config<span style="color: #f92672">(</span>configs, <span style="color: #e6db74">&#39;config_deep_atmosphere&#39;</span>, config_deep_atmosphere<span style="color: #f92672">)</span>
+&gt;       call mpas_pool_get_config<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;on_a_sphere&#39;</span>, on_a_sphere<span style="color: #f92672">)</span>
+&gt;
+4492a4611,4615
+&gt;       ! deep
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeCell&#39;</span>, rTildeCell<span style="color: #f92672">)</span>
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeLayer&#39;</span>, rTildeLayer<span style="color: #f92672">)</span>
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeEdge&#39;</span>, rTildeEdge<span style="color: #f92672">)</span>
+&gt;
+4515a4639
+&gt;          rTildeCell, rTildeLayer, rTildeEdge, &amp; ! deep
+4520a4645
+&gt;          config_deep_atmosphere, on_a_sphere, &amp;
+4542a4668
+&gt;       rTildeCell, rTildeLayer, rTildeEdge, &amp; ! deep
+4547a4674
+&gt;       config_deep_atmosphere, on_a_sphere, &amp;
+4643a4771,4772
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span> :: rTildeTmp1, rTildeTmp2
+&gt;
+4653a4783,4787
+&gt;       ! deep
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>nVertLevels,nCells+1<span style="color: #f92672">)</span> :: rTildeCell
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>nVertLevels+1,nCells+1<span style="color: #f92672">)</span> :: rTildeLayer
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>nVertLevels,nEdges+1<span style="color: #f92672">)</span> :: rTildeEdge
+&gt;
+4669a4804,4805
+&gt;       logical, intent<span style="color: #f92672">(</span>in<span style="color: #f92672">)</span> :: config_deep_atmosphere
+&gt;       logical, intent<span style="color: #f92672">(</span>in<span style="color: #f92672">)</span> :: on_a_sphere
+4691c4827
+&lt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span> :: inv_r_earth
+---
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span> :: inv_r_earth, r_c
+4716d4851
+&lt;       <span style="color: #f8f8f2">inv_r_earth</span> <span style="color: #f92672">=</span> 1.0_RKIND / r_earth
+4717a4853,4857
+&gt;       <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>on_a_sphere<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+
+&gt;          <span style="color: #f8f8f2">inv_r_earth</span> <span style="color: #f92672">=</span> 1.0_RKIND / r_earth
+&gt;       <span style="color: #66d9ef">else</span> ! on a plane, r_earth -&gt; infinity
+
+&gt;          <span style="color: #f8f8f2">inv_r_earth</span> <span style="color: #f92672">=</span> 0.0_RKIND
+&gt;       endif
+4814c4954
+&lt;             dpdz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> -gravity<span style="color: #f92672">(</span>rb<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)(</span>qtot<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">))</span> + rr_save<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)(</span>1.+qtot<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)))</span>
+---
+&gt;             dpdz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> -<span style="color: #f92672">(</span>gravity/<span style="color: #f92672">(</span>rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>**2<span style="color: #f92672">))(</span>rb<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)(</span>qtot<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">))</span> + rr_save<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)(</span>1.+qtot<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)))</span>
+4835,4836c4975,4977
+&lt;                tend_u_euler<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span>  - cqu<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)(</span> <span style="color: #f92672">(</span>pp<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>-pp<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">))</span>invDcEdge<span style="color: #f92672">(</span>iEdge<span style="color: #f92672">)</span>/<span style="color: #f92672">(</span>.5<span style="color: #f92672">(</span>zz<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>+zz<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)))</span> &amp;
+&lt;                                               -0.5zxu<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)(</span>dpdz<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>+dpdz<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">))</span> <span style="color: #f92672">)</span>
+---
+&gt;               ! deep Eq. <span style="color: #f92672">(</span>17<span style="color: #f92672">)</span>
+&gt;               tend_u_euler<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span>  - cqu<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)(</span> <span style="color: #f92672">(</span>pp<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>-pp<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">))</span>invDcEdge<span style="color: #f92672">(</span>iEdge<span style="color: #f92672">)</span>/<span style="color: #f92672">(</span>.5<span style="color: #f92672">(</span>zz<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>+zz<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)))</span> &amp;
+&gt;                     -0.5zxu<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)(</span>dpdz<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>+dpdz<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">))</span>/rTildeEdge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>2 <span style="color: #f92672">)</span>
+4857c4998,4999
+&lt;             tend_u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> - rdzw<span style="color: #f92672">(</span>k<span style="color: #f92672">)(</span>wduz<span style="color: #f92672">(</span>k+1<span style="color: #f92672">)</span>-wduz<span style="color: #f92672">(</span>k<span style="color: #f92672">))</span> !  first use of tend_u
+---
+&gt;             ! deep Eq. <span style="color: #f92672">(</span>17<span style="color: #f92672">)</span>
+&gt;             tend_u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> - rdzw<span style="color: #f92672">(</span>k<span style="color: #f92672">)(</span>wduz<span style="color: #f92672">(</span>k+1<span style="color: #f92672">)</span>-wduz<span style="color: #f92672">(</span>k<span style="color: #f92672">))</span>/rTildeEdge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> !  first use of tend_u
+4878,4889c5020,5030
+&lt;             tend_u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> tend_u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> + rho_edge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>* <span style="color: #f92672">(</span>q<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span> - <span style="color: #f92672">(</span>ke<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span> - ke<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">))</span>       &amp;
+&lt;                                                                  * invDcEdge<span style="color: #f92672">(</span>iEdge<span style="color: #f92672">))</span>                            &amp;
+&lt;                                              - u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>0.5<span style="color: #f92672">(</span>h_divergence<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>+h_divergence<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">))</span>
+&lt; <span style="color: #75715e">#ifdef CURVATURE</span>
+&lt;             ! curvature terms <span style="color: #66d9ef">for </span>the sphere
+&lt;             tend_u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> tend_u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> &amp;
+&lt;                              - 2.omegacos<span style="color: #f92672">(</span>angleEdge<span style="color: #f92672">(</span>iEdge<span style="color: #f92672">))</span>cos<span style="color: #f92672">(</span>latEdge<span style="color: #f92672">(</span>iEdge<span style="color: #f92672">))</span>  &amp;
+&lt;                                rho_edge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>.25<span style="color: #f92672">(</span>w<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>+w<span style="color: #f92672">(</span>k+1,cell1<span style="color: #f92672">)</span>+w<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>+w<span style="color: #f92672">(</span>k+1,cell2<span style="color: #f92672">))</span>          &amp;
+&lt;                              - u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>.25<span style="color: #f92672">(</span>w<span style="color: #f92672">(</span>k+1,cell1<span style="color: #f92672">)</span>+w<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>+w<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>+w<span style="color: #f92672">(</span>k+1,cell2<span style="color: #f92672">))</span>                  &amp;
+&lt;                                *rho_edge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> * inv_r_earth
+&lt; <span style="color: #75715e">#endif</span>
+&lt;          end <span style="color: #66d9ef">do</span>
+---
+&gt;             ! deep Eq. <span style="color: #f92672">(</span>17<span style="color: #f92672">)</span>.
+&gt;             <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>rTildeCell<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span> &gt; 1e-10<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;                 <span style="color: #f8f8f2">rTildeTmp1</span> <span style="color: #f92672">=</span> rTildeCell<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>
+&gt;             <span style="color: #66d9ef">else</span>
+&gt;                 <span style="color: #f8f8f2">rTildeTmp1</span> <span style="color: #f92672">=</span> 1.0
+&gt;             end <span style="color: #66d9ef">if</span>
+&gt;             <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>rTildeCell<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span> &gt; 1e-10<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;                 <span style="color: #f8f8f2">rTildeTmp2</span> <span style="color: #f92672">=</span> rTildeCell<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>
+&gt;             <span style="color: #66d9ef">else</span>
+&gt;                 <span style="color: #f8f8f2">rTildeTmp2</span> <span style="color: #f92672">=</span> 1.0
+&gt;             end <span style="color: #66d9ef">if</span>
+4890a5032,5048
+&gt;             tend_u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> tend_u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> + 0.5 * <span style="color: #f92672">(</span>rho_zz<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>/rTildeTmp12 &amp;
+&gt;                 +rho_zz<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>/rTildeTmp2**2<span style="color: #f92672">)</span> &amp;
+&gt;                 * <span style="color: #f92672">(</span>q<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span> - <span style="color: #f92672">(</span>ke<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>-ke<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">))</span>invDcEdge<span style="color: #f92672">(</span>iEdge<span style="color: #f92672">))</span> &amp;
+&gt;                 - u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>0.5<span style="color: #f92672">(</span>h_divergence<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>+h_divergence<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">))</span>/rTildeEdge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>
+&gt;          end <span style="color: #66d9ef">do</span>
+&gt;          ! curvature terms <span style="color: #66d9ef">for </span>the sphere
+&gt;          ! deep Eq. <span style="color: #f92672">(</span>17<span style="color: #f92672">)</span>
+&gt;          <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>config_deep_atmosphere<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;              <span style="color: #66d9ef">do </span><span style="color: #f8f8f2">k</span><span style="color: #f92672">=</span>1,nVertLevels
+&gt;                  tend_u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> tend_u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> + <span style="color: #f92672">(</span>&amp;
+&gt;                             - 2.omegacos<span style="color: #f92672">(</span>angleEdge<span style="color: #f92672">(</span>iEdge<span style="color: #f92672">))</span>cos<span style="color: #f92672">(</span>latEdge<span style="color: #f92672">(</span>iEdge<span style="color: #f92672">))</span> &amp;
+&gt;                              .25<span style="color: #f92672">(</span>w<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>+w<span style="color: #f92672">(</span>k+1,cell1<span style="color: #f92672">)</span>+w<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>+w<span style="color: #f92672">(</span>k+1,cell2<span style="color: #f92672">))</span> &amp;
+&gt;                             - u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>.25<span style="color: #f92672">(</span>w<span style="color: #f92672">(</span>k+1,cell1<span style="color: #f92672">)</span>+w<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>+w<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>+w<span style="color: #f92672">(</span>k+1,cell2<span style="color: #f92672">))</span>&amp;
+&gt;                             * inv_r_earth / rTildeEdge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">)</span> &amp;
+&gt;                             * rho_edge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> / rTildeEdge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>
+&gt;              end <span style="color: #66d9ef">do</span>
+&gt;          end <span style="color: #66d9ef">if</span>
+5127,5140d5284
+&lt; <span style="color: #75715e">#ifdef CURVATURE</span>
+&lt;       <span style="color: #66d9ef">do </span><span style="color: #f8f8f2">iCell</span> <span style="color: #f92672">=</span> cellSolveStart, cellSolveEnd
+&lt; !DIR<span style="color: #f8f8f2">$ </span>IVDEP
+&lt;          <span style="color: #66d9ef">do </span><span style="color: #f8f8f2">k</span><span style="color: #f92672">=</span>2,nVertLevels
+&lt;             tend_w<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> tend_w<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> + <span style="color: #f92672">(</span>rho_zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>*fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>+rho_zz<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)</span>fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">))</span>          &amp;
+&lt;                                       <span style="color: #f92672">(</span> <span style="color: #f92672">(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*ur_cell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*ur_cell<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>**2.             &amp;
+&lt;                                        +<span style="color: #f92672">(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*vr_cell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*vr_cell<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>**2. <span style="color: #f92672">)</span>/r_earth   &amp;
+&lt;                                 + 2.omegacos<span style="color: #f92672">(</span>latCell<span style="color: #f92672">(</span>iCell<span style="color: #f92672">))</span>                                              &amp;
+&lt;                                        *<span style="color: #f92672">(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*ur_cell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*ur_cell<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>                 &amp;
+&lt;                                        *<span style="color: #f92672">(</span>rho_zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>+rho_zz<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)</span>fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">))</span>
+&lt;
+&lt;          end <span style="color: #66d9ef">do</span>
+&lt;       end <span style="color: #66d9ef">do</span>
+&lt; <span style="color: #75715e">#endif</span>
+5242,5244c5386,5393
+&lt;               tend_w_euler<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> tend_w_euler<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> - cqw<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)(</span>   &amp;
+&lt;                                            rdzu<span style="color: #f92672">(</span>k<span style="color: #f92672">)(</span>pp<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>-pp<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span> &amp;
+&lt;                                          - <span style="color: #f92672">(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>dpdz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> + fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>dpdz<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span> <span style="color: #f92672">)</span>  ! dpdz is the buoyancy term here.
+---
+&gt;                   ! deep Eq. <span style="color: #f92672">(</span>20<span style="color: #f92672">)</span>
+&gt;                  !!  tend_w_euler<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> tend_w_euler<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> - cqw<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)(</span>   &amp;
+&gt;                  !!                               rdzu<span style="color: #f92672">(</span>k<span style="color: #f92672">)(</span>pp<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>-pp<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span> &amp;
+&gt;                  !!                             <span style="color: #f92672">(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>**2+fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>rTildeCell<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)</span>**2<span style="color: #f92672">)</span> &amp;
+&gt;                  !!                            - <span style="color: #f92672">(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>dpdz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> + fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>dpdz<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span> <span style="color: #f92672">)</span>  ! dpdz is the buoyancy term here.
+&gt;                  tend_w_euler<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> tend_w_euler<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> - cqw<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)(</span>   &amp;
+&gt;                             rdzu<span style="color: #f92672">(</span>k<span style="color: #f92672">)(</span>pp<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>-pp<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))(</span>rTildeLayer<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>2<span style="color: #f92672">)</span> &amp;
+&gt;                             - <span style="color: #f92672">(</span>fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*dpdz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> + fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*dpdz<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span> <span style="color: #f92672">)</span>  ! dpdz is the buoyancy term here.
+5248a5398,5414
+&gt;       <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>config_deep_atmosphere<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;          ! call mpas_log_write<span style="color: #f92672">(</span><span style="color: #e6db74">&#39;deep_atmosphere NCT terms for w&#39;</span><span style="color: #f92672">)</span>
+&gt;          <span style="color: #66d9ef">do </span><span style="color: #f8f8f2">iCell</span> <span style="color: #f92672">=</span> cellSolveStart, cellSolveEnd
+&gt;            <span style="color: #66d9ef">do </span><span style="color: #f8f8f2">k</span><span style="color: #f92672">=</span>2,nVertLevels
+&gt;              ! deep Eq. <span style="color: #f92672">(</span>20<span style="color: #f92672">)</span>
+&gt;               !! <span style="color: #f8f8f2">r_c</span> <span style="color: #f92672">=</span> fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>+fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>*rTildeCell<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)</span>
+&gt;              <span style="color: #f8f8f2">r_c</span> <span style="color: #f92672">=</span> rTildeLayer<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>
+&gt;              tend_w<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> tend_w<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> + <span style="color: #f92672">(</span>r_c2<span style="color: #f92672">)(</span>&amp;
+&gt;                                 fzm<span style="color: #f92672">(</span>k<span style="color: #f92672">)(</span> <span style="color: #f92672">(</span>ur_cell<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)</span>**2 + vr_cell<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)</span>**2<span style="color: #f92672">)</span>*inv_r_earth/r_c  &amp;
+&gt;                                  + 2.omegacos<span style="color: #f92672">(</span>latCell<span style="color: #f92672">(</span>iCell<span style="color: #f92672">))</span>*ur_cell<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">))</span>&amp;
+&gt;                                  rho_zz<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)</span>/rTildeCell<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)</span>**2&amp;
+&gt;                                  +fzp<span style="color: #f92672">(</span>k<span style="color: #f92672">)(</span> <span style="color: #f92672">(</span>ur_cell<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)</span>**2 + vr_cell<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)</span>**2<span style="color: #f92672">)</span>*inv_r_earth/r_c  &amp;
+&gt;                                   + 2.omegacos<span style="color: #f92672">(</span>latCell<span style="color: #f92672">(</span>iCell<span style="color: #f92672">))</span>*ur_cell<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>&amp;
+&gt;                                   *rho_zz<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)</span>/rTildeCell<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">)</span>2 <span style="color: #f92672">)</span>
+&gt;            end <span style="color: #66d9ef">do</span>
+&gt;          end <span style="color: #66d9ef">do</span>
+&gt;       end <span style="color: #66d9ef">if</span>
+5258,5259c5424,5425
+&lt;                                            <span style="color: #f92672">(</span>w<span style="color: #f92672">(</span>k+1,iCell<span style="color: #f92672">)</span>-w<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">))</span>*rdzw<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>                              &amp;
+&lt;                                           -<span style="color: #f92672">(</span>w<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)</span>-w<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>*rdzw<span style="color: #f92672">(</span>k-1<span style="color: #f92672">)</span> <span style="color: #f92672">)</span>*rdzu<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>
+---
+&gt;                   <span style="color: #f92672">(</span>w<span style="color: #f92672">(</span>k+1,iCell<span style="color: #f92672">)</span>-w<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">))</span>*rdzw<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span> &amp;
+&gt;                    -<span style="color: #f92672">(</span>w<span style="color: #f92672">(</span>k  ,iCell<span style="color: #f92672">)</span>-w<span style="color: #f92672">(</span>k-1,iCell<span style="color: #f92672">))</span>*rdzw<span style="color: #f92672">(</span>k-1<span style="color: #f92672">)</span> <span style="color: #f92672">)</span>rdzu<span style="color: #f92672">(</span>k<span style="color: #f92672">)</span>
+5498a5665,5666
+&gt;       ! deep
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>, pointer :: rTildeCell, rTildeEdge, rTildeVertex
+5545a5714,5718
+&gt;       ! deep
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeCell&#39;</span>, rTildeCell<span style="color: #f92672">)</span>
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeEdge&#39;</span>, rTildeEdge<span style="color: #f92672">)</span>
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeVertex&#39;</span>, rTildeVertex<span style="color: #f92672">)</span>
+&gt;
+5554a5728
+&gt;                rTildeCell, rTildeEdge, rTildeVertex, &amp; ! deep
+5566a5741
+&gt;             rTildeCell, rTildeEdge, rTildeVertex, &amp; ! deep
+5603a5779,5783
+&gt;
+
+&gt;       ! deep
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>nVertLevels,nCells+1<span style="color: #f92672">)</span> :: rTildeCell
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>nVertLevels,nEdges+1<span style="color: #f92672">)</span> :: rTildeEdge
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>nVertLevels,nVertices+1<span style="color: #f92672">)</span> :: rTildeVertex
+5664c5844,5845
+&lt;                vorticity<span style="color: #f92672">(</span>k,iVertex<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> vorticity<span style="color: #f92672">(</span>k,iVertex<span style="color: #f92672">)</span> + s * u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>
+---
+&gt;               ! deep Eq. <span style="color: #f92672">(</span>12<span style="color: #f92672">)</span>
+&gt;               vorticity<span style="color: #f92672">(</span>k,iVertex<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> vorticity<span style="color: #f92672">(</span>k,iVertex<span style="color: #f92672">)</span> + s * u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> * rTildeEdge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>
+5669c5850,5851
+&lt;             vorticity<span style="color: #f92672">(</span>k,iVertex<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> vorticity<span style="color: #f92672">(</span>k,iVertex<span style="color: #f92672">)</span> * invAreaTriangle<span style="color: #f92672">(</span>iVertex<span style="color: #f92672">)</span>
+---
+&gt;            ! deep Eq. <span style="color: #f92672">(</span>12<span style="color: #f92672">)</span>
+&gt;            vorticity<span style="color: #f92672">(</span>k,iVertex<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> vorticity<span style="color: #f92672">(</span>k,iVertex<span style="color: #f92672">)</span> * invAreaTriangle<span style="color: #f92672">(</span>iVertex<span style="color: #f92672">)</span> / rTildeVertex<span style="color: #f92672">(</span>k,iVertex<span style="color: #f92672">)</span>**2
+5684c5866,5867
+&lt;               divergence<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> divergence<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> + s * u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>
+---
+&gt;               ! deep Eq. <span style="color: #f92672">(</span>11<span style="color: #f92672">)</span>
+&gt;               divergence<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> divergence<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> + s * u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> * rTildeEdge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span>
+5689c5872,5873
+&lt;             divergence<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> divergence<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * r
+---
+&gt;            ! deep Eq. <span style="color: #f92672">(</span>11<span style="color: #f92672">)</span>
+&gt;            divergence<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> divergence<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * r / rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>**2
+5879c6063
+&lt;
+---
+&gt;       use cam_logfile,         only: iulog
+5915a6100,6105
+&gt;
+
+&gt;       ! deep
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>, pointer :: rTildeCell
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>, pointer :: rTildeEdge
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span> :: rTildeTmp1, rTildeTmp2
+&gt;
+5918a6109
+&gt;       logical, pointer :: config_weak_temperature_gradient
+5955a6147,6151
+&gt;       ! deep
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeCell&#39;</span>, rTildeCell<span style="color: #f92672">)</span>
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeEdge&#39;</span>, rTildeEdge<span style="color: #f92672">)</span>
+&gt;       call mpas_pool_get_config<span style="color: #f92672">(</span>configs, <span style="color: #e6db74">&#39;config_weak_temperature_gradient&#39;</span>, config_weak_temperature_gradient<span style="color: #f92672">)</span>
+&gt;
+5957c6153,6157
+&lt;       <span style="color: #f8f8f2">rcv</span> <span style="color: #f92672">=</span> rgas / <span style="color: #f92672">(</span>cp-rgas<span style="color: #f92672">)</span>
+---
+&gt;       <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>config_weak_temperature_gradient<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+
+&gt;         <span style="color: #f8f8f2">rcv</span> <span style="color: #f92672">=</span> 0.0_RKIND
+&gt;       <span style="color: #66d9ef">else</span>
+&gt;         <span style="color: #f8f8f2">rcv</span> <span style="color: #f92672">=</span> rgas / <span style="color: #f92672">(</span>cp-rgas<span style="color: #f92672">)</span>
+&gt;       end <span style="color: #66d9ef">if</span>
+5963c6163,6165
+&lt;             rho_zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> rho<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> / zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>
+---
+&gt;             ! deep Eq. <span style="color: #f92672">(</span>13<span style="color: #f92672">)</span>
+&gt;             rho_zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> rho<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>**2 / zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>
+&gt;             !write<span style="color: #f92672">(</span>iulog,<span style="color: #f92672">)</span> <span style="color: #e6db74">&quot;            k, cell1, rTildeCell&quot;</span>,k, <span style="color: #e6db74">&#39;    &#39;</span>, iCell, <span style="color: #e6db74">&#39;         &#39;</span>, rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>2
+5973c6175,6188
+&lt;             ru<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> 0.5 * u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> * <span style="color: #f92672">(</span>rho_zz<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span> + rho_zz<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">))</span>
+---
+&gt;            ! deep Eq. <span style="color: #f92672">(</span>14<span style="color: #f92672">)</span>
+&gt;            <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>rTildeCell<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span> &gt; 1e-10<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;             <span style="color: #f8f8f2">rTildeTmp1</span> <span style="color: #f92672">=</span> rTildeCell<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span>
+&gt;            <span style="color: #66d9ef">else</span>
+&gt;             <span style="color: #f8f8f2">rTildeTmp1</span> <span style="color: #f92672">=</span> 1.0_RKIND
+&gt;            end <span style="color: #66d9ef">if</span>
+&gt;
+&gt;            <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span>rTildeCell<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span> &gt; 1e-10<span style="color: #f92672">)</span> <span style="color: #66d9ef">then</span>
+&gt;              <span style="color: #f8f8f2">rTildeTmp2</span> <span style="color: #f92672">=</span> rTildeCell<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span>
+&gt;            <span style="color: #66d9ef">else</span>
+&gt;              <span style="color: #f8f8f2">rTildeTmp2</span> <span style="color: #f92672">=</span> 1.0_RKIND
+&gt;            end <span style="color: #66d9ef">if</span>
+&gt;            ru<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> 0.5 * u<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> * rTildeEdge<span style="color: #f92672">(</span>k,iEdge<span style="color: #f92672">)</span> * <span style="color: #f92672">(</span>rho_zz<span style="color: #f92672">(</span>k,cell1<span style="color: #f92672">)</span> / rTildeTmp12 &amp;
+&gt;                             + rho_zz<span style="color: #f92672">(</span>k,cell2<span style="color: #f92672">)</span> / rTildeTmp22<span style="color: #f92672">)</span>
+6026,6027c6241,6244
+&lt;             exner<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> <span style="color: #f92672">(</span>zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * <span style="color: #f92672">(</span>rgas/p0<span style="color: #f92672">)</span> * <span style="color: #f92672">(</span>rtheta_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> + rtheta_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)))</span>**rcv
+&lt;             exner_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> <span style="color: #f92672">(</span>zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * <span style="color: #f92672">(</span>rgas/p0<span style="color: #f92672">)</span> * <span style="color: #f92672">(</span>rtheta_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)))</span>**rcv  ! WCS addition 20180403
+---
+&gt;            ! deep Eq. <span style="color: #f92672">(</span>23<span style="color: #f92672">)</span>
+&gt;            exner<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> <span style="color: #f92672">(</span>zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> / rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>**2 * <span style="color: #f92672">(</span>rgas/p0<span style="color: #f92672">)</span> * <span style="color: #f92672">(</span>rtheta_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> + rtheta_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)))</span>**rcv
+&gt;            ! deep Eq. <span style="color: #f92672">(</span>23<span style="color: #f92672">)</span>
+&gt;            exner_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> <span style="color: #f92672">(</span>zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> / rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>**2 * <span style="color: #f92672">(</span>rgas/p0<span style="color: #f92672">)</span> * <span style="color: #f92672">(</span>rtheta_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)))</span>**rcv  ! WCS addition 20180403
+6033,6037c6250,6256
+&lt;             pressure_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * rgas &amp;
+&lt;                                                * <span style="color: #f92672">(</span>  exner<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * rtheta_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> &amp;
+&lt;                                                   + rtheta_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * <span style="color: #f92672">(</span>exner<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> - exner_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">))</span> &amp;
+&lt;                                                  <span style="color: #f92672">)</span>
+&lt;             pressure_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * rgas * exner_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * rtheta_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>      ! WCS addition 20180403
+---
+&gt;            ! deep Eq. <span style="color: #f92672">(</span>23<span style="color: #f92672">)</span>
+&gt;            pressure_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> / rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>**2 * rgas &amp;
+&gt;                         * <span style="color: #f92672">(</span>  exner<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * rtheta_p<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> &amp;
+&gt;                          + rtheta_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * <span style="color: #f92672">(</span>exner<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> - exner_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">))</span> &amp;
+&gt;                         <span style="color: #f92672">)</span>
+&gt;            ! deep Eq. <span style="color: #f92672">(</span>23<span style="color: #f92672">)</span>
+&gt;            pressure_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> / rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>**2 * rgas * exner_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * rtheta_base<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>      ! WCS addition 20180403
+diff -r CAM_Jan22_backup/src/dynamics/mpas/dycore/src/core_atmosphere/mpas_atm_core.F CAM_Jan22_deep_mpas_fix/src/dynamics/mpas/dycore/src/core_atmosphere/mpas_atm_core.F
+39a40
+&gt;       integer :: i
+190,193d190
+&lt;
+&lt;       !
+&lt;       ! Prepare the dynamics <span style="color: #66d9ef">for </span>integration
+&lt;       !
+195d191
+&lt;
+295a292
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:<span style="color: #f92672">)</span>, pointer :: meshScalingRegionalCell, meshScalingRegionalEdge
+510a508,510
+&gt;       ! For high-frequency diagnostics output
+&gt;       character <span style="color: #f92672">(</span><span style="color: #f8f8f2">len</span><span style="color: #f92672">=</span>StrKIND<span style="color: #f92672">)</span> :: tempfilename
+&gt;
+584d583
+&lt;
+731d729
+&lt;
+782a781,782
+&gt;       ! deep
+&gt;       real <span style="color: #f92672">(</span><span style="color: #f8f8f2">kind</span><span style="color: #f92672">=</span>RKIND<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>, pointer :: rTildeCell
+800a801,802
+&gt;       ! deep
+&gt;       call mpas_pool_get_array<span style="color: #f92672">(</span>mesh, <span style="color: #e6db74">&#39;rTildeCell&#39;</span>, rTildeCell<span style="color: #f92672">)</span>
+805c807,808
+&lt;             rho<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> rho_zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>
+---
+&gt;             ! deep Eq. <span style="color: #f92672">(</span>13<span style="color: #f92672">)</span>
+&gt;             rho<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> rho_zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> * zz<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span> / rTildeCell<span style="color: #f92672">(</span>k,iCell<span style="color: #f92672">)</span>**2
+817c820,821
+&lt;    ! Input: diag_physics  - contains physics diagnostic fields
+---
+&gt;    ! Input: diag          - contains dynamics diagnostic fields
+&gt;    !        daig_physics  - contains physics diagnostic fields
+908d911
+&lt;
+913d915
+&lt;
+1323d1324
+&lt;
+1339d1339
+&lt;
+diff -r CAM_Jan22_backup/src/dynamics/mpas/dycore/src/core_atmosphere/Registry.xml CAM_Jan22_deep_mpas_fix/src/dynamics/mpas/dycore/src/core_atmosphere/Registry.xml
+248a249,263
+&gt;                 &lt;nml_option <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;config_deep_atmosphere&quot;</span> <span style="color: #f8f8f2">type</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;logical&quot;</span> <span style="color: #f8f8f2">default_value</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;false&quot;</span> <span style="color: #f8f8f2">in_defaults</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;true&quot;</span>
+&gt; 		     <span style="color: #f8f8f2">units</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;-&quot;</span>
+&gt;                      <span style="color: #f8f8f2">description</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;Deep atmosphere configuration&quot;</span>
+&gt; 		     <span style="color: #f8f8f2">possible_values</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;.true. or .false.&quot;</span>/&gt;
+&gt;                 &lt;nml_option <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;on_a_sphere&quot;</span> <span style="color: #f8f8f2">type</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;logical&quot;</span> <span style="color: #f8f8f2">default_value</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;true&quot;</span> <span style="color: #f8f8f2">in_defaults</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;true&quot;</span>
+&gt; 		     <span style="color: #f8f8f2">units</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;-&quot;</span>
+&gt;                      <span style="color: #f8f8f2">description</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;Sphereical geometry?&quot;</span>
+&gt; 		     <span style="color: #f8f8f2">possible_values</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;.true. or .false.&quot;</span>/&gt;
+&gt;
+&gt;
+&gt; 		&lt;nml_option <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;config_weak_temperature_gradient&quot;</span> <span style="color: #f8f8f2">type</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;logical&quot;</span> <span style="color: #f8f8f2">default_value</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;false&quot;</span> <span style="color: #f8f8f2">in_defaults</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;true&quot;</span>
+&gt; 		     <span style="color: #f8f8f2">units</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;-&quot;</span>
+&gt; 		     <span style="color: #f8f8f2">description</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;To use barotropic fluid for tropical benchmarking tests&quot;</span>
+&gt; 		     <span style="color: #f8f8f2">possible_values</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;.true. or .false.&quot;</span>/&gt;
+&gt; 											
+
+250a266
+&gt;
+
+527a544,547
+&gt; 			&lt;var <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;rTildeCell&quot;</span>/&gt;
+&gt; 			&lt;var <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;rTildeLayer&quot;</span>/&gt;
+&gt; 			&lt;var <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;rTildeEdge&quot;</span>/&gt;
+&gt; 			&lt;var <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;rTildeVertex&quot;</span>/&gt;
+857a878,882
+&gt; 			&lt;var <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;rTildeCell&quot;</span>/&gt;
+&gt; 			&lt;var <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;rTildeLayer&quot;</span>/&gt;
+&gt; 			&lt;var <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;rTildeEdge&quot;</span>/&gt;
+&gt; 			&lt;var <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;rTildeVertex&quot;</span>/&gt;
+&gt; 	
+1426a1452,1463
+&gt;          &lt;var <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;rTildeCell&quot;</span> <span style="color: #f8f8f2">type</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;real&quot;</span> <span style="color: #f8f8f2">dimensions</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;nVertLevels nCells&quot;</span> <span style="color: #f8f8f2">units</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;???&quot;</span>
+&gt; 		     <span style="color: #f8f8f2">description</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;Nondimensional radius for cells&quot;</span>/&gt;
+&gt;
+&gt; 		&lt;var <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;rTildeLayer&quot;</span> <span style="color: #f8f8f2">type</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;real&quot;</span> <span style="color: #f8f8f2">dimensions</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;nVertLevelsP1 nCells&quot;</span> <span style="color: #f8f8f2">units</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;???&quot;</span>
+&gt;                      <span style="color: #f8f8f2">description</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;Nondimensional radius for cell layer (w) points&quot;</span>/&gt;
+&gt;
+&gt; 		&lt;var <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;rTildeEdge&quot;</span> <span style="color: #f8f8f2">type</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;real&quot;</span> <span style="color: #f8f8f2">dimensions</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;nVertLevels nEdges&quot;</span> <span style="color: #f8f8f2">units</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;-&quot;</span>
+&gt; 		     <span style="color: #f8f8f2">description</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;Nondimensional radius for edges&quot;</span>/&gt;
+&gt;
+&gt;                 &lt;var <span style="color: #f8f8f2">name</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;rTildeVertex&quot;</span> <span style="color: #f8f8f2">type</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;real&quot;</span> <span style="color: #f8f8f2">dimensions</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;nVertLevels nVertices&quot;</span> <span style="color: #f8f8f2">units</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;???&quot;</span>
+&gt;                      <span style="color: #f8f8f2">description</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;Nondimensional radius for vertices&quot;</span>/&gt;
+&gt;
+diff -r CAM_Jan22_backup/src/dynamics/mpas/dycore/src/operators/mpas_vector_operations.F CAM_Jan22_deep_mpas_fix/src/dynamics/mpas/dycore/src/operators/mpas_vector_operations.F
+883a884,886
+&gt;         ! TODO: For periodic boundaries, locate the outer cell using the mirror image of inner cell about the edge.
+&gt;         !       The current algorithm <span style="color: #66d9ef">for </span>locating the outer cell introduces large truncation error
+&gt;         !       because x_period or y_period are much larger than dcEdge.
+diff -r CAM_Jan22_backup/src/dynamics/mpas/dyn_comp.F90 CAM_Jan22_deep_mpas_fix/src/dynamics/mpas/dyn_comp.F90
+133c133,136
+&lt;
+---
+&gt;    real<span style="color: #f92672">(</span>r8<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>,   pointer :: rTildeVertex
+&gt;    real<span style="color: #f92672">(</span>r8<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>,   pointer :: rTildeCell
+&gt;    real<span style="color: #f92672">(</span>r8<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>,   pointer :: rTildeLayer
+&gt;    real<span style="color: #f92672">(</span>r8<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>,   pointer :: rTildeEdge
+199a203,207
+&gt;    real<span style="color: #f92672">(</span>r8<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>,   pointer :: rTildeVertex
+&gt;    real<span style="color: #f92672">(</span>r8<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>,   pointer :: rTildeCell
+&gt;    real<span style="color: #f92672">(</span>r8<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>,   pointer :: rTildeLayer
+&gt;    real<span style="color: #f92672">(</span>r8<span style="color: #f92672">)</span>, dimension<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>,   pointer :: rTildeEdge
+&gt;
+317c325
+&lt;    use cam_mpas_subdriver, only : domain_ptr, cam_mpas_init_phase4
+---
+&gt;    use cam_mpas_subdriver, only : domain_ptr, cam_mpas_init_phase4, cam_mpas_update_halo
+455a464
+&gt;
+
+456a466,469
+&gt;    call mpas_pool_get_array<span style="color: #f92672">(</span>mesh_pool,  <span style="color: #e6db74">&#39;rTildeLayer&#39;</span>,               dyn_in % rTildeLayer <span style="color: #f92672">)</span>
+&gt;    call mpas_pool_get_array<span style="color: #f92672">(</span>mesh_pool,  <span style="color: #e6db74">&#39;rTildeCell&#39;</span>,               dyn_in % rTildeCell <span style="color: #f92672">)</span>
+&gt;    call mpas_pool_get_array<span style="color: #f92672">(</span>mesh_pool,  <span style="color: #e6db74">&#39;rTildeVertex&#39;</span>,               dyn_in % rTildeVertex <span style="color: #f92672">)</span>
+&gt;    call mpas_pool_get_array<span style="color: #f92672">(</span>mesh_pool,  <span style="color: #e6db74">&#39;rTildeEdge&#39;</span>,               dyn_in % rTildeEdge <span style="color: #f92672">)</span>
+484a498,501
+&gt;    dyn_out % <span style="color: #f8f8f2">rTildeLayer</span> <span style="color: #f92672">=</span>&gt; dyn_in % rTildeLayer
+&gt;    dyn_out % <span style="color: #f8f8f2">rTildeCell</span> <span style="color: #f92672">=</span>&gt; dyn_in % rTildeCell
+&gt;    dyn_out % <span style="color: #f8f8f2">rTildeVertex</span> <span style="color: #f92672">=</span>&gt; dyn_in % rTildeVertex
+&gt;    dyn_out % <span style="color: #f8f8f2">rTildeEdge</span> <span style="color: #f92672">=</span>&gt; dyn_in % rTildeEdge
+514c531,534
+&lt;
+---
+&gt;    call cam_mpas_update_halo<span style="color: #f92672">(</span><span style="color: #e6db74">&quot;rTildeCell&quot;</span>, endrun<span style="color: #f92672">)</span>
+&gt;    call cam_mpas_update_halo<span style="color: #f92672">(</span><span style="color: #e6db74">&quot;rTildeVertex&quot;</span>, endrun<span style="color: #f92672">)</span>
+&gt;    call cam_mpas_update_halo<span style="color: #f92672">(</span><span style="color: #e6db74">&quot;rTildeEdge&quot;</span>, endrun<span style="color: #f92672">)</span>
+&gt;    call cam_mpas_update_halo<span style="color: #f92672">(</span><span style="color: #e6db74">&quot;rTildeLayer&quot;</span>, endrun<span style="color: #f92672">)</span>
+662a683,686
+&gt;    nullify<span style="color: #f92672">(</span>dyn_in % rTildeCell<span style="color: #f92672">)</span>
+&gt;    nullify<span style="color: #f92672">(</span>dyn_in % rTildeEdge<span style="color: #f92672">)</span>
+&gt;    nullify<span style="color: #f92672">(</span>dyn_in % rTildeVertex<span style="color: #f92672">)</span>
+&gt;    nullify<span style="color: #f92672">(</span>dyn_in % rTildeLayer<span style="color: #f92672">)</span>
+698a723,726
+&gt;    nullify<span style="color: #f92672">(</span>dyn_out % rTildeCell<span style="color: #f92672">)</span>
+&gt;    nullify<span style="color: #f92672">(</span>dyn_out % rTildeEdge<span style="color: #f92672">)</span>
+&gt;    nullify<span style="color: #f92672">(</span>dyn_out % rTildeVertex<span style="color: #f92672">)</span>
+&gt;    nullify<span style="color: #f92672">(</span>dyn_out % rTildeLayer<span style="color: #f92672">)</span>
+791a820
+&gt;    real<span style="color: #f92672">(</span>r8<span style="color: #f92672">)</span>, pointer :: rTildeCell<span style="color: #f92672">(</span>:,:<span style="color: #f92672">)</span>
+821a851
+&gt;    <span style="color: #f8f8f2">rTildeCell</span> <span style="color: #f92672">=</span>&gt; dyn_in % rTildeCell
+987c1017
+&lt;       rho_zz<span style="color: #f92672">(</span>:,1:nCellsSolve<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> rho<span style="color: #f92672">(</span>:,1:nCellsSolve<span style="color: #f92672">)</span> / zz<span style="color: #f92672">(</span>:,1:nCellsSolve<span style="color: #f92672">)</span>
+---
+&gt;       rho_zz<span style="color: #f92672">(</span>:,1:nCellsSolve<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> rho<span style="color: #f92672">(</span>:,1:nCellsSolve<span style="color: #f92672">)</span> * rTildeCell<span style="color: #f92672">(</span>:,1:nCellsSolve<span style="color: #f92672">)</span>**2 / zz<span style="color: #f92672">(</span>:,1:nCellsSolve<span style="color: #f92672">)</span>
+1063c1093
+&lt;       rho_zz<span style="color: #f92672">(</span>:,1:nCellsSolve<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> rho<span style="color: #f92672">(</span>:,1:nCellsSolve<span style="color: #f92672">)</span> / zz<span style="color: #f92672">(</span>:,1:nCellsSolve<span style="color: #f92672">)</span>
+---
+&gt;       rho_zz<span style="color: #f92672">(</span>:,1:nCellsSolve<span style="color: #f92672">)</span> <span style="color: #f92672">=</span> rho<span style="color: #f92672">(</span>:,1:nCellsSolve<span style="color: #f92672">)</span> * rTildeCell<span style="color: #f92672">(</span>:, 1:nCellsSolve<span style="color: #f92672">)</span>**2/ zz<span style="color: #f92672">(</span>:,1:nCellsSolve<span style="color: #f92672">)</span>
+1403a1434,1435
+&gt;    logical                :: <span style="color: #f8f8f2">config_deep_atmosphere</span> <span style="color: #f92672">=</span> .true.
+&gt;    logical                :: <span style="color: #f8f8f2">config_weak_temperature_gradient</span><span style="color: #f92672">=</span>.false.
+1495a1528,1529
+&gt;    call mpas_pool_add_config<span style="color: #f92672">(</span>configPool, <span style="color: #e6db74">&#39;config_deep_atmosphere&#39;</span>, config_deep_atmosphere<span style="color: #f92672">)</span>
+&gt;    call mpas_pool_add_config<span style="color: #f92672">(</span>configPool, <span style="color: #e6db74">&#39;config_weak_temperature_gradient&#39;</span>, config_weak_temperature_gradient<span style="color: #f92672">)</span>
+</pre></div>
