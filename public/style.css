@@ -231,9 +231,10 @@ a:hover {
 
 
 pre {
-  background-color:#dddddd;
+  background-color:#272822;
   padding:1em;
   overflow-x:scroll;
+  color:#d8dee9;
 }
 
 img.center {

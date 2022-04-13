@@ -268,14 +268,15 @@ Note we have changed xml files
 #### Defining a grid alias
 
 In this file you will find a snippet of text similar to
-```
-    <model_grid alias="mpasa120_mpasa120" not_compset="_POP">
-      <grid name="atm">mpasa120</grid>
-      <grid name="lnd">mpasa120</grid>
-      <grid name="ocnice">mpasa120</grid>
-      <mask>gx1v7</mask>
-    </model_grid>
-```
+
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">    <span style="color: #f92672">&lt;model_grid</span> <span style="color: #a6e22e">alias=</span><span style="color: #e6db74">&quot;mpasa120_mpasa120&quot;</span> <span style="color: #a6e22e">not_compset=</span><span style="color: #e6db74">&quot;_POP&quot;</span><span style="color: #f92672">&gt;</span>
+<span style="color: #f92672">&lt;grid</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;atm&quot;</span><span style="color: #f92672">&gt;</span>mpasa120<span style="color: #f92672">&lt;/grid&gt;</span>
+<span style="color: #f92672">&lt;grid</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;lnd&quot;</span><span style="color: #f92672">&gt;</span>mpasa120<span style="color: #f92672">&lt;/grid&gt;</span>
+<span style="color: #f92672">&lt;grid</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;ocnice&quot;</span><span style="color: #f92672">&gt;</span>mpasa120<span style="color: #f92672">&lt;/grid&gt;</span>
+<span style="color: #f92672">&lt;mask&gt;</span>gx1v7<span style="color: #f92672">&lt;/mask&gt;</span>
+<span style="color: #f92672">&lt;/model_grid&gt;</span>
+</pre></div>
+
 
 This defines the grids on which different components are defined. So far I have only
 run aquaplanet simulations which are fairly robust to grid changes. The following definitions
@@ -283,42 +284,47 @@ work for running aquaplanet configurations but may break if you try to run AMIP.
 <span class="todo">Test whether this is true lol.</span>
 I add the following lines for my custom grid:
 
-```
-    <model_grid alias="mpasa120-30_mpasa120-30" not_compset="_POP">
-      <grid name="atm">mpasa120-30</grid>
-      <grid name="lnd">mpasa120-30</grid>
-      <grid name="ocnice">mpasa120-30</grid>
-      <mask>gx1v7</mask>
-    </model_grid>
-```
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">&lt;model_grid</span> <span style="color: #a6e22e">alias=</span><span style="color: #e6db74">&quot;mpasa120-30_mpasa120-30&quot;</span> <span style="color: #a6e22e">not_compset=</span><span style="color: #e6db74">&quot;_POP&quot;</span><span style="color: #f92672">&gt;</span>
+  <span style="color: #f92672">&lt;grid</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;atm&quot;</span><span style="color: #f92672">&gt;</span>mpasa120-30<span style="color: #f92672">&lt;/grid&gt;</span>
+  <span style="color: #f92672">&lt;grid</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;lnd&quot;</span><span style="color: #f92672">&gt;</span>mpasa120-30<span style="color: #f92672">&lt;/grid&gt;</span>
+  <span style="color: #f92672">&lt;grid</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;ocnice&quot;</span><span style="color: #f92672">&gt;</span>mpasa120-30<span style="color: #f92672">&lt;/grid&gt;</span>
+  <span style="color: #f92672">&lt;mask&gt;</span>gx1v7<span style="color: #f92672">&lt;/mask&gt;</span>
+<span style="color: #f92672">&lt;/model_grid&gt;</span>
+</pre></div>
+
 
 This will allow us to do something like the following when we're creating a new case:
-```
-${SRC_DIR}/cime/scripts/create_newcase --compset "${COMPSET}" --res "mpasa120-30_mpasa120-30" --case ${CASE_DIR}/${CASE_NAME} --run-unsupported --project ${PROJECT} --pecount ${NPROCS}
 
-```
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #66d9ef">${</span><span style="color: #f8f8f2">SRC_DIR</span><span style="color: #66d9ef">}</span>/cime/scripts/create_newcase --compset <span style="color: #e6db74">&quot;${COMPSET}&quot;</span> --res <span style="color: #e6db74">&quot;mpasa120-30_mpasa120-30&quot;</span> --case <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">CASE_DIR</span><span style="color: #66d9ef">}</span>/<span style="color: #66d9ef">${</span><span style="color: #f8f8f2">CASE_NAME</span><span style="color: #66d9ef">}</span> --run-unsupported --project <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">PROJECT</span><span style="color: #66d9ef">}</span> --pecount <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">NPROCS</span><span style="color: #66d9ef">}</span>
+</pre></div>
+
+
 which uses the alias we set in the xml snippet above.
 
 #### Creating a grid specification
 We find a snippet of text like
-```
-    <domain name="mpasa120">
-      <nx>40962</nx> <ny>1</ny>
-      <mesh driver="nuopc">$DIN_LOC_ROOT/share/meshes/mpasa120z32_ESMFmesh_cdf5_c20210120.nc</mesh>
-      <desc>MPAS-A 120-km quasi-uniform mesh:</desc>
-    </domain>
-```
+
+
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">&lt;domain</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;mpasa120&quot;</span><span style="color: #f92672">&gt;</span>
+  <span style="color: #f92672">&lt;nx&gt;</span>40962<span style="color: #f92672">&lt;/nx&gt;</span> <span style="color: #f92672">&lt;ny&gt;</span>1<span style="color: #f92672">&lt;/ny&gt;</span>
+  <span style="color: #f92672">&lt;mesh</span> <span style="color: #a6e22e">driver=</span><span style="color: #e6db74">&quot;nuopc&quot;</span><span style="color: #f92672">&gt;</span>$DIN_LOC_ROOT/share/meshes/mpasa120z32_ESMFmesh_cdf5_c20210120.nc<span style="color: #f92672">&lt;/mesh&gt;</span>
+  <span style="color: #f92672">&lt;desc&gt;</span>MPAS-A 120-km quasi-uniform mesh:<span style="color: #f92672">&lt;/desc&gt;</span>
+<span style="color: #f92672">&lt;/domain&gt;</span>
+</pre></div>
+
+
 The `mesh` specification is what will force us to use the `${GRID_PREFIX}.esmf.coupling.nc` that we 
 created above. Because MPAS is an unstructured grid, the only dimension you 
 need to specify is the `nx` tag, which contains the number of columns. In my case I add
 the following text:
-```
-    <domain name="mpasa120-30">
-      <nx>92067</nx> <ny>1</ny>
-      <mesh driver="nuopc">/glade/u/home/owhughes/grids/x4.92067/x4.92067.esmf.coupling.nc</mesh>
-      <desc>MPAS-A 120km-30km variable resolution grid:</desc>
-    </domain>
-```
+
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">&lt;domain</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;mpasa120-30&quot;</span><span style="color: #f92672">&gt;</span>
+  <span style="color: #f92672">&lt;nx&gt;</span>92067<span style="color: #f92672">&lt;/nx&gt;</span> <span style="color: #f92672">&lt;ny&gt;</span>1<span style="color: #f92672">&lt;/ny&gt;</span>
+  <span style="color: #f92672">&lt;mesh</span> <span style="color: #a6e22e">driver=</span><span style="color: #e6db74">&quot;nuopc&quot;</span><span style="color: #f92672">&gt;</span>/glade/u/home/owhughes/grids/x4.92067/x4.92067.esmf.coupling.nc<span style="color: #f92672">&lt;/mesh&gt;</span>
+  <span style="color: #f92672">&lt;desc&gt;</span>MPAS-A 120km-30km variable resolution grid:<span style="color: #f92672">&lt;/desc&gt;</span>
+<span style="color: #f92672">&lt;/domain&gt;</span>
+</pre></div>
+
 
 
 ## Step 4 creating and running a case
@@ -329,231 +335,229 @@ scripting style to create my case in a repeatable way.
 <details>
 <summary><code>create_case.sh</code></summary>
 
-```
+  <!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f8f8f2">export CESMDATAROOT</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$SCRATCH</span>/CESM_INPUT
+<span style="color: #f8f8f2">readonly CESM_PREFIX</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;CAM_Jan22_var_res&quot;</span>
+<span style="color: #f8f8f2">readonly COMPSET</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;2000_CAM40_SLND_SICE_DOCN%AQP1_SROF_SGLC_SWAV&quot;</span>
+<span style="color: #f8f8f2">readonly GRID_NAME</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;mpasa120-30_mpasa120-30&quot;</span>
+<span style="color: #f8f8f2">readonly GROUP_NAME</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;589_final_project&quot;</span>
+<span style="color: #f8f8f2">readonly CASE_ID</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;AQP_spinup&quot;</span>
+<span style="color: #f8f8f2">readonly PROJECT</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;UMIC0087&quot;</span>
+<span style="color: #f8f8f2">readonly NPROCS</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;288&quot;</span>
 
-export CESMDATAROOT=$SCRATCH/CESM_INPUT
-readonly CESM_PREFIX="CAM_Jan22_var_res"
-readonly COMPSET="2000_CAM40_SLND_SICE_DOCN%AQP1_SROF_SGLC_SWAV"
-readonly GRID_NAME="mpasa120-30_mpasa120-30"
-readonly GROUP_NAME="589_final_project"
-readonly CASE_ID="AQP_spinup"
-readonly PROJECT="UMIC0087"
-readonly NPROCS="288"
-
-# =================
-readonly CASE_DIR="${HOME}/CESM_CASE_DIRS/${CESM_PREFIX}_CASES/${CESM_PREFIX}/${GROUP_NAME}"
-readonly SRC_DIR="${HOME}/CESM_SRC_DIRS/${CESM_PREFIX}"
-readonly CASE_NAME="${CESM_PREFIX}.${GRID_NAME}.${COMPSET}.${GROUP_NAME}.${CASE_ID}"
-readonly BUILD_ROOT="/glade/scratch/${USER}/$CASE_NAME"
-# =================
+<span style="color: #75715e"># =================</span>
+<span style="color: #f8f8f2">readonly CASE_DIR</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;${HOME}/CESM_CASE_DIRS/${CESM_PREFIX}_CASES/${CESM_PREFIX}/${GROUP_NAME}&quot;</span>
+<span style="color: #f8f8f2">readonly SRC_DIR</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;${HOME}/CESM_SRC_DIRS/${CESM_PREFIX}&quot;</span>
+<span style="color: #f8f8f2">readonly CASE_NAME</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;${CESM_PREFIX}.${GRID_NAME}.${COMPSET}.${GROUP_NAME}.${CASE_ID}&quot;</span>
+<span style="color: #f8f8f2">readonly BUILD_ROOT</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;/glade/scratch/${USER}/$CASE_NAME&quot;</span>
+<span style="color: #75715e"># =================</span>
 
 
-change_cesm() {
-    local cesm_prefix=$1
-    rm "${HOME}/cesm_src"
-    rm "${HOME}/cesm_cases"
-    local src_dir="${HOME}/CESM_SRC_DIRS/$cesm_prefix/"
-    if is_dir ${src_dir}; then
-        ln -s ${src_dir} "${HOME}/cesm_src"
-    else
-        echo "${src_dir} does not exist!"
-        exit
-    fi
-    local case_dir="${HOME}/CESM_CASE_DIRS/${cesm_prefix}_CASES/"
-    if is_dir ${case_dir}; then
-        ln -s ${case_dir} "${HOME}/cesm_cases"
-    else
-        echo "${case_dir} does not exist!"
-        exit
-    fi
+change_cesm<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">local cesm_prefix</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span>
+    rm <span style="color: #e6db74">&quot;${HOME}/cesm_src&quot;</span>
+    rm <span style="color: #e6db74">&quot;${HOME}/cesm_cases&quot;</span>
+    <span style="color: #f8f8f2">local src_dir</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;${HOME}/CESM_SRC_DIRS/$cesm_prefix/&quot;</span>
+    <span style="color: #66d9ef">if </span>is_dir <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">src_dir</span><span style="color: #66d9ef">}</span>; <span style="color: #66d9ef">then</span>
+<span style="color: #66d9ef">        </span>ln -s <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">src_dir</span><span style="color: #66d9ef">}</span> <span style="color: #e6db74">&quot;${HOME}/cesm_src&quot;</span>
+    <span style="color: #66d9ef">else</span>
+<span style="color: #66d9ef">        </span><span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;${src_dir} does not exist!&quot;</span>
+        <span style="color: #f8f8f2">exit</span>
+<span style="color: #f8f8f2">    </span><span style="color: #66d9ef">fi</span>
+<span style="color: #66d9ef">    </span><span style="color: #f8f8f2">local case_dir</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;${HOME}/CESM_CASE_DIRS/${cesm_prefix}_CASES/&quot;</span>
+    <span style="color: #66d9ef">if </span>is_dir <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">case_dir</span><span style="color: #66d9ef">}</span>; <span style="color: #66d9ef">then</span>
+<span style="color: #66d9ef">        </span>ln -s <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">case_dir</span><span style="color: #66d9ef">}</span> <span style="color: #e6db74">&quot;${HOME}/cesm_cases&quot;</span>
+    <span style="color: #66d9ef">else</span>
+<span style="color: #66d9ef">        </span><span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;${case_dir} does not exist!&quot;</span>
+        <span style="color: #f8f8f2">exit</span>
+<span style="color: #f8f8f2">    </span><span style="color: #66d9ef">fi</span>
     
-}
+<span style="color: #f92672">}</span>
 
-handle_case_exists() {
-    local abs_case_dir=$1
-    cat << EOF
-Case directory 
-${abs_case_dir} 
-already exists! 
+handle_case_exists<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">local abs_case_dir</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span>
+    cat <span style="color: #e6db74">&lt;&lt; EOF</span>
+<span style="color: #e6db74">Case directory </span>
+<span style="color: #e6db74">${abs_case_dir} </span>
+<span style="color: #e6db74">already exists! </span>
 
-Cowardly refusing to overwrite it :(
+<span style="color: #e6db74">Cowardly refusing to overwrite it :(</span>
 
-EOF
-    exit 1
+<span style="color: #e6db74">EOF</span>
+    <span style="color: #f8f8f2">exit </span>1
 
-}
+<span style="color: #f92672">}</span>
 
-create_case(){
-    is_dir "${CASE_DIR}/${CASE_NAME}" \
-        && handle_case_exists "${CASE_DIR}/${CASE_NAME}"
-    yes r | ${SRC_DIR}/cime/scripts/create_newcase --compset "${COMPSET}" --res ${GRID_NAME} --case ${CASE_DIR}/${CASE_NAME} --run-unsupported --project ${PROJECT} --pecount ${NPROCS}
-}
+create_case<span style="color: #f92672">(){</span>
+    is_dir <span style="color: #e6db74">&quot;${CASE_DIR}/${CASE_NAME}&quot;</span> <span style="color: #ae81ff">\</span>
+        <span style="color: #f92672">&amp;&amp;</span> handle_case_exists <span style="color: #e6db74">&quot;${CASE_DIR}/${CASE_NAME}&quot;</span>
+    yes r | <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">SRC_DIR</span><span style="color: #66d9ef">}</span>/cime/scripts/create_newcase --compset <span style="color: #e6db74">&quot;${COMPSET}&quot;</span> --res <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">GRID_NAME</span><span style="color: #66d9ef">}</span> --case <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">CASE_DIR</span><span style="color: #66d9ef">}</span>/<span style="color: #66d9ef">${</span><span style="color: #f8f8f2">CASE_NAME</span><span style="color: #66d9ef">}</span> --run-unsupported --project <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">PROJECT</span><span style="color: #66d9ef">}</span> --pecount <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">NPROCS</span><span style="color: #66d9ef">}</span>
+<span style="color: #f92672">}</span>
 
-create_xml_config_helper() {
-    local config_script="$CASE_DIR/${CASE_NAME}/xml_config_helper.sh"
-    cat << EOF > $config_script
+create_xml_config_helper<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">local config_script</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;$CASE_DIR/${CASE_NAME}/xml_config_helper.sh&quot;</span>
+    cat <span style="color: #e6db74">&lt;&lt; EOF &gt; $config_script</span>
 
-# ------------------
+<span style="color: #e6db74"># ------------------</span>
 
-readonly DEBUG=FALSE
+<span style="color: #e6db74">readonly DEBUG=FALSE</span>
 
-# ------------------
-# set this to true if you want an archive directory
+<span style="color: #e6db74"># ------------------</span>
+<span style="color: #e6db74"># set this to true if you want an archive directory</span>
 
-readonly DOUT_S=FALSE
+<span style="color: #e6db74">readonly DOUT_S=FALSE</span>
 
-#-------------------
-# valid options for this value are:
-#  nsteps, nseconds, nminutes, nhours, ndays, nmonths, nyears
+<span style="color: #e6db74">#-------------------</span>
+<span style="color: #e6db74"># valid options for this value are:</span>
+<span style="color: #e6db74">#  nsteps, nseconds, nminutes, nhours, ndays, nmonths, nyears</span>
 
-readonly STOP_OPTION=nmonths
+<span style="color: #e6db74">readonly STOP_OPTION=nmonths</span>
 
-# ------------------
+<span style="color: #e6db74"># ------------------</span>
 
-readonly STOP_N=24
+<span style="color: #e6db74">readonly STOP_N=24</span>
 
 
-readonly ATM_NCPL=288
+<span style="color: #e6db74">readonly ATM_NCPL=288</span>
 
-# ------------------
-# Set the frequency at which files for restarting the model (e.g. in the 
-# case of a blowup) are written. If TRUE, make sure to set REST_N
+<span style="color: #e6db74"># ------------------</span>
+<span style="color: #e6db74"># Set the frequency at which files for restarting the model (e.g. in the </span>
+<span style="color: #e6db74"># case of a blowup) are written. If TRUE, make sure to set REST_N</span>
 
-readonly REST_OPTION=nmonths
-readonly REST_N=1
+<span style="color: #e6db74">readonly REST_OPTION=nmonths</span>
+<span style="color: #e6db74">readonly REST_N=1</span>
 
-# ====================
-# CAM build flag (note: this is quite finicky and causes compiler errors if done wrong)
+<span style="color: #e6db74"># ====================</span>
+<span style="color: #e6db74"># CAM build flag (note: this is quite finicky and causes compiler errors if done wrong)</span>
 
-readonly CAM_CONFIG_OPTS="--phys cam4 --aquaplanet --analytic_ic --nlev=30"
+<span style="color: #e6db74">readonly CAM_CONFIG_OPTS=&quot;--phys cam4 --aquaplanet --analytic_ic --nlev=30&quot;</span>
 
-# --------------------
-# Maximum runtime:
+<span style="color: #e6db74"># --------------------</span>
+<span style="color: #e6db74"># Maximum runtime:</span>
 
-readonly HOURS=11
-readonly MINUTES=50
-readonly SECONDS=00
+<span style="color: #e6db74">readonly HOURS=11</span>
+<span style="color: #e6db74">readonly MINUTES=50</span>
+<span style="color: #e6db74">readonly SECONDS=00</span>
 
-# --------------------
+<span style="color: #e6db74"># --------------------</span>
 
-main() {
-    ./xmlchange DEBUG=\${DEBUG},DOUT_S=\${DOUT_S},STOP_OPTION=\${STOP_OPTION},STOP_N=\${STOP_N},REST_OPTION=\${REST_OPTION},REST_N=\${REST_N},ATM_NCPL=\${ATM_NCPL} \
-        && ./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val "\${CAM_CONFIG_OPTS}" \
-        && ./xmlquery CAM_CONFIG_OPTS \
-        && ./xmlchange JOB_WALLCLOCK_TIME=\${HOURS}:\${MINUTES}:\${SECONDS} \
-        && ./case.setup
+<span style="color: #e6db74">main() {</span>
+<span style="color: #e6db74">    ./xmlchange DEBUG=\${DEBUG},DOUT_S=\${DOUT_S},STOP_OPTION=\${STOP_OPTION},STOP_N=\${STOP_N},REST_OPTION=\${REST_OPTION},REST_N=\${REST_N},ATM_NCPL=\${ATM_NCPL} \</span>
+<span style="color: #e6db74">        &amp;&amp; ./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val &quot;\${CAM_CONFIG_OPTS}&quot; \</span>
+<span style="color: #e6db74">        &amp;&amp; ./xmlquery CAM_CONFIG_OPTS \</span>
+<span style="color: #e6db74">        &amp;&amp; ./xmlchange JOB_WALLCLOCK_TIME=\${HOURS}:\${MINUTES}:\${SECONDS} \</span>
+<span style="color: #e6db74">        &amp;&amp; ./case.setup</span>
 
-}
+<span style="color: #e6db74">}</span>
 
+
+<span style="color: #e6db74">main</span>
+<span style="color: #e6db74">EOF</span>
+<span style="color: #f92672">}</span>
+
+create_user_nl_cam<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">local config_script</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;$CASE_DIR/${CASE_NAME}/user_nl_cam&quot;</span>
+    cat <span style="color: #e6db74">&lt;&lt; EOF &gt; $config_script</span>
+<span style="color: #e6db74">    ncdata  = &#39;/glade/u/home/owhughes/grids/x4.92067/x4.92067.init.deep.nc&#39;</span>
+<span style="color: #e6db74">    mpas_block_decomp_file_prefix = &quot;/glade/u/home/owhughes/grids/x4.92067/x4.92067.graph.info.part.&quot;</span>
+<span style="color: #e6db74">    drydep_srf_file=&quot;/glade/u/home/owhughes/grids/stub_data/atmsrf_mpasa120-30.nc&quot;</span>
+<span style="color: #e6db74">    mpas_dt = 100.0</span>
+<span style="color: #e6db74">    omega   = 0.00014584 </span>
+<span style="color: #e6db74">    rearth  = 3185500.0</span>
+<span style="color: #e6db74">    mpas_len_disp = 15000</span>
+<span style="color: #e6db74">    analytic_ic_type = &#39;moist_baroclinic_wave_dcmip2016&#39;</span>
+<span style="color: #e6db74">    empty_htapes     = .TRUE.</span>
+<span style="color: #e6db74">    NDENS            = 2,2</span>
+<span style="color: #e6db74">    fincl1           = &#39;SST:A&#39;,&#39;PHIS:A&#39;,&#39;PS:A&#39;,&#39;T:A&#39;,&#39;U:A&#39;,&#39;V:A&#39;,&#39;OMEGA:A&#39;,&#39;Q:A&#39;,&#39;ATMEINT:A&#39;,&#39;CLDICE:A&#39;,&#39;CLDLIQ:A&#39;,&#39;CLOUD:A&#39;,&#39;CLDTOT:A&#39;,&#39;PRECL:A&#39;,&#39;PRECC:A&#39;,&#39;PRECT:A&#39;,&#39;TMQ:A&#39;,&#39;TMCLDICE:A&#39;,&#39;TMCLDLIQ:A&#39;,&#39;SHFLX:A&#39;,&#39;LHFLX:A&#39;,&#39;QFLX:A&#39;,&#39;RELHUM:A&#39;,&#39;FLUT:A&#39;,&#39;U200:A&#39;,&#39;V200:A&#39;</span>
+<span style="color: #e6db74">    fincl2           = &#39;PS:I&#39;,&#39;SHFLX:I&#39;,&#39;LHFLX:I&#39;,&#39;FLUT:I&#39;,&#39;TMQ:I&#39;,&#39;CLDTOT:I&#39;,&#39;PRECC:I&#39;,&#39;PRECT:I&#39;,&#39;U200:I&#39;,&#39;V200:I&#39;</span>
+<span style="color: #e6db74">    MFILT            = 280, 721</span>
+<span style="color: #e6db74">    NHTFRQ           = -720, -24</span>
+<span style="color: #e6db74">    inithist         = &#39;ENDOFRUN&#39;</span>
+
+<span style="color: #e6db74">EOF</span>
+
+<span style="color: #f92672">}</span>
+
+create_preview_namelists_helper<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">local config_script</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;$CASE_DIR/${CASE_NAME}/preview_namelists_helper.sh&quot;</span>
+    cat <span style="color: #e6db74">&lt;&lt; EOF &gt; $config_script</span>
+<span style="color: #e6db74">./preview_namelists &gt; preview_namelists.log 2&gt; preview_namelists.err </span>
+<span style="color: #e6db74">EOF</span>
+<span style="color: #f92672">}</span>
+
+create_case_build_helper<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">local config_script</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;$CASE_DIR/${CASE_NAME}/case_build_helper.sh&quot;</span> 
+    <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;qcmd -A ${PROJECT} -- ${CASE_DIR}/${CASE_NAME}/case.build&quot;</span> &gt; <span style="color: #f8f8f2">$config_script</span>
+<span style="color: #f92672">}</span>
+
+
+
+
+main<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    change_cesm <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">CESM_PREFIX</span><span style="color: #66d9ef">}</span>
+    create_case <span style="color: #ae81ff">\</span>
+        <span style="color: #f92672">&amp;&amp;</span> create_xml_config_helper <span style="color: #ae81ff">\</span>
+        <span style="color: #f92672">&amp;&amp;</span> create_user_nl_cam <span style="color: #ae81ff">\</span>
+        <span style="color: #f92672">&amp;&amp;</span> create_preview_namelists_helper <span style="color: #ae81ff">\</span>
+        <span style="color: #f92672">&amp;&amp;</span> create_case_build_helper
+    
+<span style="color: #f92672">}</span>
+
+
+<span style="color: #75715e"># ============================================================================</span>
+<span style="color: #75715e"># begin namelist</span>
+<span style="color: #75715e"># ============================================================================</span>
+
+<span style="color: #75715e"># ===========================================================================</span>
+
+
+<span style="color: #75715e"># ============================================================================</span>
+<span style="color: #75715e"># begin boilerplate </span>
+<span style="color: #75715e"># ============================================================================</span>
+
+<span style="color: #f8f8f2">readonly PROGNAME</span><span style="color: #f92672">=</span><span style="color: #66d9ef">$(</span>basename <span style="color: #f8f8f2">$0</span><span style="color: #66d9ef">)</span>
+<span style="color: #f8f8f2">readonly PROGDIR</span><span style="color: #f92672">=</span><span style="color: #66d9ef">$(</span>readlink -m <span style="color: #66d9ef">$(</span>dirname <span style="color: #f8f8f2">$0</span><span style="color: #66d9ef">))</span>
+<span style="color: #f8f8f2">readonly ARGS</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;$@&quot;</span>
+
+is_empty<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">local var</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span>
+
+    <span style="color: #f92672">[[</span> -z <span style="color: #f8f8f2">$var</span> <span style="color: #f92672">]]</span>
+<span style="color: #f92672">}</span>
+
+is_not_empty<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">local var</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span>
+
+    <span style="color: #f92672">[[</span> -n <span style="color: #f8f8f2">$var</span> <span style="color: #f92672">]]</span>
+<span style="color: #f92672">}</span>
+
+is_file<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">local file</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span>
+
+    <span style="color: #f92672">[[</span> -f <span style="color: #f8f8f2">$file</span> <span style="color: #f92672">]]</span>
+<span style="color: #f92672">}</span>
+
+is_link<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">local var</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span>
+
+    <span style="color: #f92672">[[</span> <span style="color: #e6db74">`</span><span style="color: #f8f8f2">test</span> -L <span style="color: #f8f8f2">$1</span><span style="color: #e6db74">`</span> <span style="color: #f92672">]]</span>
+<span style="color: #f92672">}</span>
+
+
+is_dir<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">local dir</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span>
+
+    <span style="color: #f92672">[[</span> -d <span style="color: #f8f8f2">$dir</span> <span style="color: #f92672">]]</span>
+<span style="color: #f92672">}</span>
+
+
+<span style="color: #75715e"># =================================================================</span>
+<span style="color: #75715e"># end boilerplate</span>
+<span style="color: #75715e"># =================================================================</span>
 
 main
-EOF
-}
-
-create_user_nl_cam() {
-    local config_script="$CASE_DIR/${CASE_NAME}/user_nl_cam"
-    cat << EOF > $config_script
-    ncdata  = '/glade/u/home/owhughes/grids/x4.92067/x4.92067.init.deep.nc'
-    mpas_block_decomp_file_prefix = "/glade/u/home/owhughes/grids/x4.92067/x4.92067.graph.info.part."
-    drydep_srf_file="/glade/u/home/owhughes/grids/stub_data/atmsrf_mpasa120-30.nc"
-    mpas_dt = 100.0
-    omega   = 0.00014584 
-    rearth  = 3185500.0
-    mpas_len_disp = 15000
-    analytic_ic_type = 'moist_baroclinic_wave_dcmip2016'
-    empty_htapes     = .TRUE.
-    NDENS            = 2,2
-    fincl1           = 'SST:A','PHIS:A','PS:A','T:A','U:A','V:A','OMEGA:A','Q:A','ATMEINT:A','CLDICE:A','CLDLIQ:A','CLOUD:A','CLDTOT:A','PRECL:A','PRECC:A','PRECT:A','TMQ:A','TMCLDICE:A','TMCLDLIQ:A','SHFLX:A','LHFLX:A','QFLX:A','RELHUM:A','FLUT:A','U200:A','V200:A'
-    fincl2           = 'PS:I','SHFLX:I','LHFLX:I','FLUT:I','TMQ:I','CLDTOT:I','PRECC:I','PRECT:I','U200:I','V200:I'
-    MFILT            = 280, 721
-    NHTFRQ           = -720, -24
-    inithist         = 'ENDOFRUN'
-
-EOF
-
-}
-
-create_preview_namelists_helper() {
-    local config_script="$CASE_DIR/${CASE_NAME}/preview_namelists_helper.sh"
-    cat << EOF > $config_script
-./preview_namelists > preview_namelists.log 2> preview_namelists.err 
-EOF
-}
-
-create_case_build_helper() {
-    local config_script="$CASE_DIR/${CASE_NAME}/case_build_helper.sh" 
-    echo "qcmd -A ${PROJECT} -- ${CASE_DIR}/${CASE_NAME}/case.build" > $config_script
-}
-
-
-
-
-main() {
-    change_cesm ${CESM_PREFIX}
-    create_case \
-        && create_xml_config_helper \
-        && create_user_nl_cam \
-        && create_preview_namelists_helper \
-        && create_case_build_helper
-    
-}
-
-
-# ============================================================================
-# begin namelist
-# ============================================================================
-
-# ===========================================================================
-
-
-# ============================================================================
-# begin boilerplate 
-# ============================================================================
-
-readonly PROGNAME=$(basename $0)
-readonly PROGDIR=$(readlink -m $(dirname $0))
-readonly ARGS="$@"
-
-is_empty() {
-    local var=$1
-
-    [[ -z $var ]]
-}
-
-is_not_empty() {
-    local var=$1
-
-    [[ -n $var ]]
-}
-
-is_file() {
-    local file=$1
-
-    [[ -f $file ]]
-}
-
-is_link() {
-    local var=$1
-
-    [[ `test -L $1` ]]
-}
-
-
-is_dir() {
-    local dir=$1
-
-    [[ -d $dir ]]
-}
-
-
-# =================================================================
-# end boilerplate
-# =================================================================
-
-main
+</pre></div>
 
   
-```
 </details>
 
 Where you navigate to the case directory and run the following in order:
