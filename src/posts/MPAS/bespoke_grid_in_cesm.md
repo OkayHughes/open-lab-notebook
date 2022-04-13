@@ -563,5 +563,15 @@ Download the [following repository](https://github.com/mgduda/convert_mpas) and 
 
 The tl;dr of how to use this tool is 
 ```
-${ABSOLUTE_PATH_TO_CONVERT_MPAS}/convert_mpas ${GRID_DIR}/${GRID_PREFIX}.init.nc $P
+${ABSOLUTE_PATH_TO_CONVERT_MPAS}/convert_mpas ${GRID_DIR}/${GRID_PREFIX}.init.nc ${ABSOLUTE_PATH_TO_NETCDF}/output_on_mpas_grid.nc
 ```
+
+The first file specifies all of the metric terms and topography that were used for your run. The second file is the output data.
+After this command is finished it will have created a file called `latlon.nc` which you can view with your NetCDF
+viewer of choice.
+
+<span class="todo">If you run this command multiple times in the same directory, make sure to run `rm latlon.nc`
+(or some similar command) in between. Even if the files have the same structure, calling the command again
+will silently overwrite `latlon.nc` if it exists. If the variables or dimensions
+of the file you're trying to regrid changes, it will do something very strange. I think it only regrids
+the variables that exist in the existing `latlon.nc` file along the dimensions that exist.</span>
