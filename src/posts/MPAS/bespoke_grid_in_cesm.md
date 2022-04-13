@@ -51,7 +51,7 @@ and
 ```
 make ifort CORE=init_atmosphere PRECISION=single USE_PIO2=true
 make clean CORE=atmosphere
-make ifort CORE=atmosphere PRECISION=single USE_PIO2=true  
+make ifort CORE=atmosphere PRECISION=single USE_PIO2=true
 ```
 
 </details>
@@ -73,6 +73,9 @@ in `${GRID_DIR}`.
 In these instructions I will be using my particular use case as an example.
 On Cheyenne, `GRID_DIR="${HOME}/grids/${GRID_PREFIX}/"` and `GRID_PREFIX="x4.92067"` where `x4` refers
 to a 4x grid refinement in a band near the equator and the resulting grid has `92067` horizontal cells.
+I'm going to call this grid `mpasa120-30` because on a full-radius grid it has a maximum grid spacing
+of 120km and a minimum grid spacing of 30km.
+
 
 
 **I make the assumption that you have generated the following files:**
@@ -137,5 +140,12 @@ These files are used in the case that you are starting from analytic initial con
 the [UMJS Moist Baroclinic Wave](https://www.cesm.ucar.edu/models/simpler-models-indev/fkessler/index.html)
 which can be used to spin up aquaplanets. The purpose of these files is
 to provide vertical levels and associated metric terms for such a run. 
+
+I make use of the file that I generated using the standalone version of MPAS, and make the following definition
+
+```
+<ncdata hgrid="mpasa120-30" nlev="32" analytic_ic="1" >/glade/u/home/owhughes/grids/x4.92067/x4.92067.init.nc</ncdata>
+```
+
 
 
