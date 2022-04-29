@@ -5,7 +5,7 @@ tags:
   - climate_589
 eleventyNavigation:
   parent: Climate 589
-  key: Make deep atmosphere aquaplanet
+  key: Make shallow atmosphere aquaplanet
 layout: layouts/post.njk
 ---
 

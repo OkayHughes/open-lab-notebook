@@ -30,7 +30,7 @@ readonly BUILD_ROOT="/glade/scratch/${USER}/$CASE_NAME"
 change_cesm() {
     local cesm_prefix=$1
     rm "${HOME}/cesm_src"
-    rm "${HOME}/cesm_cases"
+    rm "${HOME}/cesm_cases"https://open-lab-notebook.glitch.me/posts/climate_589/create_case_deep/
     local src_dir="${HOME}/CESM_SRC_DIRS/$cesm_prefix/"
     if is_dir ${src_dir}; then
         ln -s ${src_dir} "${HOME}/cesm_src"
@@ -156,7 +156,7 @@ readonly REST_N=1
 # CAM build flag (note: this is quite finicky and causes compiler errors if done wrong)
 
 readonly CAM_CONFIG_OPTS="--phys cam4 --aquaplanet --analytic_ic --nlev=30"
-
+https://open-lab-notebook.glitch.me/posts/climate_589/create_case_deep/
 # --------------------
 # Maximum runtime:
 
