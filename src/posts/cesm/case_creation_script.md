@@ -161,8 +161,6 @@ create_bash_source<span style="color: #f92672">()</span> <span style="color: #f9
 <span style="color: #e6db74">export MY_CESM_SRC</span>
 <span style="color: #e6db74">readonly MY_CESM_SCRATCH=${MY_CESM_SCRATCH}</span>
 <span style="color: #e6db74">export MY_CESM_SCRATCH</span>
-<span style="color: #e6db74">readonly ESMFMKFILE=/home/owhughes/esmf/esmf-ESMF_8_1_1/lib/libO/Linux.intel.64.openmpi.default/esmf.mk</span>
-<span style="color: #e6db74">export ESMFMKFILE</span>
 <span style="color: #e6db74">export PATH=${PATH}</span>
 <span style="color: #e6db74">EOF</span>
 

@@ -10,7 +10,7 @@ layout: layouts/post.njk
 ---
 
 
-# Reconfiguring the build system to work with the new CMake CIME infrastructure
+## Reconfiguring the build system to work with the new CMake CIME infrastructure
 
 ## Unchanged xml machine file:
 
@@ -286,3 +286,38 @@ source bash.source
 bash xml_change_helper.sh
 ```
 
+which all succeed. However, when I run `./case.build` I get the following error message:
+
+```
+   Calling /home/owhughes/cesm_src/2022_05_05_FV3/components/cmeps/cime_config/buildnml
+ERROR: ESMFMKFILE not found None
+```
+
+There is likely a more elegant way to fix this, but I fixed this by downloading the [ESMF 8.1.1 source code](https://earthsystemmodeling.org/download/) and building it using the following script
+
+<details>
+  <summary><code>build_esmf.sh</code></summary>
+  
+<pre>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">module load intel/18.0.5
+module load openmpi/3.1.4
+<span style="color: #f8f8f2">export ESMF_LIB</span><span style="color: #f92672">=</span><span style="color: #e6db74">`</span><span style="color: #f8f8f2">pwd</span><span style="color: #e6db74">`</span>
+<span style="color: #f8f8f2">export ESMF_CXX</span><span style="color: #f92672">=</span>mpicxx
+<span style="color: #f8f8f2">export ESMF_COMM</span><span style="color: #f92672">=</span>openmpi
+<span style="color: #f8f8f2">export ESMF_COMPILER</span><span style="color: #f92672">=</span>intel
+<span style="color: #f8f8f2">export ESMF_F90</span><span style="color: #f92672">=</span>mpif90
+make -j8
+</pre></div>
+
+</pre>
+</details>
+and run this script in the root directory of the ESMF source (which for me is `/home/owhughes/esmf/esmf-ESMF_8_1_1`).
+
+Once this is built I run `find ~+ -name "esmf.mk"` (note: this uses a bash-specific idiom). For me this returns `/home/owhughes/esmf/esmf-ESMF_8_1_1/lib/libO/Linux.intel.64.openmpi.default/esmf.mk`.
+
+Once I add `export ESMFMKFILE="/home/owhughes/esmf/esmf-ESMF_8_1_1/lib/libO/Linux.intel.64.openmpi.default/esmf.mk"` to my `${CASE_DIR}/bash.source` file, and run `source bash.source`, this resolves the error for this sectino.
+
+
+## Fixing a bug in the FMS makefile.cesm
+
+Once the previous modifications are made
