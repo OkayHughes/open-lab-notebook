@@ -280,11 +280,14 @@ The main stumbling block here is that it relies on the environment variables `$N
 
 If I follow my usual [case creation script](https://open-lab-notebook.glitch.me/posts/cesm/case_creation_script/), then I do the following
 
-```
-cd ${CASE_DIR} #set in the script above, or use your own
-source bash.source
+
+<pre>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f8f8f2">cd</span> <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">CASE_DIR</span><span style="color: #66d9ef">}</span> <span style="color: #75715e">#set in the script above, or use your own</span>
+<span style="color: #f8f8f2">source </span>bash.source
 bash xml_change_helper.sh
-```
+</pre></div>
+</pre>
+
 
 which all succeed. However, when I run `./case.build` I get the following error message:
 
@@ -311,7 +314,7 @@ make -j8
 
 </pre>
 </details>
-and run this script in the root directory of the ESMF source (which for me is `/home/owhughes/esmf/esmf-ESMF_8_1_1`).
+and run this script in the root directory of the ESMF source (which for me is `/home/owhughes/esmf/esmf-ESMF_8_1_1` ).
 
 Once this is built I run `find ~+ -name "esmf.mk"` (note: this uses a bash-specific idiom). For me this returns `/home/owhughes/esmf/esmf-ESMF_8_1_1/lib/libO/Linux.intel.64.openmpi.default/esmf.mk`.
 
@@ -522,8 +525,9 @@ on lines 175 and 176:
 </pre></div>
 </pre>
 
-The rest of this makefile makes it clear that the correct conditionals are used so that the`SLIBS` variable is set correctly if `NETCDF_C_PATH` and `NETCDF_FORTRAN_PATH` are set to distinct locations.
-Indeed, `INC_NETCDF_C` and `INC_NETCDF_FORTRAN` are set correctly if the install locations differ. However, `CFLAGS` and `FFLAGS` will always append `INC_NETCDF` even if this variable is unset.
+The rest of this makefile makes it clear that the correct conditionals are used so that the `SLIBS` variable is set correctly if `NETCDF_C_PATH` and `NETCDF_FORTRAN_PATH` are set to distinct locations.
+Indeed, in the case that the install locations differ the `INC_NETCDF_C` and `INC_NETCDF_FORTRAN` variables will be set correctly. However, unlike `SLIBS`, `CFLAGS` and `FFLAGS` will always append 
+`INC_NETCDF` even if this variable is unset and `INC_NETCDF_C` and `INC_NETCDF_FORTRAN` should be used instead.
 
 The simplest solution I've found to this problem is to _replace_ the two problem lines in `FMS/Makefile.cesm` with the following code:
 
@@ -541,6 +545,7 @@ The simplest solution I've found to this problem is to _replace_ the two problem
 </pre></div>
 </pre>
 
-The code just above these modified lines handles the case where e.g. `NETCDF_C_PATH` is set but `NETCDF_FORTRAN_PATH` and `NETCDF_PATH` are not set (and throws appropriate errors). 
+The code just above these modified lines handles the case where e.g. `NETCDF_C_PATH` is set but `NETCDF_FORTRAN_PATH` and `NETCDF_PATH` are not set (and throws appropriate errors). I therefore don't bother doing additional
+error checking here.
 
 Once these modifications are made, the FV3 test case builds and runs without a hitch.
