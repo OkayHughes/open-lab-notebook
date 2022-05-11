@@ -314,14 +314,15 @@ make -j8
 
 </pre>
 </details>
-and run this script in the root directory of the ESMF source (which for me is `/home/owhughes/esmf/esmf-ESMF_8_1_1` ).
+
+and run this script in the root directory of the ESMF source (which for me is `/home/owhughes/esmf/esmf-ESMF_8_1_1`).
 
 Once this is built I run `find ~+ -name "esmf.mk"` (note: this uses a bash-specific idiom). For me this returns `/home/owhughes/esmf/esmf-ESMF_8_1_1/lib/libO/Linux.intel.64.openmpi.default/esmf.mk`.
 
-Once I add `export ESMFMKFILE="/home/owhughes/esmf/esmf-ESMF_8_1_1/lib/libO/Linux.intel.64.openmpi.default/esmf.mk"` to my `${CASE_DIR}/bash.source` file, and run `source bash.source`, this resolves the error for this sectino.
+Once I add `export ESMFMKFILE="/home/owhughes/esmf/esmf-ESMF_8_1_1/lib/libO/Linux.intel.64.openmpi.default/esmf.mk"` to my `${CASE_DIR}/bash.source` file, and run `source bash.source`, this resolves the error for this section.
 
 
-## Fixing a bug in the FMS makefile.cesm
+## Fixing a bug in the FMS Makefile.cesm
 
 Once the previous modifications are made, I get the following error messages when I attempt to run `./case.build`
 
