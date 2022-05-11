@@ -12,7 +12,7 @@ layout: layouts/post.njk
 
 ## Reconfiguring the build system to work with the new CMake CIME infrastructure
 
-## Unchanged xml machine file:
+### Unchanged xml machine file:
 
 <details>
 <summary> <code>~/.cime/config_machines.xml</code></summary>
@@ -195,7 +195,7 @@ layout: layouts/post.njk
 
 
 
-## New CMake file:
+### New CMake file:
 
 <details>
 <summary><code>~/.cime/greatlakes.cmake</code></summary>
@@ -276,7 +276,7 @@ The main stumbling block here is that it relies on the environment variables `$N
 
 
 
-# Dealing with an unresolved ESMF dependency:
+## Dealing with an unresolved ESMF dependency:
 
 If I follow my usual [case creation script](https://open-lab-notebook.glitch.me/posts/cesm/case_creation_script/), then I do the following
 
@@ -320,4 +320,197 @@ Once I add `export ESMFMKFILE="/home/owhughes/esmf/esmf-ESMF_8_1_1/lib/libO/Linu
 
 ## Fixing a bug in the FMS makefile.cesm
 
-Once the previous modifications are made
+Once the previous modifications are made, I get the following error messages when I attempt to run `./case.build`
+
+<details>
+<summary>Error log
+</summary>
+  
+```
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/mpp_io.F90(316): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [NETCDF]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/mpp_io.F90(317): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [NETCDF_NF_DATA]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/mpp_io.F90(318): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [NETCDF_NF_INTERFACES]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/mpp_io.F90(319): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [NETCDF4_NF_INTERFACES]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6404: This name does not have a type, and must have an explicit type.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6611: The case-value must be of the same type as the case-expr.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6404: This name does not have a type, and must have an explicit type.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6611: The case-value must be of the same type as the case-expr.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6404: This name does not have a type, and must have an explicit type.   [NF_INT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_INT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_INT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6611: The case-value must be of the same type as the case-expr.   [NF_INT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(655): error #6404: This name does not have a type, and must have an explicit type.   [NF_FLOAT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(655): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_FLOAT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(655): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_FLOAT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(655): error #6611: The case-value must be of the same type as the case-expr.   [NF_FLOAT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(657): error #6404: This name does not have a type, and must have an explicit type.   [NF_DOUBLE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(657): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_DOUBLE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(657): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_DOUBLE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(657): error #6611: The case-value must be of the same type as the case-expr.   [NF_DOUBLE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6611: The case-value must be of the same type as the case-expr.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6611: The case-value must be of the same type as the case-expr.   [NF_SHORT]
+
+  errput: ERROR: /home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/mpp_io.F90(316): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [NETCDF]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/mpp_io.F90(317): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [NETCDF_NF_DATA]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/mpp_io.F90(318): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [NETCDF_NF_INTERFACES]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/mpp_io.F90(319): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [NETCDF4_NF_INTERFACES]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6404: This name does not have a type, and must have an explicit type.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6611: The case-value must be of the same type as the case-expr.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6404: This name does not have a type, and must have an explicit type.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6611: The case-value must be of the same type as the case-expr.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6404: This name does not have a type, and must have an explicit type.   [NF_INT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_INT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_INT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6611: The case-value must be of the same type as the case-expr.   [NF_INT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(655): error #6404: This name does not have a type, and must have an explicit type.   [NF_FLOAT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(655): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_FLOAT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(655): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_FLOAT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(655): error #6611: The case-value must be of the same type as the case-expr.   [NF_FLOAT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(657): error #6404: This name does not have a type, and must have an explicit type.   [NF_DOUBLE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(657): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_DOUBLE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(657): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_DOUBLE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(657): error #6611: The case-value must be of the same type as the case-expr.   [NF_DOUBLE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6611: The case-value must be of the same type as the case-expr.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6611: The case-value must be of the same type as the case-expr.   [NF_SHORT]
+
+ERROR: FMS build Failed ERROR: /home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/mpp_io.F90(316): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [NETCDF]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/mpp_io.F90(317): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [NETCDF_NF_DATA]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/mpp_io.F90(318): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [NETCDF_NF_INTERFACES]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/mpp_io.F90(319): error #7002: Error in opening the compiled module file.  Check INCLUDE paths.   [NETCDF4_NF_INTERFACES]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6404: This name does not have a type, and must have an explicit type.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6611: The case-value must be of the same type as the case-expr.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6404: This name does not have a type, and must have an explicit type.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6611: The case-value must be of the same type as the case-expr.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6404: This name does not have a type, and must have an explicit type.   [NF_INT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_INT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_INT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(653): error #6611: The case-value must be of the same type as the case-expr.   [NF_INT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(655): error #6404: This name does not have a type, and must have an explicit type.   [NF_FLOAT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(655): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_FLOAT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(655): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_FLOAT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(655): error #6611: The case-value must be of the same type as the case-expr.   [NF_FLOAT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(657): error #6404: This name does not have a type, and must have an explicit type.   [NF_DOUBLE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(657): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_DOUBLE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(657): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_DOUBLE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(657): error #6611: The case-value must be of the same type as the case-expr.   [NF_DOUBLE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6611: The case-value must be of the same type as the case-expr.   [NF_BYTE]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6601: In a CASE statement, the case-value must be a constant expression.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6612: In a CASE statement, the case-value must be of type INTEGER, CHARACTER, or LOGICAL.   [NF_SHORT]
+
+/home/owhughes/cesm_src/2022_05_05_FV3/libraries/FMS/src/mpp/include/mpp_io_util.inc(667): error #6611: The case-value must be of the same type as the case-expr.   [NF_SHORT]
+
+cam built in 3.614217 seconds
+ERROR: BUILD FAIL: cam.buildlib failed, cat /scratch/cjablono_root/cjablono1/owhughes/CESM_ROOT/output/test_cases/2022_05_05_FV3.C96_C96_mg17.FADIAB.36.test_cases.jw06/bld/atm.bldlog.220511-151500
+
+```
+</details>
+
+This makes it clear that the FMS build infrastructure is unable to locate the _include directories_ for NetCDF-c and NetCDF-fortran. The problem lies in
