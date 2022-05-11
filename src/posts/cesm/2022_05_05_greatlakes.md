@@ -513,4 +513,34 @@ ERROR: BUILD FAIL: cam.buildlib failed, cat /scratch/cjablono_root/cjablono1/owh
 ```
 </details>
 
-This makes it clear that the FMS build infrastructure is unable to locate the _include directories_ for NetCDF-c and NetCDF-fortran. The problem lies in
+This makes it clear that the FMS build infrastructure is unable to locate the _include directories_ for NetCDF-c and NetCDF-fortran. The problem lies in the file `${CESM_SRC}/libraries/FMS/Makefile.cesm`
+on lines 175 and 176:
+
+<pre>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f8f8f2">FFLAGS</span> <span style="color: #f92672">+=</span> -I<span style="color: #66d9ef">$(</span>INC_NETCDF<span style="color: #66d9ef">)</span>
+<span style="color: #f8f8f2">CFLAGS</span> <span style="color: #f92672">+=</span> -I<span style="color: #66d9ef">$(</span>INC_NETCDF<span style="color: #66d9ef">)</span>
+</pre></div>
+</pre>
+
+The rest of this makefile makes it clear that the correct conditionals are used so that the`SLIBS` variable is set correctly if `NETCDF_C_PATH` and `NETCDF_FORTRAN_PATH` are set to distinct locations.
+Indeed, `INC_NETCDF_C` and `INC_NETCDF_FORTRAN` are set correctly if the install locations differ. However, `CFLAGS` and `FFLAGS` will always append `INC_NETCDF` even if this variable is unset.
+
+The simplest solution I've found to this problem is to _replace_ the two problem lines in `FMS/Makefile.cesm` with the following code:
+
+<pre>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #75715e">ifdef INC_NETCDF_FORTRAN</span>
+  FFLAGS +<span style="color: #f92672">=</span> -I<span style="color: #66d9ef">$(</span>INC_NETCDF_FORTRAN<span style="color: #66d9ef">)</span>
+<span style="color: #75715e">else</span>
+  FFLAGS +<span style="color: #f92672">=</span> -I<span style="color: #66d9ef">$(</span>INC_NETCDF<span style="color: #66d9ef">)</span>
+<span style="color: #75715e">endif</span>
+<span style="color: #75715e">ifdef INC_NETCDF_C</span>
+  CFLAGS +<span style="color: #f92672">=</span> -I<span style="color: #66d9ef">$(</span>INC_NETCDF_C<span style="color: #66d9ef">)</span>
+<span style="color: #75715e">else</span>
+  CFLAGS +<span style="color: #f92672">=</span> -I<span style="color: #66d9ef">$(</span>INC_NETCDF<span style="color: #66d9ef">)</span>
+<span style="color: #75715e">endif</span>
+</pre></div>
+</pre>
+
+The code just above these modified lines handles the case where e.g. `NETCDF_C_PATH` is set but `NETCDF_FORTRAN_PATH` and `NETCDF_PATH` are not set (and throws appropriate errors). 
+
+Once these modifications are made, the FV3 test case builds and runs without a hitch.
