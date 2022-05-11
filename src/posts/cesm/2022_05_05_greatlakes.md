@@ -270,3 +270,19 @@ layout: layouts/post.njk
 
 </pre>
 </details>
+
+The main stumbling block here is that it relies on the environment variables `$NETCDF_C_PATH` and `$NETCDF_FORTRAN_PATH` which are set in the XML file above. Note that these are _distinct directories_. This will be important later.
+
+
+
+
+# Dealing with an unresolved ESMF dependency:
+
+If I follow my usual [case creation script](https://open-lab-notebook.glitch.me/posts/cesm/case_creation_script/), then I do the following
+
+```
+cd ${CASE_DIR} #set in the script above, or use your own
+source bash.source
+bash xml_change_helper.sh
+```
+
