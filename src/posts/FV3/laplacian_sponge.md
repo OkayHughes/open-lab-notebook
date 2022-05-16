@@ -10,5 +10,31 @@ layout: layouts/post.njk
 ---
 
 ## Initial plan:
-* Track down where raleigh friction code is.
+* Track down where rayleigh friction code is.
 * Track down where second-order operators are computed.
+
+
+## Understanding the rayleigh friction code:
+
+<details><summary>Snippet where rayleigh friction is called in <code>atmos_cubed_sphere/model/fv_dynamics.F90</code></summary>
+
+<pre>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">      <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span> <span style="color: #f92672">.not.</span><span style="color: #f8f8f2">flagstruct%RF_fast</span> <span style="color: #f92672">.and.</span> <span style="color: #f8f8f2">flagstruct%tau</span> <span style="color: #f92672">&gt;</span> <span style="color: #ae81ff">0.</span> <span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">then </span>
+<span style="color: #66d9ef">        if</span> <span style="color: #f8f8f2">(</span> <span style="color: #f8f8f2">gridstruct%grid_type</span><span style="color: #f92672">&lt;</span><span style="color: #ae81ff">4</span> <span style="color: #f92672">.or.</span> <span style="color: #f8f8f2">gridstruct%bounded_domain</span> <span style="color: #f92672">.or.</span> <span style="color: #f8f8f2">is_ideal_case</span> <span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">then</span> 
+<span style="color: #75715e">!         if ( flagstruct%RF_fast ) then</span>
+<span style="color: #75715e">!            call Ray_fast(abs(dt), npx, npy, npz, pfull, flagstruct%tau, u, v, w,  &amp;</span>
+<span style="color: #75715e">!                          dp_ref, ptop, hydrostatic, flagstruct%rf_cutoff, bd)</span>
+<span style="color: #75715e">!         else</span>
+             <span style="color: #66d9ef">call </span><span style="color: #f8f8f2">Rayleigh_Super(abs(bdt),</span> <span style="color: #f8f8f2">npx,</span> <span style="color: #f8f8f2">npy,</span> <span style="color: #f8f8f2">npz,</span> <span style="color: #f8f8f2">ks,</span> <span style="color: #f8f8f2">pfull,</span> <span style="color: #f8f8f2">phis,</span> <span style="color: #f8f8f2">flagstruct%tau,</span> <span style="color: #f8f8f2">u,</span> <span style="color: #f8f8f2">v,</span> <span style="color: #f8f8f2">w,</span> <span style="color: #f8f8f2">pt,</span>  <span style="color: #f8f8f2">&amp;</span>
+                  <span style="color: #f8f8f2">ua,</span> <span style="color: #f8f8f2">va,</span> <span style="color: #f8f8f2">delz,</span> <span style="color: #f8f8f2">gridstruct%agrid,</span> <span style="color: #f8f8f2">cp_air,</span> <span style="color: #f8f8f2">rdgas,</span> <span style="color: #f8f8f2">ptop,</span> <span style="color: #f8f8f2">hydrostatic,</span>    <span style="color: #f8f8f2">&amp;</span>    
+                 <span style="color: #f92672">.not.</span> <span style="color: #f8f8f2">(gridstruct%bounded_domain</span> <span style="color: #f92672">.or.</span> <span style="color: #f8f8f2">is_ideal_case),</span> <span style="color: #f8f8f2">flagstruct%rf_cutoff,</span> <span style="color: #f8f8f2">gridstruct,</span> <span style="color: #f8f8f2">domain,</span> <span style="color: #f8f8f2">bd)</span>
+<span style="color: #75715e">!         endif</span>
+        <span style="color: #66d9ef">else</span>
+<span style="color: #66d9ef">             call </span><span style="color: #f8f8f2">Rayleigh_Friction(abs(bdt),</span> <span style="color: #f8f8f2">npx,</span> <span style="color: #f8f8f2">npy,</span> <span style="color: #f8f8f2">npz,</span> <span style="color: #f8f8f2">ks,</span> <span style="color: #f8f8f2">pfull,</span> <span style="color: #f8f8f2">flagstruct%tau,</span> <span style="color: #f8f8f2">u,</span> <span style="color: #f8f8f2">v,</span> <span style="color: #f8f8f2">w,</span> <span style="color: #f8f8f2">pt,</span>  <span style="color: #f8f8f2">&amp;</span>
+                  <span style="color: #f8f8f2">ua,</span> <span style="color: #f8f8f2">va,</span> <span style="color: #f8f8f2">delz,</span> <span style="color: #f8f8f2">cp_air,</span> <span style="color: #f8f8f2">rdgas,</span> <span style="color: #f8f8f2">ptop,</span> <span style="color: #f8f8f2">hydrostatic,</span> <span style="color: #f8f8f2">.true.,</span> <span style="color: #f8f8f2">flagstruct%rf_cutoff,</span> <span style="color: #f8f8f2">gridstruct,</span> <span style="color: #f8f8f2">domain,</span> <span style="color: #f8f8f2">bd)</span>
+        <span style="color: #66d9ef">endif</span>
+<span style="color: #66d9ef">      endif</span>
+</pre></div>
+</pre>
+
+</details>
