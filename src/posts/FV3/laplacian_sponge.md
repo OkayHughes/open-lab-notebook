@@ -53,3 +53,50 @@ layout: layouts/post.njk
 
 ## Understanding the second-order diffusion operators in FV3
 The model I'll be using is divergence damping. Function calls can be found around line 700 of `atmos_cubed_sphere/model/dyn_core.F90`.
+
+<details>
+<summary>
+Evidence that $$\nabla^2$$ sponge layer damping is already implemented?
+</summary>
+  
+<pre>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">  <span style="color: #75715e">! Sponge layers with del-2 damping on divergence, vorticity, w, z, and air mass (delp).</span>
+<span style="color: #75715e">! no special damping of potential temperature in sponge layers</span>
+              <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span> <span style="color: #f8f8f2">k</span><span style="color: #f92672">==</span><span style="color: #ae81ff">1</span> <span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">then</span> 
+<span style="color: #75715e">! Divergence damping:</span>
+                 <span style="color: #f8f8f2">nord_k</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span>
+                 <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(is_ideal_case)</span> <span style="color: #66d9ef">then </span>
+<span style="color: #66d9ef">                    </span><span style="color: #f8f8f2">d2_divg</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">max(flagstruct%d2_bg,</span> <span style="color: #f8f8f2">flagstruct%d2_bg_k1)</span>
+                 <span style="color: #66d9ef">else</span>
+<span style="color: #66d9ef">                    </span><span style="color: #f8f8f2">d2_divg</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">max(</span><span style="color: #ae81ff">0.01</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">flagstruct%d2_bg,</span> <span style="color: #f8f8f2">flagstruct%d2_bg_k1)</span>
+                 <span style="color: #66d9ef">endif</span>
+<span style="color: #75715e">! Vertical velocity:</span>
+                   <span style="color: #f8f8f2">nord_w</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span> <span style="color: #f8f8f2">damp_w</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">d2_divg</span>
+                   <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span> <span style="color: #f8f8f2">flagstruct%do_vort_damp</span> <span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">then</span> 
+<span style="color: #75715e">! damping on delp and vorticity:</span>
+                        <span style="color: #f8f8f2">nord_v(k)</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span>
+<span style="color: #960050; background-color: #1e0010">#</span><span style="color: #f8f8f2">ifndef</span> <span style="color: #f8f8f2">HIWPP</span>
+                        <span style="color: #f8f8f2">damp_vt(k)</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0.5</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">d2_divg</span>
+<span style="color: #960050; background-color: #1e0010">#</span><span style="color: #66d9ef">endif</span>
+<span style="color: #66d9ef">                   endif</span>
+<span style="color: #66d9ef">                   </span><span style="color: #f8f8f2">d_con_k</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0.</span> 
+              <span style="color: #f8f8f2">elseif</span> <span style="color: #f8f8f2">(</span> <span style="color: #f8f8f2">k</span><span style="color: #f92672">==</span><span style="color: #ae81ff">2</span> <span style="color: #f92672">.and.</span> <span style="color: #f8f8f2">flagstruct%d2_bg_k2</span><span style="color: #f92672">&gt;</span><span style="color: #ae81ff">0.01</span> <span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">then </span>
+<span style="color: #66d9ef">                   </span><span style="color: #f8f8f2">nord_k</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span> <span style="color: #f8f8f2">d2_divg</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">max(flagstruct%d2_bg,</span> <span style="color: #f8f8f2">flagstruct%d2_bg_k2)</span>
+                   <span style="color: #f8f8f2">nord_w</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span> <span style="color: #f8f8f2">damp_w</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">d2_divg</span>
+                   <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span> <span style="color: #f8f8f2">flagstruct%do_vort_damp</span> <span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">then </span>
+<span style="color: #66d9ef">                        </span><span style="color: #f8f8f2">nord_v(k)</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span>
+<span style="color: #960050; background-color: #1e0010">#</span><span style="color: #f8f8f2">ifndef</span> <span style="color: #f8f8f2">HIWPP</span>
+                        <span style="color: #f8f8f2">damp_vt(k)</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0.5</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">d2_divg</span>
+<span style="color: #960050; background-color: #1e0010">#</span><span style="color: #66d9ef">endif</span>
+<span style="color: #66d9ef">                   endif</span>
+<span style="color: #66d9ef">                   </span><span style="color: #f8f8f2">d_con_k</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0.</span> 
+              <span style="color: #f8f8f2">elseif</span> <span style="color: #f8f8f2">(</span> <span style="color: #f8f8f2">k</span><span style="color: #f92672">==</span><span style="color: #ae81ff">3</span> <span style="color: #f92672">.and.</span> <span style="color: #f8f8f2">flagstruct%d2_bg_k2</span><span style="color: #f92672">&gt;</span><span style="color: #ae81ff">0.05</span> <span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">then </span>
+<span style="color: #66d9ef">                   </span><span style="color: #f8f8f2">nord_k</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span>  <span style="color: #f8f8f2">d2_divg</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">max(flagstruct%d2_bg,</span> <span style="color: #ae81ff">0.2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">flagstruct%d2_bg_k2)</span>
+                   <span style="color: #f8f8f2">nord_w</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span>  <span style="color: #f8f8f2">damp_w</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">d2_divg</span>
+                   <span style="color: #f8f8f2">d_con_k</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0.</span> 
+              <span style="color: #66d9ef">endif</span>
+<span style="color: #66d9ef">       endif</span>
+</pre></div>
+
+</pre>
+</details>
