@@ -38,3 +38,18 @@ layout: layouts/post.njk
 </pre>
 
 </details>
+
+<details>
+<summary>Snippet where Rayleigh friction is called if using Ray_fast in <code>atmos_cubed_sphere/model/dyn_core.F90</code></summary>
+  
+<pre>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #75715e">! *** Inline Rayleigh friction here?</span>
+   <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span> <span style="color: #f8f8f2">flagstruct%RF_fast</span> <span style="color: #f92672">.and.</span> <span style="color: #f8f8f2">flagstruct%tau</span> <span style="color: #f92672">&gt;</span> <span style="color: #ae81ff">0.</span> <span style="color: #f8f8f2">)</span>  <span style="color: #f8f8f2">&amp;</span> 
+   <span style="color: #66d9ef">call </span><span style="color: #f8f8f2">Ray_fast(abs(dt),</span> <span style="color: #f8f8f2">npx,</span> <span style="color: #f8f8f2">npy,</span> <span style="color: #f8f8f2">npz,</span> <span style="color: #f8f8f2">pfull,</span> <span style="color: #f8f8f2">flagstruct%tau,</span> <span style="color: #f8f8f2">u,</span> <span style="color: #f8f8f2">v,</span> <span style="color: #f8f8f2">w,</span>  <span style="color: #f8f8f2">&amp;</span>
+                      <span style="color: #f8f8f2">ks,</span> <span style="color: #f8f8f2">dp_ref,</span> <span style="color: #f8f8f2">ptop,</span> <span style="color: #f8f8f2">hydrostatic,</span> <span style="color: #f8f8f2">flagstruct%rf_cutoff,</span> <span style="color: #f8f8f2">bd)</span>
+</pre></div>
+</pre>
+</details>
+
+## Understanding the second-order diffusion operators in FV3
+The model I'll be using is divergence damping. Function calls can be found around line 700 of `atmos_cubed_sphere/model/dyn_core.F90`.
