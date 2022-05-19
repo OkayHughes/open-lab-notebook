@@ -10,8 +10,7 @@ layout: layouts/post.njk
 ---
 
 Let us test the following configurations / aspects that caused issues in the 2020 FV3 version as integrated in the CAM development branch used for the class (Jan. 2022):
-*  Missing timing information after the job completes, even the setting of 
-xmlchange SAVE_TIMING=TRUE
+*  Missing timing information after the job completes, even the setting of  `xmlchange SAVE_TIMING=TRUE`
 does not cure the problem. Other dycores have the same issue (dycore independent).
 * Found by Anthony in class project 3: with FVC96 hord=5 (see the non-diffusive settings for FV3 in class project 3) the dry UMJS14 baroclinic wave blows up shortly after day 18 (in CAM development with original FV3) with default time steps and 6th order div damping (nord=2)
 Anthony found that a switch to the more diffusive hord=6 setting cured the problem
