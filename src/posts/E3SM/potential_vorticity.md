@@ -23,6 +23,7 @@ Define `$$\zeta_\eta = \partial^\eta_x v - \partial^\eta_y u  $$`
 
 <table>
   <tr>
+    <td>$$ $$</td>
   </tr>
 </table>
 
