@@ -19,3 +19,4 @@ Define `$$\zeta_\eta = \partial^\eta_x v - \partial^\eta_y u  $$`
     <td></td> <td>$$= -\frac{g}{p_0\partial_\eta a + p_s \partial_\eta b } \left[\left((\zeta_\eta + f) \partial_\eta \theta - \left(\partial_\eta v \right) \left(\partial^\eta_x \theta \right) + \left(\partial_\eta u\right) \left( \partial^\eta_y \theta \right) \right) \right]  $$</td>
   </tr>
 </table>
+
