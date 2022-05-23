@@ -33,5 +33,28 @@ One could think of these as being ordered along the `$$z$$` axis, but for the sa
 of not having to explicitly dealing with boundary conditions I'll try not to actually
 use that assumption.
 
-We derive a quadratic approximation to `$$u$$`, and since we only care about
-the estimation of the derivative of `$$u$$`
+We derive a quadratic approximation to `$$u$$`. 
+We use an affine change of variables `$$ \zeta: z \mapsto (z-z_1) $$` 
+for notational convenience. We therefore denote `$$\zeta_i = \zeta(z_i) = z_i - z_1$$`
+(note, this encodes "signed `$$h$$`s" in some sense).
+Our main equation of interest takes
+the form 
+`$$$f(\zeta) = a_1\zeta^2 + a_2\zeta + a_3 $$$`
+
+with constraints 
+<table class="eqn">
+  <tr>
+    <td>$$ u_1 $$</td><td>$$= a_1\zeta_1^2 + a_2\zeta_1 + a_3 $$ </td>
+  </tr>
+  <tr>
+    <td></td><td>$$\implies a_3 = u_1$$</td>
+  </tr>
+  <tr>
+    <td>$$ u_0 $$</td><td>$$=a_1\zeta_0^2 + a_2\zeta_0 + u_1  $$</td>
+  </tr>
+  <tr>
+    <td>$$ u_2 $$</td><td>$$=a_1\zeta_2^2 + a_2\zeta_2 + u_1 $$</td>
+  </tr>
+</table>
+
+
