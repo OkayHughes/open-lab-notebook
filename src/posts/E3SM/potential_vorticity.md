@@ -21,9 +21,17 @@ Define `$$\zeta_\eta = \partial^\eta_x v - \partial^\eta_y u  $$`
 </table>
 
 
-<table>
-  <tr>
-    <td>$$ $$</td>
-  </tr>
-</table>
+In order to compute vertical derivatives, we'll just need to use a finite difference method. 
+I'll use a second-order method to start with.
 
+Because we have a vertically lagrangian model, I need to derive an appropriate stencil.
+It's always fun when I get to actually use a thing that I learned in a class.
+
+Suppose we have measurements of a quantity `$$u$$` at points `$$z_0, z_1, z_2$$`.
+Call these measurements `$$u_0, u_1, u_2$$`.
+One could think of these as being ordered along the `$$z$$` axis, but for the sake
+of not having to explicitly dealing with boundary conditions I'll try not to actually
+use that assumption.
+
+We derive a quadratic approximation to `$$u$$`, and since we only care about
+the estimation of the derivative of `$$u$$`
