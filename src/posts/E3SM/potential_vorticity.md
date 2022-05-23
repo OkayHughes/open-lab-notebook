@@ -104,4 +104,3 @@ And so find our second-order approximation of slope to be
 
 
 
-
