@@ -102,5 +102,100 @@ And so find our second-order approximation of slope to be
   </tr>
 </table>
 
+The following python code verifies that this should be second order:
 
+<details>
+<summary><code>Benchmark finite difference stencil</code></summary>
+  
+<pre>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">numpy</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">np</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">matplotlib.pyplot</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">plt</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">fin_dif_2ord</span><span style="color: #f8f8f2">(u,</span> <span style="color: #f8f8f2">z):</span>
+    <span style="color: #66d9ef">assert</span><span style="color: #f8f8f2">(u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">shape</span> <span style="color: #f92672">==</span> <span style="color: #f8f8f2">z</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">shape)</span>
+    <span style="color: #f8f8f2">z_0</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros_like(z)</span>
+    <span style="color: #f8f8f2">z_1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros_like(z)</span>
+    <span style="color: #f8f8f2">z_2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros_like(z)</span>
+    <span style="color: #f8f8f2">z_0[:,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">z[:,</span> <span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span>
+    <span style="color: #f8f8f2">z_1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">z</span>
+    <span style="color: #f8f8f2">z_2[:,</span> <span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">z[:,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:]</span>
+    <span style="color: #f8f8f2">z_0[:,</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">z[:,</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">]</span>
+    <span style="color: #f8f8f2">z_2[:,</span> <span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">z[:,</span> <span style="color: #f92672">-</span><span style="color: #ae81ff">3</span><span style="color: #f8f8f2">]</span>
+
+    <span style="color: #f8f8f2">u_0</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros_like(u)</span>
+    <span style="color: #f8f8f2">u_1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros_like(u)</span>
+    <span style="color: #f8f8f2">u_2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros_like(u)</span>
+    <span style="color: #f8f8f2">u_0[:,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u[:,</span> <span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span>
+    <span style="color: #f8f8f2">u_1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u</span>
+    <span style="color: #f8f8f2">u_2[:,</span> <span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u[:,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:]</span>
+    <span style="color: #f8f8f2">u_0[:,</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u[:,</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">]</span>
+    <span style="color: #f8f8f2">u_2[:,</span> <span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u[:,</span> <span style="color: #f92672">-</span><span style="color: #ae81ff">3</span><span style="color: #f8f8f2">]</span>
+	
+    <span style="color: #f8f8f2">numerator</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(u_1</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">u_0)</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(z_2</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">z_1)</span><span style="color: #f92672">**</span><span style="color: #ae81ff">2</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">(u_2</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">u_1)</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(z_0</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">z_1)</span><span style="color: #f92672">**</span><span style="color: #ae81ff">2</span>
+    <span style="color: #f8f8f2">denominator</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(z_0</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">z_1)</span><span style="color: #f92672">**</span><span style="color: #ae81ff">2</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">(z_2</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">z_1)</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">(z_0</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">z_1)</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(z_2</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">z_1)</span><span style="color: #f92672">**</span><span style="color: #ae81ff">2</span>
+    <span style="color: #66d9ef">return</span><span style="color: #f8f8f2">(numerator</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">denominator)</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">fin_dif_1ord</span><span style="color: #f8f8f2">(u,</span> <span style="color: #f8f8f2">z):</span>
+    <span style="color: #66d9ef">assert</span><span style="color: #f8f8f2">(u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">shape</span> <span style="color: #f92672">==</span> <span style="color: #f8f8f2">z</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">shape)</span>
+    <span style="color: #f8f8f2">z_0</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros_like(z)</span>
+    <span style="color: #f8f8f2">z_1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros_like(z)</span>
+    <span style="color: #f8f8f2">z_0[:,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">z[:,</span> <span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span>
+    <span style="color: #f8f8f2">z_1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">z</span>
+    <span style="color: #f8f8f2">z_0[:,</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">z[:,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span>
+
+    <span style="color: #f8f8f2">u_0</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros_like(u)</span>
+    <span style="color: #f8f8f2">u_1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros_like(u)</span>
+    <span style="color: #f8f8f2">u_0[:,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u[:,</span> <span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span>
+    <span style="color: #f8f8f2">u_1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u</span>
+    <span style="color: #f8f8f2">u_0[:,</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u[:,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span>
+	
+    <span style="color: #f8f8f2">numerator</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u_1</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">u_0</span>
+    <span style="color: #f8f8f2">denominator</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">z_1</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">z_0</span>
+    <span style="color: #66d9ef">return</span><span style="color: #f8f8f2">(numerator</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">denominator)</span>
+
+
+
+<span style="color: #f8f8f2">n_h</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">32</span>
+<span style="color: #f8f8f2">n_z</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">100</span>
+<span style="color: #f8f8f2">h_base</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0.01</span>
+<span style="color: #f8f8f2">u_arr</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros((n_h,</span> <span style="color: #f8f8f2">n_z))</span>
+<span style="color: #f8f8f2">z_arr</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros((n_h,</span> <span style="color: #f8f8f2">n_z))</span>
+<span style="color: #f8f8f2">hs</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">linspace(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">8</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">n_h)</span>
+<span style="color: #f8f8f2">hrange</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">arange(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">n_z,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">hstep</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(hrange</span> <span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">print(hstep)</span>
+
+<span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">hind,</span> <span style="color: #f8f8f2">h</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">enumerate(hs):</span>
+	<span style="color: #f8f8f2">z_arr[hind,</span> <span style="color: #f8f8f2">:]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">h_base</span> <span style="color: #f92672">*</span> <span style="color: #ae81ff">2</span><span style="color: #f92672">**</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">h)</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">hstep</span>
+	<span style="color: #f8f8f2">u_arr[hind,</span> <span style="color: #f8f8f2">:]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">sin(z_arr[hind,</span> <span style="color: #f8f8f2">:])</span>
+
+<span style="color: #f8f8f2">du_dz_analytic</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">cos(</span> <span style="color: #f8f8f2">u_arr)</span>
+<span style="color: #f8f8f2">du_dz_numeric_1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">fin_dif_1ord(u_arr,</span> <span style="color: #f8f8f2">z_arr)</span>
+<span style="color: #f8f8f2">du_dz_numeric_2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">fin_dif_2ord(u_arr,</span> <span style="color: #f8f8f2">z_arr)</span>
+<span style="color: #f8f8f2">residual_1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">abs(du_dz_analytic</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">du_dz_numeric_1)</span>
+<span style="color: #f8f8f2">residual_2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">abs(du_dz_analytic</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">du_dz_numeric_2)</span>
+<span style="color: #f8f8f2">max_res_1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">residual_1</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">max(axis</span><span style="color: #f92672">=</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">max_res_2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">residual_2</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">max(axis</span><span style="color: #f92672">=</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
+
+<span style="color: #f8f8f2">lplot_1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">log(max_res_1)</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">log(</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">lplot_2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">log(max_res_2)</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">log(</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">)</span> 
+
+
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">figure()</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">plot(hs,</span> <span style="color: #f8f8f2">lplot_1,</span> <span style="color: #f8f8f2">label</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;first ord&quot;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">plot(hs,</span> <span style="color: #f8f8f2">lplot_2,</span> <span style="color: #f8f8f2">label</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;second ord&quot;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">legend()</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">show()</span>
+</pre></div>
+
+
+</pre>
+</details>
+
+
+## Choosing actual functions for PV formulation:
+
+We use the folliwng formulation of potential vorticity:
+
+`$$$ \mathrm{PV} = - \frac{g}{p_0 \partial_\eta a + p_s \partial_\eta b } \left[ \left(\zeta_\eta + f \right) \partial_\eta \theta - \frac{1}{\overline{r} \cos \varphi} \left(\partial_\eta v \right) ^\eta\partial_\lambda \theta + \frac{1}{\overline{r}} \partial_\eta \partial\right] $$$`
 
