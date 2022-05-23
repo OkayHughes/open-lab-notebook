@@ -58,3 +58,35 @@ with constraints
 </table>
 
 
+which we can rewrite as
+`$$$
+\begin{bmatrix}
+\zeta_0^2 & \zeta_0\\
+\zeta_2^2 & \zeta_2  
+\end{bmatrix}
+\begin{bmatrix}
+a_1 \\
+a_2
+\end{bmatrix} =
+\begin{bmatrix}
+u_2 - u_1\\
+u_3 - u_1
+\end{bmatrix}
+$$$`
+asdf
+
+We care about the estimate `$$f'(\zeta_0) = a_2 $$`. 
+The solution to the above equations will exist iff `$$z_0 \neq z_1 \neq z_2 $$`. 
+We can find said solution analytically
+
+`$$$
+\begin{bmatrix}
+a_1 \\
+a_2
+\end{bmatrix}
+= 
+\frac{1}{\zeta_0^2 \zeta_2 - \zeta_0 \zeta_2^2}
+\begin{bmatrix}
+\end{bmatrix}
+$$$`
+
