@@ -98,8 +98,10 @@ And so find our second-order approximation of slope to be
     <td>$$a_2$$</td><td>$$= \frac{1}{\zeta_0^2\zeta_2 - \zeta_0\zeta_2^2} \left(-(u_2-u_1)\zeta_2^2 + (u_0-u_1) \zeta_0^2 \right)$$</td>
   </tr>
   <tr>
-    <td></td><td>$$= \frac{1}{(z_0-z_1)^2(z_2-z_1) - (z_0-z_1)(z_2-z_1)^2} \left((u_1-u_2)\zeta_2^2 + (u_0-u_1) \zeta_0^2 \right)$$</td>
+    <td></td><td>$$= \frac{(u_1-u_2)(z_2-z_1)^2 + (u_0-u_1) (z_0-z_1)^2}{(z_0-z_1)^2(z_2-z_1) - (z_0-z_1)(z_2-z_1)^2} $$</td>
   </tr>
 </table>
+
+
 
 
