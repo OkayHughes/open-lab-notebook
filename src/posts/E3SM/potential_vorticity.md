@@ -205,8 +205,18 @@ with `$$ \zeta_\eta = \frac{1}{\overline{r}\cos\varphi} \left((^\eta \partial_\l
 
 ### how to calculate the thing
 
-* ⬜ `$$ r, g $$`
-* ⬜ `$$ p_0, p_s $$`
+* ✅ `$$ \overline{r}, g $$` Use constants provided by ESM framework.
+  * `physical_constants, only: g0=>g,kappa0=>kappa,Rgas,Cp0=>Cp,Rwater_vapor,rearth0,omega0, dd_pi`
+* ✅ `$$ p_0, p_s $$` 
+  * For `$$p_0$$`: `use physical_constants,   only: p0`
+  * For 
+* ⬜ `$$ \theta $$`
 * ⬜ `$$ \partial_\eta a, \partial_\eta a $$`
 * ⬜ `$$ \zeta_\eta $$`
-* ⬜ `$$ $$`
+* ⬜ `$$ f $$`
+* ⬜ `$$ \partial_\eta \theta $$`
+* ⬜ `$$ \cos(\varphi) $$`
+* ⬜ `$$ \partial_\eta v$$`
+* ⬜ `$$ \partial_\lambda \theta $$`
+* ⬜ `$$ \partial_\eta y $$`
+* ⬜ `$$ \partial_varphi \theta $$`
