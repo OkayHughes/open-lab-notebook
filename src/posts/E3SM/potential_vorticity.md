@@ -69,8 +69,8 @@ a_1 \\
 a_2
 \end{bmatrix} =
 \begin{bmatrix}
-u_2 - u_1\\
-u_0 - u_1
+u_0 - u_1\\
+u_2 - u_1
 \end{bmatrix}
 $$$`
 asdf
@@ -88,17 +88,17 @@ a_2
    -\zeta_2^2 & \zeta_0^2
 \end{bmatrix}
 \begin{bmatrix}
-u_2-u_1\\
-u_0 - u_1
+u_0-u_1\\
+u_2 - u_1
 \end{bmatrix}$$$`
 And so find our second-order approximation of slope to be
 
 <table class="eqn">
   <tr>
-    <td>$$a_2$$</td><td>$$= \frac{1}{\zeta_0^2\zeta_2 - \zeta_0\zeta_2^2} \left(-(u_2-u_1)\zeta_2^2 + (u_0-u_1) \zeta_0^2 \right)$$</td>
+    <td>$$a_2$$</td><td>$$= \frac{1}{\zeta_0^2\zeta_2 - \zeta_0\zeta_2^2} \left(-(u_0-u_1)\zeta_2^2 + (u_2-u_1) \zeta_0^2 \right)$$</td>
   </tr>
   <tr>
-    <td></td><td>$$= \frac{(u_1-u_2)(z_2-z_1)^2 + (u_0-u_1) (z_0-z_1)^2}{(z_0-z_1)^2(z_2-z_1) - (z_0-z_1)(z_2-z_1)^2} $$</td>
+    <td></td><td>$$= \frac{(u_1-u_0)(z_2-z_1)^2 + (u_2-u_1) (z_0-z_1)^2}{(z_0-z_1)^2(z_2-z_1) - (z_0-z_1)(z_2-z_1)^2} $$</td>
   </tr>
 </table>
 
