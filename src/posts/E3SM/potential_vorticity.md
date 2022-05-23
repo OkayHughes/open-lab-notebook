@@ -203,3 +203,10 @@ We use the folliwng formulation of potential vorticity:
 with `$$ \zeta_\eta = \frac{1}{\overline{r}\cos\varphi} \left((^\eta \partial_\lambda v) - (^\eta \partial_\varphi u\cos \phi ) \right) $$`
 
 
+### how to calculate the thing
+
+* ⬜ `$$ r, g $$`
+* ⬜ `$$ p_0, p_s $$`
+* ⬜ `$$ \partial_\eta a, \partial_\eta a $$`
+* ⬜ `$$ \zeta_\eta $$`
+* ⬜ `$$ $$`
