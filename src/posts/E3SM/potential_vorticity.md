@@ -208,12 +208,14 @@ with `$$ \zeta_\eta = \frac{1}{\overline{r}\cos\varphi} \left((^\eta \partial_\l
 * ✅ `$$ \overline{r}, g $$` Use constants provided by ESM framework.
   * `physical_constants, only: g0=>g,kappa0=>kappa,Rgas,Cp0=>Cp,Rwater_vapor,rearth0,omega0, dd_pi`
 * ✅ `$$ p_0, p_s $$` 
-  * For `$$p_0$$`: member of `hvcoord_t,` i.e. `hvcoord%ps0`
-  * For `$$p_s $$`: member of `elem_state_t` i.e. `elem_state%ps_v`
+  * For `$$p_0$$`: member of `HybridVCoord,`  `Real ps0`
+  * For `$$p_s $$`: member of member of `ElementsState`, `m_ps_v;       // Surface pressure`
 * ✅ `$$ \theta $$`:
   * Use `get_R_star` (in C++ already) and `pottemp(:,:,:) = Rgas*elem%state%vtheta_dp(:,:,:,nt)/(Rstar(:,:,:)*elem%state%dp3d(:,:,:,nt))`
 * ✅ `$$ \partial_\eta a, \partial_\eta b $$`
-  * Use finite difference above and 
+  * Use finite difference above and `HybridVCoord,` i.e. `hvcoord.hybrid_am`
+  * `HybridVCoord,` i.e. `hvcoord.hybrid_bm`
+  * `HybridVCoord::compute_eta` to get eta.
 * ⬜ `$$ \zeta_\eta $$`
 * ⬜ `$$ f $$`
 * ⬜ `$$ \partial_\eta \theta $$`
