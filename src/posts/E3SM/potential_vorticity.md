@@ -208,8 +208,8 @@ with `$$ \zeta_\eta = \frac{1}{\overline{r}\cos\varphi} \left((^\eta \partial_\l
 * ✅ `$$ \overline{r}, g $$` Use constants provided by ESM framework.
   * `physical_constants, only: g0=>g,kappa0=>kappa,Rgas,Cp0=>Cp,Rwater_vapor,rearth0,omega0, dd_pi`
 * ✅ `$$ p_0, p_s $$` 
-  * For `$$p_0$$`: member of `HybridVCoord,`  `Real ps0`
-  * For `$$p_s $$`: member of member of `ElementsState`, `m_ps_v;       // Surface pressure`
+  * For `$$p_0$$`: member of `hvcoord_t,`  `hvcoord%ps0`
+  * For `$$p_s$$`: member of member of `ElementsState`, `ps_v`;       // Surface pressure`
 * ✅ `$$ \theta $$`:
   * Use `get_R_star` (in C++ already) and `pottemp(:,:,:) = Rgas*elem%state%vtheta_dp(:,:,:,nt)/(Rstar(:,:,:)*elem%state%dp3d(:,:,:,nt))`
 * ✅ `$$ \partial_\eta a, \partial_\eta b $$`
@@ -224,3 +224,6 @@ with `$$ \zeta_\eta = \frac{1}{\overline{r}\cos\varphi} \left((^\eta \partial_\l
 * ⬜ `$$ \partial_\lambda \theta $$`
 * ⬜ `$$ \partial_\eta y $$`
 * ⬜ `$$ \partial_varphi \theta $$`
+
+
+`share/prim_advance_mod.F90` is where to put the code
