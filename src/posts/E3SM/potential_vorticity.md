@@ -209,11 +209,11 @@ with `$$ \zeta_\eta = \frac{1}{\overline{r}\cos\varphi} \left((^\eta \partial_\l
   * `physical_constants, only: g0=>g,kappa0=>kappa,Rgas,Cp0=>Cp,Rwater_vapor,rearth0,omega0, dd_pi`
 * ✅ `$$ p_0, p_s $$` 
   * For `$$p_0$$`: member of `hvcoord_t,`  `hvcoord%ps0`
-  * For `$$p_s$$`: member of member of `ElementsState`, `ps_v`;       // Surface pressure`
+  * For `$$p_s$$`: member of member of `elem_state_t`, `ps_v`;   
 * ✅ `$$ \theta $$`:
-  * Use `get_R_star` (in C++ already) and `pottemp(:,:,:) = Rgas*elem%state%vtheta_dp(:,:,:,nt)/(Rstar(:,:,:)*elem%state%dp3d(:,:,:,nt))`
+  * in `elem_ops` there is `get_field` which can be called with `name` `pottemp`/
 * ✅ `$$ \partial_\eta a, \partial_\eta b $$`
-  * Use finite difference above and `HybridVCoord,` i.e. `hvcoord.hybrid_am`
+  * Use finite difference above and `hvcoord_t` i.e. `hvcoord.%hyam`
   * `HybridVCoord,` i.e. `hvcoord.hybrid_bm`
   * `HybridVCoord::compute_eta` to get eta.
 * ⬜ `$$ \zeta_\eta $$`
