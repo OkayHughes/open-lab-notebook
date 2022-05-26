@@ -215,15 +215,22 @@ with `$$ \zeta_\eta = \frac{1}{\overline{r}\cos\varphi} \left((^\eta \partial_\l
 * ✅ `$$ \partial_\eta a, \partial_\eta b $$`
   * Use finite difference above and `hvcoord_t` i.e. `hvcoord%hyam`, `hycoord%hybm`
   * Use `hvcoord%d_etai` (distance between `etam(k)` and `etam(k-1)`) or `hvcoord%etam` if that's simpler.
-* ⬜ `$$ \zeta_\eta $$`
-  *  `$$vorticity_sphere`
-* ⬜ `$$ f $$`
-* ⬜ `$$ \partial_\eta \theta $$`
-* ⬜ `$$ \cos(\varphi) $$`
-* ⬜ `$$ \partial_\eta v$$`
+* ✅ `$$ \zeta_\eta $$`
+  *  `vorticity_sphere` in `derivative_mod`
+* ✅ `$$ f $$`
+  * ` fcor ` in `element_t`
+* ✅ `$$ \partial_\eta \theta $$`
+  *  Use calculated `theta` which should be stored somewhere
+* ✅ `$$ \cos(\varphi) $$`
+  * `elem(ie)%spherep(i,j)%lat`
+* ✅ `$$ \partial_\eta v$$`
+  * Use finite differences and `elem_state%v`
 * ⬜ `$$ \partial_\lambda \theta $$`
-* ⬜ `$$ \partial_\eta y $$`
+  * 
+* ⬜ `$$ \partial_\eta u $$`
+  * Use finite differences and `elem_state%v`
 * ⬜ `$$ \partial_varphi \theta $$`
+  * 
 
 
 `share/prim_advance_mod.F90` is where to put the code
