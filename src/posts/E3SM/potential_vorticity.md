@@ -225,12 +225,12 @@ with `$$ \zeta_\eta = \frac{1}{\overline{r}\cos\varphi} \left((^\eta \partial_\l
   * `elem(ie)%spherep(i,j)%lat`
 * ✅ `$$ \partial_\eta v$$`
   * Use finite differences and `elem_state%v`
-* ⬜ `$$ \partial_\lambda \theta $$`
-  * 
-* ⬜ `$$ \partial_\eta u $$`
+* ✅ `$$ \partial_\lambda \theta $$`
+  * Use `gradient_sphere` from `derivative_mod`
+* ✅ `$$ \partial_\eta u $$`
   * Use finite differences and `elem_state%v`
-* ⬜ `$$ \partial_varphi \theta $$`
-  * 
+* ✅ `$$ \partial_varphi \theta $$`
+  * Use `gradient_sphere` from `derivative_mod`
 
 
 `share/prim_advance_mod.F90` is where to put the code
