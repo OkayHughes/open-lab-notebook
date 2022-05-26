@@ -214,8 +214,9 @@ with `$$ \zeta_\eta = \frac{1}{\overline{r}\cos\varphi} \left((^\eta \partial_\l
   * in `elem_ops` there is `get_field` which can be called with `name` `pottemp`/
 * ✅ `$$ \partial_\eta a, \partial_\eta b $$`
   * Use finite difference above and `hvcoord_t` i.e. `hvcoord%hyam`, `hycoord%hybm`
-  * Use `hvcoord%d_etai` (distance between ``)
+  * Use `hvcoord%d_etai` (distance between `etam(k)` and `etam(k-1)`) or `hvcoord%etam` if that's simpler.
 * ⬜ `$$ \zeta_\eta $$`
+  *  `$$vorticity_sphere`
 * ⬜ `$$ f $$`
 * ⬜ `$$ \partial_\eta \theta $$`
 * ⬜ `$$ \cos(\varphi) $$`
