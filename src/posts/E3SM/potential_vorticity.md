@@ -234,3 +234,9 @@ with `$$ \zeta_\eta = \frac{1}{\overline{r}\cos\varphi} \left((^\eta \partial_\l
 
 
 `share/prim_advance_mod.F90` is where to put the code
+
+### changes:
+
+
+##`theta-l/element_state.F90`
+  * `66:     real (kind=real_ind) :: ertel_pv                                  ! hydrostatic ertel's potential vorticity`
