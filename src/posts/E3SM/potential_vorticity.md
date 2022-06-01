@@ -229,13 +229,15 @@ with `$$ \zeta_\eta = \frac{1}{\overline{r}\cos\varphi} \left((^\eta \partial_\l
   * Use `gradient_sphere` from `derivative_mod`
 * ✅ `$$ \partial_\eta u $$`
   * Use finite differences and `elem_state%v`
-* ✅ `$$ \partial_varphi \theta $$`
+* ✅ `$$ \partial_\varphi \theta $$`
   * Use `gradient_sphere` from `derivative_mod`
 
 
 `share/prim_advance_mod.F90` is where to put the code
 
 ## changes:
+New routines to create:
+`partial_eta_scalar` in `derivative_mod`
 
 
 ### `theta-l/element_state.F90`
