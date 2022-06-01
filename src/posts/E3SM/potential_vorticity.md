@@ -244,4 +244,47 @@ New routines to create:
 * `66:     real (kind=real_ind) :: ertel_pv                                  ! hydrostatic ertel's potential vorticity`
 
 ### `share/derivative_mod_base.F90`
-* ``
+
+<pre>
+<span style="color: #75715e">!DIR$ ATTRIBUTES FORCEINLINE :: partial_eta</span>
+  <span style="color: #66d9ef">function </span><span style="color: #f8f8f2">partial_eta(s,etam)</span> <span style="color: #66d9ef">result</span><span style="color: #f8f8f2">(du_deta)</span>
+<span style="color: #75715e">!</span>
+<span style="color: #75715e">!   input:  u = scalar </span>
+<span style="color: #75715e">!   ouput:  du_deta  vertical derivative of u</span>
+<span style="color: #75715e">!</span>
+
+
+    <span style="color: #66d9ef">real</span><span style="color: #f8f8f2">(kind</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">real_kind),</span> <span style="color: #66d9ef">intent</span><span style="color: #f8f8f2">(in)</span> <span style="color: #66d9ef">::</span> <span style="color: #f8f8f2">s(nlev)</span>  <span style="color: #75715e">! in lat-lon coordinates</span>
+    <span style="color: #66d9ef">real</span><span style="color: #f8f8f2">(kind</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">real_kind),</span> <span style="color: #66d9ef">intent</span><span style="color: #f8f8f2">(in)</span> <span style="color: #66d9ef">::</span> <span style="color: #f8f8f2">etam(nlev)</span>
+    <span style="color: #66d9ef">real</span><span style="color: #f8f8f2">(kind</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">real_kind)</span> <span style="color: #66d9ef">::</span> <span style="color: #f8f8f2">du_deta(nlev)</span>
+
+    <span style="color: #75715e">! Local</span>
+
+    <span style="color: #66d9ef">real</span><span style="color: #f8f8f2">(kind</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">real_kind)</span> <span style="color: #66d9ef">::</span> <span style="color: #f8f8f2">u1(nlev),</span> <span style="color: #f8f8f2">u2(nlev),</span> <span style="color: #f8f8f2">u3(nlev)</span>
+    
+    <span style="color: #66d9ef">real</span><span style="color: #f8f8f2">(kind</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">real_kind)</span> <span style="color: #66d9ef">::</span> <span style="color: #f8f8f2">eta1(nlev),</span> <span style="color: #f8f8f2">eta2(nlev),</span> <span style="color: #f8f8f2">eta3(nlev)</span>
+    
+    <span style="color: #66d9ef">real</span><span style="color: #f8f8f2">(kind</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">real_kind)</span> <span style="color: #66d9ef">::</span> <span style="color: #f8f8f2">num(nlev),</span> <span style="color: #f8f8f2">den(nlev)</span>
+
+    <span style="color: #f8f8f2">eta1(</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">:nlev)</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">etam(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:nlev</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">eta2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">etam</span> 
+    <span style="color: #f8f8f2">eta3(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:nlev</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">etam(</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">:nlev)</span>
+    <span style="color: #f8f8f2">eta1(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">etam(</span><span style="color: #ae81ff">3</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">eta3(nlev)</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">etam(nlev</span><span style="color: #f92672">-</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">)</span>
+    
+    <span style="color: #f8f8f2">u1(</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">:nlev)</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:nlev</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">u2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u</span>
+    <span style="color: #f8f8f2">u3(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:nlev</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u(</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">:nlev)</span>
+    <span style="color: #f8f8f2">u1(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u(</span><span style="color: #ae81ff">3</span><span style="color: #f8f8f2">)</span> 
+    <span style="color: #f8f8f2">u3(nlev)</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u(nlev</span><span style="color: #f92672">-</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">)</span>
+
+
+             
+    <span style="color: #f8f8f2">num</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(u2</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">u1)</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(eta3</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">eta2)</span><span style="color: #f92672">**</span><span style="color: #ae81ff">2.0</span><span style="color: #960050; background-color: #1e0010">_</span><span style="color: #f8f8f2">real_kind</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">(u3</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">u2)</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(eta1</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">eta2)</span><span style="color: #f92672">**</span><span style="color: #ae81ff">2.0</span><span style="color: #960050; background-color: #1e0010">_</span><span style="color: #f8f8f2">real_kind</span>
+    <span style="color: #f8f8f2">den</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(eta1</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">eta2)</span><span style="color: #f92672">**</span><span style="color: #ae81ff">2.0</span><span style="color: #960050; background-color: #1e0010">_</span><span style="color: #f8f8f2">real_kind</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">(eta3</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">eta2)</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">(eta1</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">eta2)</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(eta3</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">eta2)</span><span style="color: #f92672">**</span><span style="color: #ae81ff">2.0</span><span style="color: #960050; background-color: #1e0010">_</span><span style="color: #f8f8f2">real_kind</span>
+    <span style="color: #f8f8f2">du_deta</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">num</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">den</span>
+    
+  <span style="color: #66d9ef">end function </span><span style="color: #f8f8f2">partial_eta</span>
+</pre></div>
+
+</pre>
