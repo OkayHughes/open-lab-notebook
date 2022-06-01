@@ -305,3 +305,8 @@ New routines to create:
 ## `theta-l/share/prim_advance_mod.F90`
 
 Add code around line `1210`.
+
+
+## `theta-l/share/derivative_mod.F90`
+
+Add `partial_eta` to list of used subroutines.
