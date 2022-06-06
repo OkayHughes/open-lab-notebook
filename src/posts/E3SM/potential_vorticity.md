@@ -301,6 +301,11 @@ New routines to create:
 
 ## `theta-l/share/element_ops.F90`
 
+Also, on line `98` add:
+
+```
+    case ('potvort', 'PV');    call get_potvort(elem,field,hvcoord,nt,ntQ)
+```
 
 ## `theta-l/share/prim_advance_mod.F90`
 
