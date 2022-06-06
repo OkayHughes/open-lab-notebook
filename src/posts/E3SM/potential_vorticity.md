@@ -310,3 +310,16 @@ Add code around line `1210`.
 ## `theta-l/share/derivative_mod.F90`
 
 Add `partial_eta` to list of used subroutines.
+
+
+## designing output:
+
+In file `prim_movie_mod.F90` around line `715` add the following code:
+
+```
+
+```
+
+Around line `222`: create field in netcdf
+
+Use a getter method?
