@@ -328,3 +328,6 @@ In file `prim_movie_mod.F90` around line `715` add the following code:
 Around line `222`: create field in netcdf
 
 Use a getter method?
+
+## `common_movie_mod.F90` 
+line 46, line 88.
