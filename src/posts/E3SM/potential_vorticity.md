@@ -243,6 +243,399 @@ New routines to create:
   
   
 <pre>
-git 
+<code>
+diff --git a/components/homme/src/common_movie_mod.F90 b/components/homme/src/common_movie_mod.F90
+index 0762d19..66fd6fc 100644
+--- a/components/homme/src/common_movie_mod.F90
++++ b/components/homme/src/common_movie_mod.F90
+@@ -27,7 +27,7 @@ module common_movie_mod
+ #ifndef HOMME_WITHOUT_PIOLIBRARY
+ 
+ #ifdef _PRIM
+-  integer, parameter :: varcnt =  38
++  integer, parameter :: varcnt =  39
+ 
+   integer, parameter :: maxdims =  6
+ 
+@@ -44,6 +44,7 @@ module common_movie_mod
+                                                  'div        ', &
+                                                  'T          ', &
+                                                  'Th         ', &
++                                                 'PV         ', &
+                                                  'u          ', &
+                                                  'v          ', &
+                                                  'w          ', &
+@@ -84,6 +85,7 @@ module common_movie_mod
+                                                                1,2,5,0,0,0, & ! div
+                                                                1,2,5,0,0,0, & ! T
+                                                                1,2,5,0,0,0, & ! Th
++                                                               1,2,5,0,0,0, & ! PV
+                                                                1,2,5,0,0,0, & ! u
+                                                                1,2,5,0,0,0, & ! v
+                                                                1,2,5,0,0,0, & ! w
+@@ -113,13 +115,13 @@ module common_movie_mod
+ 
+   integer, parameter :: vartype(varcnt)=(/nf_double, nf_double, nf_double,nf_double, nf_double,nf_double,nf_double,& !ps:cv_lon
+                                           nf_int,    nf_double,nf_double,nf_double,nf_double,& !corners:T
+-                                          nf_double, nf_double,nf_double,nf_double,nf_double,nf_double,& !Th:w
++                                          nf_double, nf_double,nf_double,nf_double,nf_double,nf_double,nf_double,& !Th:w
+                                           nf_double, nf_double, nf_double,nf_double,& 
+                                           nf_double, nf_double,nf_double,nf_double,nf_double,& !Q:geo
+                                           nf_double, nf_double,nf_double,nf_double,nf_double,nf_double,& !omega:ilev
+                                           nf_double, nf_double,nf_double,nf_double,nf_double/)
+   logical, parameter :: varrequired(varcnt)=(/.false.,.false.,.false.,.false.,.false.,.false.,.false.,&
+-                                              .false.,.false.,.false.,.false.,.false.,&
++                                              .false.,.false.,.false.,.false.,.false.,.false.,&
+                                               .false.,.false.,.false.,.false.,.false.,.false.,&
+                                               .false.,.false.,.false.,.false.,&
+                                               .false.,.false.,.false.,.false.,.false.,&
+diff --git a/components/homme/src/interp_movie_mod.F90 b/components/homme/src/interp_movie_mod.F90
+index e4e1bf2..065b2fb 100644
+--- a/components/homme/src/interp_movie_mod.F90
++++ b/components/homme/src/interp_movie_mod.F90
+@@ -51,7 +51,7 @@ module interp_movie_mod
+ #undef V_IS_LATLON
+ #if defined(_PRIM)
+ #define V_IS_LATLON
+-  integer, parameter :: varcnt = 45
++  integer, parameter :: varcnt = 46
+   integer, parameter :: maxdims =  5
+   character*(*), parameter :: varnames(varcnt)=(/'ps       ', &
+                                                  'geos     ', &
+@@ -64,6 +64,7 @@ module interp_movie_mod
+                                                  'div      ', &
+                                                  'T        ', &
+                                                  'Th       ', &
++                                                 'PV       ', &
+                                                  'u        ', &
+                                                  'v        ', &
+                                                  'w        ', &
+@@ -99,7 +100,7 @@ module interp_movie_mod
+                                                  'hybi     ', &
+                                                  'time     '/)
+   integer, parameter :: vartype(varcnt)=(/PIO_double,PIO_double,PIO_double,PIO_double,PIO_double,&
+-                                          PIO_double,PIO_double,PIO_double,PIO_double, &
++                                          PIO_double,PIO_double,PIO_double,PIO_double,PIO_double, &
+                                           PIO_double,PIO_double,PIO_double,PIO_double, PIO_double,&
+                                           PIO_double,PIO_double,PIO_double,PIO_double,&
+                                           PIO_double,PIO_double,PIO_double,PIO_double,&
+@@ -113,7 +114,7 @@ module interp_movie_mod
+                                           PIO_double,PIO_double,&
+                                           PIO_double/)
+   logical, parameter :: varrequired(varcnt)=(/.false.,.false.,.false.,.false.,.false.,&
+-                                              .false.,.false.,.false.,.false.,.false.,&
++                                              .false.,.false.,.false.,.false.,.false.,.false.,&
+                                               .false.,.false.,.false.,.false.,.false.,&
+                                               .false.,.false.,.false.,.false.,.false.,&
+                                               .false.,.false.,.false.,.false.,.false.,&
+@@ -136,6 +137,7 @@ module interp_movie_mod
+        1,2,3,5,0,  &   ! div
+        1,2,3,5,0,  &   ! T
+        1,2,3,5,0,  &   ! Th
++       1,2,3,5,0,  &   ! PV
+        1,2,3,5,0,  &   ! u
+        1,2,3,5,0,  &   ! v
+        1,2,3,5,0,  &   ! w
+@@ -375,6 +377,7 @@ contains
+     call nf_variable_attributes(ncdf, 'hyai', 'hybrid A coefficiet at layer interfaces' ,'dimensionless')
+     call nf_variable_attributes(ncdf, 'hybi', 'hybrid B coefficiet at layer interfaces' ,'dimensionless')
+     call nf_variable_attributes(ncdf, 'Th',   'potential temperature \theta','degrees kelvin')
++    call nf_variable_attributes(ncdf, 'PV',   'Ertel Potential Vorticity','K \cdot m^2 / (kg \cdot s)')
+     call nf_variable_attributes(ncdf, 'w_i',  'vertical wind component on interfaces','meters/second')
+     call nf_variable_attributes(ncdf, 'mu_i', 'mu=dp/d\pi on interfaces','dimensionless')
+     call nf_variable_attributes(ncdf, 'geo_i','geopotential on interfaces','meters')
+@@ -930,6 +933,21 @@ contains
+                 call nf_put_var(ncdf(ios),datall,start3d, count3d, name='Th')
+                 deallocate(datall,var3d)
+              end if
++             if(nf_selectedvar('PV', output_varnames)) then
++                if (par%masterproc) print *,'writing PV...'
++                st=1
++                allocate(datall(ncnt,nlev),var3d(np,np,nlev,1))
++                do ie=1,nelemd
++                   call get_field(elem(ie),'PV',temp3d,hvcoord,n0,n0_Q)
++                   en=st+interpdata(ie)%n_interp-1
++                   call interpolate_scalar(interpdata(ie), temp3d, &
++                        np, nlev, datall(st:en,:))
++                   st=st+interpdata(ie)%n_interp
++                end do
++                call nf_put_var(ncdf(ios),datall,start3d, count3d, name='PV')
++                deallocate(datall,var3d)
++             end if
++
+ 
+ 
+              do qindex=1,min(qsize,5)
+diff --git a/components/homme/src/preqx/element_state.F90 b/components/homme/src/preqx/element_state.F90
+index e565218..ff90ec6 100644
+--- a/components/homme/src/preqx/element_state.F90
++++ b/components/homme/src/preqx/element_state.F90
+@@ -66,7 +66,6 @@ module element_state
+   !___________________________________________________________________
+   type, public :: elem_accum_t
+ 
+-#ifdef ENERGY_DIAGNOSTICS
+ 
+     ! Energy equation:
+     ! KE_t  = T1 + T2  + D1   + Err   +  vertical & horizontal advection terms
+@@ -113,7 +112,6 @@ module element_state
+     real (kind=real_kind) :: DIFF(np,np,2,nlev)                       ! net hypervis term
+     real (kind=real_kind) :: DIFFT(np,np,nlev)                        ! net hypervis term
+     real (kind=real_kind) :: CONV(np,np,2,nlev)                       ! dpdn u dot CONV = T1 + T2
+-#endif
+ 
+     ! the "4" timelevels represents data computed at:
+     !  1  t-.5
+diff --git a/components/homme/src/prim_movie_mod.F90 b/components/homme/src/prim_movie_mod.F90
+index 7e5c125..3f2b58a 100644
+--- a/components/homme/src/prim_movie_mod.F90
++++ b/components/homme/src/prim_movie_mod.F90
+@@ -233,6 +233,7 @@ contains
+ 
+     call nf_variable_attributes(ncdf, 'T', 'Temperature','degrees kelvin')
+     call nf_variable_attributes(ncdf, 'Th','potential temperature \theta','degrees kelvin')
++    call nf_variable_attributes(ncdf, 'PV','Ertel potential vorticity','K\cdot m^2 / (kg \cdot s)')
+     call nf_variable_attributes(ncdf, 'w', 'vertical wind component','meters/second')
+     call nf_variable_attributes(ncdf, 'w_i',  'vertical wind component on interfaces','meters/second')
+     call nf_variable_attributes(ncdf, 'mu_i', 'mu=dp/d\pi on interfaces','dimensionless')
+@@ -608,6 +609,17 @@ contains
+                 end do
+                 call nf_put_var(ncdf(ios),var3d,start, count, name='Th')
+              end if
++             if(nf_selectedvar('PV', output_varnames)) then
++                st=1
++                do ie=1,nelemd
++                   call get_field(elem(ie),'potvort',vartmp,hvcoord,n0,n0_Q)
++                   en=st+elem(ie)%idxp%NumUniquePts-1
++                   call UniquePoints(elem(ie)%idxP,nlev,vartmp,var3d(st:en,:))
++                   st=en+1
++                end do
++                call nf_put_var(ncdf(ios),var3d,start, count, name='PV')
++             end if
++
+ 
+             if(nf_selectedvar('rho', output_varnames)) then
+                 if (par%masterproc) print *,'writing rho...'
+@@ -713,6 +725,18 @@ contains
+                 enddo
+                 call nf_put_var(ncdf(ios),var3d,start, count, name='w')
+              end if
++             if(nf_selectedvar('w', output_varnames)) then
++                if (par%masterproc) print *,'writing w...'
++                st=1
++                do ie=1,nelemd
++                   en=st+elem(ie)%idxp%NumUniquePts-1
++                   call get_field(elem(ie),'w',vartmp,hvcoord,n0,n0_Q)
++                   call UniquePoints(elem(ie)%idxP,nlev,vartmp,var3d(st:en,:))
++                   st=en+1
++                enddo
++                call nf_put_var(ncdf(ios),var3d,start, count, name='w')
++             end if
++
+ 
+              if(nf_selectedvar('w_i', output_varnames)) then
+                 if (par%masterproc) print *,'writing w_i...'
+diff --git a/components/homme/src/share/derivative_mod_base.F90 b/components/homme/src/share/derivative_mod_base.F90
+index e6f795e..ecfe6c1 100644
+--- a/components/homme/src/share/derivative_mod_base.F90
++++ b/components/homme/src/share/derivative_mod_base.F90
+@@ -57,6 +57,8 @@ private
+       module procedure gradient_wk_nonstag
+   end interface
+ 
++ 
++
+   private :: dvvinit
+ 
+ ! these routines compute spherical differential operators as opposed to
+@@ -81,13 +83,13 @@ private
+   public  :: vlaplace_sphere_wk
+   public  :: vlaplace_sphere_wk_contra
+   public  :: vlaplace_sphere_wk_cartesian
++  public  :: partial_eta
+ !  public  :: laplace_eta
+   public  :: laplace_z
+   public  :: element_boundary_integral
+   public  :: edge_flux_u_cg
+   public  :: limiter_optim_iter_full
+   public  :: limiter_clip_and_sum
+-
+ contains
+ 
+ ! ==========================================
+@@ -1351,6 +1353,56 @@ contains
+   end function vlaplace_sphere_wk_contra
+ 
+ 
++!DIR$ ATTRIBUTES FORCEINLINE :: second_order_findiff
++  function second_order_findiff(u1, u2, u3, zeta1, zeta3) result(du_dzeta)
++        real(kind=real_kind), intent(in) :: u1, u2, u3, zeta1, zeta3
++        real(kind=real_kind) :: du_dzeta
++        du_dzeta = (u2-u1) * zeta3**2.0_real_kind + (u3-u2) * zeta1**2.0_real_kind
++        du_dzeta = du_dzeta / (zeta1**2.0_real_kind * zeta3 - zeta1 * zeta3**2.0_real_kind)
++
++  end function second_order_findiff
++!DIR$ ATTRIBUTES FORCEINLINE :: partial_eta
++  function partial_eta(u,etam) result(du_deta)
++!
++!   input:  u = scalar 
++!   ouput:  du_deta = vertical derivative of u
++!
++
++
++    real(kind=real_kind), intent(in) :: u(nlev)  ! in lat-lon coordinates
++    real(kind=real_kind), intent(in) :: etam(nlev)
++    real(kind=real_kind) :: du_deta(nlev)
++
++    ! Local
++
++
++    real(kind=real_kind) :: u1(nlev), u2(nlev), u3(nlev)
++    
++    real(kind=real_kind) :: eta1(nlev), eta2(nlev), eta3(nlev)
++    
++    real(kind=real_kind) :: num(nlev), den(nlev)
++
++ 
++    eta1(2:nlev) = etam(1:nlev-1)
++    eta2 = etam(:)
++    eta3(1:nlev-1) = etam(2:nlev)
++    eta1(1) = etam(3)
++    eta3(nlev) = etam(nlev-2)
++ 
++    u1(2:nlev) = u(1:nlev-1)
++    u2 = u
++    u3(1:nlev-1) = u(2:nlev)
++    u1(1) = u( 3)
++    u3(nlev) = u(nlev-2)
++
++
++        
++    num = (u2-u1)*(eta3-eta2)**2.0_real_kind + (u3-u2)*(eta1-eta2)**2.0_real_kind
++    den = (eta1-eta2)**2.0_real_kind * (eta3-eta2) - (eta1-eta2)*(eta3-eta2)**2.0_real_kind
++    du_deta  = num/den
++    
++  end function partial_eta
++
+ 
+ #if 0
+   subroutine laplace_eta(v,laplace,ncomp,etam) 
+diff --git a/components/homme/src/theta-l/element_state.F90 b/components/homme/src/theta-l/element_state.F90
+index 7d57dc0..38033b4 100644
+--- a/components/homme/src/theta-l/element_state.F90
++++ b/components/homme/src/theta-l/element_state.F90
+@@ -87,7 +87,6 @@ module element_state
+   !___________________________________________________________________
+   type, public :: elem_accum_t
+ 
+-#ifdef ENERGY_DIAGNOSTICS
+     ! Energy equation:
+     real (kind=real_kind) :: KEu_horiz1(np,np)
+     real (kind=real_kind) :: KEu_horiz2(np,np)
+@@ -115,7 +114,6 @@ module element_state
+     real (kind=real_kind) :: T2_nlevp_term(np,np)
+ 
+     real (kind=real_kind) :: CONV(np,np,2,nlev)                       ! dpdn u dot CONV = T1 + T2
+-#endif
+ 
+     ! the "4" timelevels represents data computed at:
+     !  1  t-.5
+diff --git a/components/homme/src/theta-l/share/derivative_mod.F90 b/components/homme/src/theta-l/share/derivative_mod.F90
+index a2efb73..72e5ef4 100644
+--- a/components/homme/src/theta-l/share/derivative_mod.F90
++++ b/components/homme/src/theta-l/share/derivative_mod.F90
+@@ -7,6 +7,6 @@ module derivative_mod
+                                  derivinit, gradient, gradient_wk, vorticity, divergence, &
+                                  gradient_sphere_wk_testcov, gradient_sphere_wk_testcontra, ugradv_sphere, vorticity_sphere, vorticity_sphere_diag, curl_sphere,     &
+                                  curl_sphere_wk_testcov, vlaplace_sphere_wk, element_boundary_integral, edge_flux_u_cg, limiter_optim_iter_full, limiter_clip_and_sum,&
+-                                 laplace_sphere_wk, divergence_sphere_wk, gradient_sphere, divergence_sphere, laplace_z, get_deriv
++                                 laplace_sphere_wk, divergence_sphere_wk, gradient_sphere, divergence_sphere, laplace_z, get_deriv, partial_eta
+   implicit none
+ end module derivative_mod
+diff --git a/components/homme/src/theta-l/share/element_ops.F90 b/components/homme/src/theta-l/share/element_ops.F90
+index 7d75e7f..ea7f94d 100644
+--- a/components/homme/src/theta-l/share/element_ops.F90
++++ b/components/homme/src/theta-l/share/element_ops.F90
+@@ -40,7 +40,6 @@
+ !  get_temperature()   used in CAM dp_coupling layer
+ !
+ ! UTILITY ROUTINES USED BY THETA-L MODEL
+-!  get_pottemp()
+ !  get_dpnh_dp()
+ !  get_hydro_pressure()
+ !  get_nonhydro_pressure()
+@@ -96,6 +95,7 @@ recursive subroutine get_field(elem,name,field,hvcoord,nt,ntQ)
+   select case(name)
+     case ('temperature','T'); call get_temperature(elem,field,hvcoord,nt)
+     case ('pottemp','Th');    call get_pottemp(elem,field,hvcoord,nt,ntQ)
++    case ('potvort', 'PV');   call get_pot_vort(elem,field,hvcoord,nt)
+     case ('phi','geo');       call get_phi(elem,field,phi_i,hvcoord,nt)
+     case ('dpnh_dp');         call get_dpnh_dp(elem,field,hvcoord,nt)
+     case ('pnh');             call get_nonhydro_pressure(elem,field,tmp ,hvcoord,nt)
+@@ -170,6 +170,63 @@ recursive subroutine get_field(elem,name,field,hvcoord,nt,ntQ)
+  
+   end subroutine get_field_i
+ 
++  !_____________________________________________________________________
++  subroutine get_pot_vort(elem,pot_vort,hvcoord,nt)
++  !
++  use physical_constants, only: g,rearth
++  use derivative_mod, only: partial_eta, vorticity_sphere, gradient_sphere, derivative_t, get_deriv
++  implicit none
++    
++  type (element_t), intent(in)        :: elem
++  real (kind=real_kind), intent(out)  :: pot_vort(np,np,nlev)
++  type (hvcoord_t),     intent(in)    :: hvcoord                      ! hybrid vertical coordinate struct
++  integer, intent(in) :: nt! time level
++  
++  !   local
++  integer :: i, j, k
++  real(kind=real_kind), dimension(np,np,nlev) :: pottemp, rel_vort
++  real(kind=real_kind), dimension(nlev) :: da_deta, db_deta, du_deta, dv_deta
++  real(kind=real_kind), dimension(np, np, nlev, 2) :: grad_theta
++  real(kind=real_kind) :: eps = 1e-10
++  type (derivative_t)                    :: deriv
++
++  call get_deriv(deriv)
++  call get_pottemp(elem, pottemp, hvcoord, nt,-1)
++
++  da_deta = partial_eta(hvcoord%hyam, hvcoord%etam)
++  db_deta = partial_eta(hvcoord%hybm, hvcoord%etam)
++
++  do k=1,nlev
++      rel_vort(:, :, k) = vorticity_sphere(elem%state%v(:, :, :, k, nt), deriv, elem)
++      grad_theta(:, :, k, :) = gradient_sphere(pottemp(:, :, k), deriv, elem%Dinv)
++  end do
++
++  do j=1,np
++      do i=1,np
++        ! f ~ elem%fcor(i, j)
++        pot_vort(i, j, :) = cos(elem%spherep(i,j)%lat) * (rel_vort(i, j, :) + elem%fcor(i, j)) * partial_eta(pottemp(i, j, :), hvcoord%etam)
++        pot_vort(i, j, :) = pot_vort(i, j, :) - (1.0_real_kind / rearth) * (&
++                                                 partial_eta(elem%state%v(i,j,2,:,nt), hvcoord%etam) * &
++                                                 grad_theta(i, j, :, 1))
++        pot_vort(i, j, :) = pot_vort(i, j, :) + cos(elem%spherep(i,j)%lat) * (1.0_real_kind / rearth) * (&
++                                                partial_eta(elem%state%v(i,j,1,:,nt), hvcoord%etam) * &
++                                                grad_theta(i, j, :, 2))
++        pot_vort(i, j, :) = pot_vort(i, j, :) * -1.0_real_kind * (g / &
++                                                                 (hvcoord%ps0 *da_deta + &
++                                                                  elem%state%ps_v(i,j,nt) * &
++                                                                  db_deta))
++        do k=1,nlev
++            !if (abs(pot_vort(i, j, k)) < eps .and. cos(elem%spherep(i,j)%lat) < eps) then
++            !  pot_vort(i, j, k) = 0.0_real_kind
++            !else
++            pot_vort(i, j, k) = pot_vort(i, j, k) / cos(elem%spherep(i,j)%lat)
++            !end if
++        end do
++      end do
++  end do
++
++  end subroutine get_pot_vort
++ 
+ 
+   !_____________________________________________________________________
+   subroutine get_pottemp(elem,pottemp,hvcoord,nt,ntQ)
 </pre>
+</code>
 </details>
