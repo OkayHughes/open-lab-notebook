@@ -238,4 +238,11 @@ with `$$ \zeta_\eta = \frac{1}{\overline{r}\cos\varphi} \left((^\eta \partial_\l
 ## changes:
 New routines to create:
 
-
+<details>
+<summary>Complete diff of <code>${E3SM_ROOT}/components/homme</code></summary>
+  
+  
+<pre>
+git 
+</pre>
+</details>
