@@ -57,7 +57,8 @@ because it feels suitable
 <details>
   <summary>parallel fileio example </summary>
   
-```
+<pre>
+<code>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -214,9 +215,13 @@ int main(int argc, char *argv[])
     return 0;
 }
   
-  ```
+</code>
+</pre>
 </details>
 
 
 
-## Start off with a personal
+## Start off with a serial implementation:
+
+First goal: no tracking or boundaries. Pure fluid solver without gravity (or oscillating gravity or something).
+
