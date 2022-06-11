@@ -225,3 +225,7 @@ int main(int argc, char *argv[])
 
 First goal: no tracking or boundaries. Pure fluid solver without gravity (or oscillating gravity or something).
 
+
+Define a spherical geometry with a pocket on the inside.
+
+
