@@ -74,6 +74,9 @@ Note: remove all dependence on time AND remove any mention of hyperviscosity.
     void (*get_globalIDs)(int, int *, void *) = homme_globalIDs;
     void (*get_HelmElementMat)(int, int, double *,int *, void *)=helm_mat;
     void (*get_HelmMap)(int, int, int *, void *)=helm_map;
-    ```
+```
+
+Another quantity of interest: `up` is the `u` at the next timestep.
+    
 
 
