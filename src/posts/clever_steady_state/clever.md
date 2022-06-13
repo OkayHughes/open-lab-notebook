@@ -83,3 +83,8 @@ _IF_ I want to try this with theta-l, I can use the ARKODE and sub out KINSOL to
 ## Case configuration
 Next up! Setup a sanity check case.
 Set `u = 0` to start.
+
+I.e. specify `$$ u=0, v=0, T=T_0, p_s = p_0, z_s = 0\mathrm{m} $$`
+
+
+Pick a DCMIP test to bastardize
