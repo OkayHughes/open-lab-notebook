@@ -56,3 +56,6 @@ NOTE! `${HOMME_ROOT}/src/implicit_mod.F90` contains a bunch of interface routine
 The key is understanding `noxsolve`, which appears to only be included in the `preqx` codebase.
 
 
+The picard linearization subroutines are where it's at!
+
+
