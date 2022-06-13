@@ -53,4 +53,6 @@ is a general purpose nonlinear system solver that works with Kokkos.
 
 NOTE! `${HOMME_ROOT}/src/implicit_mod.F90` contains a bunch of interface routines to Nox! This should work swimmingly.
 
+The key is understanding `noxsolve`, which appears to only be included in the `preqx` codebase.
+
 
