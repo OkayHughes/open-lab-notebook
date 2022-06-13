@@ -1,9 +1,0 @@
----
-date: 2021-08-31
-tags:
-  - posts
-  - directory
-eleventyNavigation:
-  key: clever steady state
-layout: layouts/post.njk
----
