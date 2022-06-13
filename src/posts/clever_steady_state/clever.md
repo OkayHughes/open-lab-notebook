@@ -36,4 +36,19 @@ method which means it would be sensible to do something like preconditioned GMRE
 
 ## Using clues from HOMME:
 
-In the file ``
+In the file `${HOMME_ROOT}/share/prim_implicit_mod.F90`
+we find a clue in the subroutine `residual`, which demonstrates
+the infrastructure to solve 
+`$$$ \mathbf{F}(\mathbf{u})  = \frac{(\mathbf{u}_{n+1} - \mathbf{u}_{n})}{\Delta t}  -  \textrm{DSS }\left[ \textrm{RHS}(\mathbf{u}_{n+1}) \right] $$$`
+
+Under our assumptions we would revise this equation so `$$\mathbf{u}_{n+1} = \mathbf{u}_{n}$$`, i.e.
+
+`$$$ \mathbf{F}(\mathbf{u})  -  \textrm{DSS }\left[ \textrm{RHS}(\mathbf{u}_{n+1}) \right] = 0$$$`
+
+which seems like it may be a straightforward modification to make to the code?
+
+I also note that in the C++ utilities, the Nox trilinos library is included, which 
+is a general purpose nonlinear system solver that works with Kokkos.
+
+
+
