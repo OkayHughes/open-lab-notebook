@@ -78,7 +78,8 @@ Note: remove all dependence on time AND remove any mention of hyperviscosity.
 
 Another quantity of interest: `up` is the `u` at the next timestep.
     
-
+_IF_ I want to try this with theta-l, I can use the ARKODE and sub out KINSOL to do what I want to do
 
 ## Case configuration
 Next up! Setup a sanity check case.
+Set `u = 0` to start.
