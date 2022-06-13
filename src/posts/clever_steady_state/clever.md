@@ -62,3 +62,18 @@ The picard linearization subroutines are where it's at!
 Note: remove all dependence on time AND remove any mention of hyperviscosity.
 
 
+## Modifying subroutines
+
+
+```
+    void (*precFunctionblock11)(double*, int, double*, void*)      = sw_picard_block_11;
+    void (*precFunctionblock12)(double*, int, double*, int, void*) = sw_picard_DFinvBt;
+    void (*precFunctionblock21)(double*, int, double*, int, void*) = sw_picard_block_21;
+    void (*precFunctionblock22)(double*, int, double*, void *)     = sw_picard_schur;
+
+    void (*get_globalIDs)(int, int *, void *) = homme_globalIDs;
+    void (*get_HelmElementMat)(int, int, double *,int *, void *)=helm_mat;
+    void (*get_HelmMap)(int, int, int *, void *)=helm_map;
+    ```
+
+
