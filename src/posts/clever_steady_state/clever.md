@@ -80,3 +80,5 @@ Another quantity of interest: `up` is the `u` at the next timestep.
     
 
 
+## Case configuration
+Next up! Setup a sanity check case.
