@@ -51,4 +51,6 @@ I also note that in the C++ utilities, the Nox trilinos library is included, whi
 is a general purpose nonlinear system solver that works with Kokkos.
 
 
+NOTE! `${HOMME_ROOT}/src/implicit_mod.F90` contains a bunch of interface routines to Nox! This should work swimmingly.
+
 
