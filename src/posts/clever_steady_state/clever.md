@@ -57,5 +57,8 @@ The key is understanding `noxsolve`, which appears to only be included in the `p
 
 
 The picard linearization subroutines are where it's at!
+[possibly useful stuff about picard linearization](http://hplgit.github.io/INF5620/doc/pub/sphinx-nonlin/._main_nonlin002.html)
+
+Note: remove all dependence on time AND remove any mention of hyperviscosity.
 
 
