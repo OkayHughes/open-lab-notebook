@@ -19,6 +19,8 @@ separate post about how to fix this.</span>
 git clone https://github.com/ESCOMP/CAM ${HOME}/CAM_JUNE22
 cd ${HOME}/CAM_JUNE22
 git checkout cam_development
-./manage_externals/checkout_externals
+yes t | ./manage_externals/checkout_externals
 
 ```
+
+
