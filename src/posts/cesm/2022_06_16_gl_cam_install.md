@@ -57,4 +57,31 @@ bash build.sh
 
 This will take a while to run (> 5 minutes?).
 
+## Copying machine files
+In order
+
+## creating a case
+
+Run the following code:
+
+```
+mkdir -p ${HOME}/make_cases \
+  && cd ${HOME}/make_cases \
+  && wget https://open-lab-notebook.glitch.me/public/scripts/case_creation_script_june.sh \
+  && mkdir -p ${HOME}/cesm_cases \
+  && bash case_creation_script_june.sh
+```
+
+If this runs correctly, it will create a JW06 (one of the test cases)
+case directory located at `${HOME}/cesm_cases/CAM_JUNE22/test_cases/CAM_JUNE22.ne30_ne30_mg17.FADIAB.36.test_cases.jw06`
+
+
+In order to build and run this case do
+```
+cd ${HOME}/cesm_cases/CAM_JUNE22/test_cases/CAM_JUNE22.ne30_ne30_mg17.FADIAB.36.test_cases.jw06 \
+  && (source bash.source && bash xml_config_helper.sh) \
+  && (source bash.source && ./case.build) \
+  && (source bash.source && ./case.submit)
+```
+
 
