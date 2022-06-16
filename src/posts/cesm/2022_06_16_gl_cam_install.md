@@ -45,5 +45,10 @@ export ESMF_COMPILER=intel
 export ESMF_F90=mpif90
 make -j8
 HERE
+
+bash build.sh
 ```
+
+This will take a while to run (> 5 minutes?)
+
 
