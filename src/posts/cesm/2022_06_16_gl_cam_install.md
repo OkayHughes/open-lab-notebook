@@ -33,4 +33,17 @@ mkdir ${HOME}/esmf \
 wget https://github.com/esmf-org/esmf/archive/refs/tags/v8.3.0.tar.gz \
   && tar -xf v8.3.0.tar.gz \
   && cd esmf-8.3.0
+
+cat << HERE > build.sh
+module load intel/18.0.5
+module load openmpi/3.1.4
+export ESMF_DIR=`pwd`
+export ESMF_LIB=`pwd`
+export ESMF_CXX=mpicxx
+export ESMF_COMM=openmpi
+export ESMF_COMPILER=intel
+export ESMF_F90=mpif90
+make -j8
+HERE
 ```
+
