@@ -24,3 +24,13 @@ yes t | ./manage_externals/checkout_externals
 ```
 
 
+## installing missing ESMF dependency
+
+```
+mkdir ${HOME}/esmf \
+  && cd ${HOME}/esmf
+
+wget https://github.com/esmf-org/esmf/archive/refs/tags/v8.3.0.tar.gz \
+  && tar -xf v8.3.0.tar.gz \
+  && cd esmf-8.3.0
+```
