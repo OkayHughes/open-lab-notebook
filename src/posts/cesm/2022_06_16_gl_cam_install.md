@@ -25,6 +25,12 @@ yes t | ./manage_externals/checkout_externals
 
 
 ## installing missing ESMF dependency
+The fastest way to do this is to run
+```
+rsync --progress -r /home/owhughes/esmf ${HOME}/esmf
+```
+
+But if you want to do it from source, then use the following:
 
 ```
 mkdir ${HOME}/esmf \
@@ -43,12 +49,12 @@ export ESMF_CXX=mpicxx
 export ESMF_COMM=openmpi
 export ESMF_COMPILER=intel
 export ESMF_F90=mpif90
-make -j8
+make -j4
 HERE
 
 bash build.sh
 ```
 
-This will take a while to run (> 5 minutes?)
+This will take a while to run (> 5 minutes?).
 
 
