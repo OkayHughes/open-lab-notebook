@@ -58,7 +58,14 @@ bash build.sh
 This will take a while to run (> 5 minutes?).
 
 ## Copying machine files
-In order
+Run 
+```
+cp -rv  /home/owhughes/.cime_CAM_june ${HOME}/.cime
+```
+
+This copies over machine configuration files that are specific to
+our Greatlakes machine.
+
 
 ## creating a case
 
