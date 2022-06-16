@@ -9,12 +9,16 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
-Installation nonsense:
+## Step 1: Subversion is messed up on greatlakes
+
+The subversion certificate authority permissions are messed up on GL
+for some reason. <span class="todo">Figure out why this is and make a 
+separate post about how to fix this.</span>
 
 ```
 git clone https://github.com/ESCOMP/CAM ${HOME}/CAM_JUNE22
 cd ${HOME}/CAM_JUNE22
 git checkout cam_development
-
+./manage_externals/checkout_externals
 
 ```
