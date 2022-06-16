@@ -11,9 +11,8 @@ layout: layouts/post.njk
 
 ## Step 1: Subversion is messed up on greatlakes
 
-The subversion certificate authority permissions are messed up on GL
-for some reason. <span class="todo">Figure out why this is and make a 
-separate post about how to fix this.</span>
+The subversion certificate authority permissions are too strict for silent
+`checkout_externals` to run successfully.
 
 ```
 git clone https://github.com/ESCOMP/CAM ${HOME}/CAM_JUNE22
