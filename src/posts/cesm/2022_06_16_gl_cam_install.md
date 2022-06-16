@@ -9,3 +9,12 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
+Installation nonsense:
+
+```
+git clone https://github.com/ESCOMP/CAM ${HOME}/CAM_JUNE22
+cd ${HOME}/CAM_JUNE22
+git checkout cam_development
+
+
+```
