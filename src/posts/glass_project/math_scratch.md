@@ -269,4 +269,6 @@ Note: the residual is written incorrectly. Thus the correct residual should read
 
 
 Actually solving this is a pretty straightforward application of newton's method to solving `$$\mathbf{r}_m(\tilde{\mathbf{v}}) = 0 $$` namely
-`$$$ \mathbf{J}\left(\tilde{\mathbf{v}}^{i+1} - \tilde{\mathbf{v}}^{i}\right) = $$$`
+`$$$ -\mathbf{J}_{\mathbf{r}_m}\left(\tilde{\mathbf{v}}^{i+1} - \tilde{\mathbf{v}}^{i}\right) \equiv -\mathbf{J}_{\mathbf{r}_m}(\delta \tilde{\mathbf{v}}) = \mathbf{r}_m(\tilde{\mathbf{v}}^i; \overline{\mathbf{v}}_n, \overline{\mathbf{p}}_n)$$$`
+
+We use the notation `$$\mathbf{J} = \frac{\delta \mathrm{r}}{\delta } $$`
