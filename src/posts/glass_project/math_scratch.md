@@ -236,6 +236,11 @@ These will be treated separately. The equation read
     <td> $$\mathbf{M} \frac{\tilde{\mathbf{v}} - \overline{\mathbf{v}}_n}{\Delta t} + \mu \mathbf{L} \overline{\mathbf{v}}_{n+1} + \mathbf{G} \overline{\mathbf{p}}_{n+1}^g $$ </td> <td> $$ = \overline{\mathbf{F}} $$</td>
   </tr>
   <tr>
-    <td>$$\mathbf{M} \frac{\overline{\mathbf{v}}_{n+1} - \tilde{\mathbf{v}}}{\Delta t} $$</td>
+    <td>$$\mathbf{M} \frac{\overline{\mathbf{v}}_{n+1} - \tilde{\mathbf{v}}}{\Delta t}  + \mathbf{G} \left(\overline{\mathbf{p}}_{n+1} - \overline{\mathbf{p}}_{n+1}^g \right)$$</td> <td> $$ = 0 $$</td>
+  </tr>
+  <tr>
+    <td>$$ \mathbf{D}\overline{\mathbf{v}}_{n+1} + \mathbf{S} \overline{\mathbf{p}}_{n+1} $$</td>
   </tr>
 </table>
+
+The idea for solution 
