@@ -243,4 +243,5 @@ These will be treated separately. The equation read
   </tr>
 </table>
 
-The idea for solution 
+The idea for solution is essentially as follows:
+Come up with an appproximation
