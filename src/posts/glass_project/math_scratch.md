@@ -275,7 +275,7 @@ Actually solving this is a pretty straightforward application of newton's method
 We use the notation `$$\mathbf{J} = \frac{\delta \mathbf{r}_m}{\delta \tilde{\mathbf{v}}} $$`
 
 For the sake of convenience we assume that the mass and differential assemblies depend merely on the present 
-position of the mesh `$$\tilde{\mathbf{X}}^i$$`. This makes our life rather easy. This means our picard linearization takes the form (which agrees with [this paper](https://www.sciencedirect.com/science/article/pii/S0213131515000589))
+position of the mesh `$$\tilde{\mathbf{x}}^i$$`. This makes our life rather easy. This means our picard linearization takes the form (which agrees with [this paper](https://www.sciencedirect.com/science/article/pii/S0213131515000589))
 
 `$$$\mathbf{J}_{\mathbf{r}_m} = (\Delta t)^{-1}\mathbf{M} + \mu \mathbf{L} + \kappa \Delta t \mathbf{G}\mathbf{M}_p^{-1} \mathbf{D} $$$`
 
@@ -286,5 +286,8 @@ Therefore we are ready to actually calculate what we need to calculate:
 Do while not converged:
 1. Calculate the nodal pressure guess `$$\overline{\mathbf{p}}_{n+1}$$` using the `$$\textrm{pressure guess} $$` equation.
 2. Use the `$$\textrm{newton} $$` equation to solve for `$$\delta \tilde{\mathbf{v}}$$`
-3. 
+3. Update `$$\tilde{\mathbf{v}}^{i+1} = \tilde{\mathbf{v}}^i + \delta \tilde{\mathbf{v}}$$`
+4. Update `$$ \tilde{\mathbf{x}}^{i+1} = \overline{\mathbf{x}}_n + \tilde{\mathbf{v}}^{i+1} $$` (this might require an integration depending on velocity order)
+5. Update shape operators accordingly
+
 
