@@ -254,7 +254,8 @@ Come up with an appproximation for the guess. Analytically this can
 be given as `$$$ p_{n+1}^g = p_n + \kappa \int_{t_n}^{t_{n+1}} \nabla \cdot \mathbf{v} \, \mathrm{d} t $$$` 
 However, the discretized approximation is written incorrectly in the paper. We posit that
 `$$$\overline{\mathbf{p}}_{n+1} = \overline{\mathbf{p}}_n + \kappa \Delta t \mathbf{M}^{-1}_p \mathbf{D}\tilde{\mathbf{v}} $$$`
-is a well-posed guess.
+is a well-posed guess. We hypothesize here that the use of `\mathbf{M}_p` is to accomodate potentially different 
+order methods for pressure and velocity.
 
 
 
@@ -276,4 +277,9 @@ We use the notation `$$\mathbf{J} = \frac{\delta \mathbf{r}_m}{\delta \tilde{\ma
 For the sake of convenience we assume that the mass and differential assemblies depend merely on the present 
 position of the mesh `$$\tilde{\mathbf{X}}^i$$`. This makes our life rather easy. This means our picard linearization takes the form (which agrees with [this paper](https://www.sciencedirect.com/science/article/pii/S0213131515000589))
 
-`$$$\mathbf{J}_{\mathbf{r}_m} =  $$$`
+`$$$\mathbf{J}_{\mathbf{r}_m} = (\Delta t)^{-1}\mathbf{M} + \mu \mathbf{L} + \kappa \Delta t \mathbf{G}\mathbf{M}_p^{-1} \mathbf{D} $$$`
+
+
+Therefore we are ready to actually calculate what we need to calculate:
+
+1. Calculate the nodal pressure guess `$$\overline{\mathbf{p}}_{n+1}$$` using 
