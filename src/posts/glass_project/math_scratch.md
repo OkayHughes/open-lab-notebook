@@ -251,10 +251,10 @@ Given that our method is carefully designed to be lumped, I assume that I can tr
 
 The idea for solution is essentially as follows:
 Come up with an appproximation for the guess. Analytically this can
-be given as `$$$ p_{n+1}^g = p_n + \kappa \int_{t_n}^{t_{n+1}} \nabla \cdot \mathbf{v} \, \mathrm{d} t $$$` 
+be given as `$$$ p_{n+1}^g = p_n + \kappa \int_{t_n}^{t_{n+1}} \nabla \cdot \mathbf{v} \, \mathrm{d} t (\textrm{pressure guess})$$$` 
 However, the discretized approximation is written incorrectly in the paper. We posit that
 `$$$\overline{\mathbf{p}}_{n+1} = \overline{\mathbf{p}}_n + \kappa \Delta t \mathbf{M}^{-1}_p \mathbf{D}\tilde{\mathbf{v}} $$$`
-is a well-posed guess. We hypothesize here that the use of `\mathbf{M}_p` is to accomodate potentially different 
+is a well-posed guess. We hypothesize here that the use of `$$\mathbf{M}_p$$` is to accomodate potentially different 
 order methods for pressure and velocity.
 
 
@@ -270,7 +270,7 @@ Note: the residual is written incorrectly. Thus the correct residual should read
 
 
 Actually solving this is a pretty straightforward application of newton's method to solving `$$\mathbf{r}_m(\tilde{\mathbf{v}}) = 0 $$` namely
-`$$$ -\mathbf{J}_{\mathbf{r}_m}\left(\tilde{\mathbf{v}}^{i+1} - \tilde{\mathbf{v}}^{i}\right) \equiv -\mathbf{J}_{\mathbf{r}_m}(\delta \tilde{\mathbf{v}}) = \mathbf{r}_m(\tilde{\mathbf{v}}^i; \overline{\mathbf{v}}_n, \overline{\mathbf{p}}_n)$$$`
+`$$$ -\mathbf{J}_{\mathbf{r}_m}\left(\tilde{\mathbf{v}}^{i+1} - \tilde{\mathbf{v}}^{i}\right) \equiv -\mathbf{J}_{\mathbf{r}_m}(\delta \tilde{\mathbf{v}}) = \mathbf{r}_m(\tilde{\mathbf{v}}^i; \overline{\mathbf{v}}_n, \overline{\mathbf{p}}_n) (\textrm{newton})$$$`
 
 We use the notation `$$\mathbf{J} = \frac{\delta \mathbf{r}_m}{\delta \tilde{\mathbf{v}}} $$`
 
@@ -282,4 +282,9 @@ position of the mesh `$$\tilde{\mathbf{X}}^i$$`. This makes our life rather easy
 
 Therefore we are ready to actually calculate what we need to calculate:
 
-1. Calculate the nodal pressure guess `$$\overline{\mathbf{p}}_{n+1}$$` using 
+### Fractional momentum
+Do while not converged:
+1. Calculate the nodal pressure guess `$$\overline{\mathbf{p}}_{n+1}$$` using the `$$\textrm{pressure guess} $$` equation.
+2. Use the `$$\textrm{newton} $$` equation to solve for `$$\delta \tilde{\mathbf{v}}$$`
+3. 
+
