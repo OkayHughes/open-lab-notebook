@@ -247,7 +247,7 @@ We make some clever rearrangements to get
 `$$$\mathbf{D}\tilde{\mathbf{v}} = \Delta t \mathbf{D}\mathbf{M}^{-1} \mathbf{G}\left(\overline{\mathbf{p}}_{n+1} - \overline{\mathbf{p}}_{n+1}^g \right) + \mathbf{S}\overline{\mathbf{p}}_{n+1} $$$`
 
 Which we substitute for the middle equation. They make the "approximation" that `$$ \mathbf{D} \mathbf{M}^{-1} \mathbf{G} \approx \mathbf{L} $$`
-Given that our method is carefully designed to be lumped, I assume that 
+Given that our method is carefully designed to be lumped, I assume that I can treat this more rigorously.
 
 The idea for solution is essentially as follows:
 Come up with an appproximation for the guess. Analytically this can
@@ -266,3 +266,7 @@ Note: the residual is written incorrectly. Thus the correct residual should read
       <td></td><td>$$ = \mathbf{F} - \left(\mathbf{M} \frac{\tilde{\mathbf{v}} - \overline{\mathbf{v}}_n}{\Delta t} + \mu \mathbf{L} \tilde{\mathbf{v}} + G\left(\overline{\mathbf{p}}_n + \kappa \Delta t \mathbf{M}^{-1}_p \mathbf{D}\tilde{\mathbf{v}}\right)\right) $$</td>
   </tr>
 </table>
+
+
+Actually solving this is a pretty straightforward application of newton's method to solving `$$\mathbf{r}_m(\tilde{\mathbf{v}}) = 0 $$` namely
+`$$$ \mathbf{J}\left(\tilde{\mathbf{v}}^{i+1} - \tilde{\mathbf{v}}^{i}\right) = $$$`
