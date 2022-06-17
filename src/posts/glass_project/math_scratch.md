@@ -244,7 +244,7 @@ These will be treated separately. The equation read
 </table>
 
 We make some clever rearrangements to get
-`$$$\mathbf{D}\tilde{\mathbf{v}} = \Delta t \mathbf{D}\mathbf{M}^{-1} \mathbf{G}\left(\overline{\mathbf{p}}_{n+1} - \overline{\mathbf{p}}_{n+1}^g \right) + \mathbf{S}\overline{\mathbf{p}}_{n+1} $$$`
+`$$$\mathbf{D}\tilde{\mathbf{v}} = \Delta t \mathbf{D}\mathbf{M}^{-1} \mathbf{G}\left(\overline{\mathbf{p}}_{n+1} - \overline{\mathbf{p}}_{n+1}^g \right) + \mathbf{S}\overline{\mathbf{p}}_{n+1} (\textrm{pressure poisson})$$$`
 
 Which we substitute for the middle equation. They make the "approximation" that `$$ \mathbf{D} \mathbf{M}^{-1} \mathbf{G} \approx \mathbf{L} $$`
 Given that our method is carefully designed to be lumped, I assume that I can treat this more rigorously.
@@ -288,6 +288,10 @@ Do while not converged:
 2. Use the `$$\textrm{newton} $$` equation to solve for `$$\delta \tilde{\mathbf{v}}$$`
 3. Update `$$\tilde{\mathbf{v}}^{i+1} = \tilde{\mathbf{v}}^i + \delta \tilde{\mathbf{v}}$$`
 4. Update `$$ \tilde{\mathbf{x}}^{i+1} = \overline{\mathbf{x}}_n + \tilde{\mathbf{v}}^{i+1} $$` (this might require an integration depending on velocity order)
-5. Update shape operators accordingly
+5. Update shape operators with new shape matrix
+
+###  Poisson
+Solve the `$$ \textrm{pressure poisson} $$` equation using the pressure guess as boundary conditions where necessary.
+
 
 
