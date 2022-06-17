@@ -216,4 +216,15 @@ This is ostensibly due to the paper, but this seems kind of wrong.
 
 
 
-### 
+### Towards linearization + prep for newton's method
+
+The monolithic equation takes the form
+<table class="eqn">
+  <tr><td> $$\mathbf{M} \frac{\mathbf{\overline{v}_{n+1} - \overline{v}_n}}{\Delta t} + \mu \mathbf{L}\overline{\mathbf{v}}_{n+1} + \mathbf{G}\overline{\mathbf{p}}_{n+1}$$ </td><td> $$ = \overline{\mathbf{F}} $$ </td>
+ </tr>
+  <tr><td>$$\mathbf{D} \overline{\mathbf{v}}_{n+1} + \mathbf{S} \overline{\mathbf{p}}_{n+1}$$</td><td>$$ = 0 $$</td>
+  </tr>
+</table>
+
+
+And the next step is to 
