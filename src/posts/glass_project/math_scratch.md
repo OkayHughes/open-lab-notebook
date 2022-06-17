@@ -248,7 +248,7 @@ Come up with an appproximation for the guess. Analytically this can
 be given as `$$$ p_{n+1}^g = p_n + \kappa \int_{t_n}^{t_{n+1}} \nabla \cdot \mathbf{v} \, \mathrm{d} t $$$` 
 However, the discretized approximation is written incorrectly in the paper. We posit that
 `$$$\overline{\mathbf{p}}_{n+1} = \overline{\mathbf{p}}_n + \kappa \Delta t \mathbf{M}^{-1}_p \mathbf{D}\tilde{\mathbf{v}} $$$`
-
+is a 
 
 
 
