@@ -271,4 +271,9 @@ Note: the residual is written incorrectly. Thus the correct residual should read
 Actually solving this is a pretty straightforward application of newton's method to solving `$$\mathbf{r}_m(\tilde{\mathbf{v}}) = 0 $$` namely
 `$$$ -\mathbf{J}_{\mathbf{r}_m}\left(\tilde{\mathbf{v}}^{i+1} - \tilde{\mathbf{v}}^{i}\right) \equiv -\mathbf{J}_{\mathbf{r}_m}(\delta \tilde{\mathbf{v}}) = \mathbf{r}_m(\tilde{\mathbf{v}}^i; \overline{\mathbf{v}}_n, \overline{\mathbf{p}}_n)$$$`
 
-We use the notation `$$\mathbf{J} = \frac{\delta \mathrm{r}}{\delta } $$`
+We use the notation `$$\mathbf{J} = \frac{\delta \mathbf{r}_m}{\delta \tilde{\mathbf{v}}} $$`
+
+For the sake of convenience we assume that the mass and differential assemblies depend merely on the present 
+position of the mesh `$$\tilde{\mathbf{X}}^i$$`. This makes our life rather easy. This means our picard linearization takes the form (which agrees with [this paper](https://www.sciencedirect.com/science/article/pii/S0213131515000589))
+
+`$$$\mathbf{J}_{\mathbf{r}_m} =  $$$`
