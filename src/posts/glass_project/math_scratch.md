@@ -230,7 +230,7 @@ The monolithic equation takes the form
 And the next step is to introduce an auxiliary velocity guess `$$\tilde{\mathbf{v}}$$` and a pressure guess 
 `$$ \mathbf{p}_{n+1}^g $$` to decouple the linear pressure poisson's equation from the nonlinear momentum equation.
 
-These will be treated separately. The equation read
+These will be treated separately. The equations read
 <table class="eqn">
   <tr>
     <td> $$\mathbf{M} \frac{\tilde{\mathbf{v}} - \overline{\mathbf{v}}_n}{\Delta t} + \mu \mathbf{L} \overline{\mathbf{v}}_{n+1} + \mathbf{G} \overline{\mathbf{p}}_{n+1}^g $$ </td> <td> $$ = \mathbf{F} $$</td>
@@ -239,7 +239,7 @@ These will be treated separately. The equation read
     <td>$$\mathbf{M} \frac{\overline{\mathbf{v}}_{n+1} - \tilde{\mathbf{v}}}{\Delta t}  + \mathbf{G} \left(\overline{\mathbf{p}}_{n+1} - \overline{\mathbf{p}}_{n+1}^g \right)$$</td> <td> $$ = 0 $$</td>
   </tr>
   <tr>
-    <td>$$ \mathbf{D}\overline{\mathbf{v}}_{n+1} + \mathbf{S} \overline{\mathbf{p}}_{n+1} $$</td>
+    <td>$$ \mathbf{D}\overline{\mathbf{v}}_{n+1} + \mathbf{S} \overline{\mathbf{p}}_{n+1}  (\textrm{EOS momentum})$$</td>
   </tr>
 </table>
 
@@ -291,7 +291,14 @@ Do while not converged:
 5. Update shape operators with new shape matrix
 
 ###  Poisson
-Solve the `$$ \textrm{pressure poisson} $$` equation using the pressure guess as boundary conditions where necessary.
+Solve the linear `$$ \textrm{pressure poisson} $$` equation using the pressure guess as boundary conditions at the free surface or at structural interfaces.
 
+### End-of-step momentum equation
+
+Solve the linear `$$ \textrm{EOS momentum} $$` equation.
+
+
+
+##  Temperature:
 
 
