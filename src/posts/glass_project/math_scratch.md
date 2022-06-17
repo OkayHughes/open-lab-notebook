@@ -243,6 +243,12 @@ These will be treated separately. The equation read
   </tr>
 </table>
 
+We make some clever rearrangements to get
+`$$$\mathbf{D}\tilde{\mathbf{v}} = \Delta t \mathbf{D}\mathbf{M}^{-1} \mathbf{G}\left(\overline{\mathbf{p}}_{n+1} - \overline{\mathbf{p}}_{n+1}^g \right) + \mathbf{S}\overline{\mathbf{p}}_{n+1} $$$`
+
+Which we substitute for the middle equation. They make the "approximation" that `$$ \mathbf{D} \mathbf{M}^{-1} \mathbf{G} \approx \mathbf{L} $$`
+Given that our method is carefully designed to be lumped, I assume that 
+
 The idea for solution is essentially as follows:
 Come up with an appproximation for the guess. Analytically this can
 be given as `$$$ p_{n+1}^g = p_n + \kappa \int_{t_n}^{t_{n+1}} \nabla \cdot \mathbf{v} \, \mathrm{d} t $$$` 
@@ -257,6 +263,6 @@ Note: the residual is written incorrectly. Thus the correct residual should read
   <tr><td>$$ \mathbf{r}_m  $$</td> <td> $$ = \mathbf{F} - \left(\mathbf{M} \frac{\tilde{\mathbf{v}} - \overline{\mathbf{v}}_n}{\Delta t} + \mu \mathbf{L} \tilde{\mathbf{v}} + G\overline{\mathbf{p}}_{n+1}^g(\tilde{\mathbf{v}})\right)$$</td>
   </tr>
   <tr>
-      <td></td><td>$$ =  $$</td>
+      <td></td><td>$$ = \mathbf{F} - \left(\mathbf{M} \frac{\tilde{\mathbf{v}} - \overline{\mathbf{v}}_n}{\Delta t} + \mu \mathbf{L} \tilde{\mathbf{v}} + G\left(\overline{\mathbf{p}}_n + \kappa \Delta t \mathbf{M}^{-1}_p \mathbf{D}\tilde{\mathbf{v}}\right)\right) $$</td>
   </tr>
 </table>
