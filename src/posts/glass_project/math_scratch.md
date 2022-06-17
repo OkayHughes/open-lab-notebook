@@ -227,4 +227,15 @@ The monolithic equation takes the form
 </table>
 
 
-And the next step is to 
+And the next step is to introduce an auxiliary velocity guess `$$\tilde{\mathbf{v}}$$` and a pressure guess 
+`$$ \mathbf{p}_{n+1}^g $$` to decouple the linear pressure poisson's equation from the nonlinear momentum equation.
+
+These will be treated separately. The equation read
+<table class="eqn">
+  <tr>
+    <td> $$\mathbf{M} \frac{\tilde{\mathbf{v}} - \overline{\mathbf{v}}_n}{\Delta t} + \mu \mathbf{L} \overline{\mathbf{v}}_{n+1} + \mathbf{G} \overline{\mathbf{p}}_{n+1}^g $$ </td> <td> $$ = \overline{\mathbf{F}} $$</td>
+  </tr>
+  <tr>
+    <td>$$\mathbf{M} \frac{\overline{\mathbf{v}}_{n+1} - \tilde{\mathbf{v}}}{\Delta t} $$</td>
+  </tr>
+</table>
