@@ -220,7 +220,7 @@ This is ostensibly due to the paper, but this seems kind of wrong.
 
 The monolithic equation takes the form
 <table class="eqn">
-  <tr><td> $$\mathbf{M} \frac{\mathbf{\overline{v}_{n+1} - \overline{v}_n}}{\Delta t} + \mu \mathbf{L}\overline{\mathbf{v}}_{n+1} + \mathbf{G}\overline{\mathbf{p}}_{n+1}$$ </td><td> $$ = \overline{\mathbf{F}} $$ </td>
+  <tr><td> $$\mathbf{M} \frac{\mathbf{\overline{v}_{n+1} - \overline{v}_n}}{\Delta t} + \mu \mathbf{L}\overline{\mathbf{v}}_{n+1} + \mathbf{G}\overline{\mathbf{p}}_{n+1}$$ </td><td> $$ = \mathbf{F} $$ </td>
  </tr>
   <tr><td>$$\mathbf{D} \overline{\mathbf{v}}_{n+1} + \mathbf{S} \overline{\mathbf{p}}_{n+1}$$</td><td>$$ = 0 $$</td>
   </tr>
@@ -233,7 +233,7 @@ And the next step is to introduce an auxiliary velocity guess `$$\tilde{\mathbf{
 These will be treated separately. The equation read
 <table class="eqn">
   <tr>
-    <td> $$\mathbf{M} \frac{\tilde{\mathbf{v}} - \overline{\mathbf{v}}_n}{\Delta t} + \mu \mathbf{L} \overline{\mathbf{v}}_{n+1} + \mathbf{G} \overline{\mathbf{p}}_{n+1}^g $$ </td> <td> $$ = \overline{\mathbf{F}} $$</td>
+    <td> $$\mathbf{M} \frac{\tilde{\mathbf{v}} - \overline{\mathbf{v}}_n}{\Delta t} + \mu \mathbf{L} \overline{\mathbf{v}}_{n+1} + \mathbf{G} \overline{\mathbf{p}}_{n+1}^g $$ </td> <td> $$ = \mathbf{F} $$</td>
   </tr>
   <tr>
     <td>$$\mathbf{M} \frac{\overline{\mathbf{v}}_{n+1} - \tilde{\mathbf{v}}}{\Delta t}  + \mathbf{G} \left(\overline{\mathbf{p}}_{n+1} - \overline{\mathbf{p}}_{n+1}^g \right)$$</td> <td> $$ = 0 $$</td>
@@ -248,8 +248,15 @@ Come up with an appproximation for the guess. Analytically this can
 be given as `$$$ p_{n+1}^g = p_n + \kappa \int_{t_n}^{t_{n+1}} \nabla \cdot \mathbf{v} \, \mathrm{d} t $$$` 
 However, the discretized approximation is written incorrectly in the paper. We posit that
 `$$$\overline{\mathbf{p}}_{n+1} = \overline{\mathbf{p}}_n + \kappa \Delta t \mathbf{M}^{-1}_p \mathbf{D}\tilde{\mathbf{v}} $$$`
-is a 
+is a well-posed guess.
 
 
 
-Note: the residual is written incorrectly. Thus the correct residual
+Note: the residual is written incorrectly. Thus the correct residual should read:
+<table class="eqn">
+  <tr><td>$$ \mathbf{r}_m  $$</td> <td> $$ = \mathbf{F} - \left(\mathbf{M} \frac{\tilde{\mathbf{v}} - \overline{\mathbf{v}}_n}{\Delta t} + \mu \mathbf{L} \tilde{\mathbf{v}} + G\overline{\mathbf{p}}_{n+1}^g(\tilde{\mathbf{v}})\right)$$</td>
+  </tr>
+  <tr>
+      <td></td><td>$$ =  $$</td>
+  </tr>
+</table>
