@@ -46,7 +46,13 @@ However, one of the goals of this project is to have parameterizable horizontal 
 have a way of treating, e.g. second or third order shape functions. There are a few ways to do this. I'll lay out what I view as the most promising approach here.
 
 The most important consideration here is that we are attempting to formulate our FSI framework in a lagrangian framework.
-The spectral discretization that we're trying to formulate 
+The spectral discretization that we're trying to formulate requires the use of a projection operator. In curvilinear coordinates,
+projection of discontinuous quantities onto a continuous subspace necessitates the use of a globally continuous basis function 
+(that is, `$$\mathcal{C}^0$$` at element boundaries).
+
+If we were to update our positions `x` with a `$$v \in \mathcal{V}^0$$` (that is, discontinuous), this causes severe problems. 
+What we can do is to ensure that projection happens before position update. However, this loses us the discrete curl operator
+
 ## The spectral basis:
 
 In the first draft of this work we will work with linear basis functions for simplicity.
