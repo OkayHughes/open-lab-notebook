@@ -302,3 +302,7 @@ Solve the linear `$$ \textrm{EOS momentum} $$` equation.
 ##  Temperature:
 
 
+### Notes on possible alternate time-stepping methods
+Limitations of FSI mean that 
+
+
