@@ -379,5 +379,13 @@ Note: vector quantities need to be handled differently.
 We're indexing in-element GLL points using the index `$$ R $$` but for the purposes of this section
 we create an index `$$ Y $$` which contains function values for duplicate GLL nodes that appear on an element's boundary.
 One can immediately assume that the magnitude of `$$ Y $$` will be  `$$ \mathcal{O}(R) $$`. 
-We create special tensors `$$ ~_{Y}\mathbf{w} $$` and `$$ ~_{Y}\mathbf{w} $$`
+We create a special tensor `$$ ~_{Y}\mathbf{m} = ~_{Y}\mathbf{w} ~_{Y}\mathbf{Q} $$` that contains necessary integration 
+information communicated from other elements (and particularly other far-away memory)
+
+I'll use `$$~_{TR}\mathbf{\Gamma}$$` to represent the Gather matrix which has entry 
+`$$\mathbf{\Gamma}_{tr} = 1$$` if and only if `$$t$$` and `$$r$$` refer to the same geometric GLL node,
+and `$$\mathbf{\Gamma}_{tr} = 0$$` otherwise. 
+
+Therefore we can represent a scalar interpolation according to
+`$$$~_{L}\hat{\mathbf{f}} =  $$$`
 
