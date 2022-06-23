@@ -41,8 +41,12 @@ this quantity is defined if and only if `$$\mathbf{S}^t $$` is non-degenerate (i
 of using an Delaunay triangulation to maintain good condition numbers for these change-of-basis matrices.
 
 ## Higher order shape functions:
+The previous section deals with linear shape functions for which enforcing bijectivity is nearly trivial.
+However, one of the goals of this project is to have parameterizable horizontal order. As such we would like to 
+have a way of treating, e.g. second or third order shape functions. There are a few ways to do this. I'll lay out what I view as the most promising approach here.
 
-
+The most important consideration here is that we are attempting to formulate our FSI framework in a lagrangian framework.
+The spectral discretization that we're trying to formulate 
 ## The spectral basis:
 
 In the first draft of this work we will work with linear basis functions for simplicity.
