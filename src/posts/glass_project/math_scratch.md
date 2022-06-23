@@ -312,5 +312,6 @@ are no-flux constraints.
 We also have an appealing little hack that would be a _delicious_ test of our numerics.
 Namely, we treat our problem as though we are lampworkers who leave their 
 work piece attached to a piece of cold glass. This tests the capability of said method
-to handle extremely heterogeneous viscosities. I'm inclined to go with this 
+to handle extremely heterogeneous viscosities. I'm inclined to go with this if I go with a more exotic
+IMEX method
 
