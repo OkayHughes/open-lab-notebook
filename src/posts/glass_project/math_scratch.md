@@ -56,7 +56,7 @@ due to the fact that the coordinate map may have discontinuous jacobian at eleme
 I think this is fine for the moment.
 
 Accordingly we can define `$$ \mathbf{x} : \mathcal{S}^s \to \mathcal{S}^t $$` according to 
-`$$$ x_i(\mathbf{a}) = \sum_l p_l(\mathbf{a}) $$$`
+`$$$ x_i(\mathbf{a}) = \sum_l P_l(\mathbf{a}) $$$`
 
 We can clearly find the jacobian of this transformation `$$ J_{i, j} = \frac{\partial x_i}{\partial a_j}$$`
 which allows us to calculate integrals. Inverting this coordinate transformation will only need to be computed if we include a remapping step
@@ -105,13 +105,13 @@ and the underlying intuition which comes from the language of PDEs.
 
 ## Interpolation
 
-Suppose that we have a quantity `$$U(\mathbf{x})$$` and we have point evaluations at `$$\mathbf{k}_{0,1,2,3} $$`, respectively `$$_K\mathbf{U}_{0,1,2,3} $$` i.e. we are working on a finite 
+Suppose that we have a quantity `$$U(\mathbf{x})$$` and we have point evaluations at `$$\mathbf{k}_{\ldots} $$`, respectively `$$_K\mathbf{U} $$` i.e. we are working on a finite 
 element with values stored at the vertices (often referred to as "nodes" in the FEM literature for some reason). We want to find a vector `$$_L\mathbf{U}$$`
-such that`$$~_K\mathbf{U}_k = \sum_{l} ~_L\mathbf{U}_l P_{l}(\mathbf{k}_k) $$` for `$$k = 0,1,2,3$$`.
+such that`$$~_K\mathbf{U} = \sum_{l} ~_L\mathbf{U}_l P_{l}(\mathbf{k}_k) $$` for `$$k = 0,1,2,3$$`.
 In full dimensionality, these can be calculated by
-`$$$~_L\mathbf{U}_l = \iiint_{S^s} U(\mathbf{x}(\mathbf{a}))P_l(\mathbf{a}) \det(Q^{-1}) \,\mathrm{d} V  $$$`
+`$$$~_L\mathbf{U}_l = \iiint_{S^s} U(\mathbf{x}(\mathbf{a}))P_l(\mathbf{a}) \det(J^{-1}) \,\mathrm{d} V  $$$`
 
-Thankfully, for first order simplical elements decent quadrature points for `$$\mathcal{S}^s$$` are merely its vertices. In order to 
+<!-- Thankfully, for first order simplical elements decent quadrature points for `$$\mathcal{S}^s$$` are merely its vertices. In order to 
 solve for the numerical integration weights, we solve a system of linear equations. The matrix can be best understood as
 `$$\mathbf{P}_{kl} = P_l(\mathbf{a}(\mathbf{k}_k) $$` such that if we have `$$~_{K}\mathbf{w}_k $$` integration weights, then
 `$$\mathbf{P}_{kl} \mathbf{w}^k = ~_L\mathbf{1}.$$` Because I'm a moron let's write this system out in gory detail:
@@ -165,7 +165,7 @@ w = np.linalg.solve(A,b)
 print(w)
 ```
 
-</details>
+</details> -->
 
 ## Quadrature by copy-paste
 
@@ -195,9 +195,10 @@ wt=np.array([0.1817020685825351, 0.0361607142857143, 0.0361607142857143, 0.03616
   
 </details>
 
-Write these coordinates in the form of `$$ ~_{KR}\mathbf{g}_k$$`, (using convex combinations) where `$$ ~_{DR}\mathbf{G} =  ~_{KR}\mathbf{G}_k ~_{KD} \mathbf{k}^k $$`
-
-`$$$~_L\mathbf{U}_l =  (~_{KR}\mathbf{G}_k ~_{K}\mathbf{U}^k)_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})^r  $$$`
+<!-- Write these coordinates in the form of `$$ ~_{KR}\mathbf{G}_k$$`, (using convex combinations) where `$$ ~_{DR}\mathbf{G} =  ~_{KR}\mathbf{G}_k ~_{KD} \mathbf{k}^k $$` -->
+We assume that we can work with a tensor `$$ ~_{R}\mathbf{U} $$` which is evaluated at the above points. 
+If necessary we can interpolate `$$~_{L}\mathbf{U}$$` to these points using `$$~_{R}\mathbf{U} = ~_{L}\mathbf{U}_l ~_{LR}\mathbf{P}^l$$`
+`$$$~_L\mathbf{U}_l =  ~_{R}\mathbf{U}_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})^r  $$$`
 
 
 ## Shape functions and matrices:
