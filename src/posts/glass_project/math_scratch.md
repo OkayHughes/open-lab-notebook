@@ -56,7 +56,7 @@ due to the fact that the coordinate map may have discontinuous jacobian at eleme
 I think this is fine for the moment.
 
 Accordingly we can define `$$ \mathbf{x} : \mathcal{S}^s \to \mathcal{S}^t $$` according to 
-`$$$ \mathbf{x}(\mathbf{a}) = \sum_l\sum_m  $$$`
+`$$$ \mathbf{x}(\mathbf{a}) = \sum_l p_l(\mathbf{a}) $$$`
 
 
 ## The spectral basis:
