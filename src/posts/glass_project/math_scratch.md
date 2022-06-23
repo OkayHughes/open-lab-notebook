@@ -195,7 +195,7 @@ wt=np.array([0.1817020685825351, 0.0361607142857143, 0.0361607142857143, 0.03616
 
 Write these coordinates in the form of `$$ ~_{KR}\mathbf{g}_k$$`, (using convex combinations) where `$$ ~_{DR}\mathbf{G} =  ~_{KR}\mathbf{G}_k ~_{KD} \mathbf{k}^k $$`
 
-`$$$~_L\mathbf{U}_l =  (~_{KR}\mathbf{G}_k ~_{K}\mathbf{U}^k)_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}\det(Q^{-1}))^r  $$$`
+`$$$~_L\mathbf{U}_l =  (~_{KR}\mathbf{G}_k ~_{K}\mathbf{U}^k)_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})^r  $$$`
 
 
 ## Shape functions and matrices:
@@ -207,7 +207,7 @@ From the paper this has the form
 
 And we can thus find that 
 
-`$$$ ~_{LM}\mathbf{M} = \rho \left(~_{LR}\mathbf{P}_l ~_{MR}\mathbf{P}_m\right)_r ~_R\mathbf{w}^r \det(Q^{-1}) $$$`
+`$$$ ~_{LM}\mathbf{M} = \rho \left(~_{LR}\mathbf{P}_l ~_{MR}\mathbf{P}_m\right)_r ~_R\mathbf{w}^r ~_R\mathbf{Q})^r $$$`
 
 However, we note that for `$$l\neq m$$` the orthogonality of the polynomials show that we can treat `$$~_{LM}\mathbf{M} = \mathrm{diag} ~_{L}\mathbf{M} $$`
 
@@ -218,7 +218,7 @@ The paper gives
 
 and in tensor form this gives
 
-`$$$ ~_{LM} L = (~_{DLR}\mathbf{J}_{ld} ~_{DMR}\mathbf{J}_{m}^d)_r ~_R\mathbf{w}^r \det(Q^{-1}) $$$`
+`$$$ ~_{LM} L = (~_{DLR}\mathbf{J}_{ld} ~_{DMR}\mathbf{J}_{m}^d)_r ~_R\mathbf{w}^r ~_R\mathbf{Q})^r $$$`
 
 
 ### The gradient
@@ -227,7 +227,7 @@ and in tensor form this gives
 
 which in tensor form gives
 
-`$$$ ~_{DLM}\mathbf{G} = (~_{DLR}\mathbf{J}_{ld} ~_{MR}\mathbf{P}_m)_r ~_{R}\mathbf{w}^r \det(Q^{-1}) $$$`
+`$$$ ~_{DLM}\mathbf{G} = (~_{DLR}\mathbf{J}_{ld} ~_{MR}\mathbf{P}_m)_r ~_{R}\mathbf{w}^r ~_R\mathbf{Q})^r $$$`
 
 ### The forcing term
 
@@ -236,7 +236,7 @@ This has the form
 
 This is ostensibly due to the paper, but this seems kind of wrong.
 
-`$$$ ~_{DL}\mathbf{F} = (~_{DR}\mathbf{g}_r ~_{LR}\mathbf{P}_r) ~_{R}\mathbf{w}^r\det(Q^{-1}) + (((~_{T}\mathbf{p}_t ~_{D}\mathbf{n}_d)_t ~_{T}\mathbf{w'}^t \det(Q'^{-1}))_d~_{LR}\mathbf{P}_r)_r\mathbf{w}^r\det(Q^{-1}) $$$`
+`$$$ ~_{DL}\mathbf{F} = (~_{DR}\mathbf{g}_r ~_{LR}\mathbf{P}_r) ~_{R}\mathbf{w}^r~_R\mathbf{Q})^r) + (((~_{T}\mathbf{p}_t ~_{D}\mathbf{n}_d)_t ~_{T}\mathbf{w'}^t \det(Q'^{-1}))_d~_{LR}\mathbf{P}_r)_r\mathbf{w}^r\det(Q^{-1}) $$$`
 
 
 
