@@ -301,6 +301,16 @@ Solve the linear `$$ \textrm{EOS momentum} $$` equation.
 
 ##  Temperature:
 
+The viscosity relationship given in the paper takes the form
+`$$$\log_{10}(\mu) = A + \frac{B}{T-T_0} $$$`
+
+The continuum governing equation for temperature evolution takes the form
+`$$$ \rho c \frac{\mathrm{d}T}{\mathrm{d}t} = k \Delta T + q $$$`
+
+In the paper they give the following discretization:
+`$$$\rho c \mathbf{M}  \frac{\mathbf{T}_{n+1} - \mathbf{T}_{n}}{\Delta t}  = k \mathbf{L}\mathbf{T}_{n+1} + \mathbf{Q} $$$`
+
+where `$$\mathbf{Q} = \int_{\Omega} q\mathbf{N} \, \mathrm{d} \Omega  $$`
 
 ### Notes on possible alternate time-stepping methods
 Limitations of FSI mean that explicit treatment of convective terms (e.g. as is done in IMEX methods)
@@ -315,4 +325,6 @@ work piece attached to a piece of cold glass. This tests the capability of said 
 to handle extremely heterogeneous viscosities. I'm inclined to go with this if I go with a more exotic
 IMEX method.
 
-That said let's try for IMEX BDF2 from [this paper](https://arxiv.org/pdf/2112.04167.pdf)
+That said we could try for IMEX BDF2 from [this paper](https://arxiv.org/pdf/2112.04167.pdf)
+
+### 
