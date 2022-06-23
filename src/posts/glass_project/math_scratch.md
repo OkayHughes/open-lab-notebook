@@ -56,7 +56,12 @@ due to the fact that the coordinate map may have discontinuous jacobian at eleme
 I think this is fine for the moment.
 
 Accordingly we can define `$$ \mathbf{x} : \mathcal{S}^s \to \mathcal{S}^t $$` according to 
-`$$$ \mathbf{x}(\mathbf{a}) = \sum_l p_l(\mathbf{a}) $$$`
+`$$$ x_i(\mathbf{a}) = \sum_l p_l(\mathbf{a}) $$$`
+
+We can clearly find the jacobian of this transformation `$$ Q_{i, j} = \frac{\partial x_i}{\partial a_j}$$`
+which allows us to calculate integrals. Inverting this coordinate transformation will only need to be computed if we include a remapping step
+and can be done later.
+
 
 
 ## The spectral basis:
@@ -331,6 +336,8 @@ In the paper they give the following discretization:
 
 where `$$\mathbf{Q} = \int_{\Omega} q\mathbf{N} \, \mathrm{d} \Omega  $$`
 
+My inclination is that this fits best with the implicit solve 
+
 ## Notes on possible alternate time-stepping methods
 Limitations of FSI mean that explicit treatment of convective terms (e.g. as is done in IMEX methods)
 might not be possible if we do things in the most naive way. It's likely that we could correct for this
@@ -347,3 +354,7 @@ IMEX method.
 That said we could try for IMEX BDF2 from [this paper](https://arxiv.org/pdf/2112.04167.pdf)
 
 ## Multi-element assembly
+
+If we have a discontinuous scalar field in coefficient form `$$_{IL}\mathbf{U}$$`, 
+the process of projecting it into the `$$\mathcal{V}^1$$` subspace first involves
+an interpolation step, namely `$$ $$`
