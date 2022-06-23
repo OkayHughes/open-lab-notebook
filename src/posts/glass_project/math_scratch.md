@@ -236,7 +236,7 @@ This has the form
 
 This is ostensibly due to the paper, but this seems kind of wrong.
 
-`$$$ ~_{DL}\mathbf{F} = (~_{DR}\mathbf{g}_r ~_{LR}\mathbf{P}_r) ~_{R}\mathbf{w}^r~_R\mathbf{Q})^r) + (((~_{T}\mathbf{p}_t ~_{D}\mathbf{n}_d)_t ~_{T}\mathbf{w'}^t \det(Q'^{-1}))_d~_{LR}\mathbf{P}_r)_r\mathbf{w}^r\det(Q^{-1}) $$$`
+`$$$ ~_{DL}\mathbf{F} = (~_{DR}\mathbf{g}_r ~_{LR}\mathbf{P}_r)_r (~_{R}\mathbf{w} ~_R\mathbf{Q})^r)^r + (((~_{T}\mathbf{p}_t ~_{D}\mathbf{n}_d)_t ~_{T}\mathbf{w'}^t ~_R\mathbf{Q}^t)_d~_{LR}\mathbf{P}_r)_r\mathbf{w}^r\det(Q^{-1}) $$$`
 
 
 
@@ -364,4 +364,12 @@ If we have a discontinuous scalar field in coefficient form `$$_{IL}\mathbf{U}$$
 the process of projecting it into the `$$\mathcal{V}^1$$` subspace first involves
 an interpolation step, namely `$$ _{IK}\mathbf{U} = (_{IL}\mathbf{U}_l\ _{KL}\mathbf{P}^l)$$`
 
+
+The operations that allow us to derive the actual assembly are as follows:
+1. isolate shared points.
+2. Multiply by determinant of mass matrix.
+3. Sum over redundant elements. 
+4. Broadcast `$$\mathcal{C}^0 $$` boundary values back to elements.
+5. Project onto spectral coefficients
+6. 
 
