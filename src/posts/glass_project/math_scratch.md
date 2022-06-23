@@ -371,5 +371,10 @@ The operations that allow us to derive the actual assembly are as follows:
 3. Sum over redundant elements. 
 4. Broadcast `$$\mathcal{C}^0 $$` boundary values back to elements.
 5. Project onto spectral coefficients
-6. 
+6. If necessary, interpolate back to point values.
+
+Note: vector quantities need to be handled differently.
+
+### in tensor form:
+
 
