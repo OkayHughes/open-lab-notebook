@@ -382,10 +382,11 @@ One can immediately assume that the magnitude of `$$ Y $$` will be  `$$ \mathcal
 We create a special tensor `$$ ~_{Y}\mathbf{m} = ~_{Y}\mathbf{w} ~_{Y}\mathbf{Q} $$` that contains necessary integration 
 information communicated from other elements (and particularly other far-away memory)
 
-I'll use `$$~_{TR}\mathbf{\Gamma}$$` to represent the Gather matrix which has entry 
-`$$\mathbf{\Gamma}_{tr} = 1$$` if and only if `$$t$$` and `$$r$$` refer to the same geometric GLL node,
-and `$$\mathbf{\Gamma}_{tr} = 0$$` otherwise. 
+I'll use `$$~_{YR}\mathbf{\Gamma}$$` to represent the Gather matrix which has entry 
+`$$\mathbf{\Gamma}_{yr} = 1$$` if and only if `$$y$$` and `$$r$$` refer to the same geometric GLL node,
+and `$$\mathbf{\Gamma}_{yr} = 0$$` otherwise. 
 
-Therefore we can represent a scalar interpolation according to
-`$$$~_{L}\hat{\mathbf{f}} =  $$$`
+Therefore we can represent a scalar projection according to
+`$$$~_{L}\overline{\mathbf{f}} = (~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})_r (~_{YR}\Gamma_y(~_{Y}\mathbf{f} ~_{Y}\mathbf{m})^y)^r $$$`
+
 
