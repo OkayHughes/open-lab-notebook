@@ -24,19 +24,19 @@ to reconstruct `$$U$$` on tetrahedron `$$i$$` and basis function `$$l=0,1,2,3 $$
 Suppose we have an arbitrary simplex `$$ \mathcal{S}^t $$` which has vertices `$$\mathbf{k}_{0,1,2,3}$$` whose convex hull is our simplex.
 We will denote the standard 3-simplex `$$ \mathcal{S}^s $$` which has vertices `$$\mathbf{e}_{0,x,y,z} $$`.
 
-The more relevant quantities for parameterizing `$$\mathcal{S}^t $$` is `$$$Q = \begin{bmatrix}
+The more relevant quantities for parameterizing `$$\mathcal{S}^t $$` is `$$$J = \begin{bmatrix}
 \mathbf{q_1} & \mathbf{q_2} & \mathbf{q_3}
 \end{bmatrix} = \begin{bmatrix}
 \mathbf{k}_1 - \mathbf{k}_0 & \mathbf{k}_2 - \mathbf{k}_0 & \mathbf{k}_3 - \mathbf{k}_0\end{bmatrix} $$$`
 
-This allows us to express a point `$$\mathbf{x}^t \in \mathcal{S}^t $$` as `$$$ \mathbf{x}(\mathbf{a}) = Q \mathbf{a} + \mathbf{k}_0 $$$`
+This allows us to express a point `$$\mathbf{x}^t \in \mathcal{S}^t $$` as `$$$ \mathbf{x}(\mathbf{a}) = J \mathbf{a} + \mathbf{k}_0 $$$`
 with `$$\mathbf{a} \geq 0 $$` and `$$ \sum_i \mathbf{a} \leq 1 $$`.
 
 Now note: these stipulations guarantee that `$$ \mathbf{a} \in \mathcal{S}^s $$`, which means that we have constructed an affine bijection
 `$$$ \mathbf{x} : \mathcal{S}^s \mapsto \mathcal{S}^t $$$` which justifies that `$$\mathcal{S}^s$$` and `$$\mathcal{S}^t $$` are the source and target simplices,
 respectively (we will later have indexed `$$\mathcal{S}_i^t $$` to function with our triangulation). 
 
-Finally, if we have some `$$\mathbf{x}^t \in \mathcal{S}^t, $$` then `$$$\mathbf{a}^s = Q^{-1}(\mathbf{x}^t - \mathbf{k_0}) $$$` and
+Finally, if we have some `$$\mathbf{x}^t \in \mathcal{S}^t, $$` then `$$$\mathbf{a}^s = J^{-1}(\mathbf{x}^t - \mathbf{k_0}) $$$` and
 this quantity is defined if and only if `$$\mathbf{S}^t $$` is non-degenerate (i.e. it has non-zero volume). This justifies the importance
 of using an Delaunay triangulation to maintain good condition numbers for these change-of-basis matrices.
 
@@ -58,9 +58,11 @@ I think this is fine for the moment.
 Accordingly we can define `$$ \mathbf{x} : \mathcal{S}^s \to \mathcal{S}^t $$` according to 
 `$$$ x_i(\mathbf{a}) = \sum_l p_l(\mathbf{a}) $$$`
 
-We can clearly find the jacobian of this transformation `$$ Q_{i, j} = \frac{\partial x_i}{\partial a_j}$$`
+We can clearly find the jacobian of this transformation `$$ J_{i, j} = \frac{\partial x_i}{\partial a_j}$$`
 which allows us to calculate integrals. Inverting this coordinate transformation will only need to be computed if we include a remapping step
-and can be done later.
+and can be done later. However, we can use the fact that `$$\det(J^{-1}) = \det(J)^{-1} $$`
+
+
 
 
 
@@ -75,7 +77,7 @@ formula for 3d integration means that for basis functions `$$P_{0, 1, 2, 3} $$`
   <tr><td>$$\iiint_{\mathcal{S}^s} P_i(\mathbf{a})P_j(\mathbf{a})\, \mathrm{d} V $$</td><td> $$= \iiint_{\mathcal{S}^t} P_i(\mathbf{a}(\mathbf{x}))P_j(\mathbf{a}(\mathbf{x})) \det(\mathrm{D}\mathbf{a} )\, \mathrm{d} V$$</td>
   </tr>
   <tr>
-    <td></td><td> $$= \iiint_{\mathcal{S}^t} P_i(\mathbf{a}(\mathbf{x}))P_j(\mathbf{a}(\mathbf{x})) \det(Q^{-1})\, \mathrm{d} V$$</td>
+    <td></td><td> $$= \iiint_{\mathcal{S}^t} P_i(\mathbf{a}(\mathbf{x}))P_j(\mathbf{a}(\mathbf{x})) \det(J^{-1}(\mathbf{x}))\, \mathrm{d} V$$</td>
   </tr>
 </table>
 and so orthogonality is preserved under this affine transformation. 
