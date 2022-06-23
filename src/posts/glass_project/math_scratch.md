@@ -336,7 +336,12 @@ In the paper they give the following discretization:
 
 where `$$\mathbf{Q} = \int_{\Omega} q\mathbf{N} \, \mathrm{d} \Omega  $$`
 
-My inclination is that this fits best with the implicit solve 
+My inclination is that the most consistent way to treat this is to add it as part of the implicit
+velocity update. However, this adds a drastic increase in computational cost and potentially
+a tremendous stability problem if temperature differences are large. 
+A good first approximation is to add it as an implicit secondary step after all fluid cost is done.
+However! In the case that we go to an imex method that handles variable viscosity elegantly, 
+this should become part of the monolithic solver again. 
 
 ## Notes on possible alternate time-stepping methods
 Limitations of FSI mean that explicit treatment of convective terms (e.g. as is done in IMEX methods)
@@ -357,4 +362,6 @@ That said we could try for IMEX BDF2 from [this paper](https://arxiv.org/pdf/211
 
 If we have a discontinuous scalar field in coefficient form `$$_{IL}\mathbf{U}$$`, 
 the process of projecting it into the `$$\mathcal{V}^1$$` subspace first involves
-an interpolation step, namely `$$ $$`
+an interpolation step, namely `$$ _{IK}\mathbf{U} = (_{IL}\mathbf{U}_l\ _{KL}\mathbf{P}^l)$$`
+
+
