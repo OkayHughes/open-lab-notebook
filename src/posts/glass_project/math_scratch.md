@@ -390,3 +390,6 @@ Therefore we can represent a scalar projection according to
 `$$$~_{L}\overline{\mathbf{f}} = (~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})_r (~_{YR}\Gamma_y(~_{Y}\mathbf{f} ~_{Y}\mathbf{m})^y)^r $$$`
 
 
+
+## Differential operators in curvilinear coordinates
+
