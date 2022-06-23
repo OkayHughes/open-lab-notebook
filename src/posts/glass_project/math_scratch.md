@@ -376,5 +376,8 @@ The operations that allow us to derive the actual assembly are as follows:
 Note: vector quantities need to be handled differently.
 
 ### in tensor form:
-
+We're indexing in-element GLL points using the index `$$ R $$` but for the purposes of this section
+we create an index `$$ Y $$` which contains function values for duplicate GLL nodes that appear on an element's boundary.
+One can immediately assume that the magnitude of `$$ Y $$` will be  `$$ \mathcal{O}(R) $$`. 
+We create special tensors `$$ ~_{Y}\mathbf{w} $$` and `$$ ~_{Y}\mathbf{w} $$`
 
