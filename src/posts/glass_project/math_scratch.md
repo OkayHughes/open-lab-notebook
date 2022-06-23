@@ -303,6 +303,14 @@ Solve the linear `$$ \textrm{EOS momentum} $$` equation.
 
 
 ### Notes on possible alternate time-stepping methods
-Limitations of FSI mean that 
+Limitations of FSI mean that explicit treatment of convective terms (e.g. as is done in IMEX methods)
+might not be possible if we do things in the most naive way. It's likely that we could correct for this
+by an additional correction step at the expense of reduced fidelity at said boundaries (and potentially
+mass conservation problems). The most obvious constraints at fluid-structure boundaries 
+are no-flux constraints.
 
+We also have an appealing little hack that would be a _delicious_ test of our numerics.
+Namely, we treat our problem as though we are lampworkers who leave their 
+work piece attached to a piece of cold glass. This tests the capability of said method
+to handle extremely heterogeneous viscosities. I'm inclined to go with this 
 
