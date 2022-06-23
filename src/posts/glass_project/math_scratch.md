@@ -51,7 +51,13 @@ projection of discontinuous quantities onto a continuous subspace necessitates t
 (that is, `$$\mathcal{C}^0$$` at element boundaries).
 
 If we were to update our positions `x` with a `$$v \in \mathcal{V}^0$$` (that is, discontinuous), this causes severe problems. 
-What we can do is to ensure that projection happens before position update. However, this loses us the discrete curl operator
+What we can do is to ensure that projection happens before position update. However, this loses us the discrete stokes theorem
+due to the fact that the coordinate map may have discontinuous jacobian at element boundaries. 
+I think this is fine for the moment.
+
+Accordingly we can define `$$ \mathbf{x} : \mathcal{S}^s \to \mathcal{S}^t $$` according to 
+`$$$ \mathbf{x}(\mathbf{a}) = \sum_l\sum_m  $$$`
+
 
 ## The spectral basis:
 
