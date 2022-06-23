@@ -198,7 +198,9 @@ wt=np.array([0.1817020685825351, 0.0361607142857143, 0.0361607142857143, 0.03616
 <!-- Write these coordinates in the form of `$$ ~_{KR}\mathbf{G}_k$$`, (using convex combinations) where `$$ ~_{DR}\mathbf{G} =  ~_{KR}\mathbf{G}_k ~_{KD} \mathbf{k}^k $$` -->
 We assume that we can work with a tensor `$$ ~_{R}\mathbf{U} $$` which is evaluated at the above points. 
 If necessary we can interpolate `$$~_{L}\mathbf{U}$$` to these points using `$$~_{R}\mathbf{U} = ~_{L}\mathbf{U}_l ~_{LR}\mathbf{P}^l$$`
-`$$$~_L\mathbf{U}_l =  ~_{R}\mathbf{U}_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})^r  $$$`
+`$$$~_L\mathbf{U} =  ~_{R}\mathbf{U}_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})^r  $$$`
+
+
 
 
 ## Shape functions and matrices:
@@ -206,31 +208,32 @@ If necessary we can interpolate `$$~_{L}\mathbf{U}$$` to these points using `$$~
 ### The mass matrix
 
 From the paper this has the form
-`$$$ \mathbf{M} = \rho \iiint_{\mathcal{S}^s} \begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}^\top(\mathbf{a})\begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}(\mathbf{a}) \det(Q^{-1}) \, \mathrm{d} V$$$`
+`$$$ \mathbf{M} = \rho \iiint_{\mathcal{S}^t} \begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}^\top(\mathbf{a})\begin{bmatrix} P_0 & P_1 & P_2 & P_3 \end{bmatrix}(\mathbf{a}) \det(J^{-1}) \, \mathrm{d} V$$$`
 
 And we can thus find that 
 
-`$$$ ~_{LM}\mathbf{M} = \rho \left(~_{LR}\mathbf{P}_l ~_{MR}\mathbf{P}_m\right)_r ~_R\mathbf{w}^r ~_R\mathbf{Q})^r $$$`
+`$$$ ~_{LM}\mathbf{M} = \rho (~_{LR}\mathbf{P}_l ~_{MR}\mathbf{P}_m)_r (~_R\mathbf{w} ~_R\mathbf{J})^r $$$`
 
-However, we note that for `$$l\neq m$$` the orthogonality of the polynomials show that we can treat `$$~_{LM}\mathbf{M} = \mathrm{diag} ~_{L}\mathbf{M} $$`
+However, we note that for `$$l\neq m$$` the orthogonality of the polynomials show that we can treat `$$~_{LM}\mathbf{M} = \mathrm{diag} ~_{L}\mathbf{M}.$$`
+This gives an automatically lumped finite element method. Neat.
 
 ### The laplacian
 
 The paper gives
-`$$$ \mathbf{L} = \iiint_{\mathcal{S}^s} \begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix}^\top(\mathbf{a})\begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix}(\mathbf{a}) \det(Q^{-1}) \, \mathrm{d} V$$$`
+`$$$ \mathbf{L} = \iiint_{\mathcal{S}^t} \begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix}^\top(\mathbf{a})\begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix}(\mathbf{a}) \det(J^{-1}) \, \mathrm{d} V$$$`
 
 and in tensor form this gives
 
-`$$$ ~_{LM} L = (~_{DLR}\mathbf{J}_{ld} ~_{DMR}\mathbf{J}_{m}^d)_r ~_R\mathbf{w}^r ~_R\mathbf{Q})^r $$$`
+`$$$ ~_{LM} L = (~_{DLR}\mathbf{P}_{ld}' ~_{DMR}\mathbf{P}_{m}'^d)_r (~_R\mathbf{w} ~_R\mathbf{J})^r $$$`
 
 
 ### The gradient
 
-`$$$ \mathbf{G} = \iiint_{\mathcal{S}^s} \begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix} (\mathbf{a})\begin{bmatrix}  P_0 &  P_1 & P_2 &  P_3 \end{bmatrix}^\top(\mathbf{a}) \det(Q^{-1}) \, \mathrm{d} V$$$`
+`$$$ \mathbf{G} = \iiint_{\mathcal{S}^s} \begin{bmatrix} \nabla P_0 & \nabla P_1 & \nabla P_2 & \nabla P_3 \end{bmatrix} (\mathbf{a})\begin{bmatrix}  P_0 &  P_1 & P_2 &  P_3 \end{bmatrix}^\top(\mathbf{a}) \det(J^{-1}) \, \mathrm{d} V$$$`
 
 which in tensor form gives
 
-`$$$ ~_{DLM}\mathbf{G} = (~_{DLR}\mathbf{J}_{ld} ~_{MR}\mathbf{P}_m)_r ~_{R}\mathbf{w}^r ~_R\mathbf{Q})^r $$$`
+`$$$ ~_{DLM}\mathbf{G} = (~_{DLR}\mathbf{P}'_{ld} ~_{MR}\mathbf{P}_m)_r (~_{R}\mathbf{w} ~_R\mathbf{Q})^r $$$`
 
 ### The forcing term
 
