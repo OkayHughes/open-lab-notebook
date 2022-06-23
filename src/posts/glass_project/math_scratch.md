@@ -40,6 +40,9 @@ Finally, if we have some `$$\mathbf{x}^t \in \mathcal{S}^t, $$` then `$$$\mathbf
 this quantity is defined if and only if `$$\mathbf{S}^t $$` is non-degenerate (i.e. it has non-zero volume). This justifies the importance
 of using an Delaunay triangulation to maintain good condition numbers for these change-of-basis matrices.
 
+## Higher order shape functions:
+
+
 ## The spectral basis:
 
 In the first draft of this work we will work with linear basis functions for simplicity.
@@ -299,7 +302,7 @@ Solve the linear `$$ \textrm{EOS momentum} $$` equation.
 
 
 
-##  Temperature:
+###  Temperature:
 
 The viscosity relationship given in the paper takes the form
 `$$$\log_{10}(\mu) = A + \frac{B}{T-T_0} $$$`
@@ -312,7 +315,7 @@ In the paper they give the following discretization:
 
 where `$$\mathbf{Q} = \int_{\Omega} q\mathbf{N} \, \mathrm{d} \Omega  $$`
 
-### Notes on possible alternate time-stepping methods
+## Notes on possible alternate time-stepping methods
 Limitations of FSI mean that explicit treatment of convective terms (e.g. as is done in IMEX methods)
 might not be possible if we do things in the most naive way. It's likely that we could correct for this
 by an additional correction step at the expense of reduced fidelity at said boundaries (and potentially
@@ -327,4 +330,4 @@ IMEX method.
 
 That said we could try for IMEX BDF2 from [this paper](https://arxiv.org/pdf/2112.04167.pdf)
 
-### 
+## Multi-element assembly
