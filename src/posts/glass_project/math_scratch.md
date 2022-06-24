@@ -416,3 +416,10 @@ which is in physical coordinates.
 Alternately we can write 
 
 `$$$ \mathbf{v} = ~_{\Beta}\mathbf{v}_\beta ~_{\Beta}\mathbf{g}^\beta $$$`
+
+which represents a covariant vector. This seems as though it should be a covector,
+but it's not presented that way?
+
+Finally, 
+`$$$ \mathbf{v} = ~_{\Alpha}\mathbf{v}^\alpha ~_{\Alpha}\mathbf{g}_\alpha $$$`
+which is contravariant. 
