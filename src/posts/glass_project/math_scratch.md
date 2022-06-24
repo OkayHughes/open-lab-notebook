@@ -242,11 +242,11 @@ This has the form
 
 This is ostensibly due to the paper, but this seems kind of wrong.
 
-`$$$ ~_{DL}\mathbf{F} = (~_{DR}\mathbf{g}_r ~_{LR}\mathbf{P}_r)_r (~_{R}\mathbf{w} ~_R\mathbf{Q})^r)^r + (((~_{T}\mathbf{p}_t ~_{D}\mathbf{n}_d)_t ~_{T}\mathbf{w'}^t ~_R\mathbf{Q}^t)_d~_{LR}\mathbf{P}_r)_r\mathbf{w}^r\det(Q^{-1}) $$$`
+`$$$ ~_{DL}\mathbf{F} = (~_{DR}\mathbf{g}_r ~_{LR}\mathbf{P}_r)_r (~_{R}\mathbf{w} ~_R\mathbf{Q})^r+ (((~_{T}\mathbf{p}_t ~_{D}\mathbf{n}_d)_t (~_{T}\mathbf{w'} ~_T\mathbf{Q})^t)_d~_{LR}\mathbf{P}_r)(~_R\mathbf{w}~_R\mathbf{Q})^r) $$$`
 
 
 
-### Towards linearization + prep for newton's method
+## Towards linearization + prep for newton's method
 
 The monolithic equation takes the form
 <table class="eqn">
