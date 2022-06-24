@@ -399,3 +399,8 @@ Therefore we can represent a scalar projection according to
 
 ## Differential operators in curvilinear coordinates
 
+Define the coordinate functions `$$ \mathbf{g}_i = \frac{\partial \mathbf{x}}{\partial a_i} $$`
+
+We can define the determinant of the jacobian as `$$ \det(J) = \left|\mathbf{g}_1 \times \mathbf{g}_2 \cdot \mathbf{g}_3\right| $$`
+
+Note that if we're a little mathematically sloppy, we can write a vector `$$\mathbf{v}$$` 
