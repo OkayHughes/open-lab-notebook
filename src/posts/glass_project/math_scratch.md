@@ -399,8 +399,20 @@ Therefore we can represent a scalar projection according to
 
 ## Differential operators in curvilinear coordinates
 
-Define the coordinate functions `$$ \mathbf{g}_i = \frac{\partial \mathbf{x}}{\partial a_i} $$`
+Define the coordinate functions `$$ \mathbf{g}_\beta = \frac{\partial \mathbf{x}}{\partial a_\beta} $$`
+It's also worth defining `$$ \mathbf{g}_alpha = \nabla \mathbf{x}^\alpha $$` which is covariant.
 
 We can define the determinant of the jacobian as `$$ \det(J) = \left|\mathbf{g}_1 \times \mathbf{g}_2 \cdot \mathbf{g}_3\right| $$`
 
-Note that if we're a little mathematically sloppy, we can write a vector `$$\mathbf{v}$$` 
+Note that if we're a little mathematically sloppy, we can write a vector `$$\mathbf{v}$$` in several ways.
+
+We can write 
+`$$$ \mathbf{v} = ~_{D}\mathbf{v}_d ~_{D}\mathbf{x}'^d $$$`
+
+with `$$~_{D}\mathbf{x}'^d = \frac{\partial \mathbf{x}}{\partial x^d}$$`
+
+which is in physical coordinates. 
+
+Alternately we can write 
+
+`$$$ \mathbf{v} = ~_{\Beta}\mathbf{v}_\beta ~_{\Beta}\mathbf{g}^\beta $$$`
