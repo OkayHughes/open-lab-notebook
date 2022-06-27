@@ -400,7 +400,7 @@ Therefore we can represent a scalar projection according to
 ## Differential operators in curvilinear coordinates
 
 Define the coordinate functions `$$ \mathbf{g}_\beta = \frac{\partial \mathbf{x}}{\partial a_\beta} $$`
-It's also worth defining `$$ \mathbf{g}_alpha = \nabla \mathbf{x}^\alpha $$` which is covariant.
+It's also worth defining `$$ \mathbf{g}_\alpha = \nabla \mathbf{x}^\alpha $$` which is covariant.
 
 We can define the determinant of the jacobian as `$$ \det(J) = \left|\mathbf{g}_1 \times \mathbf{g}_2 \cdot \mathbf{g}_3\right| $$`
 
@@ -425,6 +425,14 @@ Finally,
 which is contravariant. 
 
 ## Gradient:
-Let `$$ ~_{LM}\mathbf{D}$$` represent the derivative matrix of the polynomial
+Let `$$ ~_{RSD}\mathbf{D}$$` represent the derivative matrix of the polynomial
 basis functions in the element. 
-The equation from the paper looks like `$$ \nabla f_{\alpha} = \frac{\partial f}{\partial } $$`
+The equation from the paper looks like `$$ \nabla f_{\alpha} = \frac{\partial f}{\partial x^\alpha} $$`
+
+Therefore this can be computed within an element as `$$$ ~_{RSD}\mathbf{D}_{s} ~_{S}\mathbf{f}^s $$$`
+
+## Divergence:
+Write the vector in question as a contravariant vector as above, that is `$$ ~_{\Alpha}\mathbf{v}^\alpha ~_{\Alpha}\mathbf{g}_\alpha $$`
+then divergence is given by 
+`$$$ $$$`
+
