@@ -456,4 +456,6 @@ This illustrates that we need to solve a weak formulation of our problem.
 ## The weak formulation
 
 If we have a contravariant quantity that we're trying to advance, then we want to e.g. find a sufficient solution to
-`$$$ \left\langle \frac{\mathrm{D}\mathbf{v}_{\textrm{con}}}{}, \psi_{\textrm{cov}} \right\rangle $$$`
+`$$$ \left\langle \frac{\mathrm{D}\mathbf{v}}{\mathrm{D}t}, \psi_{\textrm{cov}} \right\rangle + \left \langle \mu \nabla^2 \mathbf{v}, \psi_{\textrm{cov}}\right\rangle$$$`
+
+
