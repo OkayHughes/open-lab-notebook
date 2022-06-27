@@ -459,4 +459,8 @@ If we have a contravariant quantity that we're trying to advance, then we want t
 `$$$ \left\langle m \frac{\mathbf{v}_{\sim} - \mathbf{v}_{n}}{\Delta t}, \psi_{\textrm{cov}} \right\rangle + \left \langle \mu \nabla^2 \mathbf{v}_{\sim}, \psi_{\textrm{cov}}\right\rangle + \left \langle \nabla \left(\kappa \Delta t \left(\nabla \cdot \mathbf{v}_{\sim} \right)\right),  \psi_{\textrm{cov}}   \right \rangle = \left \langle F, \psi_{\textrm{cov}}  \right \rangle $$$`
 
 Let's try the following:
-`$$$ \left\langle ~_{R}\mathbf{m} (\Delta t)^{-1}~_{R\Alpha}\mathbf{v}_{\sim} - ~_{R\Alpha}\mathbf{v}_{n}, \psi_{\textrm{cov}} \right\rangle + \left \langle \mu \nabla^2 \mathbf{v}_{\sim}, \psi_{\textrm{cov}}\right\rangle + \left \langle \nabla \left(\kappa \Delta t \left(\nabla \cdot \mathbf{v}_{\sim} \right)\right),  \psi_{\textrm{cov}}   \right \rangle = \left \langle F, \psi_{\textrm{cov}}  \right \rangle $$$`
+
+<table>
+  
+</table>
+`$$$ ((\Delta t)^{-1} ~_{R}\mathbf{m}( ~_{R\Alpha}\mathbf{v}_{\sim} - ~_{R\Alpha}\mathbf{v}_{n})  +  \mu (~_{S}\mathbf{J}^{-1} (~_{RS\Alpha}\mathbf{D}_{r\alpha} (~_R\mathbf{J}_r (~_{RS\Alpha}\mathbf{D}_{r} ~_{R\Alpha}\mathbf{v}^r)_{s \mapsto r})^{r\alpha}))_{s \mapsto r} + \left \langle \nabla \left(\kappa \Delta t \left(\nabla \cdot \mathbf{v}_{\sim} \right)\right),  \psi_{\textrm{cov}}   \right \rangle -  F, \psi_{\textrm{cov}} )_r(~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})^r = 0  $$$`
