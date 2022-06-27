@@ -443,3 +443,5 @@ The laplaican can be computed in the continuum as `$$\nabla \cdot (\nabla f)$$`
 It's likely that we can thus use the above to compute the laplacian as 
 `$$$ ~_{S}\mathbf{J}^{-1}_s (~_{RSD}\mathbf{D}_{rd} (~_R\mathbf{J}_r (~_{RSD}\mathbf{D}_{r} ~_{R}\mathbf{f}^r)_{s \mapsto r})^{rd})_s  $$$`
 
+
+
