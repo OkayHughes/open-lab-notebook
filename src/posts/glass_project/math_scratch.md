@@ -458,4 +458,5 @@ This illustrates that we need to solve a weak formulation of our problem.
 If we have a contravariant quantity that we're trying to advance, then we want to e.g. find a sufficient solution to
 `$$$ \left\langle m \frac{\mathbf{v}_{\sim} - \mathbf{v}_{n}}{\Delta t}, \psi_{\textrm{cov}} \right\rangle + \left \langle \mu \nabla^2 \mathbf{v}_{\sim}, \psi_{\textrm{cov}}\right\rangle + \left \langle \nabla \left(\kappa \Delta t \left(\nabla \cdot \mathbf{v}_{\sim} \right)\right),  \psi_{\textrm{cov}}   \right \rangle = \left \langle F, \psi_{\textrm{cov}}  \right \rangle $$$`
 
-We assume that quantities of interest are written as `$$ [\cdot](x) = a_{l}P^l(x) $$`
+Let's try the following:
+`$$$ \left\langle ~_{R}\mathbf{m} (\Delta t)^{-1}~_{R\Alpha}\mathbf{v}_{\sim} - ~_{R\Alpha}\mathbf{v}_{n}, \psi_{\textrm{cov}} \right\rangle + \left \langle \mu \nabla^2 \mathbf{v}_{\sim}, \psi_{\textrm{cov}}\right\rangle + \left \langle \nabla \left(\kappa \Delta t \left(\nabla \cdot \mathbf{v}_{\sim} \right)\right),  \psi_{\textrm{cov}}   \right \rangle = \left \langle F, \psi_{\textrm{cov}}  \right \rangle $$$`
