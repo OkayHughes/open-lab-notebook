@@ -435,5 +435,11 @@ Therefore this can be computed within an element as `$$$ ~_{RSD}\mathbf{D}_{s} ~
 Write the vector in question as a contravariant vector as above, that is `$$ ~_{\Alpha}\mathbf{v}^\alpha ~_{\Alpha}\mathbf{g}_\alpha $$`
 then divergence is given by `$$ \nabla \cdot \mathbf{v} = \frac{1}{J} \partial_{\alpha}(J\mathbf{v}^\alpha)$$`
 
-Which then takes the form of `$$$ ~_{S}\mathbf{J}^{-1}_s (~_{RSD}\mathbf{D}_{rd} (~_R\mathbf{J}_r ~_{RD}\mathbf{v}_{rd})^{rd})_s   $$$` 
+Which then takes the form of `$$$ ~_{S}\mathbf{J}^{-1}_s (~_{RSD}\mathbf{D}_{rd} (~_R\mathbf{J}_r ~_{RD}\mathbf{v}_{r})^{rd})_s   $$$` 
+
+## Laplacian:
+The laplaican can be computed in the continuum as `$$\nabla \cdot (\nabla f)$$`
+
+It's likely that we can thus use the above to compute the laplacian as 
+`$$$ ~_{S}\mathbf{J}^{-1}_s (~_{RSD}\mathbf{D}_{rd} (~_R\mathbf{J}_r (~_{RSD}\mathbf{D}_{r} ~_{R}\mathbf{f}^r)_{s \mapsto r})^{rd})_s  $$$`
 
