@@ -443,5 +443,7 @@ The laplaican can be computed in the continuum as `$$\nabla \cdot (\nabla f)$$`
 It's likely that we can thus use the above expressions to compute the laplacian as 
 `$$$ ~_{S}\mathbf{J}^{-1}_s (~_{RS\Alpha}\mathbf{D}_{r\alpha} (~_R\mathbf{J}_r (~_{RS\Alpha}\mathbf{D}_{r} ~_{R}\mathbf{f}^r)_{s \mapsto r})^{r\alpha})_s  $$$`
 
+## Forcing term
 
+We make use of the fact that `\mathbf{f}^\alpha = \mathbf{f}_{\textrm{physical}} \cdot \mathbf{g}^\alpha`
 
