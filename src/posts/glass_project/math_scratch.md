@@ -407,7 +407,7 @@ We can define the determinant of the jacobian as `$$ \det(J) = \left|\mathbf{g}_
 Note that if we're a little mathematically sloppy, we can write a vector `$$\mathbf{v}$$` in several ways.
 
 We can write 
-`$$$ \mathbf{v} = ~_{D}\mathbf{v}_d ~_{D}\mathbf{x}'^d $$$`
+`$$$ ~_{D}\mathbf{v} = ~_{E}\mathbf{v}_e ~_{ED}\mathbf{x}'^e $$$`
 
 with `$$~_{D}\mathbf{x}'^d = \frac{\partial \mathbf{x}}{\partial x^d}$$`
 
@@ -415,13 +415,13 @@ which is in physical coordinates.
 
 Alternately we can write 
 
-`$$$ \mathbf{v} = ~_{\Beta}\mathbf{v}_\beta ~_{\Beta}\mathbf{g}^\beta $$$`
+`$$$ ~_D\mathbf{v} = ~_{\Beta}\mathbf{v}_\beta ~_{D\Beta}\mathbf{g}^\beta $$$`
 
 which represents a covariant vector. This seems as though it should be a covector,
 but it's not presented that way?
 
 Finally, 
-`$$$ \mathbf{v} = ~_{\Alpha}\mathbf{v}^\alpha ~_{\Alpha}\mathbf{g}_\alpha $$$`
+`$$$ ~_D\mathbf{v} = ~_{\Alpha}\mathbf{v}^\alpha ~_{D\Alpha}\mathbf{g}_\alpha $$$`
 which is contravariant. 
 
 ## Gradient:
@@ -440,7 +440,7 @@ Which then takes the form of `$$$ ~_{S}\mathbf{J}^{-1}_s (~_{RSD}\mathbf{D}_{rd}
 ## Laplacian:
 The laplaican can be computed in the continuum as `$$\nabla \cdot (\nabla f)$$`
 
-It's likely that we can thus use the above to compute the laplacian as 
+It's likely that we can thus use the above expressions to compute the laplacian as 
 `$$$ ~_{S}\mathbf{J}^{-1}_s (~_{RSD}\mathbf{D}_{rd} (~_R\mathbf{J}_r (~_{RSD}\mathbf{D}_{r} ~_{R}\mathbf{f}^r)_{s \mapsto r})^{rd})_s  $$$`
 
 
