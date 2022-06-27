@@ -460,7 +460,16 @@ If we have a contravariant quantity that we're trying to advance, then we want t
 
 Let's try the following:
 
-<table>
-  
+<table class="eqn">
+  <tr><td> $$ 0 $$</td><td>$$ = \Big\{(\Delta t)^{-1} ~_{R}\mathbf{m}( ~_{R\Alpha}\mathbf{v}_{\sim} - ~_{R\Alpha}\mathbf{v}_{n})$$</td>
+  </tr>
+  <tr>
+    <td></td><td>$$+ \mu (~_{S}\mathbf{J}^{-1} (~_{RS\Alpha}\mathbf{D}_{r\alpha} (~_R\mathbf{J}_r (~_{RS\Alpha}\mathbf{D}_{r} ~_{R\Alpha'}\mathbf{v}^r)_{s \mapsto r})^{r\alpha}))_{s \mapsto r, \Alpha' \mapsto \Alpha} $$</td>
+  </tr>
+  <tr>
+    <td></td><td>$$ + \kappa \Delta t ~_{RS\Alpha}\mathbf{D}_{s}   \left( ~_{S}\mathbf{J}^{-1}_s (~_{RS\Alpha}\mathbf{D}_{r\alpha} (~_R\mathbf{J}_r ~_{R\Alpha}\mathbf{v}_{r})^{r\alpha})_s  ~_{R\Alpha}\mathbf{v} \right)\right) $$</td>
+  </tr>
+  <tr>
+    <td></td><td>$$ -  ~_{R\Alpha}\mathbf{F} \Big\} (~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})^r$$</td>
+  </tr>
 </table>
-`$$$ ((\Delta t)^{-1} ~_{R}\mathbf{m}( ~_{R\Alpha}\mathbf{v}_{\sim} - ~_{R\Alpha}\mathbf{v}_{n})  +  \mu (~_{S}\mathbf{J}^{-1} (~_{RS\Alpha}\mathbf{D}_{r\alpha} (~_R\mathbf{J}_r (~_{RS\Alpha}\mathbf{D}_{r} ~_{R\Alpha}\mathbf{v}^r)_{s \mapsto r})^{r\alpha}))_{s \mapsto r} + \left \langle \nabla \left(\kappa \Delta t \left(\nabla \cdot \mathbf{v}_{\sim} \right)\right),  \psi_{\textrm{cov}}   \right \rangle -  F, \psi_{\textrm{cov}} )_r(~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})^r = 0  $$$`
