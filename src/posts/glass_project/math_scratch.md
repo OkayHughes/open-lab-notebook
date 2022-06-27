@@ -423,3 +423,5 @@ but it's not presented that way?
 Finally, 
 `$$$ \mathbf{v} = ~_{\Alpha}\mathbf{v}^\alpha ~_{\Alpha}\mathbf{g}_\alpha $$$`
 which is contravariant. 
+
+## Gradient:
