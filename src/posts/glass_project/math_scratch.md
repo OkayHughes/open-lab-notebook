@@ -455,4 +455,4 @@ This illustrates that we need to solve a weak formulation of our problem.
 
 ## The weak formulation
 
-If we have a contravariant quantity that we're trying to 
+If we have a contravariant quantity that we're trying to advance, 
