@@ -427,12 +427,12 @@ which is contravariant.
 ## Gradient:
 Let `$$ ~_{RS\Alpha}\mathbf{D}$$` represent the derivative matrix of the polynomial
 basis functions in the element, in covariant coordinates.
-The equation from the paper looks like `$$ \nabla f_{\alpha} = \frac{\partial f}{\partial x^\alpha} $$`
+The equation from the paper looks like `$$ (\nabla f)_{\alpha} = \frac{\partial f}{\partial x^\alpha} $$`
 
-Therefore this can be computed within an element as `$$$ ~_{RSD}\mathbf{D}_{s} ~_{S}\mathbf{f}^s $$$`
+Therefore this can be computed within an element as `$$$ ~_{RS\Alpha}\mathbf{D}_{s} ~_{S}\mathbf{f}^s $$$`
 
 ## Divergence:
-Write the vector in question as a contravariant vector as above, that is `$$ ~_{\Alpha}\mathbf{v}^\alpha ~_{\Alpha}\mathbf{g}_\alpha $$`
+Divergence acts on contravariant quantities, and so we express it in terms of `$$\mathbf{v}^\alpha$$`
 then divergence is given by `$$ \nabla \cdot \mathbf{v} = \frac{1}{J} \partial_{\alpha}(J\mathbf{v}^\alpha)$$`
 
 Which then takes the form of `$$$ ~_{S}\mathbf{J}^{-1}_s (~_{RS\Alpha}\mathbf{D}_{r\alpha} (~_R\mathbf{J}_r ~_{R\Alpha}\mathbf{v}_{r})^{r\alpha})_s   $$$` 
@@ -441,7 +441,7 @@ Which then takes the form of `$$$ ~_{S}\mathbf{J}^{-1}_s (~_{RS\Alpha}\mathbf{D}
 The laplaican can be computed in the continuum as `$$\nabla \cdot (\nabla f)$$`
 
 It's likely that we can thus use the above expressions to compute the laplacian as 
-`$$$ ~_{S}\mathbf{J}^{-1}_s (~_{RSD}\mathbf{D}_{rd} (~_R\mathbf{J}_r (~_{RSD}\mathbf{D}_{r} ~_{R}\mathbf{f}^r)_{s \mapsto r})^{rd})_s  $$$`
+`$$$ ~_{S}\mathbf{J}^{-1}_s (~_{RS\Alpha}\mathbf{D}_{r\alpha} (~_R\mathbf{J}_r (~_{RS\Alpha}\mathbf{D}_{r} ~_{R}\mathbf{f}^r)_{s \mapsto r})^{r\alpha})_s  $$$`
 
 
 
