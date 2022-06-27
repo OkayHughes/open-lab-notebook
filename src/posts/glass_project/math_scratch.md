@@ -461,7 +461,7 @@ If we have a contravariant quantity that we're trying to advance, then we want t
 Let's try the following:
 
 <table class="eqn">
-  <tr><td> $$ 0 $$</td><td>$$ = \Big\{(\Delta t)^{-1} ~_{R}\mathbf{m}( ~_{R\Alpha}\mathbf{v}_{\sim} - ~_{R\Alpha}\mathbf{v}_{n})$$</td>
+  <tr><td> $$ 0 $$</td><td>$$ = \bigg[\Big\{(\Delta t)^{-1} ~_{R}\mathbf{m}( ~_{R\Alpha}\mathbf{v}_{\sim} - ~_{R\Alpha}\mathbf{v}_{n})$$</td>
   </tr>
   <tr>
     <td></td><td>$$+ \mu (~_{S}\mathbf{J}^{-1} (~_{RS\Alpha}\mathbf{D}_{r\alpha} (~_R\mathbf{J}_r (~_{RS\Alpha}\mathbf{D}_{r} ~_{R\Alpha'}\mathbf{v}^r)_{s \mapsto r})^{r\alpha}))_{s \mapsto r, \alpha' \mapsto \alpha} $$</td>
@@ -470,6 +470,6 @@ Let's try the following:
     <td></td><td>$$ + \kappa \Delta t (~_{RS\Alpha}\mathbf{D}_{r\alpha}   \left( ~_{r}\mathbf{J}^{-1}_r (~_{RS\Alpha}\mathbf{D}_{r\alpha} (~_R\mathbf{J}_r ~_{R\Alpha}\mathbf{v}_{r})^{r\alpha})_{s\mapsto r} \right)^r)_{s \mapsto r} $$</td>
   </tr>
   <tr>
-    <td></td><td>$$ -  ~_{R\Alpha}\mathbf{F} \Big\}_r (~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})^r$$</td>
+    <td></td><td>$$ -  ~_{R\Alpha}\mathbf{F} \Big\}_r ((~_{\Alpha}\mathbf{1}~_{LR}\mathbf{P}) ~_R\mathbf{w}~_R\mathbf{Q})^r\bigg]_l ~_{LR}\mathbf{P}^l$$</td>
   </tr>
 </table>
