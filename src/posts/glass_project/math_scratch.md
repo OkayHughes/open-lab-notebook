@@ -425,3 +425,6 @@ Finally,
 which is contravariant. 
 
 ## Gradient:
+Let `$$ ~_{LM}\mathbf{D}$$` represent the derivative matrix of the polynomial
+basis functions in the element. 
+The equation from the paper looks like `$$ \nabla f_{\alpha} = \frac{\partial f}{\partial } $$`
