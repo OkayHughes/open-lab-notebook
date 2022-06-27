@@ -456,6 +456,6 @@ This illustrates that we need to solve a weak formulation of our problem.
 ## The weak formulation
 
 If we have a contravariant quantity that we're trying to advance, then we want to e.g. find a sufficient solution to
-`$$$ \left\langle m \frac{\mathbf{v}_{n+1} - \mathbf{v}_{n}}{\Delta t}, \psi_{\textrm{cov}} \right\rangle + \left \langle \mu \nabla^2 \mathbf{v}_{n+1}, \psi_{\textrm{cov}}\right\rangle + \left \langle \nabla \left(\kappa \Delta t \nabla \right) \right \rangle $$$`
+`$$$ \left\langle m \frac{\mathbf{v}_{\sim} - \mathbf{v}_{n}}{\Delta t}, \psi_{\textrm{cov}} \right\rangle + \left \langle \mu \nabla^2 \mathbf{v}_{\sim}, \psi_{\textrm{cov}}\right\rangle + \left \langle \nabla \left(\kappa \Delta t \left(\nabla \cdot \mathbf{v}_{\sim} \right)\right),  \psi_{\textrm{cov}}   \right \rangle = \left \langle F, \psi_{\textrm{cov}}  \right \rangle $$$`
 
-
+We assume that quantities of interest are written as `$$ [\cdot](x) = a_{l}P^l(x) $$`
