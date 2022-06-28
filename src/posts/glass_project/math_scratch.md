@@ -495,3 +495,7 @@ In order to find the derivative matrix `$$ ~_{RS\Alpha}\mathbf{D} $$` the most i
  ### inferring correct basis on a weird shape:
  
 If we are given a set of GLL points (that is, we have dimension-`$$d$$` polynomials and d+1 points)
+then we can use something like a vandermonde matrix to derive the necessary polynomials.
+Namely, if we have GLL points `$$ \xi_k = (x_k, y_k, z_k) \in \mathcal{S}^s $$`, then the formula for the `$$k$$`th interpolating polynomial
+can be found by solving the linear system
+`$$$ \sum_{\mathbf{\alpha}} $$$`
