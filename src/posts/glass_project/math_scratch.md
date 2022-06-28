@@ -483,5 +483,10 @@ In order to find the derivative matrix `$$ ~_{RS\Alpha}\mathbf{D} $$` the most i
 
  Namely we can first define `$$ ~_{LS\Alpha} \mathrm{D}' $$` such that if we let `$$ ~_{L}\mathbf{e}$$` be the 
  `$$l$$`th canonical basis vector then 
- `$$ (~{LS\Alpha}\mathbf{D}'_l~_{L}\mathbf{e}^l)_{s \mapsto r} = ~{RL\Alpha}\mathbf{N}_l ~_{L}\mathbf{e}^l  $$`
- where `$$`
+ `$$$ (~{LS\Alpha}\mathbf{D}'_l~_{L}\mathbf{e}^l)_{s \mapsto r} = ~{RL\Alpha}\mathbf{N}_l ~_{L}\mathbf{e}^l  $$$`
+ where `$$ ~_{RL\Alpha}\mathbf{N}$$` encodes the pointwise vector evaluation of `(\nabla P_l)(x_1, x_2, x_3)`.
+ 
+ However we know from above that if we have a scalar quantity stored at the GLL nodes `~_{R}\mathbf{U}` then we can project
+ into our orthogonal basis by `$$ ~_{R}\mathbf{U}_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})^r  $$`
+ 
+ So, in conclusion, if 
