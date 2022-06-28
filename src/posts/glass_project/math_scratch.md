@@ -505,7 +505,7 @@ In order to find the derivative matrix `$$ ~_{RS\Alpha}\mathbf{D} $$` the most i
  where `$$ ~_{RR'\Alpha}\mathbf{N}$$` encodes the pointwise vector analytic evaluation of `$$(\nabla P_l)(x_1, x_2, x_3)$$`.
  
 
- 
+ Using the fact that we are using an interpolant basis, we get that 
  
  ### inferring correct basis on a weird shape:
  
