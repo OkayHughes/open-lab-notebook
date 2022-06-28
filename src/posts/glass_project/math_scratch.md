@@ -499,13 +499,17 @@ Linearize w.r.t. `$$~_{R\Alpha}\mathbf{v}$$`
 In order to find the derivative matrix `$$ ~_{RS\Alpha}\mathbf{D} $$` the most instructive identity is that
 `$$ \nabla f = \frac{\partial f}{\partial x^\alpha} $$`
 
- Namely we can first define `$$ ~_{RS\Alpha} \mathrm{D}' $$` such that if we let `$$ ~_{R'}\mathbf{e}$$` be the 
+ Namely we can first define `$$ ~_{RS\Alpha} \mathrm{D} $$` such that if we let `$$ ~_{R'}\mathbf{e}$$` be the 
  `$$r'$$`th canonical basis vector then 
- `$$$ (~_{RR'\Alpha}\mathbf{D}'_{r'}~_{R'}\mathbf{e}^{r'}) = ~_{RR'\Alpha}\mathbf{N}_{r'} ~_{R'}\mathbf{e}^{r'}  $$$`
+ `$$$ (~_{RR'\Alpha}\mathbf{D}_{r'}~_{R'}\mathbf{e}^{r'}) = ~_{RR'\Alpha}\mathbf{N}_{r'} ~_{R'}\mathbf{e}^{r'}  $$$`
  where `$$ ~_{RR'\Alpha}\mathbf{N}$$` encodes the pointwise vector analytic evaluation of `$$(\nabla P_l)(x_1, x_2, x_3)$$`.
  
 
- Using the fact that we are using an interpolant basis, we get that 
+ Using the fact that we are using an interpolant basis, we get that a
+ field `$$ ~_{R}\mathbf{u} $$` is in fact the same as `$$ ~_{L}\mathbf{u}_l ~_{LR}\mathbf{P}^l$$`
+ 
+ So clearly `$$ \nabla u $$` can be computed as
+ `$$$ ~_{RR'\Alpha}\mathbf{D}_{r'}~_{R'}\mathbf{u}^{r'}$$$`
  
  ### inferring correct basis on a weird shape:
  
