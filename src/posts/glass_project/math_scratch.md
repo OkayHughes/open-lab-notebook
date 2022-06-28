@@ -396,7 +396,7 @@ Therefore we can represent a scalar projection according to
 `$$$~_{R}\overline{\mathbf{f}} = (~_{YR}\Gamma_y (~_{Y}\mathbf{m})^y)^{-1}_r (~_{YR}\Gamma_y(~_{Y}\mathbf{f} ~_{Y}\mathbf{m})^y)_r $$$`
 
 
-The global mass matrix is diagonal after projection into `$$ \mathcal{V}^1 $$`. It should take a form similar to `$$ ~_{YR}\Gamma_y (~_{YR}\Gamma_r(~_{R}\mathbf{w} ~_{R}\mathbf{Q})^r)^y $$`
+The global mass matrix is diagonal after projection into `$$ \mathcal{V}^1 $$`. It should take a form similar to `$$ ~_{YR}\Gamma_y (~_{YR}\Gamma_r(~_{R}\mathbf{w} ~_{R}\mathbf{Q})^r)^y $$` (this assumes global communication.)
 This should be diagonal. 
 ## Differential operators in curvilinear coordinates
 
@@ -485,7 +485,7 @@ In order to find the derivative matrix `$$ ~_{RS\Alpha}\mathbf{D} $$` the most i
  Namely we can first define `$$ ~_{RS\Alpha} \mathrm{D}' $$` such that if we let `$$ ~_{R'}\mathbf{e}$$` be the 
  `$$r'$$`th canonical basis vector then 
  `$$$ (~_{RR'\Alpha}\mathbf{D}'_{r'}~_{R'}\mathbf{e}^{r'}) = ~_{RR'\Alpha}\mathbf{N}_{r'} ~_{R'}\mathbf{e}^{r'}  $$$`
- where `$$ ~_{RL\Alpha}\mathbf{N}$$` encodes the pointwise vector analytic evaluation of `$$(\nabla P_l)(x_1, x_2, x_3)$$`.
+ where `$$ ~_{RR'\Alpha}\mathbf{N}$$` encodes the pointwise vector analytic evaluation of `$$(\nabla P_l)(x_1, x_2, x_3)$$`.
  
 
  
