@@ -473,3 +473,6 @@ Let's try the following:
     <td></td><td>$$ -  ~_{R\Alpha}\mathbf{F} \Big\}_r ((~_{\Alpha}\mathbf{1}~_{LR}\mathbf{P}) ~_R\mathbf{w}~_R\mathbf{Q})^r\bigg]_l ~_{LR}\mathbf{P}^l$$</td>
   </tr>
 </table>
+
+
+
