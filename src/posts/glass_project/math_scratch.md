@@ -393,7 +393,7 @@ I'll use `$$~_{YR}\mathbf{\Gamma}$$` to represent the Gather matrix which has en
 and `$$\mathbf{\Gamma}_{yr} = 0$$` otherwise. 
 
 Therefore we can represent a scalar projection according to
-`$$$~_{L}\overline{\mathbf{f}} = (~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})_r (~_{YR}\Gamma_y(~_{Y}\mathbf{f} ~_{Y}\mathbf{m})^y)^r $$$`
+`$$$~_{R'}\overline{\mathbf{f}} = (~_{RR'}\mathbf{P} ~_{R}\mathbf{w}~_R\mathbf{Q})_r (~_{YR}\Gamma_y(~_{Y}\mathbf{f} ~_{Y}\mathbf{m})^y)^r $$$`
 
 
 
@@ -481,10 +481,10 @@ Let's try the following:
 In order to find the derivative matrix `$$ ~_{RS\Alpha}\mathbf{D} $$` the most instructive identity is that
 `$$ \nabla f = \frac{\partial f}{\partial x^\alpha} $$`
 
- Namely we can first define `$$ ~_{LS\Alpha} \mathrm{D}' $$` such that if we let `$$ ~_{L}\mathbf{e}$$` be the 
- `$$l$$`th canonical basis vector then 
- `$$$ (~{LS\Alpha}\mathbf{D}'_l~_{L}\mathbf{e}^l)_{s \mapsto r} = ~{RL\Alpha}\mathbf{N}_l ~_{L}\mathbf{e}^l  $$$`
- where `$$ ~_{RL\Alpha}\mathbf{N}$$` encodes the pointwise vector evaluation of `(\nabla P_l)(x_1, x_2, x_3)`.
+ Namely we can first define `$$ ~_{RS\Alpha} \mathrm{D}' $$` such that if we let `$$ ~_{R'}\mathbf{e}$$` be the 
+ `$$r'$$`th canonical basis vector then 
+ `$$$ (~_{RR'\Alpha}\mathbf{D}'_{r'}~_{R'}\mathbf{e}^{r'}) = ~_{RR'\Alpha}\mathbf{N}_{r'} ~_{R'}\mathbf{e}^{r'}  $$$`
+ where `$$ ~_{RL\Alpha}\mathbf{N}$$` encodes the pointwise vector analytic evaluation of `$$(\nabla P_l)(x_1, x_2, x_3)$$`.
  
 
  
@@ -498,4 +498,7 @@ can be found by solving the linear systems
 `$$$ \sum_{\{\mathbf{d} \mid \sum {\mathbf{d}_i} \leq d\}}a_{\mathbf{d}} x_{k'}^{\mathbf{d}_1}y_{k'}^{\mathbf{d}_2}z_{k'}^{\mathbf{d}_3} = \delta_{kk'} $$$`
 with `$$\delta_{kk'}$$` the usual kronecker delta function. 
 
-Such an interpolation can be easily solved for offline. It is immediately obvious that the polynomials `$$~_{RL}\mathbf{P} $$`
+Such an interpolation can be easily solved for offline. It is immediately obvious that the polynomials `$$~_{RR'}\mathbf{P} $$`
+have the property `$$ ~_{RR'}\mathbf{P}_{r,r'} = \delta_{r, r'} $$`
+This makes interpolation utterly trivial. These polynomials can be
+differentiated to machine precision offline.
