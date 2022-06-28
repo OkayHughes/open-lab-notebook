@@ -475,6 +475,23 @@ Let's try the following:
   </tr>
 </table>
 
+### Finding the linearized form of this
+
+Linearize w.r.t. `$$~_{R\Alpha}\mathbf{v}$$`
+<table class="eqn">
+  <tr><td> $$ 0 $$</td><td>$$ = \Big\{(\Delta t)^{-1} ~_{R}\mathbf{m}( ~_{R\Alpha}\mathbf{v}_{\sim})$$</td>
+  </tr>
+  <tr>
+    <td></td><td>$$+ \mu (~_{R'}\mathbf{J}^{-1}_{r'} (~_{R'S\Alpha}\mathbf{D}_{r'\alpha} (~_{R'}\mathbf{J}_{r'} (~_{RS\Alpha}\mathbf{D}_{r} ~_{R\Alpha'}\mathbf{v})_{s \mapsto r'})^{s \mapsto r', \alpha}))_{s \mapsto r', \alpha' \mapsto \alpha} $$</td>
+  </tr>
+  <tr>
+    <td></td><td>$$ + \kappa \Delta t (~_{RS\Alpha}\mathbf{D}_{r\alpha}   \left( ~_{r}\mathbf{J}^{-1}_r (~_{RS\Alpha}\mathbf{D}_{r\alpha} (~_R\mathbf{J}_r ~_{R\Alpha}\mathbf{v}_{r})^{r\alpha})_{s\mapsto r} \right)^r)_{s \mapsto r} $$</td>
+  </tr>
+  <tr>
+    <td></td><td>$$ -  ~_{R\Alpha}\mathbf{F} \Big\}_r (~_{\Alpha}\mathbf{1} ~_R\mathbf{w}~_R\mathbf{Q})^r $$</td>
+  </tr>
+</table>
+
 
 
 ## Derivative matrix:
