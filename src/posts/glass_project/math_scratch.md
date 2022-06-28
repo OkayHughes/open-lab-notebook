@@ -486,16 +486,16 @@ In order to find the derivative matrix `$$ ~_{RS\Alpha}\mathbf{D} $$` the most i
  `$$$ (~{LS\Alpha}\mathbf{D}'_l~_{L}\mathbf{e}^l)_{s \mapsto r} = ~{RL\Alpha}\mathbf{N}_l ~_{L}\mathbf{e}^l  $$$`
  where `$$ ~_{RL\Alpha}\mathbf{N}$$` encodes the pointwise vector evaluation of `(\nabla P_l)(x_1, x_2, x_3)`.
  
- However we know from above that if we have a scalar quantity stored at the GLL nodes `~_{R}\mathbf{U}` then we can project
- into our orthogonal basis by `$$ ~_{R}\mathbf{U}_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})^r  $$`
- 
- So, in conclusion, if 
+
  
  
  ### inferring correct basis on a weird shape:
  
-If we are given a set of GLL points (that is, we have dimension-`$$d$$` polynomials and d+1 points)
+If we are given a set of GLL points (that is, we have dimension-`$$d$$` polynomials and `$$d+1$$` points)
 then we can use something like a vandermonde matrix to derive the necessary polynomials.
 Namely, if we have GLL points `$$ \xi_k = (x_k, y_k, z_k) \in \mathcal{S}^s $$`, then the formula for the `$$k$$`th interpolating polynomial
-can be found by solving the linear system
-`$$$ \sum_{\mathbf{\alpha}} $$$`
+can be found by solving the linear systems 
+`$$$ \sum_{\{\mathbf{d} \mid \sum {\mathbf{d}_i} \leq d\}}a_{\mathbf{d}} x_{k'}^{\mathbf{d}_1}y_{k'}^{\mathbf{d}_2}z_{k'}^{\mathbf{d}_3} = \delta_{kk'} $$$`
+with `$$\delta_{kk'}$$` the usual kronecker delta function. 
+
+Such an interpolation can be easily solved for offline. It is immediately obvious that the polynomials `$$~_{RL}\mathbf{P} $$`
