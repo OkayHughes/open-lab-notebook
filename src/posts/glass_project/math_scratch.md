@@ -478,4 +478,10 @@ Let's try the following:
 
 ## Derivative matrix:
 
-It's quite clear that 
+In order to find the derivative matrix `$$ ~_{RS\Alpha}\mathbf{D} $$` the most instructive identity is that
+`$$ \nabla f = \frac{\partial f}{\partial x^\alpha} $$`
+
+ Namely we can first define `$$ ~_{LS\Alpha} \mathrm{D}' $$` such that if we let `$$ ~_{L}\mathbf{e}$$` be the 
+ `$$l$$`th canonical basis vector then 
+ `$$ (~{LS\Alpha}\mathbf{D}'_l~_{L}\mathbf{e}^l)_{s \mapsto r} = ~{RL\Alpha}\mathbf{N}_l ~_{L}\mathbf{e}^l  $$`
+ where `$$`
