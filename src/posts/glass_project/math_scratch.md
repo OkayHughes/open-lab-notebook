@@ -479,16 +479,16 @@ Let's try the following:
 
 Linearize w.r.t. `$$~_{R\Alpha}\mathbf{v}$$`
 <table class="eqn">
-  <tr><td> $$ 0 $$</td><td>$$ = \Big\{(\Delta t)^{-1} ~_{R'}\mathbf{m}_{r'}( ~_{R\Alpha}\mathbf{v}_{\sim})_r$$</td>
+  <tr><td> $$ \mathbf{H} $$</td><td>$$ =\Big\{(\Delta t)^{-1} ~_{R'}\mathbf{m}_{r'}( ~_{R\Alpha}\mathbf{1})_r$$</td>
   </tr>
   <tr>
-    <td></td><td>$$+ \mu (~_{S}\mathbf{J}^{-1}_{s} (~_{R'S\Alpha}\mathbf{D}_{r'\alpha} (~_{R'}\mathbf{J}_{r'} (~_{RS\Alpha}\mathbf{D}_{r} ~_{R\Alpha'}\mathbf{v}_r)_{s \mapsto r'})^{s \mapsto r', \alpha}))_{s \mapsto r', \alpha' \mapsto \alpha} $$</td>
+    <td></td><td>$$+ \mu (~_{S}\mathbf{J}^{-1}_{s} (~_{R'S\Alpha}\mathbf{D}_{r'\alpha} (~_{R'}\mathbf{J}_{r'} (~_{RS\Alpha}\mathbf{D}_{r} ~_{R\Alpha}\mathbf{1}_r)_{s \mapsto r'})^{s \mapsto r', \alpha}))_{s \mapsto r', \alpha' \mapsto \alpha} $$</td>
   </tr>
   <tr>
-    <td></td><td>$$ + \kappa \Delta t (~_{R'S\Alpha}\mathbf{D}_{r'\alpha}   \left( ~_{R'}\mathbf{J}^{-1}_{r'} (~_{RS\Alpha}\mathbf{D}_{r\alpha} (~_R\mathbf{J}_r ~_{R\Alpha}\mathbf{v}_{r})^{\alpha}_r)_{s\mapsto r'} \right)^{r'})_{s \mapsto r} $$</td>
+    <td></td><td>$$ + \kappa \Delta t (~_{R'S\Alpha}\mathbf{D}_{r'\alpha}   \left( ~_{R'}\mathbf{J}^{-1}_{r'} (~_{RS\Alpha}\mathbf{D}_{r\alpha} (~_R\mathbf{J}_r ~_{R\Alpha}\mathbf{1}_r)^{\alpha}_r)_{s\mapsto r'} \right)^{r'})_{s \mapsto r'} $$</td>
   </tr>
   <tr>
-    <td></td><td>$$ -  ~_{R\Alpha}\mathbf{F} \Big\}_r (~_{\Alpha}\mathbf{1} ~_R\mathbf{w}~_R\mathbf{Q})^r $$</td>
+    <td></td><td>$$ \Big\}_{r'} (~_{\Alpha}\mathbf{1} ~_R\mathbf{w}~_R\mathbf{Q})_{r'}~_{R\Alpha}\mathbf{v}_\sim^r $$</td>
   </tr>
 </table>
 
