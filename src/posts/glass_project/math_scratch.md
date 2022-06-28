@@ -490,3 +490,8 @@ In order to find the derivative matrix `$$ ~_{RS\Alpha}\mathbf{D} $$` the most i
  into our orthogonal basis by `$$ ~_{R}\mathbf{U}_r  (~_{LR}\mathbf{P} ~_R\mathbf{w}~_R\mathbf{Q})^r  $$`
  
  So, in conclusion, if 
+ 
+ 
+ ### inferring correct basis on a weird shape:
+ 
+If we are given a set of GLL points (that is, we have dimension-`$$d$$` polynomials and d+1 points)
