@@ -393,9 +393,10 @@ I'll use `$$~_{YR}\mathbf{\Gamma}$$` to represent the Gather matrix which has en
 and `$$\mathbf{\Gamma}_{yr} = 0$$` otherwise. 
 
 Therefore we can represent a scalar projection according to
-`$$$~_{R'}\overline{\mathbf{f}} = (~_{RR'}\mathbf{P} ~_{R}\mathbf{w}~_R\mathbf{Q})_r (~_{YR}\Gamma_y(~_{Y}\mathbf{f} ~_{Y}\mathbf{m})^y)^r $$$`
+`$$$~_{R}\overline{\mathbf{f}} = (~_{R}\mathbf{w}~_R\mathbf{Q})_r (~_{YR}\Gamma_y(~_{Y}\mathbf{f} ~_{Y}\mathbf{m})^y)_r $$$`
 
 
+The global mass matrix is diagonal after projection into `$$ \mathcal{V}^1 $$`. It should take a form similar to `$$ (~_{Y}\mathbf{w}~_{YR}\Gamma_y $$`
 
 ## Differential operators in curvilinear coordinates
 
