@@ -15,4 +15,12 @@ layout: layouts/post.njk
 * Calculate GLL points on `$$ \mathcal{S}^s $$`, start in 2D 
 * Calculate lagrange polynomials on the canonical simplex
 * Calculate shape functions and derivative matrices in general
-*
+* Define spherical and ellipsoidal geometry and test shape functions and differential operators on known functions 
+with analytical solutions to ground truth.
+
+## Calculating GLL points
+
+```
+
+
+```
