@@ -10,17 +10,4 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
-## Outline of tasks
-
-* Calculate GLL points on `$$ \mathcal{S}^s $$`, start in 2D 
-* Calculate lagrange polynomials on the canonical simplex
-* Calculate shape functions and derivative matrices in general
-* Define spherical and ellipsoidal geometry and test shape functions and differential operators on known functions 
-with analytical solutions to ground truth.
-
-## Calculating GLL points
-
-```
-
-
-```
+<a href="https://colab.research.google.com/drive/1NgVrSYzMH_zmv9pl0nd7nkD1RfJS6A-l?usp=sharing">Link to Google CoLab notebook</a>
