@@ -26,6 +26,12 @@ where we assume that we're working on a single model level.
   <tr>
     <td></td><td>$$=  \frac{u}{a\cos\phi} \frac{\partial}{\partial_{\eta} \lambda}p   $$</td>
   </tr>
+  <tr>
+    <td></td><td>$$=  \frac{u}{a\cos\phi} \frac{\partial}{\partial_{\eta} \lambda} \left(a_k p_0 + b_k p_s(\phi, \lambda) \right)   $$</td>
+  </tr>
+  <tr>
+    <td></td><td>$$=  b_k \frac{u}{a\cos\phi} \frac{\partial}{\partial_{\eta} \lambda} \left(p_s(\phi, \lambda) \right)   $$</td>
+  </tr>
 </table>
 
 
