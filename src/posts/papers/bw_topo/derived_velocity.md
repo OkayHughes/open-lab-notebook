@@ -40,7 +40,10 @@ Using the definition `$$$ p_s(\phi, \lambda) = p_0 \exp \left[ -\frac{g}{R_d}\le
 We get that 
 <table class="eqn">
   <tr>
-    <td>$$ \frac{\partial}{\partial_\eta \lambda} p_s$$</td><td>$$ $$</td>
+    <td>$$ \frac{\partial}{\partial_\eta \lambda} p_s$$</td><td>$$= \frac{\partial}{\partial_\eta \lambda} p_0 \exp \left[ -\frac{g}{R_d}\left(\tau_{\textrm{int}, 1}(z_s(\phi, \lambda)) - \tau_{\textrm{int},2}(z_s(\phi, \lambda))I_T(\phi)\right)\right] $$</td>
+  </tr>
+  <tr>
+    <td></td><td>$$ = -\frac{gp_0}{R_d} \exp \left[ -\frac{g}{R_d}\left(\tau_{\textrm{int}, 1}(z_s(\phi, \lambda)) - \tau_{\textrm{int},2}(z_s(\phi, \lambda))I_T(\phi)\right)\right] \frac{\partial}{\partial_\eta \lambda}\left[ \left(\tau_{\textrm{int}, 1}(z_s(\phi, \lambda)) - \tau_{\textrm{int},2}(z_s(\phi, \lambda))I_T(\phi)\right) \right]  $$</td>
   </tr>
 </table>
 
