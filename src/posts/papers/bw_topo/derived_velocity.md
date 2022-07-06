@@ -43,7 +43,7 @@ We get that
     <td>$$ \frac{\partial}{\partial_\eta \lambda} p_s$$</td><td>$$= \frac{\partial}{\partial_\eta \lambda} p_0 \exp \left[ -\frac{g}{R_d}\left(\tau_{\textrm{int}, 1}(z_s(\phi, \lambda)) - \tau_{\textrm{int},2}(z_s(\phi, \lambda))I_T(\phi)\right)\right] $$</td>
   </tr>
   <tr>
-    <td></td><td>$$ = -\frac{gp_0}{R_d} \exp \left[ -\frac{g}{R_d}\left(\tau_{\textrm{int}, 1}(z_s(\phi, \lambda)) - \tau_{\textrm{int},2}(z_s(\phi, \lambda))I_T(\phi)\right)\right] \frac{\partial}{\partial_\eta \lambda}\left[ \left(\tau_{\textrm{int}, 1}(z_s(\phi, \lambda)) - \tau_{\textrm{int},2}(z_s(\phi, \lambda))I_T(\phi)\right) \right]  $$</td>
+    <td></td><td>$$ = -\frac{gp_0}{R_d} \exp \left[ -\frac{g}{R_d}\left(\tau_{\textrm{int}, 1}(z_s(\phi, \lambda)) - \tau_{\textrm{int},2}(z_s(\phi, \lambda))I_T(\phi)\right)\right] \left[ \left(\left[\frac{\partial}{\partial z}\tau_{\textrm{int}, 1}\right](z_s(\phi, \lambda)) - I_T(\phi) \left[\frac{\partial}{\partial z}\tau_{\textrm{int},2}\right](z_s(\phi, \lambda))\right) \right]\left[\frac{\partial}{\partial_\eta \lambda}z_s\right](\phi, \lambda)  $$</td>
   </tr>
 </table>
 
