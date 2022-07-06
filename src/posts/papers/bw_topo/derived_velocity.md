@@ -49,9 +49,19 @@ We get that
 
 
 
-`$$$ \tau_{\mathrm{int},1}(z) = \frac{1}{\Gamma} \left[\exp \left(\frac{\Gamma z}{T_0} \right) - 1 \right] + z \left( \frac{T_0 - T_\mathrm{P}}{T_0T_\mathrm{P}} \right) \exp\left[ -\left(\frac{zg}{bR_dT_0} \right)^2\right]$$$`
+<table class="eqn">
+  <tr>
+    <td>$$ \partial_z \tau_{\mathrm{int},1}(z) $$</td><td>$$ = \partial_z\frac{1}{\Gamma} \left[\exp \left(\frac{\Gamma z}{T_0} \right) - 1 \right] + z \left( \frac{T_0 - T_\mathrm{P}}{T_0T_\mathrm{P}} \right) \exp\left[ -\left(\frac{zg}{bR_dT_0} \right)^2\right] $$</td>
+  </tr>
+</table> 
 
-`$$$ \tau_{\mathrm{int},2} = \frac{K+2}{2} \left(\frac{T_\mathrm{E} - T_\mathrm{P}}{T_\mathrm{E} T_\mathrm{P}} \right)z\,\exp \left[-\left(\frac{zg}{bR_dT_0} \right)^2 \right] $$$`
+
+<table class="eqn">
+  <tr>
+    <td>$$\partial_z \tau_{\mathrm{int},2} $$</td><td>$$ = \partial_z  \frac{K+2}{2} \left(\frac{T_\mathrm{E} - T_\mathrm{P}}{T_\mathrm{E} T_\mathrm{P}} \right)z\,\exp \left[-\left(\frac{zg}{bR_dT_0} \right)^2 \right]$$</td>
+  </tr>
+</table>
+
 
 
 
