@@ -36,6 +36,16 @@ where we assume that we're working on a single model level.
 
 
 Using the definition `$$$ p_s(\phi, \lambda) = p_0 \exp \left[ -\frac{g}{R_d}\left(\tau_{\textrm{int}, 1}(z_s(\phi, \lambda)) - \tau_{\textrm{int},2}(z_s(\phi, \lambda))I_T(\phi)\right)\right] $$$`
+
+We get that 
+<table class="eqn">
+  <tr>
+    <td>$$ \frac{\partial}{\partial_\eta \lambda} p_s$$</td><td>$$ $$</td>
+  </tr>
+</table>
+
+
+
 `$$$ \tau_{\mathrm{int},1}(z) = \frac{1}{\Gamma} \left[\exp \left(\frac{\Gamma z}{T_0} \right) - 1 \right] + z \left( \frac{T_0 - T_\mathrm{P}}{T_0T_\mathrm{P}} \right) \exp\left[ -\left(\frac{zg}{bR_dT_0} \right)^2\right]$$$`
 
 `$$$ \tau_{\mathrm{int},2} = \frac{K+2}{2} \left(\frac{T_\mathrm{E} - T_\mathrm{P}}{T_\mathrm{E} T_\mathrm{P}} \right)z\,\exp \left[-\left(\frac{zg}{bR_dT_0} \right)^2 \right] $$$`
