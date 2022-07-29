@@ -49,3 +49,12 @@ will be included in the executable for your case.
 
 We'll work with the concrete example of the source file `ic_baro_dry_jw06.F90` 
 which defines the initial conditions for the test case that we're running.
+
+To find the location of the original file, you can run `find ~ -name "ic_baro_dry_jw06.F90"`
+
+From within your case directory you should run `cp ${PATH_TO_IC_BARO_DRY}/ic_baro_dry_jw06.F90 SourceMods/src.cam`.
+Using your text editor of choice (`nano` and `vim` are simple choices, but `vim` 
+has a few early stumbling blocks) to edit the copied file.
+For me that reads as `vim SourceMods/src.cam/ic_baro_dry_jw06.F90.`
+
+The 
