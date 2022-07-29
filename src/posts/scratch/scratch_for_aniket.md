@@ -32,3 +32,11 @@ How does the time-evolution of `T` mirror and how does it differ from the evolut
 think about e.g. walking past the door to an air-conditioned building on a hot day when the door opens. Wind coming from inside the building
 transports cool air from inside to where you are on the outside. How does that relate to what we're seeing in the `T` field?
 
+
+## Modifying the source code
+
+Since you already have a case directory, I'll assume that you have the location stored in 
+a variable called `$CASE_DIR`. The contents of this directory should look like:
+<img class="scratch small" href="">
+and if you lost it and want to find it again (or, more specifically, find all case directories
+contained in your home directory) then you can run `find ~ -name "SourceMods"`
