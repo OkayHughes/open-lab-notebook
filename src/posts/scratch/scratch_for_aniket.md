@@ -72,5 +72,19 @@ An important caveat is that if you are running a particular case (which is a par
 configuration of the CAM model) that lives in `$CASE_DIR` multiple times, the output NetCDF
 file will be overwritten. 
 
-Keeping this in mind, I lay 
+Keeping this in mind, I lay before you the following challenge:
+1. Copy the fortran file to the `SourceMods/src.cam` directory and build the model using `./case.build`.
+1. Run the model with the default value of `perturbation_amplitude` set in the `SourceMods/src.cam/ic_baro_dry_jw06.F90`, i.e. run `./case.submit`.
+Note: you can check the status of running jobs with `squeue -u ${USER}`. Once your job completes, continue to the next step.
+1. Find the output NetCDF file. The right-most directory in `${CASE_DIR}` (in my setup this is `CAM_JUNE22.ne30_ne30_mg17.FADIAB.36.test_cases.jw06`)
+is the name of your case. Since your scratch directory is located at `/scratch/cjablono_root/cjablono0/daniket/`
+try to find a directory that has the same case name as what we found in `${CASE_DIR}`.
+1. Navigate to this directory, which should contain two subdirectories, `bld`, and `run`. Navigate into the `run` subdirectory.
+1. If all has gone to plan, there should be a file with the `.nc` suffix, which you can find by doing `ls *.nc`.
+1. Rename this NetCDF file to something like `default_perturbation_amplitude.nc`
+1. Go back to your case directory. Modify `SourceMods/src.cam/ic_baro_dry_jw06.F90` to double the strength of the perturbation.
+1. Run `./case.build` and if this completes successfully run `./case.submit`. Wait for the job to complete.
+1. Navigate to the output directory and rename the NetCDF file to something like `doubled_perturbation_amplitude.nc`. 
+1. A little exercise to test your retention: Determine the steps you need to do to
+run the model with `perturbation`
 
