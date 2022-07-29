@@ -86,5 +86,18 @@ try to find a directory that has the same case name as what we found in `${CASE_
 1. Run `./case.build` and if this completes successfully run `./case.submit`. Wait for the job to complete.
 1. Navigate to the output directory and rename the NetCDF file to something like `doubled_perturbation_amplitude.nc`. 
 1. A little exercise to test your retention: Determine the steps you need to do to
-run the model with `perturbation`
+run the model with `perturbation_amplitude` set to 0. Rename the NetCDF file to something like
+`nil_perturbation_amplitude.nc`.
 
+After you're done, you should have an output directory that contains three NetCDF files: one where the model was run with
+a default perturbation amplitude, one where the perturbation amplitude is doubled, and one where 
+the perturbation is not present. Use panoply to explore these output files and try to figure out what changed.
+Is there a pattern? Try to see if you can see why; if you're interested in thinking deeply about this, you should look at the paper I linked above which covers the details of this
+test case in gory detail.
+
+Keep me posted!!
+
+
+If you get through this wicked fast and are interested in doing something else, my next suggestion
+is to break the test case in a major way. I won't tell you how to do it, surprise me. Make sure it's not so
+broken that the model doesn't run. Explain what you did.
