@@ -57,4 +57,20 @@ Using your text editor of choice (`nano` and `vim` are simple choices, but `vim`
 has a few early stumbling blocks) to edit the copied file.
 For me that reads as `vim SourceMods/src.cam/ic_baro_dry_jw06.F90.`
 
-The 
+The crucial parameters that define the test case are found in this file, 
+in the section of the code that looks like
+<img class="center large" src="https://open-lab-notebook-assets.glitch.me/assets/aniket/source_mods_tutorial/test_case_params.png">
+The description of the structure of this test case can be found in the [following paper](https://opensky.ucar.edu/islandora/object/technotes%3A481).
+
+A good introductory exercise for learning how to change CAM source code is changing these parameters 
+and seeing how this impacts the resulting model output.
+
+A good starting parameter to change is `perturbation_amplitude` which is the 
+strength of the nudge that starts the wave in motion.
+To see how this works, we'll start by running two simulations.
+An important caveat is that if you are running a particular case (which is a particular
+configuration of the CAM model) that lives in `$CASE_DIR` multiple times, the output NetCDF
+file will be overwritten. 
+
+Keeping this in mind, I lay 
+
