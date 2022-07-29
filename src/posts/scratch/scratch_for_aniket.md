@@ -37,6 +37,15 @@ transports cool air from inside to where you are on the outside. How does that r
 
 Since you already have a case directory, I'll assume that you have the location stored in 
 a variable called `$CASE_DIR`. The contents of this directory should look like:
-<img class="scratch small" href="">
+<img class="center large" src="https://open-lab-notebook-assets.glitch.me/assets/aniket/source_mods_tutorial/case_directory.png">
 and if you lost it and want to find it again (or, more specifically, find all case directories
-contained in your home directory) then you can run `find ~ -name "SourceMods"`
+contained in your home directory) then you can run `find ~ -name "SourceMods"`.
+
+We will work from within the case directory, so run `cd ${CASE_DIR}`.
+The way that source code modifications work in CAM is that if you take a fortran source file
+(these end in the suffix `.f90` or `.f`) and copy it to `${CASE_DIR}/SourceMods/src.cam/` and
+run `./case.build` to rebuild the case, then any modifications made to the source file
+will be included in the executable for your case.
+
+We'll work with the concrete example of the source file `ic_baro_dry_jw06.F90` 
+which defines the initial conditions for the test case that we're running.
