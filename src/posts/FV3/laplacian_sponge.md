@@ -102,3 +102,8 @@ Evidence that $$\nabla^2$$ sponge layer damping is already implemented?
 </details>
 
 It appears that horizontal second-order operators are handled within the call to the explicit `d_sw` shallow water subroutine. Therefore there are flags so that the damping coefficients are set to appropriate values in the sponge levels.
+
+## designing an ideal test case to ensure that this implementation is behaving reasonably.
+
+Use the hydrostatic staniforth white test case? Bring that over, at least.
+
