@@ -107,3 +107,5 @@ It appears that horizontal second-order operators are handled within the call to
 
 Use the hydrostatic staniforth white test case? Bring that over, at least.
 
+Use the files I modified for the class in the following way:
+
