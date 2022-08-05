@@ -109,3 +109,17 @@ Use the hydrostatic staniforth white test case? Bring that over, at least.
 
 Use the files I modified for the class in the following way:
 
+
+## Note from 08/06/22
+Now that I've looked in the source code in JT's new FV3 dycore branch, it appears that he's already
+added namelist variables that enable `$$ \nabla^2 $$` sponge-layer diffusion in the top two layers.
+The default namelist configuration disables the conversion of dissipated energy from Rayleigh friction to thermal energy,
+This is controlled by the namelist variable `fv3_d_con`.
+
+My task now is to benchmark the performance of these two diffusion methods .
+
+
+
+## Comparing Rayleigh friction when `fv3_d_con = 1`
+
+
