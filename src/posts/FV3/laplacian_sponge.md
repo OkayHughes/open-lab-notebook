@@ -123,3 +123,10 @@ My task now is to benchmark the performance of these two diffusion methods .
 ## Comparing Rayleigh friction when `fv3_d_con = 1`
 
 
+
+<div  style="display:flex;flex-direction:row; justify-content:center;width:100%">
+  <img class="medium" src="https://open-lab-notebook-assets.glitch.me/assets/fv3_diffusion/T_DAY_2_DEFAULT_RAYLEIGH.png">
+  <img class="medium" src="https://open-lab-notebook-assets.glitch.me/assets/fv3_diffusion/T_DAY_2_NO_RAYLEIGH.png">
+</div>
+
+
