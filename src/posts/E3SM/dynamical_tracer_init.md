@@ -74,3 +74,7 @@ Look for where `cnst_add` is called
 Idea: create routine which initializes tracer fields and
 takes as input the index number of the relevant tracers.
 What's left to do: ensure that PCNST is set correctly and cnst_name is valid.
+
+
+in `cam/src/dynamics/se/stepon.F90` we have the line
+`call addfld('DYN_T'    ,(/ 'lev' /), 'A', 'K',    'Temperature (dyn grid)', gridname='GLL')`
