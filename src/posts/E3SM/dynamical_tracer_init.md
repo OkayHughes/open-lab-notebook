@@ -45,7 +45,23 @@ in `src/theta-l/share/prim_advection_mod.f90` we find
 
 ## breadcrumb:
 * Figure out where the tracer length of `Q` is set!
-* `qsize` in `dimensions_mod` governs loops that iterate over num of tracers.
+* `qsize` or `qsize_d` in `dimensions_mod` governs loops that iterate over num of tracers.
+* complicating factor: `pcnst`?
+
+
+### `qsize`
+
+### `qsize_d`
+
+### `pcnst`
+Assigned to `qsize_d` if the preprocessor variable `CAM` is true. 
 
 
 
+## Breadcrumb outcome:
+`pcnst` is the key in E3SM runs, I think. Should be set
+at build time in cime infrastructure?
+In `constituents.F90` it is set to `PCNST` 
+
+## Brief deviation?
+Let's look at the HOMME output tendencies. 
