@@ -66,3 +66,9 @@ In `constituents.F90` it is set to `PCNST`
 ## Brief deviation?
 Let's look at the HOMME output tendencies. 
 Look in eam/src/dynamics/se/restart_dynamics.F90
+
+`cnst_name` tells restart file which tracer is which.:q
+
+Look for where `cnst_add` is called
+
+Idea: figure out where 
