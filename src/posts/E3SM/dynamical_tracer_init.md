@@ -43,6 +43,9 @@ in `src/theta-l/share/prim_advection_mod.f90` we find
 </pre></div>
 </pre>
 
-Figure out where the tracer length of `Q` is set!
+## breadcrumb:
+* Figure out where the tracer length of `Q` is set!
+* `qsize` in `dimensions_mod` governs loops that iterate over num of tracers.
+
 
 
