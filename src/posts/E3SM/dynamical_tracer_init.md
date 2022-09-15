@@ -67,8 +67,10 @@ In `constituents.F90` it is set to `PCNST`
 Let's look at the HOMME output tendencies. 
 Look in eam/src/dynamics/se/restart_dynamics.F90
 
-`cnst_name` tells restart file which tracer is which.:q
+`cnst_name` tells restart file which tracer is which.
 
 Look for where `cnst_add` is called
 
-Idea: figure out where 
+Idea: create routine which initializes tracer fields and
+takes as input the index number of the relevant tracers.
+What's left to do: ensure that PCNST is set correctly and 
