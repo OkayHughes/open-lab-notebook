@@ -78,3 +78,5 @@ What's left to do: ensure that PCNST is set correctly and cnst_name is valid.
 
 in `cam/src/dynamics/se/stepon.F90` we have the line
 `call addfld('DYN_T'    ,(/ 'lev' /), 'A', 'K',    'Temperature (dyn grid)', gridname='GLL')`
+
+This is where things that live on the GLL grid are declared.
