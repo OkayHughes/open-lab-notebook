@@ -30,10 +30,15 @@ design inner method assuming `$$ m \geq n$$`
 
 Divide horizontal stripes of matrix among processors. 
 
-That is, assign `$$\lfloor \frac{m}{p} \rfloor $$` to each of the `p` processors. 
+That is, assign `$$\lfloor \frac{m}{p} \rfloor $$` to each of the `$$p$$` processors. 
+Because we are designing this algorithm for `$$p < \frac{\min(m', n')}{10} = \frac{1}{10}n $$` processors,
+we therefore know that `$$ \frac{m}{p} \geq \frac{n}{p} > 10.$$` 
+
+
 As an example, if we have 1000 rows and 16 processors, then 
 we get `$$ \frac{1000}{16}= 62.5.$$` If we assign 62 rows to 
-each processor then there are 8 rows left over. Therefore 
+each processor then there are 8 rows left over. We know automatically that
+the number of leftover rows is less than or equal to the total number of blocks.
 
 This informs the following method:
 
