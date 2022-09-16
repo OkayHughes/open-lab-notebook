@@ -80,3 +80,4 @@ in `cam/src/dynamics/se/stepon.F90` we have the line
 `call addfld('DYN_T'    ,(/ 'lev' /), 'A', 'K',    'Temperature (dyn grid)', gridname='GLL')`
 
 This is where things that live on the GLL grid are declared.
+`prim_init2`
