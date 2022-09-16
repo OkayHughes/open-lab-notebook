@@ -29,3 +29,16 @@ design inner method assuming `$$ m \geq n$$`
 
 
 Divide horizontal stripes of matrix among processors. 
+
+That is, assign `$$\lfloor \frac{m}{p} \rfloor $$` to each of the `p` processors. 
+As an example, if we have 1000 rows and 16 processors, then 
+we get `$$ \frac{1000}{16}= 62.5.$$` If we assign 62 rows to 
+each processor then there are 8 rows left over. Therefore 
+
+This informs the following method:
+
+The number of excess rows is calculated by `$$m - p\lfloor \frac{m}{p} \rfloor$$`
+
+
+This method will behave badly if `$$m$$` is `$$ \mathcal{O}(p) $$` but that's not the case
+we're designing for. 
