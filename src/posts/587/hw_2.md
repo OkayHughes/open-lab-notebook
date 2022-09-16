@@ -86,7 +86,11 @@ This informs the following method of calculating responsibility of a row:
 Add if/else conditionals to handle lack of ghost entries at top and bottom of matrix.
 Namely,
 ```
+
 if my_rank == 0:
-  starter_idx = np.array(end_idx-start_idx + 1, NCOLUMNS)
+  iteration_start_values = np.array(end_idx-start_idx + 1, NCOLUMNS)
+elif my_rank == MPI_SIZE-1:
+  iteration_start_values = np.array(end_idx-start_idx + 1, NCOLUMNS)
+
   
 ```
