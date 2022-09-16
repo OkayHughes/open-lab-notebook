@@ -42,7 +42,6 @@ the number of leftover rows is less than or equal to the total number of blocks.
 
 This informs the following method of calculating responsibility of a row:
 ```
-start_idx = 0
 end_idx = 0
 base_rows_per_block = np.floor(NROWS/NPROCS)
 remainder = NROWS - base_rows_per_block * NPROCS
@@ -52,7 +51,7 @@ for rank_idx in range(my_rank):
     end_idx += base_rows_per_block+1
     remainder -= 1
   else:
-    
+    end_idx += base_rows_per_block
   
 if remainder > 0:
   raise ValueError("Remainder after division among processors is nonzero!")
