@@ -87,10 +87,19 @@ Add if/else conditionals to handle lack of ghost entries at top and bottom of ma
 Namely,
 ```
 
-if my_rank == 0:
+if my_rank == 0 :
   iteration_start_values = np.array(end_idx-start_idx + 1, NCOLUMNS)
+  start_assignment_idx = 0
 elif my_rank == MPI_SIZE-1:
   iteration_start_values = np.array(end_idx-start_idx + 1, NCOLUMNS)
-
+  start_assignment_idx = 1
+else:
+  iteration_start_values = np.array(end_idx-start_idx + 2, NCOLUMNS)
+  start_assignment_idx = 1
+end_assignment_idx = start_assignment_idx + burden
   
 ```
+
+Calculate initialization for my assigned rows:
+
+
