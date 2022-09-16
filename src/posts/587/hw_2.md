@@ -18,3 +18,14 @@ Main loop:
   Communicate ghost cell values
   Calculate updated values
   
+  
+  
+## First task: divide the domain
+We want to be able to divide an `$$m\times n$$` matrix among
+`$$p$$` processors, with minimal assumptions about divisibility.
+
+Add outer calling routine which takes arbitrary `$$m', n'$$` and 
+design inner method assuming `$$ m \geq n$$`
+
+
+Divide horizontal stripes of matrix among processors. 
