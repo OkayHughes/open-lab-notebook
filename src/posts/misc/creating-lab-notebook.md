@@ -29,7 +29,8 @@ into the top of the file. (make )
 1. Edit the `about.md`, `index.md`, and `posts.md` to set up the main pages for your website.
 1. Markdown is a pretty powerful way of rendering rich text, see e.g. [this tutorial](https://www.writethedocs.org/guide/writing/markdown/)
 
-
+<span class="todo">note: if you use the "remix" button to clone this site, you don't need to 
+do any of the steps below!</span>
 ## Installing navigation
 In order to have some heirarchical navigation, I installed the `eleventy-navigation` plugin. 
 This allows me to have heirarchical categories and to have it autogenerate some navigation for me.
