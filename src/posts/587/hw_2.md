@@ -145,21 +145,39 @@ def is_boundary(row_idx, col_idx):
           ((row_idx == burden-1) and (my_rank == MPI_SIZE-1)) or
           (col_idx == 0) or
           (col_idx == NCOLUMNS-1))
-          
+# This loop is not structured to be friendly for a compiler
+# that wants to vectorize this work. 
 for row_idx in range(burden):
   for column_idx in range(NCOLUMNS):
     if is_boundary(row_idx, column_idx):
       iteration_end_values[row_idx, column_idx] = iteration_start_values[row_idx, column_idx]
     else:
+      # Handle stencil value in top buffer
       if row_idx-1 < 0:
         assert(top_buffer is not None)
         upper = top_buffer[column_idx]
       else:
-        lower = 
-      elif row_idx+1 > burden-1:
+        upper = iteration_start_values[row_idx-1, column_idx]
+      # Handle stencil value in bottom buffer
+      if row_idx+1 > burden-1:
         assert(bottom_buffer is not None)
         lower = bottom_buffer[column_idx]
       else:
+        lower = iteration_start_values[row_idx+1, column_idx]
+      # we assume that this block will only run if col_idx-1 and col_idx+1 are valid
+      # indices for iteration_start_values
+      left = iteration_start_values[row_idx, column_idx-1]
+      right = iteration_start_values[row_idx, column_idx+1]
+      center = iteration_start_values[row_idx, column_idx]
+      kernel_val           = (garbage_func(upper) + 
+                              garbage_func(lower) +
+                              garbage_func(left) +
+                              garbage_func(right) + 
+                              garbage_func(center)) / 5
+      iteration_end_values[row_idx, column_idx] = 
+                              
+
+
         
         
         
