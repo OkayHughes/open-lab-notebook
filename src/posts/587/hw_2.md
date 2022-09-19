@@ -88,7 +88,6 @@ Namely,
 ```
 
 if my_rank == 0 :
-  iteration_start_values = np.array(end_idx-start_idx + 1, NCOLUMNS)
   start_assignment_idx = 0
 elif my_rank == MPI_SIZE-1:
   iteration_start_values = np.array(end_idx-start_idx + 1, NCOLUMNS)
@@ -97,9 +96,18 @@ else:
   iteration_start_values = np.array(end_idx-start_idx + 2, NCOLUMNS)
   start_assignment_idx = 1
 end_assignment_idx = start_assignment_idx + burden
+
+iteration_start_values = np.array(burden, NCOLUMNS)
+
+iteration_end_values = np.array(burden, NCOLUMNS)
   
 ```
 
 Calculate initialization for my assigned rows:
 
+```
+for row_idx in range(start_assignment_idx, end_assignment_idx):
+  for column_idx in range(NCOLUMNS):
+    iteration_start_values = 
 
+```
