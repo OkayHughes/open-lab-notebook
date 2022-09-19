@@ -114,8 +114,7 @@ for row_idx in range(start_assignment_idx, end_assignment_idx):
     
 ```
 
-Assume that before this point we have computed an array `row_to_proc_id`
-where `row_to_proc_id[row_idx] = proc_id_which_computes_row_idx`
+Assume that before this point we have calculated `top_neighbor_proc_idx` and `bottom_neighbor_proc_idx`
 
 main loop code:
 
@@ -123,8 +122,12 @@ main loop code:
 # MPI_BARRIER CALL
 # START TIMER on executive process
 
-if bottom_buffer:
-  MPI_SEND iteration_start_values[0, :] to 
+if my_rank != 0:
+  MPI_SEND iteration_start_values[0, :] to process top_neighbor_proc_idx
+
+
+if my_rank != MPI_SIZE-1:
+  
   
 if top_buffer:
 ```
