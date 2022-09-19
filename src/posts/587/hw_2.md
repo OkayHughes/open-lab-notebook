@@ -127,7 +127,18 @@ if my_rank != 0:
 
 
 if my_rank != MPI_SIZE-1:
+  MPI_SEND iteration_start_values[-1, :] to process bottom_neighbor_proc_idx
   
+
+if my_rank != 0:
+  MPI_RECV from top_neighbor_proc_idx into top_buffer
+  
+
+if my_rank != MPI_SIZE-1:
+  MPI_RECV from bottom_neighbor_proc_idx into bottom_buffer
+
+
+
   
 if top_buffer:
 ```
