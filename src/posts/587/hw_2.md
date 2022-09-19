@@ -115,12 +115,17 @@ for row_idx in range(burden):
 ```
 
 Assume that before this point we have calculated `top_neighbor_proc_idx` and `bottom_neighbor_proc_idx`
+Setup timing infrastructure:
+```
+# MPI_BARRIER CALL
+# START TIMER on executive process
+```
+
 
 main loop code:
 
 ```
 # MPI_BARRIER CALL
-# START TIMER on executive process
 
 if my_rank != 0:
   MPI_SEND iteration_start_values[0, :] to process top_neighbor_proc_idx
@@ -174,16 +179,11 @@ for row_idx in range(burden):
                               garbage_func(left) +
                               garbage_func(right) + 
                               garbage_func(center)) / 5
-      iteration_end_values[row_idx, column_idx] = 
-                              
-
-
-        
-        
-        
-    
-
+      iteration_end_values[row_idx, column_idx] = np.max(-100, np.min(kernel_val, 100))
+iteration_start_values = iteration_end_values
 ```
+
+Run this 10 times in a loop. 
 
 
 
