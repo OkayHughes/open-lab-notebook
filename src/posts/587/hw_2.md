@@ -128,7 +128,11 @@ iteration_end_values = iteration_start_values
 
 def get_start_end_row_idx(processor_id):
   if processor_id == 0:
-    return 
+    return (2, burden)
+  elif processor_id == MPI_SIZE-1:
+    return (1, burden-1)
+  else:
+    return (1, burden)
 
 for row_idx in range(burden):
   for column_idx in range(NCOLUMNS):
@@ -138,11 +142,11 @@ for row_idx in range(burden):
 # MPI_BARRIER CALL
 
 if my_rank != 0:
-  MPI_SEND iteration_start_values[0, :] to process top_neighbor_proc_idx
+  MPI_SEND iteration_start_values[1, :] to process top_neighbor_proc_idx
 
 
 if my_rank != MPI_SIZE-1:
-  MPI_SEND iteration_start_values[-1, :] to process bottom_neighbor_proc_idx
+  MPI_SEND iteration_start_values[-2, :] to process bottom_neighbor_proc_idx
   
 
 if my_rank != 0:
@@ -157,11 +161,16 @@ if my_rank != MPI_SIZE-1:
 
 # IF DEBUG, MPI_BARRIER_CALL
           
+row_start_idx, row_end_idx = get_start_end_row(my_rank)
 
-iteration_end_values = iteration_start_values
 
-iteration_end_values[1:-1, 1:-1] = 
-iteration_end_values = np.max(-100, np.min(iteration_end_values, 100))
+iteration_end_values[row_start_idx:row_end_idx, 1:-1] = (
+iteration_start_values[row_start_idx-1:row_end_idx-1,1:-1] +
+iteration_start_values[row_start_idx+1:row_end_idx+1,1:-1] +
+iteration_start_values[row_start_idx:row_end_idx,0:-2] +
+iteration_start_values[row_start_idx:row_end_idx,2:] +
+iteration_start_values[row_start_idx:row_end_idx,1:-1])/5
+iteration_end_values[row_start_idx:row_end_idx, 1:-1] = np.max(-100, np.min(iteration_end_values[row_start_idx:row_end_idx, 1:-1], 100))
 iteration_start_values = iteration_end_values
 ```
 
