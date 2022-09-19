@@ -88,13 +88,15 @@ Namely,
 ```
 
 if my_rank == 0 :
-  start_assignment_idx = 0
+  bottom_buffer = np.array(NCOLUMNS)
+  top_buffer = None
 elif my_rank == MPI_SIZE-1:
-  iteration_start_values = np.array(end_idx-start_idx + 1, NCOLUMNS)
-  start_assignment_idx = 1
+  top_buffer = np.array(NCOLUMNS)
+  bottom_buffer = None
 else:
-  iteration_start_values = np.array(end_idx-start_idx + 2, NCOLUMNS)
-  start_assignment_idx = 1
+  top_buffer = np.array(NCOLUMNS)
+  bottom_buffer = np.array(NCOLUMNS)
+
 end_assignment_idx = start_assignment_idx + burden
 
 iteration_start_values = np.array(burden, NCOLUMNS)
@@ -108,6 +110,21 @@ Calculate initialization for my assigned rows:
 ```
 for row_idx in range(start_assignment_idx, end_assignment_idx):
   for column_idx in range(NCOLUMNS):
-    iteration_start_values = 
+    iteration_start_values[row_idx, column_idx] = initialize(row_idx, column_idx)
+    
+```
 
+Assume that before this point we have computed an array `row_to_proc_id`
+where `row_to_proc_id[row_idx] = proc_id_which_computes_row_idx`
+
+main loop code:
+
+```
+# MPI_BARRIER CALL
+# START TIMER on executive process
+
+if bottom_buffer:
+  MPI_SEND iteration_start_values[0, :] to 
+  
+if top_buffer:
 ```
