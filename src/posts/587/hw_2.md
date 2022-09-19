@@ -125,6 +125,34 @@ Setup timing infrastructure:
 main loop code:
 
 ```
+
+for row_idx in range(burden):
+  for column_idx in range(NCOLUMNS):
+    if not is_boundary(row_idx, column_idx):
+    
+      # Handle stencil value in top buffer
+      if row_idx-1 < 0:
+        assert(top_buffer is not None)
+        upper = top_buffer[column_idx]
+      else:
+        upper = iteration_start_values[row_idx-1, column_idx]
+      # Handle stencil value in bottom buffer
+      if row_idx+1 > burden-1:
+        assert(bottom_buffer is not None)
+        lower = bottom_buffer[column_idx]
+      else:
+        lower = iteration_start_values[row_idx+1, column_idx]
+      # we assume that this block will only run if col_idx-1 and col_idx+1 are valid
+      # indices for iteration_start_values
+      left = iteration_start_values[row_idx, column_idx-1]
+      right = iteration_start_values[row_idx, column_idx+1]
+      center = iteration_start_values[row_idx, column_idx]
+      kernel_val           = (garbage_func(upper) + 
+                              garbage_func(lower) +
+                              garbage_func(left) +
+                              garbage_func(right) + 
+                              garbage_func(center)) / 5
+      iteration_end_values[row_idx, column_idx] = np.max(-100, np.min(kernel_val, 100))
 # MPI_BARRIER CALL
 
 if my_rank != 0:
