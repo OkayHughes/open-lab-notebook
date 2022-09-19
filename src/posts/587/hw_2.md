@@ -108,7 +108,7 @@ iteration_end_values = np.array(burden, NCOLUMNS)
 Calculate initialization for my assigned rows:
 
 ```
-for row_idx in range(start_assignment_idx, end_assignment_idx):
+for row_idx in range(burden):
   for column_idx in range(NCOLUMNS):
     iteration_start_values[row_idx, column_idx] = initialize(row_idx, column_idx)
     
@@ -138,7 +138,34 @@ if my_rank != MPI_SIZE-1:
   MPI_RECV from bottom_neighbor_proc_idx into bottom_buffer
 
 
+# IF DEBUG, MPI_BARRIER_CALL
 
-  
-if top_buffer:
+def is_boundary(row_idx, col_idx):
+  return (((row_idx == 0) and (my_rank == 0)) or
+          ((row_idx == burden-1) and (my_rank == MPI_SIZE-1)) or
+          (col_idx == 0) or
+          (col_idx == NCOLUMNS-1))
+          
+for row_idx in range(burden):
+  for column_idx in range(NCOLUMNS):
+    if is_boundary(row_idx, column_idx):
+      iteration_end_values[row_idx, column_idx] = iteration_start_values[row_idx, column_idx]
+    else:
+      if row_idx-1 < 0:
+        assert(top_buffer is not None)
+        upper = top_buffer[column_idx]
+      else:
+        lower = 
+      elif row_idx+1 > burden-1:
+        assert(bottom_buffer is not None)
+        lower = bottom_buffer[column_idx]
+      else:
+        
+        
+        
+    
+
 ```
+
+
+
