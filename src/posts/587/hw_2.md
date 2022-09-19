@@ -111,7 +111,6 @@ Calculate initialization for my assigned rows:
 for row_idx in range(burden):
   for column_idx in range(NCOLUMNS):
     iteration_start_values[row_idx+1, column_idx] = initialize(row_idx, column_idx)
-    
 ```
 
 Assume that before this point we have calculated `top_neighbor_proc_idx` and `bottom_neighbor_proc_idx`
@@ -125,16 +124,14 @@ Setup timing infrastructure:
 main loop code:
 
 ```
+iteration_end_values = iteration_start_values
 
-def is_boundary(row_idx, col_idx):
-  return (((row_idx == 0) and (my_rank == 0)) or
-          ((row_idx == burden-1) and (my_rank == MPI_SIZE-1)) or
-          (col_idx == 0) or
-          (col_idx == NCOLUMNS-1))
+def get_start_end_row_idx(processor_id):
+  if processor_id == 0:
+    return 
 
 for row_idx in range(burden):
   for column_idx in range(NCOLUMNS):
-    if not is_boundary(row_idx, column_idx):
       iteration_start_values[row_idx+1, column_idx] = garbage_func(iteration_start_values[row_idx+1, column_idx])
       
 
@@ -150,46 +147,20 @@ if my_rank != MPI_SIZE-1:
 
 if my_rank != 0:
   MPI_RECV from top_neighbor_proc_idx into top_buffer
-  
+  iteration_start_values[0, :] = top_buffer
   
 
 if my_rank != MPI_SIZE-1:
   MPI_RECV from bottom_neighbor_proc_idx into bottom_buffer
+  iteration_start_values[-1, :] = bottom_buffer
 
 
 # IF DEBUG, MPI_BARRIER_CALL
           
 
+iteration_end_values = iteration_start_values
 
-# This loop is not structured to be friendly for a compiler
-# that wants to vectorize this work. 
-for row_idx in range(burden):
-  for column_idx in range(NCOLUMNS):
-    if is_boundary(row_idx, column_idx):
-      iteration_end_values[row_idx, column_idx] = iteration_start_values[row_idx, column_idx]
-    else:
-      # Handle stencil value in top buffer
-      if row_idx-1 < 0:
-        assert(top_buffer is not None)
-        upper = top_buffer[column_idx]
-      else:
-        upper = iteration_start_values[row_idx-1, column_idx]
-      # Handle stencil value in bottom buffer
-      if row_idx+1 > burden-1:
-        assert(bottom_buffer is not None)
-        lower = bottom_buffer[column_idx]
-      else:
-        lower = iteration_start_values[row_idx+1, column_idx]
-      # we assume that this block will only run if col_idx-1 and col_idx+1 are valid
-      # indices for iteration_start_values
-      left = iteration_start_values[row_idx, column_idx-1]
-      right = iteration_start_values[row_idx, column_idx+1]
-      center = iteration_start_values[row_idx, column_idx]
-      kernel_val           = (garbage_func(upper) + 
-                              garbage_func(lower) +
-                              garbage_func(left) +
-                              garbage_func(right) + 
-                              garbage_func(center)) / 5
+iteration_end_values[1:-1, 1:-1] = 
 iteration_end_values = np.max(-100, np.min(iteration_end_values, 100))
 iteration_start_values = iteration_end_values
 ```
