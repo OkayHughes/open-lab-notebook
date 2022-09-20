@@ -132,7 +132,9 @@ Setup timing infrastructure:
 main loop code:
 
 ```
-iteration_end_values = iteration_start_values
+for row_idx, column_idx in get_boundary_indices:
+  iteration_end_values[row_idx, column_idx] = iteration_start_values[row_idx, column_idx]
+  
 
 def get_start_end_row_idx(processor_id):
   if processor_id == 0:
