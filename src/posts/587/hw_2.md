@@ -86,6 +86,11 @@ This informs the following method of calculating responsibility of a row:
 Add if/else conditionals to handle lack of ghost entries at top and bottom of matrix.
 Namely,
 ```
+vertical_tiles = NPROCS
+lateral_tiles = 1
+
+
+
 
 if my_rank == 0 :
   bottom_buffer = np.array(NCOLUMNS)
@@ -96,6 +101,7 @@ elif my_rank == MPI_SIZE-1:
 else:
   top_buffer = np.array(NCOLUMNS)
   bottom_buffer = np.array(NCOLUMNS)
+
 
 end_assignment_idx = start_assignment_idx + burden
 
