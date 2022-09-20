@@ -89,6 +89,11 @@ Namely,
 vertical_tiles = NPROCS
 lateral_tiles = 1
 
+assert(lateral_tiles * vertical_tiles == NPROCS)
+
+def get_row_col_idx(proc_id):
+  
+
 
 
 
