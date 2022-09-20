@@ -92,36 +92,33 @@ lateral_tiles = 1
 assert(lateral_tiles * vertical_tiles == NPROCS)
 
 def get_row_col_idx(proc_id):
+  row_idx = floor(proc_id/lateral_tiles)
+  col_idx = proc_id - row_idx * lateral_tiles
+  return (row_idx, col_idx)
   
 
 
 
-
-if my_rank == 0 :
-  bottom_buffer = np.array(NCOLUMNS)
-  top_buffer = None
-elif my_rank == MPI_SIZE-1:
-  top_buffer = np.array(NCOLUMNS)
-  bottom_buffer = None
-else:
-  top_buffer = np.array(NCOLUMNS)
-  bottom_buffer = np.array(NCOLUMNS)
+row_idx, column_idx = get_row_col_idx(my_rank)
 
 
-end_assignment_idx = start_assignment_idx + burden
 
-iteration_start_values = np.array(burden+2, NCOLUMNS)
 
-iteration_end_values = np.array(burden+2, NCOLUMNS)
-  
+row_end_assignment_idx = row_start_assignment_idx + row_burden
+column_end_assignment_idx = column_start_assignment_idx + column_burden
+
+iteration_start_values = np.array(row_burden+2, column_burden+2)
+
+iteration_end_values = np.array(row_burden+2, column_burden+2)
+
 ```
 
 Calculate initialization for my assigned rows:
 
 ```
-for row_idx in range(burden):
-  for column_idx in range(NCOLUMNS):
-    iteration_start_values[row_idx+1, column_idx] = initialize(row_idx, column_idx)
+for row_idx in range(row_start_assignment_idx, row_end_assignment_idx):
+  for column_idx in range(column_start_assignment_idx, column_end_assignment_idx):
+    iteration_start_values[row_idx+1, column_idx+1] = initialize(row_idx, column_idx)
 ```
 
 Assume that before this point we have calculated `top_neighbor_proc_idx` and `bottom_neighbor_proc_idx`
