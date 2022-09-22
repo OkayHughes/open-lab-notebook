@@ -27,7 +27,7 @@ For the purposes of most of the systems that I want to work with, we can assume 
 takes the form of `$$\int F(\rho(x))\intd \mu(x)$$` for some 
 `$$F \in \mathrm{C}^1(\mathbb{R}).$$` 
 Let us check that this is Fréchet differentiable. 
-That is for `$$h \in X $$`
+That is for `$$h \in L^2([0, 1]) $$`
 `$$$ 0 = \lim_{\varepsilon \to 0} \frac{\left|\mathscr{F}(\rho + \varepsilon h) - \mathscr{F}(\rho)  - \mathscr{F}'_{\rho}(\varepsilon h)\right|}{\|\varepsilon h\|} $$$`
 We can make a pretty good guess that 
 `$$$\mathscr{F}'_\rho(h) = \int F'(\rho(x))h(x) \intd{x} $$$`
@@ -35,9 +35,9 @@ We can make a pretty good guess that
 but this should be verified). We then find
 `$$$\lim_{\varepsilon \to 0} \frac{\left|\mathscr{F}(\rho + \varepsilon h) - \mathscr{F}(\rho)  - \mathscr{F}'_{\rho}(\varepsilon h)\right|}{\|\varepsilon h\|} = \lim_{\varepsilon \to 0} \frac{\left| \int F(\rho(x) + \varepsilon h(x)) -  F(\rho(x))  - \varepsilon F'(\rho(x)) h(x) \intd{x} \right|}{\|\varepsilon h\|}$$$`
 A precise form of Taylor's theorem states that for any fixed `$$x$$`, we can find some `$$h_{\rho(x)}(y)$$` such that `$$\lim_{y \to \rho(x)} h_{\rho(x)}(y) = 0$$` and 
-`$$$ F(\rho(x) + \varepsilon h(x)) = F(\rho(x)) + \varepsilon h(x)F'(\rho(x)) +  \int_{\rho(x)}^{\rho(x) + \varepsilon h(x)} F''(x') (x'-\rho(x) ) \intd{x'} $$$`
+`$$$ F(\rho(x) + \varepsilon h(x)) = F(\rho(x)) + \varepsilon h(x)F'(\rho(x)) +  \int_{0}^{\varepsilon h(x)} F''(\rho(x) + t)t \intd{t} $$$`
 Assume that `$$|F''|$$` can be essentially bounded by some `$$C,$$` then we have 
-`$$$ |R(x)| = \left|  \int_{\rho(x)}^{\rho(x) + \varepsilon h(x)} F''(x') (x'-\rho(x) ) \intd{x'}\right| \intd{x} \leq  \int_{\rho(x)}^{\rho(x) + \varepsilon h(x)} \left|F''(x') (x'-\rho(x) ) \intd{x'}\right| \intd{x} \leq  \int_{\rho(x)}^{\rho(x) + \varepsilon h(x)} \left||C| (x'-\rho(x) ) \intd{x'}\right| \intd{x} = C(\varepsilon h(x))^2$$$`
+`$$$ |R(x)| = \left|  \int_{0}^{\varepsilon h(x)} F''(\rho(x) + t)t \intd{x'}\right| \intd{x} \leq  \int_{0}^{\varepsilon h(x)} \left|F''(\rho(x) + t)t \right| \intd{x'}  \leq  \int_{0}^{\varepsilon h(x)} \left|Ct \right| \intd{x} = \frac{C}{2}(\varepsilon h(x))^2$$$`
 This meabs 
 <table class="eqn">
   <tr>
@@ -46,6 +46,10 @@ This meabs
   <tr>
     <td></td><td>$$= \lim_{\varepsilon \to 0} \frac{\left| \int  R(x)  \intd{x} \right|}{\|\varepsilon h\|}$$</td>
   </tr>
+  <tr>
+    <td></td><td>$$\leq \lim_{\varepsilon \to 0} \frac{\left| \int R(x)  \intd{x} \right|}{\|\varepsilon h\|}$$</td>
+  </tr>
+
 </table>
 
 Then `$$\mathscr{D}_\rho(\delta x)$$` is a linear functional, which we can represent by integration against some measure `$$Q\intd \mu$$` for `$$Q \in L^2([0, 1]).$$` Because of our special choice of functional, this should be guaranteed to be absolutely continuous w.r.t. the lebesgue measure. 
