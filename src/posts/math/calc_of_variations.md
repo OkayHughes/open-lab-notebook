@@ -19,7 +19,8 @@ Assume the necessary quantities exist to define the following (this appears to b
 This gives us a feel for the regularity that we need `$$\mathscr{F}$$` to have. One weird thing about the Gateaux derivative is that
 it is so general that it can fail to even be linear. Thus, the better requirement is to assume Fréchet differentiability of `$$\mathscr{F}$$` at `$$\rho_0$$`.
 In its most general formulation, this posits that `$$\mathscr{F}$$` is a functional on a Locally Convex Metrizable Topological Vector Space, which is complete (e.g. w.r.t. the metric).
-A few notes on this: the spaces `$$ \mathrm{C}^k(M) $$` works for smooth manifolds with 
+A few notes on this: the spaces `$$ \mathrm{C}^k(M) $$` works for smooth manifolds under the countable family of 
+seminorms given by `$$ \| f \|_{k, n} = \sup \{ |f^k| \mid x \in [-n, n] \} $$` and holds even for `$$k = \infty$$`. 
 
 
 For the purposes of most of the systems that I want to work with, we can assume that `$$\mathscr{F}$$` 
