@@ -68,7 +68,16 @@ This demonstrates that, indeed,
 
 
 However!! In this process we've determined that, in fact, 
-`$$$\mathscr{D}_\rho(h)  = $$$`
+`$$$\mathscr{D}_\rho(h) = \mathscr{F}'_\rho(h) = \int F'(\rho(x))h(x) \intd{x}.$$$`
+
+Now! Here comes the fun part. This linear functional `$$\mathscr{D}_\rho(h)$$` can be represented by
+integration against the measure `$$F'(\rho(x)) \intd{\mu}.$$` This functional can be used to calculate the directional
+functional derivative in some "direction" `$$h(x)$$`. However, it is _extremely_ common (especially in numerical applications) to
+wish to access a quantity `$$\fder{\mathscr{F}}{\rho} $$` which can be evaluated pointwise.
+Here's the really clever thing, and the point of why I started writing this little article in the first place:
+for any Fréchet-differentiable functional `$$\mathscr{G},$$` we can do this process to find some measure `$$\nu$$` 
+against which an `$$h$$` can be integrated to calculate a directional functional derivative. If we want to find `$$ \fder{\mathscr{G}}{\rho} $$`
+then we merely need to calculate the Radon-Nikodym derivative `$$\der{\nu}{\mu}$$`
 
 
 Then `$$\mathscr{D}_\rho(\delta x)$$` is a linear functional, which we can represent by integration against some measure `$$Q\intd \mu$$` for `$$Q \in L^2([0, 1]).$$` Because of our special choice of functional, this should be guaranteed to be absolutely continuous w.r.t. the lebesgue measure. 
