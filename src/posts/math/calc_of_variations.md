@@ -82,4 +82,6 @@ that determine whether `$$\nu \ll \mu $$`).
 Let us examine this concretely for our example `$$\mathscr{F}$$`. The Radon-Nikodym derivative is some Lebesgue integrable function
 `$$\der{\nu}{\mu}$$` which satisfies `$$ \nu(A) = \int_A \der{\nu}{\mu}\intd{\mu} $$` for all measurable sets `$$A$$`. Well, in the case
 of our `$$\mathscr{F}$$` we are calculating the R-N derivative with respect to the underlying measure `$$\mu $$` corresponding to `$$L^2([0, 1])$$`
-and so we get `$$$\fder{\mathscr{F}}{\mu}(\rho_0; x) = \der{\nu_{\rho_0}}{\mu}( x) = F'(\rho_0(x)).$$$`
+and so we get `$$$\fder{\mathscr{F}}{\rho}(\rho_0; x) = \der{\nu_{\rho_0}}{\mu}( x) = F'(\rho_0(x)).$$$`
+
+## Next up: product and chain rules!
