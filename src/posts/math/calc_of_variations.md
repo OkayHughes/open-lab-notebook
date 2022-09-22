@@ -36,7 +36,17 @@ but this should be verified). We then find
 `$$$\lim_{\varepsilon \to 0} \frac{\left|\mathscr{F}(\rho + \varepsilon h) - \mathscr{F}(\rho)  - \mathscr{F}'_{\rho}(\varepsilon h)\right|}{\|\varepsilon h\|} = \lim_{\varepsilon \to 0} \frac{\left| \int F(\rho(x) + \varepsilon h(x)) -  F(\rho(x))  - \varepsilon F'(\rho(x)) h(x) \intd{x} \right|}{\|\varepsilon h\|}$$$`
 A precise form of Taylor's theorem states that for any fixed `$$x$$`, we can find some `$$h_{\rho(x)}(y)$$` such that `$$\lim_{y \to \rho(x)} h_{\rho(x)}(y) = 0$$` and 
 `$$$ F(\rho(x) + \varepsilon h(x)) = F(\rho(x)) + \varepsilon h(x)F'(\rho(x)) +  \int_{\rho(x)}^{\rho(x) + \varepsilon h(x)} F''(x') (x'-\rho(x) ) \intd{x'} $$$`
-Assume that `$$|F''|$$` can be essentially bounded by some `$$C,$$` 
+Assume that `$$|F''|$$` can be essentially bounded by some `$$C,$$` then we have 
+`$$$ |R(x)| = \left|  \int_{\rho(x)}^{\rho(x) + \varepsilon h(x)} F''(x') (x'-\rho(x) ) \intd{x'}\right| \intd{x} \leq  \int_{\rho(x)}^{\rho(x) + \varepsilon h(x)} \left|F''(x') (x'-\rho(x) ) \intd{x'}\right| \intd{x} \leq  \int_{\rho(x)}^{\rho(x) + \varepsilon h(x)} \left||C| (x'-\rho(x) ) \intd{x'}\right| \intd{x} = C(\varepsilon h(x))^2$$$`
+This meabs 
+<table class="eqn">
+  <tr>
+    <td>$$\lim_{\varepsilon \to 0} \frac{\left| \int F(\rho(x) + \varepsilon h(x)) -  F(\rho(x))  - \varepsilon F'(\rho(x)) h(x) \intd{x} \right|}{\|\varepsilon h\|}$$</td><td>$$= \lim_{\varepsilon \to 0} \frac{\left| \int F(\rho(x)) + \varepsilon F'(\rho(x))h(x) + R(x) -  F(\rho(x))  - \varepsilon F'(\rho(x)) h(x) \intd{x} \right|}{\|\varepsilon h\|}$$</td>
+  </tr>
+  <tr>
+    <td></td><td>$$= \lim_{\varepsilon \to 0} \frac{\left| \int  R(x)  \intd{x} \right|}{\|\varepsilon h\|}$$</td>
+  </tr>
+</table>
 
 Then `$$\mathscr{D}_\rho(\delta x)$$` is a linear functional, which we can represent by integration against some measure `$$Q\intd \mu$$` for `$$Q \in L^2([0, 1]).$$` Because of our special choice of functional, this should be guaranteed to be absolutely continuous w.r.t. the lebesgue measure. 
 Then the functional derivative `$$\frac{\delta \mathscr{F}}{\delta \rho}$$` is just the R-N derivative of `$$Q\intd \mu.$$` This means that a robust, weak form of functional differentiation gives 
