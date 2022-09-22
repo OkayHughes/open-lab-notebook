@@ -37,8 +37,7 @@ but this should be verified). We then find
 A precise form of Taylor's theorem states that for any fixed `$$x$$`, we can find some `$$h_{\rho(x)}(y)$$` such that `$$\lim_{y \to \rho(x)} h_{\rho(x)}(y) = 0$$` and 
 `$$$ F(\rho(x) + \varepsilon h(x)) = F(\rho(x)) + \varepsilon h(x)F'(\rho(x)) + \varepsilon h(x) h_1(\rho(x) + \varepsilon h(x)) $$$`
 
-Then let `$$h_\varepsilon$$` be constructed so that for fixed `$$ \varepsilon > 0,$$` such that for all `$$x$$`, `$$|h_\varepsilon(\rho(x) + \varepsilon h(x))| < \varepsilon.$$`
-A constructive way to do this is to take a sub-interval `$$[a, b]$$` and divide it at the point `$$\frac{a+b}{2}.$$` Define `$$h_{\varepsilon,1} = `
+Examine the quantity 
 
 Then `$$\mathscr{D}_\rho(\delta x)$$` is a linear functional, which we can represent by integration against some measure `$$Q\intd \mu$$` for `$$Q \in L^2([0, 1]).$$` Because of our special choice of functional, this should be guaranteed to be absolutely continuous w.r.t. the lebesgue measure. 
 Then the functional derivative `$$\frac{\delta \mathscr{F}}{\delta \rho}$$` is just the R-N derivative of `$$Q\intd \mu.$$` This means that a robust, weak form of functional differentiation gives 
