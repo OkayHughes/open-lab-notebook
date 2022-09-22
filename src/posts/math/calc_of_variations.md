@@ -26,16 +26,10 @@ seminorms given by `$$ \| f \|_{k, n} = \sup \{ |f^k| \mid x \in [-n, n] \} $$` 
 For the purposes of most of the systems that I want to work with, we can assume that `$$\mathscr{F}$$` 
 takes the form of `$$\int F(\rho(x))\intd \mu(x)$$` for some 
 `$$F \in \mathrm{C}^1(\mathbb{R}).$$` 
-I should check that these constraints on `$$ F $$` and `$$ \mathscr{F} $$` are sufficient to get linearity of `$$\mathscr{D}_\rho $$`
+Let us check that this is Fréchet differentiable. 
+That is for `$$h \in X $$`
+`$$$ 0 = \lim_{\varepsilon \to 0} \frac{\left|\mathscr{F}(\rho + \varepsilon h) - \mathscr{F}(\rho)  - \mathscr{F}'(\varepsilon h)\right|}{\|\varepsilon h\|} $$$`
 
-<table class="eqn">
-  <tr><td> $$0$$</td><td>$$ = \mathscr{D}_\rho(\delta x_1 + \delta x_2) - \mathscr{D}_\rho(\delta x_1) - \mathscr{D}_\rho(\delta x_2)$$</td>
-  </tr>
-  <td></td><td>$$ = \lim_{\varepsilon \to 0 } \frac{\mathscr{F}(\rho + \varepsilon(\delta x_1 + \delta x_2)) - \mathscr{F}(\rho + \varepsilon \delta x_1) - \mathscr{F}(\rho + \varepsilon\delta x_2)}{\varepsilon}$$</td>
-</table>
-
-Which relies on the behaviour of 
-`$$$ \int F(\rho + \varepsilon (\delta x_1 + \delta x_2)) - F(\rho + \varepsilon (\delta x_1)) - F(\rho + \varepsilon (\delta x_1)) \intd{x}  $$$`
 
 Then `$$\mathscr{D}_\rho(\delta x)$$` is a linear functional, which we can represent by integration against some measure `$$Q\intd \mu$$` for `$$Q \in L^2([0, 1]).$$` Because of our special choice of functional, this should be guaranteed to be absolutely continuous w.r.t. the lebesgue measure. 
 Then the functional derivative `$$\frac{\delta \mathscr{F}}{\delta \rho}$$` is just the R-N derivative of `$$Q\intd \mu.$$` This means that a robust, weak form of functional differentiation gives 
