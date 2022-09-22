@@ -7,7 +7,6 @@ const pluginTOC = require('eleventy-plugin-toc')
 
 
 
-
 /**
 * This is the JavaScript code that determines the config for your Eleventy site
 *
@@ -52,6 +51,14 @@ module.exports = function(eleventyConfig) {
   });
   
   // KaTeX CONFIG:
+  let macros = {};
+  katex.renderToString(`
+  \\newcommand{\\intd}[1]{\\,\\mathrm{d}#1}
+  \\newcommand{\\der}[2]{\\frac{\\mathrm{d} #1}{\\mathrm{d} #2}}
+  \\newcommand{\\pder}[2]{\\frac{\\partial #1}{\\partial #2}}
+  \\newcommand{\\fder}[2]{\\frac{\\delta #1}{\\delta #2}}
+  `, {macros, globalGroup: true});
+
   eleventyConfig.addFilter('latex', content => {
   return content.replace(/\$\$\$(.+?)\$\$\$/g, (_, equation) => {
     const cleanEquation = equation
@@ -59,14 +66,14 @@ module.exports = function(eleventyConfig) {
       .replace(/&gt;/g, '>')
       .replace(/&amp;/g, '&')
 
-    return katex.renderToString(cleanEquation, { throwOnError: true, displayMode: true })
+    return katex.renderToString(cleanEquation, { throwOnError: true, displayMode: true, macros})
   }).replace(/\$\$(.+?)\$\$/g, (_, equation) => {
     const cleanEquation = equation
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
       .replace(/&amp;/g, '>')
 
-    return katex.renderToString(cleanEquation, { throwOnError: true, displayMode: false })
+    return katex.renderToString(cleanEquation, { throwOnError: true, displayMode: false, macros })
   })
   });
   eleventyConfig.addPlugin(linkTo);
