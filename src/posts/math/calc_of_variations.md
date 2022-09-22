@@ -47,10 +47,29 @@ This meabs
     <td></td><td>$$= \lim_{\varepsilon \to 0} \frac{\left| \int  R(x)  \intd{x} \right|}{\|\varepsilon h\|}$$</td>
   </tr>
   <tr>
-    <td></td><td>$$\leq \lim_{\varepsilon \to 0} \frac{\left| \int R(x)  \intd{x} \right|}{\|\varepsilon h\|}$$</td>
+    <td></td><td>$$\leq \lim_{\varepsilon \to 0} \frac{ \int \left| R(x) \right| \intd{x} }{\|\varepsilon h\|}$$</td>
   </tr>
-
+  <tr>
+    <td></td><td>$$\leq \lim_{\varepsilon \to 0} \frac{ \frac{1}{2} C \varepsilon^2 \int h(x)^2 \intd{x} }{\|\varepsilon h\|}$$</td>
+  </tr>
+  <tr>
+    <td></td><td>$$= \lim_{\varepsilon \to 0} \frac{ \frac{1}{2} C  \|\varepsilon h\|_2^2 }{\|\varepsilon h\|}$$</td>
+  </tr>
+  <tr>
+    <td></td><td>$$= \lim_{\varepsilon \to 0} \frac{1}{2} C  \|\varepsilon h\|_2$$</td>
+  </tr>
+  <tr>
+    <td></td><td>$$= 0$$</td>
+  </tr>
 </table>
+
+This demonstrates that, indeed, 
+`$$$\mathscr{F}'_\rho(h) = \int F'(\rho(x))h(x) \intd{x} $$$`
+
+
+However!! In this process we've determined that, in fact, 
+`$$$\mathscr{D}_\rho(h)  = $$$`
+
 
 Then `$$\mathscr{D}_\rho(\delta x)$$` is a linear functional, which we can represent by integration against some measure `$$Q\intd \mu$$` for `$$Q \in L^2([0, 1]).$$` Because of our special choice of functional, this should be guaranteed to be absolutely continuous w.r.t. the lebesgue measure. 
 Then the functional derivative `$$\frac{\delta \mathscr{F}}{\delta \rho}$$` is just the R-N derivative of `$$Q\intd \mu.$$` This means that a robust, weak form of functional differentiation gives 
