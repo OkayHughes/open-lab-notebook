@@ -28,8 +28,13 @@ takes the form of `$$\int F(\rho(x))\intd \mu(x)$$` for some
 `$$F \in \mathrm{C}^1(\mathbb{R}).$$` 
 Let us check that this is Fréchet differentiable. 
 That is for `$$h \in X $$`
-`$$$ 0 = \lim_{\varepsilon \to 0} \frac{\left|\mathscr{F}(\rho + \varepsilon h) - \mathscr{F}(\rho)  - \mathscr{F}'(\varepsilon h)\right|}{\|\varepsilon h\|} $$$`
-
+`$$$ 0 = \lim_{\varepsilon \to 0} \frac{\left|\mathscr{F}(\rho + \varepsilon h) - \mathscr{F}(\rho)  - \mathscr{F}'_{\rho}(\varepsilon h)\right|}{\|\varepsilon h\|} $$$`
+We can make a pretty good guess that 
+`$$$\mathscr{F}'_\rho(h) = \int F'(\rho(x))h(x) \intd{x} $$$`
+in which case we find
+<table class="eqn">
+  <
+</table>
 
 Then `$$\mathscr{D}_\rho(\delta x)$$` is a linear functional, which we can represent by integration against some measure `$$Q\intd \mu$$` for `$$Q \in L^2([0, 1]).$$` Because of our special choice of functional, this should be guaranteed to be absolutely continuous w.r.t. the lebesgue measure. 
 Then the functional derivative `$$\frac{\delta \mathscr{F}}{\delta \rho}$$` is just the R-N derivative of `$$Q\intd \mu.$$` This means that a robust, weak form of functional differentiation gives 
