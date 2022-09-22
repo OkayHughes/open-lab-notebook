@@ -77,8 +77,9 @@ wish to access a quantity `$$\fder{\mathscr{F}}{\rho} $$` which can be evaluated
 Here's the really clever thing, and the point of why I started writing this little article in the first place:
 for any Fréchet-differentiable functional `$$\mathscr{G},$$` we can do this process to find some measure `$$\nu$$` 
 against which an `$$h$$` can be integrated to calculate a directional functional derivative. If we want to find `$$ \fder{\mathscr{G}}{\rho} $$`
-then we merely need to calculate the Radon-Nikodym derivative `$$\der{\nu}{\mu}$$`
-
-
-Then `$$\mathscr{D}_\rho(\delta x)$$` is a linear functional, which we can represent by integration against some measure `$$Q\intd \mu$$` for `$$Q \in L^2([0, 1]).$$` Because of our special choice of functional, this should be guaranteed to be absolutely continuous w.r.t. the lebesgue measure. 
-Then the functional derivative `$$\frac{\delta \mathscr{F}}{\delta \rho}$$` is just the R-N derivative of `$$Q\intd \mu.$$` This means that a robust, weak form of functional differentiation gives 
+then we merely need to calculate the Radon-Nikodym derivative `$$\der{\nu}{\mu}$$` (we omit for the moment the considerations
+that determine whether `$$\nu \ll \mu $$`). 
+Let us examine this concretely for our example `$$\mathscr{F}$$`. The Radon-Nikodym derivative is some Lebesgue integrable function
+`$$\der{\nu}{\mu}$$` which satisfies `$$ \nu(A) = \int_A \der{\nu}{\mu}\intd{\mu} $$` for all measurable sets `$$A$$`. Well, in the case
+of our `$$\mathscr{F}$$` we are calculating the R-N derivative with respect to the underlying measure `$$\mu $$` corresponding to `$$L^2([0, 1])$$`
+and so we get `$$$\fder{\mathscr{F}}{\mu}(\rho_0; x) = \der{\nu_{\rho_0}}{\mu}( x) = F'(\rho_0(x)).$$$`
