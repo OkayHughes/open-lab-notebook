@@ -20,7 +20,7 @@ and
     w(\phi, \lambda, \overline{z}) = -\frac{u}{a\cos(\phi)}\left(2A\left( 1 - \frac{\overline{z}}{z_{\mathrm{top}}} \right) \sum_{i=1}^2 \left(\frac{\lambda - \lambda_i}{\bar{c}^2} \right) \exp\left[-\left(\left(\frac{\phi - \phi_n}{\bar{b}} \right)^6  + \left(\frac{\lambda - \lambda_n}{\bar{c}} \right)^2 \right) \right] \right)
 $$$`
 is `$$ \min(d_n, 2\pi - d_n)$$`
-What we would like is for the resultant quantity to be 
+What we would like is for the resultant quantity to lie between `$$-\pi, \pi.$$`
 
 To convince me that this won't cause derivative problems, define `$$\lambda$$` to be any point which is _not_ 
 one of the problem points at which `$$\min(\ldots)$$` is not differentiable or `$$d_n$$` is discontinuous (this occurs at a finite number of points).
