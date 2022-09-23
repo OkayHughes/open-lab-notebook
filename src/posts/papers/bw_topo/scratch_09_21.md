@@ -21,3 +21,8 @@ and
 $$$`
 is `$$ l_n = \min(d_n, 2\pi - d_n)$$`
 In order to calculate `$$w$$` we must find `$$$ \pder{l_n}{\lambda}  =  \begin{cases} 1 & d_n < \pi  \\ -1  & d_n \geq \pi \end{cases}  $$$`
+
+
+How, then, to calculate the perceived vertical velocity in `$$\eta $$` coordinates?
+
+We start by noting that `$$p = a(\eta)p_0 + b(\eta) p_s $$`
