@@ -19,6 +19,5 @@ and
 `$$$
     w(\phi, \lambda, \overline{z}) = -\frac{u}{a\cos(\phi)}\left(2A\left( 1 - \frac{\overline{z}}{z_{\mathrm{top}}} \right) \sum_{i=1}^2 \left(\frac{\lambda - \lambda_i}{\bar{c}^2} \right) \exp\left[-\left(\left(\frac{\phi - \phi_n}{\bar{b}} \right)^6  + \left(\frac{\lambda - \lambda_n}{\bar{c}} \right)^2 \right) \right] \right)
 $$$`
-is `$$ \min(d_n, 2\pi - d_n)$$`
-
-We make the following definition 
+is `$$ l_n = \min(d_n, 2\pi - d_n)$$`
+In order to calculate `$$w$$` we must find `$$$ \pder{l_n}{\lambda}  =  \begin{cases} 1 & d_n < \pi  \\ -1  & d_n \geq \pi \end{cases}  $$$`
