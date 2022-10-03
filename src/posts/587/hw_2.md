@@ -87,7 +87,6 @@ Add if/else conditionals to handle lack of ghost entries at top and bottom of ma
 Namely,
 ```
 vertical_tiles = NPROCS
-lateral_tiles = 1
 
 assert(lateral_tiles * vertical_tiles == NPROCS)
 
@@ -99,17 +98,16 @@ def get_row_col_idx(proc_id):
 
 
 
-row_idx, column_idx = get_row_col_idx(my_rank)
 
 
 
 
 row_end_assignment_idx = row_start_assignment_idx + row_burden
-column_end_assignment_idx = column_start_assignment_idx + column_burden
+column_end_assignment_idx = NCOLUMNS
 
-iteration_start_values = np.array(row_burden+2, column_burden+2)
+iteration_start_values = np.array(row_burden+2, NCOLUMNS)
 
-iteration_end_values = np.array(row_burden+2, column_burden+2)
+iteration_end_values = np.array(row_burden+2, NCOLUMNS)
 
 ```
 
