@@ -36,4 +36,4 @@ Since DSS is a jacobian-weighted average over all redundant points, and our Eule
 a Jacobian which is just the identity matrix, this means that our DSS procedure is just a sum which must take into account the number of redundant points.
 
 Given that our viscosity has the form `$$\nu(T, S)$$` (in particular, it isn't flow dependent), we get some choice in
-of prognostic equations. For the sake of education, I'm going to try to follow along with [this paper](https://drive.google.com/file/d/1yWxl4rg9gyxKGrzNjT_z_QddZZs5_sCF/view?usp=sharing)
+of prognostic equations. For the sake of education, I'm going to try to follow along with [this paper](https://drive.google.com/file/d/1hJajromVP15F-Ft_9g4fG_P6F2da2IP4/view?usp=sharing)
