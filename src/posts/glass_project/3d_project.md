@@ -37,3 +37,6 @@ a Jacobian which is just the identity matrix, this means that our DSS procedure 
 
 Given that our viscosity has the form `$$\nu(T, S)$$` (in particular, it isn't flow dependent), we get some choice in
 of prognostic equations. For the sake of education, I'm going to try to follow along with [this paper](https://drive.google.com/file/d/1hJajromVP15F-Ft_9g4fG_P6F2da2IP4/view?usp=sharing)
+
+But I think I can basically just use the Navier Stokes equations as is. 
+
