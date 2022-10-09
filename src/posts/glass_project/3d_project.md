@@ -20,4 +20,10 @@ point evaluations of the quantity `$$U$$` on tetrahedron `$$i$$` and vertex `$$k
 to reconstruct `$$U$$` on tetrahedron `$$i$$` and basis function `$$l=0,1,2,3 $$`
 
 ## Design simplifications:
-* 3D 
+* 3D cubical domain.
+* rigid among z and y boundaries, periodic among x boundary.
+* `$$\nu = \nu(T, S) $$` with potentially wildly different stiffnesses depending on both tracer (glass color)
+and temperature values.
+
+
+## 
