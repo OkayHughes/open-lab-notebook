@@ -35,4 +35,5 @@ Righthand side terms are computed within an element, then undergo DSS (direct st
 Since DSS is a jacobian-weighted average over all redundant points, and our Eulerian grid (which is a subset of Euclidean space) has
 a Jacobian which is just the identity matrix, this means that our DSS procedure is just a sum which must take into account the number of redundant points.
 
-Given that our viscosity has the form `$$\nu(T, S)$$` (that is, it isn't flow dependent), 
+Given that our viscosity has the form `$$\nu(T, S)$$` (in particular, it isn't flow dependent), we get some choice in
+of prognostic equations. For the sake of education, I'm going to try to follow along with [this paper](https://drive.google.com/file/d/1yWxl4rg9gyxKGrzNjT_z_QddZZs5_sCF/view?usp=sharing)
