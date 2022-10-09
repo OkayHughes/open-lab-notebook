@@ -21,6 +21,7 @@ In order to keep track of tensors e.g. in point space and spectral space, I like
 * rigid among z and y boundaries, periodic among x boundary.
 * `$$\nu = \nu(T, S) $$` with potentially wildly different stiffnesses depending on both tracer (glass color)
 and temperature values.
+* design for multiple GPUs (i.e. one MPI per GPU. This generalizes well to the cluster that I have)
 
 
 ## Construction and derivatives
@@ -30,3 +31,8 @@ then `$$\partial_{x_i} u $$` is `$$~_{l_1l_2l_3}\mathbf{U}_{L=l_i}~_{lL}\mathbf{
 `$$u(x_1, x_2, x_3) = \sum_{l_1,l_2,l_3=1}^{n_{GLL}} u_{l_1,l_2,l_3} p_{l_1}(\xi_{l_1})p_{l_2}(\xi_{l_2})p_{l_3}(\xi_{l_3}).$$`
 
 
+Righthand side terms are computed within an element, then undergo DSS (direct stiffness summation) which involves intra-element communication. 
+Since DSS is a jacobian-weighted average over all redundant points, and our Eulerian grid (which is a subset of Euclidean space) has
+a Jacobian which is just the identity matrix, this means that our DSS procedure is just a sum which must take into account the number of redundant points.
+
+Given that our viscosity has the form `$$\nu(T, S)$$` (that is, it isn't flow dependent), 
