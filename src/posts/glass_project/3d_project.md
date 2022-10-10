@@ -40,3 +40,8 @@ of prognostic equations. For the sake of education, I'm going to try to follow a
 
 But I think I can basically just use the Navier Stokes equations as is. 
 
+
+## Code:
+
+Create abstract base class for an equation set 
+
