@@ -170,3 +170,13 @@ fy2(i,j) = gridstruct%del6_u(i,j)*(d2(i,j)-d2(i,j-1))
 
 where f(xy)2 seems to represent a flux quantity.
 I.e. `ut, vt` in the code are flux quantities. 
+
+
+It doesn't appear that the preprocessor name `USE_SG` is defined anywhere? I've checked the FV3 github as well as the
+entire CESM codebase to see if it appears in the build infrastructure. Therefore it seems safe to assume that 
+it will be defined to be false?
+
+
+## Synthesizing these breadcrumbs:
+
+Application of 0th order divergence damping involves adding a `$$ $$`
