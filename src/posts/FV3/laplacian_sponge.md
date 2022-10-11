@@ -146,5 +146,9 @@ If we use some vector calculus identities
 
 Assume that `$$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ 0 \end{bmatrix} $$`
 in which case `$$\nabla \cdot \mathbf{v} = \delta $$` and (using cartesian coordiantes for confidence). We assume we're working at a fixed `$$ r$$`,
-and so vertical variation of horizontal wind can be 
-and `$$$ \nabla \times \mathbf{v} = {\displaystyle {\begin{aligned}{\frac {1}{r\sin \theta }}\left({\frac {\partial }{\partial \theta }}\left(v_{\varphi }\sin \theta \right)-{\frac {\partial v_{\theta }}{\partial \varphi }}\right)&{\hat {\mathbf {r} }}\\{}+{\frac {1}{r}}\left({\frac {1}{\sin \theta }}{\frac {\partial v_{r}}{\partial \varphi }}-{\frac {\partial }{\partial r}}\left(rv_{\varphi }\right)\right)&{\hat {\boldsymbol {\theta }}}\\{}+{\frac {1}{r}}\left({\frac {\partial }{\partial r}}\left(rv_{\theta }\right)-{\frac {\partial v_{r}}{\partial \theta }}\right)&{\hat {\boldsymbol {\varphi }}}\end{aligned}}}$$$`
+and so vertical variation of horizontal wind can be disregarded.
+We then find that `$$$ \nabla \times \mathbf{v} = \zeta \mathbf{k}$$$`
+
+then we find that `$$$\nabla \times \zeta \mathbf{k} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ \partial_x & \partial_y & \partial_z \\ 0 & 0 & \zeta  \end{vmatrix} = \begin{bmatrix} \partial_y \zeta \\ -\partial_x \zeta \\ 0 \end{bmatrix} $$$`
+
+Therefore we need to know how to take the gradient of a scalar. 
