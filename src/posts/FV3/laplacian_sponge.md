@@ -167,3 +167,6 @@ i.e.
 fx2(i,j) = gridstruct%del6_v(i,j)*(d2(i,j)-d2(i-1,j))
 fy2(i,j) = gridstruct%del6_u(i,j)*(d2(i,j)-d2(i,j-1))
 ```
+
+where f(xy)2 seems to represent a flux quantity.
+I.e. `ut, vt` in the code are flux quantities. 
