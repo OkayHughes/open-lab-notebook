@@ -156,3 +156,7 @@ Therefore we need to know how to take the gradient of a scalar.
 From page 15 of [the fv3 specification](https://www.gfdl.noaa.gov/wp-content/uploads/2020/02/FV3-Technical-Description.pdf)
 we know that we can calculate "cell integrated" quantity on the dual grid:
 `$$$ D = \frac{1}{A_c} \left[\delta_x (u_c \Delta y_c \sin \alpha) + \delta_y (v_c \Delta x_c \sin \alpha) \right] $$$`
+
+`divergence_corner` in `sw_core` shows how to deal with index hell. It appears that `$$ \delta_{x, y}$$` is a finite differencing operation.
+See line 1788 in the `sw_core` module file.
+For volume mean vorticity see line 1249, i.e. `wk(i,j) = rarea(i,j)*(vt(i,j)-vt(i,j+1)-ut(i,j)+ut(i+1,j))`
