@@ -145,5 +145,6 @@ If we use some vector calculus identities
 `$$\nabla (\nabla \cdot \mathbf{v}) - \nabla \times (\nabla \times \mathbf{v}) $$`
 
 Assume that `$$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ 0 \end{bmatrix} $$`
-in which case `$$\nabla \cdot \mathbf{v} = \delta $$` and (using cartesian coordiantes for confidence)
-and `$$ \nabla \times \mathbf{v} = \zeta$$`
+in which case `$$\nabla \cdot \mathbf{v} = \delta $$` and (using cartesian coordiantes for confidence). We assume we're working at a fixed `$$ r$$`,
+and so vertical variation of horizontal wind can be 
+and `$$$ \nabla \times \mathbf{v} = {\displaystyle {\begin{aligned}{\frac {1}{r\sin \theta }}\left({\frac {\partial }{\partial \theta }}\left(v_{\varphi }\sin \theta \right)-{\frac {\partial v_{\theta }}{\partial \varphi }}\right)&{\hat {\mathbf {r} }}\\{}+{\frac {1}{r}}\left({\frac {1}{\sin \theta }}{\frac {\partial v_{r}}{\partial \varphi }}-{\frac {\partial }{\partial r}}\left(rv_{\varphi }\right)\right)&{\hat {\boldsymbol {\theta }}}\\{}+{\frac {1}{r}}\left({\frac {\partial }{\partial r}}\left(rv_{\theta }\right)-{\frac {\partial v_{r}}{\partial \theta }}\right)&{\hat {\boldsymbol {\varphi }}}\end{aligned}}}$$$`
