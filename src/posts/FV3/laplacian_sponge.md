@@ -213,4 +213,4 @@ fx2(i,j) = gridstruct%lap_nu_v(i,j)*(divg(i-1,j)-divg(i,j) + vort(i,j-1)-vort(i,
 fy2(i,j) = gridstruct%lap_nu_u(i,j)*(divg(i,j-1)-divg(i,j) - (vort(i-1,j)-vort(i,j)))
 ```
 
-But we need to use the spherical grid version ugh. 
+But we need to use the spherical grid version. Let's do that first thing tomorrow.
