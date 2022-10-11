@@ -179,4 +179,6 @@ entire CESM codebase to see if it appears in the build infrastructure.
 ## Synthesizing these breadcrumbs:
 
 Application of 0th order divergence damping involves adding a `$$\nabla \delta $$` term to the RHS of the momentum equation.
-Therefore the treatment of 0th order divergence damping should show us how to add a 
+Therefore the treatment of 0th order vorticity damping should show us how to add what we need.
+
+Use the subroutine `del6_vt_flux` as a guide.
