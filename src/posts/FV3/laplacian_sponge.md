@@ -133,5 +133,11 @@ My task now is to benchmark the performance of these two diffusion methods .
 
 ## Actual vector laplacian
 
+The vector laplacian is somewhat inconveniently defined (this also works for tensors) as
+`$$$ (\nabla \cdot \nabla) \mathbf{v}. $$$`
 
+Note that that formulation uses operators that can easily be formulated in coordinate-free notation. 
+The end result we wish to get is, under the assumption that `$$\mathbf{v}_{k} = 0$$`, we can calculate
+the laplacian in terms of 2D `$$ \zeta$$` relative vorticity and divergence `$$ \delta$$` which are available in the 
+D-grid routines. 
 
