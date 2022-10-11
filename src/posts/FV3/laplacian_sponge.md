@@ -160,8 +160,8 @@ But! It turns out that adding a `$$(\nabla \cdot \nabla) \mathbf{v} $$` term to 
 $$$`
 just gives us
 `$$$
-\begin{align*} \der{u}{t} &= \ldots + (\nu (\nabla \cdot \nabla) \mathbf{v})_1\\
-\der{v}{t} &= \ldots + (\nu (\nabla \cdot \nabla) \mathbf{v})_2
+\begin{align*} \der{u}{t} &= \ldots + \partial_{x_1} \delta + \partial_{x_2} \zeta\\
+\der{v}{t} &= \ldots + \partial_{x_2} \delta - \partial_{x_1} \zeta
 \end{align*}
 $$$`
 
@@ -205,8 +205,12 @@ fy2(i,j) = gridstruct%del6_u(i,j)*(vort(i,j-1)-vort(i,j))
 then our quantity should look something like
 
 ```
+! uses C grid convention, seemingly
 vort(i,j) = damp*wk_vort(i,j)
 divg(i,j) = damp*wk_divg(i,j)
-fx2(i,j) = gridstruct%del6_v(i,j)*(vort(i-1,j)-vort(i,j))
-fy2(i,j) = gridstruct%del6_u(i,j)*(vort(i,j-1)-vort(i,j))
+! lap_nu_v = lap_nu_u almost certainly. 
+fx2(i,j) = gridstruct%lap_nu_v(i,j)*(divg(i-1,j)-divg(i,j) + vort(i,j-1)-vort(i,j))
+fy2(i,j) = gridstruct%lap_nu_u(i,j)*(divg(i,j-1)-divg(i,j) - (vort(i-1,j)-vort(i,j)))
 ```
+
+But we need to use the spherical grid version ugh. 
