@@ -152,3 +152,6 @@ We then find that `$$$ \nabla \times \mathbf{v} = \zeta \mathbf{k}$$$`
 then we find that `$$$\nabla \times \zeta \mathbf{k} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ \partial_x & \partial_y & \partial_z \\ 0 & 0 & \zeta  \end{vmatrix} = \begin{bmatrix} \partial_y \zeta \\ -\partial_x \zeta \\ 0 \end{bmatrix} $$$`
 
 Therefore we need to know how to take the gradient of a scalar. 
+
+From page 15 of [the fv3 specification](https://www.gfdl.noaa.gov/wp-content/uploads/2020/02/FV3-Technical-Description.pdf)
+we know that 
