@@ -160,3 +160,10 @@ we know that we can calculate "cell integrated" quantity on the dual grid:
 `divergence_corner` in `sw_core` shows how to deal with index hell. It appears that `$$ \delta_{x, y}$$` is a finite differencing operation.
 See line 1788 in the `sw_core` module file.
 For volume mean vorticity see line 1249, i.e. `wk(i,j) = rarea(i,j)*(vt(i,j)-vt(i,j+1)-ut(i,j)+ut(i+1,j))`
+
+When applied to vorticity, the analogue of equations (2.3) and (2.4) in the FV3 document can be found at lines 1676 and 1689.
+i.e.
+```
+fx2(i,j) = gridstruct%del6_v(i,j)*(d2(i,j)-d2(i-1,j))
+fy2(i,j) = gridstruct%del6_u(i,j)*(d2(i,j)-d2(i,j-1))
+```
