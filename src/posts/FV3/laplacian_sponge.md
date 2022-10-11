@@ -173,10 +173,10 @@ I.e. `ut, vt` in the code are flux quantities.
 
 
 It doesn't appear that the preprocessor name `USE_SG` is defined anywhere? I've checked the FV3 github as well as the
-entire CESM codebase to see if it appears in the build infrastructure. Therefore it seems safe to assume that 
-it will be defined to be false?
+entire CESM codebase to see if it appears in the build infrastructure. 
 
 
 ## Synthesizing these breadcrumbs:
 
-Application of 0th order divergence damping involves adding a `$$ $$`
+Application of 0th order divergence damping involves adding a `$$\nabla \delta $$` term to the RHS of the momentum equation.
+Therefore the treatment of 0th order divergence damping should show us how to add a 
