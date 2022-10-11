@@ -153,6 +153,18 @@ then we find that `$$$\nabla \times \zeta \mathbf{k} = \begin{vmatrix} \mathbf{i
 
 Therefore we need to know how to take the gradient of a scalar. 
 
+But! It turns out that adding a `$$(\nabla \cdot \nabla) \mathbf{v} $$` term to the RHS of the momentum equation, i.e.
+`$$$\begin{align*} \der{u}{t} &= \ldots + (\nu (\nabla \cdot \nabla) \mathbf{v})_1\\
+\der{v}{t} &= \ldots + (\nu (\nabla \cdot \nabla) \mathbf{v})_2
+\end{align*}
+$$$`
+just gives us
+`$$$
+\begin{align*} \der{u}{t} &= \ldots + (\nu (\nabla \cdot \nabla) \mathbf{v})_1\\
+\der{v}{t} &= \ldots + (\nu (\nabla \cdot \nabla) \mathbf{v})_2
+\end{align*}
+$$$`
+
 From page 15 of [the fv3 specification](https://www.gfdl.noaa.gov/wp-content/uploads/2020/02/FV3-Technical-Description.pdf)
 we know that we can calculate "cell integrated" quantity on the dual grid:
 `$$$ D = \frac{1}{A_c} \left[\delta_x (u_c \Delta y_c \sin \alpha) + \delta_y (v_c \Delta x_c \sin \alpha) \right] $$$`
@@ -182,3 +194,19 @@ Application of 0th order divergence damping involves adding a `$$\nabla \delta $
 Therefore the treatment of 0th order vorticity damping should show us how to add what we need.
 
 Use the subroutine `del6_vt_flux` as a guide.
+
+Using the two (simplified) lines as a first guess,
+
+```
+vort(i,j) = damp*wk(i,j)
+fx2(i,j) = gridstruct%del6_v(i,j)*(vort(i-1,j)-vort(i,j))
+fy2(i,j) = gridstruct%del6_u(i,j)*(vort(i,j-1)-vort(i,j))
+```
+then our quantity should look something like
+
+```
+vort(i,j) = damp*wk_vort(i,j)
+divg(i,j) = damp*wk_divg(i,j)
+fx2(i,j) = gridstruct%del6_v(i,j)*(vort(i-1,j)-vort(i,j))
+fy2(i,j) = gridstruct%del6_u(i,j)*(vort(i,j-1)-vort(i,j))
+```
