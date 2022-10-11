@@ -141,3 +141,9 @@ The end result we wish to get is, under the assumption that `$$\mathbf{v}_{k} = 
 the laplacian in terms of 2D `$$ \zeta$$` relative vorticity and divergence `$$ \delta$$` which are available in the 
 D-grid routines. 
 
+If we use some vector calculus identities 
+`$$\nabla (\nabla \cdot \mathbf{v}) - \nabla \times (\nabla \times \mathbf{v}) $$`
+
+Assume that `$$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ 0 \end{bmatrix} $$`
+in which case `$$\nabla \cdot \mathbf{v} = \delta $$` and (using cartesian coordiantes for confidence)
+and `$$ \nabla \times \mathbf{v} = \zeta$$`
