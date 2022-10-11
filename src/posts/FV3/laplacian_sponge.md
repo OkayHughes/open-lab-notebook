@@ -130,3 +130,8 @@ My task now is to benchmark the performance of these two diffusion methods .
 </div>
 
 
+
+## Actual vector laplacian
+
+
+
