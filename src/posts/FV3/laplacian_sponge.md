@@ -201,6 +201,8 @@ Using the two (simplified) lines as a first guess,
 vort(i,j) = damp*wk(i,j)
 fx2(i,j) = gridstruct%del6_v(i,j)*(vort(i-1,j)-vort(i,j))
 fy2(i,j) = gridstruct%del6_u(i,j)*(vort(i,j-1)-vort(i,j))
+! 0.5*(sin_sg(i-1,j,3)+sin_sg(i,j,1))*dy(i,j)*(d2(i-1,j)-d2(i,j))*rdxc(i,j)
+!  0.5*(sin_sg(i,j-1,4)+sin_sg(i,j,2))*dx(i,j)*(d2(i,j-1)-d2(i,j))*rdyc(i,j)
 ```
 then our quantity should look something like
 
@@ -214,3 +216,6 @@ fy2(i,j) = gridstruct%lap_nu_u(i,j)*(divg(i,j-1)-divg(i,j) - (vort(i-1,j)-vort(i
 ```
 
 But we need to use the spherical grid version. Let's do that first thing tomorrow.
+
+
+
