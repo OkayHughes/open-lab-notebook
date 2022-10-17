@@ -23,4 +23,5 @@ with `$$ \zeta_\eta = \frac{1}{\overline{r}\cos\varphi} \left((^\eta \partial_\l
 ## Pitfalls of comparing against lat-lon grids:
 
 Assuming I calculate the above quantity correctly, then `$$\partial u $$` and `$$\partial v $$` are are calculated 
-to machine precision. That is, assuming we have an internal (numerical) state `$$\mathbf{u}_{i} $$`
+to machine precision. That is, assuming we have an internal (numerical) state `$$\mathbf{u, v}_{mijk} $$` where `$$m$$`
+indexes element ID, `$$i,j $$` index the tensored GLL points within an element, and `$$k$$` indexes level.
