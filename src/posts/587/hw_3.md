@@ -21,6 +21,11 @@ stack.
   * request deletion stack lock and prepend deletion stack
   * request continuation stack lock and prepend 
 
+Useful lemma:
+Suppose we have a global maximum `$$ M_1 $$`. If we wrap each thread's read of this value in an atomic 
+clause, and we have a mutex-protected lock on writing `$$M_1=M_2$$` which ensures monotonicity (prove this in final code)
+then if we determine that on an interval `$$[a_i, b_i]$$` our function `$$g$$` cannot be more than `$$M_1$$`, then
+we also know that it cannot be more than any `$$M_i$$` determined by 
 
 
 Develop library of functions and test heuristics on this library of functions
