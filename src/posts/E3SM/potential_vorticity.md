@@ -23,7 +23,8 @@ Define `$$\zeta_\eta = \partial^\eta_x v - \partial^\eta_y u  $$`
 
 # Quick derivation:
 
-`$$PV = -g(f + \mathbf{k} \cdot \nabla_\theta \times \mathbf{v}_h)\pder{\theta}{p} $$`
+`$$PV = \frac{f + \mathbf{k} \cdot \left( \nabla_\theta \times \mathbf{v} \right)}{-g^{-1}\pder{p}{\theta}} $$`
+
 
 
 
