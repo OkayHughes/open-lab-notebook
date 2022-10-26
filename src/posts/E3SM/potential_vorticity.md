@@ -20,6 +20,9 @@ Define `$$\zeta_\eta = \partial^\eta_x v - \partial^\eta_y u  $$`
   </tr>
 </table>
 
+My current hypothesis is that `$$\frac{1}{\partial_\eta\left(p_0 a + p_s b\right)} = \frac{1}{\partial_\eta\left(p\right)} = {\partial_p\left(\eta\right)}.$$`
+This would be correct if we had things listed in terms of pressure 
+
 
 In order to compute vertical derivatives, we'll just need to use a finite difference method. 
 I'll use a second-order method to start with.
