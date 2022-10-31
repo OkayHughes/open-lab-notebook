@@ -26,4 +26,8 @@ there is only one cell with ID `$$i_{\textrm{event}}$$` for which we want to com
 
 If I'm allowed to have an entirely different "component" which isn't a bolt-on tracer system, then here's a potential 
 way to do this with particles:
-At each barcode time step, initialize 
+At each barcode time step, initialize a particle containing a bit-mask with a bit for each horizontal grid cell.
+Another design branch here would be to initialize several particles and add an uncertainty parameter `$$ \kappa $$`
+that introduces stochasticity to the advection of these particles. Move forward one (dynamics?) timestep,
+then take the bitwise or of every particle assigned to a grid cell with the stored "upwind bitmap" for that grid cell.
+After `$$n_{\textrm{remap}}$$` timesteps, re-initialize the ensembles of particles 
