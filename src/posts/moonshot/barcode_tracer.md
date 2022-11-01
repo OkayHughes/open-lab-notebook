@@ -37,4 +37,7 @@ After `$$n_{\textrm{remap}}$$` timesteps, re-initialize the ensembles of particl
 
 Related idea that's almost already not being done:
 Partition the equations into a prognostic and a control term, add probability distribution to 
-control term. Use this to do hypothesis testing. [https://www.sciencedirect.com/science/article/pii/S1053811909011999]
+control term. Use this to do hypothesis testing. [https://www.sciencedirect.com/science/article/pii/S1053811909011999].
+Main idea is to do formal hypothesis testing by making ensemble-aware adjustments to
+the model state in the lead up to an event. Null hypothesis in this case: "modifying
+this variable at this point does not correlate with the strength of measured signal after lag"
