@@ -28,9 +28,14 @@ Define `$$\zeta_\eta = \partial^\eta_x v - \partial^\eta_y u  $$`
 ``$$$
 \begin{align*}
   &g \left[\frac{1}{a\cos\phi}  \pder{v}{p}\left( \pder{\theta}{\lambda} \right)_p - \frac{1}{a}\pder{u}{p}\left(\pder{\theta}{\phi}\right)_p+ (f + \zeta_p) \left(-\pder{\theta}{p} \right) \right]\\
-  &= g\left[\frac{1}{a\cos\phi}  \pder{v}{p}\left( \pder{\theta}{\lambda} \right)_p - \frac{1}{a}\pder{u}{p}\left(\pder{\theta}{\phi}\right)_p+ (f + \zeta_p) \left(-\pder{\theta}{p} \right) \right]
+  &= g\left[\frac{1}{a\cos\phi}  \pder{v}{\eta}\pder{\eta}{p}\left( \pder{\theta}{\lambda} \right)_p - \frac{1}{a}\pder{u}{\eta}\pder{\eta}{p}\left(\pder{\theta}{\phi}\right)_p+ (f + \zeta_p) \left(-\pder{\theta}{\eta}\pder{\eta}{p} \right) \right]
 \end{align*}
 $$$``
+
+Useful identity:
+`$$$
+\partial_{s} \alpha(x, y, s) = \partial_{t}\left[s \right]  \partial_
+$$$`
 
 
 
