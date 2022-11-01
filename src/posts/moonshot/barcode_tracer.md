@@ -30,4 +30,11 @@ At each barcode time step, initialize a particle containing a bit-mask with a bi
 Another design branch here would be to initialize several particles and add an uncertainty parameter `$$ \kappa $$`
 that introduces stochasticity to the advection of these particles. Move forward one (dynamics?) timestep,
 then take the bitwise or of every particle assigned to a grid cell with the stored "upwind bitmap" for that grid cell.
-After `$$n_{\textrm{remap}}$$` timesteps, re-initialize the ensembles of particles 
+After `$$n_{\textrm{remap}}$$` timesteps, re-initialize the ensembles of particles..
+
+
+
+
+Related idea that's almost already not being done:
+Partition the equations into a prognostic and a control term, add probability distribution to 
+control term. Use this to do hypothesis testing. [https://www.sciencedirect.com/science/article/pii/S1053811909011999]
