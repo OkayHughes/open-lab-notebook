@@ -25,7 +25,12 @@ Define `$$\zeta_\eta = \partial^\eta_x v - \partial^\eta_y u  $$`
 
 `$$PV = \frac{f + \mathbf{k} \cdot \left( \nabla_\theta \times \mathbf{v} \right)}{-g^{-1}\pder{p}{\theta}} $$`
 
-``$$g \left[\frac{1}{a\cos\phi}  \pder{v}{p}\left( \pder{\theta}{\lambda} \right)_p - \frac{1}{a}\pder{u}{p}\left(\pder{\theta}{\phi}\right)_p+ (f + \zeta_p) \left(-\pder{\theta}{p} \right) \right]$$``
+``$$$
+\begin{align*}
+  &g \left[\frac{1}{a\cos\phi}  \pder{v}{p}\left( \pder{\theta}{\lambda} \right)_p - \frac{1}{a}\pder{u}{p}\left(\pder{\theta}{\phi}\right)_p+ (f + \zeta_p) \left(-\pder{\theta}{p} \right) \right]\\
+  &= g\left[\frac{1}{a\cos\phi}  \pder{v}{p}\left( \pder{\theta}{\lambda} \right)_p - \frac{1}{a}\pder{u}{p}\left(\pder{\theta}{\phi}\right)_p+ (f + \zeta_p) \left(-\pder{\theta}{p} \right) \right]
+\end{align*}
+$$$``
 
 
 
