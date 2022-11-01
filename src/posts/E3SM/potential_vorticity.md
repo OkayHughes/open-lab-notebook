@@ -34,13 +34,16 @@ $$$``
 
 Useful identity:
 `$$$
-\partial_{s} \left[u(x, y, s) \right] = \partial_{t}\left[s \right]  \partial_x \left[ t(x, y, s) \right] \partial_{x} \left[u(x, y, t) \right]+ \partial_{x} \left[ u(x, y, t)  \right]
+\partial_{x} \left[u(x, y, s) \right] = \partial_{t}\left[s \right]  \partial_x \left[ t(x, y, s) \right] \partial_{x} \left[u(x, y, t) \right]+ \partial_{x} \left[ u(x, y, t)  \right]
 $$$`
 
 `$$$
-\partial_{p} \left[\theta(x, y, p) \right] = \partial_{t}\left[s \right]  \partial_x \left[ t(x, y, s) \right] \partial_{x} \left[u(x, y, t) \right]+ \partial_{x} \left[ u(x, y, t)  \right]
+\partial_{x} \left[\theta(x, y, p) \right] = \partial_{\eta}\left[p \right]  \partial_x \left[ \eta(x, y, p) \right] \partial_{x} \left[\theta(x, y, \eta) \right]+ \partial_{x} \left[ \theta(x, y, \eta)  \right]
 $$$`
 
+`$$$
+\partial_{x} \left[\eta(x, y, p) \right] = \partial_{\eta}\left[p \right]  \partial_x \left[ \eta(x, y, p) \right] \partial_{x} \left[\theta(x, y, \eta) \right]+ \partial_{x} \left[ \theta(x, y, \eta)  \right]
+$$$`
 
 
 
