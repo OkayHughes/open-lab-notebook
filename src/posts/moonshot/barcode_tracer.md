@@ -41,3 +41,8 @@ control term. Use this to do hypothesis testing. [https://www.sciencedirect.com/
 Main idea is to do formal hypothesis testing by making ensemble-aware adjustments to
 the model state in the lead up to an event. Null hypothesis in this case: "modifying
 this variable at this point does not correlate with the strength of measured signal after lag"
+
+
+Transformed eulerian mean: store quantity on a node with statistical estimates of variance.
+Online diagnose: here is a point that significantly increased variance of mean circulation.
+
