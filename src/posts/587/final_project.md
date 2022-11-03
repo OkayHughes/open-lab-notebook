@@ -15,3 +15,5 @@ Suppose we have an advection equation
 which we're solving with `$$ u_d = \sum u_{dijk} p_i(x)p_j(y)p_k(z)$$` and
 `$$ T = \sum T_{ijk} p_i(x)p_j(y)p_k(z) $$`
 
+ $$`
+
