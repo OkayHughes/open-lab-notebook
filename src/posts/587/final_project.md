@@ -20,14 +20,16 @@ Let us work within a singular element.
 At a particular GLL node indexed by `$$ ijk $$`, if we 
 were to use an explicit method then
 `$$$
- T_{t_{i+1}}
+\begin{align*}
+ T_{t_{i+1}, ijk} &= T_{t_{i}, ijk} + \Delta t \left( k\left(T_{ijk}\right)\left[\sum_{ijk} T_{ijk}(p_i''(x_i)p(y_j)p(z_k) + p_i(x_i)p_j''(y_j)p_k(z_k) + p_i(x_i)p_j(y_j)p_k''(z_k))\right] \right)\\
+\end{align*}
 $$$`
 
 
 `$$$
 \begin{align*}
-   0 &= (T_{t_{i+1}} - T_{t_{i}}) - \Delta t(k(T) \nabla^2 T) \\
-   &= \left[\sum_{ijk} (T_{t_{i+1}, ijk} - T_{t_{i}, ijk})p_i(x)p_\right] - \Delta t(k() \nabla^2 T) = 0
+   0 &= (T_{t_{i+1}} - T_{t_{i}}) - \Delta t(k(T_{t_{i+1}}) \nabla^2 T_{t_{i+1}}) \\
+   &= \left[(T_{t_{i+1}, ijk} - T_{t_{i}, ijk})p_i(x)p_j(y)p_k(z)\right] - \Delta t\left(k(T_{t_{i+1}, ijk}) \nabla^2 \sum_{ijk} T_{t_{i+1}, ijk} p_i(x)p_j(y)p_k(z) \right)
 \end{align*}
 $$$`
 
