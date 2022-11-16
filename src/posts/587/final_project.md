@@ -30,14 +30,28 @@ Working in implicit we get
 \begin{align*}
    0 &= (T_{t_{i+1}} - T_{t_{i}}) - \Delta t(k(T_{t_{i+1}}) \nabla^2 T_{t_{i+1}}) \\
    &= \left[(T_{t_{i+1}, ijk} - T_{t_{i}, ijk})\right] - \Delta t\left(k(T_{t_{i+1}, ijk}) \nabla^2 \sum_{ijk} T_{t_{i+1}, ijk} p_i(x)p_j(y)p_k(z) \right)\\
-   &= \left[(T_{t_{i+1}, ijk} - T_{t_{i}, ijk})\right] - \Delta t\left(k(T_{t_{i+1}, ijk})  \left(\sum_{q} T_{t_{i+1}, qjk} p_q''(x_q) + T_{t_{i+1}, iqk}  p_q''(y_q) +  T_{t_{i+1}, ijq}  p_q''(z_q) \right)\right)
+   &= \left[(T_{t_{i+1}, ijk} - T_{t_{i}, ijk})\right] - \Delta t\left(k(T_{t_{i+1}, ijk})  \left(\sum_{q} T_{t_{i+1}, qjk} p_q''(x_i) + T_{t_{i+1}, iqk}  p_q''(y_j) +  T_{t_{i+1}, ijq}  p_q''(z_k) \right)\right)
 \end{align*}
 $$$`
 
 This is a system of algebraic equations 
 `$$$
- G_{ijk}(T_{i'j'k'}) = 0
+ G_{ijk}(T_{lmn}) = 0
 $$$`
-and in order to solve this we must find 
+and in order to solve this we must find the matrix (after identifying `$$ ijk$$` and `$$lmn$$` with indices)
+`$$\mathbf{G}$$` with
+`$$$ 
+\mathbf{G}_{ijk,lmn} = \partial_{T_{lmn}} G_{ijk}
+$$$`
+and for the above equations this gives
+`$$$ 
+\begin{align*}
+  \mathbf{G}_{ijk,lmn} &= \partial_{T_{lmn}}\left[(T_{t_{i+1}, ijk} - T_{t_{i}, ijk})\right] - \Delta t\left(k(T_{t_{i+1}, ijk})  \left(\sum_{q} T_{t_{i+1}, qjk} p_q''(x_i) + T_{t_{i+1}, iqk}  p_q''(y_j) +  T_{t_{i+1}, ijq}  p_q''(z_k) \right)\right) \\
+\end{align*}$$$`
+On the diagonal we get
+`$$$ 
+\begin{align*}
+  \mathbf{G}_{ijk,ijk} &= 1  - \Delta t\left(k(T_{t_{i+1}, ijk})  \left(\sum_{q} T_{t_{i+1}, qjk} p_q''(x_i) + T_{t_{i+1}, iqk}  p_q''(y_j) +  T_{t_{i+1}, ijq}  p_q''(z_k) \right)\right) \\
+\end{align*}$$$`
 
 
