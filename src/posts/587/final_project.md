@@ -50,7 +50,7 @@ and for the above equations this gives
   &= \delta(ijk, lmn)  - \Delta t\bigg(\delta(ijk, lmn) k'(T_{t_{i+1}, ijk})  \left(\sum_{q} T_{t_{i+1}, qjk} p_q''(x_i) + T_{t_{i+1}, iqk}  p_q''(y_j) +  T_{t_{i+1}, ijq}  p_q''(z_k) \right)\\
   &+ k(T_{t_{i+1}, ijk}) \left(\delta(jk, mn)  p_l''(x_i) + \delta(ik, ln)  p_m''(y_j) + \delta(ij, lm) p_n''(z_k)  \right) \bigg)
 \end{align*}$$$`
-On the diagonal we get
+with `$$\delta(xyz, \alpha \beta \gamma)$$` is a kronecker delta operating on tuples `$$(x, y, z)$$` and `$$(\alpha, \beta, \gamma)$$`
 
 
 
