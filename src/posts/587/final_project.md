@@ -10,10 +10,11 @@ layout: layouts/post.njk
 ---
 
 
-Suppose we have an advection equation
-`$$\pder{T}{t} + \mathbf{v} \cdot \nabla T = 0$$`
-which we're solving with `$$ u_d = \sum u_{dijk} p_i(x)p_j(y)p_k(z)$$` and
+Suppose we have a diffusion equation
+`$$\pder{T}{t} = k \nabla^2 T$$`
+which we're solving with MOL. We use spectral decomposition
 `$$ T = \sum T_{ijk} p_i(x)p_j(y)p_k(z) $$`
+Suppose we want to solve newton's method 
+`$$ T_{t_{i+1}} - T_{t_{i+1}} - \Delta t(k \nabla^2 T) $$$`
 
- $$`
 
