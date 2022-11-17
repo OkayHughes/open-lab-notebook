@@ -66,7 +66,8 @@ $$$`
 We use the split from the glass paper:
 `$$$
 \begin{align*}
-\rho \left[ \partial_t \mathbf{u} + \mathbf{u} \cdot \nabla \mathbf{u} \right] + \Delta t \left( \nu \right)
+\rho_{t+\Delta t} \left[  \hat{\mathbf{u}} - \mathbf{u}_{t} + \hat{\mathbf{u}} \cdot \nabla \hat{\mathbf{u}} \right] + \Delta t \left( \nu (T_{t + \Delta t}) \nabla^2 \hat{\mathbf{u}} + \nabla p_{\textrm{guess}} - \mathbf{g} \right)\\
+T_
 \end{align*}
 $$$`
 
