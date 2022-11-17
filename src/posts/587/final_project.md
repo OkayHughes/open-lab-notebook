@@ -58,7 +58,15 @@ with `$$\delta(xyz, \alpha \beta \gamma)$$` is a kronecker delta operating on tu
 \begin{align*}
   \partial_t \mathbf{u} + \mathbf{u} \cdot \nabla \mathbf{u} - \nu(T) \nabla^2 \mathbf{u} &= -\frac{1}{\rho} \nabla p + \mathbf{g}\\
   \nabla \cdot \mathbf{u} &= 0\\
-  \partial_t \rho + \mathbf{u} \cdot \nabla \rho &= 0
+  \partial_t \rho + \mathbf{u} \cdot \nabla \rho &= 0 \\
+  \partial_t T + \mathbf{u} \cdot \nabla T &= k \nabla^2 T
+\end{align*}
+$$$`
+
+We use the split from the glass paper:
+`$$$
+\begin{align*}
+\rho \left[ \partial_t \mathbf{u} + \mathbf{u} \cdot \nabla \mathbf{u} \right] + \Delta t \left( \nu \right)
 \end{align*}
 $$$`
 
