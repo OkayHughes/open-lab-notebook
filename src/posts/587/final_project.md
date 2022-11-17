@@ -52,5 +52,15 @@ and for the above equations this gives
 \end{align*}$$$`
 with `$$\delta(xyz, \alpha \beta \gamma)$$` is a kronecker delta operating on tuples `$$(x, y, z)$$` and `$$(\alpha, \beta, \gamma)$$`
 
+## Let's do navier stokes:
+
+`$$$
+\begin{align*}
+  \partial_t \mathbf{u} + \mathbf{u} \cdot \nabla \mathbf{u} - \nu(T) \nabla^2 \mathbf{u} &= -\frac{1}{\rho} \nabla p + \mathbf{g}\\
+  \nabla \cdot \mathbf{u} &= 0\\
+  \partial_t \rho + \mathbf{u} \cdot \nabla \rho &= 0
+\end{align*}
+$$$`
+
 
 
