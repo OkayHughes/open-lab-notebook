@@ -94,5 +94,12 @@ with some sort of curvature. Let's try the function
 \end{align*}
 $$$`
 
+The analytic jacobian determinant of this is tedious to find, but we'll do it nonetheless:
+`$$$ 
+\begin{align*}
+\mathbf{J} = \begin{bmatrix} \end{bmatrix} 
+\end{align*}
+$$$`
+
 
 
