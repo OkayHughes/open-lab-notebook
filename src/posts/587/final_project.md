@@ -87,7 +87,13 @@ Note that `$$\tau \equiv \left(\frac{2\|\mathbf{u}\|}{h} + \frac{4\nu(T)}{h^2} \
 
 ## lagrangian SE decomposition
 For a test of the curvilinear differential operators, we start with a position function `$$a(x)$$` which maps the unit cube `$$[-1, 1]^3 $$` to itself
-with an induced 
+with some sort of curvature. Let's try the function
+`$$$ 
+\begin{align*}
+\mathbf{x} \mapsto \frac{\sum_d x_d^{2k}}{\sum_d x_d^{(f(r_{2k}))}}\mathbf{x}\\
+\end{align*}
+$$$`
+with `$$ k \gg 1 $$`,where we want `$$f(1) = 2k$$`, `$$f'(1) = 0$$`, `$$f(0) = 2  $$`
 
 
 
