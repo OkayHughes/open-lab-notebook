@@ -77,7 +77,10 @@ Repeat until converged.
 `$$$
 0 = \nabla \cdot \hat{\mathbf{u}} - \Delta t \nabla^2\left[ p_{t + \Delta t} - p_{\textrm{guess}} \right] + \tau \nabla^2 p_{t + \Delta t}
 $$$`
-
+Then a final non-divergent form
+`$$$
+0 = \rho_{t+\Delta t} \left[\mathbf{u}_{t+\Delta t} - \hat{\mathbf{u}} \right] + \Delta t\left(\rho_{t+\Delta t} (\mathbf{u}_{t+\Delta t} \cdot \nabla \mathbf{u}_{t+\Delta t}) + \nabla \left( p_{t+\Delta t} - p_{\textrm{guess}}) \right) \right)
+$$$`
 
 
 
