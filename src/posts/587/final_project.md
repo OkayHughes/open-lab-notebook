@@ -90,11 +90,19 @@ For a test of the curvilinear differential operators, we start with a position f
 with some sort of curvature. Let's try the function
 `$$$ 
 \begin{align*}
-\mathbf{x} \mapsto \frac{\sum_d x_d^{2k}}{\sum_d x_d^{(f(r_{2k}))}}\mathbf{x}\\
+\mathbf{x} \mapsto \frac{\|\mathbf{x}\|_{f(r_{2k})}}{r_{2k}}\mathbf{x}\\
 \end{align*}
 $$$`
-with `$$ k \gg 1 $$`,where we want `$$f(1) = 2k$$`, `$$f'(1) = 0$$`, `$$f(0) = 2  $$`
-
+with `$$ k \gg 1 $$`,where we want `$$f(1) = 2k$$`, `$$f'(1) = 0$$`, `$$f(0) = 2,$$` `$$ f'(0) = 0.$$` Then we posit 
+`$$ f(r) = ax^3 + bx^2 + cx + d,$$` and get
+`$$$
+\begin{align*}
+  d&= 2\\
+  c &= 0 \\
+  3a + 2b + c &= 0\\
+  
+\end{align*}
+$$$`
 
 
 
