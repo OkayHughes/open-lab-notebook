@@ -90,7 +90,7 @@ For a test of the curvilinear differential operators, we start with a position f
 with some sort of curvature. Let's try the function
 `$$$ 
 \begin{align*}
-\mathbf{x} \mapsto \frac{\|\mathbf{x}\|_{f(r_{2k})}}{r_{2k}}\mathbf{x}\\
+\mathbf{x} \mapsto \frac{\|\mathbf{x}\|_{2 + \frac{\|\mathbf{x}\|_\infty}{1 - \|\mathbf{x} \|_\infty}}}{\|\mathbf{x}\|_\infty} \mathbf{x}
 \end{align*}
 $$$`
 
