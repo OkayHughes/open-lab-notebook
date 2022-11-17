@@ -94,12 +94,11 @@ with some sort of curvature. Let's try the function
 \end{align*}
 $$$`
 
-The analytic jacobian determinant of this is tedious to find, but we'll do it nonetheless:
-`$$$ 
-\begin{align*}
-\mathbf{J} = \begin{bmatrix} \end{bmatrix} 
-\end{align*}
-$$$`
+Note: I think I've finally determined how to do covariant/contravariant vectors? Note that the euclidean structure into which our manifold is embedded gives us that for 
+physical vectors `$$ \mathbf{u}, \mathbf{v} $$` then `$$\langle \mathbf{u}, \mathbf{v} \rangle =  \mathbf{u}_{p} \mathbf{v}^p.$$` Note that [this site](https://en.wikipedia.org/wiki/First_fundamental_form) 
+gives that `$$g = \mathbf{J}^\top \mathbf{J} $$`
+
+
 
 
 
