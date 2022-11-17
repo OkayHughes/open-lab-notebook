@@ -69,8 +69,13 @@ We use the split from the glass paper:
 0 &= \rho_{t+\Delta t} \left[ \hat{\mathbf{u}} - \mathbf{u}_{t}\right] + \Delta t \left( \rho_{t+\Delta t} (\hat{\mathbf{u}} \cdot \nabla \hat{\mathbf{u}}) + \nu (T_{t + \Delta t}) \nabla^2 \hat{\mathbf{u}} + \nabla p_{\textrm{guess}} - \mathbf{g} \right)\\
 0 &= T_{t + \Delta t} - T_{t} + \Delta t \left( \hat{\mathbf{u}} \cdot \nabla T_{t + \Delta t} + \kappa \nabla^2 T_{t+\Delta t} \right)\\
 0 &= \rho_{t+\Delta t} - \rho_{t} + \Delta t \left( \hat{\mathbf{u}} \cdot \nabla \rho_{t+\Delta t} \right)\\
-p_{\textrm{guess}} &= \beta 
+p_{\textrm{guess}} &= p_{t} + \beta \Delta t \frac{1}{\rho_{t}} \nabla \cdot \hat{\mathbf{u}}
 \end{align*}
+$$$`
+Repeat until converged.
+
+`$$$
+0 = \nabla \cdot \hat{\mathbf{u}} - \Delta t \nabla^2\left[ p_{t + \Delta t} - p_{\textrm{guess}} \right] + \tau \nabla^2 p_{t + \Delta t}
 $$$`
 
 
