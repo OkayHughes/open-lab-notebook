@@ -99,8 +99,14 @@ physical vectors `$$ \mathbf{u}, \mathbf{v} $$` then `$$\langle \mathbf{u}, \mat
 gives that `$$\mathbf{g} = \mathbf{J}^\top \mathbf{J}.$$` This seems to indicate that covariant `$$ \mathbf{u}_\alpha = \mathbf{u}^\top (\mathbf{J}^{-1})^\top$$` and `$$ \mathbf{u}^\alpha =  \mathbf{J}^{-1}\mathbf{u}$$`
 which gives
 `$$$
-\langle \mathbf{u}_\alpha, \mathbf{v}^\alpha \rangle = \mathbf{u}^\top (\mathbf{J}^{-1})^\top \mathbf
+\begin{align*}
+\langle \mathbf{u}_\alpha, \mathbf{v}^\alpha \rangle &= \mathbf{u}^\top (\mathbf{J}^{-1})^\top \mathbf{g}  \mathbf{J}^{-1}\mathbf{v} \\
+&= \mathbf{u}^\top (\mathbf{J}^{-1})^\top \mathbf{J}^\top \mathbf{J} \mathbf{J}^{-1}\mathbf{v} \\
+&= \mathbf{u}^\top \mathbf{v} \\
+\end{align*}
 $$$`
+
+
 
 
 
