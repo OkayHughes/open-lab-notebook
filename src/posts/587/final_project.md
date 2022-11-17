@@ -99,10 +99,13 @@ with `$$ k \gg 1 $$`,where we want `$$f(1) = 2k$$`, `$$f'(1) = 0$$`, `$$f(0) = 2
 \begin{align*}
   d&= 2\\
   c &= 0 \\
-  3a + 2b + c &= 0\\
-  
+  3a + 2b &= 0\\
+  a+b&=2(k-1)
 \end{align*}
 $$$`
-
+and we solve to find `$$ b = 6(k-1)$$` and therefore `$$ a=-4(k-1)$$` so
+`$$$
+f(r) = -r(k-1)r^3 + 6(k-1)x^2 + 2 = 0
+$$$`
 
 
