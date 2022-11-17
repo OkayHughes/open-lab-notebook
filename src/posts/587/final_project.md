@@ -96,7 +96,11 @@ $$$`
 
 Note: I think I've finally determined how to do covariant/contravariant vectors? Note that the euclidean structure into which our manifold is embedded gives us that for 
 physical vectors `$$ \mathbf{u}, \mathbf{v} $$` then `$$\langle \mathbf{u}, \mathbf{v} \rangle =  \mathbf{u}_{p} \mathbf{v}^p.$$` Note that [this site](https://en.wikipedia.org/wiki/First_fundamental_form) 
-gives that `$$g = \mathbf{J}^\top \mathbf{J} $$`
+gives that `$$\mathbf{g} = \mathbf{J}^\top \mathbf{J}.$$` This seems to indicate that covariant `$$ \mathbf{u}_\alpha = \mathbf{u}^\top (\mathbf{J}^{-1})^\top$$` and `$$ \mathbf{u}^\alpha =  \mathbf{J}^{-1}\mathbf{u}$$`
+which gives
+`$$$
+\langle \mathbf{u}_\alpha, \mathbf{v}^\alpha \rangle = \mathbf{u}^\top (\mathbf{J}^{-1})^\top \mathbf
+$$$`
 
 
 
