@@ -82,7 +82,12 @@ Then a final non-divergent form
 0 = \rho_{t+\Delta t} \left[\mathbf{u}_{t+\Delta t} - \hat{\mathbf{u}} \right] + \Delta t\left(\rho_{t+\Delta t} (\mathbf{u}_{t+\Delta t} \cdot \nabla \mathbf{u}_{t+\Delta t}) + \nabla \left( p_{t+\Delta t} - p_{\textrm{guess}}) \right) \right)
 $$$`
 
-Note that `$$\tau \equiv \left(\frac{2\|\mathbf{u}\|}{h} + \frac{4\nu(T)}{} \right)^{-1} $$`
+Note that `$$\tau \equiv \left(\frac{2\|\mathbf{u}\|}{h} + \frac{4\nu(T)}{h^2} \right)^{-1} $$`
+
+
+## lagrangian SE decomposition
+For a test of the curvilinear differential operators, we start with a position function `$$a(x)$$` which maps the unit cube `$$[-1, 1]^3 $$` to itself
+with an induced 
 
 
 
