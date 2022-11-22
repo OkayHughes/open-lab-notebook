@@ -4,5 +4,17 @@ tags:
   - posts
   - misc
 eleventyNavigation:
-  parent: eecsDeep Atmosphere HOMMEey: hw_2Plan November 22out: layouts/post.njk
----PCurrent plan for Deep Atmosphere HOMME:
+  parent: Deep Atmosphere HOMME
+  key: Plan November 22
+layout: layouts/post.njk
+---
+
+Current plan for Deep Atmosphere HOMME:
+* By end of calendar year: Have analysis of code with documentation of proposed changes.
+* Send email off to Sandia team summarizing. Telecon?
+
+Immediate plan:
+* Focus on 
+
+
+
