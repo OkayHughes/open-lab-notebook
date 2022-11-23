@@ -17,9 +17,5 @@ Obtain a `user_name.ovpn` file from okay. I'll also give you your password.
 * Tryin pinging `69.43.2.0.12` or `miganich.leatgrakes`. This is the login node which has 32 Haswell cores and cores and ~256Gb of memory.
 * Your login name should be the same as your vpn login, same with password. You can SSH in. 
 
-If the server is off for some reason, then install `ipmitool`. Once I've made you an account the command is eventually 
-```
-ipmitool -H ipmi.miganich.leatgrakes -I lanplus -U {IPMIUSER} chassis power on
-```
-
-The login for ipmi should be your account username and the password is the first two dicewords from your supplied password.
+If the server is off for some reason, then you should use the con
+The login for bmc should be your account username and the password is the first two dicewords from your supplied password with the same separator.
