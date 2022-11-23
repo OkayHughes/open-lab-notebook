@@ -18,7 +18,7 @@ Obtain a `user_name.ovpn` file from okay. I'll also give you your password.
 * The login node itself is located at `miganich.leatgrakes`, but this won't be ping-able if the server is off.
 * Your login name should be the same as your vpn login, same with password. You can SSH in. 
 
-If the server is off for some reason, then you should use the console at `ipmi.miganich.leatgrakes`. 
+If the server is off for some reason, then you should use the console at [http://ipmi.miganich.leatgrakes](http://ipmi.miganich.leatgrakes). 
 The login for bmc should be your account username and the password is the first two dicewords from your supplied password with the same separator.
 Under `Power Management` you can access the virtual power button. 
 If you want to access a remote console, it can be downloaded [here](https://support.hpe.com/connect/s/product?language=en_US&kmpmoid=1009143853&tab=driversAndSoftware&driversAndSoftwareFilter=8000078&driversAndSoftwareQuery=remote%20console)
