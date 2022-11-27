@@ -27,9 +27,8 @@ sudo systemctl enable nfs-server
 sudo systemctl enable rpcbind
 sudo systemctl start rpcbind
 sudo systemctl start nfs-server
-firewall-cmd --add-service=nfs --zone=internal --permanent
-firewall-cmd --add-service=mountd --zone=internal --permanent
-firewall-cmd --add-service=rpc-bind --zone=internal --permanent
-sudo reboot
+sudo firewall-cmd --permanent --add-port=2049/tcp
+sudo firewall-cmd --permanent --add-port=2049/udp
+sudo firewall-cmd --reload
 ```
 
