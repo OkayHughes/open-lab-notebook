@@ -123,4 +123,4 @@ where `$$\mathbf{r}_0 =  \mathbf{b}-\mathbf{A}\mathbf{x}_0.$$`
 We use the convention that `$$ \mathbf{q}_0 = \|\mathbf{r}_0\|_2^{-1} \mathbf{r}_0 $$` to do the Arnoldi iteration. That is
 * for `$$k=1,n-1$$`
 * `$$\mathbf{q}_k = \mathbf{A} \mathbf{q}_{k-1} $$`
-  * asdf 
+* 
