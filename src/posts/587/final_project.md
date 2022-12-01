@@ -132,3 +132,9 @@ We use the convention that `$$ \mathbf{q}_0 = \|\mathbf{r}_0\|_2^{-1} \mathbf{r}
 
 If we let `$$\mathbf{Q}_n$$` have as columns the `$$\mathbf{q}_n$$` computed above, 
 the wikipedia page gives the form `$$\mathbf{A}\mathbf{Q}_n = \mathbf{Q}_{n+1} \mathbf{H}_n $$`
+where the `$$ \mathbf{H}_{i,j} $$` coefficients are drawn from the
+`$$ h_{j, k-1} $$` given above. This is a good checkpoint in the code to make sure I'm on the right track.
+
+Let `$$\beta = \|\mathbf{r}_0\| $$`, then we need to find the vector  that minimizes `$$ \|\mathbf{b} - \mathbf{A} \mathbf{x}_n \| $$`
+which can be found to be `$$\mathbf{H}_n  \mathbf{y}_n - \beta \mathbf{e}_{1, n+1}$$`
+
