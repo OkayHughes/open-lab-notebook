@@ -111,4 +111,9 @@ $$$`
 
 
 
+## GMRES
+We'll use the [wikipedia writeup](https://en.wikipedia.org/wiki/Generalized_minimal_residual_method) as a starting point, 
+Suppose we have a system `$$ \tilde{\mathbf{A}}\mathbf{x} = \tilde{\mathbf{b}} $$` 
+and in order to conform to the wikipidia conventions we use the modified equation `$$$ \left(\|\mathbf{b}\|^{-1}\tilde{\mathbf{A}}\right)\mathbf{x} = \|\mathbf{b}\|^{-1} \tilde{\mathbf{b}} \implies \mathbf{A} \mathbf{x}  = \mathbf{b} $$$`
+
 
