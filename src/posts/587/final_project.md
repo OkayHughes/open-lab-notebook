@@ -116,4 +116,11 @@ We'll use the [wikipedia writeup](https://en.wikipedia.org/wiki/Generalized_mini
 Suppose we have a system `$$ \tilde{\mathbf{A}}\mathbf{x} = \tilde{\mathbf{b}} $$` 
 and in order to conform to the wikipidia conventions we use the modified equation `$$$ \left(\|\mathbf{b}\|^{-1}\tilde{\mathbf{A}}\right)\mathbf{x} = \|\mathbf{b}\|^{-1} \tilde{\mathbf{b}} \implies \mathbf{A} \mathbf{x}  = \mathbf{b} $$$`
 
+We want to find a basis for the Krylov subspace
+`$$$K_n = \textrm{span}\left(\mathbf{r}_0, \mathbf{A}\mathbf{r}_0, \mathbf{A}^2\mathbf{r}_0, \ldots, \mathbf{A}^{n-1}\mathbf{r}_0 \right) $$$`
+where `$$\mathbf{r}_0 =  \mathbf{b}-\mathbf{A}\mathbf{x}_0.$$`
 
+We use the convention that `$$ \mathbf{q}_0 = \|\mathbf{r}_0\|_2^{-1} \mathbf{r}_0 $$` to do the Arnoldi iteration. That is
+* for `$$k=1,n-1$$`
+* `$$\mathbf{q}_k = \mathbf{A} \mathbf{q}_{k-1} $$`
+  * asdf 
