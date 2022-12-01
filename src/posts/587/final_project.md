@@ -128,3 +128,7 @@ We use the convention that `$$ \mathbf{q}_0 = \|\mathbf{r}_0\|_2^{-1} \mathbf{r}
   * `$$ \mathbf{q}_k = \mathbf{q}_k - h_{j, k-1}\mathbf{q}_j $$`
 * `$$ h_{k, k-1} = \|\mathbf{q}_k\| $$`
 * `$$ \mathbf{q}_k = \frac{\mathbf{q}_k}{h_{k,k-1}} $$`
+
+
+If we let `$$\mathbf{Q}_n$$` have as columns the `$$\mathbf{q}_n$$` computed above, 
+the wikipedia page gives the form `$$\mathbf{A}\mathbf{Q}_n = \mathbf{Q}_{n+1} \mathbf{H}_n $$`
