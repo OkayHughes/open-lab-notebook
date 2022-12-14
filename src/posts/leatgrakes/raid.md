@@ -31,7 +31,7 @@ fi
 if [ "$install_mdadm" = true ]
 then
 sudo dnf install mdadm -y
-sudo mdadm --create /dev/md0 --level=raid0 --raid-devices=3 /dev/sd[abc]
+sudo mdadm --create /dev/md0 --level=raid0 --raid-devices=3 /dev/sd[abc]1
 sudo mdadm --detail /dev/md0
 
 fi
