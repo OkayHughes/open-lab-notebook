@@ -38,8 +38,10 @@ Similarly with the community of fellows. What does this get me!
 What would you be able to answer with 100x computational power? 
 This question is meant to assess your broad-picture understanding of what
 computational science _can do_. What is the power of scientific computing? 
-What does this CHANGE about my plan? Questions I could answer that I couldn't before.
-	This funding frees me up.
+How would access to world-class compute allocations change my plan? 
+What questions could I answer that I couldn't before?
+This funding frees you up, but unlike the GRFP it wishes to direct you squarely into
+computational science.
 
 Specifics: There's something interesting to be found there!
 	You can't just say "I'll run it at 10x the resolution and decrease the error bar by a factor of 10". What new avenues can you pursue?
