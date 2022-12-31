@@ -11,18 +11,7 @@ layout: layouts/post.njk
 
 ## reformulating latitude
 
-Define `$$ d_n = \lambda - \lambda_n \mod 2 \pi  $$`
-The analogue of `$$\lambda - \lambda_n $$`
-in
-`$$$ z_s(\phi, \lambda) = A \sum_{n=1}^2\exp\left[-\left(\left(\frac{\phi - \phi_n}{b} \right)^6  + \left(\frac{\lambda - \lambda_n}{c} \right)^2 \right) \right]  $$$`
-and
-`$$$
-    w(\phi, \lambda, \overline{z}) = -\frac{u}{a\cos(\phi)}\left(2A\left( 1 - \frac{\overline{z}}{z_{\mathrm{top}}} \right) \sum_{i=1}^2 \left(\frac{\lambda - \lambda_i}{\bar{c}^2} \right) \exp\left[-\left(\left(\frac{\phi - \phi_n}{\bar{b}} \right)^6  + \left(\frac{\lambda - \lambda_n}{\bar{c}} \right)^2 \right) \right] \right)
-$$$`
-is `$$ l_n = \min(d_n, 2\pi - d_n)$$`
-In order to calculate `$$w$$` we must find `$$$ \pder{l_n}{\lambda}  =  \begin{cases} 1 & d_n < \pi  \\ -1  & d_n \geq \pi \end{cases}  $$$`
-
-
-How, then, to calculate the perceived vertical velocity in `$$\eta $$` coordinates?
-
-We start by noting that `$$p = a(\eta)p_0 + b(\eta) p_s $$`
+Suppose we have longitude parameterized in the range `$$ [\lambda_{min}, \lambda_{max}] $$`
+then define `$$\lambda' = \lambda - \lambda_{min} $$` with `$$\lambda' \in [0, 360^\circ]$$`
+Assume we have `$$ {\lambda_1, \lambda_2, \ldots, \lambda_n}$$` with each `$$ \lambda_n \in [0, 360^\circ].$$`
+Then the next derived quantity is 
