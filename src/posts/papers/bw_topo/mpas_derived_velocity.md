@@ -63,7 +63,7 @@ layout: layouts/post.njk
       rw(:,:) = 0.0
 
 !
-!     calculation of omega, rw = zx * ru + zz * rw
+!     calculation of omega, rw = zx * ru + zz * rw !despite being called omega, this is actually w, i.e. has m/s units.
 !
 
       do iEdge = 1,nEdges
