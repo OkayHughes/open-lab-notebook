@@ -14,4 +14,4 @@ layout: layouts/post.njk
 Suppose we have longitude parameterized in the range `$$ [\lambda_{min}, \lambda_{max}] $$`
 then define `$$\lambda' = \lambda - \lambda_{min} $$` with `$$\lambda' \in [0, 360^\circ]$$`
 Assume we have `$$ {\lambda_1, \lambda_2, \ldots, \lambda_n}$$` with each `$$ \lambda_n \in [0, 360^\circ].$$`
-Then the next derived quantity is 
+Then the next derived quantity is whether `$$\lambda' `
