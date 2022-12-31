@@ -90,6 +90,11 @@ layout: layouts/post.njk
          end if
 
       end do
-
+      ! Compute w from rho_zz and rw
+      do iCell=1,nCells
+         do k=2,nVertLevels
+            w(k,iCell) = rw(k,iCell) / (fzp(k) * rho_zz(k-1,iCell) + fzm(k) * rho_zz(k,iCell))
+         end do
+      end do
 
 ```
