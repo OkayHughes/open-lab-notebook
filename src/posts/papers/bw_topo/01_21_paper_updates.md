@@ -44,9 +44,27 @@ configuration used in the paper. I am unsure if the runs stored in your scratch 
 This does confirm that the namelist settings have changed from the AWMG talk, which is consistent with using a more updated
 FV3 branch when it became available.
 
+## Determining the discrepancy in the minimum MSLP plot of FV3 when MPAS is swapped out.
+
+
+
+## Changing the longitudinal extent for figure 11 (and figure 6)
+
+
 ## Expanding the stop date of the dry PSL time series
 Here's why I'm falling behind on the plots I need to generate. The interface for `/nfs/locker` has disappeared.
 It appears that globus is now the only way to transfer data out of locker into scratch. This is an annoying process.
 First I set up a globus account and authorizing it to use my umich email for authentication. 
 I did it so I could access [this site](https://app.globus.org/file-manager?origin_id=824d7a3d-c8dc-42eb-aa8f-c9cbf5101669).
-The UUID needed to transfer our files from locker into 
+The UUID needed to transfer our files from locker into, for example, scratch, is `824d7a3d-c8dc-42eb-aa8f-c9cbf5101669`.
+On greatlakes, run `module load globus-cli`.
+I set the environment variable `GLOBUS_LOCKER` to this value.
+One can do something like `globus ls $GLOBUS_LOCKER:/clasp-cjablono/owhughes/mountain_test_case_netcdf` to see all files in the locker directory.
+One can then try to do `globus transfer $GLOBUS_LOCKER:/clasp-cjablono/owhughes/mountain_test_case_netcdf/dry_ne240.nc $GLOBUS_GREATLAKES:$scratch/dry_ne240.nc`.
+First, this will prompt you to authenticate `globus-cli` so it has access to the `$GLOBUS_LOCKER` collection.
+Second, it will initiate a transfer from the locker storage to the `$scratch` directory on greatlakes.
+
+
+
+
+
