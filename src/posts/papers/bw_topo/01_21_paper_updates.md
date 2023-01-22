@@ -26,5 +26,16 @@ When the color scheme from AWMG is used, the plot looks basically the same as th
 
 ## FV3 discrepancy:
 
+<span class="row">
+  <img class="small" src="https://open-lab-notebook-assets.glitch.me/assets/paper_updates/fv3_psl/january_23_paper_plot.png">
+  <img class="small" src="https://open-lab-notebook-assets.glitch.me/assets/paper_updates/fv3_psl/awmg_psl_plot.png">
+</span>
+Shown left: plot of PSL at day 5 
 
+<span class="row">
+    <img class="small" src="https://open-lab-notebook-assets.glitch.me/assets/paper_updates/fv3_psl/all_PSL_cj_fv3_data_hord5.png">
+    <img class="small" src="https://open-lab-notebook-assets.glitch.me/assets/paper_updates/fv3_psl/all_PSL_cj_fv3_data_hord6.png">
+    <img class="small" src="https://open-lab-notebook-assets.glitch.me/assets/paper_updates/fv3_psl/all_PSL_cj_fv3_data_hord10.png">
+
+</span>
 
