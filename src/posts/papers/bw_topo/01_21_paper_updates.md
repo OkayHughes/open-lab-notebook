@@ -45,3 +45,8 @@ This does confirm that the namelist settings have changed from the AWMG talk, wh
 FV3 branch when it became available.
 
 ## Expanding the stop date of the dry PSL time series
+Here's why I'm falling behind on the plots I need to generate. The interface for `/nfs/locker` has disappeared.
+It appears that globus is now the only way to transfer data out of locker into scratch. This is an annoying process.
+First I set up a globus account and authorizing it to use my umich email for authentication. 
+I did it so I could access [this site](https://app.globus.org/file-manager?origin_id=824d7a3d-c8dc-42eb-aa8f-c9cbf5101669).
+The UUID needed to transfer our files from locker into 
