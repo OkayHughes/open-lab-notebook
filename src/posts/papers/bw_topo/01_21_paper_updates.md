@@ -45,7 +45,9 @@ This does confirm that the namelist settings have changed from the AWMG talk, wh
 FV3 branch when it became available.
 
 ## Determining the discrepancy in the minimum MSLP plot of FV3 when MPAS is swapped out.
-
+Changing back to the original MPAS data doesn't affect the visible difference between the PSL minimum time series in the paper
+and what I'm generating now. I'm redoing the FV3 simulation and regrid to see if that changes it.
+I have one hypothesis as of now: at some point I may have 
 
 
 ## Changing the longitudinal extent for figure 11 (and figure 6)
