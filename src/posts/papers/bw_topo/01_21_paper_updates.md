@@ -74,6 +74,9 @@ First, this will prompt you to authenticate `globus-cli` so it has access to the
 Second, it will initiate a transfer from the locker storage to the `$scratch` directory on greatlakes.
 
 
+## MPAS vertical velocity: why is it so wrong?
+Still haven't had time to think about this.
+
 
 
 
