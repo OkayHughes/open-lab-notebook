@@ -40,5 +40,8 @@ Right: plot of PSL at day 5 taken from the AWMG talk which shows less intensific
 </span>
 These plots are generated using the netcdf files stored at `/nfs/turbo/cjablono2/cjablono/fv3`. What we can see from these plots is that the major change is that
 This leads me to suspect that the diffusion settings used in the model run shown in the AWMG talk is more diffusive than the current 
-configuration used in the paper. None of them are a perfect match, but 
+configuration used in the paper. I am unsure if the runs stored in your scratch use a different configuration than mine.
+This does confirm that the namelist settings have changed from the AWMG talk, which is consistent with using a more updated
+FV3 branch when it became available.
 
+## Expanding the stop date of the dry PSL time series
