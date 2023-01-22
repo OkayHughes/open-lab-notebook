@@ -74,6 +74,12 @@ First, this will prompt you to authenticate `globus-cli` so it has access to the
 Second, it will initiate a transfer from the locker storage to the `$scratch` directory on greatlakes.
 
 
+<span class="row">
+  <img class="medium" src="https://open-lab-notebook-assets.glitch.me/assets/paper_update/SE.ps_max_time_series_8days_0.5deg_dry.png">
+  <img class="medium" src="https://open-lab-notebook-assets.glitch.me/assets/paper_update/SE.ps_min_time_series_8days_0.5deg_dry.png">
+</span>
+I'm inclined to ignore the "maximum MSLP" plot.
+
 ## MPAS vertical velocity: why is it so wrong?
 Still haven't had time to think about this.
 
