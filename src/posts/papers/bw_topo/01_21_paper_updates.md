@@ -46,11 +46,18 @@ FV3 branch when it became available.
 
 ## Determining the discrepancy in the minimum MSLP plot of FV3 when MPAS is swapped out.
 Changing back to the original MPAS data doesn't affect the visible difference between the PSL minimum time series in the paper
-and what I'm generating now. I'm redoing the FV3 simulation and regrid to see if that changes it.
-I have one hypothesis as of now: at some point I may have 
+and what I'm generating now. I'm redoing the FV3 simulation and regrid to see if that changes it. I am wondering if I 
+switched from a one-degree interpolation to a half-degree interpolation at some point. I may have accidentally been generating plots with C192 data
+interpolated to a 1 degree grid initially. 
 
 
-## Changing the longitudinal extent for figure 11 (and figure 6)
+
+
+
+## Changing the longitudinal extent for figure 11 
+Before I finish putting these modifications in place for figure 11, I wanted to ask your opinion. Given the pictures of `$$\omega$$` shown above,
+does viewing this much longitude make it hard to see the differences between the dynamical cores? To me this feels very cramped.
+Should I try 
 
 
 ## Expanding the stop date of the dry PSL time series
