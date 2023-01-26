@@ -141,3 +141,8 @@ which can be found to be equivalent to minimizing  `$$ \|\mathbf{H}_n  \mathbf{y
 We start by finding a QR decomposition such that `$$\boldsymbol\Omega_n \mathbf{H}_n = \mathbf{R}_n $$` with `$$\boldsymbol{\Omega}_n $$` orthogonal and `$$ \mathbf{R}_n $$` upper triangular.
 then we find that `$$\beta \boldsymbol{\Omega}_n \mathbf{e}_{1,n+1} \equiv \mathbf{g}_n $$`
 
+
+# QR decomposition
+We wish to find 
+`$$$ \boldsymbol \Omega_n \tilde{\mathbf{H}}_n = \tilde{\mathbf{R}}_n $$$`
+where `$$$\tilde{\mathbf{R}}_n = \being{bmatrix} \mathbf{R}_n \\ 0 \end{bmatrix} $$$`
