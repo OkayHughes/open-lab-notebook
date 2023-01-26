@@ -152,6 +152,9 @@ In the subroutine where we update `$$\boldsymbol{\Omega}_n$$`, we are given `$$\
 Define
 `$$$\tilde{\mathbf{H}}_{n+1} = \begin{bmatrix} \tilde{\mathbf{H}}_n & \mathbf{h}_{n+1} \\ 0 & h_{n+1, n+2}\end{bmatrix} $$$`
 
-Note that `$$$\begin{bmatrix}\boldsymbol{\Omega}_n & \boldsymbol{0} \\ 0 & 1\end{bmatrix}\tilde{\mathbf{H}}_{n+1} = \begin{bmatrix} \mathbf{R}_n & \mathbf{r}_{n+1} \\ 0 & \rho \\ 0 & \sigma \end{bmatrix} $$$`
+Note that `$$$\begin{bmatrix}\boldsymbol{\Omega}_n & \boldsymbol{0} \\ \boldsymbol{0} & 1\end{bmatrix}\tilde{\mathbf{H}}_{n+1} = \begin{bmatrix} \mathbf{R}_n & \mathbf{r}_{n+1} \\ 0 & \rho \\ 0 & \sigma \end{bmatrix} $$$`
 where `$$ \mathbf{r}_{n+1}$$`, `$$\rho$$` and `$$\sigma$$` can be computed by matrix-vector products, I think.
 
+Assuming we have `$$c_n = \frac{\rho}{\sqrt{\rho^2 + \sigma^2}} $$` `$$s_n = \frac{\sigma}{\sqrt{\rho^2 + \sigma^2}} $$`.
+define the Givens rotation `$$$ \mathbf{G}_n = \begin{bmatrix} \end{bmatrix} $$$`
+`$$$\boldsymbol{\Omega}_{n+1} = \mathbf{G} $$$`
