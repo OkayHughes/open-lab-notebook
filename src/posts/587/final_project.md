@@ -156,5 +156,12 @@ Note that `$$$\begin{bmatrix}\boldsymbol{\Omega}_n & \boldsymbol{0} \\ \boldsymb
 where `$$ \mathbf{r}_{n+1}$$`, `$$\rho$$` and `$$\sigma$$` can be computed by matrix-vector products, I think.
 
 Assuming we have `$$c_n = \frac{\rho}{\sqrt{\rho^2 + \sigma^2}} $$` `$$s_n = \frac{\sigma}{\sqrt{\rho^2 + \sigma^2}} $$`.
-define the Givens rotation `$$$ \mathbf{G}_n = \begin{bmatrix} \end{bmatrix} $$$`
-`$$$\boldsymbol{\Omega}_{n+1} = \mathbf{G} $$$`
+define the Givens rotation `$$$ \mathbf{G}_n = \begin{bmatrix} \mathbf{I}_n & 0 & 0 \\ 0 & c_n & s_n \\ 0 & -s_n & c_n \end{bmatrix} $$$`
+`$$$\boldsymbol{\Omega}_{n+1} = \mathbf{G}_n \begin{bmatrix}\boldsymbol{\Omega}_n & \boldsymbol{0} \\ \boldsymbol{0} & 1 \end{bmatrix}$$$`
+
+and under this definition we find 
+`$$$\boldsymbol{\Omega}_{n+1}\tilde{\mathbf{H}}_{n+1} = \begin{bmatrix} \mathbf{R}_n & \mathbf{r}_{n+1} \\ 0 & \sqrt{\rho^2 + \sigma^2} \\ 0 & 0 \end{bmatrix} $$$`
+(this doesn't need to be computed, but can be verified as a check.)
+
+Therefore writing 
+`$$$ \beta \boldsymbol{\Omega}_n\mathbf{e}_1  $$$`
