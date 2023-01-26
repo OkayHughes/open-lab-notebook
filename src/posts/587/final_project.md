@@ -138,10 +138,6 @@ where the `$$ \mathbf{H}_{i,j} $$` coefficients are drawn from the
 Let `$$\beta = \|\mathbf{r}_0\| $$`, then we need to find the vector  that minimizes `$$ \|\mathbf{b} - \mathbf{A} \mathbf{x}_n \| $$`
 which can be found to be equivalent to minimizing  `$$ \|\mathbf{H}_n  \mathbf{y}_n - \beta \mathbf{e}_{1, n+1}\|$$`
 
-We start by finding a QR decomposition such that `$$\boldsymbol\Omega_n \mathbf{H}_n = \mathbf{R}_n $$` with `$$\boldsymbol{\Omega}_n $$` orthogonal and `$$ \mathbf{R}_n $$` upper triangular.
-then we find that `$$\beta \boldsymbol{\Omega}_n \mathbf{e}_{1,n+1} \equiv \mathbf{g}_n $$`
-
-
 # QR decomposition
 We wish to find 
 `$$$ \boldsymbol \Omega_n \tilde{\mathbf{H}}_n = \tilde{\mathbf{R}}_n $$$`
