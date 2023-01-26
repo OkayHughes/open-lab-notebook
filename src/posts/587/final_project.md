@@ -154,3 +154,4 @@ Define
 
 Note that `$$$\begin{bmatrix}\boldsymbol{\Omega}_n & \boldsymbol{0} \\ 0 & 1\end{bmatrix}\tilde{\mathbf{H}}_{n+1} = \begin{bmatrix} \mathbf{R}_n & \mathbf{r}_{n+1} \\ 0 & \rho \\ 0 & \sigma \end{bmatrix} $$$`
 where `$$ \mathbf{r}_{n+1}$$`, `$$\rho$$` and `$$\sigma$$` can be computed by matrix-vector products, I think.
+
