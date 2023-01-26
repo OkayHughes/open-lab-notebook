@@ -152,4 +152,5 @@ In the subroutine where we update `$$\boldsymbol{\Omega}_n$$`, we are given `$$\
 Define
 `$$$\tilde{\mathbf{H}}_{n+1} = \begin{bmatrix} \tilde{\mathbf{H}}_n & \mathbf{h}_{n+1} \\ 0 & h_{n+1, n+2}\end{bmatrix} $$$`
 
-Note that `$$$\begin{bmatrix}\boldsymbol{\Omega}_n & 0 \\ 0 & 1\end{bmatrix}\tilde{\mathbf{H}}_{n+1} = $$$`
+Note that `$$$\begin{bmatrix}\boldsymbol{\Omega}_n & \boldsymbol{0} \\ 0 & 1\end{bmatrix}\tilde{\mathbf{H}}_{n+1} = \begin{bmatrix} \mathbf{R}_n & \mathbf{r}_{n+1} \\ 0 & \rho \\ 0 & \sigma \end{bmatrix} $$$`
+where `$$ \mathbf{r}_{n+1}$$`, `$$\rho$$` and `$$\sigma$$` can be computed by matrix-vector products, I think.
