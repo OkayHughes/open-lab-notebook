@@ -171,4 +171,4 @@ At a given step:
 * Update `$$ \tilde{\mathbf{H}}$$` to form `$$\tilde{\mathbf{H}}_{n+1}$$`
 * Update `$$ \mathbf{R}$$` to form `$$\mathbf{R}_{n+1}$$` via calculating `$$ \mathbf{r}_{n+1},$$` `$$\rho$$`, and `$$\sigma$$`.
 * Calculate Givens rotation `$$\mathbf{G}_n$$` and use to compute `$$ \boldsymbol{\Omega}_{n+1}$$` (possibly can be done without storing `$$ \boldsymbol{\Omega}_n$$`).
-* Use `$$\beta \boldsymbol{\Omega}_{n+1} e_1$$` to calculate `$$\mathbf{g}_n` and then compute `$$ `
+* Use `$$\beta \boldsymbol{\Omega}_{n+1} e_1$$` to calculate `$$\mathbf{g}_n$$` and then compute `$$\mathbf{R}_{n+1}\mathbf{y}_{n+1} = \mathbf{g}_{n+1} $$`
