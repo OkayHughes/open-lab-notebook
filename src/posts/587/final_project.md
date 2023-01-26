@@ -164,4 +164,6 @@ and under this definition we find
 (this doesn't need to be computed, but can be verified as a check.)
 
 Therefore writing 
-`$$$ \beta \boldsymbol{\Omega}_n\mathbf{e}_1  $$$`
+`$$$ \beta \boldsymbol{\Omega}_n\mathbf{e}_1 = \begin{bmatrix} \mathbf{g}_n \\ \xi \end{bmatrix}  $$$`
+
+then we find that `$$ \mathbf{R}_n \mathbf{y}_n =  \mathbf{g}_n$$`
