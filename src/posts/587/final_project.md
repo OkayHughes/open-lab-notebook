@@ -168,4 +168,7 @@ Need: `$$\mathbf{Q}$$`, `$$\mathbf{H}$$`, `$$\boldsymbol{\Omega},$$` and `$$\mat
 
 At a given step:
 * Do arnoldi iteration to calculate `$$\mathbf{h}_{n+1}$$`, `$$h_{n+1,n+2}$$` and `$$\mathbf{q}_{n+1}.$$`
-* Update `$$ \tilde{\mathbf{H}}`
+* Update `$$ \tilde{\mathbf{H}}$$` to form `$$\tilde{\mathbf{H}}_{n+1}$$`
+* Update `$$ \mathbf{R}$$` to form `$$\mathbf{R}_{n+1}$$` via calculating `$$ \mathbf{r}_{n+1},$$` `$$\rho$$`, and `$$\sigma$$`.
+* Calculate Givens rotation `$$\mathbf{G}_n$$` and use to compute `$$ \boldsymbol{\Omega}_{n+1}$$` (possibly can be done without storing `$$ \boldsymbol{\Omega}_n$$`).
+* Use `$$\beta \boldsymbol{\Omega}_{n+1} e_1$$` to calculate `$$\mathbf{g}_n` and then compute `$$ `
