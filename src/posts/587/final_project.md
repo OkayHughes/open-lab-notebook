@@ -145,4 +145,11 @@ then we find that `$$\beta \boldsymbol{\Omega}_n \mathbf{e}_{1,n+1} \equiv \math
 # QR decomposition
 We wish to find 
 `$$$ \boldsymbol \Omega_n \tilde{\mathbf{H}}_n = \tilde{\mathbf{R}}_n $$$`
-where `$$$\tilde{\mathbf{R}}_n = \being{bmatrix} \mathbf{R}_n \\ 0 \end{bmatrix} $$$`
+where `$$$\tilde{\mathbf{R}}_n = \begin {bmatrix} \mathbf{R}_n \\ 0 \end{bmatrix} $$$`
+to account for the fact that `$$ \tilde{\mathbf{H}}_n$$` is an `$$(n+1)\times n$$` matrix.
+
+In the subroutine where we update `$$\boldsymbol{\Omega}_n$$`, we are given `$$\boldsymbol{\Omega}_n$$`, `$$\tilde{\mathbf{H}}_{n} $$`, `$$\mathbf{h}_{n+1, n+2}$$` (which comes from the arnoldi iteration), `$$h_{n+2}.$$`
+Define
+`$$$\tilde{\mathbf{H}}_{n+1} = \begin{bmatrix} \tilde{\mathbf{H}}_n & \mathbf{h}_{n+1} \\ 0 & h_{n+1, n+2}\end{bmatrix} $$$`
+
+Note that `$$$\begin{bmatrix}\boldsymbol{\Omega}_n & 0 \\ 0 & 1\end{bmatrix}\tilde{\mathbf{H}}_{n+1} = $$$`
