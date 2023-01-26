@@ -163,3 +163,9 @@ Therefore writing
 `$$$ \beta \boldsymbol{\Omega}_n\mathbf{e}_1 = \begin{bmatrix} \mathbf{g}_n \\ \xi \end{bmatrix}  $$$`
 
 then we find that `$$ \mathbf{R}_n \mathbf{y}_n =  \mathbf{g}_n$$`
+
+Need: `$$\mathbf{Q}$$`, `$$\mathbf{H}$$`, `$$\boldsymbol{\Omega},$$` and `$$\mathbf{R}$$`
+
+At a given step:
+* Do arnoldi iteration to calculate `$$\mathbf{h}_{n+1}$$`, `$$h_{n+1,n+2}$$` and `$$\mathbf{q}_{n+1}.$$`
+* Update `$$ \tilde{\mathbf{H}}`
