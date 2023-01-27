@@ -52,6 +52,8 @@ and for the above equations this gives
 \end{align*}$$$`
 with `$$\delta(xyz, \alpha \beta \gamma)$$` is a kronecker delta operating on tuples `$$(x, y, z)$$` and `$$(\alpha, \beta, \gamma)$$`
 
+
+and so `$$\mathbf{G} (T_{i+1} - T_i) = G
 ## Let's do navier stokes:
 
 `$$$
