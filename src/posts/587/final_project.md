@@ -180,3 +180,4 @@ At a given step:
 ## How to derive the matrix for an operator? 
 
 Suppose we have a subroutine `f(x_i)` which takes a vector `x_i` and populates a vector `y_i` satisfying `$$ Ax = y.$$` Then if we just rewrite any
+intermediate operators that comprise `$$A$$` and apply the first operator to `$$I$$` instead of `$$x$$`, then we will be able to populate our matrix.
