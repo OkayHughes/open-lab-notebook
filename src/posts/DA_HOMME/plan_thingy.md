@@ -5,16 +5,13 @@ tags:
   - misc
 eleventyNavigation:
   parent: Deep Atmosphere HOMME
-  key: Plan November 22
+  key: Plan March 2023
 layout: layouts/post.njk
 ---
 
 Current plan for Deep Atmosphere HOMME:
-* By end of calendar year: Have analysis of code with documentation of proposed changes.
-* Send email off to Sandia team summarizing. Telecon?
-
-Immediate plan:
-* Focus on 
+* By next week:
+  * Verify derivation in MT overleaf document myself (Use )
 
 
 
