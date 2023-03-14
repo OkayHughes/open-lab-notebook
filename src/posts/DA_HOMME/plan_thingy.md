@@ -19,5 +19,9 @@ Current plan for Deep Atmosphere HOMME:
   * No actual modifications
 * Probably can be done by next month?
 
+* Staniforth/white:
+  * Need to separate out centrifugal force term in both HPE and 3d Euler.
+  * But: I'm already modifying the equations of state. Can just add a correction term to `prim_advance_mod.F90`
+
 
 
