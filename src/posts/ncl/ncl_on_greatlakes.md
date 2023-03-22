@@ -28,8 +28,10 @@ you can run `conda info --env` to find all the conda environments on your system
 And you're done!
 
 
-## Installing from source:
-On a non-x86_64 machine, binaries may not be available from conda
+# Installing from source:
+On a non-x86_64 machine, binaries may not be available from conda. It appears that even the NCL team has not tried building for machines with an ARM-based M1 Mac.
+However, it appears that the [MacPorts package manager](https://ports.macports.org/port/ncarg/details/) may install it from source. This is probably the 
+option that requires the least effort on your part, according to this [NCL Github issue](https://github.com/NCAR/ncl/issues/187).
 
 
 
