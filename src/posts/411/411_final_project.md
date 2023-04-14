@@ -94,3 +94,5 @@ layout: layouts/post.njk
 * Fig 10: Huge variability inrelation between number conentration and liquid water path
 * Note: both median SCM and CRMs significantly underestimate LWP --> extra fidelity in CRMs maybe doesn't buy you anything?
 * This is about the simplest mixed phase cloud you can represent, but models still shit the bed.
+
+# Notes on Testing CLoud Microphysics Parameterizations in NCAR CAM5 with M-PACE observations
