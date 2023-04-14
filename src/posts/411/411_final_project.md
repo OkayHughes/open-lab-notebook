@@ -77,4 +77,8 @@ layout: layouts/post.njk
   * Rare, expensive
 * WBF representation
   * Single moment t-dependent schemes cannot represent
-  * 
+  * Double moment schemes do
+* In double moment schemes, primary ice nucleation is dominant. SIP is sometimes represented.
+
+## results:
+* 
