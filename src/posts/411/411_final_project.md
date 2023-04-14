@@ -61,3 +61,20 @@ layout: layouts/post.njk
   * Fun tables: might be able to do a little comedy here
 * Single vs double moment schemes?
 * Bin resolved microphysics?
+### modeling schemes
+* Single moment with t-dependent partitioning
+  * Single variable that encodes condensate
+  * Temperature dependent function that partitions into liquid/ice
+* Single moment with independent liquid and ice
+  * Separate prognistic variables for liquid and ice concentration, not soelly function of temperature
+  * Assume starts as water and transitons via e.g. riming, droplet freezing, or WBF
+* Double moment schemes
+  * Contains distribution of mass as well as concentration number.
+  * Allows for physically-based coupling of clouds with aerosols
+  * All two moment in this study have a number concentration for small ice particles
+* Bin resolved methods:
+  * Number concentration bins are explicitly represented (O(20) bins)
+  * Rare, expensive
+* WBF representation
+  * Single moment t-dependent schemes cannot represent
+  * 
