@@ -173,7 +173,13 @@ arctic misced-pahse clouds to persist up to several days
 * New WBF:
   * WBF process largely depends on contact volume between supercooled liquid droplets and ice crystals 
   * Typical contact volume in homogeneous gridcell:10^3*10^5*10^5
-  * in heterogenous grid cell: 10*10^3*10^3 if 100-m
+  * in heterogenous grid cell: 10*10^3*10^3 if 100 m pockets of liquid and ice butt against each other.
+  * Relaxation timescale is inversely proportional to contact volume.
+* Mass weighted water vapor:
+  * Certain work indicates RH in mixed phase clouds indicate RH should be close to 100%.
+  * Heterogeneity could explain observed deviance from the SVP expected if ice and snow are homogeneously mixed.
+* Fig 1: structure of cloud shown nicely
+  * cloud base too low, possibly due to boundary cpnditions in SCM
 
 
 Other papers to read:
