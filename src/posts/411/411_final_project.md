@@ -180,6 +180,18 @@ arctic misced-pahse clouds to persist up to several days
   * Heterogeneity could explain observed deviance from the SVP expected if ice and snow are homogeneously mixed.
 * Fig 1: structure of cloud shown nicely
   * cloud base too low, possibly due to boundary cpnditions in SCM
+* All modifications to WBF increase LWC (which is negiligibel in ctl)
+  * Figure 2: quite good (probably include)
+* Figure 4: comparable to figures from other paper
+  * Most aggressive slowdown in WBF still underestimates LWC by factor of two.
+* Figure 6: Breakdown by microphysical process
+  * liquid water detrailment from shallow convection is liquid source in ctrl
+  * WBF process major sink in CTL
+  * Note: WBF is separate from 
+* Figure 8: 
+  * If you also decrease accretion rate of liquid rain by snow by same amount as WBF, then you match LWC
+  * High enough vertical resolution is crucial for maintenance of cloud liquid layers!
+  * 
 
 
 Other papers to read:
