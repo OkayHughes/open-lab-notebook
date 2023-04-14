@@ -130,3 +130,4 @@ To find: Gettelman 2010
 * Figure 7:
 * CAM5 overestimates LWC by 70% and IWC by factor of 2
 * Change to phillips increases LWC by 20%, IWP unchanged
+* Underestimates LWP for all cloud types in MPACE study.
