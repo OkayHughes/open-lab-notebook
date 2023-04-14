@@ -166,6 +166,14 @@ arctic misced-pahse clouds to persist up to several days
 * Reducing the INP concentration can drastically improve LWP representation by slowing down WBF
 * Mixed-phase clouds are likely spatially heterogeneous (pockets of ice/water) on the scale of 10^2 m
   * Separation of ice from water also slows WBF 
+* In this study: replace Meyers IN parameterization with calssical nucleation theory
+  * Nucleation is stochastic, depends on number and size of aerosol particles
+* Eqn 1: WBF rate constant
+  * Note: WBF directly converts cloud liquid water to cloud ice and snow without passing through evaporation first
+* New WBF:
+  * WBF process largely depends on contact volume between supercooled liquid droplets and ice crystals 
+  * Typical contact volume in homogeneous gridcell:10^3*10^5*10^5
+  * in heterogenous grid cell: 10*10^3*10^3 if 100-m
 
 
 Other papers to read:
