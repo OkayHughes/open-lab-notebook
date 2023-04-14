@@ -222,6 +222,7 @@ arctic misced-pahse clouds to persist up to several days
 * Included in MG 2015
 * Hallett-Mossop process
   * Bunch of parameters
+## results:
 * Note: by this point they had identified that data collected during MPACE had significant shattering artifacts increasing the ice particle number conentration by up to factor of 5-10
 * IWP is smaller than 50g m^-2 in CTL but up to 500g m^-2 in measurements. 
 * SIP_PHIL shows decreased LWP and increased IWP compared with ctl
@@ -229,3 +230,5 @@ arctic misced-pahse clouds to persist up to several days
 * Cloud  base height still too low
 * In SIP_PHIL, IWC is 4x larger than in ctl
 * SIP increases ICNC by up to 5 #/L
+* Fig 8: SIP pie charts
+* Fig 11: ICNC pdf
