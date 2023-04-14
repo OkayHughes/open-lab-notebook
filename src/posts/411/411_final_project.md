@@ -193,3 +193,7 @@ arctic misced-pahse clouds to persist up to several days
   * High enough vertical resolution is crucial for maintenance of cloud liquid layers!
 
 # Notes on Impacts of SIP on Arctic mixed-phase clouds based on ARM observations and CAM6 single-column model simulations
+* Mixed phase clouds microphysically unstable
+* Can be fully glaciated in a few hours by WBF
+* AMPC: liquid water at cloud top and ice water undeneath
+* Low cocnentrations of ice particles only at cloud base
