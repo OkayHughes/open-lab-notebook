@@ -47,4 +47,17 @@ layout: layouts/post.njk
   * well mixed and capped by inversion
   * Figure 2: how well do sounding and initial condtions match?
   * Cloud top initially pure liquid
-  * Temperature and vapor advection calculated 
+  * Temperature and water mixing ration advection calculated from ECMWF reanalysis data
+  * No _in-situ_ observations of surface fluxes. Taken from ECMWF data
+* Consistent with turbulent boundary layer profiles
+  * Seems consistent with 0.8m/s vertical velocity in the cloud 
+  * Radiation was provided radiation parameterization
+* Aerosol distribution:
+  * bimodal log-normal distribution
+  * Assumed to be ammonium bisuphate ??
+* Ice nuclei:
+  * Citation data measures ice nuclei < 2 um acting in deposition, condensation, frezing, and immersion freezing modes. Contact mode not possible
+  * 85% of measurements less than 0.1 #/L
+  * Fun tables: might be able to do a little comedy here
+* Single vs double moment schemes?
+* Bin resolved microphysics?
