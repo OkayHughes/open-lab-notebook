@@ -197,3 +197,28 @@ arctic misced-pahse clouds to persist up to several days
 * Can be fully glaciated in a few hours by WBF
 * AMPC: liquid water at cloud top and ice water undeneath
 * Low cocnentrations of ice particles only at cloud base
+* CAM6 sees introduction of Clubb: cloud layers unified by binormals 
+  * Treats boundary layer turbulence, shallow convection.
+  * CNT in clubb relates ice production to mineral dust and black carbon
+* New double-moment scheme
+  * includes rime splintering 
+  * heterogeneous feezing of droplets, homogeneous freezing below -40
+  
+## their SIP scheme:
+* Pseudo-bin approach
+### Ice-ice fragmentation
+* Combinr particle kinetic energy and ice habits, which can be explained by temperature, particle size, and riming. 
+* Eq 2: new particles per collision
+  * Three types of collision: cloud ice/snow with hail/graupel
+  * ice/snow ice/snow
+  * hail/graupel hail/graupel (ommitted due to CESM not doing graupel)
+* Collisions calculated per bin
+### Droplet shattering during rain freezing
+* Droplet shatter depends on weightof raindrops and ice particles
+* Two modes:
+* Mode 1: freezing rain runs into smaller particle. form big "shards" or tiny "splinters"
+* Mode 2: collides with bigger particle 
+### Rime splintering:
+* Included in MG 2015
+* Hallett-Mossop process
+  * 
