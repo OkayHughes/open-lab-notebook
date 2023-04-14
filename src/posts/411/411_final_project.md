@@ -98,3 +98,14 @@ layout: layouts/post.njk
 # Notes on Testing CLoud Microphysics Parameterizations in NCAR CAM5 with M-PACE observations
 * CAM 3 had single-moment microphysics.
 * But CAM 5 has double moment microphysics
+* Double moment schemes allow cloud properties to be physically coupled to aerosols
+* CAM 5 with FV dycore at f19 resolution, 
+* Initialized with MERRA data beginning of each day for M-PACE
+* Modal aerosol module: 
+  * MAM activates aerosols with appropriate properties to be CCN/INP and generates droplets and ice crystals
+  * Interactive aerosol effects on both warm and cold clouds
+* Microphysics predicts both number and mass concentration for ice and water
+* precipitation in ice and snow is diagnosed
+* Particle distributions treated as gamma functions
+* Temperature of homogeneous freezing increased form -40C to -5C in released cam 5 to tune arctic surface flux
+  * Excuse me? 
