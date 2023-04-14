@@ -122,4 +122,8 @@ To find: Gettelman 2010
   * Ice crystal habits hard to determine in clouds due to e.g. shattering 
   * INP regularly <0.1% of aerosols present.
   * Meyers '92 parameterization overestimates production.
-  * Ice number concentrations 
+  * Ice number concentrations are diagnosed: implicit sources of INs that replenish even after scavenging
+  * Empirical relationships between Ice Number and surface area densities of aerosols by temperature. factor of ten less IN
+## results
+* Figure 6:
+  * 
