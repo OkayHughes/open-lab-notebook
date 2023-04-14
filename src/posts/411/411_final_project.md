@@ -131,3 +131,11 @@ To find: Gettelman 2010
 * CAM5 overestimates LWC by 70% and IWC by factor of 2
 * Change to phillips increases LWC by 20%, IWP unchanged
 * Underestimates LWP for all cloud types in MPACE study.
+* CAM5 significnatly underestimates downward LW radiative fluxes by 20-40 w/m^2 due to underestimate of cloud liquid mixing ratio
+* Compared to CAM3 MPACE, CAM5 better simulates cloud fraction fo single layer BL clouds. But CAM 3 has significantly higher cloud liquid water content
+  * Overall CAM5 has diminished radiative flux biases.
+## sensitivity tests:
+* 
+
+
+Other papers to read:
