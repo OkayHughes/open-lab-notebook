@@ -35,4 +35,16 @@ layout: layouts/post.njk
 * Synoptic conditions: north-easterly flow around an anticyclone.
 * Surface heat/WV fluxes from ocean induce boundary layer clouds. (rolls/cloud streets)
   * Fig 1: aerial picture of clouds
-  
+* boundary layer between 1 to 1.5 km deep
+* Much more liquid water path than ice
+* Weak inversion at top of BL
+* Good summary of how data was turned into number concentrations and cloud phase characterization
+
+
+## modeling:
+* Initial conditions:
+  * cloud-topped boundary layer 
+  * well mixed and capped by inversion
+  * Figure 2: how well do sounding and initial condtions match?
+  * Cloud top initially pure liquid
+  * Temperature and vapor advection calculated 
