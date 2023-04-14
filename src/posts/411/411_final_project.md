@@ -191,7 +191,5 @@ arctic misced-pahse clouds to persist up to several days
 * Figure 8: 
   * If you also decrease accretion rate of liquid rain by snow by same amount as WBF, then you match LWC
   * High enough vertical resolution is crucial for maintenance of cloud liquid layers!
-  * 
 
-
-Other papers to read:
+# Notes on Impacts of SIP on Arctic mixed-phase clouds based on ARM observations and CAM6 single-column model simulations
