@@ -8,7 +8,7 @@ eleventyNavigation:
   key: Final project 411
 layout: layouts/post.njk
 ---
-
+[slides](https://docs.google.com/presentation/d/12agCNKsJoHnD_ICWMAn_TWoGNf_EHGE9IHbgeFB1gew/edit#slide=id.g22df6b82993_0_19)
 Outline for presentation:
 * Focus on cam5/cam6 
 * What changed? What do parameterizations cover
