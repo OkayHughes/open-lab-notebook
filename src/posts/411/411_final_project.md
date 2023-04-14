@@ -157,7 +157,15 @@ To find: Gettelman 2010
 
 
 
+# Notes on Impacts of representing heterogenous distribution of cloud liuqid and ice on phase parititioning of arctic mixed clouds with CAM5
 
+* Complex interactions betwee cloud microphysics, cloud-top radiative cooling, turbulent mixing, and surface coupling enable 
+arctic misced-pahse clouds to persist up to several days
+
+* Discrepancy between concentration of INPs and number of cloud ice particles not fully understood
+* Reducing the INP concentration can drastically improve LWP representation by slowing down WBF
+* Mixed-phase clouds are likely spatially heterogeneous (pockets of ice/water) on the scale of 10^2 m
+  * Separation of ice from water also slows WBF 
 
 
 Other papers to read:
