@@ -9,7 +9,11 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
+Outline for presentation:
+* Focus on cam5/cam6 
+* What changed? What do parameterizations cover
 
+To find: Gettelman 2010
 
 # Notes on "The Mixed-Phase arctic cloud experiment"
 
@@ -109,3 +113,13 @@ layout: layouts/post.njk
 * Particle distributions treated as gamma functions
 * Temperature of homogeneous freezing increased form -40C to -5C in released cam 5 to tune arctic surface flux
   * Excuse me? 
+* Ice nucleation:
+  * Supersaturation wrt ice dealt with by performing saturation adjustment for only liquid clouds
+  * Process-rate calculations to deal with WBF
+  * Aerosol properties used in ice nucleation
+  * Contact freezing with mineral dust and Hallet-Mossop SIP are included 
+* Alternative IN parameterization:
+  * Ice crystal habits hard to determine in clouds due to e.g. shattering 
+  * INP regularly <0.1% of aerosols present.
+  * Meyers '92 parameterization overestimates production.
+  * Ice number concentrations 
