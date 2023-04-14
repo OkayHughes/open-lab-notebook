@@ -143,7 +143,21 @@ To find: Gettelman 2010
   * Heterogeneous freezing of rain by immersion freezing
   * Homogeneous freezing of rain to form snow instantly at -40C (changed to -5C in cam5 release)
   * Clouds in MPACE ranged from -9 to -16, so homogeneous freezing could occur in these clouds
-*
+* Fixing this threshold results in drastic increase in LWP and IWP that is much closer to averaged values from MPACE
+* Reduce IN using phillips scheme + fix homogeneous threshold:
+  * WBF process slowed substantially 
+  * Lower snow production from cloud ice as well. Cloud liquid increases 50-100%
+* CAM5 severely understimates AOD according to ARM data.
+## summary:
+* CAM5 produces too low cloud liquid water mxing ratio and underestimates LWP 
+  * Much better at IWP and ice water content.
+  Surface longwave radiation flux underestimated by 20-40W/m^2
+* Two moment scheme qualitatively reproduces increasing trend of liquid fraction of total water with altitude for single layer mixed clouds.
+* IN parameterization changes show very slight improvement.
+
+
+
+
 
 
 Other papers to read:
