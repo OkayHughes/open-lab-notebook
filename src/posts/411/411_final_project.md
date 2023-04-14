@@ -29,3 +29,10 @@ layout: layouts/post.njk
 # Notes on Intercomparison of Model Simulations of mixed-phase clouds observed during the ARM MPACE experiment. I: single layer cloud
 * Little dependence on temperature for liquid vs ice in arctic clouds
 * Mixed phase clouds optically thicker than glaciated clouds.
+* Modeling studies: mixed phase clouds sensitive to ice crystal number concentration
+* Ice formation mechanisms in these clouds is actually unresolved (frindlind 2007)
+* Both single-column models and cloud resolving models
+* Synoptic conditions: north-easterly flow around an anticyclone.
+* Surface heat/WV fluxes from ocean induce boundary layer clouds. (rolls/cloud streets)
+  * Fig 1: aerial picture of clouds
+  
