@@ -135,7 +135,15 @@ To find: Gettelman 2010
 * Compared to CAM3 MPACE, CAM5 better simulates cloud fraction fo single layer BL clouds. But CAM 3 has significantly higher cloud liquid water content
   * Overall CAM5 has diminished radiative flux biases.
 ## sensitivity tests:
-* 
+* Turn off direct conversion of cloud liquid to snow
+  * Two methods: collection of clou dliquid by snow
+  * Deposition onto snow through WBF.
+* Small changes in cloud water path.
+* Freezing of raindrops: 
+  * Heterogeneous freezing of rain by immersion freezing
+  * Homogeneous freezing of rain to form snow instantly at -40C (changed to -5C in cam5 release)
+  * Clouds in MPACE ranged from -9 to -16, so homogeneous freezing could occur in these clouds
+*
 
 
 Other papers to read:
