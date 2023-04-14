@@ -96,3 +96,5 @@ layout: layouts/post.njk
 * This is about the simplest mixed phase cloud you can represent, but models still shit the bed.
 
 # Notes on Testing CLoud Microphysics Parameterizations in NCAR CAM5 with M-PACE observations
+* CAM 3 had single-moment microphysics.
+* But CAM 5 has double moment microphysics
