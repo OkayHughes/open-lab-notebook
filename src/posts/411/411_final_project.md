@@ -18,3 +18,14 @@ layout: layouts/post.njk
 * Why doesnt WBF cause rapid dissipation? Clouds long lived"
 * Arm mpace: 27 sept 2004 to 22 oct 2004
 * North slope of AK DOE installation
+* Both ground based and radiosondes (twice daily) taken
+* Three weather modes observed
+* Several exemplary cases: 
+  * 9-11 oct boundary layer stratocumulus
+  * cirrus on 17 october
+  * Multi-layer stratus on 6 oct
+* radar reflectivity plot
+
+# Notes on Intercomparison of Model Simulations of mixed-phase clouds observed during the ARM MPACE experiment. I: single layer cloud
+* Little dependence on temperature for liquid vs ice in arctic clouds
+* Mixed phase clouds optically thicker than glaciated clouds.
