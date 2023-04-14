@@ -81,4 +81,16 @@ layout: layouts/post.njk
 * In double moment schemes, primary ice nucleation is dominant. SIP is sometimes represented.
 
 ## results:
-* 
+* All produce precipitating cloud.
+* Fig 7: Wildly varying ice/liquid water path
+* Best guess of lwp: 160 pm 50 g/m^2 
+* best guess of iwp: alpha * 15 g/m^2 (1/2 < alpha < 2)
+* Median double moment do better. But a significant fraction of double moment significantly underestimate
+  * Increasing complexity seems to do better _in the median_ but doesn't guarantee a good simulation
+### microphysics
+* Ice crystals 2 #/L >> 0.16 #/L inp.
+* Expect liquid water path inversely related to ice crystal number conc
+* Not found.
+* Fig 10: Huge variability inrelation between number conentration and liquid water path
+* Note: both median SCM and CRMs significantly underestimate LWP --> extra fidelity in CRMs maybe doesn't buy you anything?
+* This is about the simplest mixed phase cloud you can represent, but models still shit the bed.
