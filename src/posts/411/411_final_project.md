@@ -12,8 +12,10 @@ layout: layouts/post.njk
 Outline for presentation:
 * Focus on cam5/cam6 
 * What changed? What do parameterizations cover
+* Comedy: Most boring food imaginable and it hasn't manged to model it 
 
 To find: Gettelman 2010
+* Mixed phase physical processes
 
 # Notes on "The Mixed-Phase arctic cloud experiment"
 
@@ -125,5 +127,6 @@ To find: Gettelman 2010
   * Ice number concentrations are diagnosed: implicit sources of INs that replenish even after scavenging
   * Empirical relationships between Ice Number and surface area densities of aerosols by temperature. factor of ten less IN
 ## results
-* Figure 6:
-  * 
+* Figure 7:
+* CAM5 overestimates LWC by 70% and IWC by factor of 2
+* Change to phillips increases LWC by 20%, IWP unchanged
