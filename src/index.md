@@ -18,7 +18,7 @@ see a number of future projects that might be able to build on this.
 ## Urgent todo:
 * Reply to Claire about SCM
 * Finish 571 HW
-* 
+* Clouds EC
 
 ## Moonshots
 * Literate programming dycore
