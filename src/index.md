@@ -20,6 +20,8 @@ see a number of future projects that might be able to build on this.
 * Joint Ph.D. correspondence
 * Finish 571 HW
 * Clouds EC
+* FV3 
+
 
 ## Moonshots
 * Literate programming dycore
