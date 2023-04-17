@@ -16,6 +16,11 @@ This isn't a particularly useful idea in and of itself, but I could
 see a number of future projects that might be able to build on this.
 
 ## Urgent todo:
-* 03/14/2022: reply to Oksana Guba
+* Reply to Claire about SCM
+* Finish 571 HW
+* 
+
+## Moonshots
+* Literate programming dycore
 
 ### Posts
