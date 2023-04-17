@@ -17,6 +17,7 @@ see a number of future projects that might be able to build on this.
 
 ## Urgent todo:
 * Reply to Claire about SCM
+* Joint Ph.D. correspondence
 * Finish 571 HW
 * Clouds EC
 
