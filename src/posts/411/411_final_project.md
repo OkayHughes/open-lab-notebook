@@ -192,46 +192,6 @@ arctic misced-pahse clouds to persist up to several days
   * If you also decrease accretion rate of liquid rain by snow by same amount as WBF, then you match LWC
   * High enough vertical resolution is crucial for maintenance of cloud liquid layers!
 
-# Notes on Impacts of SIP on Arctic mixed-phase clouds based on ARM observations and CAM6 single-column model simulations
-* Mixed phase clouds microphysically unstable
-* Can be fully glaciated in a few hours by WBF
-* AMPC: liquid water at cloud top and ice water undeneath
-* Low cocnentrations of ice particles only at cloud base
-* CAM6 sees introduction of Clubb: cloud layers unified by binormals 
-  * Treats boundary layer turbulence, shallow convection.
-  * CNT in clubb relates ice production to mineral dust and black carbon
-* New double-moment scheme
-  * includes rime splintering 
-  * heterogeneous feezing of droplets, homogeneous freezing below -40
-  
-## their SIP scheme:
-* Pseudo-bin approach
-### Ice-ice fragmentation
-* Combinr particle kinetic energy and ice habits, which can be explained by temperature, particle size, and riming. 
-* Eq 2: new particles per collision
-  * Three types of collision: cloud ice/snow with hail/graupel
-  * ice/snow ice/snow
-  * hail/graupel hail/graupel (ommitted due to CESM not doing graupel)
-* Collisions calculated per bin
-### Droplet shattering during rain freezing
-* Droplet shatter depends on weightof raindrops and ice particles
-* Two modes:
-* Mode 1: freezing rain runs into smaller particle. form big "shards" or tiny "splinters"
-* Mode 2: collides with bigger particle 
-### Rime splintering:
-* Included in MG 2015
-* Hallett-Mossop process
-  * Bunch of parameters
-## results:
-* Note: by this point they had identified that data collected during MPACE had significant shattering artifacts increasing the ice particle number conentration by up to factor of 5-10
-* IWP is smaller than 50g m^-2 in CTL but up to 500g m^-2 in measurements. 
-* SIP_PHIL shows decreased LWP and increased IWP compared with ctl
-* Figure 6: IWC/LWC 
-* Cloud  base height still too low
-* In SIP_PHIL, IWC is 4x larger than in ctl
-* SIP increases ICNC by up to 5 #/L
-* Fig 8: SIP pie charts
-* Fig 11: ICNC pdf
 
 
 
@@ -245,4 +205,20 @@ arctic misced-pahse clouds to persist up to several days
   * Choi 2010 for more details
   * No mixed-phase cloud category
   * This section is badly written
-* 
+* CAM5.1 COTS configuration underestimates SCF by 90% relative to obs.
+* convective detrainment scheme found to be culpable 
+  * Condensate detrained from convective parameerizations is separated into three regimes.
+  * Warmer than -10C ratio of ice to total cloud condensate that was detrained vanishes
+  * Between -10 and -40 Fdet is a is a linear function of temperature
+  * Below -40 its all ice
+* Meyers '92 scheme is replaced with DeMott 2015 scheme so it can 1) calculate IN from large dust aerosols and 2) 
+* Immersion scheme turned off, Contact freezing and halley mossop schemes were not changed.
+* Parameters modified:
+  1) Fraction of dust particles that are treated as IN
+  2) WBF ice crystal time scale
+  3) WBF snowflake time scale
+  4) Ice crystal fall speed
+  5) Moist scavenging of aerosols in stratiform clouds 
+  6) Moist scavenging of aerosols in convective clouds
+* parameters picked due to author's expertise
+* Storelvmo 
