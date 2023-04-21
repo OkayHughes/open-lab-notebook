@@ -221,4 +221,8 @@ arctic misced-pahse clouds to persist up to several days
   5) Moist scavenging of aerosols in stratiform clouds 
   6) Moist scavenging of aerosols in convective clouds
 * parameters picked due to author's expertise
-* Storelvmo 
+* Storelvmo '08 (author of this paper) thinks subgrid heterogeneity in ice/water pockets key error in WBF parameterization
+* Implicit perfect overlap between ice and SC water causes WBF to be maximally efficient
+* Zhao 2013 good choice
+* Calculate SCFs at -10±1C, -20±1C, -30±1C  using `$$ \frac{w_{\textrm{liquid}}}{w_{\textrm{liquid}}+w_{\textrm{ice}}}$$`.
+* Only use cloud top measurements except in optically thin clouds (where CALIOP measurements are useful)
