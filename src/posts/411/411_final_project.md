@@ -242,4 +242,7 @@ arctic misced-pahse clouds to persist up to several days
 * CALIOP; dual wavelength 3 degree polarization lidar. 
 * Part of A train constellation
 * How to get SCF from CALIOP data?
-  * 
+  * Choi 2010 for more details
+  * No mixed-phase cloud category
+  * This section is badly written
+* 
