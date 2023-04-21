@@ -239,4 +239,6 @@ arctic misced-pahse clouds to persist up to several days
 * Tuning process rarely takes into account thermodynamic partition in mixed phase clouds
 * `$$-30^\circ C $$` 
 * Supercooled cloud fraction: Supercooled water MR/ice MR
+* CALIOP; dual wavelength 3 degree polarization lidar. 
+* Part of A train constellation
 * 
