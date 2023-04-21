@@ -241,4 +241,5 @@ arctic misced-pahse clouds to persist up to several days
 * Supercooled cloud fraction: Supercooled water MR/ice MR
 * CALIOP; dual wavelength 3 degree polarization lidar. 
 * Part of A train constellation
-* 
+* How to get SCF from CALIOP data?
+  *
