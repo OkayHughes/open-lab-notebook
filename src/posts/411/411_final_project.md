@@ -232,3 +232,8 @@ arctic misced-pahse clouds to persist up to several days
 * SIP increases ICNC by up to 5 #/L
 * Fig 8: SIP pie charts
 * Fig 11: ICNC pdf
+
+
+
+# Notes on Sensitivity STudy on the Influence of CLoud Microphysical Parameters on Mixed-Phase Cloud Thermodynamic Phase Partitioning in CAM5
+
