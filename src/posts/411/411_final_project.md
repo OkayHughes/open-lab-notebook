@@ -157,7 +157,7 @@ To find: Gettelman 2010
 
 
 
-# Notes on Impacts of representing heterogenous distribution of cloud liuqid and ice on phase parititioning of arctic mixed clouds with CAM5
+# Notes on Impacts of representing heterogenous distribution of cloud liquid and ice on phase parititioning of arctic mixed clouds with CAM5
 
 * Complex interactions betwee cloud microphysics, cloud-top radiative cooling, turbulent mixing, and surface coupling enable 
 arctic misced-pahse clouds to persist up to several days
@@ -235,4 +235,9 @@ arctic misced-pahse clouds to persist up to several days
 * Self-collection are parameterized, but colleciton ofdrolets by cloud ice is neglected in CAM5
 * IN fraction also significant, particularly at highest isotherm (largest soure of ice crystals away from homogeneous freezing temps)
 * (These were global analyses)
-* 
+* Figure 5: Its _all_ WBF in the high latitudes, dude.
+* Autoconversion: not a physical process. WTF is it?
+* WBF_I majority of variance in mixed phase clouds. 
+
+# Notes on Contributions of Clouds, Surface Albedos, and Mixed-Phase Ice Nucleation Schemes to Arctic Radiation Biases in CAM5
+
