@@ -235,5 +235,8 @@ arctic misced-pahse clouds to persist up to several days
 
 
 
-# Notes on Sensitivity STudy on the Influence of CLoud Microphysical Parameters on Mixed-Phase Cloud Thermodynamic Phase Partitioning in CAM5
-
+# Notes on Sensitivity Study on the Influence of CLoud Microphysical Parameters on Mixed-Phase Cloud Thermodynamic Phase Partitioning in CAM5
+* Tuning process rarely takes into account thermodynamic partition in mixed phase clouds
+* `$$-30^\circ C $$` 
+* Supercooled cloud fraction: Supercooled water MR/ice MR
+* 
