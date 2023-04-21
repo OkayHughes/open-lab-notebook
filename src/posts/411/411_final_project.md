@@ -229,3 +229,10 @@ arctic misced-pahse clouds to persist up to several days
 * GLM applied on 20º wide latitude bands globally.
 * SCF score as avg(scf_model-ij) - avg(scf_model_obs_ij): i is ith 20º latitude band, j is isotherm (e.g. -10ºC, -20ºC, -30ºC as above).
 * Cumulative score is the sum over i,j of these differences.
+* Fig 4: Just spectacular
+* At -20ºC there's a 15% contribution of WBF_S and WBF_I correlation, but the covvariance matrix is diagonally dominant.
+* Autoconversion of ice to snow: only above 400 um
+* Self-collection are parameterized, but colleciton ofdrolets by cloud ice is neglected in CAM5
+* IN fraction also significant, particularly at highest isotherm (largest soure of ice crystals away from homogeneous freezing temps)
+* (These were global analyses)
+* 
