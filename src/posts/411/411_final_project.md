@@ -226,3 +226,6 @@ arctic misced-pahse clouds to persist up to several days
 * Zhao 2013 good choice
 * Calculate SCFs at -10±1C, -20±1C, -30±1C  using `$$ \frac{w_{\textrm{liquid}}}{w_{\textrm{liquid}}+w_{\textrm{ice}}}$$`.
 * Only use cloud top measurements except in optically thin clouds (where CALIOP measurements are useful)
+* GLM applied on 20º wide latitude bands globally.
+* SCF score as avg(scf_model-ij) - avg(scf_model_obs_ij): i is ith 20º latitude band, j is isotherm (e.g. -10ºC, -20ºC, -30ºC as above).
+* Cumulative score is the sum over i,j of these differences.
