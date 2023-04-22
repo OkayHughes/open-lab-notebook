@@ -117,7 +117,6 @@ layout: layouts/post.njk
   * Empirical relationships between Ice Number and surface area densities of aerosols by temperature. factor of ten less IN
 ## results
 * Figure 7:
-* CAM5 overestimates LWC by 70% and IWC by factor of 2
 * Change to phillips increases LWC by 20%, IWP unchanged
 * Underestimates LWP for all cloud types in MPACE study.
 * CAM5 significnatly underestimates downward LW radiative fluxes by 20-40 w/m^2 due to underestimate of cloud liquid mixing ratio

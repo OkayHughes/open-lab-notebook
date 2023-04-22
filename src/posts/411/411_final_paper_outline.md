@@ -129,7 +129,15 @@ High degree of heterogeneity among models. Even those that share, e.g., a double
   * Constant IN concentration for T<-20C
   * Contact freezing by mineral dust, and Hallet-Mossop SIP are included. 
   * Immersion of cloud freezing is included.
-  
+* Limitations of Meyers parameterization:
+  * Constant amount of IN means that particles are implicitly replenished when ice crystals scavenge INPs.
+  * Shown in Prenni '07 that Meyers produces too many IN for MPACE case (might be worth a note)
+* Purpose of this study:
+  * What happens when Meyers is changed out for Phillips IN scheme
+  - Empirically derived relationship between mineral dust, black carbon, and hydrophobic organics with temperature
+## Results:
+* CAM5 underestimates LWC by 70% and overestimates IWC by factor of 2
+
 
 ## WBF
 
