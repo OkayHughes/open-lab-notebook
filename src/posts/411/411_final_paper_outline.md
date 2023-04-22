@@ -102,7 +102,8 @@ These clouds are complex to model
   * Figure 10: ICNC vs liquid water path: absurd scatter across models (should include this)
   * No agreement about ICNC
   
-High degree of heterogeneity among models. Even those that share 
+High degree of heterogeneity among models. Even those that share, e.g., a double moment scheme.
+
 
 # Modeling Interventions
 
