@@ -69,6 +69,21 @@ These clouds are complex to model
 
   
 # Modeling Background
+* Retrievals from this stratiform cloud case were used to create cloud physical and dynamical fluxes
+ * mm wavelength cloud radar
+ * lidar, microwave radiometer.
+* Fields: 
+  * cloud top/base
+  * liquid water/ice water content
+  * effective particle sizes of liquid/ice
+* Uncertainties:
+  * 20g/m^-2 for liquid water path
+  * ice water content: 0.002 g/m^-3 based on minimal detectable radar signal (dubious)
+* well mixed and capped by inversion
+* cloud-topped boundary layer 
+* Cloud top initially pure liquid
+* Temperature and water mixing ration advection calculated from ECMWF reanalysis data
+* No _in-situ_ observations of surface fluxes. Taken from ECMWF data
 
 
 
