@@ -14,4 +14,28 @@ Final concentration: Correcting LWP and IWP biases for Arctic mixed-phase clouds
 Physics surrounding longevity of AMPCs
 * coupling
 * Several mechanisms for replenishing
-* Why the
+* Sources of uncertainty: synoptic
+
+Highly complex. How do we benchmark?
+ARM MPACE:
+* Frequently occurring
+* Take measurements of, what exactly?
+  * Notes on what is high reliability (LIDAR, RADAR)
+  * Note on post processing
+  * Ice number concentration: suspect
+
+Modelling is difficult: 
+* All models (at the time) tended to have similar underrepresentation.
+  * Model complexity improves potential to represent clouds, but doesn't guarantee good performance.
+* CAM5: how does it treat?
+  * Double moment scheme. Four quantities (water, ice, rain, snow)
+  * The two WBFs
+  * Three-mode aerosol scheme: what gets treated as IN.
+  * Implict homogeneity
+  
+
+  
+  
+  
+  
+Lonely science: can it be studied in isolation?

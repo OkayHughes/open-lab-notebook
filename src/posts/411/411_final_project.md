@@ -152,7 +152,7 @@ layout: layouts/post.njk
 
 # Notes on gettelman 2010:
 * Supercooled rain freezes at -5ºC
-* Sea ice does not treat supercooled rain, so caused anomalously low 
+* Sea ice does not treat supercooled rain, so caused anomalously low sea ice _in the coupled model_
 
 # Notes on Impacts of representing heterogenous distribution of cloud liquid and ice on phase parititioning of arctic mixed clouds with CAM5
 
