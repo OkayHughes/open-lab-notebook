@@ -241,4 +241,9 @@ arctic misced-pahse clouds to persist up to several days
 *   Can cause static instability! Condensation of droplets driven by this cooling
 * Large scale advection creates frequent moisture inversions near cloud top
   * This is different from mixed-phase stratocumulus at lower latitudes (typically dry near cloud top)
-* Entrainment of above-air 
+* Entrainment of above-cloud air actually replenishes cloud water lost to (ice) precip
+* Special: AMPCs can persist and be replenished even if not dynamically coupled to surface fluxes
+* In case of dynamic coupling to surface:
+  * Radiative cooling of SC water warms surface, cools atmosphere
+  * Source of static instability: sensible heat flux and moisture drawn upwards into cloud
+  * 
