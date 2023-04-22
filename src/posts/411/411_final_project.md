@@ -242,4 +242,4 @@ arctic misced-pahse clouds to persist up to several days
 # Notes on Contributions of Clouds, Surface Albedos, and Mixed-Phase Ice Nucleation Schemes to Arctic Radiation Biases in CAM5
 * LWP substantially underestimated in GCMs for arctic mixed phase clouds
 * Also highly sensitive to ICNC
-* 
+* Calipso Cloud Product (chepfer 2010)
