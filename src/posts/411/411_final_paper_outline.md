@@ -46,8 +46,16 @@ These clouds are complex to model
   * High Volume Precipitation Sampler
   * Counterflow Virtaul Impactor
   * Continuous flow ice thermal diffusion chamber. 
-  * Above-clouddeck flights combined with in-situ measurements constrain both radiative budget at clonstituent concentrations in the cloud
-
+  * Above-clouddeck flights combined with in-situ measurements constrain both radiative budget at cloud boundary as well as concentration of species in cloud
+* 27 sept 2004 to 22 oct 2004
+* Three separate exemplary clouds. 
+* Main event for us: Single layer stratoform mixed phase
+  * High pressure over ice pack
+  * transient low draws moisture to NSA site. 
+* 9-11 of october: single layer stratus cloud
+* Low level northeasterly flow off the ipack ice and over ocean. Persistent low-level clouds under a sharp inversion for entire period
+* Include: Figure 6 is ground truth. 
+  * 
 Highly complex. How do we benchmark?
 ARM MPACE:
 * Frequently occurring
