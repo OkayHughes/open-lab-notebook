@@ -236,4 +236,9 @@ arctic misced-pahse clouds to persist up to several days
 # Notes on Resilience of Persistent Arctic mixed-phase clouds
 * AMPC exist under synoptic subsidence
 * Turbulence and cloud-scale upward air motion seem to be critical in maintaining mixed-phase clouds under weak synoptic-scale updrafts
-* 
+* Strong enough updrafts -> supersaturated w.r.t. ice and water (both grow simultaneously)
+* supercooled droplets lead to strong longwave radiative cooling (60K per day near cloud top whoa)
+*   Can cause static instability! Condensation of droplets driven by this cooling
+* Large scale advection creates frequent moisture inversions near cloud top
+  * This is different from mixed-phase stratocumulus at lower latitudes (typically dry near cloud top)
+* Entrainment of above-air 
