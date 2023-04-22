@@ -29,10 +29,24 @@ Final concentration: Correcting LWP and IWP biases for Arctic mixed-phase clouds
 * Radiative cooling of SC water warms surface, cools atmosphere
 * Source of static instability: sensible heat flux and moisture drawn upwards into cloud
 * Ice often only forms after SC water is present (even if there is substantial ice-supersaturation before LW is present)
-
 * Modeling of these clouds is tremendously difficult [RESILIENCE] last paragraph
 
-These clouds are complex. 
+These clouds are complex to model
+
+## Measuring AMPCs
+* Atmospheric Radiation Measurement program set up in alaska:
+  * Barrow (another name) -> oliktok point 0> toolik lake 0->  atqasuk
+  * Approximates grid cell of GCM, for use in the Single Column Modeling methodology
+* Barrow site:
+  * High Spectral Resolution Lidar
+  * depolarization lidar
+  * Atmospheric Emitted Radiance Interferometer
+  * Instrumented aircrafts 
+  * Citation
+  * High Volume Precipitation Sampler
+  * Counterflow Virtaul Impactor
+  * Continuous flow ice thermal diffusion chamber. 
+  * Above-clouddeck flights combined with in-situ measurements constrain both radiative budget at clonstituent concentrations in the cloud
 
 Highly complex. How do we benchmark?
 ARM MPACE:
