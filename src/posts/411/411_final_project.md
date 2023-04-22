@@ -250,4 +250,10 @@ arctic misced-pahse clouds to persist up to several days
   * Ice often only forms after SC water is present (even if there is substantial ice-supersaturation before LW is present)
 * Lmao complex system theory
 * Two steady states of system:
-  *
+  * Radiatively opaque, radiatively transparent
+  * Bistable environment with two slow manifolds (PS/net surface LWR phase space)
+* Buncha uncertainties:
+  * synoptic vertical velocity: might determine two clusters
+  * synoptic transport: maybe?
+  * Two mixed-phase states have 30-40 W/m^2 difference in radiative impact (cloudy clouds are cloudier)
+  * 
