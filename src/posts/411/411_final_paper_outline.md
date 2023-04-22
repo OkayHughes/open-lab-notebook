@@ -11,6 +11,7 @@ layout: layouts/post.njk
 Final concentration: Correcting LWP and IWP biases for Arctic mixed-phase clouds in CAM5
 
 
+# Observational background
 
 ## physics of AMPCs
 * Mixed phase clouds at warm temperatures (which??) are microphysically unstable. [RESILIENCE]
@@ -55,25 +56,33 @@ These clouds are complex to model
 * 9-11 of october: single layer stratus cloud
 * Low level northeasterly flow off the ipack ice and over ocean. Persistent low-level clouds under a sharp inversion for entire period
 * Include: Figure 6 is ground truth. 
-  * 
-Highly complex. How do we benchmark?
-ARM MPACE:
-* Frequently occurring
-* Take measurements of, what exactly?
-  * Notes on what is high reliability (LIDAR, RADAR)
-  * Note on post processing
-  * Ice number concentration: suspect
+  * Ice precipitation indicated persistently underneath cloud base
+  * Cloud base at 900m.
+* Cloud top values for temperature, liquid water content, mean diameter were -16.9C, 0.36g/m^3, 25 um.
+  * Number concentration 25 #/cm^3 throughout
+* Figure 7: explains background state given above
+* Narrow cloud drop distribution. Heterogeneous ice crystals through entire cloud body.
+* Mixed phase present even with cloud-top temperatures as low as -30C
 
-Modelling is difficult: 
-* All models (at the time) tended to have similar underrepresentation.
-  * Model complexity improves potential to represent clouds, but doesn't guarantee good performance.
-* CAM5: how does it treat?
-  * Double moment scheme. Four quantities (water, ice, rain, snow)
-  * The two WBFs
-  * Three-mode aerosol scheme: what gets treated as IN.
-  * Implict homogeneity
+
+*  Fig 1 [MPACE_MIP]: aerial picture of clouds
+
   
+# Modeling Background
 
+
+
+
+# Modeling Interventions
+
+## WBF
+
+## IN
+
+## Integrated sensitivity
+
+
+# Conclusions
   
   
   
