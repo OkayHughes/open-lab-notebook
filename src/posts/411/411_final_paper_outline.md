@@ -164,6 +164,16 @@ High degree of heterogeneity among models. Even those that share, e.g., a double
 * Mass weighted water vapor:
   * Certain work indicates RH in mixed phase clouds indicate RH should be close to 100%.
   * Heterogeneity could explain observed deviance from the SVP expected if ice and snow are homogeneously mixed.
+* Figure 4: comparable to figures from other paper
+  * Most aggressive slowdown in WBF still underestimates LWC by factor of two.
+* Figure 6: Breakdown by microphysical process
+  * liquid water detrailment from shallow convection is liquid source in ctrl
+  * WBF process major sink in CTL
+* Figure 8: 
+  * If you also decrease accretion rate of liquid rain by snow by same amount as WBF, then you match LWC
+  * High enough vertical resolution is crucial for maintenance of cloud liquid layers!
+* Recommendation:
+  * Physically based representation of heterogeneous structure rather than tuning parameter.
 ## Integrated sensitivity
 
 
