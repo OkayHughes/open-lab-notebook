@@ -11,7 +11,13 @@ layout: layouts/post.njk
 Final concentration: Correcting LWP and IWP biases for Arctic mixed-phase clouds in CAM5
 
 
+
 Physics surrounding longevity of AMPCs
+* Mixed phase clouds at warm temperatures (which??) are microphysically unstable. [RESILIENCE]
+  * WBF can glaciate in hours
+  * But observations of mixed phase clouds show they can persist for days or weeks.
+  * Arctic MPCs different (HOW?)
+* Turbulence and cloud-scale upward air motion seem to be critical in maintaining mixed-phase clouds under weak synoptic-scale updrafts [RESILIENCE]
 * coupling
 * Several mechanisms for replenishing
 * Sources of uncertainty: synoptic

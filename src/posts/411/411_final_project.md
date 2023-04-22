@@ -11,7 +11,7 @@ layout: layouts/post.njk
 
 
 
-# Notes on "The Mixed-Phase arctic cloud experiment"
+# Notes on "The Mixed-Phase arctic cloud experiment" [MPACE]
 
 * Arctic model scatter larger than other regions (ca 2007)
 * "weak solar heating coupled with strong inversions and a combination of sea ice and ocean at the lower boundary produce clouds iwth multiple layersd and stable temp profiles"
@@ -26,7 +26,7 @@ layout: layouts/post.njk
   * Multi-layer stratus on 6 oct
 * radar reflectivity plot
 
-# Notes on Intercomparison of Model Simulations of mixed-phase clouds observed during the ARM MPACE experiment. I: single layer cloud
+# Notes on Intercomparison of Model Simulations of mixed-phase clouds observed during the ARM MPACE experiment. I: single layer cloud [MPACE_MIP]
 * Little dependence on temperature for liquid vs ice in arctic clouds
 * Mixed phase clouds optically thicker than glaciated clouds.
 * Modeling studies: mixed phase clouds sensitive to ice crystal number concentration
@@ -95,7 +95,7 @@ layout: layouts/post.njk
 * Note: both median SCM and CRMs significantly underestimate LWP --> extra fidelity in CRMs maybe doesn't buy you anything?
 * This is about the simplest mixed phase cloud you can represent, but models still shit the bed.
 
-# Notes on Testing CLoud Microphysics Parameterizations in NCAR CAM5 with M-PACE observations
+# Notes on Testing CLoud Microphysics Parameterizations in NCAR CAM5 with M-PACE observations [CAM_IN]
 * CAM 3 had single-moment microphysics.
 * But CAM 5 has double moment microphysics
 * Double moment schemes allow cloud properties to be physically coupled to aerosols
@@ -150,11 +150,11 @@ layout: layouts/post.njk
 * IN parameterization changes show very slight improvement.
 
 
-# Notes on gettelman 2010:
+# Notes on gettelman 2010: [CAM_ICE]
 * Supercooled rain freezes at -5ºC
 * Sea ice does not treat supercooled rain, so caused anomalously low sea ice _in the coupled model_
 
-# Notes on Impacts of representing heterogenous distribution of cloud liquid and ice on phase parititioning of arctic mixed clouds with CAM5
+# Notes on Impacts of representing heterogenous distribution of cloud liquid and ice on phase parititioning of arctic mixed clouds with CAM5 [CAM_WBF]
 
 * Complex interactions betwee cloud microphysics, cloud-top radiative cooling, turbulent mixing, and surface coupling enable 
 arctic misced-pahse clouds to persist up to several days
@@ -192,7 +192,7 @@ arctic misced-pahse clouds to persist up to several days
 
 
 
-# Notes on Sensitivity Study on the Influence of CLoud Microphysical Parameters on Mixed-Phase Cloud Thermodynamic Phase Partitioning in CAM5
+# Notes on Sensitivity Study on the Influence of CLoud Microphysical Parameters on Mixed-Phase Cloud Thermodynamic Phase Partitioning in CAM5 [SENSITIVITY]
 * Tuning process rarely takes into account thermodynamic partition in mixed phase clouds
 * `$$-30^\circ C $$` 
 * Supercooled cloud fraction: Supercooled water MR/ice MR
@@ -236,7 +236,7 @@ arctic misced-pahse clouds to persist up to several days
 * Autoconversion: not a physical process. WTF is it?
 * WBF_I majority of variance in mixed phase clouds. 
 
-# Notes on Resilience of Persistent Arctic mixed-phase clouds
+# Notes on Resilience of Persistent Arctic mixed-phase clouds [RESILIENCE]
 * AMPC exist under synoptic subsidence
 * Turbulence and cloud-scale upward air motion seem to be critical in maintaining mixed-phase clouds under weak synoptic-scale updrafts
 * Strong enough updrafts -> supersaturated w.r.t. ice and water (both grow simultaneously)
