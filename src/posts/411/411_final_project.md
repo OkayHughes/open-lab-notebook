@@ -246,4 +246,8 @@ arctic misced-pahse clouds to persist up to several days
 * In case of dynamic coupling to surface:
   * Radiative cooling of SC water warms surface, cools atmosphere
   * Source of static instability: sensible heat flux and moisture drawn upwards into cloud
-  * 
+  * Ice concentration and large-water-drop concentration are correlated?
+  * Ice often only forms after SC water is present (even if there is substantial ice-supersaturation before LW is present)
+* Lmao complex system theory
+* Two steady states of system:
+  *
