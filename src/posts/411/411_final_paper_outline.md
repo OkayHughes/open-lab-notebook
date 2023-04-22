@@ -87,17 +87,22 @@ These clouds are complex to model
 * Focus on single-vs-double moment schemes:
   * Mixed-phase processes such as the Wegener Bergeron Findeisen process rely on ice crystal concentration number
   * Single moment schemes have only mass, not number concentration
-  * 5 SCMs with single moment and 5 with double-moment schemes in this paper
+  * 10 SCMs with single moment and 10 with double-moment schemes in this paper
   * Discussion of bin microphysics schemes beyond scope of this paper
-* Figure 7: 
-  * Table IV: 
+* Table IV: 
 * 160 pm 60 g/m^2 for liquid water and 7-30 g /m^2 of ice water path.
   * Aircraft IWP much higher than remote sensing IWP
-  * 
-
-
-
-
+* Single model with T-dep ice/liquid partitioning: 21.2 g/m^2
+* Single moment but separate ice/water microphysics: 72.8 g/m^2
+* double moment: 100 g/m^2 
+* Ice water path: 33.8, 31.8, 19.9
+  * That is, models with higher-complexity treatment of ice microphysics are closer to observed values.
+  * Figure 8: water content vs aircraft retrievals, ice water vs retrievals
+  * LWC 
+  * Figure 10: ICNC vs liquid water path: absurd scatter across models (should include this)
+  * No agreement about ICNC
+  
+High degree of heterogeneity among models. Even those that share 
 
 # Modeling Interventions
 
