@@ -107,6 +107,13 @@ High degree of heterogeneity among models. Even those that share, e.g., a double
 
 # Modeling Interventions
 
+# Summary of CAM5
+
+* CAM 3 had single-moment microphysics.
+* But CAM 5 has double moment microphysics
+* Double moment schemes allow cloud properties to be physically coupled to aerosols
+
+
 ## WBF
 
 ## IN
