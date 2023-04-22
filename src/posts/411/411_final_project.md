@@ -107,7 +107,7 @@ layout: layouts/post.njk
 * Microphysics predicts both number and mass concentration for ice and water
 * precipitation in ice and snow is diagnosed
 * Particle distributions treated as gamma functions
-* Temperature of homogeneous freezing increased form -40C to -5C in released cam 5 to tune arctic surface flux
+* Temperature of homogeneous freezing (but only for rain!) increased form -40C to -5C in released cam 5 to tune arctic surface flux
   * Excuse me? 
 * Ice nucleation:
   * Supersaturation wrt ice dealt with by performing saturation adjustment for only liquid clouds
@@ -150,6 +150,9 @@ layout: layouts/post.njk
 * IN parameterization changes show very slight improvement.
 
 
+# Notes on gettelman 2010:
+* Supercooled rain freezes at -5ºC
+* Sea ice does not treat supercooled rain, so caused anomalously low 
 
 # Notes on Impacts of representing heterogenous distribution of cloud liquid and ice on phase parititioning of arctic mixed clouds with CAM5
 
