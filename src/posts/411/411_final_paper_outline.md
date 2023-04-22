@@ -147,11 +147,23 @@ High degree of heterogeneity among models. Even those that share, e.g., a double
   * Collection of water by snow
   * Evaporation/deposition by WBF
 * Figure 10: Ice/Water Budgets
-  * Fixing instantaneous freezing 
+  * Fixing instantaneous freezing fixes budget substantially
+* Cam5 significantly underestimates aerosol optical depth (is this reanalysis artifact?)
+* Tuning parameter for autoconversion from 
 ## WBF
-
-## IN
-
+* Mixed-phase clouds are likely spatially heterogeneous (pockets of ice/water) on the scale of 10^2 m
+  * Separation of ice from water also slows WBF 
+* In this study: replace Meyers IN parameterization with calssical nucleation theory
+  * Nucleation is stochastic, depends on number and size of aerosol particles
+  * Note: different from above. Same goal
+* New WBF:
+  * WBF process largely depends on contact volume between supercooled liquid droplets and ice crystals 
+  * Typical contact volume in homogeneous gridcell:10^3*10^5*10^5
+  * in heterogenous grid cell: 10*10^3*10^3 if 100 m pockets of liquid and ice butt against each other.
+  * Relaxation timescale is inversely proportional to contact volume.
+* Mass weighted water vapor:
+  * Certain work indicates RH in mixed phase clouds indicate RH should be close to 100%.
+  * Heterogeneity could explain observed deviance from the SVP expected if ice and snow are homogeneously mixed.
 ## Integrated sensitivity
 
 
