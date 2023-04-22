@@ -84,6 +84,17 @@ These clouds are complex to model
 * Cloud top initially pure liquid
 * Temperature and water mixing ration advection calculated from ECMWF reanalysis data
 * No _in-situ_ observations of surface fluxes. Taken from ECMWF data
+* Focus on single-vs-double moment schemes:
+  * Mixed-phase processes such as the Wegener Bergeron Findeisen process rely on ice crystal concentration number
+  * Single moment schemes have only mass, not number concentration
+  * 5 SCMs with single moment and 5 with double-moment schemes in this paper
+  * Discussion of bin microphysics schemes beyond scope of this paper
+* Figure 7: 
+  * Table IV: 
+* 160 pm 60 g/m^2 for liquid water and 7-30 g /m^2 of ice water path.
+  * Aircraft IWP much higher than remote sensing IWP
+  * 
+
 
 
 
@@ -98,6 +109,7 @@ These clouds are complex to model
 
 
 # Conclusions
+* Bin microphysics and SIP
   
   
   
