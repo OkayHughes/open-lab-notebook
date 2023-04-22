@@ -8,4 +8,6 @@ eleventyNavigation:
   key: Final paper 411
 layout: layouts/post.njk
 ---
-Final concentration: Correcting biases in mixed-phase clouds in CAM5 
+Final concentration: Correcting LWP and IWP biases for Arctic mixed-phase clouds in CAM5
+
+
