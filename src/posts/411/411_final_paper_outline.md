@@ -119,6 +119,7 @@ High degree of heterogeneity among models. Even those that share, e.g., a double
 * Modal aerosol module: 
   * MAM activates aerosols with appropriate properties to be CCN/INP and generates droplets and ice crystals
   * Interactive aerosol effects on both warm and cold clouds
+* Separate WBF for ice crystals/snow (four fields)
 * CAM 5 with FV dycore at f19 resolution,
 * Initialized with MERRA data beginning of each day for M-PACE
 * Temperature of homogeneous freezing (but only for rain!) increased form -40C to -5C in released cam 5 to tune arctic surface flux
@@ -137,8 +138,16 @@ High degree of heterogeneity among models. Even those that share, e.g., a double
   - Empirically derived relationship between mineral dust, black carbon, and hydrophobic organics with temperature
 ## Results:
 * CAM5 underestimates LWC by 70% and overestimates IWC by factor of 2
-
-
+* Figure 6 (qualitative over/under estimates)
+* Figure 7: cloud fraction is good, but persistent biases in LWC, IWC
+* From 5-12th october, cam5 undreestimates downward LW radiative fluxes by 20-40 W/m^2
+  * Largely due to underestimate of cloud liquid mixing ratio
+  * Overestimates OLWR by 10 W m^2
+* Two processes for turning cloud liquid into snow in CAM5:
+  * Collection of water by snow
+  * Evaporation/deposition by WBF
+* Figure 10: Ice/Water Budgets
+  * Fixing instantaneous freezing 
 ## WBF
 
 ## IN
