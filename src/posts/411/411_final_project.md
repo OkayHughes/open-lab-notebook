@@ -234,4 +234,6 @@ arctic misced-pahse clouds to persist up to several days
 * WBF_I majority of variance in mixed phase clouds. 
 
 # Notes on Resilience of Persistent Arctic mixed-phase clouds
+* AMPC exist under synoptic subsidence
+* Turbulence and cloud-scale upward air motion seem to be critical in maintaining mixed-phase clouds under weak synoptic-scale updrafts
 * 
