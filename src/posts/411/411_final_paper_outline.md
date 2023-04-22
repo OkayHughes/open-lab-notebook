@@ -111,8 +111,25 @@ High degree of heterogeneity among models. Even those that share, e.g., a double
 
 * CAM 3 had single-moment microphysics.
 * But CAM 5 has double moment microphysics
-* Double moment schemes allow cloud properties to be physically coupled to aerosols
+  * Microphysics predicts both number and mass concentration for ice and water
+  * precipitation in ice and snow is diagnosed (from what?)
+  * Particle distributions treated as gamma functions
 
+* Double moment schemes allow cloud properties to be physically coupled to aerosols
+* Modal aerosol module: 
+  * MAM activates aerosols with appropriate properties to be CCN/INP and generates droplets and ice crystals
+  * Interactive aerosol effects on both warm and cold clouds
+* CAM 5 with FV dycore at f19 resolution,
+* Initialized with MERRA data beginning of each day for M-PACE
+* Temperature of homogeneous freezing (but only for rain!) increased form -40C to -5C in released cam 5 to tune arctic surface flux
+
+* Ice nucleation linked with aerosol properties in this model 
+  * Homogeneous nucleation of sulfate competing with heterogeneous nucleation in mineral dust for ice clouds.
+  * Mixed phase clouds: deposition/condensation nucleation drawn from Meyers 1992
+  * Constant IN concentration for T<-20C
+  * Contact freezing by mineral dust, and Hallet-Mossop SIP are included. 
+  * Immersion of cloud freezing is included.
+  
 
 ## WBF
 
