@@ -8,14 +8,8 @@ eleventyNavigation:
   key: Final project 411
 layout: layouts/post.njk
 ---
-[slides](https://docs.google.com/presentation/d/12agCNKsJoHnD_ICWMAn_TWoGNf_EHGE9IHbgeFB1gew/edit#slide=id.g22df6b82993_0_19)
-Outline for presentation:
-* Focus on cam5/cam6 
-* What changed? What do parameterizations cover
-* Comedy: Most boring food imaginable and it hasn't manged to model it 
 
-To find: Gettelman 2010
-* Mixed phase physical processes
+
 
 # Notes on "The Mixed-Phase arctic cloud experiment"
 
@@ -239,7 +233,5 @@ arctic misced-pahse clouds to persist up to several days
 * Autoconversion: not a physical process. WTF is it?
 * WBF_I majority of variance in mixed phase clouds. 
 
-# Notes on Contributions of Clouds, Surface Albedos, and Mixed-Phase Ice Nucleation Schemes to Arctic Radiation Biases in CAM5
-* LWP substantially underestimated in GCMs for arctic mixed phase clouds
-* Also highly sensitive to ICNC
-* Calipso Cloud Product (chepfer 2010)
+# Notes on Resilience of Persistent Arctic mixed-phase clouds
+* 
