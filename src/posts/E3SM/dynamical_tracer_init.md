@@ -18,3 +18,10 @@ In `eam/src/dynamics/se/dyn_comp.F90`, it's called in the subroutine `dyn_init2`
 
 ## where is `dyn_init2` called?
 In `am/src/control/startup_initialconds.F90,` the routine `initial_conds` calls `read_inidat`.
+
+
+## summary of how to handle different cases:
+in `eam/src/dynamics/se/restart_dynamics.F90`, `dyn_init2` is called. However, this seems to assume that all `Q` fields are read in from a restart file (reasonable). 
+We don't actually have to change this! It's reasonable to assume that if you are running a restart file, it was initialized using the dynamics tracers.
+
+It's also called in `eam/src/dynamics/se/inital.F90`
