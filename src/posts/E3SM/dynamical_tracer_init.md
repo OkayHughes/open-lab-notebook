@@ -25,3 +25,7 @@ in `eam/src/dynamics/se/restart_dynamics.F90`, `dyn_init2` is called. However, t
 We don't actually have to change this! It's reasonable to assume that if you are running a restart file, it was initialized using the dynamics tracers.
 
 It's also called in `eam/src/dynamics/se/inital.F90`
+
+
+# Breadcrumb: where is PV_TRCR output?
+
