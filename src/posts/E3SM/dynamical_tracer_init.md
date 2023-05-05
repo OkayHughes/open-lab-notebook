@@ -36,4 +36,7 @@ Current hypothesis: no matter what advection scheme you use, it's handled in cal
 
 `eam/src/physics/cam/constituents.F90`
 `eam/src/physics/cam/cam_diagnostics.F90`
+these are places where generic outfld calls are defined. 
+The key finding is that output needs to propagate to the `state` FV physics object, which is what is passed to the outfld call.
+Current hypothesis is that we should do the compensation just before passing back to physics
 
