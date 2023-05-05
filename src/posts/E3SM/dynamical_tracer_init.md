@@ -32,3 +32,8 @@ It's also called in `eam/src/dynamics/se/inital.F90`
 Idea: don't have to change it at _output_ time. We can add/subtract value in EAM glue code before advection is called! 
 Provisionally: modify `stepon_run3` in `eam/src/dynamics/se/stepon.F90`. Wrap the call to `dyn_run`. 
 Current hypothesis: no matter what advection scheme you use, it's handled in calls to `prim_run_subcycle`
+
+
+`eam/src/physics/cam/constituents.F90`
+`eam/src/physics/cam/cam_diagnostics.F90`
+
