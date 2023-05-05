@@ -29,3 +29,4 @@ It's also called in `eam/src/dynamics/se/inital.F90`
 
 # Breadcrumb: where is PV_TRCR output?
 
+Idea: don't have to change it at _output_ time. We can add/subtract value in EAM glue code before advection is called! (Bril
