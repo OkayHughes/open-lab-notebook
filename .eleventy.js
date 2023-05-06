@@ -57,7 +57,7 @@ module.exports = function(eleventyConfig) {
   \\newcommand{\\der}[2]{\\frac{\\mathrm{d} #1}{\\mathrm{d} #2}}
   \\newcommand{\\pder}[2]{\\frac{\\partial #1}{\\partial #2}}
   \\newcommand{\\fder}[2]{\\frac{\\delta #1}{\\delta #2}}
-  \\newcommand{\\tm}[1]{\\textrm{\\delta #1}}
+  \\newcommand{\\tm}[1]{\\textrm{#1}}
   `, {macros, globalGroup: true});
 
   eleventyConfig.addFilter('latex', content => {

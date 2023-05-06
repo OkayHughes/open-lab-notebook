@@ -45,7 +45,20 @@ We define
 `$$$
 \begin{align*}
 \pi_s(z) &= p_{\tm{top}} + \int_{z}^{z_{\tm{top}}} \rho g \intd{z}  \\
-&= p_{\tm{top}} 
+&\stackrel{(1)}{=}p_{\tm{top}}  \int_{z}^{z_\tm{top}} \rho g_0 \intd{z} \\
+&= p_{\tm{top}} - \int_{z}^{z_\tm{top}} \intd{p}\\
+&=  p_{\tm{top}} - (p_{\tm{top}} - \pi(z))\\
 \end{align*}
 $$$`
+where (1) holds only under the shallow atmosphere assumption. Done this a hundred times. 
+
+### Hydrostatic pressure in deep atmosphere
+`$$$
+\begin{align*}
+\pi_d(z) &= p_{\tm{top}} + \int_{z}^{z_{\tm{top}}} \rho g \intd{z} \\
+&= p_{\tm{top}} + \int_{z}^{z_{\tm{top}}} \rho g \intd{z} \\
+\end{align*}
+$$$`
+
+
 
