@@ -61,9 +61,6 @@ where (1) holds only under the shallow atmosphere assumption. Done this a hundre
 \end{align*}
 $$$`
 So lets consider
-`$$$
-\pder{\pi}{s} &= \partial_{s} \left[ p_{\tm{top}} + \int_{z}^{z_{\tm{top}} \right]
-$$$`
 
 
 
