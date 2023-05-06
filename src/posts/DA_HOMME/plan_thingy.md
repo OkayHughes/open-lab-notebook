@@ -56,8 +56,13 @@ where (1) holds only under the shallow atmosphere assumption. Done this a hundre
 `$$$
 \begin{align*}
 \pi_d(z) &= p_{\tm{top}} + \int_{z}^{z_{\tm{top}}} \rho g \intd{z} \\
-&= p_{\tm{top}} + \int_{z}^{z_{\tm{top}}} \rho g \intd{z} \\
+&= p_{\tm{top}} + \int_{z}^{z_{\tm{top}}} \rho g_0\hat{r}^{-2} \intd{z} \\
+&= p_{\tm{top}} + \frac{g_0}{R_0^2}\int_{z}^{z_{\tm{top}}} \rho (R_0+z)^2 \intd{z} \\
 \end{align*}
+$$$`
+So lets consider
+`$$$
+\pder{\pi}{s} &= \partial_{s} \left[ p_{\tm{top}} + \int_{z}^{z_{\tm{top}} \right]
 $$$`
 
 
