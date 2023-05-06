@@ -5,8 +5,8 @@ tags:
   - misc
 eleventyNavigation:
   parent: Plan November 22
-  key: eos.F90
-layout: layouts/post.njk
+  key: eos
+lF90ayout: layouts/post.njk
 ---
 
 <pre>
@@ -317,4 +317,4 @@ layout: layouts/post.njk
 <span style="color: #66d9ef">end module</span>
 </pre></div>
 
-</pre>
+</pre>.

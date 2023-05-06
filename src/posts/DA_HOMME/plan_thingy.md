@@ -40,5 +40,12 @@ Therefore the acceleration for `$$ m_1 $$` is
 $$$`
 and so defining `$$ \hat{r} = \frac{R_0 + z}{R_0}$$` we find `$$$ g = g_0 \hat{r}^{-2}.$$$`
 
-Suppose geopotential is defined as `$$\phi = g_0 z$$`. This gives us `$$\pder{\phi}{z} = g_0 $$`
+### Hydrostatic pressure in shallow atmosphere
+We define 
+`$$$
+\begin{align*}
+\pi_s(z) &= p_{\tm{top}} + \int_{z}^{z_{\tm{top}}} \rho g \intd{z}  \\
+&= p_{\tm{top}} 
+\end{align*}
+$$$`
 
