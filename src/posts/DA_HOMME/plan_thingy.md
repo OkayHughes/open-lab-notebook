@@ -38,5 +38,7 @@ Therefore the acceleration for `$$ m_1 $$` is
   &= g_0 \left(\frac{R_0}{R_0+z} \right)^2
 \end{align*}
 $$$`
-and so defining `$$ \hat{r} = \frac{R_0 + z}{R_0}$$` we find `$$ g = g_0 \hat{r]^{-2} $$`
+and so defining `$$ \hat{r} = \frac{R_0 + z}{R_0}$$` we find `$$$ g = g_0 \hat{r}^{-2}.$$$`
+
+Suppose geopotential is defined as `$$\phi = g_0 z$$`. This gives us `$$\pder{\phi}{z} = g_0 $$`
 
