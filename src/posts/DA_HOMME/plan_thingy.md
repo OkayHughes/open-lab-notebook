@@ -60,7 +60,7 @@ where (1) holds only under the shallow atmosphere assumption. Done this a hundre
 &= p_{\tm{top}} + \frac{g_0}{R_0^2}\int_{z}^{z_{\tm{top}}} \rho (R_0+z)^2 \intd{z} \\
 \end{align*}
 $$$`
-So lets consider
+So it turns out that this hydrostatic integral (and the definition of arbitrary vertical quantities) incorporate gravitational variation. But `$$g$$` in the MT document is `$$g_0$$` here.
 
 
 
