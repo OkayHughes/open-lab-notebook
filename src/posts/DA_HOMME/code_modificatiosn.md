@@ -12,3 +12,5 @@ layout: layouts/post.njk
 # Finding and modifying the vertical integral
 The idea is to do this by modifying the underlying subroutine. Hopefully one exists.
 Geopotential used in NH model: called `phinh_i` (only at interfaces). Where is this used?
+
+Brute force: Look through everywhere `nlev` is mentioned.
