@@ -25,3 +25,9 @@ Current plan for Deep Atmosphere HOMME:
 
 
 
+# Breadcrumb: How is hydrostatic pseudodensity calculated?
+
+There's something funky in the calculation of `$$\pi(s)$$`. Do the definitions in MT's document account for spatial variation in `$$g$$`?
+
+
+
