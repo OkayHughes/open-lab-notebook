@@ -29,5 +29,6 @@ Current plan for Deep Atmosphere HOMME:
 
 There's something funky in the calculation of `$$\pi(s)$$`. Do the definitions in MT's document account for spatial variation in `$$g$$`?
 
-
+I'm gonna have to look really foolish because theres a simplified form for `$$g$$` that you can derive. 
+How does that work? Newton's law of gravitation gives us `$$F_{m_1,m_2} = G\frac{m_1m_2}{r^2} $$` Therefore the acceleration for `$$ m_1 $$` is `$$ Gm_2 (R_0 + z)^{-2} $$`
 
