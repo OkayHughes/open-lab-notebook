@@ -21,6 +21,8 @@ So: plan for tomorrow.
 2) Identify as many vertical integrals as possible. Figure out how to change them.
 
 
+# Tangent 0:
+Where is g referenced in the code?
 
 
 # Step 1: calcuate `$$ \hat{r}$$` on interfaces, model levels
