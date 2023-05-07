@@ -21,23 +21,21 @@ So: plan for tomorrow.
 2) Identify as many vertical integrals as possible. Figure out how to change them.
 
 
-# Tangent 0:
-Where is g referenced in the code?
+# Assumptions
+We assume that `$$\phi = g(r-R_0) $$` uses a constant `$$g$$` defined in the code by
+`use physical_constants, only: g`. This means that computation of `dphinh_i` 
+does not need to be changed.
 
+# List of changes
 
-# Step 1: calcuate `$$ \hat{r}$$` on interfaces, model levels
+## `dp3d`
+We change the computation of `dp3d` according to `dp3d \equiv \hat{r}^2.`
 
+In order to do this we first determine a way to calculate `$$r$$` on model 
+interfaces as well as model levels.
 
+Here is the first complication: midpoints are defined to be in the middle of the interval `$$s_{i,j-1}$$` and
+`$$ s_{i, j}$$`. If `$$s$$` is not a height coordinate, then taking the average of `$$ \phi_{i, j-1} $$` and `$$\phi_{i, j} $$`
+may not give the geometric midpoint of the interval. How, then, do we fix this?
 
-# Step 2: Modify `dp3d` calculation to deep atmosphere form.
-
-
-
-# Step 3: Modify EOS calculations 
-
-
-# Step 4: Misc
-
-
-# Step 5: BW test
 
