@@ -35,7 +35,6 @@ because, honestly, who would use that?
 # List of changes
 
 ## `dp3d`
-We change the computation of `dp3d` according to `dp3d \equiv \hat{r}^2.`
 
 
 ### Calculating `$$ r $$`
@@ -60,3 +59,12 @@ will need to be modified to calculate `dp3d` with the correct pseudodensity. How
 to the CAAR routines are internally consistent, we needn't change how `dp3d` is used after it is initialized.
 
 
+## EOS changes
+
+At line 176 in `eos.F90` calculates `$$\frac{p_{\tm{nh}}}{\Pi} $$`.
+In the shallow HOMME formulation, 
+`$$$
+\begin{align*}
+\pder{\phi}{s} &= -R_{d}\left(\pder{p_{\tm{h}}}{s}\theta_v\right)\frac{\Pi}{p_{\tm{nh}}} 
+\end{align*}
+$$$`
