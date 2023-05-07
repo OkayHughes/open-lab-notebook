@@ -91,3 +91,13 @@ and then line 182 calculates
 $$$`
 Therefore line 176 is an intermediate quantity that allows for the calculation of nonhydrostatic pressure by line 178,
 and the exner function by line 182.
+
+Therefore in the deep HOMME formulation, 
+`$$$
+\begin{align*}
+\Delta \phi &= -\hat{r}^{-2} R_d (\Delta p_{\tm{h},d} \cdot \theta_v)\frac{\Pi}{p_{\tm{nh}}}\\
+&= -\hat{r}^{-2} R_d (\hat{r}^2\Delta p_{\tm{h}} \cdot \theta_v)\frac{\Pi}{p_{\tm{nh}}}\\
+&= R_d (\Delta p_{\tm{h}} \cdot \theta_v)\frac{\Pi}{p_{\tm{nh}}}
+\end{align*}
+$$$`
+and the rest of the derivation remains the same.
