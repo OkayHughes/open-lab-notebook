@@ -56,4 +56,7 @@ is not publicly exported because we assume it's only usable in theta_hydrostatic
 
 So `dp3d` is calculated at initialization, but grepping for `dp3d` shows that
 the only assignments to dp3d are through time stepping. Therefore, test initialization
-will need to be modified to calculate `dp3d` pseudodensity. But once
+will need to be modified to calculate `dp3d` with the correct pseudodensity. However, so long as our updates 
+to the CAAR routines are internally consistent, we needn't change how `dp3d` is used after it is initialized.
+
+
