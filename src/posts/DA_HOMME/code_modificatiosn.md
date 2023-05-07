@@ -54,3 +54,4 @@ is not publicly exported because we assume it's only usable in theta_hydrostatic
 
 ### Modifying dp3d calculation
 
+Complication: do I need to change how the reference state is calculated?
