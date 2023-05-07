@@ -22,9 +22,12 @@ So: plan for tomorrow.
 
 
 # Assumptions
-We assume that `$$\phi = g(r-R_0) $$` uses a constant `$$g$$` defined in the code by
+* We assume that `$$\phi = g(r-R_0) $$` uses a constant `$$g$$` defined in the code by
 `use physical_constants, only: g`. This means that computation of `dphinh_i` 
 does not need to be changed.
+* We assume that `$$\phi_{i} = 0.5(\phi_{i-1/2} + \phi_{i+1/2})$$`, i.e. midpoint values
+of interface quantities can be reconstructed by averaging.
+
 
 # List of changes
 
@@ -34,8 +37,8 @@ We change the computation of `dp3d` according to `dp3d \equiv \hat{r}^2.`
 In order to do this we first determine a way to calculate `$$r$$` on model 
 interfaces as well as model levels.
 
-Here is the first complication: midpoints are defined to be in the middle of the interval `$$s_{i,j-1}$$` and
-`$$ s_{i, j}$$`. If `$$s$$` is not a height coordinate, then taking the average of `$$ \phi_{i, j-1} $$` and `$$\phi_{i, j} $$`
-may not give the geometric midpoint of the interval. How, then, do we fix this?
-
-
+Here is the first complication: midpoints are defined to be in the middle of the interval `$$s_{i-1/2}$$` and
+`$$ s_{i+1/2}$$`. If `$$s$$` is not a height coordinate, then taking the average of `$$ \phi_{i-1/2} $$` and `$$\phi_{i+1/2} $$`
+may not give the geometric midpoint of the interval. In the proofs of conservation
+provided in Taylor (2020), Eqn 30 shows that this is good enough for the moment. This is consistent with the `element_ops.F90` routine
+for calculating it at midpoints.
