@@ -37,6 +37,8 @@ because, honestly, who would use that?
 ## `dp3d`
 We change the computation of `dp3d` according to `dp3d \equiv \hat{r}^2.`
 
+
+### Calculating `$$ r $$`
 In order to do this we first determine a way to calculate `$$r$$` on model 
 interfaces as well as model levels.
 
@@ -45,3 +47,10 @@ Here is the first complication: midpoints are defined to be in the middle of the
 may not give the geometric midpoint of the interval. In the proofs of conservation
 provided in Taylor (2020), Eqn 30 shows that this is good enough for the moment. This is consistent with the `element_ops.F90` routine
 for calculating it at midpoints.
+
+These are added to the `element_ops.F90` file. The `get_radius` subroutine
+is not publicly exported because we assume it's only usable in theta_hydrostatic.
+`get_field` and `get_field_i` must be called to calculate radius or r_hat. 
+
+### Modifying dp3d calculation
+
