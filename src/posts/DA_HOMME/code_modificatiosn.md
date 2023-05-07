@@ -54,4 +54,6 @@ is not publicly exported because we assume it's only usable in theta_hydrostatic
 
 ### Modifying dp3d calculation
 
-Complication: do I need to change how the reference state is calculated?
+So `dp3d` is calculated at initialization, but grepping for `dp3d` shows that
+the only assignments to dp3d are through time stepping. Therefore, test initialization
+will need to be modified to calculate `dp3d` pseudodensity. But once
