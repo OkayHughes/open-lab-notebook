@@ -66,6 +66,14 @@ In the shallow HOMME formulation,
 `$$$
 \begin{align*}
 \pder{\phi}{s} &= -R_{d}\left(\pder{p_{\tm{h}}}{s}\theta_v\right)\frac{\Pi}{p_{\tm{nh}}} \\
-\implies \frac{\Delta \phi}{\Delta s} &= -R_d \left(\frac{\Delta p_{\tm{h}}}{\Delta s}\theta_v \right) \frac{\Pi}{p_{\tm{nh}}}
+\implies \frac{\Delta \phi}{\Delta s} &= -R_d \left(\frac{\Delta p_{\tm{h}}}{\Delta s}\theta_v \right) \frac{\Pi}{p_{\tm{nh}}}\\
+\implies \Delta \phi &= -R_d \Theta \frac{\Pi}{p_{\tm{nh}}}\\
+\implies \frac{p_{\tm{nh}}}{\Pi} &= \frac{R_d \Theta}{\Delta \phi} 
+\end{align*}
+$$$`
+Using the definition `$$\Pi = \left(\frac{p}{p_0} \right)^{R_d/c_p},$$` line 178 calculates
+`$$$
+\begin{align*}
+p_{\tm{nh}} = p_0 \left(\frac{\frac{p_{\tm{nh}}}{\Pi}}{p_0} \right)^{\fracp{1}{1-\frac{R_d}{c_p}}}
 \end{align*}
 $$$`
