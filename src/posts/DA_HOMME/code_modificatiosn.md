@@ -27,6 +27,9 @@ So: plan for tomorrow.
 does not need to be changed.
 * We assume that `$$\phi_{i} = 0.5(\phi_{i-1/2} + \phi_{i+1/2})$$`, i.e. midpoint values
 of interface quantities can be reconstructed by averaging.
+* `theta_hydrostatic_mode=.false.`. We disregard the case of a hydrostatic-but-deep atmosphere
+because, honestly, who would use that?
+
 
 
 # List of changes
