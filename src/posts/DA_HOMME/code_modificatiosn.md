@@ -19,3 +19,23 @@ So: plan for tomorrow.
 0) Ensure deep atmosphere 2016 base state is available.  (Looks to be true!)
 1) Modify EOS + elem ops following MT document
 2) Identify as many vertical integrals as possible. Figure out how to change them.
+
+
+
+
+# Step 1: calcuate `$$ \hat{r}$$` on interfaces, model levels
+
+
+
+# Step 2: Modify `dp3d` calculation to deep atmosphere form.
+
+
+
+# Step 3: Modify EOS calculations 
+
+
+# Step 4: Misc
+
+
+# Step 5: BW test
+
