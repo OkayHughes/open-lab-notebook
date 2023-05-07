@@ -71,9 +71,23 @@ In the shallow HOMME formulation,
 \implies \frac{p_{\tm{nh}}}{\Pi} &= \frac{R_d \Theta}{\Delta \phi} 
 \end{align*}
 $$$`
-Using the definition `$$\Pi = \left(\frac{p}{p_0} \right)^{R_d/c_p},$$` line 178 calculates
+Using the definition `$$\Pi = \left(\frac{p_{\tm{nh}}}{p_0} \right)^{R_d/c_p},$$` line 178 calculates
 `$$$
 \begin{align*}
-p_{\tm{nh}} = p_0 \left(\frac{\frac{p_{\tm{nh}}}{\Pi}}{p_0} \right)^{\fracp{1}{1-\frac{R_d}{c_p}}}
+p_{\tm{nh}} &= p_0 \left(\frac{\frac{p_{\tm{nh}}}{\Pi}}{p_0} \right)^{\frac{1}{1-\frac{R_d}{c_p}}}\\
+&= p_0 \left(\frac{\frac{p_{\tm{nh}}}{\left(\frac{p_{\tm{nh} }}{p_0} \right)^{R_d/c_p}}}{p_0} \right)^{\frac{1}{1-\frac{R_d}{c_p}}} \\
+&= p_0 \left(\frac{p_{\tm{nh}}}{p_0} \cdot \left(\frac{p_{\tm{nh}}}{p_0}\right)^{-\frac{R_d}{c_p}} \right)^{\frac{1}{1-\frac{R_d}{c_p}}} \\
+&= p_0 \left(\left(\frac{p_{\tm{nh}}}{p_0}\right)^{1-\frac{R_d}{c_p}} \right)^{\frac{1}{1-\frac{R_d}{c_p}}} \\
+&= p_0 \left(\frac{p_{\tm{nh}}}{p_0}\right)^{\frac{1-\frac{R_d}{c_p} }{1-\frac{R_d}{c_p}}} \\
+&= p_0 \cdot \frac{p_{\tm{nh}}}{p_0}\\
+&= p_{\tm{nh}}
 \end{align*}
 $$$`
+and then line 182 calculates
+`$$$
+\begin{align*}
+\Pi = \frac{p_{\tm{nh}}}{\frac{p_{\tm{nh}}}{\Pi}}.
+\end{align*}
+$$$`
+Therefore line 176 is an intermediate quantity that allows for the calculation of nonhydrostatic pressure by line 178,
+and the exner function by line 182.
