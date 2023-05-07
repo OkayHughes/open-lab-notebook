@@ -65,6 +65,7 @@ At line 176 in `eos.F90` calculates `$$\frac{p_{\tm{nh}}}{\Pi} $$`.
 In the shallow HOMME formulation, 
 `$$$
 \begin{align*}
-\pder{\phi}{s} &= -R_{d}\left(\pder{p_{\tm{h}}}{s}\theta_v\right)\frac{\Pi}{p_{\tm{nh}}} 
+\pder{\phi}{s} &= -R_{d}\left(\pder{p_{\tm{h}}}{s}\theta_v\right)\frac{\Pi}{p_{\tm{nh}}} \\
+\implies \frac{\Delta \phi}{\Delta s} &= -R_d \left(\frac{\Delta p_{\tm{h}}}{\Delta s}\theta_v \right) \frac{\Pi}{p_{\tm{nh}}}
 \end{align*}
 $$$`
