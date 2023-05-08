@@ -136,3 +136,6 @@ Is this consistent?
 ```
 Is it appropriate to use a constant `$$g$$` in the definition of `$$\phi$$`?
 
+Combining eq 4 with definition of `$$\mu$$` causes r hats to cancel. Is that correct?
+
+
