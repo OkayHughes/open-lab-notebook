@@ -134,4 +134,5 @@ Is this consistent?
              elem(ie)%derived%gradphis(:,:,2)**2)/(2*gravit))   )  / dt2
 
 ```
+Is it appropriate to use a constant `$$g$$` in the definition of `$$\phi$$`?
 
