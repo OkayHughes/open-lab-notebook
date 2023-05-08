@@ -113,3 +113,5 @@ Todo:
 
 * Note: `tests_initialize` requires `phi_from_eos`
   * But: doesn't seem to use dp3d.
+  * `/home/owhughes/E3SM/DA_HOMME_E3SM/components/homme/src/dp3d.grep.log` contains all potential problems caused by redefinition of dp3d
+  
