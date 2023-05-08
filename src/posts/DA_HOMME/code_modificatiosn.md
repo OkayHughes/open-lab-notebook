@@ -101,3 +101,11 @@ Therefore in the deep HOMME formulation,
 \end{align*}
 $$$`
 and the rest of the derivation remains the same.
+
+
+Todo:
+* Add parameter to control deep/shallow
+* Modify IMEX system
+* Sleuth initialization to figure out where `dp3d` is first calculated.
+* Modify prognostic equations
+
