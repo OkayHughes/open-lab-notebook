@@ -116,4 +116,11 @@ Todo:
   * `/home/owhughes/E3SM/DA_HOMME_E3SM/components/homme/src/dp3d.grep.log` contains all potential problems caused by redefinition of dp3d
   
   
-Find calculation of `derived%gradphi`
+Find calculation of `derived%gradphi` --> fixed.
+
+## Questions:
+Is this consistent?
+```
+     elem(ie)%state%ps_v(:,:,np1) = hvcoord%hyai(1)*hvcoord%ps0 + & 
+          sum(elem(ie)%state%dp3d(:,:,:,np1),3)
+```
