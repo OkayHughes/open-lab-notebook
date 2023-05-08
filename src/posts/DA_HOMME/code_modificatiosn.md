@@ -124,3 +124,14 @@ Is this consistent?
      elem(ie)%state%ps_v(:,:,np1) = hvcoord%hyai(1)*hvcoord%ps0 + & 
           sum(elem(ie)%state%dp3d(:,:,:,np1),3)
 ```
+
+```
+        dpnh_dp_i(:,:,nlevp) = 1 + (  & 
+             ((elem(ie)%state%v(:,:,1,nlev,np1)*elem(ie)%derived%gradphis(:,:,1) + &
+             elem(ie)%state%v(:,:,2,nlev,np1)*elem(ie)%derived%gradphis(:,:,2))/gravit - &
+             elem(ie)%state%w_i(:,:,nlevp,np1)) / &
+             (gravit + ( elem(ie)%derived%gradphis(:,:,1)**2 + &
+             elem(ie)%derived%gradphis(:,:,2)**2)/(2*gravit))   )  / dt2
+
+```
+
