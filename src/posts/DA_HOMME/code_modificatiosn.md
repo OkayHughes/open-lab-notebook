@@ -109,3 +109,7 @@ Todo:
 * Sleuth initialization to figure out where `dp3d` is first calculated.
 * Modify prognostic equations
 
+
+
+* Note: `tests_initialize` requires `phi_from_eos`
+  * But: doesn't seem to use dp3d.
