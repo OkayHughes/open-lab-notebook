@@ -11,7 +11,7 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
-Following the link [https://app.globus.org/file-manager?origin_id=824d7a3d-c8dc-42eb-aa8f-c9cbf5101669]
+Following the link [https://app.globus.org/file-manager?origin_id=824d7a3d-c8dc-42eb-aa8f-c9cbf5101669]()
 and authorizing with the Umich SSO system gives you an interface that will
 show you the `locker` filesystem. E.g. `/clasp-cjablono` exists in this interface, but is not visible on the greatlakes filesystem.
 
