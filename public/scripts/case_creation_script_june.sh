@@ -1,5 +1,5 @@
 export CESMDATAROOT=$scratch/CESM_INPUT
-readonly CESM_PREFIX="CAM_JUNE22"
+readonly CESM_PREFIX="CAM_DEVEL"
 readonly COMPSET="FADIAB"
 readonly GRID_NAME="ne30_ne30_mg17"
 readonly CESM_GROUP="test_cases"

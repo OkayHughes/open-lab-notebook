@@ -4,7 +4,7 @@ tags:
   - posts
   - cesm
 eleventyNavigation:
-  key: 2022/06/14 CAM devel install on UM GreatLakes system
+  key: CAM devel install on UM GreatLakes system
   parent: Community Earth System Model lifehacks
 layout: layouts/post.njk
 ---
@@ -15,8 +15,8 @@ The subversion certificate authority permissions are too strict for silent
 `checkout_externals` to run successfully.
 
 ```
-git clone https://github.com/ESCOMP/CAM ${HOME}/CAM_JUNE22
-cd ${HOME}/CAM_JUNE22
+git clone https://github.com/ESCOMP/CAM ${HOME}/CAM_DEVEL
+cd ${HOME}/CAM_DEVEL
 git checkout cam_development
 yes t | ./manage_externals/checkout_externals
 
@@ -59,7 +59,7 @@ This will take a while to run (> 5 minutes?).
 ## Copying machine files
 Run 
 ```
-cp -rv  /home/owhughes/.cime_CAM_june ${HOME}/.cime
+cp -rv  /home/owhughes/.cime ${HOME}/.cime
 ```
 
 This copies over machine configuration files that are specific to
@@ -79,12 +79,12 @@ mkdir -p ${HOME}/make_cases \
 ```
 
 If this runs correctly, it will create a JW06 (one of the test cases)
-case directory located at `${HOME}/cesm_cases/CAM_JUNE22/test_cases/CAM_JUNE22.ne30_ne30_mg17.FADIAB.36.test_cases.jw06`
+case directory located at `${HOME}/cesm_cases/CAM_DEVEL/test_cases/CAM_DEVEL.ne30_ne30_mg17.FADIAB.36.test_cases.jw06`
 
 
 In order to build and run this case do
 ```
-cd ${HOME}/cesm_cases/CAM_JUNE22/test_cases/CAM_JUNE22.ne30_ne30_mg17.FADIAB.36.test_cases.jw06 \
+cd ${HOME}/cesm_cases/CAM_DEVEL/test_cases/CAM_DEVEL.ne30_ne30_mg17.FADIAB.36.test_cases.jw06 \
   && (source bash.source && bash xml_config_helper.sh) \
   && (source bash.source && ./case.build) \
   && (source bash.source && ./case.submit)
