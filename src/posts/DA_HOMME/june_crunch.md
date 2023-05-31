@@ -11,6 +11,9 @@ layout: layouts/post.njk
 
 
 Tomorrow:
+Create fork
+
+Add enable/disable flag
 Code up isothermal hydrostatic atmosphere for deep EOS. 
 Calculate analytic values.
 
