@@ -14,7 +14,6 @@ Tomorrow:
 Create fork
 
 Add enable/disable flag
-Code up isothermal hydrostatic atmosphere for deep EOS. 
-Calculate analytic values.
+Finish gravity change
 
 
