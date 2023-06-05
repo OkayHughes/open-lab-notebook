@@ -27,4 +27,13 @@ g &= G\frac{m_1m_2}{r^2} \\
 &= g_0 \left(\frac{R_0}{R_0+z} \right)^2
 \end{align*}
 $$$`
+Alright let's do geopotential
+`$$$
+\begin{align*}
+\phi &= zg(z)\\
+&= zg_0 \left(\frac{R_0}{R_0 + z}\right)^2\\
+\implies (R_0+z)^2 \phi &= zg_0R_0^2 \\
+\implies R_0^2 + 2zR_0 + z^2 &= zg
+\end{align*}
+$$$`
 
