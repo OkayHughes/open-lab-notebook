@@ -41,14 +41,10 @@ and applying the quadratic formula we get
 `$$$
 \begin{align*}
 z &= \frac{-b \pm \sqrt{b^2-4ac}}{2a} \\
-&= \frac{(2\phi R_0 - g_0R_0^2) + \sqrt{(2\phi R_0 - g_0R_0^2)^2 - 4\phi^2 R_0^2}}{2}\\
-&= \frac{(2\phi R_0 - g_0R_0^2) + \sqrt{R_0^2(2\phi- g_0R_0)^2 - 4\phi^2R_0^2}}{2}\\
-&= \frac{(2\phi R_0 - g_0R_0^2) + R_0 \sqrt{(2\phi- g_0R_0)^2 - 4\phi^2}}{2}\\
+&= \frac{(g_0R_0^2- 2\phi R_0 ) + \sqrt{(2\phi R_0 - g_0R_0^2)^2 - 4\phi^2 R_0^2}}{2\phi}\\
+&= \frac{(g_0R_0^2-2\phi R_0 ) + \sqrt{R_0^2(2\phi- g_0R_0)^2 - 4\phi^2R_0^2}}{2\phi}\\
+&= \frac{(g_0R_0^2-2\phi R_0 ) + R_0 \sqrt{(2\phi- g_0R_0)^2 - 4\phi^2}}{2\phi}\\
 \end{align*}
 $$$`
 verify:
-`$$$
-\begin{align*}
-  \frac{(2\phi R_0 - g_0R_0^2) + R_0 \sqrt{(2\phi- g_0R_0)^2 - 4\phi^2}}{2} g_0\left(\frac{R_0}{R_0+\frac{(2\phi R_0 - g_0R_0^2) + R_0 \sqrt{(2\phi- g_0R_0)^2 - 4\phi^2}}{2}}\right)^2\\
-\end{align*}
-$$$`
+
