@@ -20,7 +20,12 @@ Respectively, their install directories are `~/installs/homme_deep_gravit` and `
 
 
 We use `ne30` resolution with `$$R_0=6.37\cdot10^5 \textrm{ m}$$` and `$$\Omega = 7.292\cdot 10^{-4} \textrm{ m} $$`.
-All diffusion coefficients have been reduced to `$$6.3\cdot 10^{11} \textrm{ m}$$` using 
-For fully explicit time stepping (`tstep_type=5`) the maximum
+All diffusion coefficients have been reduced to `$$6.3\cdot 10^{11} \textrm{ m}$$` using the scaling law `1e15(ne30/ne300)**3.2` listed in the code.
+For fully explicit time stepping (`tstep_type=5`) the maximum time step is `$tstep=0.4$`. 
+A 30 minute debug run on perlmutter with one full node can simulate 2.7 hours of motion.
+
+The current plan is as follows:
+Quantify the ability of the SA and DA(in shallow mode) implementations to keep the UMJS14 steady state for 
+a 2 hour simulation. 
 
 
