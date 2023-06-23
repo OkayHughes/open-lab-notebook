@@ -25,7 +25,15 @@ For fully explicit time stepping (`tstep_type=5`) the maximum time step is `$tst
 A 30 minute debug run on perlmutter with one full node can simulate 2.7 hours of motion.
 
 The current plan is as follows:
-Quantify the ability of the SA and DA(in shallow mode) implementations to keep the UMJS14 steady state for 
-a 2 hour simulation. 
+1) Quantify the ability of the SA and DA (in shallow mode) implementations to keep the UMJS14 steady state for 
+a 2 hour simulation in explicit mode. These should be of comparable magnitude. PS should be an adequate metric for the moment.
+
+
+2) Is the performance of the DA implementation comparable when cos coriolis terms are added
+
+3) Is the performance of the DA implementation comparable when gravitational variation is added
+
+
+
 
 
