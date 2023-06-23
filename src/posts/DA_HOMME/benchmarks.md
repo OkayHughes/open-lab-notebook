@@ -24,6 +24,9 @@ All diffusion coefficients have been reduced to `$$6.3\cdot 10^{11} \textrm{ m}$
 For fully explicit time stepping (`tstep_type=5`) the maximum time step is `$tstep=0.4$`. 
 A 30 minute debug run on perlmutter with one full node can simulate 2.7 hours of motion.
 
+I'm going to store `ne8` model runs on greatlakes, at `${nfs_home}/steady_state_deep_vs_shallow` with informative-ish names.
+
+
 The current plan is as follows:
 1) Quantify the ability of the SA and DA (in shallow mode) implementations to keep the UMJS14 steady state for 
 a 2 hour simulation in explicit mode. These should be of comparable magnitude. PS should be an adequate metric for the moment.
@@ -32,6 +35,7 @@ a 2 hour simulation in explicit mode. These should be of comparable magnitude. P
 2) Is the performance of the DA implementation comparable when cos coriolis terms are added
 
 3) Is the performance of the DA implementation comparable when gravitational variation is added
+
 
 
 
