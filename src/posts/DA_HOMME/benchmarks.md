@@ -38,6 +38,9 @@ a 2 hour simulation in explicit mode. These should be of comparable magnitude. P
 
 
 
+Note:
+Calculation of ps_v NEEDS to be backwards compatible 
+
 
 
 
