@@ -42,6 +42,9 @@ Note:
 Calculation of ps_v NEEDS to be backwards compatible with other models (otherwise there are
 a BUNCH of code modifications that need to change).
 
+Hypothesis:
+  Fuckup in vertical remap is due to fact that phi_from_eos is used in NH code. Have I changed that yet?
+
 
 
 
