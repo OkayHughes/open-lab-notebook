@@ -15,7 +15,9 @@ Idea:
 * Posit equations of motion (maybe plus hyperviscosity?).
 * Posit several solution fields from continuum function space.
 * Derive forcing terms necessary to make that solution a steady state. 
-* Give dynamics interface to 
+* Give dynamics interface to sample with arbitrarily high spatiotemporal frequency. 
+
+This proves code correctness (are we solving the equations that we want to solve?).
 
 
-Possibilities: take high res atmosphere runs with diabatic forcing, project into high-res space-time basis (e.g. 5 days of high-res amip run). Realistic-ish atmosphere with 
+Possibilities: take high res atmosphere runs with diabatic forcing, project into continuum basis (e.g. 5 days of high-res amip run). Realistic-ish atmosphere with forcing term backed out by projection. 
