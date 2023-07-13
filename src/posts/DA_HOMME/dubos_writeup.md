@@ -52,7 +52,8 @@ Let `$$ \rt{\mu}$$` be eulerian pseudodensity. `$$s$$` is entropy, and is coordi
 `$$$
 \begin{align*}
   \rt{\partial}_t s + \rt{u}^l \rt{\partial}_l s &= 0,\\
-  \rt{\partial}_t \rt{\mu} + \rt{\partial}_l \left[ \rt{\mu}\rt{u}^l \right] &= 0
+  \rt{\partial}_t \rt{\mu} + \rt{\partial}_l \left[ \rt{\mu}\rt{u}^l \right] &= 0 \\
+  \rt{\partial}_t \left[ \rt{\mu}s\right] + \rt{\partial}_l\left[\rt{\mu} s \rt{u}^l \right] &= 0
 \end{align*}
 $$$`
 where `$$ \rt{u}^l$$` are contravariant velocity components, defined according to `$$\rt{u}^l = \frac{\mathrm{D}\rt{\xi}^l}{\mathrm{D} t} $$` with `$$\frac{\textrm{D}}{\textrm{D}t} = \rt{\partial}_t + \rt{u}^l \rt{\partial}_l $$`
