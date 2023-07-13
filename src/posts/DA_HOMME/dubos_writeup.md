@@ -47,5 +47,7 @@ Anyways, this needs more clarification. Let's move on to the equations.
 
 ## Eulerian coordinates
 
-Assume in this section that `$$\Phi$$` is a 
+Let `$$\xi^i $$` be curvilinear coordinates. Assume in this section that `$$\Phi$$` is a predefined function of curvilinear coordinate `$$ \xi^3 $$`. Quantities and operators in red are eulerian. 
+Let `$$ \cr{\mu}, \cr{s}$$` be eulerian pseudodensity and entropy, respectively. 
+
 
