@@ -9,6 +9,8 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
+
+
 This is trying to explain [this paper](https://journals.ametsoc.org/view/journals/mwre/142/10/mwr-d-14-00069.1.xml).
 
 Let `$$\mbf{q} \in \mathcal{A}_1 \times \mathcal{A}_2\times \ldots \mathcal{A}_n $$` for some suitably nice function spaces `$$\mathcal{A}_i$$`. We express scalar energy as `$$\msc{H}(\mbf{q})$$`. 
@@ -41,5 +43,9 @@ Note that `$$\partial_{\mbf{q}_i}\msc{H}$$` is, strictly speaking, an element of
 \end{align*}
 $$$`
 
-Anyways, this needs more clarification. Let's move on to 
+Anyways, this needs more clarification. Let's move on to the equations.
+
+## Eulerian coordinates
+
+Assume in this section that `$$\Phi$$` is a 
 
