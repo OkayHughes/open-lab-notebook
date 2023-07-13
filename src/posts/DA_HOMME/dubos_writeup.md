@@ -23,11 +23,14 @@ and as we found out in [this writeup](https://open-lab-notebook.glitch.me/posts/
 $$$`
 One of the annoying bits of the paper is the use of bold face `$$\mbf{q}$$`. To explicate this fully, we note that if `$$ \msc{H}(\mbf{q}) = \int H(\mbf{q}_1, \ldots, \mbf{q}_n) \intd \mu $$` then, analogous with vector calculus,
 `$$$ 
-\pder{\msc{H}}{\mbf{q}_i}(\delta\mbf{q}_i) = \int H'(\mbf{q}_1)\delta\mbf{q}_1 \intd{\mu}.
+\pder{\msc{H}}{\mbf{q}_i}(\delta\mbf{q}_i) = \int \partial_i H(\mbf{q}_1, \ldots, \mbf{q}_n)\delta\mbf{q}_i \intd{\mu}.
 $$$`
 
 Returning to the paper, they wish to write
 `$$
-  \frac{}{}
+  \der{\mbf{q}}{t} = \left.\mbf{J}\right|_{\mbf{q}} \left(\fder{\msc{H}}{\mbf{q}}\right)
 $$`
+where `$$\mbf{J}$$` is an anti-symmetric linear operator (i.e. could be an anti-symmetric matrix of linear operators which act on `$$\pder{\msc{H}}{\mbf{q}_i} $$`) and `$$\fder{\msc{H}}{\mbf{q}} $$` is a functional "gradient" in the usual way.
+
+This gives a concrete representation of a poisson bracket 
 
