@@ -32,5 +32,8 @@ Returning to the paper, they wish to write
 $$`
 where `$$\mbf{J}$$` is an anti-symmetric linear operator (i.e. could be an anti-symmetric matrix of linear operators which act on `$$\pder{\msc{H}}{\mbf{q}_i} $$`) and `$$\fder{\msc{H}}{\mbf{q}} $$` is a functional "gradient" in the usual way.
 
-This gives a concrete representation of a poisson bracket 
+Note that `$$\partial_{\mbf{q}_i}\msc{H}$$` is, strictly speaking, an element of the dual space. However, using the particular form of `$$\msc{H}$$`, we can get a concrete representation of a Poisson bracket:
+`$$$
+\der{\msc{F}}{t} = \{\msc{F},\msc{H}\} = \int \fder{\msc{F}}{}
+$$$`
 
