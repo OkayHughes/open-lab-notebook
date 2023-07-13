@@ -34,6 +34,10 @@ where `$$\mbf{J}$$` is an anti-symmetric linear operator (i.e. could be an anti-
 
 Note that `$$\partial_{\mbf{q}_i}\msc{H}$$` is, strictly speaking, an element of the dual space. However, using the particular form of `$$\msc{H}$$`, we can get a concrete representation of a Poisson bracket:
 `$$$
-\der{\msc{F}}{t} = \{\msc{F},\msc{H}\} = \int \fder{\msc{F}}{}
+\begin{align*}
+\der{\msc{F}}{t} &= \{\msc{F},\msc{H}\}  \\
+  &= \mbf{J}\left(\fder{\msc{F}}{\mbf{q}}, \fder{\msc{H}}{\mbf{q}}\right) \\
+  &= 
+\end{align*}
 $$$`
 
