@@ -47,14 +47,14 @@ Anyways, this needs more clarification. Let's move on to the equations.
 
 ## Eulerian coordinates
 
-Let `$$\xi^i $$` be curvilinear coordinates. Assume in this section that `$$\Phi$$` is a predefined function of curvilinear coordinate `$$ \xi^3 $$`. Quantities and operators in red are eulerian. 
-Let `$$ \cr{\mu}$$` be eulerian pseudodensity. `$$s$$` is entropy, and is coordinate independent. Then we have the following transport equations which don't change with eqns of motion:
+Let `$$\rt{\xi}^i $$` be curvilinear coordinates. Assume in this section that `$$\Phi$$` is a predefined function of curvilinear coordinate `$$ \rt{\xi}^3 $$`. Quantities and operators in red are eulerian. 
+Let `$$ \rt{\mu}$$` be eulerian pseudodensity. `$$s$$` is entropy, and is coordinate independent. Then we have the following transport equations which don't change with eqns of motion:
 `$$$
-\cr{l}
 \begin{align*}
-  \cr{\partial}_t s + \cr{u}^l\cr{\partial}_l s &= 0,\\
-  \cr{\partial}_t \cr{\mu} + \cr{\partial}_l \left[ \cr{\mu}\cr{u}^l \right] &= 0
+  \rt{\partial}_t s + \rt{u}^l \rt{\partial}_l s &= 0,\\
+  \rt{\partial}_t \rt{\mu} + \rt{\partial}_l \left[ \rt{\mu}\rt{u}^l \right] &= 0
 \end{align*}
 $$$`
+where `$$ \rt{u}^l$$` are contravariant velocity components, defined according to `$$\rt{u}^l = \frac{\mathrm{D}\rt{\xi}^l}{\mathrm{D} t} $$` with `$$\frac{\textrm{D}}{\textrm{D}t} = \rt{\partial}_t + \rt{u}^l \rt{\partial}_l $$`
 
 
