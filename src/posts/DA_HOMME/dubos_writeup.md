@@ -48,6 +48,13 @@ Anyways, this needs more clarification. Let's move on to the equations.
 ## Eulerian coordinates
 
 Let `$$\xi^i $$` be curvilinear coordinates. Assume in this section that `$$\Phi$$` is a predefined function of curvilinear coordinate `$$ \xi^3 $$`. Quantities and operators in red are eulerian. 
-Let `$$ \cr{\mu}, \cr{s}$$` be eulerian pseudodensity and entropy, respectively. 
+Let `$$ \cr{\mu}$$` be eulerian pseudodensity. `$$s$$` is entropy, and is coordinate independent. Then we have the following transport equations which don't change with eqns of motion:
+`$$$
+\cr{l}
+\begin{align*}
+  \cr{\partial}_t s + \cr{u}^l\cr{\partial}_l s &= 0,\\
+  \cr{\partial}_t \cr{\mu} + \cr{\partial}_l \left[ \cr{\mu}\cr{u}^l \right] &= 0
+\end{align*}
+$$$`
 
 
