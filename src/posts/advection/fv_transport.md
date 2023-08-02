@@ -30,8 +30,8 @@ $$$`
 For a scalar equation, we define
 `$$$
 \begin{align*}
-u^-_{j\pm\frac{1}{2}}(t) &= u_{j\pm 1}(t) - \frac{\Delta x}{2}(u_x)_{j\pm 1}(t), \\
-u^+_{j\pm\frac{1}{2}}(t) &= u_{j\pm 1}(t) + \frac{\Delta x}{2} (u_x)_{j\pm 1}(t)
+u^\pm_{j+\frac{1}{2}}(t) &= u_{j+ 1}(t) \mp \frac{\Delta x}{2}(u_x)_{j + \frac{1}{2} \pm \frac{1}{2}}(t), \\
+u^\pm_{j-\frac{1}{2}}(t) &= u_{j- 1}(t) \stackrel{?}{\pm} \frac{\Delta x}{2}(u_x)_{j - \frac{1}{2} \pm \frac{1}{2}}(t)
 \end{align*}
 $$$`
 so we can define
@@ -61,6 +61,7 @@ $$$`
 and we finish by defining
 `$$$
 \begin{align*}
-  H^x_{j\pm\frac{1}{2},k}(t) = \frac{f(u^+_{j\pm\frac{1}{2},k}(t)) + f(u^-_{j\pm\frac{1}{2},k}(t))}{2} - \frac{a^x_{j\pm \frac{1}{2},k}(t)}{2}\left[u^+_{j\pm \frac{1}{2},k}(t) - u^-_{j\pm \frac{1}{2}} \right]
+  H^x_{j\pm\frac{1}{2},k}(t) &= \frac{f(u^+_{j\pm\frac{1}{2},k}(t)) + f(u^-_{j\pm\frac{1}{2},k}(t))}{2} - \frac{a^x_{j\pm \frac{1}{2},k}(t)}{2}\left[u^+_{j\pm \frac{1}{2},k}(t) - u^-_{j\pm \frac{1}{2},k}(t) \right]\\
+  H^y_{j,k\pm\frac{1}{2}}(t) &= \frac{f(u^+_{j,k\pm\frac{1}{2}}(t)) + f(u^-_{j,k\pm\frac{1}{2}}(t))}{2} - \frac{a^y_{j,k\pm\frac{1}{2}}(t)}{2}\left[u^+_{j,k\pm\frac{1}{2}}(t) - u^-_{j,k\pm\frac{1}{2}}(t) \right]
 \end{align*}
 $$$`
