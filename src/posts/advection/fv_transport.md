@@ -34,4 +34,10 @@ $$$`
 
 
 and we use the minmod limiter from the paper for simplicity, namely
-`$`
+`$$$
+\begin{align*}
+  (u_x)_{j,k}^n &= \textrm{minmod }\left(\theta \frac{u_{j,k}^n - u_{j-1,k}^n}{\Delta x}, \frac{u_{j+1,k}^n - u_{j-1,k}^n}{2\Delta x}, \theta \frac{u_{j+1,k}^n - u_{j,k}^n}{\Delta x}\right), \qquad 1\leq \theta \leq 2\\
+  (u_y)_{j,k}^n &= \textrm{minmod }\left(\theta \frac{u_{j,k}^n - u_{j,k-1}^n}{\Delta y}, \frac{u_{j,k+1}^n - u_{j,k-1}^n}{2\Delta y}, \theta \frac{u_{j,k+1}^n - u_{j,k}^n}{\Delta y}\right), \qquad 1\leq \theta \leq 2\\
+  \textrm{minmod}[\cdot] &= \frac{1}{2}[\textrm{sgn}(a) + \textrm{sgn}(b)] \cdot \min(|a|,|b|)
+\end{align*}
+$$$`
