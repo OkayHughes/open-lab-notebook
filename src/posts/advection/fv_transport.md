@@ -10,7 +10,7 @@ layout: layouts/post.njk
 ---
 We are solving the following equation
 `$$$
-\pder{}{t} \rho_i + \nabla \cdot (\rho_i\mathbf{F}) = 0
+\pder{}{t} u + \nabla \cdot (u \mathbf{F}) = 0
 $$$`
 based on the Riemann-solver-free scheme for regular grids given [in this paper by Kurganov and Tadmor](https://www.sciencedirect.com/science/article/pii/S0021999100964593).
 
@@ -23,6 +23,20 @@ u^{(l+1)} &= \eta_l u^{n} + (1-\eta_l)\left(u^{(l)}) + \Delta t^{n} C\left[u^{(l
 u^{n+1} &= u^{(s)}
 \end{align*}
 $$$`
+
+
+## local propagation speeds
+
+For a scalar equation, we define
+`$$$
+u^-_{j+\frac{1}{2}}(t) &= u_{j+1}(t) - \Delta x/2(u_x)_{j+1}(t), \\
+u_{j+1}(t) - \Delta x/2 (u_x)_{j+1}(t)
+$$$`
+so we can define
+`$$$
+a_{j+\frac{1}{2}}(t) = \max_{u \in [u]} |f'(u)|
+$$$`
+but since we are using a flux which is linear in `$$u,$$` this value is constant and so this reduces to `$$a_{j+\frac{1}{2}} = |F(t, x)|$$`
 
 ## horizontal differencing:
 `$$C[\cdot]$$` is defined as follows:
@@ -38,6 +52,8 @@ and we use the minmod limiter from the paper for simplicity, namely
 \begin{align*}
   (u_x)_{j,k}^n &= \textrm{minmod }\left(\theta \frac{u_{j,k}^n - u_{j-1,k}^n}{\Delta x}, \frac{u_{j+1,k}^n - u_{j-1,k}^n}{2\Delta x}, \theta \frac{u_{j+1,k}^n - u_{j,k}^n}{\Delta x}\right), \qquad 1\leq \theta \leq 2\\
   (u_y)_{j,k}^n &= \textrm{minmod }\left(\theta \frac{u_{j,k}^n - u_{j,k-1}^n}{\Delta y}, \frac{u_{j,k+1}^n - u_{j,k-1}^n}{2\Delta y}, \theta \frac{u_{j,k+1}^n - u_{j,k}^n}{\Delta y}\right), \qquad 1\leq \theta \leq 2\\
-  \textrm{minmod}[\cdot] &= \frac{1}{2}[\textrm{sgn}(a) + \textrm{sgn}(b)] \cdot \min(|a|,|b|)
+  \textrm{minmod}[a, b] &= \frac{1}{2}[\textrm{sgn}(a) + \textrm{sgn}(b)] \cdot \min(|a|,|b|)
 \end{align*}
 $$$`
+
+
