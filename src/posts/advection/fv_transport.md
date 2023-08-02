@@ -29,12 +29,14 @@ $$$`
 
 For a scalar equation, we define
 `$$$
-u^-_{j+\frac{1}{2}}(t) &= u_{j+1}(t) - \Delta x/2(u_x)_{j+1}(t), \\
-u_{j+1}(t) - \Delta x/2 (u_x)_{j+1}(t)
+\begin{align*}
+u^-_{j\pm\frac{1}{2}}(t) &= u_{j\pm 1}(t) - \frac{\Delta x}{2}(u_x)_{j\pm 1}(t), \\
+u^+_{j\pm\frac{1}{2}}(t) &= u_{j\pm 1}(t) + \frac{\Delta x}{2} (u_x)_{j\pm 1}(t)
+\end{align*}
 $$$`
 so we can define
 `$$$
-a_{j+\frac{1}{2}}(t) = \max_{u \in [u]} |f'(u)|
+a_{j\pm\frac{1}{2}}(t) = \max_{u \in [u^-_{j\pm \frac{1}{2}}, u^+_{j\pm\frac{1}{2}}]} |f'(u)|
 $$$`
 but since we are using a flux which is linear in `$$u,$$` this value is constant and so this reduces to `$$a_{j+\frac{1}{2}} = |F(t, x)|$$`
 
@@ -56,4 +58,9 @@ and we use the minmod limiter from the paper for simplicity, namely
 \end{align*}
 $$$`
 
-
+and we finish by defining
+`$$$
+\begin{align*}
+  H^x_{j\pm\frac{1}{2},k}(t) = \frac{f(u^+_{j\pm\frac{1}{2},k}(t)) + f(u^-_{j\pm\frac{1}{2},k}(t))}{2} - \frac{a^x_{j\pm \frac{1}{2},k}(t)}{2}\left[u^+_{j\pm \frac{1}{2},k}(t) - u^-_{j\pm \frac{1}{2}} \right]
+\end{align*}
+$$$`
