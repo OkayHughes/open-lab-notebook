@@ -62,6 +62,9 @@ and we finish by defining
 `$$$
 \begin{align*}
   H^x_{j\pm\frac{1}{2},k}(t) &= \frac{f(u^+_{j\pm\frac{1}{2},k}(t)) + f(u^-_{j\pm\frac{1}{2},k}(t))}{2} - \frac{a^x_{j\pm \frac{1}{2},k}(t)}{2}\left[u^+_{j\pm \frac{1}{2},k}(t) - u^-_{j\pm \frac{1}{2},k}(t) \right]\\
-  H^y_{j,k\pm\frac{1}{2}}(t) &= \frac{f(u^+_{j,k\pm\frac{1}{2}}(t)) + f(u^-_{j,k\pm\frac{1}{2}}(t))}{2} - \frac{a^y_{j,k\pm\frac{1}{2}}(t)}{2}\left[u^+_{j,k\pm\frac{1}{2}}(t) - u^-_{j,k\pm\frac{1}{2}}(t) \right]
+  H^y_{j,k\pm\frac{1}{2}}(t) &= \frac{g(u^+_{j,k\pm\frac{1}{2}}(t)) + g(u^-_{j,k\pm\frac{1}{2}}(t))}{2} - \frac{a^y_{j,k\pm\frac{1}{2}}(t)}{2}\left[u^+_{j,k\pm\frac{1}{2}}(t) - u^-_{j,k\pm\frac{1}{2}}(t) \right]
 \end{align*}
 $$$`
+
+Note that evaluation of `$$f,g$$` occur only at `$$j \pm \frac{1}{2}, k\pm \frac{1}{2} $$` points, respectively. This indicates that we are implicitly working on an arakawa C grid. 
+Since we are assuming that the domain is `$$\mathbb{T}^2$$`, this means that we can assume that `$$f_{,k}$$`
