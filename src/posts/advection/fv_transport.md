@@ -5,7 +5,7 @@ tags:
   - finite volume
 eleventyNavigation:
   parent: Transport Algorithms
-  key: finite volume transport regular grid
+  key: finite volume transport on a regular grid
 layout: layouts/post.njk
 ---
 We are solving the following equation
