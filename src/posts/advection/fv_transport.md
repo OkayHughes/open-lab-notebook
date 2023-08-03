@@ -67,4 +67,5 @@ and we finish by defining
 $$$`
 
 Note that evaluation of `$$f,g$$` occur only at `$$j \pm \frac{1}{2}, k\pm \frac{1}{2} $$` points, respectively. This indicates that we are implicitly working on an arakawa C grid. 
-Since we are assuming that the domain is `$$\mathbb{T}^2$$`, this means that we can assume that `$$f_{,k}$$`
+Since we are assuming that the domain is `$$\mathbb{T}^2$$`, this means that we can assume that `$$f_{-\frac{1}{2},k} = f_{n+\frac{1}{2},k}$$` and likewise `$$f_{j, -\frac{1}{2}} = f_{j, n+\frac{1}{2}}$$`.
+This, therefore, resolves any ambiguity surrounding the flux used to compute `$$ a_{j\pm\frac{1}{2}}(t) = \max_{u \in [u^-_{j\pm \frac{1}{2}}, u^+_{j\pm\frac{1}{2}}]} |f'(u)| $$`
