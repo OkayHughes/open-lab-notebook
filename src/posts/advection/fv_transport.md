@@ -78,3 +78,8 @@ We find that the construction of the numerical fluxes gives
 \end{align*}
 $$$`
 which is implicit upwind biasing. 
+
+Note: do not accidentally solve the equation
+`$$$ 
+\pder{\rho}{t} + \nabla \cdot (\rho^2 \mathbf{u}) = 0
+$$$`
