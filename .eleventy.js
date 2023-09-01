@@ -60,6 +60,8 @@ module.exports = function(eleventyConfig) {
   \\newcommand{\\tm}[1]{\\textrm{#1}}
   \\newcommand{\\msc}[1]{\\mathscr{#1}}
   \\newcommand{\\mbf}[1]{\\mathbf{#1}}
+  \\newcommand{\\probp}{\\mathbb{P}}
+  \\newcommand{\\probe}{\\mathbb{E}}
   \\newcommand{\\rt}[1]{\\textcolor{darkred}{#1}}
   `, {macros, globalGroup: true});
 
