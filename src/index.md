@@ -15,15 +15,7 @@ I had the idea of putting my lab notebooks online for all to see.
 This isn't a particularly useful idea in and of itself, but I could
 see a number of future projects that might be able to build on this.
 
-## Urgent todo:
-* Reply to Claire about SCM
-* Joint Ph.D. correspondence
-* Finish 571 HW
-* Clouds EC
-* FV3 
 
-
-## Moonshots
-* Literate programming dycore
+## [Active todo list](posts/todo/2023_09/)
 
 ### Posts
