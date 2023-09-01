@@ -4,7 +4,7 @@ tags:
   - posts
   - misc
 eleventyNavigation:
-  key: stats700
+  key: CLaSP 586
 layout: layouts/post.njk
 ---
 
