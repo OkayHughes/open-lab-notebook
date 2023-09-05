@@ -61,9 +61,11 @@ In the computational world this might not be true?
 
 Example of when this is dubious: measure the impact of a treatment of an illness (tendency of patients to get better over time).
 
-## Lab controlled experiments and Unit Homogeneity
+### Lab controlled experiments and Unit Homogeneity
 This is the assumption that different units respond identically to treatment, e.g. `$$Y_i(z) =  Y_j(z) $$` for `$$z \in \mathcal{A}$$`.
 E.g. knockout experiments on mice: engineer nearly genetically identical mice and vary a single gene. Potential outcomes should have the same distribution across units.
+
+## Statistical approaches to causality
 
 
 
