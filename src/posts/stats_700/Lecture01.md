@@ -74,6 +74,9 @@ A frequent estimand is the Average Treatment Effect (ATE):
 &= \probe[Y_i(1)] - \probe[Y_i(0)]
 \end{align*}
 $$$`
-which is linear in a way that allows us to approximate the treatment effect using only the marginal expectations `$$\ $$`
+which is linear in a way that allows us to approximate the treatment effect using only the marginal expectations `$$\probe[Y_i(1)],\ \probe[Y_i(0)] $$`
+
+There are estimands (e.g. median treatment response) which do not immediately have this property and more work must be done.
+
 
 
