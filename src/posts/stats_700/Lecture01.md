@@ -47,8 +47,9 @@ In the computational world this might not be true?
 * Relationship to do calculus
   * `$$\tau_i = \probp(Y_i=y \mid \textrm{do}(1)) - \probp(Y_i=y \mid \textrm{do}(0))  $$`
 
-## Fundamental problem of causal inference:
+### Fundamental problem of causal inference:
 * We cannot observe both `$$Y_i(1)$$` and `$$Y_i(0)$$` in the real world, and therefore we cannot observe the causal effect of the active treatment
 
+### Before-after study: temporal stability and causal transience
 
 
