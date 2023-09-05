@@ -51,7 +51,19 @@ In the computational world this might not be true?
 ### Fundamental problem of causal inference:
 * We cannot observe both `$$Y_i(1)$$` and `$$Y_i(0)$$` in the real world, and therefore we cannot observe the causal effect of the active treatment
 
-### Causal transience
-* Temporal stability assumption: The value of `$$Y_i(0) $$` does not de
+### Temporal stability
+* Temporal stability assumption: The value of `$$Y_i(0) $$` does not depend on when we apply `$$ 0 $$` to unit `$$ i $$` and then measure.
+* If this holds, we can take a sequence of measurements, then we can measure `$$Y_i(Z)$$` by a sequence of experiments.
+
+### Causal Transience
+* The value of `$$Y_i(1)$$` is not impacted by applying control to unit `$$i$$`, then measure `$$Y_i$$`.
+* This gives us the ability to measure both `$$Y_i(0)$$` and `$$Y_i(1)$$` for the same unit `$$i$$` via a sequence of experiments under limited assumptions.
+
+Example of when this is dubious: measure the impact of a treatment of an illness (tendency of patients to get better over time).
+
+## Lab controlled experiments and Unit Homogeneity
+This is the assumption that different units respond identically to treatment, e.g. `$$Y_i(z) =  Y_j(z) $$` for `$$z \in \mathcal{A}$$`.
+E.g. knockout experiments on mice: engineer nearly genetically identical mice and vary a single gene. Potential outcomes should have the same distribution across units.
+
 
 
