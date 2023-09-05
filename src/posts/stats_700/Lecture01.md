@@ -41,7 +41,12 @@ Some notes on causal effects:
 In the real world (why did Judy get lung cancer?) you have the problem of infinite regress (she has lung cancer because she smoked, because her parents smoked, because her parents hated each other...).
 In the computational world this might not be true?
   * Potential outcomes gives actionable information on how to live our lives. And can do so in purely observational situations.
-* 
+* Cause-effect relationships have to have a temporal ordering.
+  * Can't have effect before a cause.
+  * Can't have causal simultaneity --> impossible to distinguish directionality.
+* Relationship to do calculus
+  * `$$\tau_i = \probp(Y_i=y \mid \textrm{do}(1)) - \probp(Y_i=y \mid \textrm{do}(0))  $$`
+
 
 
 
