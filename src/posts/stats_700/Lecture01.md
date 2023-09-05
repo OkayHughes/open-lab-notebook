@@ -30,4 +30,18 @@ We use the notation
 
 The causal effect of treatment compared to control for unit `$$i$$` can be expressed as `$$$ \tau_i = Y_i(1) - Y_i(0).$$$`
 
-Let's put together a climate example: SSW with EP flux above a certain threshold
+Let's put together a climate example: measure whether tropical cyclone forms under deep/shallow dynamics in a weather-scale experiment. 
+* `$$\tau_i = 1 $$` would show that deep atmosphere causes tropical cyclone for unit `$$i$$`.
+* `$$\tau_i = 0$$` means deep atmosphere does not cause for unit `$$i$$`.
+* `$$ \tau_i = -1 $$` means deep atmosphere inhibits tropical cyclone from forming for unit `$$ i$$`.
+
+Some notes on causal effects:
+* The causal effect of a treatment can only be defined in reference to another treatment (e.g. a control). Do these treatments have to be mutually exclusive?
+* This framework focuses on effects which result from causes (effect of deep/shallow atmosphere on tropical cyclones) rather than causes of effects (why did tropical cyclone form?)
+In the real world (why did Judy get lung cancer?) you have the problem of infinite regress (she has lung cancer because she smoked, because her parents smoked, because her parents hated each other...).
+In the computational world this might not be true?
+  * Potential outcomes gives actionable information on how to live our lives. And can do so in purely observational situations.
+* 
+
+
+
