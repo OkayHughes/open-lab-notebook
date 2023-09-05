@@ -66,6 +66,14 @@ This is the assumption that different units respond identically to treatment, e.
 E.g. knockout experiments on mice: engineer nearly genetically identical mice and vary a single gene. Potential outcomes should have the same distribution across units.
 
 ## Statistical approaches to causality
-
+A statistical approach to causal inference, we seek to infer some analogue of the difference between potential outcomes
+A frequent estimand is the Average Treatment Effect (ATE):
+`$$$
+\begin{align*}
+\tau &= \probe[Y_i(1) - Y_i(0)] \\
+&= \probe[Y_i(1)] - \probe[Y_i(0)]
+\end{align*}
+$$$`
+which is linear in a way that allows us to approximate the treatment effect using only the marginal expectations `$$\ $$`
 
 
