@@ -4,7 +4,7 @@ tags:
   - posts
   - ncl
 eleventyNavigation:
-  key: Lecture 01
+  key: Lecture 02
   parent: STATS 700
 layout: layouts/post.njk
 ---
@@ -25,4 +25,13 @@ We can formulate causality by defining:
 * `$$Y_i(1)$$`: income of student `$$ i$$` in 1973 if they graduated from college
 * `$$Y_i(0)$$`: income of student `$$ i $$` in 1973 if they did not graduate from college
 * `$$\tau_i = Y_i(1) - Y_i(0)$$`: the difference in income if student `$$i$$` graduated from college
-* `$$ \probe [Y_i(1) - Y_i(0)]$$`: 
+* `$$ \probe [Y_i(1) - Y_i(0)]$$`: the average difference in income that would happen if a student went to college.
+
+### Being sloppy:
+A naive estimator of `$$\tau$$` would be to take the difference between mean income in the population who graduated from college and those who didn't.
+That is,
+`$$$\hat{\tau} = \hat{\probe}[Y_i \mid Z_i = 1] - \hat{\probe}[Y_i \mid Z_i = 0] = \frac{1}{n_1} \sum_i Y_iZ_i - \frac{1}{n_0} \sum_i Y_i(1-Z_i) $$$`
+
+Note that this should be interpreted as "the two populations of interest should differ in mean income by this amount".
+This completely fails to address any sort of counterfactual reality. That people can self-select into going to college
+gives us `$$\probe $$`
