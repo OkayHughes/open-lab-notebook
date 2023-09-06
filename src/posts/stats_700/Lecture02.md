@@ -12,7 +12,7 @@ The code segments are translated to python in [this notebook](https://colab.rese
 
 Let `$$ Z_i$$` denote the treatment assignment and `$$ Y_i$$` denote the observed outcome for unit `$$ i$$`.
 We denote pre-treatment covariates by `$$ X_i$$`. These should be measured before the treatment is measured. 
-Controlling for post-treatment variables can introduce bias to estimates of treatment effects ([Rosenbaum, 1984](https://www.jstor.org/stable/2981697)).
+Controlling for post-treatment variables can introduce bias to estimates of treatment effects ([Rosenbaum, 1984](https://doi.org/10.2307/2981697)).
 
 For the example of college and earnings, we define
 * `$$ Z_i $$`: whether you graduated from 4-year college `($$Z_i=1$$`) or not (`$$Z_i=0$$`) in 1964.
@@ -43,4 +43,13 @@ differences in the population could explain the treatment effect.
 
 Note: the power of randomized trials is that the distribution of both unobserved covariates `$$U_i$$` and observed covariates `$$X_i$$` are balanced between the two groups.
 This can be seen in the attached notebook. While covariates like parental education are highly unbalanced when college is not randomized, the balance is nearly perfect when we fictitiously assign 
-students to go to college or not.
+students to go to college or not. 
+
+## Formalizing conditions for treatment effect identification
+In this section let's show why randomizing `$$Z_i$$` gives us `$$\probe[Y_i \mid Z_i=z] = \probe[Y_i(1)]$$`. This would give us `$$$\probe[Y_i(1) - Y_i(0)] = \probe[Y_i \mid Z_i=1] - \probe[Y_i \mid Z_i = 0] $$$`
+
+There are three assumptions needed to show the above equality: **SUTVA, ignorability, and overlap**. 
+
+### SUTVA:
+The Stable Unit Treatment Value Assumption links `$$ Y_i(1)$$` and `$$Y_i(0)$$` to the observed outcome `$$Y_i$$` [Rubin 1980](https://doi.org/10.2307/2287653).
+SUTVA states that 
