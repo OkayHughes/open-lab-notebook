@@ -76,7 +76,13 @@ A frequent estimand is the Average Treatment Effect (ATE):
 $$$`
 which is linear in a way that allows us to approximate the treatment effect using only the marginal expectations `$$\probe[Y_i(1)],\ \probe[Y_i(0)] $$`
 
-There are estimands (e.g. median treatment response) which do not immediately have this property and more work must be done.
+There are estimands which do not immediately have this property and more work must be done.
+* The median of `$$\tau_i $$`
+* `$$ \probe [\boldsymbol{1}_{\{\tau_i > 0\}}]$$`
+
+### A first look at SUTVA
+If we are interested in `$$ \bar{tau}_i = \probe[\tau_i].$$` Why is this still challenging if we focus on marginals instead of the joint distribution?
+
 
 
 
