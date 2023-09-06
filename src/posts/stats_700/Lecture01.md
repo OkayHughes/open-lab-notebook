@@ -82,6 +82,17 @@ There are estimands which do not immediately have this property and more work mu
 
 ### A first look at SUTVA
 If we are interested in `$$ \bar{tau}_i = \probe[\tau_i].$$` Why is this still challenging if we focus on marginals instead of the joint distribution?
+Suppose `$$Z_i$$` is the chosen treatment that unit `$$i$$` recieves. SUTVA (which will be introduced later) gives us
+`$$$
+\begin{align*}
+Y_i &= Y_i(Z_i) \\
+  &= \begin{cases}
+      Y_i(1) \quad Z_i = 1 \\
+      Y_i(0) \quad z_i = 0
+      \end{cases}
+\end{align*}
+$$$`
+and thus the observed data is `$$\{(Y_i,Z_i)\}_{1 \leq i \leq n} $$`
 
 
 
