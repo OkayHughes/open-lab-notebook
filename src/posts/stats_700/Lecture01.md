@@ -129,5 +129,20 @@ Fundamentally, the "science table" tends to look like this:
   </tr>
 </table>
 
+Are these entries missing completely at random (MCAR)? We don't usually know
 
+## Randomized experiments vs Observational studies
+One sufficient condition which gives `$$\probe[Y_i \mid Z_i = z] = \probe[Y_i(z)] $$` is independence:
+* `$$ (Y_i(1), Y_i(0)) \bot Z_i$$` 
+* `$$ \probp(Z_i = 1 \mid (Y_i(1), Y_i(0))) = \probp(Z_i=1)$$`
+
+One can get this in a randomized experiment
+### Randomized expieriments
+If we assign individuals into treatment groups, then we can enforce this independence by design.
+
+A simple starting example: **a completely randomized experiment**:
+* `$$n_1$$` individuals are given treatment, `$$n_0$$` are given control, `$$n = n_0 + n_1$$`. The assignment proportions may be imbalanced e.g. if treatment is very expensive.
+* `$$ Z \equiv (Z_1, \ldots, Z_n)^\top$$` 
+* `$$ \Omega = \{z \mid \sum_{i} z_i = n_1\}$$` is the set of allowable treatments. 
+* `$$\probp(Z=z \mid Z \in \Omega, (Y(1), Y(0)) $$`
 
