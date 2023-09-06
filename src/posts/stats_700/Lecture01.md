@@ -92,8 +92,42 @@ Y_i &= Y_i(Z_i) \\
       \end{cases}
 \end{align*}
 $$$`
-and thus the observed data is `$$\{(Y_i,Z_i)\}_{1 \leq i \leq n} $$`
+and thus the observed data is `$$\{(Y_i,Z_i)\}_{1 \leq i \leq n}.$$` 
+The population which is treated (and for which we can observe the treatment effect) is disjoint from the population for which we 
+get to observe the control.
 
+To put this mathematically,
+`$$$
+\begin{align*}
+  \probe[Y_i \mid Z_i = 1] = \probe[Y_i(1) \mid Z_i = 1] \\
+  \probe[Y_i \mid Z_i = 0] = \probe[Y_i(0) \mid Z_i = 0]
+\end{align*}
+$$$`
+
+But in general `$$ \probe[Y_i(z) \mid Z_i = z] \neq \probe[Y_i(z)].$$` Especially in observational settings, the way treatments are assigned (or self selected)
+can bias these populations. 
+
+### Modeling causality as a missing-data problem
+The crux of Rubin's causal model is considering causality as a missing-data problem (e.g. Pearl takes significant issue with this).
+
+Fundamentally, the "science table" tends to look like this:
+<table>
+  <tr>
+    <th>$$Y_i(1)$$</th> <th>$$Y_i(0)$$</th> <th>$$\tau_i$$</th>
+  </tr>
+  <tr>
+    <td>?</td><td>2</td><td>?</td>
+  </tr>
+  <tr>
+    <td>6</td><td>?</td><td>?</td>
+  </tr>
+  <tr>
+    <td>?</td><td>8</td><td>?</td>
+  </tr>
+  <tr>
+    <td>?</td><td>10</td><td>?</td>
+  </tr>
+</table>
 
 
 
