@@ -34,4 +34,10 @@ That is,
 
 Note that this should be interpreted as "the two populations of interest should differ in mean income by this amount".
 This completely fails to address any sort of counterfactual reality. That people can self-select into going to college
-gives us `$$\probe $$`
+gives us `$$\probe[Y_i(1) \mid Z_i=1] \neq \probe[Y_i(1)]$$`.
+
+The estimands that we want are `$$\probe[Y_i(1)] - \probe[Y_i(0)]$$` which vary over _the same population of individuals_. 
+Supposing this is the case, then a non-zero `$$\tau_i$$` is attributable to the treatment. But if the populations differ (as in the college case), then 
+differences in the population could explain the treatment effect. 
+
+
