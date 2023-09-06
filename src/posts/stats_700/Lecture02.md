@@ -41,3 +41,6 @@ Supposing this is the case, then a non-zero `$$\tau_i$$` is attributable to the 
 differences in the population could explain the treatment effect. 
 
 
+Note: the power of randomized trials is that the distribution of both unobserved covariates `$$U_i$$` and observed covariates `$$X_i$$` are balanced between the two groups.
+This can be seen in the attached notebook. While covariates like parental education are highly unbalanced when college is not randomized, the balance is nearly perfect when we fictitiously assign 
+students to go to college or not.
