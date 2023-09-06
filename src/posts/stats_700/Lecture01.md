@@ -144,5 +144,16 @@ A simple starting example: **a completely randomized experiment**:
 * `$$n_1$$` individuals are given treatment, `$$n_0$$` are given control, `$$n = n_0 + n_1$$`. The assignment proportions may be imbalanced e.g. if treatment is very expensive.
 * `$$ Z \equiv (Z_1, \ldots, Z_n)^\top$$` 
 * `$$ \Omega = \{z \mid \sum_{i} z_i = n_1\}$$` is the set of allowable treatments. 
-* `$$\probp(Z=z \mid Z \in \Omega, (Y(1), Y(0)) $$`
+* `$$\probp(Z=z \mid Z \in \Omega, Y(1), Y(1)) = \probp(Z=z \mid Z \in \Omega) = \frac{1}{|\Omega|} = {n \choose n_1}.$$` This is the complete randomization.
+* `$$ \probp(Z_i=1 \mid Z \in \Omega, Y_i(1), Y_i(0)) = \probp(Z_i=1 \mid Z \in \Omega) = \frac{n_1}{n} $$`
+* Assignment is independent of potential outcomes. Both in an informal and formal sense.
+
+### Observational studies:
+An observational study must be done when it's not feasible (e.g. ethical) to do a controled experimentation. 
+Self selection is possible, so the above independence condition does not hold.
+
+* Observational experiments MUST be done in certain situations.
+* Poorly designed observational studies can be complete garbage. 
+
+
 
