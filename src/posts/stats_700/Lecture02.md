@@ -53,3 +53,28 @@ There are three assumptions needed to show the above equality: **SUTVA, ignorabi
 ### SUTVA:
 The Stable Unit Treatment Value Assumption links `$$ Y_i(1)$$` and `$$Y_i(0)$$` to the observed outcome `$$Y_i$$` [Rubin 1980](https://doi.org/10.2307/2287653).
 SUTVA states that 
+`$$$
+\begin{align*}
+  Y_i &= Z_iY_i(1) + (1-Z_i)Y_i(0) 
+\end{align*}
+$$$`
+or
+`$$$
+Z_i=z \implies Y_i = Y_i(z)
+$$$`
+which seems mathematically intuitive, but 
+the validity of this assumption in the context
+of real-world complexity must be assessed by 
+subject-matter experts. There are two main things
+that should be assessed:
+* There are no hidden versions of treatment 
+or that treatment variation is negligible.
+This measn that if `$$Z_i=z$$`, either 1) there is only one version fpr
+unit `$$i$$` to receive the treatment (or control) or b) variations in how treatment is received
+do not affect potential outcomes.
+  * E.g. the college example above _does not_ satisfy this assumption.
+* There is _no interference_: that is, unit `$$i$$`'s treatment value `$$Z_i$$` does not impact whether another unit is treated. 
+  * E.g. "being on a diet" does not satisfy assumption 1 (furthermore, even fixing a type of diet, this is violated)
+
+Verbatim from the notes: the two articles by [Hernan and Taubman](https://www.ncbi.nlm.nih.gov/pubmed/18695657) and [Cole and Frangakis](https://journals.lww.com/epidem/fulltext/2009/01000/The_Consistency_Statement_in_Causal_Inference__A.3.aspx) provide excellent expositions on this topic. Also, check out a recent twitter thread by [Miguel](https://twitter.com/_miguelhernan/status/997298467797131265) on this topic. In summary, the Rubin (via Frangakis, goes back to this paper) and Robins (via Hernan) school of causal inference emphasize the notion of well-defined interventions to define treatment in a good causal inference study. 
+
