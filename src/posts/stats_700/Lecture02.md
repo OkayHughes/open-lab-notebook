@@ -77,4 +77,19 @@ do not affect potential outcomes.
   * E.g. "being on a diet" does not satisfy assumption 1 (furthermore, even fixing a type of diet, this is violated)
 
 Verbatim from the notes: the two articles by [Hernan and Taubman](https://www.ncbi.nlm.nih.gov/pubmed/18695657) and [Cole and Frangakis](https://journals.lww.com/epidem/fulltext/2009/01000/The_Consistency_Statement_in_Causal_Inference__A.3.aspx) provide excellent expositions on this topic. Also, check out a recent twitter thread by [Miguel](https://twitter.com/_miguelhernan/status/997298467797131265) on this topic. In summary, the Rubin (via Frangakis, goes back to this paper) and Robins (via Hernan) school of causal inference emphasize the notion of well-defined interventions to define treatment in a good causal inference study. 
+In fact, because of this phenomena, there is also debate as to whether we can estimate the causal effect of race since intervening on race is impossible. There was an entire journal dedicated to defining treatments in causal inference around [2017](https://academic.oup.com/ije/search-results?f_TocHeadingTitle=Approaches%20to%20causal%20inference).
+
+Takeaway: before you define a causal effect, think about whether the treatment is well-defined.
+
+### Ignorability:
+This is called different things in different fields.
+
+Firstly, we state unconditional ignorability.This holds in randomized experiments, and
+`$$
+\{Y_i(1), Y_i(0)\} \bot Z_i
+$$`
+where it is important that this set is _taken together_ (otherwise our experiment would be meaningless).
+
+In the sense of missing data, this gives us that missingness of `$$Y_i(0)$$` or `$$Y_i(1)$$` by column happens completely at random (MCAR). 
+THis gets pretty mangy in observational contexts!
 
