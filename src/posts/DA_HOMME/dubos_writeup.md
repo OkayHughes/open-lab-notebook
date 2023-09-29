@@ -268,4 +268,16 @@ which gives
 $$$`
 which agrees precisely with Tea20. However: does the integration by parts trickery work if we do the pseudodensity trick instead of modifying `$$\mathrm{d}A$$`?
 
-
+## Squaring this with TD14:
+A fundamental property of our pseudodensity is that 
+`$$$
+\begin{align*}
+m_s = \frac{p_s}{g} &= \int_0^1 \mu \intd{\eta} 
+\end{align*}
+$$$`
+and TD14 suggests that we define `$$\mu = \partial_{\eta} (A) M + \partial_{\eta} (B) $$`. Let's validate that this works:
+`$$$
+\begin{align*}
+    \int_0^1 \partial_{\eta} 
+\end{align*}
+$$$`
