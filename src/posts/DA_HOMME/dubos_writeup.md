@@ -268,7 +268,7 @@ which gives
 $$$`
 which agrees precisely with Tea20. However: does the integration by parts trickery work if we do the pseudodensity trick instead of modifying `$$\mathrm{d}A$$`?
 
-## Squaring pseudodensity with TD14:
+## Rectifying pseudodensity using TD14:
 A fundamental property of our pseudodensity is that 
 `$$$
 \begin{align*}
@@ -282,5 +282,5 @@ and TD14 suggests that we define `$$\mu = \partial_{\eta} (A) M + \partial_{\eta
     &= M 
 \end{align*}
 $$$`
-so this constrains that the `$$ \textrm{dp3d} = p_s\Delta A  + p_0 \Delta B$$`
+so this constrains that the `$$ \textrm{dp3d} = p_s\Delta A  + p_0 \Delta B$$`. However, the reconstruction of `$$p_s$$` must be done carefully w.r.t. boundary terms in the deep atmosphere.
 
