@@ -197,13 +197,13 @@ Note: no functional derivatives with respect to non-hydrostatic pressure `$$p$$`
 Therefore define
 `$$$
 \begin{align*}
-    \mathcal{H} = \iint \textcolor{cyan}{\stackrel{(1)}{\frac{1}{2} \partial_{\eta} [\pi](\langle \mathbf{u}, \mathbf{u}\rangle + w^2)}} + \textcolor{purple}{\stackrel{(2)}{c_p  \Theta \Pi + \partial_{\eta} [\phi] p + p_{\textrm{top}} \phi_{\textrm{top}}}} + \textcolor{teal}{\stackrel{(3)}{\partial_{\eta} [\pi] \phi}}  \intd{A} \intd{\eta}
+    \mathcal{H} = \iint \textcolor{#2a3d45}{\stackrel{(1)}{\frac{1}{2} \partial_{\eta} [\pi](\langle \mathbf{u}, \mathbf{u}\rangle + w^2)}} + \textcolor{#DDC9B4}{\stackrel{(2)}{c_p  \Theta \Pi + \partial_{\eta} [\phi] p + p_{\textrm{top}} \phi_{\textrm{top}}}} + \textcolor{#C17C74}{\stackrel{(3)}{\partial_{\eta} [\pi] \phi}}  \intd{A} \intd{\eta}
 \end{align*}
 $$$`
 and we do the typical algebraic shenanigans and discard second-order terms:
 `$$$
 \begin{align*}
-    \textcolor{cyan}{(1)}:&\frac{1}{2} (\partial_{\eta} [\pi] + \delta \left[\partial_{\eta} [\pi]\right])(\langle \mathbf{u} + \delta \mathbf{u}, \mathbf{u} + \delta \mathbf{u} \rangle + (w + \delta w)^2)\\
+    \textcolor{#2a3d45}{(1)}:&\frac{1}{2} (\partial_{\eta} [\pi] + \delta \left[\partial_{\eta} [\pi]\right])(\langle \mathbf{u} + \delta \mathbf{u}, \mathbf{u} + \delta \mathbf{u} \rangle + (w + \delta w)^2)\\
     =&  \frac{1}{2} (\partial_{\eta} [\pi] + \delta \left[\partial_{\eta} [\pi]\right])(\langle \mathbf{u}, \mathbf{u} \rangle + 2 \langle \delta \mathbf{u}, \mathbf{u} \rangle + \langle  \delta \mathbf{u}, \delta \mathbf{u} \rangle + w^2 + 2w\delta w + \delta w^2)\\
     =& \frac{1}{2} (\partial_{\eta} [\pi] + \delta \left[\partial_{\eta} [\pi]\right])(\langle \mathbf{u}, \mathbf{u} \rangle + 2 \langle \delta \mathbf{u}, \mathbf{u} \rangle  + w^2 + 2w\delta w ) + \mathcal{O}(\varepsilon^2)\\
     =& \frac{1}{2} \partial_{\eta}[\pi]( \langle \mathbf{u}, \mathbf{u} \rangle + w^2) + \partial_{\eta} [\pi] (\langle \delta \mathbf{u}, \mathbf{u} \rangle + w \delta w) + \frac{1}{2} \delta \left[\partial_{\eta} [\pi]\right] (\langle \mathbf{u}, \mathbf{u}) + w^2) + \delta \left[\partial_{\eta} [\pi]\right] (\langle \delta \mathbf{u}, \mathbf{u} \rangle + w\delta w) + \mathcal{O}(\varepsilon^2)\\
@@ -214,7 +214,7 @@ $$$`
 and
 `$$$
 \begin{align*}
-    \textcolor{purple}{(2)}:& c_p (\Theta + \delta \Theta) \Pi + (\partial_{\eta} [\phi] + \delta [\partial_{\eta} [\phi]]) p + p_{\textrm{top}} (\phi_{\textrm{top}} + \delta \phi_{\textrm{top}}) \\
+    \textcolor{#DDC9B4}{(2)}:& c_p (\Theta + \delta \Theta) \Pi + (\partial_{\eta} [\phi] + \delta [\partial_{\eta} [\phi]]) p + p_{\textrm{top}} (\phi_{\textrm{top}} + \delta \phi_{\textrm{top}}) \\
     =& c_p \Theta \Pi + \partial_{\eta} [\phi] p + p_{\textrm{top}}\phi_{\textrm{top}} + c_p \Pi \delta \Theta  + p \delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}] \\
     =& I + c_p \Pi \delta \Theta  + p \delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}]
 \end{align*}
@@ -222,7 +222,7 @@ $$$`
 and
 `$$$
 \begin{align*}
-    \textcolor{teal}{(3)}:& (\partial_\eta [\pi] + \delta [\partial_{\eta}[\pi]])(\phi + \delta \phi) \\
+    \textcolor{#C17C74}{(3)}:& (\partial_\eta [\pi] + \delta [\partial_{\eta}[\pi]])(\phi + \delta \phi) \\
     =& \partial_{\eta}[\pi] \phi + \partial_{\eta} [\pi] \delta \phi + \phi \delta [\partial_{\eta}[\pi]] + \delta[\partial_{\eta}[\pi]] \delta \phi \\
     =& P + \partial_{\eta} [\pi] \delta \phi + \phi \delta [\partial_{\eta}[\pi]] +\mathcal{O}(\varepsilon^2)
 \end{align*}
@@ -248,9 +248,9 @@ and we now note that `$$\delta \phi_{\textrm{bot}} = 0$$` due to the stationary 
 \begin{align*}
     \int \int p\delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \intd{\eta} &= \int p_{\textrm{bot}}\delta\phi_{\textrm{bot}}  - \int \partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A} \\
     &= \int \int -\partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A} \\
-\end{align*}
+\end{align*}.
 $$$`
-and we can return to the total functional differential to find
+where we have relied on the fact that `$$\partial_{\eta} \delta \phi = \delta \partial_{\eta} \phi$$`. We can return to the total functional differential to find
 `$$$
 \begin{align*}
     \delta \mathcal{H} &= \iint \langle \partial_{\eta} [\pi]  \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi] w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]\right]  + c_p \Pi \delta \Theta  + (\partial_{\eta} [\pi] - \partial_{\eta} [p]) \delta \phi \intd{A} \intd{\eta}.
@@ -282,5 +282,5 @@ and TD14 suggests that we define `$$\mu = \partial_{\eta} (A) M + \partial_{\eta
     &= M 
 \end{align*}
 $$$`
-but the pseudodensity in HOMME disregards the `$$\partial_{\eta} (B)$$`  term. 
+so this constrains that the `$$ \textrm{dp3d} = \Delta A p_s + \Delta B$$`
 
