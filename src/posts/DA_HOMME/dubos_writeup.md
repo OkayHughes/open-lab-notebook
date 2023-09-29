@@ -282,5 +282,5 @@ and TD14 suggests that we define `$$\mu = \partial_{\eta} (A) M + \partial_{\eta
     &= M 
 \end{align*}
 $$$`
-but the pseudodensity in HOMME disregards the `$$\partial_{\eta} (B)$$`  term.
+but the pseudodensity in HOMME disregards the `$$\partial_{\eta} (B)$$`  term. 
 
