@@ -282,5 +282,5 @@ and TD14 suggests that we define `$$\mu = \partial_{\eta} (A) M + \partial_{\eta
     &= M 
 \end{align*}
 $$$`
-so this constrains that the `$$ \textrm{dp3d} = \Delta A p_s + \Delta B$$`
+so this constrains that the `$$ \textrm{dp3d} = p_s\Delta A  + p_0 \Delta B$$`
 
