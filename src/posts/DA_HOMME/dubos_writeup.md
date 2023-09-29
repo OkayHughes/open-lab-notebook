@@ -182,7 +182,7 @@ where
     \implies& |g'(z) z| \approx 0.024 \textrm{~m~s}^{-2}
 \end{align*}
 $$$`
-so in assuming that `$$\left(\partial_z \phi\right)^{-1} = \frac{1}{g_0}$$` we incur a 0.003% multiplicative error.
+so in assuming that `$$\left(\partial_z \phi\right)^{-1} = \frac{1}{g_0}$$` we incur a 0.3% multiplicative error.
 
 ## The Hamiltonian derivation
 Kinetic, internal, and potential energy are supposedly given by 
@@ -268,7 +268,7 @@ which gives
 $$$`
 which agrees precisely with Tea20. However: does the integration by parts trickery work if we do the pseudodensity trick instead of modifying `$$\mathrm{d}A$$`?
 
-## Squaring this with TD14:
+## Squaring pseudodensity with TD14:
 A fundamental property of our pseudodensity is that 
 `$$$
 \begin{align*}
@@ -278,6 +278,9 @@ $$$`
 and TD14 suggests that we define `$$\mu = \partial_{\eta} (A) M + \partial_{\eta} (B) $$`. Let's validate that this works:
 `$$$
 \begin{align*}
-    \int_0^1 \partial_{\eta} 
+    \int_0^1 \partial_{\eta} (A) M + \partial_{\eta} (B) \intd{\eta} &= \left[A\right]_{\eta=0}^{\eta =1} M + \left[B\right]_{\eta=0}^{\eta =1} \\
+    &= M 
 \end{align*}
 $$$`
+but the pseudodensity in HOMME disregards the `$$\partial_{\eta} (B)$$`  term.
+
