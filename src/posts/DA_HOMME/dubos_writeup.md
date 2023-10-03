@@ -285,3 +285,6 @@ $$$`
 so this constrains that the `$$ \textrm{dp3d} = p_s\Delta A  + p_0 \Delta B$$`. 
 However, the reconstruction of `$$p_s$$` must be done carefully w.r.t. boundary terms in the deep atmosphere.
 
+
+
+
