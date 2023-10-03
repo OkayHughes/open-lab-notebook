@@ -410,3 +410,8 @@ which gives
 \end{align*}
 $$$`
 which agrees precisely with Tea20. However: does the integration by parts trickery work if we do the pseudodensity trick instead of modifying `$$\mathrm{d}A$$`?
+
+
+Todo tomorrow:
+  * Disambiguate pressure/mass at the surface (i.e. do continuum integral for dp3d)
+  * Either perform derivation of Hamiltonian using A'M+B'M_0 formulation or plug in Oksana's cheats and check cancelation.
