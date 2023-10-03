@@ -275,7 +275,7 @@ A fundamental property of our pseudodensity is that
 m_s = \frac{p_s}{g} &= \int_0^1 \mu \intd{\eta} 
 \end{align*}
 $$$`
-and TD14 suggests that we define `$$\mu = \partial_{\eta} (A) M + \partial_{\eta} (B) p_0 $$`. Let's validate that this works:
+and TD14 suggests that we define `$$\mu = \partial_{\eta} (A) M + \partial_{\eta} (B) M_0 $$`. Let's validate that this works:
 `$$$
 \begin{align*}
     \int_0^1 \partial_{\eta} (A) M + \partial_{\eta} (B) \intd{\eta} &= \left[A\right]_{\eta=0}^{\eta =1} M + \left[B\right]_{\eta=0}^{\eta =1} \\
@@ -283,6 +283,8 @@ and TD14 suggests that we define `$$\mu = \partial_{\eta} (A) M + \partial_{\eta
 \end{align*}
 $$$`
 so this constrains that the `$$ \textrm{dp3d} = p_s\Delta A  + p_0 \Delta B = g_0(m_s \Delta A + m_0 \Delta B)$$`.
+Dividing by `$$g_0$$`, even in the deep atmosphere, gives the _mass_ located between particular model levels.
+This means that the correct generalization to the deep atmosphere is `$$ \textrm{dp3d} &= g_0 \frac{a^2}{(a+z)^2} (m_s \Delta A + m_0 \Delta B$$`
 This does not coincide with the value of the actual mass integral `$$ \int g \rho \intd{z}$$`, however.
 However, 
 
