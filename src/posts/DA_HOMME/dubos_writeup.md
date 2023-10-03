@@ -309,9 +309,10 @@ v_i &\equiv \hat{v}_i + \hat{v}_3 \partial_i \xi^3 \\
 $$$`
 We note that `$$\xi^3 = r$$`.
 
-They emphasize that the Bernoulli function can be found as the linear solution of
+Tea20 makes the definition `$$\mu = \partial_{\eta} [A] M + \partial_{\eta} [B]$$`. With this definition
 `$$$
 \begin{align*}
-  \mu \partial_{\eta} \fder{\mathcal{H}}{\mu} = \partial_{\eta} [v_i] \fder{\mathcal{H}'}{v_i} 
+ \partial_t M + \partial_i \int \fder{\mathcal{H}'}{v_i} \intd{\eta} &= \partial_t \int \mu \intd{\eta} + \partial_i \int \mu u_i \intd{\eta}
 \end{align*}
 $$$`
+which is quite straightforwardly the conservation equation 
