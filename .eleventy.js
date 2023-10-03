@@ -63,6 +63,8 @@ module.exports = function(eleventyConfig) {
   \\newcommand{\\probp}{\\mathbb{P}}
   \\newcommand{\\probe}{\\mathbb{E}}
   \\newcommand{\\rt}[1]{\\textcolor{darkred}{#1}}
+  \\renewcommand{\\Re}{\\operatorname{Re}}
+  \\renewcommand{\\Im}{\\operatorname{Im}}
   `, {macros, globalGroup: true});
 
   eleventyConfig.addFilter('latex', content => {
