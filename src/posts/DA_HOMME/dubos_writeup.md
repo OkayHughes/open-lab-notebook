@@ -275,7 +275,7 @@ A fundamental property of our pseudodensity is that
 m_s = \frac{p_s}{g} &= \int_0^1 \mu \intd{\eta} 
 \end{align*}
 $$$`
-and TD14 suggests that we define `$$\mu = \partial_{\eta} (A) M + \partial_{\eta} (B) $$`. Let's validate that this works:
+and TD14 suggests that we define `$$\mu = \partial_{\eta} (A) M + \partial_{\eta} (B) p_0 $$`. Let's validate that this works:
 `$$$
 \begin{align*}
     \int_0^1 \partial_{\eta} (A) M + \partial_{\eta} (B) \intd{\eta} &= \left[A\right]_{\eta=0}^{\eta =1} M + \left[B\right]_{\eta=0}^{\eta =1} \\
@@ -331,7 +331,7 @@ $$$`
 Kinetic, internal, and potential energy are supposedly given by 
 `$$$
 \begin{align*}
-    K = \frac{1}{2} (A' M + B') \mathbf{v}^2, \qquad I = c_p \Theta \Pi - \partial_{\eta} [\pi] \frac{1}{\rho} p + p_{\textrm{top}} \phi_{\textrm{top}} \qquad P = \partial_{\eta} [\pi] \phi
+    K = \frac{1}{2} (A' M + B' M_0) \mathbf{v}^2, \qquad I = c_p \Theta \Pi - (A'M + B' M_0) \frac{1}{\rho} p + p_{\textrm{top}} \phi_{\textrm{top}} \qquad P = (A'M + B' M_0) \phi
 \end{align*}
 $$$`
 and note that `$$p_{\textrm{top}}$$` is really a hydrostatic `$$p$$`. This section simply notes that `$$\intd{A}$$` is an "area" metric. This has no radial dependence in the shallow atmosphere but (in the most naive formulation) gains a radial dependence in the deep atmosphere. 
@@ -340,7 +340,7 @@ Note: no functional derivatives with respect to non-hydrostatic pressure `$$p$$`
 Therefore define
 `$$$
 \begin{align*}
-    \mathcal{H} = \iint \textcolor{#2a3d45}{\stackrel{(1)}{\frac{1}{2} \partial_{\eta} [\pi](\langle \mathbf{u}, \mathbf{u}\rangle + w^2)}} + \textcolor{#DDC9B4}{\stackrel{(2)}{c_p  \Theta \Pi + \partial_{\eta} [\phi] p + p_{\textrm{top}} \phi_{\textrm{top}}}} + \textcolor{#C17C74}{\stackrel{(3)}{\partial_{\eta} [\pi] \phi}}  \intd{A} \intd{\eta}
+    \mathcal{H} = \iint \textcolor{#2a3d45}{\stackrel{(1)}{\frac{1}{2} (A'M + B')(\langle \mathbf{u}, \mathbf{u}\rangle + w^2)}} + \textcolor{#DDC9B4}{\stackrel{(2)}{c_p  \Theta \Pi + \partial_{\eta} [\phi] p + B_{top} M_0 \phi_{\textrm{top}}}} + \textcolor{#C17C74}{\stackrel{(3)}{\partial_{\eta} [\pi] \phi}}  \intd{A} \intd{\eta}
 \end{align*}
 $$$`
 and we do the typical algebraic shenanigans and discard second-order terms:
