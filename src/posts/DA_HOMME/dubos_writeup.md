@@ -289,5 +289,10 @@ However, the reconstruction of `$$p_s$$` must be done carefully w.r.t. boundary 
 
 
 ## Curl form for mass coordinates in TD14:
-
+In TD14 notation we have
+`$$$
+\begin{align*}
+  \partial_t M + \partial_i \int \fder{\mathcal{H}}{v_i} \intd{\eta} &= 0 \\
+\end{align*}
+$$$`
 
