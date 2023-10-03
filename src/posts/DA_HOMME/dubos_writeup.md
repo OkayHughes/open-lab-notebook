@@ -307,4 +307,11 @@ v_i &\equiv \hat{v}_i + \hat{v}_3 \partial_i \xi^3 \\
 \hat{v_l} &\equiv \pder{\hat{L}}{\hat{u}^l}.
 \end{align*}
 $$$`
-We note that `$$\xi^3 = r$$`
+We note that `$$\xi^3 = r$$`.
+
+They emphasize that the Bernoulli function can be found as the linear solution of
+`$$$
+\begin{align*}
+  \mu \partial_{\eta} \fder{\mathcal{H}}{\mu} = \partial_{\eta} [v_i] \fder{\mathcal{H}'}{v_i} 
+\end{align*}
+$$$`
