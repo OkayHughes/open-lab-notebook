@@ -9,4 +9,4 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
-Suppose we have `$$X(t) = \Re(Z(t))$$`
+Suppose we have `$$X(t) = \Re(Z(t))$$` and we assume that `$$Z(t)$$` is holomorphic on the upper half plane.
