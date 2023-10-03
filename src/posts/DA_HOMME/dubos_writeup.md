@@ -293,7 +293,8 @@ In TD14 notation we have
 `$$$
 \begin{align*}
   \partial_t M + \partial_i \int \fder{\mathcal{H}}{v_i} \intd{\eta} &= 0 \\
-  \partial_t S + \partial_i 
+  \partial_t S + \partial_i \left(s \fder{\mathcal{H}}{v_i} \right) + \partial_{\eta} \left( S \dot{\eta} \right) &= 0 \\
+  \partial_{t} v_i + (\partial_\eta v_i - \partial_i v_3) \dot{\eta} + \frac{\partial_j v_i - \partial_i v_j}{\mu} \fder{\mathcal{H}}{v_j} + \partial_i \left( \fder{\mathcal{H}}{\mu} + \dot{eta} v_3 \right)
 \end{align*}
 $$$`
 
