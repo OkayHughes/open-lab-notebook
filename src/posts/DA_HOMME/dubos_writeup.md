@@ -282,8 +282,9 @@ and TD14 suggests that we define `$$\mu = \partial_{\eta} (A) M + \partial_{\eta
     &= M 
 \end{align*}
 $$$`
-so this constrains that the `$$ \textrm{dp3d} = p_s\Delta A  + p_0 \Delta B$$`. 
-However, the reconstruction of `$$p_s$$` must be done carefully w.r.t. boundary terms in the deep atmosphere.
+so this constrains that the `$$ \textrm{dp3d} = p_s\Delta A  + p_0 \Delta B = g_0(m_s \Delta A + m_0 \Delta B)$$`.
+This does not coincide with the value of the actual mass integral `$$ \int g \rho \intd{z}$$`, however.
+However, 
 
 
 
