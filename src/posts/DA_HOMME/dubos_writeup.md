@@ -294,7 +294,17 @@ In TD14 notation we have
 \begin{align*}
   \partial_t M + \partial_i \int \fder{\mathcal{H}}{v_i} \intd{\eta} &= 0 \\
   \partial_t S + \partial_i \left(s \fder{\mathcal{H}}{v_i} \right) + \partial_{\eta} \left( S \dot{\eta} \right) &= 0 \\
-  \partial_{t} v_i + (\partial_\eta v_i - \partial_i v_3) \dot{\eta} + \frac{\partial_j v_i - \partial_i v_j}{\mu} \fder{\mathcal{H}}{v_j} + \partial_i \left( \fder{\mathcal{H}}{\mu} + \dot{eta} v_3 \right)
+  \partial_{t} v_i + (\partial_\eta v_i - \partial_i v_3) \dot{\eta} + \frac{\partial_j v_i - \partial_i v_j}{\mu} \fder{\mathcal{H}}{v_j} + \partial_i \left( \fder{\mathcal{H}}{\mu} + \dot{\eta} v_3 \right) + s \partial_i \left(\fder{\mathcal{H}}{S} \right) &= 0\\
+  \partial_t V_3 + \partial_{\eta} (V_3 \dot{\eta}) + \fder{\mathcal{H}}{\xi^3} = 0\\
+  \partial_t \xi^3 + \dot{\eta} \partial_{\eta} \xi^3 - \fder{\mathcal{H}}{V_3} = 0
 \end{align*}
 $$$`
-
+where
+`$$$
+\begin{align*}
+V_3 &\equiv \mu \hat{v}_3 \\
+v_i &\equiv \hat{v}_i + \hat{v}_3 \partial_i \xi^3 \\
+\hat{v_l} &\equiv \pder{\hat{L}}{\hat{u}^l}.
+\end{align*}
+$$$`
+We note that `$$\xi^3 = r$$`
