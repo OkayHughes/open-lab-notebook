@@ -447,14 +447,14 @@ and the same algebraic manipulations gives
 `$$$
 \begin{align*}
     \delta \mathcal{H} &= \lim_{\varepsilon \to 0} \frac{\mathcal{H}(\mathbf{u} + \varepsilon \delta \mathbf{u}, w + \varepsilon \delta w, \phi + \varepsilon \delta \phi, \Theta_{\hat{r}^2}  + \delta \Theta_{\hat{r}^2} , \partial_{\eta}[\pi]_{\hat{r}^2}  + \delta[\partial_{\eta}[\pi]_{\hat{r}^2} ] )- \mathcal{H}(\mathbf{u}, w, \phi , \Theta_{\hat{r}^2}  , \partial_{\eta}[\pi]_{\hat{r}^2}  )}{\varepsilon}\\
-    &= \iint \langle \partial_{\eta} [\pi]_{\hat{r}^2}   \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi]_{\hat{r}^2}  w \delta w + \frac{1}{2}  (\langle \mathbf{u}, \mathbf{u}\rangle + w^2) \delta \left[\partial_{\eta} [\pi]_{\hat{r}^2} \right]  + c_p \Pi \delta \Theta_{\hat{r}^2}   + p \delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}] + \partial_{\eta} [\pi]_{\hat{r}^2}  \delta \phi + \phi \delta [\partial_{\eta}[\pi]_{\hat{r}^2} ] \intd{A} \intd{\eta} \\
-    &= \iint \langle \partial_{\eta} [\pi]_{\hat{r}^2}   \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi]_{\hat{r}^2}  w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]_{\hat{r}^2} \right]  + c_p \Pi \delta \Theta_{\hat{r}^2}   + p \delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}] + \partial_{\eta} [\pi]_{\hat{r}^2}  \delta \phi \intd{A} \intd{\eta}.
+    &= \iint \langle \partial_{\eta} [\pi]_{\hat{r}^2}   \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi]_{\hat{r}^2}  w \delta w + \frac{1}{2}  (\langle \mathbf{u}, \mathbf{u}\rangle + w^2) \delta \left[\partial_{\eta} [\pi]_{\hat{r}^2} \right]  + c_p \Pi \delta \Theta_{\hat{r}^2}   + p \delta[\partial_{\eta}[\phi]_{\hat{r}^2}] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}] + \partial_{\eta} [\pi]_{\hat{r}^2}  \delta \phi + \phi \delta [\partial_{\eta}[\pi]_{\hat{r}^2} ] \intd{A} \intd{\eta} \\
+    &= \iint \langle \partial_{\eta} [\pi]_{\hat{r}^2}   \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi]_{\hat{r}^2}  w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]_{\hat{r}^2} \right]  + c_p \Pi \delta \Theta_{\hat{r}^2}   + p \delta[\partial_{\eta}[\phi]_{\hat{r}^2}] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}] + \partial_{\eta} [\pi]_{\hat{r}^2}  \delta \phi \intd{A} \intd{\eta}.
 \end{align*}
 $$$`
 and we rewrite
 `$$$
 \begin{align*}
-    \int \int p\delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \intd{\eta} &= \int \int p\delta[\partial_{\eta}[\phi]] \intd{\eta}  + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \\
+    \int \int p\delta[\hat{r}^2\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \intd{\eta} &= \int \int p\delta[\hat{r}^2\partial_{\eta}[\phi]] \intd{\eta}  + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \\
     &= \int [p \delta \phi]_{\eta = \eta_{\textrm{top}}}^{\eta = 1} - \int \partial_{\eta} [p] \delta \phi \intd{\eta}  + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \\
     &= \int p_{\textrm{bot}}\delta\phi_{\textrm{bot}} - p_{\textrm{top}}\delta\phi_{\textrm{top}} + p_{\textrm{top}} \delta \phi_{\textrm{top}} - \int \partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A} \\
 \end{align*}
@@ -462,7 +462,7 @@ $$$`
 and we now note that `$$\delta \phi_{\textrm{bot}} = 0$$` due to the stationary topography at the lower boundary condition. Therefore
 `$$$
 \begin{align*}
-    \int \int p\delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \intd{\eta} &= \int p_{\textrm{bot}}\delta\phi_{\textrm{bot}}  - \int \partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A} \\
+    \int \int p\delta[\hat{r}^2\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \intd{\eta} &= \int p_{\textrm{bot}}\delta\phi_{\textrm{bot}}  - \int \partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A} \\
     &= \int \int -\partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A} \\
 \end{align*}
 $$$`
