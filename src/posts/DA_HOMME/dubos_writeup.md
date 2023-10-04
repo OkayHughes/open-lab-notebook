@@ -418,6 +418,8 @@ which agrees precisely with Tea20. However: does the integration by parts tricke
 -->
 
 ## The Hamiltonian derivation for Oksana's notes
+The idea for this hack is to essentially redefine `$$\mathrm{d}A$$` as `$$\hat{r}^2 \intd{A} $$` by defining `$$\mathrm{dp3d}$$`.
+
 Kinetic, internal, and potential energy are supposedly given by 
 `$$$
 \begin{align*}
@@ -440,34 +442,7 @@ Therefore define
     \mathcal{H} = \iint \textcolor{#2a3d45}{\stackrel{(1)}{\frac{1}{2}  \hat{r}^2 \partial_{\eta} [\pi](\langle \mathbf{u}, \mathbf{u}\rangle + w^2)}} + \textcolor{#DDC9B4}{\stackrel{(2)}{c_p \hat{r}^2 \Theta \Pi + \partial_{\eta} [\phi] p + p_{\textrm{top}} \phi_{\textrm{top}}}} + \textcolor{#C17C74}{\stackrel{(3)}{\partial_{\eta} [\pi] \phi}}  \intd{A} \intd{\eta}
 \end{align*}
 $$$`
-and we do the typical algebraic shenanigans and discard second-order terms:
-`$$$
-\begin{align*}
-    \textcolor{#2a3d45}{(1)}:&\frac{1}{2} (\partial_{\eta} [\pi] + \delta \left[\partial_{\eta} [\pi]\right])(\langle \mathbf{u} + \delta \mathbf{u}, \mathbf{u} + \delta \mathbf{u} \rangle + (w + \delta w)^2)\\
-    =&  \frac{1}{2} (\partial_{\eta} [\pi] + \delta \left[\partial_{\eta} [\pi]\right])(\langle \mathbf{u}, \mathbf{u} \rangle + 2 \langle \delta \mathbf{u}, \mathbf{u} \rangle + \langle  \delta \mathbf{u}, \delta \mathbf{u} \rangle + w^2 + 2w\delta w + \delta w^2)\\
-    =& \frac{1}{2} (\partial_{\eta} [\pi] + \delta \left[\partial_{\eta} [\pi]\right])(\langle \mathbf{u}, \mathbf{u} \rangle + 2 \langle \delta \mathbf{u}, \mathbf{u} \rangle  + w^2 + 2w\delta w ) + \mathcal{O}(\varepsilon^2)\\
-    =& \frac{1}{2} \partial_{\eta}[\pi]( \langle \mathbf{u}, \mathbf{u} \rangle + w^2) + \partial_{\eta} [\pi] (\langle \delta \mathbf{u}, \mathbf{u} \rangle + w \delta w) + \frac{1}{2} \delta \left[\partial_{\eta} [\pi]\right] (\langle \mathbf{u}, \mathbf{u}) + w^2) + \delta \left[\partial_{\eta} [\pi]\right] (\langle \delta \mathbf{u}, \mathbf{u} \rangle + w\delta w) + \mathcal{O}(\varepsilon^2)\\
-    =& K + \partial_{\eta} [\pi] (\langle \delta \mathbf{u}, \mathbf{u} \rangle + w \delta w) + \frac{1}{2} \delta \left[\partial_{\eta} [\pi]\right] (\langle \mathbf{u}, \mathbf{u}) + w^2) +\mathcal{O}(\varepsilon^2) \\
-    =& K +  \langle \partial_{\eta} [\pi]  \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi] w \delta w + \frac{1}{2}  (\langle \mathbf{u}, \mathbf{u}\rangle + w^2) \delta \left[\partial_{\eta} [\pi]\right] +\mathcal{O}(\varepsilon^2) \\
-\end{align*}
-$$$`
-and
-`$$$
-\begin{align*}
-    \textcolor{#DDC9B4}{(2)}:& c_p (\Theta + \delta \Theta) \Pi + (\partial_{\eta} [\phi] + \delta [\partial_{\eta} [\phi]]) p + p_{\textrm{top}} (\phi_{\textrm{top}} + \delta \phi_{\textrm{top}}) \\
-    =& c_p \Theta \Pi + \partial_{\eta} [\phi] p + p_{\textrm{top}}\phi_{\textrm{top}} + c_p \Pi \delta \Theta  + p \delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}] \\
-    =& I + c_p \Pi \delta \Theta  + p \delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}]
-\end{align*}
-$$$`
-and
-`$$$
-\begin{align*}
-    \textcolor{#C17C74}{(3)}:& (\partial_\eta [\pi] + \delta [\partial_{\eta}[\pi]])(\phi + \delta \phi) \\
-    =& \partial_{\eta}[\pi] \phi + \partial_{\eta} [\pi] \delta \phi + \phi \delta [\partial_{\eta}[\pi]] + \delta[\partial_{\eta}[\pi]] \delta \phi \\
-    =& P + \partial_{\eta} [\pi] \delta \phi + \phi \delta [\partial_{\eta}[\pi]] +\mathcal{O}(\varepsilon^2)
-\end{align*}
-$$$`
-giving 
+and the same algebraic manipulations gives
 `$$$
 \begin{align*}
     \delta \mathcal{H} &= \lim_{\varepsilon \to 0} \frac{\mathcal{H}(\mathbf{u} + \varepsilon \delta \mathbf{u}, w + \varepsilon \delta w, \phi + \varepsilon \delta \phi, \Theta + \delta \Theta, \partial_{\eta}[\pi] + \delta[\partial_{\eta}[\pi]] )- \mathcal{H}(\mathbf{u}, w, \phi , \Theta , \partial_{\eta}[\pi] )}{\varepsilon}\\
