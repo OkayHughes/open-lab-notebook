@@ -473,12 +473,19 @@ where we have relied on the fact that `$$\partial_{\eta} \delta \phi = \delta \p
 \end{align*}
 $$$`
 The only problem term in this equation is in the differential for `$$\delta \phi$$`, namely `$$ \partial_{\eta} [p] \delta \phi $$`. The lack of a `$$\hat{r}^2$$` correction in this term 
-dictates the modification of `$$\mu \equiv \partial_{\eta} [p] \left(\partial_{\eta} [\pi] \right)^{-1}$$`
+dictates the modification of `$$\mu \equiv \partial_{\eta} [p] \left(\partial_{\eta} [\pi] \right)^{-1}$$` so we rewrite
+`$$$
+\begin{align*}
+    \delta \mathcal{H} &= \iint \langle \partial_{\eta} [\pi]_{\hat{r}^2}   \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi]_{\hat{r}^2}  w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]_{\hat{r}^2} \right]  + c_p \Pi \delta \Theta_{\hat{r}^2}   + \partial_{\eta} [\pi]_{\hat{r}^2}( 1 - \partial_{\eta} [p] \left( \partial_{\eta} [\pi]_{\hat{r}^2}\right)^{-1}) \delta \phi \intd{A} \intd{\eta},
+                       &= \iint \langle \partial_{\eta} [\pi]_{\hat{r}^2}   \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi]_{\hat{r}^2}  w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]_{\hat{r}^2} \right]  + c_p \Pi \delta \Theta_{\hat{r}^2}   + \partial_{\eta} [\pi]_{\hat{r}^2}( 1 - \partial_{\eta} [p] \left( \partial_{\eta} [\pi]_{\hat{r}^2}\right)^{-1}) \delta \phi \intd{A} \intd{\eta}.
+\end{align*}
+$$$`
+which dictates that `$$\mu_{\hat{r}^2} = \hat{r}^2 \partial_{\eta} [p] \left( \partial_{\eta} [\pi]_{\hat{r}^2}\right)^{-1}$$`. 
 `$$$
 \begin{align*}
     \fder{\mathcal{H}}{\mathbf{u}} &= \partial_{\eta}[\pi] \mathbf{u}\\
     \fder{\mathcal{H}}{w} &= \partial_{\eta} [\pi] w \\
-    \fder{\mathcal{H}}{\phi} &= \partial_{\eta} [\pi] - \partial_{\eta} [p]\\
+    \fder{\mathcal{H}}{\phi} &= \partial_{\eta} [\pi]_{\hat{r}^2}(1 - \mu_{\hat{r}^2})\\
     \fder{\mathcal{H}}{\Theta} &= c_p \Pi \\
     \fder{\mathcal{H}}{\partial_{\eta} [\pi]} &= \frac{\mathbf{u}^2 + w^2}{2} + \phi
 \end{align*}
