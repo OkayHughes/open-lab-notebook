@@ -482,7 +482,8 @@ which gives
     \fder{\mathcal{H}}{\partial_{\eta} [\pi]} &= \frac{\mathbf{u}^2 + w^2}{2} + \phi
 \end{align*}
 $$$`
-which illustrates that the integration by parts trick works perfectly if we do not incorporate 
+which illustrates that the integration by parts trick works perfectly if we do not incorporate an `$$\hat{r}^2$$` factor into `$$ \partial_{\eta}$$`.
+Let us check if this is consistent by returning to the implicit hypsometric that defines our EOS.
 ## Returning to EOS 
 `$$$
 \begin{align*}
@@ -494,6 +495,3 @@ which illustrates that the integration by parts trick works perfectly if we do n
 \end{align*}
 $$$`
 
-Todo tomorrow:
-  * Disambiguate pressure/mass at the surface (i.e. do continuum integral for dp3d)
-  * Either perform derivation of Hamiltonian using A'M+B'M_0 formulation or plug in Oksana's cheats and check cancelation.
