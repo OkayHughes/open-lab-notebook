@@ -440,7 +440,7 @@ $$$`
 Therefore define
 `$$$
 \begin{align*}
-    \mathcal{H} = \iint \textcolor{#2a3d45}{\stackrel{(1)}{\frac{1}{2}   \partial_{\eta} [\pi]_{\hat{r}^2}(\langle \mathbf{u}, \mathbf{u}\rangle + w^2)}} + \textcolor{#DDC9B4}{\stackrel{(2)}{c_p \Theta_{\hat{r}^2} \Pi + \partial_{\eta} [\phi] p + p_{\textrm{top}} \phi_{\textrm{top}}}} + \textcolor{#C17C74}{\stackrel{(3)}{\partial_{\eta} [\pi]_{\hat{r}^2} \phi}}  \intd{A} \intd{\eta}
+    \mathcal{H} = \iint \textcolor{#2a3d45}{\stackrel{(1)}{\frac{1}{2}   \partial_{\eta} [\pi]_{\hat{r}^2}(\langle \mathbf{u}, \mathbf{u}\rangle + w^2)}} + \textcolor{#DDC9B4}{\stackrel{(2)}{c_p \Theta_{\hat{r}^2} \Pi + \partial_{\eta} [\phi]_{\hat{r}^2} p + \hat{r}_{\textrm{top}}^2p_{\textrm{top}} \phi_{\textrm{top}}}} + \textcolor{#C17C74}{\stackrel{(3)}{\partial_{\eta} [\pi]_{\hat{r}^2} \phi}}  \intd{A} \intd{\eta}
 \end{align*}
 $$$`
 and the same algebraic manipulations gives
@@ -454,7 +454,7 @@ $$$`
 and we rewrite
 `$$$
 \begin{align*}
-    \int \int p\delta[\hat{r}^2\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \intd{\eta} &= \int \int p\delta[\hat{r}^2\partial_{\eta}[\phi]] \intd{\eta}  + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \\
+    \int \int p\delta[\hat{r}^2\partial_{\eta}[\phi]] + \hat{r}_{\textrm{top}}^2 p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \intd{\eta} &= \int \int p\delta[\hat{r}^2\partial_{\eta}[\phi]] \intd{\eta}  + \hat{r}_{\textrm{top}}^2p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \\
     &= \int [p \delta \phi]_{\eta = \eta_{\textrm{top}}}^{\eta = 1} - \int \partial_{\eta} [p] \delta \phi \intd{\eta}  + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \\
     &= \int p_{\textrm{bot}}\delta\phi_{\textrm{bot}} - p_{\textrm{top}}\delta\phi_{\textrm{top}} + p_{\textrm{top}} \delta \phi_{\textrm{top}} - \int \partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A} \\
 \end{align*}
