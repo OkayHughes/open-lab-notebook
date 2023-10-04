@@ -421,15 +421,16 @@ which agrees precisely with Tea20. However: does the integration by parts tricke
 Kinetic, internal, and potential energy are supposedly given by 
 `$$$
 \begin{align*}
-    K = \frac{1}{2} \hat{r}^2 \partial_{\eta} [\pi] \mathbf{v}^2, \qquad I = c_p \Theta \Pi - \hat{r}^2 \partial_{\eta} [\pi] \frac{1}{\rho} p + p_{\textrm{top}} \phi_{\textrm{top}} \qquad P = \hat{r}^2\partial_{\eta} [\pi] \phi
+    K = \frac{1}{2}  \partial_{\eta} [\pi]_{\hat{r}^2} \mathbf{v}^2, \qquad I = c_p \Theta \Pi - \partial_{\eta} [\pi]_{\hat{r}^2} \frac{1}{\rho} p + p_{\textrm{top}} \phi_{\textrm{top}} \qquad P = \partial_{\eta} [\pi]_{\hat{r}^2} \phi
 \end{align*}
 $$$`
-and note that `$$p_{\textrm{top}}$$` is really a hydrostatic `$$p$$`. Since `$$\Theta = \partial_{\eta} [\pi] \theta_v$$`  This time we are rather more careful, noting that if 
+and note that `$$p_{\textrm{top}}$$` is really a hydrostatic `$$p$$`. Since `$$\Theta = \partial_{\eta} [\pi] \theta_v$$`, terms containing `$$\Theta$$` gain a correction.
+This time we are rather more careful, noting that if 
 `$$$
 \begin{align*}
-\partial_{\eta} \phi &= -R_d \partial_{\eta} [\pi] \theta_v \frac{\Pi}{p} \\
-  &= -\frac{R_d}{p} \theta_v\frac{T_v}{\theta_v} \partial_{\eta} [\pi] \\
-  &= -\frac{1}{\rho} \partial_{\eta} [\pi].
+\partial_{\eta} \phi &= -R_d \partial_{\eta} [\pi]_{\hat{r}^2} \theta_v \frac{\Pi}{p} \\
+  &= -\frac{R_d}{p} \theta_v\frac{T_v}{\theta_v} \partial_{\eta} [\pi]_{\hat{r}^2} \\
+  &= -\frac{1}{\rho} \partial_{\eta} [\pi]_{\hat{r}^2}.
 \end{align*}.
 $$$`  
 
