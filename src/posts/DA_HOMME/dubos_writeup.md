@@ -286,7 +286,7 @@ so this constrains that the `$$ \textrm{dp3d} = p_s\Delta A  + p_0 \Delta B = g_
 Dividing by `$$g_0$$`, even in the deep atmosphere, gives the _mass_ located between particular model levels.
 This means that the correct generalization to the deep atmosphere is `$$$ \textrm{dp3d} = g_0 \frac{a^2}{(a+z)^2} (m_s \Delta A + m_0 \Delta B)$$$`
 This would make the value of `$$\sum \textrm{dp3d}$$` coincide with the mass-weighted integral. However, this means
-that the `$$g$$` correction would need to be 
+that the `$$g$$` correction really must be inside the integral. 
 
 
 
