@@ -472,7 +472,8 @@ where we have relied on the fact that `$$\partial_{\eta} \delta \phi = \delta \p
     \delta \mathcal{H} &= \iint \langle \partial_{\eta} [\pi]_{\hat{r}^2}   \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi]_{\hat{r}^2}  w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]_{\hat{r}^2} \right]  + c_p \Pi \delta \Theta_{\hat{r}^2}   + (\partial_{\eta} [\pi]_{\hat{r}^2}  - \partial_{\eta} [p]) \delta \phi \intd{A} \intd{\eta}.
 \end{align*}
 $$$`
-The only problem term in this equation is in the differential for `$$\delta \phi$$`, namely `$$ \partial_{\eta} [p] \delta \phi $$`. The lack of a 
+The only problem term in this equation is in the differential for `$$\delta \phi$$`, namely `$$ \partial_{\eta} [p] \delta \phi $$`. The lack of a `$$\hat{r}^2$$` correction in this term 
+dictates the modification of `$$\mu \equiv \partial_{\eta} [p] \left(\partial_{\eta} [\pi] \right)^{-1}$$`
 `$$$
 \begin{align*}
     \fder{\mathcal{H}}{\mathbf{u}} &= \partial_{\eta}[\pi] \mathbf{u}\\
