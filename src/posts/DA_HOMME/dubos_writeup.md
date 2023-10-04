@@ -328,6 +328,7 @@ Let's examine
 \end{align*}
 $$$`
 
+<!--
 ## Hamiltonian formulation for `$$M$$`
 
 
@@ -414,7 +415,7 @@ which gives
 $$$`
 which agrees precisely with Tea20. However: does the integration by parts trickery work if we do the pseudodensity trick instead of modifying `$$\mathrm{d}A$$`?
 
-
+-->
 
 ## The Hamiltonian derivation for Oksana's notes
 Kinetic, internal, and potential energy are supposedly given by 
@@ -423,13 +424,19 @@ Kinetic, internal, and potential energy are supposedly given by
     K = \frac{1}{2} \hat{r}^2 \partial_{\eta} [\pi] \mathbf{v}^2, \qquad I = c_p \Theta \Pi - \hat{r}^2 \partial_{\eta} [\pi] \frac{1}{\rho} p + p_{\textrm{top}} \phi_{\textrm{top}} \qquad P = \hat{r}^2\partial_{\eta} [\pi] \phi
 \end{align*}
 $$$`
-and note that `$$p_{\textrm{top}}$$` is really a hydrostatic `$$p$$`. This section simply notes that `$$\intd{A}$$` is an "area" metric. This has no radial dependence in the shallow atmosphere but (in the most naive formulation) gains a radial dependence in the deep atmosphere. 
-Note: no functional derivatives with respect to non-hydrostatic pressure `$$p$$` are sought. Due to the EOS `$$p$$` is subjugated by`$$\phi$$`.  
+and note that `$$p_{\textrm{top}}$$` is really a hydrostatic `$$p$$`. Since `$$\Theta = \partial_{\eta} [\pi] \theta_v$$`  This time we are rather more careful, noting that if 
+`$$$
+\begin{align*}
+\partial_{\eta} \phi &= -R_d \partial_{\eta} [\pi] \theta_v \frac{\Pi}{p} \\
+  &= -\frac{R_d}{p} \theta_v\frac{T_v}{\theta_v} \partial_{\eta} [\pi] \\
+  &= -\frac{1}{\rho} \partial_{\eta} [\pi].
+\end{align*}.
+$$$`  
 
 Therefore define
 `$$$
 \begin{align*}
-    \mathcal{H} = \iint \textcolor{#2a3d45}{\stackrel{(1)}{\frac{1}{2} \partial_{\eta} [\pi](\langle \mathbf{u}, \mathbf{u}\rangle + w^2)}} + \textcolor{#DDC9B4}{\stackrel{(2)}{c_p  \Theta \Pi + \partial_{\eta} [\phi] p + p_{\textrm{top}} \phi_{\textrm{top}}}} + \textcolor{#C17C74}{\stackrel{(3)}{\partial_{\eta} [\pi] \phi}}  \intd{A} \intd{\eta}
+    \mathcal{H} = \iint \textcolor{#2a3d45}{\stackrel{(1)}{\frac{1}{2}  \hat{r}^2 \partial_{\eta} [\pi](\langle \mathbf{u}, \mathbf{u}\rangle + w^2)}} + \textcolor{#DDC9B4}{\stackrel{(2)}{c_p \hat{r}^2 \Theta \Pi + \partial_{\eta} [\phi] p + p_{\textrm{top}} \phi_{\textrm{top}}}} + \textcolor{#C17C74}{\stackrel{(3)}{\partial_{\eta} [\pi] \phi}}  \intd{A} \intd{\eta}
 \end{align*}
 $$$`
 and we do the typical algebraic shenanigans and discard second-order terms:
