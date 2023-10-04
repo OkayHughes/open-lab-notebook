@@ -431,7 +431,7 @@ and note that `$$p_{\textrm{top}}$$` is really a hydrostatic `$$p$$`. Since `$$\
 This time we are rather more careful, noting that if 
 `$$$
 \begin{align*}
-\partial_{\eta} \phi &= -R_d \partial_{\eta} [\pi]_{\hat{r}^2} \theta_v \frac{\Pi}{p} \\
+\hat{r}^2 \partial_{\eta} \phi &= -R_d \partial_{\eta} [\pi]_{\hat{r}^2} \theta_v \frac{\Pi}{p} \\
   &= -\frac{R_d}{p} \theta_v\frac{T_v}{\theta_v} \partial_{\eta} [\pi]_{\hat{r}^2} \\
   &= -\frac{1}{\rho} \partial_{\eta} [\pi]_{\hat{r}^2}.
 \end{align*}.
