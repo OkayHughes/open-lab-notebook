@@ -417,6 +417,7 @@ which agrees precisely with Tea20. However: does the integration by parts tricke
 
 -->
 
+
 ## The Hamiltonian derivation for Oksana's notes
 The idea for this hack is to essentially redefine `$$\mathrm{d}A$$` as `$$\hat{r}^2 \intd{A} $$` by defining `$$\mathrm{dp3d}$$`.
 
@@ -484,6 +485,16 @@ $$$`
 which agrees precisely with Tea20. However: does the integration by parts trickery work if we do the pseudodensity trick instead of modifying `$$\mathrm{d}A$$`?
 
 
+## Returning to EOS 
+`$$$
+\begin{align*}
+    &\partial_s \phi = -R_d \partial_s[\pi] \theta_v \frac{\Pi}{p}\\
+    \implies& \int \partial_s [\phi] \, \mathrm{d}s = -R_d \int \partial_s[\pi] \theta_v \frac{\Pi}{p} \, \mathrm{d}s\\
+    \implies& \Delta \phi = -R_d \int \partial_s[\pi] \theta_v \frac{\Pi}{p} \, \mathrm{d}s\\
+    \implies& \Delta \phi = -R_d \int \frac{T}{p} \partial_s[\pi]\, \mathrm{d}s\\
+    \implies& \Delta \phi = -R_d \int \frac{T}{p}\, \mathrm{d}\pi\\
+\end{align*}
+$$$`
 
 Todo tomorrow:
   * Disambiguate pressure/mass at the surface (i.e. do continuum integral for dp3d)
