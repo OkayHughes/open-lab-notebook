@@ -487,11 +487,12 @@ Let us check if this is consistent by returning to the implicit hypsometric that
 ## Returning to EOS 
 `$$$
 \begin{align*}
-    &\partial_s \phi = -R_d \partial_s[\pi] \theta_v \frac{\Pi}{p}\\
-    \implies& \int \partial_s [\phi] \, \mathrm{d}s = -R_d \int \partial_s[\pi] \theta_v \frac{\Pi}{p} \, \mathrm{d}s\\
-    \implies& \Delta \phi = -R_d \int \partial_s[\pi] \theta_v \frac{\Pi}{p} \, \mathrm{d}s\\
-    \implies& \Delta \phi = -R_d \int \frac{T}{p} \partial_s[\pi]\, \mathrm{d}s\\
+    &\partial_s \phi = -R_d \partial_\eta[\pi]_{\hat{r}^2}  \theta_v \frac{\Pi}{p}\\
+    \implies& \int \partial_\eta [\phi] \, \mathrm{d}\eta = -R_d \int \partial_\eta[\pi]_{\hat{r}^2}  \theta_v \frac{\Pi}{p} \, \mathrm{d}\eta\\
+    \implies& \Delta \phi = -R_d \int \partial_\eta[\pi]_{\hat{r}^2}  \theta_v \frac{\Pi}{p} \, \mathrm{d}\eta\\
+    \implies& \Delta \phi = -R_d \int \frac{T}{p} \partial_\eta [\pi]_{\hat{r}^2} \, \mathrm{d}\eta\\
     \implies& \Delta \phi = -R_d \int \frac{T}{p}\, \mathrm{d}\pi\\
 \end{align*}
 $$$`
-
+and so we see that the `$$\hat{r}^2$$` must ensure that `$$$\int [\cdot] \hat{r}^2 \partial_\eta [\pi] \intd{\eta} = \int [\cdot] \intd{\pi}$$$`
+which is precisely what we constructed `$$\partial_{\eta} [\pi]_{\hat{r}^2}$$` to satisfy!
