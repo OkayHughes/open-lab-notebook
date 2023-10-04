@@ -464,7 +464,7 @@ and we now note that `$$\delta \phi_{\textrm{bot}} = 0$$` due to the stationary 
 \begin{align*}
     \int \int p\delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \intd{\eta} &= \int p_{\textrm{bot}}\delta\phi_{\textrm{bot}}  - \int \partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A} \\
     &= \int \int -\partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A} \\
-\end{align*}.
+\end{align*}
 $$$`
 where we have relied on the fact that `$$\partial_{\eta} \delta \phi = \delta \partial_{\eta} \phi$$`. We can return to the total functional differential to find
 `$$$
@@ -472,7 +472,7 @@ where we have relied on the fact that `$$\partial_{\eta} \delta \phi = \delta \p
     \delta \mathcal{H} &= \iint \langle \partial_{\eta} [\pi]_{\hat{r}^2}   \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi]_{\hat{r}^2}  w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]_{\hat{r}^2} \right]  + c_p \Pi \delta \Theta_{\hat{r}^2}   + (\partial_{\eta} [\pi]_{\hat{r}^2}  - \partial_{\eta} [p]) \delta \phi \intd{A} \intd{\eta}.
 \end{align*}
 $$$`
-which gives
+The only problem term in this equation is in the differential for `$$\delta \phi$$`, namely `$$ \partial_{\eta} [p] \delta \phi $$`. The lack of a 
 `$$$
 \begin{align*}
     \fder{\mathcal{H}}{\mathbf{u}} &= \partial_{\eta}[\pi] \mathbf{u}\\
@@ -483,7 +483,7 @@ which gives
 \end{align*}
 $$$`
 which illustrates that the integration by parts trick works perfectly if we do not incorporate an `$$\hat{r}^2$$` factor into `$$ \partial_{\eta}$$`.
-Let us check if this is consistent by returning to the implicit hypsometric that defines our EOS.
+Let us check if this is consistent by returning to the implicit hypsometric equation that defines our EOS.
 ## Returning to EOS 
 `$$$
 \begin{align*}
@@ -494,5 +494,5 @@ Let us check if this is consistent by returning to the implicit hypsometric that
     \implies& \Delta \phi = -R_d \int \frac{T}{p}\, \mathrm{d}\pi\\
 \end{align*}
 $$$`
-and so we see that the `$$\hat{r}^2$$` must ensure that `$$$\int [\cdot] \hat{r}^2 \partial_\eta [\pi] \intd{\eta} = \int [\cdot] \intd{\pi}$$$`
+and so we see that this holds if `$$$\int [\cdot]\, \partial_\eta [\pi]_{\hat{r}^2} \intd{\eta} = \int [\cdot]\, \hat{r}^2 \partial_\eta [\pi] \intd{\eta} = \int [\cdot] \intd{\pi}$$$`
 which is precisely what we constructed `$$\partial_{\eta} [\pi]_{\hat{r}^2}$$` to satisfy!
