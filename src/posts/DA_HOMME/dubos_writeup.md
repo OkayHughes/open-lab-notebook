@@ -439,7 +439,7 @@ $$$`
 Therefore define
 `$$$
 \begin{align*}
-    \mathcal{H} = \iint \textcolor{#2a3d45}{\stackrel{(1)}{\frac{1}{2}  \hat{r}^2 \partial_{\eta} [\pi](\langle \mathbf{u}, \mathbf{u}\rangle + w^2)}} + \textcolor{#DDC9B4}{\stackrel{(2)}{c_p \hat{r}^2 \Theta \Pi + \partial_{\eta} [\phi] p + p_{\textrm{top}} \phi_{\textrm{top}}}} + \textcolor{#C17C74}{\stackrel{(3)}{\partial_{\eta} [\pi] \phi}}  \intd{A} \intd{\eta}
+    \mathcal{H} = \iint \textcolor{#2a3d45}{\stackrel{(1)}{\frac{1}{2}   \partial_{\eta} [\pi]_{\hat{r}^2}(\langle \mathbf{u}, \mathbf{u}\rangle + w^2)}} + \textcolor{#DDC9B4}{\stackrel{(2)}{c_p \Theta_{\hat{r}^2} \Pi + \partial_{\eta} [\phi] p + p_{\textrm{top}} \phi_{\textrm{top}}}} + \textcolor{#C17C74}{\stackrel{(3)}{\partial_{\eta} [\pi]_{\hat{r}^2} \phi}}  \intd{A} \intd{\eta}
 \end{align*}
 $$$`
 and the same algebraic manipulations gives
