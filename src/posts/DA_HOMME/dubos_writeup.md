@@ -476,7 +476,7 @@ The only problem term in this equation is in the differential for `$$\delta \phi
 dictates the modification of `$$\mu \equiv \partial_{\eta} [p] \left(\partial_{\eta} [\pi] \right)^{-1}$$` so we rewrite
 `$$$
 \begin{align*}
-    \delta \mathcal{H} &= \iint \langle \partial_{\eta} [\pi]_{\hat{r}^2}   \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi]_{\hat{r}^2}  w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]_{\hat{r}^2} \right]  + c_p \Pi \delta \Theta_{\hat{r}^2}   + \partial_{\eta} [\pi]_{\hat{r}^2}( 1 - \partial_{\eta} [p] \left( \partial_{\eta} [\pi]_{\hat{r}^2}\right)^{-1}) \delta \phi \intd{A} \intd{\eta},
+    \delta \mathcal{H} &= \iint \langle \partial_{\eta} [\pi]_{\hat{r}^2}   \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi]_{\hat{r}^2}  w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]_{\hat{r}^2} \right]  + c_p \Pi \delta \Theta_{\hat{r}^2}   + \partial_{\eta} [\pi]_{\hat{r}^2}( 1 - \partial_{\eta} [p] \left( \partial_{\eta} [\pi]_{\hat{r}^2}\right)^{-1}) \delta \phi \intd{A} \intd{\eta} \\
                        &= \iint \langle \partial_{\eta} [\pi]_{\hat{r}^2}   \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi]_{\hat{r}^2}  w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]_{\hat{r}^2} \right]  + c_p \Pi \delta \Theta_{\hat{r}^2}   + \partial_{\eta} [\pi]_{\hat{r}^2}( 1 - \partial_{\eta} [p] \left( \partial_{\eta} [\pi]_{\hat{r}^2}\right)^{-1}) \delta \phi \intd{A} \intd{\eta}.
 \end{align*}
 $$$`
