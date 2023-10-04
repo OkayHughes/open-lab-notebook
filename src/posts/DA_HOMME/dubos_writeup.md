@@ -446,9 +446,9 @@ $$$`
 and the same algebraic manipulations gives
 `$$$
 \begin{align*}
-    \delta \mathcal{H} &= \lim_{\varepsilon \to 0} \frac{\mathcal{H}(\mathbf{u} + \varepsilon \delta \mathbf{u}, w + \varepsilon \delta w, \phi + \varepsilon \delta \phi, \Theta + \delta \Theta, \partial_{\eta}[\pi] + \delta[\partial_{\eta}[\pi]] )- \mathcal{H}(\mathbf{u}, w, \phi , \Theta , \partial_{\eta}[\pi] )}{\varepsilon}\\
-    &= \iint \langle \partial_{\eta} [\pi]  \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi] w \delta w + \frac{1}{2}  (\langle \mathbf{u}, \mathbf{u}\rangle + w^2) \delta \left[\partial_{\eta} [\pi]\right]  + c_p \Pi \delta \Theta  + p \delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}] + \partial_{\eta} [\pi] \delta \phi + \phi \delta [\partial_{\eta}[\pi]] \intd{A} \intd{\eta} \\
-    &= \iint \langle \partial_{\eta} [\pi]  \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi] w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]\right]  + c_p \Pi \delta \Theta  + p \delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}] + \partial_{\eta} [\pi] \delta \phi \intd{A} \intd{\eta}.
+    \delta \mathcal{H} &= \lim_{\varepsilon \to 0} \frac{\mathcal{H}(\mathbf{u} + \varepsilon \delta \mathbf{u}, w + \varepsilon \delta w, \phi + \varepsilon \delta \phi, \Theta_{\hat{r}^2}  + \delta \Theta_{\hat{r}^2} , \partial_{\eta}[\pi]_{\hat{r}^2}  + \delta[\partial_{\eta}[\pi]_{\hat{r}^2} ] )- \mathcal{H}(\mathbf{u}, w, \phi , \Theta_{\hat{r}^2}  , \partial_{\eta}[\pi]_{\hat{r}^2}  )}{\varepsilon}\\
+    &= \iint \langle \partial_{\eta} [\pi]_{\hat{r}^2}   \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi]_{\hat{r}^2}  w \delta w + \frac{1}{2}  (\langle \mathbf{u}, \mathbf{u}\rangle + w^2) \delta \left[\partial_{\eta} [\pi]_{\hat{r}^2} \right]  + c_p \Pi \delta \Theta_{\hat{r}^2}   + p \delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}] + \partial_{\eta} [\pi]_{\hat{r}^2}  \delta \phi + \phi \delta [\partial_{\eta}[\pi]_{\hat{r}^2} ] \intd{A} \intd{\eta} \\
+    &= \iint \langle \partial_{\eta} [\pi]_{\hat{r}^2}   \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi]_{\hat{r}^2}  w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]_{\hat{r}^2} \right]  + c_p \Pi \delta \Theta_{\hat{r}^2}   + p \delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}] + \partial_{\eta} [\pi]_{\hat{r}^2}  \delta \phi \intd{A} \intd{\eta}.
 \end{align*}
 $$$`
 and we rewrite
@@ -469,7 +469,7 @@ $$$`
 where we have relied on the fact that `$$\partial_{\eta} \delta \phi = \delta \partial_{\eta} \phi$$`. We can return to the total functional differential to find
 `$$$
 \begin{align*}
-    \delta \mathcal{H} &= \iint \langle \partial_{\eta} [\pi]  \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi] w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]\right]  + c_p \Pi \delta \Theta  + (\partial_{\eta} [\pi] - \partial_{\eta} [p]) \delta \phi \intd{A} \intd{\eta}.
+    \delta \mathcal{H} &= \iint \langle \partial_{\eta} [\pi]_{\hat{r}^2}   \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi]_{\hat{r}^2}  w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]_{\hat{r}^2} \right]  + c_p \Pi \delta \Theta_{\hat{r}^2}   + (\partial_{\eta} [\pi]_{\hat{r}^2}  - \partial_{\eta} [p]) \delta \phi \intd{A} \intd{\eta}.
 \end{align*}
 $$$`
 which gives
@@ -482,9 +482,7 @@ which gives
     \fder{\mathcal{H}}{\partial_{\eta} [\pi]} &= \frac{\mathbf{u}^2 + w^2}{2} + \phi
 \end{align*}
 $$$`
-which agrees precisely with Tea20. However: does the integration by parts trickery work if we do the pseudodensity trick instead of modifying `$$\mathrm{d}A$$`?
-
-
+which illustrates that the integration by parts trick works perfectly if we do not incorporate 
 ## Returning to EOS 
 `$$$
 \begin{align*}
