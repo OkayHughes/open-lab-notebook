@@ -284,9 +284,9 @@ and TD14 suggests that we define `$$\mu = \partial_{\eta} (A) M + \partial_{\eta
 $$$`
 so this constrains that the `$$ \textrm{dp3d} = p_s\Delta A  + p_0 \Delta B = g_0(m_s \Delta A + m_0 \Delta B)$$`.
 Dividing by `$$g_0$$`, even in the deep atmosphere, gives the _mass_ located between particular model levels.
-This means that the correct generalization to the deep atmosphere is `$$ \textrm{dp3d} &= g_0 \frac{a^2}{(a+z)^2} (m_s \Delta A + m_0 \Delta B$$`
-This does not coincide with the value of the actual mass integral `$$ \int g \rho \intd{z}$$`, however.
-However, 
+This means that the correct generalization to the deep atmosphere is `$$$ \textrm{dp3d} = g_0 \frac{a^2}{(a+z)^2} (m_s \Delta A + m_0 \Delta B)$$$`
+This would make the value of `$$\sum \textrm{dp3d}$$` coincide with the mass-weighted integral. However, this means
+that the `$$g$$` correction would need to be 
 
 
 
@@ -413,6 +413,93 @@ which gives
 \end{align*}
 $$$`
 which agrees precisely with Tea20. However: does the integration by parts trickery work if we do the pseudodensity trick instead of modifying `$$\mathrm{d}A$$`?
+
+
+
+## The Hamiltonian derivation for Oksana's notes
+Kinetic, internal, and potential energy are supposedly given by 
+`$$$
+\begin{align*}
+    K = \frac{1}{2} \hat{r}^2 \partial_{\eta} [\pi] \mathbf{v}^2, \qquad I = c_p \Theta \Pi - \hat{r}^2 \partial_{\eta} [\pi] \frac{1}{\rho} p + p_{\textrm{top}} \phi_{\textrm{top}} \qquad P = \hat{r}^2\partial_{\eta} [\pi] \phi
+\end{align*}
+$$$`
+and note that `$$p_{\textrm{top}}$$` is really a hydrostatic `$$p$$`. This section simply notes that `$$\intd{A}$$` is an "area" metric. This has no radial dependence in the shallow atmosphere but (in the most naive formulation) gains a radial dependence in the deep atmosphere. 
+Note: no functional derivatives with respect to non-hydrostatic pressure `$$p$$` are sought. Due to the EOS `$$p$$` is subjugated by`$$\phi$$`.  
+
+Therefore define
+`$$$
+\begin{align*}
+    \mathcal{H} = \iint \textcolor{#2a3d45}{\stackrel{(1)}{\frac{1}{2} \partial_{\eta} [\pi](\langle \mathbf{u}, \mathbf{u}\rangle + w^2)}} + \textcolor{#DDC9B4}{\stackrel{(2)}{c_p  \Theta \Pi + \partial_{\eta} [\phi] p + p_{\textrm{top}} \phi_{\textrm{top}}}} + \textcolor{#C17C74}{\stackrel{(3)}{\partial_{\eta} [\pi] \phi}}  \intd{A} \intd{\eta}
+\end{align*}
+$$$`
+and we do the typical algebraic shenanigans and discard second-order terms:
+`$$$
+\begin{align*}
+    \textcolor{#2a3d45}{(1)}:&\frac{1}{2} (\partial_{\eta} [\pi] + \delta \left[\partial_{\eta} [\pi]\right])(\langle \mathbf{u} + \delta \mathbf{u}, \mathbf{u} + \delta \mathbf{u} \rangle + (w + \delta w)^2)\\
+    =&  \frac{1}{2} (\partial_{\eta} [\pi] + \delta \left[\partial_{\eta} [\pi]\right])(\langle \mathbf{u}, \mathbf{u} \rangle + 2 \langle \delta \mathbf{u}, \mathbf{u} \rangle + \langle  \delta \mathbf{u}, \delta \mathbf{u} \rangle + w^2 + 2w\delta w + \delta w^2)\\
+    =& \frac{1}{2} (\partial_{\eta} [\pi] + \delta \left[\partial_{\eta} [\pi]\right])(\langle \mathbf{u}, \mathbf{u} \rangle + 2 \langle \delta \mathbf{u}, \mathbf{u} \rangle  + w^2 + 2w\delta w ) + \mathcal{O}(\varepsilon^2)\\
+    =& \frac{1}{2} \partial_{\eta}[\pi]( \langle \mathbf{u}, \mathbf{u} \rangle + w^2) + \partial_{\eta} [\pi] (\langle \delta \mathbf{u}, \mathbf{u} \rangle + w \delta w) + \frac{1}{2} \delta \left[\partial_{\eta} [\pi]\right] (\langle \mathbf{u}, \mathbf{u}) + w^2) + \delta \left[\partial_{\eta} [\pi]\right] (\langle \delta \mathbf{u}, \mathbf{u} \rangle + w\delta w) + \mathcal{O}(\varepsilon^2)\\
+    =& K + \partial_{\eta} [\pi] (\langle \delta \mathbf{u}, \mathbf{u} \rangle + w \delta w) + \frac{1}{2} \delta \left[\partial_{\eta} [\pi]\right] (\langle \mathbf{u}, \mathbf{u}) + w^2) +\mathcal{O}(\varepsilon^2) \\
+    =& K +  \langle \partial_{\eta} [\pi]  \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi] w \delta w + \frac{1}{2}  (\langle \mathbf{u}, \mathbf{u}\rangle + w^2) \delta \left[\partial_{\eta} [\pi]\right] +\mathcal{O}(\varepsilon^2) \\
+\end{align*}
+$$$`
+and
+`$$$
+\begin{align*}
+    \textcolor{#DDC9B4}{(2)}:& c_p (\Theta + \delta \Theta) \Pi + (\partial_{\eta} [\phi] + \delta [\partial_{\eta} [\phi]]) p + p_{\textrm{top}} (\phi_{\textrm{top}} + \delta \phi_{\textrm{top}}) \\
+    =& c_p \Theta \Pi + \partial_{\eta} [\phi] p + p_{\textrm{top}}\phi_{\textrm{top}} + c_p \Pi \delta \Theta  + p \delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}] \\
+    =& I + c_p \Pi \delta \Theta  + p \delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}]
+\end{align*}
+$$$`
+and
+`$$$
+\begin{align*}
+    \textcolor{#C17C74}{(3)}:& (\partial_\eta [\pi] + \delta [\partial_{\eta}[\pi]])(\phi + \delta \phi) \\
+    =& \partial_{\eta}[\pi] \phi + \partial_{\eta} [\pi] \delta \phi + \phi \delta [\partial_{\eta}[\pi]] + \delta[\partial_{\eta}[\pi]] \delta \phi \\
+    =& P + \partial_{\eta} [\pi] \delta \phi + \phi \delta [\partial_{\eta}[\pi]] +\mathcal{O}(\varepsilon^2)
+\end{align*}
+$$$`
+giving 
+`$$$
+\begin{align*}
+    \delta \mathcal{H} &= \lim_{\varepsilon \to 0} \frac{\mathcal{H}(\mathbf{u} + \varepsilon \delta \mathbf{u}, w + \varepsilon \delta w, \phi + \varepsilon \delta \phi, \Theta + \delta \Theta, \partial_{\eta}[\pi] + \delta[\partial_{\eta}[\pi]] )- \mathcal{H}(\mathbf{u}, w, \phi , \Theta , \partial_{\eta}[\pi] )}{\varepsilon}\\
+    &= \iint \langle \partial_{\eta} [\pi]  \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi] w \delta w + \frac{1}{2}  (\langle \mathbf{u}, \mathbf{u}\rangle + w^2) \delta \left[\partial_{\eta} [\pi]\right]  + c_p \Pi \delta \Theta  + p \delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}] + \partial_{\eta} [\pi] \delta \phi + \phi \delta [\partial_{\eta}[\pi]] \intd{A} \intd{\eta} \\
+    &= \iint \langle \partial_{\eta} [\pi]  \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi] w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]\right]  + c_p \Pi \delta \Theta  + p \delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta[\phi_{\textrm{top}}] + \partial_{\eta} [\pi] \delta \phi \intd{A} \intd{\eta}.
+\end{align*}
+$$$`
+and we rewrite
+`$$$
+\begin{align*}
+    \int \int p\delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \intd{\eta} &= \int \int p\delta[\partial_{\eta}[\phi]] \intd{\eta}  + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \\
+    &= \int [p \delta \phi]_{\eta = \eta_{\textrm{top}}}^{\eta = 1} - \int \partial_{\eta} [p] \delta \phi \intd{\eta}  + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \\
+    &= \int p_{\textrm{bot}}\delta\phi_{\textrm{bot}} - p_{\textrm{top}}\delta\phi_{\textrm{top}} + p_{\textrm{top}} \delta \phi_{\textrm{top}} - \int \partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A} \\
+\end{align*}
+$$$`
+and we now note that `$$\delta \phi_{\textrm{bot}} = 0$$` due to the stationary topography at the lower boundary condition. Therefore
+`$$$
+\begin{align*}
+    \int \int p\delta[\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \intd{\eta} &= \int p_{\textrm{bot}}\delta\phi_{\textrm{bot}}  - \int \partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A} \\
+    &= \int \int -\partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A} \\
+\end{align*}.
+$$$`
+where we have relied on the fact that `$$\partial_{\eta} \delta \phi = \delta \partial_{\eta} \phi$$`. We can return to the total functional differential to find
+`$$$
+\begin{align*}
+    \delta \mathcal{H} &= \iint \langle \partial_{\eta} [\pi]  \mathbf{u}, \delta \mathbf{u} \rangle + \partial_{\eta} [\pi] w \delta w + \left(  \frac{\langle \mathbf{u}, \mathbf{u}\rangle + w^2}{2} + \phi \right) \delta \left[\partial_{\eta} [\pi]\right]  + c_p \Pi \delta \Theta  + (\partial_{\eta} [\pi] - \partial_{\eta} [p]) \delta \phi \intd{A} \intd{\eta}.
+\end{align*}
+$$$`
+which gives
+`$$$
+\begin{align*}
+    \fder{\mathcal{H}}{\mathbf{u}} &= \partial_{\eta}[\pi] \mathbf{u}\\
+    \fder{\mathcal{H}}{w} &= \partial_{\eta} [\pi] w \\
+    \fder{\mathcal{H}}{\phi} &= \partial_{\eta} [\pi] - \partial_{\eta} [p]\\
+    \fder{\mathcal{H}}{\Theta} &= c_p \Pi \\
+    \fder{\mathcal{H}}{\partial_{\eta} [\pi]} &= \frac{\mathbf{u}^2 + w^2}{2} + \phi
+\end{align*}
+$$$`
+which agrees precisely with Tea20. However: does the integration by parts trickery work if we do the pseudodensity trick instead of modifying `$$\mathrm{d}A$$`?
+
 
 
 Todo tomorrow:
