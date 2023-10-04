@@ -495,7 +495,7 @@ Let us check if this is consistent by returning to the implicit hypsometric equa
 ## Returning to EOS 
 `$$$
 \begin{align*}
-    &\partial_s \phi = -R_d \partial_\eta[\pi]_{\hat{r}^2}  \theta_v \frac{\Pi}{p}\\
+    &\partial_\eta \phi = -R_d \partial_\eta[\pi]_{\hat{r}^2}  \theta_v \frac{\Pi}{p}\\
     \implies& \int \partial_\eta [\phi] \, \mathrm{d}\eta = -R_d \int \partial_\eta[\pi]_{\hat{r}^2}  \theta_v \frac{\Pi}{p} \, \mathrm{d}\eta\\
     \implies& \Delta \phi = -R_d \int \partial_\eta[\pi]_{\hat{r}^2}  \theta_v \frac{\Pi}{p} \, \mathrm{d}\eta\\
     \implies& \Delta \phi = -R_d \int \frac{T}{p} \partial_\eta [\pi]_{\hat{r}^2} \, \mathrm{d}\eta\\
