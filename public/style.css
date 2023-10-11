@@ -8,8 +8,8 @@ to this section's matching END comment to see page-specific styles.
 ******************************************************************************/
 /* Our default values set as CSS variables */
 :root {
-  --color-bg: #FFFFFF;
-  --color-text-main: #222222;
+  --color-bg: #171921;
+  --color-text-main: #E8E5D8;
   --color-primary: #9C2553;
   --wrapper-height: 85vh;
   --image-max-width: 320px;
