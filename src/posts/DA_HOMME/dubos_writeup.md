@@ -454,12 +454,13 @@ $$$`
 We rewrite
 `$$$
 \begin{align*}
-    \int \int p\delta[\hat{r}^2\partial_{\eta}[\phi]] + \hat{r}_{\textrm{top}}^2 p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{\eta} \intd{A} &= \int \int p\delta[\hat{r}^2\partial_{\eta}[\phi]] \intd{\eta}  + \int \hat{r}_{\textrm{top}}^2p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{\eta} \intd{A} \\
-    &= \int [p \delta \phi]_{\eta = \eta_{\textrm{top}}}^{\eta = 1} - \int \partial_{\eta} [p] \delta \phi \intd{\eta}  + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \\
+    \int \int p\delta[\partial_{\eta}[\phi]_{\hat{r}^2}] + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{\eta} \intd{A} &= \int \int p\delta[\partial_{\eta}[\phi]_{\hat{r}^2}] \intd{\eta}  + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \\
+    &= \int [p \delta \phi]_{\eta = \eta_{\textrm{top}}}^{\eta = 1} - \int \partial_{\eta} [p] \delta \phi \intd{\eta}  + \int p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{\eta} \intd{A} \\
     &= \int p_{\textrm{bot}}\delta\phi_{\textrm{bot}} - p_{\textrm{top}}\delta\phi_{\textrm{top}} + p_{\textrm{top}} \delta \phi_{\textrm{top}} - \int \partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A} \\
-\end{align*}
+\end{align*},
 $$$`
-and we now note that `$$\delta \phi_{\textrm{bot}} = 0$$` due to the stationary topography at the lower boundary condition. Therefore
+which relies on the fact that reconstructing `$$\phi$$` from `$$\partial_{\eta} \phi_{\hat{r}^2}$$` is a mass-weighted integral,
+which consumes the `$$\hat{r}^2$$` factor. We now note that `$$\delta \phi_{\textrm{bot}} = 0$$` due to the stationary topography at the lower boundary condition. Therefore
 `$$$
 \begin{align*}
     \int \int p\delta[\hat{r}^2\partial_{\eta}[\phi]] + p_{\textrm{top}} \delta \phi_{\textrm{top}} \intd{A} \intd{\eta} &= \int p_{\textrm{bot}}\delta\phi_{\textrm{bot}}  - \int \partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A} \\
