@@ -427,7 +427,7 @@ Kinetic, internal, and potential energy are supposedly given by
     K = \frac{1}{2}  \partial_{\eta} [\pi]_{\hat{r}^2} \mathbf{v}^2, \qquad I = c_p \Theta \Pi - \partial_{\eta} [\pi]_{\hat{r}^2} \frac{1}{\rho} p + p_{\textrm{top}} \phi_{\textrm{top}} \qquad P = \partial_{\eta} [\pi]_{\hat{r}^2} \phi
 \end{align*}
 $$$`
-and note that `$$p_{\textrm{top}}$$` is really a hydrostatic `$$p$$`. Since `$$\Theta = \partial_{\eta} [\pi] \theta_v$$`, terms containing `$$\Theta$$` gain a correction.
+and note that `$$p_{\textrm{top}}$$` is really a hydrostatic `$$p$$`. In mass-based coordinates, it is also time-invariant. Since `$$\Theta = \partial_{\eta} [\pi] \theta_v$$`, terms containing `$$\Theta$$` gain a correction.
 This time we are rather more careful, noting that if 
 `$$$
 \begin{align*}
