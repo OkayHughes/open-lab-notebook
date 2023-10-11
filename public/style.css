@@ -81,7 +81,7 @@ a:not(.btn--remix):visited {
   font-style: normal;
   font-weight: normal;
   font-size: 1.1rem;
-  color: #000;
+  color: var(--color-text-main);
   text-decoration: none;
   border-style: none;
 }
@@ -106,6 +106,7 @@ body {
   font-family: var(--font-family);
   background-color: var(--color-bg);
   margin:5vw;
+  color:var(--color-text-main);
 }
 .wrapper {
   min-height: var(--wrapper-height);
