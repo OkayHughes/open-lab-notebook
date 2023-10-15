@@ -14,4 +14,7 @@ Our initialization must satisfy this relation.
 
 Philosophical interpretation of initialization:
 We initialize UMJS14 based on point-wise hydrostatic pressure
-at a particular position in the atmosphere. 
+at a particular position in the atmosphere. The calculated `dp` variable
+that comes out of initialization and is used to call, e.g., `set_elem_state`
+is actually `$$dp3d$$` due to how the `$$\eta$$` coordinate behaves in
+the deep atmosphere. 
