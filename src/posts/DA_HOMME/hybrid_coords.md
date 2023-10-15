@@ -10,4 +10,4 @@ layout: layouts/post.njk
 ---
 
 Ok so the code assumes that `$$ A_{\textrm{top}} p_0 + \sum \textrm{dp3d} = p_{sv}  $$`.
-This introduces a discrepancy when we go to the deep EOS. 
+Our initialization must satisfy this relation. 
