@@ -6,8 +6,8 @@ tags:
 eleventyNavigation:
   parent: Plan November 22
   key: eos
-lF90ayout: layouts/post.njk
---
+layout: layouts/post.njk
+---
 
 <pre>
 <!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #960050; background-color: #1e0010">#</span><span style="color: #f8f8f2">ifdef</span> <span style="color: #f8f8f2">HAVE_CONFIG_H</span>
