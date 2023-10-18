@@ -25,6 +25,6 @@ The key to this problem is that
 \begin{align*}
   &\hat{r}^2 \partial_s g z = -R_d \frac{p}{\pi} \Theta_v\\
   \implies& \left(\frac{a + \frac{z_0 + z}{2}}{a}\right)^2 (g(z-z_0)) = Q \\
-  \implies& \left(\frac{a + \frac{z_0 + z}{2}}{a}\right)^2 (g(z-z_0)) = Q \\
+  \implies& \left(1 + \frac{z_0 + z}{2a}\right)^2 (g(z-z_0)) = Q \\
 \end{align*}
 $$$`
