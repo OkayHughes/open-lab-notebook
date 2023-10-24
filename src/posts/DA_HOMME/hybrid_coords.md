@@ -23,7 +23,7 @@ the deep atmosphere.
 The key to this problem is that
 `$$$
 \begin{align*}
-  &\hat{r}^2 \partial_s g z = -R_d \frac{p}{\Pi} \Theta_v\\
+  &\hat{r}^2 \partial_s g z = -R_d \frac{\Pi}{p} \Theta_v\\
   \implies& \left(\frac{a + \frac{z_0 + z}{2}}{a}\right)^2 (g(z-z_0)) = Q \\
   \implies& \left(1 + \frac{z_0 + z}{2a}\right)^2 (g(z-z_0)) = Q \\
   \implies& g\left(\left(1 + \frac{z_0}{2a}\right) + \frac{z}{2a}\right)^2 (z-z_0) = Q \\
