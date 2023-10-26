@@ -10,6 +10,8 @@ layout: layouts/post.njk
 ---
 
 There are two regimes in which (linear) Partial Differential Equations have a well-posed notion of causality.
+Writing this was inspired by [this provocative argument](https://drive.google.com/file/d/19DNv4csBkEW5Pe_JwJ5VcpvTlFGHeP4M/view?usp=sharing),
+though I make little effort to directly link what I'm writing about to the argument in that paper.
 
 ## Hyperbolic equations
 Hyperbolic Initial Value Problems (which could be nonlinear so long as they have benign characteristics)
@@ -24,6 +26,19 @@ implicit diffusion that manifests in Finite Volume schemes.
 
 ## Elliptic equations
 Elliptic boundary value problems induce (spatially non-local) causality between boundary values and 
-values on the interior. In this case the direction of causality can be t
+values on the interior. In this case the direction of causality can be transposed at will,
+indicating that this intuitive notion of "causality" does not map as cleanly onto the 
+squishy notion of causality that we use to design experiments. 
+
 
 ## Parabolic Nonsense:
+The ill-posedness of the [backward heat equation](https://people.maths.ox.ac.uk/trefethen/pdectb/backward2.pdf)
+is a prolific example of just how much information must be imputed in order to 
+make any sense of parabolic inverse problems. The infinite propagation speed of
+parabolic operators renders hinders us in constructing any notion of "local cause".
+
+
+## Implications for the atmosphere:
+The (continuum) model equations in atmospheric general circulation models are universally taken 
+to be the compressible Euler equations. These are notably hyperbolic, but very capable of 
+forming shocks (and, as is now known, will blow up as well). Especially 
