@@ -41,4 +41,7 @@ parabolic operators renders hinders us in constructing any notion of "local caus
 ## Implications for the atmosphere:
 The (continuum) model equations in atmospheric general circulation models are universally taken 
 to be the compressible Euler equations. These are notably hyperbolic, but very capable of 
-forming shocks (and, as is now known, will blow up as well). Especially 
+forming shocks (and, as is now known, will blow up as well). However, when they are discretized,
+numerical diffusion is (for now) added to the equations as an _ad hoc_ method of diffusing energy which accumulates
+due to unresolved subgrid motion. 
+At the scale of the earth, the flows we study are turbulent, but not
