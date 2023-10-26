@@ -10,6 +10,20 @@ layout: layouts/post.njk
 ---
 
 There are two regimes in which (linear) Partial Differential Equations have a well-posed notion of causality.
+
+## Hyperbolic equations
 Hyperbolic Initial Value Problems (which could be nonlinear so long as they have benign characteristics)
 have a notion of *temporal* causality. That is, the method of characteristics defines which initial values
-could potentially affect 
+could potentially affect a down-stream value. Notably, the formation of shocks (see [this useful note](https://drive.google.com/file/d/1_ol_ODDSdGbXWDY5ilhkleEfJn1aKjZu/view?usp=sharing), [original link:](https://dept.math.lsa.umich.edu/~karni/m671/Toro65.pdf))
+causes problems for this, and the natural recourse to weak solutions 
+leads us to view strong solutions as non-unique. The aforementioned reference
+identifies a method by which we can use domain knowledge (such as entropy) not present in the original equations
+to impute physically realistic strong solutions. This sort of imputation is key to, e.g., the scientific justification for
+Riemann solvers. I suspect (though haven't formalized) that regression to entropy etc. is equivalent to the
+implicit diffusion that manifests in Finite Volume schemes. 
+
+## Elliptic equations
+Elliptic boundary value problems induce (spatially non-local) causality between boundary values and 
+values on the interior. In this case the direction of causality can be t
+
+## Parabolic Nonsense:
