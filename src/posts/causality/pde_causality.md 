@@ -1,0 +1,15 @@
+---
+date: 2023-10-26
+tags:
+  - posts
+  - finite volume
+eleventyNavigation:
+  parent: Causality
+  key: PDEs and Causality.
+layout: layouts/post.njk
+---
+
+There are two regimes in which (linear) Partial Differential Equations have a well-posed notion of causality.
+Hyperbolic Initial Value Problems (which could be nonlinear so long as they have benign characteristics)
+have a notion of *temporal* causality. That is, the method of characteristics defines which initial values
+could potentially affect 
