@@ -34,3 +34,5 @@ and the derivative is
 \begin{align*}
   \partial_z \left[g\left(\left(1 + \frac{z_0}{2a}\right) + \frac{z}{2a}\right)^2 (z-z_0) \right] \approx g\left(\frac{1}{a}(z-z_0)\left(\left(1 + \frac{z_0}{2a}\right) + \frac{z}{2a}\right) + \left(\left(1 + \frac{z_0}{2a}\right) + \frac{z}{2a}\right)^2  \right)
 \end{align*}$$$`
+
+

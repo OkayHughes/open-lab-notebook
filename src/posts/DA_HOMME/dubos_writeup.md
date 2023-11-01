@@ -505,3 +505,13 @@ Let us check if this is consistent by returning to the implicit hypsometric equa
 $$$`
 and so we see that this holds if `$$$\int [\cdot]\, \partial_\eta [\pi]_{\hat{r}^2} \intd{\eta} = \int [\cdot]\, \hat{r}^2 \partial_\eta [\pi] \intd{\eta} = \int [\cdot] \intd{\pi}$$$`
 which is precisely what we constructed `$$\partial_{\eta} [\pi]_{\hat{r}^2}$$` to satisfy!
+
+
+
+## The integration by parts:
+
+`$$$
+\begin{align*}
+    \int \int p\hat{r}^2\delta[\partial_{\eta}[\phi]] + \textrm{BC} \intd{\eta} \intd{A} &= \int \int -\partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A}
+\end{align*},
+$$$`
