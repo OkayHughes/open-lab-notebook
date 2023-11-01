@@ -515,5 +515,5 @@ which is precisely what we constructed `$$\partial_{\eta} [\pi]_{\hat{r}^2}$$` t
     &\int \int p\hat{r}^2\delta[\partial_{\eta}[\phi]] + \textrm{BC} \intd{\eta} \intd{A} = \int \int -\hat{r}^2 \partial_{\eta} [p] \delta \phi \intd{\eta} \intd{A}\\
     \implies& \int \int p\hat{r}^2\delta[\partial_{\eta}[\phi]] + \textrm{BC} -\hat{r}^2 \partial_{\eta} [p] \delta \phi  \intd{\eta} \intd{A} = 0\\
     \implies& \int \int \hat{r}^2(p\delta[\partial_{\eta}[\phi]] - \partial_{\eta} [p] \delta \phi) + \textrm{BC}  \intd{\eta} \intd{A} = 0\\
-\end{align*},
+\end{align*}
 $$$`
