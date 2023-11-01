@@ -520,6 +520,7 @@ and so
 `$$$
 \begin{align*}
        \int \int p\hat{r}^2 \delta[\partial_{\eta}[\phi]]   \intd{\eta} \intd{A} &= \int \left[ p\hat{r}^2 \delta \phi \right]_{\textrm{bot}}^{\textrm{top}} - \int \partial_{\eta} [\hat{r}^2 p] \delta \phi \intd{\eta} \intd{A} \\
-       &= \int \left[ p\hat{r}^2 \delta \phi \right]_{\textrm{bot}}^{\textrm{top}} - \int \left( \partial_{\eta} [\hat{r}^2] p \right) \delta \phi \intd{\eta} \intd{A} 
+       &= \int \left[ p\hat{r}^2 \delta \phi \right]_{\textrm{bot}}^{\textrm{top}} - \int \left( \partial_{\eta} [\hat{r}^2] p + \hat{r}^2 \partial_{\eta} [p] \right) \delta \phi \intd{\eta} \intd{A} \\
+       &= \int \left[ p\hat{r}^2 \delta \phi \right]_{\textrm{bot}}^{\textrm{top}} - \int \left( \partial_{\eta} [\hat{r}^2] p + \hat{r}^2 \partial_{\eta} [p] \right) \delta \phi \intd{\eta} \intd{A} 
 \end{align*}
 $$$`
