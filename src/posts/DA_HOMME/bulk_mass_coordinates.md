@@ -39,4 +39,14 @@ $$$`
 
 Ignore variation in `$$g$$` as it is merely a nuissance for the moment. Then `$$ \frac{\Delta p}{g} = \hat{m}$$`,
 where `$$ \hat{m}$$` is the columnar mass within a certain level.  It has units `$$\textrm{kg m}^{-2}$$`.
-Under the shallow atmosphere
+
+There are two ways of recovering the correct mass when we go to the deep atmosphere in spherical coordinates.
+Either one recovers mass-weighted integrals as
+`$$$
+  \int \int [\rho X] \hat{r}^2 \intd{s} \intd{A} \textrm{ or } \int \int [\rho \hat{r}^2] X  \intd{s} \intd{A} 
+$$$`
+where the integral on the left corresponds to introducing time dependence to the metric 
+that is used to compute weak differential operators. 
+We have elected to follow the strategy that corresponds to the integral on the right.
+
+''
