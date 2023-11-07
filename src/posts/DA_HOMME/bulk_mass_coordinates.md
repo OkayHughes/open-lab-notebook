@@ -46,7 +46,7 @@ Either one recovers mass-weighted integrals as
   \int \int [\rho X] \hat{r}^2 \intd{s} \intd{A} \textrm{ or } \int \int [\rho \hat{r}^2] X  \intd{s} \intd{A} 
 $$$`
 where the integral on the left corresponds to introducing time dependence to the metric 
-that is used to compute weak differential operators. 
+that is used to compute weak differential operators. (Strictly speaking, the `$$\mathrm{d}A$$` here contains a `$$a$$` factor that is the mean radius of the earth.)
 Under this interpretation, `$$\rho$$` corresponds to specific density.
 What I mean by this is that `$$\rho$$` is the mass _per unit volume at a gridpoint_. 
 This is an unproblematic interpretation with either a shallow metric, or a modified deep metric.
@@ -58,5 +58,10 @@ This means that we then find
 $$`
 
 ## implications for initialization
+
+Assuming we are in hydrostatic balance,
+`$$$
+  \frac{\int_{z_1}^{z_2} [\hat{r}^2 \rho] g_0 \intd{z} }{g_0} = \frac{\Delta p}{g_0} = \Delta \hat{m}
+$$$`
 
 
