@@ -38,4 +38,5 @@ $$$`
 
 
 Ignore variation in `$$g$$` as it is merely a nuissance for the moment. Then `$$ \frac{\Delta p}{g} = \hat{m}$$`,
-where `$$ \hat{m}$$` is the columnar mass of a 
+where `$$ \hat{m}$$` is the columnar mass within a certain level.  It has units `$$\textrm{kg m}^{-2}$$`.
+Under the shallow atmosphere
