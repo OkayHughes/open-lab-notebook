@@ -16,5 +16,8 @@ The typical hybrid mass coordinate is defined by
 where I am going to use `$$F_{m} $$` to refer to a fictitious force that in previous HOMME versions
 was called "hydrostatic pressure". 
 
-The well-posedness of this coordinate results from the fact that `$$\int_{\textrm{bot}}^{\textrm{top}} g \hat{m} \intd{z} $$`
+The well-posedness of this coordinate results from the fact that if we let `$$\hat{m}$$` be the mass per unit area in a column of the atmosphere, then 
+`$$\int_{z}^{\textrm{top}} g \hat{m} \intd{z} $$` is monotonically increasing in `$$z$$`. 
+Note that the monotonicity holds regardless of whether the atmosphere is in hydrostatic balance. 
+Note that we can rewrite this as `$$\int_{z}^{\textrm{top}} g  $$`
 
