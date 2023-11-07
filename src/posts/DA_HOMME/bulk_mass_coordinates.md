@@ -35,3 +35,7 @@ Assume (incorrectly) that the atmosphere is in hydrostatic balance between `$$z_
   \int_{z_1}^{z_2} \rho g \intd{z} = \int_{p_2}^{p_1} \intd{p} = \Delta p
 \end{align*}
 $$$`
+
+
+Ignore variation in `$$g$$` as it is merely a nuissance for the moment. Then `$$ \frac{\Delta p}{g} = \hat{m}$$`,
+where `$$ \hat{m}$$` is the columnar mass of a 
