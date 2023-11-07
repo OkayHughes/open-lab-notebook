@@ -29,3 +29,9 @@ We should probably retain legacy `$$\eta$$` model coordinates.
 To my knowledge, they are the best understood way to combine terrain following and pure-mass coordinates
 in one concise coordinate system. 
 
+Assume (incorrectly) that the atmosphere is in hydrostatic balance between `$$z_1, z_2$$`. Then
+`$$$
+\begin{align*}
+  \int_{z_1}^{z_2} \rho g \intd{z} = \int_{p_2}^{p_1} \intd{p} = \Delta p
+\end{align*}
+$$$`
