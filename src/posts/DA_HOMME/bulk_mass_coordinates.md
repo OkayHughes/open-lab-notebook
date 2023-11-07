@@ -16,8 +16,15 @@ The typical hybrid mass coordinate is defined by
 where I am going to use `$$F_{m} $$` to refer to a fictitious force that in previous HOMME versions
 was called "hydrostatic pressure". 
 
-The well-posedness of this coordinate results from the fact that if we let `$$\hat{m}$$` be the mass per unit area in a column of the atmosphere, then 
-`$$\int_{z}^{\textrm{top}} g \hat{m} \intd{z} $$` is monotonically increasing in `$$z$$`. 
+The well-posedness of this coordinate results from the fact 
+`$$\int_{z}^{\textrm{top}} g \rho \intd{z} $$` is monotonically increasing in `$$z$$`. 
 Note that the monotonicity holds regardless of whether the atmosphere is in hydrostatic balance. 
-Note that we can rewrite this as `$$\int_{z}^{\textrm{top}} g  $$`
+However, the form of this equation does indicate two important things about this equation.
+Firstly, the use of a notion of "pressure" in the definition of our mass coordinate is largely a 
+misnomer. The notion of "hydrostatic pressure" in the non-hydrostatic HOMME model
+is misleading and should be abandoned.  Secondly, this equation does allow us to precisely
+explain where quantities such as `$$\Delta p$$` which show up in the legacy coordinates we use come from.
 
+We should probably retain legacy `$$\eta$$` model coordinates. 
+To my knowledge, they are the best understood way to combine terrain following and pure-mass coordinates
+in one concise coordinate system. 
