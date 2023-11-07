@@ -37,7 +37,7 @@ Assume (incorrectly) that the atmosphere is in hydrostatic balance between `$$z_
 $$$`
 
 
-Ignore variation in `$$g$$` as it is merely a nuissance for the moment. Then `$$ \frac{\Delta p}{g} = \hat{m}$$`,
+Ignore variation in `$$g$$` as it is merely a nuissance for the moment. Then `$$ \frac{\Delta p}{g} = \Delta \hat{m}$$`,
 where `$$ \hat{m}$$` is the columnar mass within a certain level.  It has units `$$\textrm{kg m}^{-2}$$`.
 
 There are two ways of recovering the correct mass when we go to the deep atmosphere in spherical coordinates.
@@ -47,6 +47,16 @@ Either one recovers mass-weighted integrals as
 $$$`
 where the integral on the left corresponds to introducing time dependence to the metric 
 that is used to compute weak differential operators. 
-We have elected to follow the strategy that corresponds to the integral on the right.
+Under this interpretation, `$$\rho$$` corresponds to specific density.
+What I mean by this is that `$$\rho$$` is the mass _per unit volume at a gridpoint_. 
+This is an unproblematic interpretation with either a shallow metric, or a modified deep metric.
 
-''
+We have elected to follow the strategy that corresponds to the integral on the right.
+This means that we then find
+`$$
+\frac{1}{g_0} \int_{z_1}^{z_2} [\hat{r}^2 \rho] g_0 \intd{z} = \Delta \hat{m}
+$$`
+
+## implications for initialization
+
+
