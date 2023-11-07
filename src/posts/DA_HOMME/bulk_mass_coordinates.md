@@ -28,3 +28,4 @@ explain where quantities such as `$$\Delta p$$` which show up in the legacy coor
 We should probably retain legacy `$$\eta$$` model coordinates. 
 To my knowledge, they are the best understood way to combine terrain following and pure-mass coordinates
 in one concise coordinate system. 
+
