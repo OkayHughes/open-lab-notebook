@@ -64,6 +64,7 @@ Assuming we are in hydrostatic balance,
   \frac{\int_{z_1}^{z_2} [\hat{r}^2 \rho] g_0 \intd{z} }{g_0} = \frac{\Delta p}{g_0} = \Delta \hat{m}.
 $$$`
 
-If we are given a "pressure-based" initialization routine, 
+If we are given a "pressure-based" initialization routine, it expects that 
+`$$\frac{\Delta p}{\hat{g}} = \int \rho \hat{g} \intd{z}$$` (we neglect variation in g in the integral and let `$$\hat{g}$$` be the midpoint value.)
 
 
