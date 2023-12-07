@@ -14,7 +14,7 @@ I had the idea of putting my lab notebooks online for all to see.
 This isn't a particularly useful idea in and of itself, but I could
 see a number of future projects that might be able to build on this.
 
-<div style="width:100%; display:flex; ">
+<div style="width:100%; display:flex; justify-content:center">
   <p>
     Burned all my notebooks! <br>
     What good are notebooks? <br>
