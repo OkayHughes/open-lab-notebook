@@ -18,7 +18,7 @@ I derive a numerically stable way to compute `$$P_n^m(x)$$` for integral `$$n, m
 
 They define the associated legendre polynomials by the Rodriguez formula
 `$$$
-P_n^m(x) = \sqrt{(2n+1) \frac{(n-m)!}{(n+m)!}} \cdot \frac{(1-x)^{\frac{|m|}{2}}}{2^n n!} \left(\der{^{n+|m|}}{x^{n+|m|}} (1-x^2)^n \right)
+P_n^m(x) = \sqrt{(2n+1) \frac{(n-m)!}{(n+m)!}} \cdot \frac{(1-x^2)^{\frac{|m|}{2}}}{2^n n!} \left(\der{^{n+|m|}}{x^{n+|m|}} (1-x^2)^n \right)
 $$$`
 
 
@@ -38,4 +38,23 @@ for `$$ m > 0.$$` When `$$m=0$$`, we can use the fact that the Legendre and Asso
 
 # starting induction:
 
-## 
+
+`$$$
+P_0^0(x) = \sqrt{(0) \frac{(0)!}{(0)!}} \cdot \frac{(1-x^2)^{0}}{2^0 0!} \left(\der{^{0}}{x^0} (1-x^2)^0\right) = 1
+$$$`
+`$$$ P_0^1(x) = P_0^2(x) = 0    $$$`
+
+`$$$
+\begin{align*}
+P_1^0(x) &= \sqrt{(2+1) \frac{(1-0)!}{(1+0)!}} \cdot \frac{(1-x^2)^{\frac{|0|}{2}}}{2^1 1!} \left(\der{^{1+|0|}}{x^{1+|0|}} (1-x^2)^1 \right) \\
+&= \sqrt{3} \cdot \frac{1}{2 } \left(\der{}{x} (1-x^2)^1 \right) \\
+&= \sqrt{3} \cdot \frac{1}{2} 2x  \\
+&= \sqrt{3} \cdot x  \\
+\end{align*}
+$$$`
+
+`$$$
+P_1^1(x) &= \sqrt{(2+1) \frac{(1-1)!}{(1+1)!}} \cdot \frac{(1-x^2)^{\frac{|1|}{2}}}{2^1 1!} \left(\der{^{1+|1|}}{x^{1+|1|}} (1-x^2)^n \right) \\
+    &= \sqrt{3} \cdot \sqrt{\frac{(1-x^2)\frac{1}{2} \left(\der{^{1+|1|}}{x^{1+|1|}} (1-x^2)^n \right)
+$$$`
+
