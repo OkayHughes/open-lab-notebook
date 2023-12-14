@@ -54,7 +54,12 @@ P_1^0(x) &= \sqrt{(2+1) \frac{(1-0)!}{(1+0)!}} \cdot \frac{(1-x^2)^{\frac{|0|}{2
 $$$`
 
 `$$$
+\begin{align*}
 P_1^1(x) &= \sqrt{(2+1) \frac{(1-1)!}{(1+1)!}} \cdot \frac{(1-x^2)^{\frac{|1|}{2}}}{2^1 1!} \left(\der{^{1+|1|}}{x^{1+|1|}} (1-x^2)^n \right) \\
-    &= \sqrt{3} \cdot \sqrt{\frac{(1-x^2)\frac{1}{2} \left(\der{^{1+|1|}}{x^{1+|1|}} (1-x^2)^n \right)
+    &= \sqrt{3} \cdot \sqrt{1-x^2} \frac{1}{2} \left(\der{^{2}}{x^{2}} (1-x^2) \right) \\
+    &= \sqrt{3} \cdot \sqrt{1-x^2}  \\
+\end{align*}
 $$$`
+
+and `$$P_1^2(x) = 0 $$`
 
