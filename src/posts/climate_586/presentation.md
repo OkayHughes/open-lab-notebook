@@ -18,7 +18,7 @@ I derive a numerically stable way to compute `$$P_n^m(x)$$` for integral `$$n, m
 
 They define the associated legendre polynomials by the Rodriguez formula
 `$$$
-P_n^m(x) = \sqrt{(2n+1) \frac{(n-m)!}{(n+m)!}} \cdot \frac{(1-x^2)^{\frac{|m|}{2}}}{2^n n!} \left(\der{^{n+|m|}}{x^{n+|m|}} (1-x^2)^n \right)
+P_n^m(x) = \sqrt{\frac{(2n+1)}{2} \frac{(n-m)!}{(n+m)!}} \cdot \frac{(1-x^2)^{\frac{|m|}{2}}}{2^n n!} \left(\der{^{n+|m|}}{x^{n+|m|}} (1-x^2)^n \right)
 $$$`
 
 
@@ -28,7 +28,7 @@ In any case `$$P_n^m (x) = 0 $$` if `$$|m| > n$$`.
 They recommend a special recurrence relation
 `$$$
 \begin{align*}
-  P_n^m(x) &= c_n^m P_{n-2}^{m-2}(x) - d_n^m x P_{n-1}^{m-2}(x) + e_n^m P_{n-1}^m (x) \\
+  P_n^m(x) &= c_n^m P_{n-2}^{m-2}(x) - d_n^m x P_{n-1}^{m-2}(x) + e_n^m x P_{n-1}^m (x) \\
   c_n^m &\equiv \sqrt{\frac{2n+1}{2n-3} \cdot \frac{m+n-1}{m+n} \cdot \frac{m+n-3}{m+n-2}} \\
   d_n^m &\equiv \sqrt{\frac{2n+1}{2n-1} \cdot \frac{m+n-1}{m+n} \cdot \frac{n-m+1}{m+n-2}} \\
   e_n^m &\equiv \sqrt{\frac{2n+1}{2n-1} \cdot \frac{n-m}{n+m}}
@@ -48,16 +48,16 @@ $$$`
 \begin{align*}
 P_1^0(x) &= \sqrt{(2+1) \frac{(1-0)!}{(1+0)!}} \cdot \frac{(1-x^2)^{\frac{|0|}{2}}}{2^1 1!} \left(\der{^{1+|0|}}{x^{1+|0|}} (1-x^2)^1 \right) \\
 &= \sqrt{3} \cdot \frac{1}{2 } \left(\der{}{x} (1-x^2)^1 \right) \\
-&= \sqrt{3} \cdot \frac{1}{2} 2x  \\
-&= \sqrt{3} \cdot x  \\
+&= -\sqrt{3} \cdot \frac{1}{2} 2x  \\
+&= -\sqrt{3} \cdot x  \\
 \end{align*}
 $$$`
 
 `$$$
 \begin{align*}
 P_1^1(x) &= \sqrt{(2+1) \frac{(1-1)!}{(1+1)!}} \cdot \frac{(1-x^2)^{\frac{|1|}{2}}}{2^1 1!} \left(\der{^{1+|1|}}{x^{1+|1|}} (1-x^2)^n \right) \\
-    &= \sqrt{3} \cdot \sqrt{1-x^2} \frac{1}{2} \left(\der{^{2}}{x^{2}} (1-x^2) \right) \\
-    &= \sqrt{3} \cdot \sqrt{1-x^2}  \\
+    &= -\sqrt{3} \cdot \sqrt{1-x^2} \frac{1}{2} \left(\der{^{2}}{x^{2}} (1-x^2) \right) \\
+    &= -\sqrt{3} \cdot \sqrt{1-x^2}  \\
 \end{align*}
 $$$`
 
