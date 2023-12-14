@@ -63,3 +63,6 @@ $$$`
 
 and `$$P_1^2(x) = 0 $$`
 
+
+The recurrence relation for `$$m=0$$` is `$$n P_{n}^0(x) = (2n-1)x P_{n-1}^0(x) - (n-1) P^0_{n-2}(x) $$`
+
