@@ -22,4 +22,20 @@ P_n^m(x) = \sqrt{(2n+1) \frac{(n-m)!}{(n+m)!}} \cdot \frac{(1-x)^{\frac{|m|}{2}}
 $$$`
 
 
-They state that `$$P_n^m(x) = P_n^{-m}(x) $$`, which doesn
+They state that `$$P_n^m(x) = P_n^{-m}(x) $$`, which may be slightly wrong depending on normalization?
+In any case `$$P_n^m (x) = 0 $$` if `$$|m| > n$$`. 
+
+They recommend a special recurrence relation
+`$$$
+\begin{align*}
+  P_n^m(x) &= c_n^m P_{n-2}^{m-2}(x) - d_n^m x P_{n-1}^{m-2}(x) + e_n^m P_{n-1}^m (x) \\
+  c_n^m &\equiv \sqrt{\frac{2n+1}{2n-3} \cdot \frac{m+n-1}{m+n} \cdot \frac{m+n-3}{m+n-2}} \\
+  d_n^m &\equiv \sqrt{\frac{2n+1}{2n-1} \cdot \frac{m+n-1}{m+n} \cdot \frac{n-m+1}{m+n-2}} \\
+  e_n^m &\equiv \sqrt{\frac{2n+1}{2n-1} \cdot \frac{n-m}{n+m}}
+\end{align*}
+$$$`
+for `$$ m > 0.$$` When `$$m=0$$`, we can use the fact that the Legendre and Associated Legendre polynomials coincide.
+
+# starting induction:
+
+## 
