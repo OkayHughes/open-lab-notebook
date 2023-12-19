@@ -93,7 +93,19 @@ P_1^1(x) &= \sqrt{(2+1) \frac{(1-1)!}{(1+1)!}} \cdot \frac{(1-x^2)^{\frac{|1|}{2
 \end{align*}
 $$$`
 
-and `$$P_1^2(x) = 0 $$`
+and `$$P_1^2(x) = 0 $$`.
+
+### Algorithm pseudocode
+For `$$N$$` the maximum total wavenumber (i.e. `$$ |m| \leq n \leq N$$`) and a single point `$$(\lambda, \phi)$$`, 
+allocate a `$$(3, N)$$` array with zeros. The component `$$(0, m)$$` is the associated legendre polynomial
+`$$P_{n-2}^m$$` and `$$(1, m)$$` is `$$P_{n-1}^m$$`. We will not store `$$P_{n}^{-m}$$` but rather compute it when needed.
+
+* Initialize `$$P_n^m$$` for `$$(n, m) \in \{(0, 0), (1, 0), (0, 1)\}$$` using the above analytic equations
+* For `$$n=2,N$$` do
+  a
+  * b
+* `done`
+
 
 
 
@@ -101,6 +113,61 @@ and `$$P_1^2(x) = 0 $$`
 
 ## A simple python implementation
 
+```
+def n_m_to_d(n,m):
+  return int(n**2 + n + m)
 
+def assoc_leg_to_sph_harm(p, lon, m):
+    pronk = np.exp(1j * m * lon) * p / np.sqrt(4*np.pi)
+    return pronk
+
+def assoc_leg_m_n(lat, lon, out, example_fn):
+  # ==================
+  # lat, lon are given in radians
+  # out returns spherical harmonic evaluations at provided points
+  # example_fn(Y_n_m, n, m) takes 
+  #    * Y_n_m: an array of spherical harmonic evaluations
+  #    * n, m: the order and total wavenumber of Y_m_n
+  # ===================
+  x = np.sin(lat)
+
+  p_prev = np.zeros((3, n_max, x.size))
+
+  p_prev[0, 0, :] =  np.ones_like(x) # P_0^0 = 1
+  out[n_m_to_d(0,0),:] = assoc_leg_to_sph_harm(p_prev[0,0,:], lon, 0)
+  example_fn(out[n_m_to_d(0,0),:], 0, 0)
+
+
+  p_prev[1, 0, :] = np.sqrt(3) * x # P_1^0 = \sqrt{3} x
+  out[n_m_to_d(1,0),:] = assoc_leg_to_sph_harm(p_prev[1,0,:], lon, 0)
+  example_fn(out[n_m_to_d(1,0),:], 1, 0)
+  p_prev[1, 1, :] = -np.sqrt(3/2) * np.sqrt(1 - x**2)# P_1^1 = \sqrt{\frac{3}{2}(1-x^2)}
+  out[n_m_to_d(1,1),:] = assoc_leg_to_sph_harm(p_prev[1,1,:], lon, 1)
+  out[n_m_to_d(1,-1),:] = -1 * assoc_leg_to_sph_harm(p_prev[1,1,:], lon, -1)
+  example_fn(out[n_m_to_d(1,1),:], 1, 1)
+  example_fn(out[n_m_to_d(1,-1),:], 1, -1)
+
+  for n in range(2, n_max):
+    p_prev[2, 0, :] = np.sqrt(2 *n  + 1 )/n * ((2 * n -1 ) * x * (p_prev[1, 0, :]/np.sqrt(2*(n-1)+1)) - (n-1) * (p_prev[0, 0, :]/np.sqrt(2 * (n-2) + 1)) )
+    out[n_m_to_d(n,0),:] = assoc_leg_to_sph_harm(p_prev[2,0,:], lon, 0)
+    example_fn(out[n_m_to_d(2,0),:], 2, 0)
+    for m in range(1, n+1):
+      mm2 = abs(m-2)
+      m_neg = (-1)**m if m-2 < 0 else 1
+      c_mn = np.sqrt(((2*n+1)/(2*n-3)) * ((m + n - 1)/(m + n)) * ((m + n - 3)/(m + n - 2)))
+      d_mn = np.sqrt(((2*n+1)/(2*n-1)) * ((m + n - 1)/(m + n)) * ((n-m + 1)/(m + n - 2)))
+      e_mn = np.sqrt(((2*n+1)/(2*n-1))* ((n-m)/(n+m)))
+      p_nm2_mm2 = m_neg * p_prev[0, mm2, :]
+      p_nm1_mm2 = m_neg * p_prev[1, mm2, :]
+      p_nm1_m = p_prev[1, m, :]
+      p_prev[2, m, :] = c_mn * p_nm2_mm2 - d_mn * x * p_nm1_mm2 + e_mn *x * p_nm1_m
+      out[n_m_to_d(n,m),:] = assoc_leg_to_sph_harm(p_prev[2,m,:], lon, m)
+      out[n_m_to_d(n,-m),:] = (-1)**m * assoc_leg_to_sph_harm(p_prev[2,m,:], lon, -m)
+      example_fn(out[n_m_to_d(n,m),:], n, m)
+       example_fn(out[n_m_to_d(n,-m),:], n, -m)
+    p_prev[0, :, :] = p_prev[1, :, :]
+    p_prev[1, :, :] = p_prev[2, :, :]
+    p_prev[2, :, :] = 0
+```
 
 
