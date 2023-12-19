@@ -52,7 +52,7 @@ is that `$$P_n^{-m} = (-1)^m P_n^m$$` (this is mis-stated in the ECMWF document)
 
 To start the recursion we use the definition of the associated Legendre polynomials given by the Rodriguez formula
 `$$$
-P_n^m(x) = \sqrt{(2n+1)\frac{(n-m)!}{(n+m)!}} \cdot \frac{(1-x^2)^{\frac{|m|}{2}}}{2^n n!} \left(\der{^{n+|m|}}{x^{n+|m|}} (1-x^2)^n \right).
+P_n^m(x) = \sqrt{\frac{(2n+1)}{2}\frac{(n-m)!}{(n+m)!}} \cdot \frac{(1-x^2)^{\frac{|m|}{2}}}{2^n n!} \left(\der{^{n+|m|}}{x^{n+|m|}} (1-x^2)^n \right).
 $$$`
 As a consequence of this definition, if `$$|m| > |n|$$`, then
 the derivative term vanishes and `$$P_n^m (x) = 0 $$`. 
@@ -89,7 +89,7 @@ $$$`
 \begin{align*}
 P_1^1(x) &= \sqrt{(2+1) \frac{(1-1)!}{(1+1)!}} \cdot \frac{(1-x^2)^{\frac{|1|}{2}}}{2^1 1!} \left(\der{^{1+|1|}}{x^{1+|1|}} (1-x^2)^n \right) \\
     &= -\sqrt{3} \cdot \sqrt{1-x^2} \frac{1}{2} \left(\der{^{2}}{x^{2}} (1-x^2) \right) \\
-    &= -\sqrt{3} \cdot \sqrt{1-x^2}  \\
+    &= -\sqrt{\frac{3}{2}} \cdot \sqrt{1-x^2}  \\
 \end{align*}
 $$$`
 
@@ -111,11 +111,15 @@ allocate a `$$(3, N)$$` array `$$A$$` with zeros. The component `$$(0, m)$$` is 
 * 
 * Initialize `$$P_n^m$$` for `$$(n, m) \in \{(0, 0), (1, 0), (0, 1)\}$$` using the above analytic equations
 * For `$$n=2,N$$` do
-  * Use recurrence relation for `$$m=0$$` given above to calculate `$$ P_{n}^0$$` from `$$ P_{n-1}^0$$` and `$$ P_{n-1}^0$$`.
+  * Use recurrence relation for `$$m=0$$` given above to calculate `$$ P_{n}^0$$` from `$$ P_{n-1}^0$$` and `$$ P_{n-1}^0$$`. Stick this in `$$A_{2, 0}$$`
   * For `$$m=1, n$$` do
-    - Use `$$P_{n-2}^{m-2}$$`, `$$P_{n-1}^{m-1}$$` and `$$P_{n-1}^m$$` and the recurrence relation to calculate `$$P_n^m$$`
-    - If `$$ m-2 = -1$$`, then `$$P_n^m`
+    - Use `$$P_{n-2}^{m-2}$$`, `$$P_{n-1}^{m-1}$$` and `$$P_{n-1}^m$$` and the recurrence relation to calculate `$$P_n^m$$`. 
+      If `$$ m-2 = -1$$`, then `$$P_{n-2}^{-1} = -P_{n-2}^{-1}$$`. If `$$|m'| > |n'|$$` for one of the `$$P_{n'}^{m'}$$` recursive dependencies,
+      then it is equal to zero. Stick this value in `$$ A_{2,m}$$`
+    - Use `$$P_{n}^-m = -1^m P_n^m$$` to find `$$P_n^{-m}$$`
   * end do
+  * Move `$$A_{1, \cdot}$$` into `$$ A_{0, \cdot}$$`
+  * Move `$$A_{2, \cdot}$$` into `$$A_{1, \cdot}$$`
 * end do
 
 
