@@ -18,11 +18,20 @@ remains relevant to model development and data analysis in the geosciences.
 However, I recently discovered that if one is working in a language that lacks built-in functions for computing
 spherical harmonics, there appears to be no succinct summary of how to calculate these functions yourself in a numerically stable way.
 In implementations such as Python's `scipy`, functions such as `special.sph_harm` obscure the fact that 
-there is a recursion beneath the hood. Therefore, calculation of e.g.  `$$Y_n^m(\lambda, \phi)$$`
+there is a recursion beneath the hood. Therefore, calculation of e.g. the `$$(m,n)$$`th spherical harmonic,`$$Y_n^m(\lambda, \phi)$$`,
+necessitates calculating `$$Y_{n'}^{m'}$$` for some some set of `$$(m', n')$$` for `$$m' \leq m$$`, `$$n' \leq m$$`.
+
+The purpose of this document is to describe a simple, easy to implement, numerically stable algorithm for performing this
+recursion to compute `$$Y_{n}^m$$` for `$$m,n \in \mathbb{Z}$$` in a codebase where you do not have access to an off-the-shelf library for doing so. 
+The crux of what makes this difficult is calculating the so-called associated Legendre polynomials `$$P_n^m(\sin(\phi))$$`. 
+If you need more esoteric computations, such as calculating `$$P_{n}^m$$` for `$$n, m \in \mathbb{R}$$`, or where use of recursion is unacceptable,
+I recommend persuing a method like the one advanced in []()
 
 
 
 ## Mathematical Statement
+
+We use the convention that `$$\phi\in [-\pi/2,\pi/2]$$` denotes latitude.
 
 using info found [here](https://www.ecmwf.int/sites/default/files/elibrary/1983/10253-spectral-technique.pdf),
 I derive a numerically stable way to compute `$$P_n^m(x)$$` for integral `$$n, m$$`.
