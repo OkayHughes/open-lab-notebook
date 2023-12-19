@@ -67,7 +67,7 @@ The ECMWF document recommend a special recurrence relation
 \end{align*}
 $$$`
 for `$$ m > 0.$$` The red `$$\textcolor{red}{x}$$` is a crucial correction of a typo in the reference document. When `$$m=0$$`, we can use the fact that the Legendre and Associated Legendre polynomials coincide.
-The recurrence relation for `$$m=0$$` is `$$n P_{n}^0(x) = (2n-1)x P_{n-1}^0(x) - (n-1) P^0_{n-2}(x) $$`.
+The recurrence relation for `$$m=0$$` is `$$n \sqrt{2n-1}P_{n}^0(x) = (2n-1)x \frac{P_{n-1}^0(x)}{\sqrt{2(n-1)-1}} - (n-1) \frac{P^0_{n-2}(x)}{\sqrt{2(n-2)-1}} $$`.
 
 ### Initializing the recursion
 
@@ -95,16 +95,28 @@ $$$`
 
 and `$$P_1^2(x) = 0 $$`.
 
-### Algorithm pseudocode
-For `$$N$$` the maximum total wavenumber (i.e. `$$ |m| \leq n \leq N$$`) and a single point `$$(\lambda, \phi)$$`, 
-allocate a `$$(3, N)$$` array with zeros. The component `$$(0, m)$$` is the associated legendre polynomial
-`$$P_{n-2}^m$$` and `$$(1, m)$$` is `$$P_{n-1}^m$$`. We will not store `$$P_{n}^{-m}$$` but rather compute it when needed.
+The spherical harmonics are finally calculated as
+`$$$
+  Y_n^m(\lambda, \phi) = e^{im\lambda}P_{n}^m(\sin(\phi))
+$$$`
 
+### Algorithm pseudocode
+In the following algorithm, whenever an associated Legendre polynomial `$$P_{n}^m$$` is calculated,
+use the above equation to calculate `$$Y_{n}^m$$`. Any computation that requires the `$$(m,n)$$`th spherical harmonic
+should performed at this point in the code (see example implementation below).
+
+For `$$N$$` the maximum total wavenumber (i.e. `$$ |m| \leq n \leq N$$`) and a single point `$$(\lambda, \phi)$$`, 
+allocate a `$$(3, N)$$` array `$$A$$` with zeros. The component `$$(0, m)$$` is the associated legendre polynomial
+`$$P_{n-2}^m$$` and `$$(1, m)$$` is `$$P_{n-1}^m$$`. We will not store `$$P_{n}^{-m}$$` but rather compute it when needed.
+* 
 * Initialize `$$P_n^m$$` for `$$(n, m) \in \{(0, 0), (1, 0), (0, 1)\}$$` using the above analytic equations
 * For `$$n=2,N$$` do
-  a
-  * b
-* `done`
+  * Use recurrence relation for `$$m=0$$` given above to calculate `$$ P_{n}^0$$` from `$$ P_{n-1}^0$$` and `$$ P_{n-1}^0$$`.
+  * For `$$m=1, n$$` do
+    - Use `$$P_{n-2}^{m-2}$$`, `$$P_{n-1}^{m-1}$$` and `$$P_{n-1}^m$$` and the recurrence relation to calculate `$$P_n^m$$`
+    - If `$$ m-2 = -1$$`, then `$$P_n^m`
+  * end do
+* end do
 
 
 
