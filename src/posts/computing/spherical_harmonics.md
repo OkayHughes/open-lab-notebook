@@ -57,7 +57,7 @@ $$$`
 As a consequence of this definition, if `$$|m| > |n|$$`, then
 the derivative term vanishes and `$$P_n^m (x) = 0 $$`. 
 
-The ECMWF document recommend a special recurrence relation
+The ECMWF document recommends a special recurrence relation
 `$$$
 \begin{align*}
   P_n^m(x) &= c_n^m P_{n-2}^{m-2}(x) - d_n^m x P_{n-1}^{m-2}(x) + e_n^m \textcolor{red}{x} P_{n-1}^m (x) \\
@@ -66,7 +66,7 @@ The ECMWF document recommend a special recurrence relation
   e_n^m &\equiv \sqrt{\frac{2n+1}{2n-1} \cdot \frac{n-m}{n+m}}
 \end{align*}
 $$$`
-for `$$ m > 0.$$` The red `$$\textcolor{red}{x}$$` is a crucial correction of a typo in the reference document. When `$$m=0$$`, we can use the fact that the Legendre and Associated Legendre polynomials coincide.
+for `$$ m > 0.$$` The red `$$\textcolor{red}{x}$$` is a correction of a crucial omission in the reference document. When `$$m=0$$`, we can use the fact that the Legendre and Associated Legendre polynomials coincide.
 The recurrence relation for `$$m=0$$` is `$$n \sqrt{2n-1}P_{n}^0(x) = (2n-1)x \frac{P_{n-1}^0(x)}{\sqrt{2(n-1)-1}} - (n-1) \frac{P^0_{n-2}(x)}{\sqrt{2(n-2)-1}} $$`.
 
 ### Initializing the recursion
@@ -108,7 +108,7 @@ should performed at this point in the code (see example implementation below).
 For `$$N$$` the maximum total wavenumber (i.e. `$$ |m| \leq n \leq N$$`) and a single point `$$(\lambda, \phi)$$`, 
 allocate a `$$(3, N)$$` array `$$A$$` with zeros. The component `$$(0, m)$$` is the associated legendre polynomial
 `$$P_{n-2}^m$$` and `$$(1, m)$$` is `$$P_{n-1}^m$$`. We will not store `$$P_{n}^{-m}$$` but rather compute it when needed.
-* 
+
 * Initialize `$$P_n^m$$` for `$$(n, m) \in \{(0, 0), (1, 0), (0, 1)\}$$` using the above analytic equations
 * For `$$n=2,N$$` do
   * Use recurrence relation for `$$m=0$$` given above to calculate `$$ P_{n}^0$$` from `$$ P_{n-1}^0$$` and `$$ P_{n-1}^0$$`. Stick this in `$$A_{2, 0}$$`
@@ -123,10 +123,13 @@ allocate a `$$(3, N)$$` array `$$A$$` with zeros. The component `$$(0, m)$$` is 
 * end do
 
 
-The memory footprint of this routine is essentially `$$3N $$`
+To calculate `$$Q$$` points in parallel (note that the calculation is embarassingly parallel), one needs only allocate a `$$3 \times Q \times N$$` array.
 
 
 ## A simple python implementation
+
+In double precision arithmetic, the following routine agrees with `scipy`'s `special.sph_harm` to `$$N=80$$`. Beyond this,
+quad precision is required. 
 
 ```
 def n_m_to_d(n,m):
