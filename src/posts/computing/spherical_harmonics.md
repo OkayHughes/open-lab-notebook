@@ -25,20 +25,27 @@ The purpose of this document is to describe a simple, easy to implement, numeric
 recursion to compute `$$Y_{n}^m$$` for `$$m,n \in \mathbb{Z}$$` in a codebase where you do not have access to an off-the-shelf library for doing so. 
 The crux of what makes this difficult is calculating the so-called associated Legendre polynomials `$$P_n^m(\sin(\phi))$$`. 
 If you need more esoteric computations, such as calculating `$$P_{n}^m$$` for `$$n, m \in \mathbb{R}$$`, or where use of recursion is unacceptable,
-I recommend persuing a method like the one advanced in []()
-
+I recommend persuing a method like the one advanced in [Bremer (2017)](https://arxiv.org/abs/1707.03287). However, this method is 
+significantly more complicated to implement. Furthermore, computation must be performed offline and read into memory or included as data in the executable.
+The author precomputes the necessary lookup tables for `$$|\mu| \leq \nu < 10^6.$$` However, the required data are 138MB in size,
+almost all of which is entirely extraneous for applications where only integral `$$m, n$$` are required.
 
 
 ## Mathematical Statement
 
 We use the convention that `$$\phi\in [-\pi/2,\pi/2]$$` denotes latitude.
+The Integrated Forecast System of the European Center for Numerical Range Weather Forecasting is built atop
+a global spectral decomposition and can be run down to a grid spacing of 9 km.
+It's therefore not surprising that they provide a recipe for calculating spherical harmonics 
+which can achieve numerical stability for large `$$n$$` (though quad precision must be used for `$$n>100$$`).
+Although a reasonably readable summary is provided [here](https://www.ecmwf.int/sites/default/files/elibrary/1983/10253-spectral-technique.pdf),
+this summary contains several crucial errors. I therefore follow their derivation and note corrections where I make them.
 
-using info found [here](https://www.ecmwf.int/sites/default/files/elibrary/1983/10253-spectral-technique.pdf),
-I derive a numerically stable way to compute `$$P_n^m(x)$$` for integral `$$n, m$$`.
+There are several ways of normalizing the associated Legendre polynomials. The choice used here is 
 
-They define the associated legendre polynomials by the Rodriguez formula
+They use the definition of the associated Legendre polynomials using the Rodriguez formula
 `$$$
-P_n^m(x) = \sqrt{\frac{(2n+1)}{2} \frac{(n-m)!}{(n+m)!}} \cdot \frac{(1-x^2)^{\frac{|m|}{2}}}{2^n n!} \left(\der{^{n+|m|}}{x^{n+|m|}} (1-x^2)^n \right)
+P_n^m(x) = \sqrt{\frac{(2n+1)}{2} \frac{(n-m)!}{(n+m)!}} \cdot \frac{(1-x^2)^{\frac{|m|}{2}}}{2^n n!} \left(\der{^{n+|m|}}{x^{n+|m|}} (1-x^2)^n \right).
 $$$`
 
 
