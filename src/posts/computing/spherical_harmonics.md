@@ -38,21 +38,24 @@ The Integrated Forecast System of the European Center for Numerical Range Weathe
 a global spectral decomposition and can be run down to a grid spacing of 9 km.
 It's therefore not surprising that they provide a recipe for calculating spherical harmonics 
 which can achieve numerical stability for large `$$n$$` (though quad precision must be used for `$$n>100$$`).
-Although a reasonably readable summary is provided [here](https://www.ecmwf.int/sites/default/files/elibrary/1983/10253-spectral-technique.pdf),
+Although a reasonably readable summary is provided [here](https://web.archive.org/web/20231219172924/https://www.ecmwf.int/sites/default/files/elibrary/1983/10253-spectral-technique.pdf),
 this summary contains several crucial errors. I therefore follow their derivation and note corrections where I make them.
 
-There are several ways of normalizing the associated Legendre polynomials. The choice used here is 
-
-They use the definition of the associated Legendre polynomials using the Rodriguez formula
+There are several ways of normalizing the associated Legendre polynomials. The choice used here is that the un-normalized
+associated Legendre polynomial `$$\tilde{P}_n^m$$` is multiplied by
 `$$$
-P_n^m(x) = \sqrt{\frac{(2n+1)}{2} \frac{(n-m)!}{(n+m)!}} \cdot \frac{(1-x^2)^{\frac{|m|}{2}}}{2^n n!} \left(\der{^{n+|m|}}{x^{n+|m|}} (1-x^2)^n \right).
+\sqrt{(2n+1)\frac{(n-m)!}{(n+m)!}} 
 $$$`
+to obtain the normalized associated Legendre polynomials `$$P_n^m $$`. One advantage of this normalization
+is that `$$P_n^{-m} = (-1)^m P_n^m$$`, omitting the factorial term that arises in the un-normalized associated Legendre polynomials.
 
+To start the recursion we use the definition of the associated Legendre polynomials given by the Rodriguez formula
+`$$$
+P_n^m(x) = \sqrt{(2n+1)\frac{(n-m)!}{(n+m)!}} \cdot \frac{(1-x^2)^{\frac{|m|}{2}}}{2^n n!} \left(\der{^{n+|m|}}{x^{n+|m|}} (1-x^2)^n \right).
+$$$`
+As a consequence of this definition,  `$$P_n^m (x) = 0 $$` if `$$|m| > n$$`. 
 
-They state that `$$P_n^m(x) = P_n^{-m}(x) $$`, which may be slightly wrong depending on normalization?
-In any case `$$P_n^m (x) = 0 $$` if `$$|m| > n$$`. 
-
-They recommend a special recurrence relation
+We recommend a special recurrence relation
 `$$$
 \begin{align*}
   P_n^m(x) &= c_n^m P_{n-2}^{m-2}(x) - d_n^m x P_{n-1}^{m-2}(x) + e_n^m x P_{n-1}^m (x) \\
