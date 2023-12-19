@@ -123,8 +123,7 @@ allocate a `$$(3, N)$$` array `$$A$$` with zeros. The component `$$(0, m)$$` is 
 * end do
 
 
-
-
+The memory footprint of this routine is essentially `$$3N $$`
 
 
 ## A simple python implementation
