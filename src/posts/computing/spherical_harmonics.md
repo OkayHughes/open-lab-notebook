@@ -97,7 +97,7 @@ and `$$P_1^2(x) = 0 $$`.
 
 The spherical harmonics are finally calculated as
 `$$$
-  Y_n^m(\lambda, \phi) = \frac{1}{\sqrt{2\pi}}e^{im\lambda}P_{n}^m(\sin(\phi))
+  Y_n^m(\lambda, \phi) = \frac{1}{\sqrt{4\pi}}e^{im\lambda}P_{n}^m(\sin(\phi))
 $$$`
 
 ### Algorithm pseudocode
