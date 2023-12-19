@@ -47,26 +47,29 @@ associated Legendre polynomial `$$\tilde{P}_n^m$$` is multiplied by
 \sqrt{(2n+1)\frac{(n-m)!}{(n+m)!}} 
 $$$`
 to obtain the normalized associated Legendre polynomials `$$P_n^m $$`. One advantage of this normalization
-is that `$$P_n^{-m} = (-1)^m P_n^m$$`, omitting the factorial term that arises in the un-normalized associated Legendre polynomials.
+is that `$$P_n^{-m} = (-1)^m P_n^m$$` (this is mis-stated in the ECMWF document)
+, omitting the factorial term that arises in the un-normalized associated Legendre polynomials.
 
 To start the recursion we use the definition of the associated Legendre polynomials given by the Rodriguez formula
 `$$$
 P_n^m(x) = \sqrt{(2n+1)\frac{(n-m)!}{(n+m)!}} \cdot \frac{(1-x^2)^{\frac{|m|}{2}}}{2^n n!} \left(\der{^{n+|m|}}{x^{n+|m|}} (1-x^2)^n \right).
 $$$`
-As a consequence of this definition,  `$$P_n^m (x) = 0 $$` if `$$|m| > n$$`. 
+As a consequence of this definition, if `$$|m| > |n|$$`, then
+the derivative term vanishes and `$$P_n^m (x) = 0 $$`. 
 
-We recommend a special recurrence relation
+The ECMWF document recommend a special recurrence relation
 `$$$
 \begin{align*}
-  P_n^m(x) &= c_n^m P_{n-2}^{m-2}(x) - d_n^m x P_{n-1}^{m-2}(x) + e_n^m x P_{n-1}^m (x) \\
+  P_n^m(x) &= c_n^m P_{n-2}^{m-2}(x) - d_n^m x P_{n-1}^{m-2}(x) + e_n^m \textcolor{red}{x} P_{n-1}^m (x) \\
   c_n^m &\equiv \sqrt{\frac{2n+1}{2n-3} \cdot \frac{m+n-1}{m+n} \cdot \frac{m+n-3}{m+n-2}} \\
   d_n^m &\equiv \sqrt{\frac{2n+1}{2n-1} \cdot \frac{m+n-1}{m+n} \cdot \frac{n-m+1}{m+n-2}} \\
   e_n^m &\equiv \sqrt{\frac{2n+1}{2n-1} \cdot \frac{n-m}{n+m}}
 \end{align*}
 $$$`
-for `$$ m > 0.$$` When `$$m=0$$`, we can use the fact that the Legendre and Associated Legendre polynomials coincide.
+for `$$ m > 0.$$` The red `$$\textcolor{red}{x}$$` is a crucial correction of a typo in the reference document. When `$$m=0$$`, we can use the fact that the Legendre and Associated Legendre polynomials coincide.
+The recurrence relation for `$$m=0$$` is `$$n P_{n}^0(x) = (2n-1)x P_{n-1}^0(x) - (n-1) P^0_{n-2}(x) $$`.
 
-
+### Initializing the recursion
 
 `$$$
 P_0^0(x) = \sqrt{(0) \frac{(0)!}{(0)!}} \cdot \frac{(1-x^2)^{0}}{2^0 0!} \left(\der{^{0}}{x^0} (1-x^2)^0\right) = 1
@@ -77,8 +80,8 @@ $$$`
 \begin{align*}
 P_1^0(x) &= \sqrt{(2+1) \frac{(1-0)!}{(1+0)!}} \cdot \frac{(1-x^2)^{\frac{|0|}{2}}}{2^1 1!} \left(\der{^{1+|0|}}{x^{1+|0|}} (1-x^2)^1 \right) \\
 &= \sqrt{3} \cdot \frac{1}{2 } \left(\der{}{x} (1-x^2)^1 \right) \\
-&= -\sqrt{3} \cdot \frac{1}{2} 2x  \\
-&= -\sqrt{3} \cdot x  \\
+&= -\sqrt{3} \cdot -\frac{1}{2} 2x  \\
+&= \sqrt{3} \cdot x  \\
 \end{align*}
 $$$`
 
@@ -93,7 +96,7 @@ $$$`
 and `$$P_1^2(x) = 0 $$`
 
 
-The recurrence relation for `$$m=0$$` is `$$n P_{n}^0(x) = (2n-1)x P_{n-1}^0(x) - (n-1) P^0_{n-2}(x) $$`
+
 
 
 ## A simple python implementation
