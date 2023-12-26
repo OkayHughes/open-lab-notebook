@@ -42,8 +42,10 @@ Then let `$$v \in V$$` be a test function.
 
 We start by remembering how the variational problem is derived.
 Start with `$$ \int_\Omega (u - \nabla \cdot( \nabla u))v \intd{\mathbf{x}} = \int_\Omega vf \intd{\mathbf{x}} $$`.
-The diverg
+Integration by parts in cartesian coordinates gives
 `$$$
 \begin{align*}
+  \int_\Omega (\nabla \cdot \nabla u) v \intd{\mathbf{x}} &= \int_\Omega \nabla v \cdot \nabla u - \nabla \cdot (v\nabla u) \intd{\mathbf{x}} \\
+  &\stackrel{\textrm{div thm}}{=}\int_\Omega \nabla v \cdot \nabla u  \intd{\mathbf{x}} - \int_\Gamma v \nabla u \intd{\Gamma}
 \end{align*}
 $$$`
