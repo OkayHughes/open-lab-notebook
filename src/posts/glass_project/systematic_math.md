@@ -18,6 +18,9 @@ domain overlap problems by remeshing.
 * This approach provides higher probability of experimentally determining a 
 stable preconditioning method for dealing with complex constitutive equation
 of glass at immobile/quasi-solid temperatures.
+* The difficulty of the complex constitutive equation will probably have an approximate
+splitting of the hard elliptical problem from the lagrangian velocity term.
+The method pioneered in the work that started all this may be of use after all.
 
 ## Helmholtz
 
@@ -36,3 +39,11 @@ $$$`
 
 Let us use the galerkin formalism over a function space `$$V$$`.
 Then let `$$v \in V$$` be a test function. 
+
+We start by remembering how the variational problem is derived.
+Start with `$$ \int_\Omega (u - \nabla \cdot( \nabla u))v \intd{\mathbf{x}} = \int_\Omega vf \intd{\mathbf{x}} $$`.
+The diverg
+`$$$
+\begin{align*}
+\end{align*}
+$$$`
