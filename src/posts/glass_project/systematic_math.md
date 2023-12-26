@@ -79,3 +79,26 @@ For variational problems Neumann boundary conditions
 are incorporated into the variational formulation. Determining
 the appropriate method of integrating over the boundary weakly must be determined.
 
+```
+import firedrake as fd
+ne_x, ne_y = (10, 10)
+mesh = fd.UnitSquareMesh(ne_x, ne_y)
+
+cont_galerkin_deg = 1
+cg_func_space = fd.FunctionSpace(mesh, "CG", cont_galerkin_deg)
+
+trial_funcs = fd.TrialFunction(cg_func_space)
+test_funcs = fd.TestFunction(cg_func_space) # there's jargon for when trial func space = test func space.
+mesh_x, mesh_y = fd.SpatialCoordinate(mesh)
+f = fd.Function(cg_func_space)
+f.interpolate((1.0 + 8.0 * fd.pi**2) * fd.cos(mesh_x * fd.pi * 2) * fd.cos(mesh_y * fd.pi * 2))
+a = (fd.inner(fd.grad(trial_funcs), fd.grad(test_funcs)) + fd.inner(trial_funcs,test_funcs)) * fd.dx
+L = fd.inner(f, trial_funcs) * fd.dx
+
+u = fd.Function(cg_func_space)
+
+fd.solve(a==L, u, solver_parameters={'ksp_type': 'cg', 'pc_type': 'none'})
+
+fd.File("/content/firedrake/helmholtz.pvd").write(u)
+
+```
