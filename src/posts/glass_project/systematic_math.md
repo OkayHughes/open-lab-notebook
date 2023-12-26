@@ -22,7 +22,10 @@ of glass at immobile/quasi-solid temperatures.
 splitting of the hard elliptical problem from the lagrangian velocity term.
 The method pioneered in the work that started all this may be of use after all.
 
-Currently I plan to use a continuous Galerkin formulation, especially given the
+Currently I plan to use a Continuous Galerkin formulation for the full problem.
+As the numerical difficulty of this problem results from the elliptic terms in the problem rather
+than the hyperbolic ones (i.e. shocks will not predominate), 
+I feel the additional complexity of DG methods aren't warranted.
 
 ## Helmholtz
 
@@ -63,3 +66,11 @@ we can use the method of constructed solutions and set the ansatz `$$ u= \cos(2\
 satisified and `$$f = (1.0 + 8.0\pi^2)\cos(2\pi x)\cos(2\pi y)$$`.
 
 
+## Summary of how to use firedrake for linear variational problems
+* Construct mesh
+* Construct function space
+* Get trial/test functions
+* Construct governing equations
+* Pass to `fd.solve` which calls petsc
+
+Note: `fd.dx` is a placeholder for integration over `$$` 
