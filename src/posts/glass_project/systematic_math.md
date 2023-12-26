@@ -22,6 +22,8 @@ of glass at immobile/quasi-solid temperatures.
 splitting of the hard elliptical problem from the lagrangian velocity term.
 The method pioneered in the work that started all this may be of use after all.
 
+Currently I plan to use a continuous Galerkin formulation, especially given the
+
 ## Helmholtz
 
 We start by implementing the helmholtz equation on a 2d domain
@@ -46,6 +48,18 @@ Integration by parts in cartesian coordinates gives
 `$$$
 \begin{align*}
   \int_\Omega (\nabla \cdot \nabla u) v \intd{\mathbf{x}} &= \int_\Omega \nabla v \cdot \nabla u - \nabla \cdot (v\nabla u) \intd{\mathbf{x}} \\
-  &\stackrel{\textrm{div thm}}{=}\int_\Omega \nabla v \cdot \nabla u  \intd{\mathbf{x}} - \int_\Gamma v \nabla u \intd{\Gamma}
+  &\stackrel{\textrm{div thm}}{=}\int_\Omega \nabla v \cdot \nabla u  \intd{\mathbf{x}} - \int_\Gamma v \nabla u \cdot \mathbf{n} \intd{\Gamma}
 \end{align*}
 $$$`
+and so we get 
+`$$$
+\begin{align*}
+  \int_\Omega \nabla u \cdot \nabla v + uv \intd{\mathbf{x}} &= \int_{\Omega} vf \intd{\mathrm{x}} + \int_\Gamma v \nabla u \cdot \mathbf{n} \intd{\Gamma} \\
+  &= \int_{\Omega} vf \intd{\mathbf{x}} + 0.
+\end{align*}
+$$$`
+
+we can use the method of constructed solutions and set the ansatz `$$ u= \cos(2\pi x) \cos(2 \pi y)$$` such that the boundary condition is
+satisified and `$$f = (1.0 + 8.0\pi^2)\cos(2\pi x)\cos(2\pi y)$$`.
+
+
