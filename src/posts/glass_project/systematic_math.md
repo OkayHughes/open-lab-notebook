@@ -71,6 +71,11 @@ satisified and `$$f = (1.0 + 8.0\pi^2)\cos(2\pi x)\cos(2\pi y)$$`.
 * Construct function space
 * Get trial/test functions
 * Construct governing equations
+* Projection is done via the `interpolate` method on a `fd.Function` object.
 * Pass to `fd.solve` which calls petsc
 
-Note: `fd.dx` is a placeholder for integration over `$$` 
+Note: `fd.dx` is a placeholder for integration over `$$\mathbb{R}^n$$`. 
+For variational problems Neumann boundary conditions 
+are incorporated into the variational formulation. Determining
+the appropriate method of integrating over the boundary weakly must be determined.
+
