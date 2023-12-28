@@ -60,3 +60,16 @@ and we get a constraint that must be satisfied for the problem to be well-posed,
 `$$$
    \int_{\partial \Omega} g + \int_\Omega f = 0
 $$$`
+
+Following the derivation we did in the other article here, under Neumann conditions we derive the weak form of the Poisson equation
+`$$$
+  \int_\Omega \nabla u \cdot \nabla v \intd{\mathbf{x}} = \int_\Omega vf + \int_{\partial \Omega} v (\nabla u \cdot \mathbf{n}) \intd{A} = \int_\Omega vf + \int_{\partial \Omega} vg \intd{A}.
+$$$`
+The quantities necessary to formulate the above weak problem naturally live in the space `$$\mathcal{H}^1(\Omega)$$`, which is the space of functions `$$u$$` which are weakly first differentiable .
+
+A useful generic boundary problem that we will be implementing is
+`$$$
+-\nabla^2 u &= f \textrm{ on } \Omega \\
+u = g_D \textrm{ on } \partial_D \Omega \\
+
+$$$`
