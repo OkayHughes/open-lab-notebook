@@ -52,4 +52,11 @@ the product rule for divergences gives us that
 `$$$
   -\int_{\partial \Omega} \nabla u \cdot \mathbf{u} \intd{A} = - \int_\Omega \nabla \cdot \nabla u \intd{\mathbf{x}} = \int_\Omega f \intd{\mathbf{x}}
 $$$`
-but integrating the (strong version of) the Neumann boundary conditions, 
+but integrating the (strong version of) the Neumann boundary conditions, we find
+`$$$
+\int_{\partial \Omega} \nabla u \cdot \mathbf{n} \intd{A} = \intd_{\partial \Omega} g
+$$$`
+and we get a constraint that must be satisfied for the problem to be well-posed, namely
+`$$$
+   \int_{\partial \Omega} g + \int_\Omega f = 0
+$$$`
