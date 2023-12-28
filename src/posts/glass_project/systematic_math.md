@@ -90,7 +90,15 @@ where we see that the restriction of `$$v$$` negates the contribution of the bou
 
 Construct a good subspace `$$ \mathcal{S}_T \subset \mathcal{H}_T^1$$`, with basis functions `$$ \{\phi_i\}_{1 \leq i \leq n}$$`. Note that these basis functions satisfy the Dirichlet boundary condition.
 Then choose additional basis functions `$$\{\phi_i\}_{n+1 \leq i \leq n+n_\partial} $$`
-such that for some `$$u' \in \mathcal{S}_T$$` we can augment this function into`$$u' = u + \sum_{i=n+1}^{n+n_\partial} u_i \phi_i $$` to satisfy the Dirichlet boundary condition. 
+such that for some `$$u' \in \mathcal{S}_T$$` we can augment this function into`$$u' = u + \sum_{i=n+1}^{n+n_\partial} u_i \phi_i $$` to satisfy the Dirichlet boundary condition. We
+denote the set of `$$u'$$` constructed thusly as `$$\mathcal{S}_S $$`.
 My current understanding is that since the basis functions of `$$\mathcal{S}_T$$` are zero on the boundary, the appropriate choice of `$$n_\partial$$` will uniquely determine the
-combination `$$ u_j $$`
+combination `$$ u_j $$` which I believe can be calculated offline. Therefore if the Dirichlet condition is fixed, these pseudo-basis functions do not increase the number of DOFs in
+the overall solution space. That is, for `$$ u = \sum_{j=1}^n u_j \phi_j + \sum_{j=n+1}^{n+n_\partial} u_j \phi_j$$`, the bilinear form `$$\langle \phi_j, u \rangle $$` defines a linear system
+which constrains only `$$\{u_i\}_{1\leq i \leq n} $$`. This justifies the definition of `$$ \mathcal{S}_T$$` as the space of test functions. We can then write the finite-dimensional weak formulation
+which is to find `$$u \in \mathcal{S}_S$$` such that
+`$$$
+\int_\Omega \nabla u \cdot \nabla v \intd{\mathbf{x}} = \int_{\Omega} vf \intd{\mathbf{x}} + \int_{\partial \Omega_N} v g_N \intd{A} \textrm{ for all } v \in \mathcal{S}_T.
+$$$`
+If we construct the basis functions such that substituting `$$ \phi_i `
 
