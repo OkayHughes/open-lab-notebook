@@ -69,7 +69,19 @@ The quantities necessary to formulate the above weak problem naturally live in t
 
 A useful generic boundary problem that we will be implementing is
 `$$$
+\begin{align*}
 -\nabla^2 u &= f \textrm{ on } \Omega \\
-u = g_D \textrm{ on } \partial_D \Omega \\
-
+u &= g_D \textrm{ on } \partial \Omega_D \\
+\nabla u \cdot \mathbf{n} &= g_N \textrm{ on } \partial \Omega_N \\
+\partial \Omega &= \partial \Omega_D \sqcup \Omega_N
+\end{align*}
 $$$`
+
+Note that solutions exist in the affine subspace of `$$\mathcal{H}^1$$` that is `$$\mathcal{H}^1_S = \{\mathcal{H}^1(\Omega) \mid u=g_d \textrm{ on } \partial \Omega_d \}$$` and test functions 
+are in `$$\mathcal{H}^1_T = \{\mathcal{H}^1(\Omega) \mid u=0 \textrm{ on } \partial \Omega_d \}$$`. The test functions, while an affine subspace, are not a linear subspace.
+So we get the following weak formulation
+`$$$
+  \int_\Omega \nabla u \cdot \nabla v \intd{\mathbf{x}} = \int_\Omega vf \intd{\mathbf{x}} + \int_{\partial \Omega_N} vg_N \intd{A} \textrm{ for all } v \in \mathcal{H}_T^1
+$$$`
+where we see that the restriction of `$$v$$` negates the contribution of the boundary integral on `$$\partial \Omega_D$$`.
+
