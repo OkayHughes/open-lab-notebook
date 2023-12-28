@@ -100,5 +100,8 @@ which is to find `$$u \in \mathcal{S}_S$$` such that
 `$$$
 \int_\Omega \nabla u \cdot \nabla v \intd{\mathbf{x}} = \int_{\Omega} vf \intd{\mathbf{x}} + \int_{\partial \Omega_N} v g_N \intd{A} \textrm{ for all } v \in \mathcal{S}_T.
 $$$`
-If we construct the basis functions such that substituting `$$ \phi_i `
+If we construct the basis functions such that the above equation is satisfied, then for a given test function `$$\phi_i$$`, we get
+`$$$
+
+$$$`
 
