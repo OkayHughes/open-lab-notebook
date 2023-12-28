@@ -88,4 +88,9 @@ where we see that the restriction of `$$v$$` negates the contribution of the bou
 
 ## The (Bubnov-) Galerkin Method with boundary
 
-Construct a good 
+Construct a good subspace `$$ \mathcal{S}_T \subset \mathcal{H}_T^1$$`, with basis functions `$$ \{\phi_i\}_{1 \leq i \leq n}$$`. Note that these basis functions satisfy the Dirichlet boundary condition.
+Then choose additional basis functions `$$\{\phi_i\}_{n+1 \leq i \leq n+n_\partial} $$`
+such that for some `$$u' \in \mathcal{S}_T$$` we can augment this function into`$$u' = u + \sum_{i=n+1}^{n+n_\partial} u_i \phi_i $$` to satisfy the Dirichlet boundary condition. 
+My current understanding is that since the basis functions of `$$\mathcal{S}_T$$` are zero on the boundary, the appropriate choice of `$$n_\partial$$` will uniquely determine the
+combination `$$ u_j $$`
+
