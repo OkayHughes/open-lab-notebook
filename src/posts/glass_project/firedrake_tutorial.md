@@ -6,26 +6,10 @@ tags:
   - glass_blowing
 eleventyNavigation:
   parent: Main Glass Post
-  key: Working up to NS
+  key: Firedrake test
 layout: layouts/post.njk
 ---
 
-## Current strategy (26-12-2023)
-* Prototype stable numerical traditional FE method using firedrake
-* Primary simulation interest is post-gather high-viscosity flow
-where flow is essentially irrotational. We will deal with
-domain overlap problems by remeshing. 
-* This approach provides higher probability of experimentally determining a 
-stable preconditioning method for dealing with complex constitutive equation
-of glass at immobile/quasi-solid temperatures.
-* The difficulty of the complex constitutive equation will probably have an approximate
-splitting of the hard elliptical problem from the lagrangian velocity term.
-The method pioneered in the work that started all this may be of use after all.
-
-Currently I plan to use a Continuous Galerkin formulation for the full problem.
-As the numerical difficulty of this problem results from the elliptic terms in the problem rather
-than the hyperbolic ones (i.e. shocks will not predominate), 
-I feel the additional complexity of DG methods aren't warranted.
 
 ## Helmholtz
 
