@@ -85,3 +85,7 @@ So we get the following weak formulation
 $$$`
 where we see that the restriction of `$$v$$` negates the contribution of the boundary integral on `$$\partial \Omega_D$$`.
 
+
+## The (Bubnov-) Galerkin Method with boundary
+
+Construct a good 
