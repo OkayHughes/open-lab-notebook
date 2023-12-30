@@ -1,4 +1,4 @@
----
+===---
 date: 2021-08-30
 tags:
   - posts
@@ -42,5 +42,5 @@ Several potential ideas:
   
 The most mathematically amenable (to me) option is the formulation as a PDE. Admittedly this option would also be adaptable to solution on a tetrahedral mesh. A downside to this method is that it would
 almost certainly result in internal levelsets that are non-spherical. That is, the continuum analogue of the torus error I mention above
-occurs on a set of measure zero. Furthermore, vanishing gradients in this sort of mismatch would allow this as a valid solution to the strong form of the equations as well.
-
+occurs on a set of measure zero. Furthermore, vanishing gradients in this sort of mismatch would allow this as a valid solution to the strong form of the equations as wellThe key to all of these: How to encode topological information that holds in the continuum limit (kinda fractal in nature). Geometric information is very easy to formulate.
+Idea: good meshing for sphere with arbitrary surface topography.
