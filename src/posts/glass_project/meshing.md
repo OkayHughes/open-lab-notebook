@@ -31,3 +31,6 @@ Question: can a closed manifold such as a torus arise in the interior of a mesh?
 connectivity near the center of the torus, which could only be resolved with degenerate elements (e.g. a square cut along diagonals
 # using KC's stuff
 
+Several potential ideas:
+  * Three fields of repulsive surfaces with orthogonality penalty. Boundaries of initial surfaces are closed loops on boundary (known _a priori_). 
+  A good option for choosing (potentially geometrically bad) 
