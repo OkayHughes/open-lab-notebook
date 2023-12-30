@@ -16,7 +16,7 @@ It significantly simplifies the sparsity structure of the global matrices and th
 
 # Spatial twist continuum
 A valid hexahedral mesh can be characterized using the
-[Spatial Twist Continuum](https://www.sciencedirect.com/science/article/abs/pii/S0168874X97819567).
+[Spatial Twist Continuum (STC)](https://www.sciencedirect.com/science/article/abs/pii/S0168874X97819567).
 To each edge in the primal mesh, a dual 2-cell is associated. It is formed by connecting the centroids of the cells on this edge.
 On each primal quadrilateral `$$q$$` which contains the edge `$$e_1$$`, there is another edge `$$e_2$$` which is "opposite" in the sense that it shares no vertices with `$$e_1$$`. 
 As each face is associated to a dual edge, we see that both of the 2-cells dual to `$$e_1,e_2$$` contain the centroids of the hexahedra which are joined at `$$q$$`.
@@ -33,4 +33,6 @@ connectivity near the center of the torus, which could only be resolved with deg
 
 Several potential ideas:
   * Three fields of repulsive surfaces with orthogonality penalty. Boundaries of initial surfaces are closed loops on boundary (known _a priori_). 
-  A good option for choosing (potentially geometrically bad) 
+  A good option for choosing (potentially geometrically bad-but-) topologically valid choices are to use the [whisker weaving algorithm](https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291097-0207%2819961015%2939%3A19%3C3327%3A%3AAID-NME2%3E3.0.CO%3B2-H) 
+  that was derived using the STC. This option essentially black-boxes both methods and would be absurdly fast to implement.
+  * Formulate a mesh-free PDE finding three potential functions `$$V_1, V_2, V_3$$` whose level sets obey (a weak version of) the orthogonality constraints.
