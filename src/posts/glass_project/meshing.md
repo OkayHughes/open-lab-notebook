@@ -17,4 +17,11 @@ It significantly simplifies the sparsity structure of the global matrices and th
 # Spatial twist continuum
 A valid hexahedral mesh can be characterized using the
 [Spatial Twist Continuum](https://www.sciencedirect.com/science/article/abs/pii/S0168874X97819567).
-To each edge in the primal mesh, a dual 2-cell is associated. 
+To each edge in the primal mesh, a dual 2-cell is associated. It is formed by connecting the centroids of the cells on this edge.
+On each primal quadrilateral `$$q$$` which contains the edge `$$e_1$$`, there is another edge `$$e_2$$` which is "opposite" in the sense that it shares no vertices with `$$e_1$$`. 
+As each face is associated to a dual edge, we see that both of the 2-cells dual to `$$e_1,e_2$$` contain the centroids of the hexahedra which are joined at `$$q$$`.
+Continuing in this way, we can build so-called "twist sheets" throu
+It is natural to see that hexahedral elements are defined at the intersection of 
+
+ 
+# using KC's stuff
