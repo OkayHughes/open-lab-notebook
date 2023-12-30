@@ -44,4 +44,3 @@ The most mathematically amenable (to me) option is the formulation as a PDE. Adm
 almost certainly result in internal levelsets that are non-spherical. That is, the continuum analogue of the torus error I mention above
 occurs on a set of measure zero. Furthermore, vanishing gradients in this sort of mismatch would allow this as a valid solution to the strong form of the equations as well.
 
-The idea behind the third option is something like this: start with a 
