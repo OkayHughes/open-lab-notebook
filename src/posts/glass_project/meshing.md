@@ -35,4 +35,8 @@ Several potential ideas:
   * Three fields of repulsive surfaces with orthogonality penalty. Boundaries of initial surfaces are closed loops on boundary (known _a priori_). 
   A good option for choosing (potentially geometrically bad-but-) topologically valid choices are to use the [whisker weaving algorithm](https://onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291097-0207%2819961015%2939%3A19%3C3327%3A%3AAID-NME2%3E3.0.CO%3B2-H) 
   that was derived using the STC. This option essentially black-boxes both methods and would be absurdly fast to implement.
-  * Formulate a mesh-free PDE finding three potential functions `$$V_1, V_2, V_3$$` whose level sets obey (a weak version of) the orthogonality constraints.
+  * Formulate a mesh-free PDE finding three potential functions `$$V_1, V_2, V_3$$` whose level sets obey (a weak version of) the orthogonality constraints that one would expect. 
+  The boundary conditions are Neumann if potentials are used, using the direction field induced by the (potentially remeshed) surface chords. 
+  * Adapt the vector heat method to this problem (possibly with a background mesh). 
+  
+The most mathematically amenable (to me) option is the formulation as a PDE. Admittedly this option would also work with a tetrahedral mesh 
