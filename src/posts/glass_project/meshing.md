@@ -38,6 +38,7 @@ Several potential ideas:
   * Formulate a mesh-free PDE finding three potential functions `$$V_1, V_2, V_3$$` whose level sets obey (a weak version of) the orthogonality constraints that one would expect. 
   The boundary conditions are Neumann if potentials are used, using the direction field induced by the (potentially remeshed) surface chords. 
   * Adapt the vector heat method to this problem (possibly with a background mesh). 
+  * See if the striping paper is usable (probably not, as it relies on structure of complex functions). Quaternions might be usable?
   
 The most mathematically amenable (to me) option is the formulation as a PDE. Admittedly this option would also be adaptable to solution on a tetrahedral mesh. A downside to this method is that it would
 almost certainly result in internal levelsets that are non-spherical. That is, the continuum analogue of the torus error I mention above
