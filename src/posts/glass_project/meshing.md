@@ -15,3 +15,6 @@ of our equations. While this is not strictly a requirement, I'm fairly sure it w
 It significantly simplifies the sparsity structure of the global matrices and the assembly/stiffness summation procedure.
 
 # Spatial twist continuum
+A valid hexahedral mesh can be characterized using the
+[Spatial Twist Continuum](https://www.sciencedirect.com/science/article/abs/pii/S0168874X97819567).
+To each edge in the primal mesh, a dual 2-cell is associated. 
