@@ -52,4 +52,5 @@ $$$`
 
 
 Idea: `$$\mu$$` is used to calculate the vertical pressure gradient force, i.e. `$$\frac{1}{\rho} \nabla p \cdot \mathbf{k} = g\frac{1}{\rho} \frac{\partial_{\eta} p}{\partial_{\eta} \phi} = - g \mu $$`.
-In our new, fucked coordinates, the area of the
+In our new, fucked coordinates, the area of the upper surface is larger than the lower surface. 
+Therefore in calculating the pressure gradient (and associated quantities), the quantity `$$\mu$$` should take this into account.
