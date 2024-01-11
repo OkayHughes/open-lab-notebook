@@ -45,4 +45,8 @@ and the derivative is
     &= \int  \left[p\hat{r}^2 \phi\right]_{\eta = 1}^{\eta = 0} + \textrm{BC} - \int p\partial_{\eta} [\hat{r}^2] \delta \phi \intd{\eta} \intd{A}\\
 \end{align*}
 $$$`
+If we don't expand out and use the typical boundary conditions, then
+`$$$
+  \fder{\mathcal{H}}{\phi} = \partial_{\eta} [\pi] \left(1-\frac{\partial_{\eta}[\hat{r}^2 p]}{\partial_{\eta} [\pi]}\right)
+$$$`
 and so
