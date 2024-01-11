@@ -42,7 +42,7 @@ and the derivative is
 \begin{align*}
     \int \int p\hat{r}^2\delta[\partial_{\eta}[\phi]] + \textrm{BC} +\hat{r}^2 \partial_{\eta} [p] \delta \phi  \intd{\eta} \intd{A} &=  \int  \left[p\hat{r}^2 \phi\right]_{\eta = 1}^{\eta = 0} + \textrm{BC} + \int -\partial_{\eta} [p\hat{r}^2]\delta \phi + \hat{r}^2 \partial_{\eta} [p] \delta \phi  \intd{\eta} \intd{A}\\
     &= \int  \left[p\hat{r}^2 \phi\right]_{\eta = 1}^{\eta = 0} + \textrm{BC} + \int - \hat{r}^2 \partial_{\eta} [p] \delta \phi -p\partial_{\eta} [\hat{r}^2] \delta \phi + \hat{r}^2 \partial_{\eta} [p] \delta \phi  \intd{\eta} \intd{A}\\
-    &= \int  \left[p\hat{r}^2 \phi\right]_{\eta = 1}^{\eta = 0} + \textrm{BC} - \int p\partial_{\eta} [\hat{r}^2] \delta \phi + \hat{r}^2 \partial_{\eta} [p] \delta \phi  \intd{\eta} \intd{A}\\
+    &= \int  \left[p\hat{r}^2 \phi\right]_{\eta = 1}^{\eta = 0} + \textrm{BC} - \int p\partial_{\eta} [\hat{r}^2] \delta \phi \intd{\eta} \intd{A}\\
 \end{align*}
 $$$`
 and so
