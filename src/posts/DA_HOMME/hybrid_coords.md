@@ -49,4 +49,7 @@ If we don't expand out and use the typical boundary conditions, then
 `$$$
   \fder{\mathcal{H}}{\phi} = \partial_{\eta} [\pi] \left(1-\frac{\partial_{\eta}[\hat{r}^2 p]}{\partial_{\eta} [\pi]}\right)
 $$$`
-and so
+
+
+Idea: `$$\mu$$` is used to calculate the vertical pressure gradient force, i.e. `$$\frac{1}{\rho} \nabla p \cdot \mathbf{k} = g\frac{1}{\rho} \frac{\partial_{\eta} p}{\partial_{\eta} \phi} = - g \mu $$`.
+In our new, fucked coordinates, the area of the
