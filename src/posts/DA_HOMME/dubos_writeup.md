@@ -512,7 +512,7 @@ which is precisely what we constructed `$$\partial_{\eta} [\pi]_{\hat{r}^2}$$` t
 
 `$$$
 \begin{align*}
-    &\int \int p\hat{r}^2\delta[\partial_{\eta}[\phi]] + \textrm{BC} -\hat{r}^2 \partial_{\eta} [p] \delta \phi  \intd{\eta} \intd{A} =  \int \int \left[p\hat{r}^2 \phi\right]_{\eta = 1}^\eta = 0}  + \textrm{BC} -\hat{r}^2 \partial_{\eta} [p] \delta \phi  \intd{\eta} \intd{A} = 0\\
+    &\int \int p\hat{r}^2\delta[\partial_{\eta}[\phi]] + \textrm{BC} -\hat{r}^2 \partial_{\eta} [p] \delta \phi  \intd{\eta} \intd{A} =  \int \int \left[p\hat{r}^2 \phi\right]_{\eta = 1}^{\eta = 0} - + \textrm{BC} -\hat{r}^2 \partial_{\eta} [p] \delta \phi  \intd{\eta} \intd{A} \
 \end{align*}
 $$$`
 and so
