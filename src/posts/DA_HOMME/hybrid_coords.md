@@ -89,6 +89,8 @@ The only option for enforcing `$$\mu=1$$` at the top boundary is changing how `$
 near the top boundary. As this may wreak havoc on discrete averaging identities, it may actually be prefereable to
 allow a mismatch between hydrostatic and nonhydrostatic pressure at the top barrier. Either that or enforce
 
-However, this introduces a 
+If we allow such a free surface, then `$$\phi$$` is allowed to evolve according to the prognostic equation.
+As such `$$p_{\textrm{top}}$$` is determined to satisfy the boundary condition algebraically. 
+However, this may violate the discrete EOS, which is `$$\hat{r}^2 \partial_{s} \phi = -R_d \Theta_v \frac{\Pi}{p}$$`
 
 
