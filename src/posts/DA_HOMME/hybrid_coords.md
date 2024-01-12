@@ -64,3 +64,4 @@ Therefore, the choice `$$BC = \hat{r}_{\textrm{top}}^2 p_\textrm{top}\phi_{\text
 $$$`
 and assuming that we have solved the boundary condition problems at the bottom such that `$$ [\delta \phi]_{\textrm{bot}} = 0$$`, then we get that the boundary condition and integration by parts
 perform essentially the same as in the shallow atmosphere case. 
+In the new coordinates we must _assume_ that `$$ \mu_{\textrm{top}}=1$$`?
