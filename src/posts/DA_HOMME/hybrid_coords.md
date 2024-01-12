@@ -86,7 +86,9 @@ The pressure is known at the midpoint below the top interface,
 and geopotential is prognostic at the upper boundary in pressure coordinates.
 
 The only option for enforcing `$$\mu=1$$` at the top boundary is changing how `$$\textrm{dp3d}$$` is treated 
-near the top boundary. 
+near the top boundary. As this may wreak havoc on discrete averaging identities, it may actually be prefereable to
+allow a mismatch between hydrostatic and nonhydrostatic pressure at the top barrier. Either that or enforce
 
+However, this introduces a 
 
 
