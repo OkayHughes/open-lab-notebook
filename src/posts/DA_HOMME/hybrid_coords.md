@@ -65,3 +65,10 @@ $$$`
 and assuming that we have solved the boundary condition problems at the bottom such that `$$ [\delta \phi]_{\textrm{bot}} = 0$$`, then we get that the boundary condition and integration by parts
 perform essentially the same as in the shallow atmosphere case. 
 In the new coordinates we must _assume_ that `$$ \mu_{\textrm{top}}=1$$`?
+
+
+## How to constrain the quantities
+The recent paper by the [MPAS folks](https://journals.ametsoc.org/view/journals/mwre/150/8/MWR-D-21-0328.1.xml)
+makes a compelling case that our choice of upper boundary condition should retain an essentially isobaric character.
+The core takeaway from their paper is that we can use discrete hydrostatic balance to 
+
