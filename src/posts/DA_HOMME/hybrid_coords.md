@@ -91,6 +91,19 @@ allow a mismatch between hydrostatic and nonhydrostatic pressure at the top barr
 
 If we allow such a free surface, then `$$\phi$$` is allowed to evolve according to the prognostic equation.
 As such `$$p_{\textrm{top}}$$` is determined to satisfy the boundary condition algebraically. 
-However, this may violate the discrete EOS, which is `$$\hat{r}^2 \partial_{s} \phi = -R_d \Theta_v \frac{\Pi}{p}$$`
+However, this may violate the agreement between discrete EOS, which is `$$\hat{r}^2 \partial_{s} \phi = -R_d \Theta_v \frac{\Pi}{p}$$`
+and the requirement that midpoints lie halfway between interfaces. 
+
+Can we just change to a Neumann boundary condition at the top?
+* Phi at top interface is prognostic
+* Combination of discrete averaging and EOS uniquely determines 
+
+
+Things to note:
+  * Sponge layers etc already strongly violate energy conservation at the top boundary!
+  * Remapping violates energy conservation on interior of model for lagrangian vertical coordinate!
+  * All things considered, math is quite clean and concise on interior of model.
+  * Still want to avoid mass loss, as that's sacrosanct.
+
 
 
