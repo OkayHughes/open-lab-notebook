@@ -70,5 +70,13 @@ In the new coordinates we must _assume_ that `$$ \mu_{\textrm{top}}=1$$`?
 ## How to constrain the quantities
 The recent paper by the [MPAS folks](https://journals.ametsoc.org/view/journals/mwre/150/8/MWR-D-21-0328.1.xml)
 makes a compelling case that our choice of upper boundary condition should retain an essentially isobaric character.
-The core takeaway from their paper is that we can use discrete hydrostatic balance to 
+The core takeaway from their paper is that we can use discrete hydrostatic balance to link pressure and height near the top boundary
+in a principled way, allowing for hybrids of pressure and height coordinates to be used.
+
+However, we have a bit of a problem. It's immediately obvious that if we set `$$ \hat{r}^2 p\phi = C $$` as our boundary condition, we can either set `$$p$$` or `$$\phi$$`, as `$$\hat{r}$$` is uniquely determined by `$$\phi$$`.
+The vertical velocity term prognostic equation takes the form
+`$$$
+\partial_t [w]  + \frac{\mathbf{u}}{\hat{r}} \cdot \nabla_s w + \dot{s} \partial_{s}[w]  - \frac{\mathbf{u}^2}{r} - 
+$$$`
+
 
