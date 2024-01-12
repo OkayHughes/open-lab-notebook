@@ -20,7 +20,7 @@ The discrete averaging scheme used in HOMME
 states that we can extrapolate the model-level quantity `$$p$$` to the model top 
 using `$$ p_{i+1/2} = \frac{(p\Delta \eta)_{i+1} + (p\Delta \eta)_i}{2\Delta \eta_{i+1/2}},$$` `$$p_{1/2} = p_1$$`. 
 I don't think this actually agrees with how the calculation of `$$\mu$$` is handled in shallow HOMME.
-In shallow HOMME, `$$p_{\textrm{top}} = \pi_{\textrm{top}},$$` which disagrees with this averaging identity.
+In shallow HOMME, `$$p_{\textrm{top}} = \pi_{\textrm{top}} = p_0,$$` which disagrees with this averaging identity.
 
 In any case, the equation of state `$$ \hat{r}^2 \frac{\partial \phi}{\partial \eta} = - R_d \Theta_v \frac{\Pi}{p}$$`
 implies that if we know `$$\textrm{dp3d}$$`, `$$\phi $$` ( and thus `$$\hat{r}^2$$`), and `$$ \frac{\partial \phi}{\partial \eta},$$`
@@ -71,7 +71,7 @@ possibility that the discretized vertical transport term may not vanish." They d
 to allow for the possibility that the discretized vertical transport may be non-zero. In their case, 
 they are using the condition on `$$\mu$$` to constrain discrete violations of `$$\dot{s}=0$$`, 
 but we could go in the opposite direction and use the `$$\dot{s} \frac{\partial w}{\partial s}$$`
-term to ensure that `$$ \mu = 1.$$` This concisely shows that we can either fiddle with `$$\{\partial w}{\partial s} $$`
+term to ensure that `$$ \mu = 1.$$` This concisely shows that we can either fiddle with `$$\frac{\partial w}{\partial s} $$`
 (i.e. energy conservation) or `$$\dot{s}$$` (i.e. mass conservation) to 
 enforce a Neumann boundary condition. 
 
