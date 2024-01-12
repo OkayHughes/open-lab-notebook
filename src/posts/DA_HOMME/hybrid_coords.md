@@ -76,7 +76,13 @@ in a principled way, allowing for hybrids of pressure and height coordinates to 
 However, we have a bit of a problem. It's immediately obvious that if we set `$$ \hat{r}^2 p\phi = C $$` as our boundary condition, we can either set `$$p$$` or `$$\phi$$`, as `$$\hat{r}$$` is uniquely determined by `$$\phi$$`.
 The vertical velocity term prognostic equation takes the form
 `$$$
-\partial_t [w]  + \frac{\mathbf{u}}{\hat{r}} \cdot \nabla_s w + \dot{s} \partial_{s}[w]  - \frac{\mathbf{u}^2}{r} - 
+\partial_t [w]  + \frac{\mathbf{u}}{\hat{r}} \cdot \nabla_s w + \dot{s} \partial_{s}[w]  - \frac{\mathbf{u}^2}{r} - f_c [u] + (1-\mu )g = 0
 $$$`
+it would be _highly_ undesirable if the top boundary initiated motion in
+a benign atmosphere (i.e. no wind, vertical hydrostatic balance). In such an atmosphere
+the prognostic equations reduce to a constraint `$$ \mu = 1$$`. 
+Using the new definition of `$$\mu$$`, this constrains that `$$\partial_{s} \hat{r}^2 p = \partial_{s} \pi$$`.
+The pressure is known at the midpoint below the top interface,
+and geopotential is reconstructed 
 
 
