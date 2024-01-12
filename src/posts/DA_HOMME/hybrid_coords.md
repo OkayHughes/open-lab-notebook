@@ -83,6 +83,10 @@ a benign atmosphere (i.e. no wind, vertical hydrostatic balance). In such an atm
 the prognostic equations reduce to a constraint `$$ \mu = 1$$`. 
 Using the new definition of `$$\mu$$`, this constrains that `$$\partial_{s} \hat{r}^2 p = \partial_{s} \pi$$`.
 The pressure is known at the midpoint below the top interface,
-and geopotential is reconstructed 
+and geopotential is prognostic at the upper boundary in pressure coordinates.
+
+The only option for enforcing `$$\mu=1$$` at the top boundary is changing how `$$\textrm{dp3d}$$` is treated 
+near the top boundary. 
+
 
 
