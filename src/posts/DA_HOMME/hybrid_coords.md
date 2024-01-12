@@ -119,3 +119,8 @@ boundary conditions at the top.
   &(\hat{r}^2_{top, i} p_{\textrm{top,i}} - \hat{r}^2_{top, m}p_{\textrm{top, m}}) = \frac{\textrm{dp3d}_{top, m}}{2} \\
 \end{align*}
 $$$`
+
+## Tangent: initializing the atmosphere in general
+* Calculate `$$\rho$$` and ensure that `$$z$$` is calculated or read from data.
+* Within a column, calculate `$$g\int_{\textrm{top}}^{\textrm{bot}} \frac{\rho}{\hat{r}^2} \intd{z}$$`.
+* This can be compared against `$$\sum_i \textrm{dp3d}$$`
