@@ -112,3 +112,10 @@ boundary conditions at the top.
 ## The plan for implementation:
 * `$$\mu=1$$` condition determines `$$p$$` at model top given prognostic `$$\phi$$`.
 * Slack is taken up by `$$\Theta_v$$`. Unclear if `$$\Theta_v$$` needs to be modified to match definition.
+
+
+`$$$ 
+\begin{align*} 
+  &(\hat{r}^2_{top, i} p_{\textrm{top,i}} - \hat{r}^2_{top, m}p_{\textrm{top, m}}) = \frac{\textrm{dp3d}_{top, m}}{2} \\
+\end{align*}
+$$$`
