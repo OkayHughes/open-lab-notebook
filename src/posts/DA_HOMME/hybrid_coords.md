@@ -69,7 +69,8 @@ In the new coordinates we must _assume_ that `$$ \mu_{\textrm{top}}=1$$`?
 
 ## How to constrain the quantities
 The recent paper by the [MPAS folks](https://journals.ametsoc.org/view/journals/mwre/150/8/MWR-D-21-0328.1.xml)
-makes a compelling case that our choice of upper boundary condition should retain an essentially isobaric character.
+makes a compelling case that our choice of upper boundary condition should retain an essentially isobaric character. IMPORTANT: this publication
+concedes conservation of energy near the boundary!
 The core takeaway from their paper is that we can use discrete hydrostatic balance to link pressure and height near the top boundary
 in a principled way, allowing for hybrids of pressure and height coordinates to be used.
 
@@ -107,3 +108,6 @@ Things to note:
 
 If we allow energy loss at top barrier, then we have a choice of either Neumann or Dirichlet 
 boundary conditions at the top. 
+
+## The plan for implementation:
+
