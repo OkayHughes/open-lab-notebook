@@ -110,4 +110,4 @@ If we allow energy loss at top barrier, then we have a choice of either Neumann 
 boundary conditions at the top. 
 
 ## The plan for implementation:
-
+* use weighted averaging to 
