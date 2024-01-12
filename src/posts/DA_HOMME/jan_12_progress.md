@@ -43,7 +43,24 @@ As I just discovered an hour ago, this is the recommended upper boundary conditi
 in [Taylor et al, 2020](). However, it turns out that a Neumann boundary condition also runs into the same 
 problem as the Dirichlet boundary condition `$$ (\hat{r}^2p \phi)_{\textrm{top}}=C$$`, which is that
 the EOS (and the constraint `$$\dot{\eta} = 0$$` on `$$\textrm{dp3d}$$`) combined with discrete averaging 
-already determines the values of `$$\phi, p$$`
+already determines the values of `$$\phi, p$$` at the top boundary. 
+
+There are two strategies to fix this problem. The more suspicious one is as follows.
+If we sacrifice energy conservation at the upper boundary, we can solve all of these issues.
+If we allow `$$\Theta_v$$` to vary, then we can change the EOS such that our boundary condition is satisfied. 
+This preserves mass conservation of the model, and gives us the ability to implement either a Neumann or Dirichlet boundary condition.
+My current strategy is to use this approach to implement a Neumann (i.e. `$$\mu_{\textrm{top}} = 1$$` ) 
+boundary condition at the expense of energy conservation near the model top.
+I believe this is unobjectionable for two reasons. Firstly, models almost always have damping mechanisms
+near the model top which are not energy preserving. Secondly, 
+in the lagrangian mass coordinate, HOMME does not use an energy-conserving remap 
+(according to Chris Eldred, because using an energy preserving remap tended to result in 
+spurious generation of circulation). Therefore, using an upper boundary condition which is not
+energy preserving should be an acceptable concession. Furthermore, I'm not actually sure that
+the method of calculating `$$\mu$$` at the in shallow HOMME is necessarily correct.
+
+The second strategy is less fleshed out. I mentioned above that the `$$\mu`
+
 
 
 
