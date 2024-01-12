@@ -59,7 +59,21 @@ spurious generation of circulation). Therefore, using an upper boundary conditio
 energy preserving should be an acceptable concession. Furthermore, I'm not actually sure that
 the method of calculating `$$\mu$$` at the in shallow HOMME is necessarily correct.
 
-The second strategy is less fleshed out. I mentioned above that the `$$\mu`
+The second strategy is less fleshed out. I mentioned above that the `$$\mu=1$$` boundary condition
+is similar to what is recommended in the paper for height coordinates. However, they
+use the slightly different condition
+`$$$
+\dot{s} \frac{\partial w}{\partial s} + g(1-\mu) = 0
+$$$`
+and make the somewhat confusing observation that although `$$\dot{s}=0$$` should be satisfied for
+the top boundary, "here we retain this term to allow for the
+possibility that the discretized vertical transport term may not vanish." They do this in order
+to allow for the possibility that the discretized vertical transport may be non-zero. In their case, 
+they are using the condition on `$$\mu$$` to constrain discrete violations of `$$\dot{s}=0$$`, 
+but we could go in the opposite direction and use the `$$\dot{s} \frac{\partial w}{\partial s}$$`
+term to ensure that `$$ \mu = 1.$$` This concisely shows that we can either fiddle with `$$\{\partial w}{\partial s} $$`
+(i.e. energy conservation) or `$$\dot{s}$$` (i.e. mass conservation) to 
+enforce a Neumann boundary condition. 
 
 
 
