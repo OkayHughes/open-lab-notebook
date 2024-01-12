@@ -110,4 +110,5 @@ If we allow energy loss at top barrier, then we have a choice of either Neumann 
 boundary conditions at the top. 
 
 ## The plan for implementation:
-* use weighted averaging to 
+* `$$\mu=1$$` condition determines `$$p$$` at model top given prognostic `$$\phi$$`.
+* Slack is taken up by `$$\Theta_v$$`. Unclear if `$$\Theta_v$$` needs to be modified to match definition.
