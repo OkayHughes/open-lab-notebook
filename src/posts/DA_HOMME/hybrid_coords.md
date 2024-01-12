@@ -96,14 +96,14 @@ and the requirement that midpoints lie halfway between interfaces.
 
 Can we just change to a Neumann boundary condition at the top?
 * Phi at top interface is prognostic
-* Combination of discrete averaging and EOS uniquely determines 
-
+* Combination of discrete averaging and EOS uniquely extrapolates p to top level given phi and pdensity.
 
 Things to note:
   * Sponge layers etc already strongly violate energy conservation at the top boundary!
   * Remapping violates energy conservation on interior of model for lagrangian vertical coordinate!
   * All things considered, math is quite clean and concise on interior of model.
   * Still want to avoid mass loss, as that's sacrosanct.
+  * If we allow energy loss at top barrier, then we can just twiddle `$$\Theta_v$$` to accomodate. 
 
-
-
+If we allow energy loss at top barrier, then we have a choice of either Neumann or Dirichlet 
+boundary conditions at the top. 
