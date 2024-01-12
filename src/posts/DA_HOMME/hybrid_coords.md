@@ -56,4 +56,11 @@ Idea: `$$\mu$$` is used to calculate the vertical pressure gradient force, i.e. 
 In our new, fucked coordinates, the area of the upper surface is larger than the lower surface. 
 Therefore in calculating the pressure gradient (and associated quantities), the quantity `$$\mu$$` should take this into account.
 
-Therefore, the choice `$$BC = \hat{r}^2 p_\textrm{top}\phi_{\textrm{top}}$$` 
+Therefore, the choice `$$BC = \hat{r}_{\textrm{top}}^2 p_\textrm{top}\phi_{\textrm{top}}$$` gives
+`$$$
+\begin{align*}
+      \int \int p\hat{r}^2\delta[\partial_{\eta}[\phi]] + \hat{r}^2 p_\textrm{top}\phi_{\textrm{top}} + \partial_{\eta} [\hat{r}^2p] \delta \phi  \intd{\eta} \intd{A} &=  \int  (p\hat{r}^2\delta\phi)_{\textrm{bot}} - (p\hat{r}^2\delta\phi)_{\textrm{top}} + \hat{r}^2 p_\textrm{top}\phi_{\textrm{top}} + \int \partial_{\eta} [\hat{r}^2 p] \delta \phi - \partial_{\eta} [\hat{r}^2p]  \delta \phi  \intd{\eta} \intd{A}
+\end{align*}
+$$$`
+and assuming that we have solved the boundary condition problems at the bottom such that `$$ [\delta \phi]_{\textrm{bot}} = 0$$`, then we get that the boundary condition and integration by parts
+perform essentially the same as in the shallow atmosphere case. 
