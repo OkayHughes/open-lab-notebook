@@ -86,9 +86,9 @@ and initialize the model such that `$$\int_{\textrm{interface below}}^{\textrm{i
 externally provided `$$\textrm{dp3d}$$`. In the more general (i.e. nonhydrostatic) case,
 the rootfinding and/or interpolation must be provided the form of `$$\rho$$` and `$$z$$`.
 If we are provided these fields, then we can use monotonicity
-of the discrete analogue of `$$\int_{\textrm{model bottom}}^{z} \hat{r}^2 \rho \intd{z'}$$` and 
-`$$ \sum_{i'=0}^i \textrm{dp3d}_{i'}$$` to use initial conditions from, e.g.,
-data.
+of the discrete analogue of `$$\int_{\textrm{model bottom}}^{z} \hat{r}^2 \rho \intd{z'}$$` and the sum
+`$$ \sum_{i'=0}^i (\textrm{dp3d})_{i'}$$` to map initial conditions from, e.g.,
+data onto the deep mass coordinates.
 
 
 
