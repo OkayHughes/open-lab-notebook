@@ -78,6 +78,7 @@ enforce a Neumann boundary condition.
 
 
 
+
 ## What's actually happening in initialization:
 If we rootfind progressively from the surface to the model top such that the atmosphere satisfies `$$\mu \equiv 1$$`,
 what is actually happening is that for hydrostatically balanced initial conditions,
