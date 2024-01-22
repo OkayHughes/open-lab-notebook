@@ -78,6 +78,7 @@ enforce a Neumann boundary condition.
 
 
 
+## initializing more generally:
 
 
 
