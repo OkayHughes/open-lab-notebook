@@ -122,5 +122,5 @@ $$$`
 
 ## Tangent: initializing the atmosphere in general
 * Calculate `$$\rho$$` and ensure that `$$z$$` is calculated or read from data.
-* Within a column, calculate `$$g\int_{\textrm{top}}^{\textrm{bot}} \frac{\rho}{\hat{r}^2} \intd{z}$$`.
+* Within a column, calculate `$$\int_{\textrm{top}}^{\textrm{bot}} \frac{\rho}{\hat{r}^2} g \intd{z}$$`.
 * This can be compared against `$$\sum_i \textrm{dp3d}$$`
