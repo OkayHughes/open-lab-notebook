@@ -135,6 +135,17 @@ Idea:
   * `$$p\equiv p_s$$` and `$$\phi \equiv \phi_s$$` indicate that we should start initialization at the surface
   * Assume that we know physical pressure `$$p$$` and geometric height `$$z$$`. 
   * The eta coordinates used for initialization give us `$$\textrm{dp3d}$$`. 
-  * The EOS 
-
+  * The EOS states that if we know `$$\Delta \phi$$`, then we can calculate `$$$ p = -\frac{R_d  T  \cdot \textrm{dp3d}}{\hat{r}^2 
+   \Delta \phi}.$$$`
+  * Therefore a consistent initialization results from progressively rootfinding
+  from the lowest model level to the top such that the EOS is satisfied. 
+  * Justifying that this is guaranteed to converge for an (approximately) hydrostatic atmosphere
+  should be possible. 
+  * The above strategy can also be rephrased in terms of guaranteeing that `$$\int_0^z \rho g \intd{z} = \textrm{dp3d}$$`,
+  which can be translated into a monotonicity constraint. When this is combined with `$$\Delta \phi > 0$$`,
+  I expect this gives us the best strategy to show that this initialization strategy works.
+  * Current progress: 
+      - (ongoing) determine why this fails for the DCMIP2016 test case. Does it work analytically?
+      - Write up these initialization findings into a document to share with Sandia.
+      - 
 
