@@ -147,6 +147,7 @@ Idea:
   * Current progress: 
       - (ongoing) determine why this fails for the DCMIP2016 test case. It seems to hold analytically,
       but is the code right? 
+      - Possible missing term in `$$\tau_{\textrm{int}}$$` terms
       - Write up these initialization findings into a document to share with Sandia.
       - 
 
