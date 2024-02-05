@@ -145,7 +145,8 @@ Idea:
   which can be translated into a monotonicity constraint. When this is combined with `$$\Delta \phi > 0$$`,
   I expect this gives us the best strategy to show that this initialization strategy works.
   * Current progress: 
-      - (ongoing) determine why this fails for the DCMIP2016 test case. Does it work analytically?
+      - (ongoing) determine why this fails for the DCMIP2016 test case. It seems to hold analytically,
+      but is the code right? 
       - Write up these initialization findings into a document to share with Sandia.
       - 
 
