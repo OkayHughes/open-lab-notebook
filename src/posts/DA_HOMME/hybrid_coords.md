@@ -129,7 +129,9 @@ $$$`
 
 ## The Deep Atmosphere Baroclinic Wave 
 So the constraining equation given in the paper is
-`$$
--\frac{u^2}{r} - 2\Omega u \cos\phi + g_0 \frac{a^2}{r^2} + RT \partial_r [\log p] 
-$$`
+`$$$
+\begin{align*}
+-\frac{u^2}{r} - 2\Omega u \cos\phi + g_0 \frac{a^2}{r^2} + RT \partial_r [\log p] = -\frac{u^2}{r} - 2\Omega u \cos\phi + g_0 \frac{a^2}{r^2} + \frac{1}{\rho} \partial_z [p]
+\end{align*}
+$$$`
 
