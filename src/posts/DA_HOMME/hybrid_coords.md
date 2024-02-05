@@ -120,10 +120,10 @@ boundary conditions at the top.
 \end{align*}
 $$$`
 
-## Tangent: initializing the atmosphere in general
-* Calculate `$$\rho$$` and ensure that `$$z$$` is calculated or read from data.
-* Within a column, calculate `$$\int_{\textrm{top}}^{\textrm{bot}} \hat{r}^2 \rho  \intd{z}$$`.
-* This can be compared against `$$\sum_i \frac{1}{g} \textrm{dp3d}$$`
+## Initializing the atmosphere in general
+Idea:
+  * `$$p\equiv p_s$$` and `$$\phi \equiv \phi_s$$` indicate that we should start initialization at the surface
+  * Assume that we know physical pressure 
 
 
 
