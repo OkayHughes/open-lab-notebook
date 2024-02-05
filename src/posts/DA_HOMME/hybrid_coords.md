@@ -120,13 +120,6 @@ boundary conditions at the top.
 \end{align*}
 $$$`
 
-## Initializing the atmosphere in general
-Idea:
-  * `$$p\equiv p_s$$` and `$$\phi \equiv \phi_s$$` indicate that we should start initialization at the surface
-  * Assume that we know physical pressure 
-
-
-
 ## The Deep Atmosphere Baroclinic Wave 
 So the constraining equation given in the paper is
 `$$$
@@ -134,4 +127,14 @@ So the constraining equation given in the paper is
 -\frac{u^2}{r} - 2\Omega u \cos\phi + g_0 \frac{a^2}{r^2} + RT \partial_r [\log p] = -\frac{u^2}{r} - 2\Omega u \cos\phi + g_0 \frac{a^2}{r^2} + \frac{1}{\rho} \partial_z [p]
 \end{align*}
 $$$`
+
+This can only be satisfied if `$$\mu \neq 1$$`. `
+
+## Initializing the atmosphere in general
+Idea:
+  * `$$p\equiv p_s$$` and `$$\phi \equiv \phi_s$$` indicate that we should start initialization at the surface
+  * Assume that we know physical pressure `$$p$$` and geometric height `$$z$$`. 
+  * The eta coordinates used for initialization give us `$$\textrm{dp3d}$$`. 
+  * The EOS 
+
 
