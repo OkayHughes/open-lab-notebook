@@ -163,8 +163,10 @@ For an atmosphere where `$$w(0) \equiv 0$$`, the quasi hydrostatic equation is g
 `$$$ -\frac{\mathbf{u}^2}{r} - 2\Omega \cos(\varphi) u + g(1-\mu) = 0 $$$`
 with `$$\mu = \hat{r}^2 \frac{\pder{p}{\eta}}{\pder{\pi}{\eta}} = \hat{r}^2 \frac{\pder{p}{\eta}}{-\rho\pder{\phi}{\eta}} \stackrel{\textrm{continuum}}{=} -\hat{r}^2 \frac{1}{\rho} \pder{p}{\phi} $$`
 
+For a stationary atmosphere where `$$u=v=0$$`, hydrostatic balance still translates into `$$ \mu = 1$$`.
 
-In any atmospheric initialization, 
+
+<!-- In any atmospheric initialization, 
 `$$$
 \begin{align*}
 M = \int \frac{1}{g} \rho g \intd{z} 
@@ -179,3 +181,4 @@ M(z') &= \int_\textrm{bottom}^{z'} \rho \intd{z} \\
 \end{align*}
 $$$` 
 and we differentiate under the integral sign to find
+-->
