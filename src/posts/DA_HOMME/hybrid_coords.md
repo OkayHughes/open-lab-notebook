@@ -169,4 +169,5 @@ In any atmospheric initialization,
 \begin{align*}
 M = \int \frac{1}{g} \rho g \intd{z} 
 \end{align*}$$$`
-and the standard construction for (quasi)
+and the standard construction for (quasi) hydrostatic atmospheres requires that
+`$$ M(z) = \int_0^z \rho \intd{z} = \int_0^z \pder{p}{z} \intd{z} $$` 
