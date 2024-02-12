@@ -156,4 +156,5 @@ Idea:
 
 ## Boundary conditions and initialization
 
-We've accepted _a priori_ that 
+We define our mass coordinate in terms of column-integrated mass `$$M$$`.
+`$$ \sum  $$`
