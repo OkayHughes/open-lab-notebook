@@ -160,5 +160,8 @@ We define our mass coordinate in terms of column-integrated mass `$$M$$`.
 `$$ \int_{1}^\eta \frac{r^2}{R_0^2} \partial_{\eta} [r] \rho \intd{\eta}.$$`.
 
 For an atmosphere where `$$w(0) \equiv 0$$`, the quasi hydrostatic equation is given by:
-`$$$ \frac{\mathbf{u}^2}{r} - 2\Omega \cos(\varphi) u + g(1-\mu) = 0 $$$`
-with `$$\mu = \hat{r}^2 \frac{\pder{p}{\eta}}{\pder{\pi}{\eta}}$$`
+`$$$ -\frac{\mathbf{u}^2}{r} - 2\Omega \cos(\varphi) u + g(1-\mu) = 0 $$$`
+with `$$\mu = \hat{r}^2 \frac{\pder{p}{\eta}}{\pder{\pi}{\eta}} = \hat{r}^2 \frac{\pder{p}{\eta}}{-\rho\pder{\phi}{\eta}} \stackrel{\textrm{continuum}}{=} -\hat{r}^2 \frac{1}{\rho} \pder{p}{\phi} $$`
+
+
+In a standard atmospheric initialization, `$$ `
