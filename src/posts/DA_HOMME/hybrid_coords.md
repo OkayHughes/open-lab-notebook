@@ -151,3 +151,9 @@ Idea:
       - Write up these initialization findings into a document to share with Sandia.
       - 
 
+
+
+
+## Boundary conditions and initialization
+
+We've accepted _a priori_ that 
