@@ -172,13 +172,10 @@ M = \int \frac{1}{g} \rho g \intd{z}
 and the standard construction for (quasi) hydrostatic atmospheres requires that
 `$$$
 \begin{align*}
-M(z') &= \int_\textrm{bottom}^z \rho \intd{z} \\
-&= \int_\textrm{bottom}^z -\frac{1}{g} \pder{p}{z} \intd{z} 
+M(z') &= \int_\textrm{bottom}^{z'} \rho \intd{z} \\
+&= \int_\textrm{bottom}^{z'} -\frac{1}{g} \pder{p}{z} \intd{z} \\
+&= \int_\textrm{bottom}^{z'} -\frac{1}{g} \pder{p}{z} \intd{z} \\
+&= \left[-\frac{z}{g} \pder{p}{z} \right]_{\textrm{bottom}}^{z'} - \int_{\textrm{bottom}}^{z'} -\frac{1}{g} \pder{^2 p}{z^2} \intd{z}
+\end{align*}
 $$$` 
 and we differentiate under the integral sign to find
-`$$$
-\begin{align*}
-  \partial_z M(q) &= \partial_z \left[\int_{z_s}^z - \frac{1}{g} \pder{p}{z} \intd{z} \right] \\
-  &= \pder{p}{z}()
-\end{align*}
-$$$`
