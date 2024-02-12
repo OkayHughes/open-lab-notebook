@@ -170,4 +170,8 @@ In any atmospheric initialization,
 M = \int \frac{1}{g} \rho g \intd{z} 
 \end{align*}$$$`
 and the standard construction for (quasi) hydrostatic atmospheres requires that
-`$$ M(z) = \int_0^z \rho \intd{z} = \int_0^z \pder{p}{z} \intd{z} $$` 
+`$$$
+\begin{align*}
+M(z') &= \int_0^z' \rho \intd{z} \\
+&= \int_0^z' -\frac{1}{g} \pder{p}{z} \intd{z} 
+&= \int_1^\eta' -\frac{1}{g} \frac{\pder{p}{\eta}}{\pder{z}{\eta}} \intd{z}$$` 
