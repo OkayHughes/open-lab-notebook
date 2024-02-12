@@ -172,6 +172,9 @@ M = \int \frac{1}{g} \rho g \intd{z}
 and the standard construction for (quasi) hydrostatic atmospheres requires that
 `$$$
 \begin{align*}
-M(z') &= \int_0^z' \rho \intd{z} \\
-&= \int_0^z' -\frac{1}{g} \pder{p}{z} \intd{z} 
-&= \int_1^\eta' -\frac{1}{g} \frac{\pder{p}{\eta}}{\pder{z}{\eta}} \intd{z}$$` 
+M(z') &= \int_\textrm{bottom}^z \rho \intd{z} \\
+&= \int_\textrm{bottom}^z -\frac{1}{g} \pder{p}{z} \intd{z} \\
+&= \int_1^\eta -\frac{1}{g} \frac{\pder{p}{\eta}}{\pder{z}{\eta}} \intd{\eta} \\
+&\stackrel{\textrm{lie}}{=} \int_1^\eta - \frac{\pder{p}{\eta}}{\pder{\phi}{\eta}} \intd{\eta}
+\end{align*}
+$$$` 
