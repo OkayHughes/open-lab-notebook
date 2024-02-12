@@ -164,4 +164,9 @@ For an atmosphere where `$$w(0) \equiv 0$$`, the quasi hydrostatic equation is g
 with `$$\mu = \hat{r}^2 \frac{\pder{p}{\eta}}{\pder{\pi}{\eta}} = \hat{r}^2 \frac{\pder{p}{\eta}}{-\rho\pder{\phi}{\eta}} \stackrel{\textrm{continuum}}{=} -\hat{r}^2 \frac{1}{\rho} \pder{p}{\phi} $$`
 
 
-In a standard atmospheric initialization, `$$ `
+In any atmospheric initialization, 
+`$$$
+\begin{align*}
+M = \int \frac{1}{g} \rho g \intd{z} 
+\end{align*}$$$`
+and the standard construction for (quasi)
