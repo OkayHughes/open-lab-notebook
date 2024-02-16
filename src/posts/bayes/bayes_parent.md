@@ -1,0 +1,15 @@
+---
+date: 2021-09-01
+tags:
+  - posts
+  - misc
+eleventyNavigation:
+  key: AEROSP 567
+layout: layouts/post.njk
+---
+
+
+
+
+
+
