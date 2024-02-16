@@ -62,6 +62,7 @@ module.exports = function(eleventyConfig) {
   \\newcommand{\\mbf}[1]{\\mathbf{#1}}
   \\newcommand{\\probp}{\\mathbb{P}}
   \\newcommand{\\probe}{\\mathbb{E}}
+  \\newcommand{\\probv}{\\mathbb{V}}
   \\newcommand{\\rt}[1]{\\textcolor{darkred}{#1}}
   \\renewcommand{\\Re}{\\operatorname{Re}}
   \\renewcommand{\\Im}{\\operatorname{Im}}
