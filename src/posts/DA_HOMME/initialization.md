@@ -18,5 +18,8 @@ The strong form of the EOS is
 $$$`
 and we integrate (assume no surface topo for the moment) to find
 `$$$
-  (\hat{r}^2 \phi - \hat{r}_{\textrm{sfc}}^2 \phi_{\textrm{sfc}}) = -\int \frac{}{} \intd{\eta}
+\begin{align*}
+  (\hat{r}^2 \phi - \hat{r}_{\textrm{sfc}}^2 \phi_{\textrm{sfc}}) &= -\int \frac{R_d T}{p} \pder{}{\eta} \left[\int g\hat{r}^2  \rho  \intd{z} \right]\intd{\eta} \\
+    &= \left[\frac{R_d T}{p} \int g\hat{r}^2  \rho  \intd{z} \right]_{\textrm{sfc}}^{\eta}\intd{\eta} - \int \pder{}{\eta} \left[ \frac{R_d T}{p} \right] \cdot \pder{}{\eta} \left[\int g\hat{r}^2  \rho  \intd{z} \right]\intd{\eta}
+\end{align*}
 $$$`
