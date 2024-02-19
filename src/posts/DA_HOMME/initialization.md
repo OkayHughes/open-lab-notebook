@@ -13,7 +13,10 @@ The strong form of the EOS is
 `$$$
 \begin{align*}
  \partial_\eta[\hat{r}^2 \phi] &= - R_d \theta \textrm{ dp3d } \frac{\Pi}{p} \\
-  &= -R_d \theta \pder{}{\eta} \left[ \int \hat{r}^2 \rho \, \intd{z} \right] \\
-  &= -R_d \theta \pder{}{\eta} \left[ \int \hat{r}^2 \rho \, \intd{z} \right] \\
+  &= -\frac{R_d T}{p} \pder{}{\eta} \left[ \int g\hat{r}^2  \rho  \intd{z} \right] \\
 \end{align*}
+$$$`
+and we integrate (assume no surface topo for the moment) to find
+`$$$
+  (\hat{r}^2 \phi - \hat{r}_{\textrm{sfc}}^2 \phi_{\textrm{sfc}}) = -\int \frac{}{} \intd{\eta}
 $$$`
