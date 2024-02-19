@@ -14,6 +14,17 @@ From the [IMEX preprint](https://arxiv.org/pdf/1906.07219.pdf)
 
 `$$$ G_{m,j}(g_{m,j}^\phi) = g_{m,j} - E_{m,j}^\phi - g \Delta t \hat{A}_{j,j} E_m^w + (g \Delta t \hat{A}_{j,j})^2 (1-\mu_{m,j})$$$`
 
+
+
+`$$$
+\begin{align*}
+  a &= \frac{(\Delta t g(\phi_1))^2}{(1-\kappa)}\\
+  b &= \frac{a}{\textrm{dp3d}_1}\\
+  c_1 &= \frac{p_1}{\Delta \phi_1} \\
+  J_L &= 2b_{k+1}c_k \\
+  J_{k, k} &= 1- 2bc_1 
+\end{align*}
+$$$`
 ## top interface:
 
 We define
@@ -38,9 +49,19 @@ $$$`
   c_k &= \frac{p_k}{\Delta \phi_k} \\
   J_{k+1, k} &= 2bc_{k-1} \\
   J_{k-1, k} &= 2bc_k \\
-  J_{k, k} &= 1- bc_k - 
+  J_{k, k} &= 1- b( c_k  + c_{k-1}) 
 \end{align*}
 $$$`
 
 
 ## bottom interface:
+
+`$$$
+\begin{align*}
+  a &= \frac{(\Delta t g(\phi_N))^2}{(1-\kappa)}\\
+  b &= \frac{a}{\textrm{dp3d}_N}\\
+  c_1 &= \frac{p_N}{\Delta \phi_N} \\
+  J_{k-1, k} &= 2bc_1 \\
+  J_{k, k} &= 1- 2bc_1 
+\end{align*}
+$$$`
