@@ -25,13 +25,20 @@ From the [IMEX preprint](https://arxiv.org/pdf/1906.07219.pdf)
   J_{U,k=1} &= 2b_kc_k \\
   J_{U,k\neq 1} &= b_k c_k \\
   J_{D, k=1} &= 1- J_{U, 1} \\
-  J_{D, k \neq 1} &= 1-J_{U,k-1} - J_{U, k}
+  J_{D, k \neq 1} &= 1-J_{L,k-1} - J_{U, k}
 \end{align*}
 $$$`
 
 where we can expand
 `$$$
 \begin{align*}
-  b_m c_n = \frac{(\Delta t g(\phi_m))^2}{(1-\kappa) \cdot \textrm{dp3d}_{\textrm{int}, m}} \cdot \frac{p_n}{\Delta \phi_n}
+  b_m c_n &= \frac{(\Delta t g(\phi_m))^2}{(1-\kappa) \cdot \textrm{dp3d}_{\textrm{int}, m}} \cdot \frac{p_n}{\Delta \phi_n}\\
+  &= \frac{(\Delta t g(\phi_m))^2}{(1-\kappa) \cdot \textrm{dp3d}_{\textrm{int}, m}} \cdot \frac{p_n}{\Delta \phi_n}\\
 \end{align*}
+$$$`
+
+
+thus
+`$$$
+  \mu = \frac{p_k - p_{k+1}}{\textrm{dp3d}_{\textrm{int}, k}}
 $$$`
