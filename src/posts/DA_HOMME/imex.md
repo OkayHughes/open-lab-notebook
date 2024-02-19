@@ -9,3 +9,4 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
+All we need to modify are the Jacobian terms for `$$\phi$$`. 
