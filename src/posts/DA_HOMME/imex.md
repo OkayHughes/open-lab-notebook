@@ -42,12 +42,12 @@ The trick comes from differentiating `$$\mu$$` with respect to `$$\phi$$`
 `$$$
 \begin{align*}
   \mu &= \frac{p_k - p_{k+1}}{\textrm{dp3d}_{\textrm{int}, k}} \\
-      &= \frac{p_0 \left(\frac{R_d \Theta_k }{\Delta \phi_k} \right)^{\frac{1}{1-\kappa}} - p_0 \left(\frac{R_d \Theta_{k+1} }{\Delta \phi_{k+1}} \right)^{\frac{1}{1-\kappa}}}{\textrm{dp3d}_{\textrm{int}, k}} 
+      &= \frac{ \frac{R_d T_k \textrm{dp3d}_k }{\Delta \phi_k} - \frac{R_d T_{k+1} \textrm{dp3d}_{k+1} }{\Delta \phi_{k+1}}}{\textrm{dp3d}_{\textrm{int}, k+1}} 
 \end{align*}
 $$$`
 and thus
 `$$$
 \begin{align*}
- \partial_{\Delta \phi_k} \mu &= \frac{1}{1-\kappa} \cdot \frac{1}{\textrm{dp3d}_{\textrm{int}, k}} 
+ \partial_{\Delta \phi_k} \mu &= -\frac{p_k}{\textrm{dp3d}_{\textrm{int}, k}} [\Delta \phi_k]^{-1}
 \end{align*}
 $$$`
