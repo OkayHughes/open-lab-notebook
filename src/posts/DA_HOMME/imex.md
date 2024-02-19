@@ -38,7 +38,8 @@ where we can expand
 $$$`
 
 
-thus
+The trick comes from differentiating `$$\mu$$` with respect to `$$\phi$$`
 `$$$
-  \mu = \frac{p_k - p_{k+1}}{\textrm{dp3d}_{\textrm{int}, k}}
+  \mu &= \frac{p_k - p_{k+1}}{\textrm{dp3d}_{\textrm{int}, k}} \\
+      &= \frac{p0 \left(\frac{R_d \Theta }{\Delta \phi_k} \right)^{\frac{1}{1-\kappa}}{} - p_{k+1}}{\textrm{dp3d}_{\textrm{int}, k}} \\
 $$$`
