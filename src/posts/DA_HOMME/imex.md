@@ -48,6 +48,6 @@ $$$`
 and thus
 `$$$
 \begin{align*}
- \partial_{\Delta \phi_k} \mu &= -\frac{p_k}{\textrm{dp3d}_{\textrm{int}, k}} [\Delta \phi_k]^{-1}
+ \partial_{\Delta \phi_k} \mu &= -\frac{p_k}{\textrm{dp3d}_{\textrm{int}, k+1}} [\Delta \phi_{k}]^{-1}
 \end{align*}
 $$$`
