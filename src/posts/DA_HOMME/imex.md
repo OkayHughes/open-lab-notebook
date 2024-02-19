@@ -19,14 +19,28 @@ From the [IMEX preprint](https://arxiv.org/pdf/1906.07219.pdf)
 We define
 `$$$
 \begin{align*}
-  a &= \frac{(\Delta t g(\phi))^2}{(1-\kappa)}\\
-  b &= \frac{a}{\textrm{dp3d}}\\
-  c &= \frac{p}{\Delta \phi} \\
-  J_
+  a &= \frac{(\Delta t g(\phi_1))^2}{(1-\kappa)}\\
+  b &= \frac{a}{\textrm{dp3d}_1}\\
+  c_1 &= \frac{p_1}{\Delta \phi_1} \\
+  J_{k-1, k} &= 2bc_1 \\
+  J_{k, k} &= 1- 2bc_1 
 \end{align*}
 $$$`
 
 
 ## interior interfaces:
+
+`$$$
+\begin{align*}
+  a &= \frac{(\Delta t g(\phi_k))^2}{(1-\kappa)}\\
+  b &= 2\frac{a}{
+  \left(\textrm{dp3d}_{k-1}+ \textrm{dp3d}_k\right)}\\
+  c_k &= \frac{p_k}{\Delta \phi_k} \\
+  J_{k+1, k} &= 2bc_{k-1} \\
+  J_{k-1, k} &= 2bc_k \\
+  J_{k, k} &= 1- bc_k - 
+\end{align*}
+$$$`
+
 
 ## bottom interface:
