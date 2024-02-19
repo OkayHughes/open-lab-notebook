@@ -10,6 +10,10 @@ layout: layouts/post.njk
 ---
 
 The strong form of the EOS is 
-`$$ 
-\hat{r^2} \partial_\eta[\phi] = 
-$$`
+`$$$
+\begin{align*}
+ \partial_\eta[\hat{r}^2 \phi] &= - R_d \theta \textrm{ dp3d } \frac{\Pi}{p} \\
+  &= -R_d \theta \pder{}{\eta} \left[ \int \hat{r}^2 \rho \, \intd{z} \right] \\
+  &= -R_d \theta \pder{}{\eta} \left[ \int \hat{r}^2 \rho \, \intd{z} \right] \\
+\end{align*}
+$$$`
