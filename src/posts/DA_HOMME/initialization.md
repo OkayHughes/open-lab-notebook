@@ -16,6 +16,17 @@ The strong form of the EOS is
   &= -\frac{R_d T}{p} \pder{}{\eta} \left[ \int g\hat{r}^2  \rho  \intd{z} \right] \\
 \end{align*}
 $$$`
+
+
+
+
+
+
+
+
+
+
+### misc garbage
 and we integrate (assume no surface topo for the moment) to find
 `$$$
 \begin{align*}
@@ -23,3 +34,10 @@ and we integrate (assume no surface topo for the moment) to find
     &= \left[\frac{R_d T}{p} \int g\hat{r}^2  \rho  \intd{z} \right]_{\textrm{sfc}}^{\eta}\intd{\eta} - \int \pder{}{\eta} \left[ \frac{R_d T}{p} \right] \cdot \pder{}{\eta} \left[\int g\hat{r}^2  \rho  \intd{z} \right]\intd{\eta}
 \end{align*}
 $$$`
+
+
+Other relevant constraints:
+`$$$
+\int_{\textrm{level}} \rho g \intd{z} = \textrm{dp3d}
+$$$`
+`$$p_s = \sum_i \textrm{dp3d}$$`
