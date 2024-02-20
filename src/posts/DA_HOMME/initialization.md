@@ -17,6 +17,16 @@ The strong form of the EOS is
 \end{align*}
 $$$`
 
+where the eta (or z) coordinates used in initialization satisfy
+`$$$
+\begin{align*}
+ \partial_\eta[ \phi] &= - R_d \theta \textrm{ dp3d } \frac{\Pi}{p} \\
+  &= -\frac{R_d T}{p} \pder{}{\eta} \left[ \int  \rho  \intd{z} \right] \\
+\end{align*}
+$$$`
+
+so perhaps we've advanced to the point where initializing in pressure coordinates 
+is just alright?
 
 
 
