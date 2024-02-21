@@ -22,10 +22,17 @@ and so we find
 `$$$
 \begin{align*}
   \mu_k &= \frac{p_{k+1} - p_k}{\frac{1}{2}(\textrm{dp3d}_{k+1} + \textrm{dp3d}_k)}\\
-  &= (\textrm{dp3d}_i)^{-1} \left[ 
-  \frac{\frac{R_d T_v}{p} \textrm{dp3d}}{\phi_{k+1}-\phi_{k}} \right]
+  &= (\textrm{dp3d}_i)^{-1}  p_0 \left[ 
+  \left( p_0^{-1} \frac{R_d \theta_{v, k+1} \textrm{dp3d}_{k+1}}{\phi_{k+1}-\phi_{k}} \right)^{\frac{1}{1-\kappa}} - 
+ \left( p_0^{-1} \frac{R_d \theta_{v, k} \textrm{dp3d}_{k}}{\phi_{k}-\phi_{k-1}} \right)^{\frac{1}{1-\kappa}} \right]\\
+ &= (\textrm{dp3d}_i)^{-1}  p_0 \left[ 
+  \left( p_0^{-1} \frac{R_d \theta_{v, k+1} \textrm{dp3d}_{k+1}}{\phi_{k+1}-\phi_{k}} \right)^{\frac{1}{1-\kappa}} - 
+ \left( p_0^{-1} \frac{R_d \theta_{v, k} \textrm{dp3d}_{k}}{\phi_{k}-\phi_{k-1}} \right)^{\frac{1}{1-\kappa}} \right]
 \end{align*}
 $$$`
+
+and so we can calculate that 
+
 
 `$$$
 \begin{align*}
