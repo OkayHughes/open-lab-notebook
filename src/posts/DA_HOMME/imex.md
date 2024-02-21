@@ -26,12 +26,20 @@ and so we find
   \left( p_0^{-1} \frac{R_d \theta_{v, k+1} \textrm{dp3d}_{k+1}}{\phi_{k+1}-\phi_{k}} \right)^{\frac{1}{1-\kappa}} - 
  \left( p_0^{-1} \frac{R_d \theta_{v, k} \textrm{dp3d}_{k}}{\phi_{k}-\phi_{k-1}} \right)^{\frac{1}{1-\kappa}} \right]\\
  &= (\textrm{dp3d}_i)^{-1}  p_0 \left[ 
-  \left( p_0^{-1} \frac{R_d \theta_{v, k+1} \textrm{dp3d}_{k+1}}{\phi_{k+1}-\phi_{k}} \right)^{\frac{1}{1-\kappa}} - 
- \left( p_0^{-1} \frac{R_d \theta_{v, k} \textrm{dp3d}_{k}}{\phi_{k}-\phi_{k-1}} \right)^{\frac{1}{1-\kappa}} \right]
+  \left( p_0^{-1} R_d \theta_{v, k+1} \textrm{dp3d}_{k+1}  \right)^{\frac{1}{1-\kappa}} \left( \phi_{k+1}-\phi_{k} \right)^{\frac{1}{1-\kappa}} - 
+ \left( p_0^{-1} R_d \theta_{v, k} \textrm{dp3d}_{k} \right)^{\frac{1}{1-\kappa}}  \left(\phi_{k}-\phi_{k-1} \right)^{\frac{1}{1-\kappa}}\right]
 \end{align*}
 $$$`
 
-and so we can calculate that 
+and so to make everything as easy to read as possible
+
+`$$$
+\begin{align*}
+  \partial_{\phi_{k+1}} [ \mu_k]  &= (\textrm{dp3d}_i)^{-1}  p_0 \left[ 
+  \left( p_0^{-1} R_d \theta_{v, k+1} \textrm{dp3d}_{k+1}  \right)^{\frac{1}{1-\kappa}} \left( \phi_{k+1}-\phi_{k} \right)^{\frac{1}{1-\kappa}}\frac{1}{(1-\kappa)\left( \phi_{k+1}-\phi_{k} \right)} \right]\\
+\end{align*}
+$$$`
+which gives us the template 
 
 
 `$$$
