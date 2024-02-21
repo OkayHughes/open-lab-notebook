@@ -14,7 +14,17 @@ From the [IMEX preprint](https://arxiv.org/pdf/1906.07219.pdf)
 
 `$$$ G_{m,j}(g_{m,j}^\phi) = g_{m,j} - E_{m,j}^\phi - g \Delta t \hat{A}_{j,j} E_m^w + (g \Delta t \hat{A}_{j,j})^2 (1-\mu_{m,j})$$$`
 
+which gets translated into (dicarding any terms that disappear under differentiation),
 
+`$$$ C_1 - \sum(\delta \phi) - C_2 - C_3  - (g\Delta t A_{j,j})^2\mu_{m,j} $$$`.
+The tricky thing is that we are calculating this quantity at model interfaces, which means
+and so we find
+`$$$
+\begin{align*}
+  \mu_k &= \frac{p_{k+1} - p_k}{\frac{1}{2}(\textrm{dp3d}_{k+1} + \textrm{dp3d}_k)}\\
+  &= (\textrm{dp3d}_i)^{-1} \left[\frac{}{} \right]
+\end{align*}
+$$$`
 
 `$$$
 \begin{align*}
