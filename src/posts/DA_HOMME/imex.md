@@ -22,7 +22,8 @@ and so we find
 `$$$
 \begin{align*}
   \mu_k &= \frac{p_{k+1} - p_k}{\frac{1}{2}(\textrm{dp3d}_{k+1} + \textrm{dp3d}_k)}\\
-  &= (\textrm{dp3d}_i)^{-1} \left[\frac{}{} \right]
+  &= (\textrm{dp3d}_i)^{-1} \left[ 
+  \frac{\frac{R_d T_v}{p} \textrm{dp3d}}{\phi_{k+1}-\phi_{k}} \right]
 \end{align*}
 $$$`
 
