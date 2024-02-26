@@ -14,8 +14,12 @@ the most obvious way to translate a shallow-atmosphere state described in pressu
 `$$T$$` and some method of calculating _physical_ density `$$\rho$$`, such as `$$p$$` (which is _physical_ pressure) and
 the DA HOMME EOS:
 `$$$
-  p_k = \frac{R_d \theta_{v \textrm{ dp3d}}{\hat{r}^2 \Delta \phi_k} 
+  p_k = \frac{R_d T_{v, k} \textrm{ dp3d}_k}{\hat{r}^2 \Delta \phi_k} = \frac{R_d \theta_{v, k} \Pi \textrm{ dp3d}_k}{\hat{r}^2 \Delta \phi_k}
 $$$`
+and I have previously been enforcing this pointwise at model levels starting from the lower boundary where `$$\phi_{K+1}  = \phi_{\textrm{surf}}$$`
+and we rootfind on `$$\phi_{k}$$` for `$$k = K, \ldots, 1$$`. 
+This results in a very slightly imbalanced vertical structure in the atmosphere. In the DCMIP 2016 BW test case
+this results in initial things 
 
 
 
