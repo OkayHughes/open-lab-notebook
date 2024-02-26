@@ -28,7 +28,7 @@ pressure at interfaces, namely
 `$$$
   p_{k+\frac{1}{2}} = \frac{(\textrm{dp3d}_k)p_k + (\textrm{dp3d}_{k+1})p_{k+1}}{\textrm{dp3d}_{k} + \textrm{dp3d}_{k+1}}
 $$$`
-is satisfied. That is, suppose we have profiles `$$T(z), p(z)$$` given by a {datafile, analytic sounding}. Then 
+is satisfied. That is, suppose we have profiles `$$T(z), p(z)$$` given by a {data file, analytic sounding}. Then 
 having `$$p_k = p(z_k)$$` and `$$p_{k+1} = p(z_{k+1})$$` does not guarantee `$$p_{k+\frac{1}{2}} = p(z_{k+\frac{1}{2}})$$`.
 Note here that `$$z_k, z_{k+1}$$` are actually determined via (purely arithmetic) averaging, as geopotential lives on interfaces.
 
@@ -37,8 +37,15 @@ This makes it clear why this was not an issue when `$$\textrm{dp3d}$$` did not i
 i.e., in SA HOMME.
 In all previous analytic initializations within SA HOMME, `$$\textrm{dp3d}$$` and `$$p$$` agree
 and satsify HOMME's averaging relations _by construction_. 
-In my mind, this justifies my current attempt to initialize geopotential levels such that `$$ p_{k+\frac{1}{2}} `
+In my mind, this justifies my current attempt to initialize geopotential levels such that `$$ p_{k+\frac{1}{2}} = p(z_{k+ \frac{1}{2}})$$`.
 
+
+This can follow a similar form as previous rootfinding code when you note that `$$\mu_{K+1} = 1$$` determines `$$ p_{K}$$`,
+which therefore determines `$$\phi_{K}$$`. This means that both `$$\phi_{K+1}$$` and `$$\phi_{K}$$` can be determined
+from boundary conditions, and so enforcing the averaging condition for `$$p_{K-\frac{1}{2}}$$` involves only 
+one unknown: `$$\phi_{K-1}$$`.
+
+It's possible that the systematic way to do this is to treat `$$`
 
 
 
