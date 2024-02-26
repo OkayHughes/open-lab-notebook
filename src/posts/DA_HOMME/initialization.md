@@ -9,27 +9,13 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
-The strong form of the EOS is 
+If we assume a Neumann upper boundary condition (i.e., `$$\mu \approx 1$$`) as described elsewhere,
+the most obvious way to translate a shallow-atmosphere state described in pressure coordinates is to use
+`$$T$$` and some method of calculating _physical_ density `$$\rho$$`, such as `$$p$$` (which is _physical_ pressure) and
+the DA HOMME EOS:
 `$$$
-\begin{align*}
- \partial_\eta[\hat{r}^2 \phi] &= - R_d \theta \textrm{ dp3d } \frac{\Pi}{p} \\
-  &= -\frac{R_d T}{p} \pder{}{\eta} \left[ \int g\hat{r}^2  \rho  \intd{z} \right] \\
-\end{align*}
+  p_k = \frac{R_d \theta_{v \textrm{ dp3d}}{\hat{r}^2 \Delta \phi_k} 
 $$$`
-
-where the eta (or z) coordinates used in initialization satisfy
-`$$$
-\begin{align*}
- \partial_\eta[ \phi] &= - R_d \theta \textrm{ dp3d } \frac{\Pi}{p} \\
-  &= -\frac{R_d T}{p} \pder{}{\eta} \left[ \int  \rho  \intd{z} \right] \\
-\end{align*}
-$$$`
-
-so perhaps we've advanced to the point where initializing in pressure coordinates 
-is just alright?
-
-
-
 
 
 
