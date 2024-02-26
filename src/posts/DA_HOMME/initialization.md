@@ -18,8 +18,19 @@ the DA HOMME EOS:
 $$$`
 and I have previously been enforcing this pointwise at model levels starting from the lower boundary where `$$\phi_{K+1}  = \phi_{\textrm{surf}}$$`
 and we rootfind on `$$\phi_{k}$$` for `$$k = K, \ldots, 1$$`. 
-This results in a very slightly imbalanced vertical structure in the atmosphere. In the DCMIP 2016 BW test case
-this results in initial things 
+This results in a very slightly imbalanced vertical structure in the atmosphere. In the DCMIP 2016 steady state test case in ne30 resolution with 30 levels,
+this results in initial vertical motion on the order of `$$10^{-3}$$` m/s for around 500 seconds, after which point `$$\mu \equiv 1$$`.
+A rough analysis of the change in `$$z$$` is that there is an approximately 100 m adjustment in vertical levels in the uppermost levels of the atmosphere.
+
+My current assumption is that this adjustment is due to the fact that initializing the atmosphere such that 
+pressure agrees at model levels does not guarantee that the discrete averaging used to reconstruct
+pressure at interfaces, namely
+`$$$
+  p_{k+\frac{1}{2}} = \frac{(\textrm{dp3d}_k)p_k + (\textrm{dp3d}_{k+1})p_{k+1}}{\textrm{dp3d}_{k} + \textrm{dp3d}_{k+1}}
+$$$`
+is satisfied. 
+
+
 
 
 
