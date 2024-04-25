@@ -32,8 +32,10 @@ Output frequency: every 6 hour.
 
 ## idea: adapt hybrid to small earth DA
 
-Assume reference column with known `$$T(z)$$` (I'll assume `$$T(z) = 273 K - 0.005 \textrm{ K m}^{-1} \cdot z$$`).
+Assume reference column with known `$$T(z)$$` (I'll assume `$$T(z) = 273 K - 0.005 \textrm{ K m}^{-1} \cdot z$$`). 
+Assume that the atmosphere is quasi-hydrostatic, `$$$ \pder{p}{z} = -\rho g \implies \int \intd{\log(p)} = - \int \frac{g}{R_d T} \intd{z} \implies \log(p/p0) - $$$`
 
-Given reference `$$\eta_i, A_i, B_i$$`, we use the fact that `$$A_i + B_i = \eta_i $$`
+Given reference interface values for `$$\eta_i, A_i, B_i$$`, we use the fact that `$$A_i + B_i = \eta_i $$`,
+then we set ``$\eta'_{K+0.5} = \eta'_{K+0.5}$``, then set `$$ \eta_{K-0.5} -  $$`
 
 
