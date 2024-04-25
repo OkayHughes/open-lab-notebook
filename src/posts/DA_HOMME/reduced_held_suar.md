@@ -37,6 +37,6 @@ Assume that the atmosphere is quasi-hydrostatic, `$$$ \pder{p}{z} = -\rho g \imp
 which we calculate by quadrature and invert via rootfinding 
 
 Given reference interface values for `$$\eta_i, A_i, B_i$$`, we use the fact that `$$A_i + B_i = \eta_i $$`,
-then we set ``$\eta'_{K+0.5} = \eta'_{K+0.5}$``, then set `$$ \eta_{K-0.5} -  $$`
+then we set ``$\eta'_{K+0.5} = \eta'_{K+0.5}$``, then set `$$ \eta_{K-0.5} -  $$`®
 
 
