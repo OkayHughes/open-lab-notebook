@@ -27,6 +27,6 @@ Output plan:
 * u, v, w
 * T, p, geo
 
-Output frequency: every 6 hour.s
+Output frequency: every 6 hour.
 
 
