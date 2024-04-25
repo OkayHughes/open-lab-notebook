@@ -19,7 +19,7 @@ DCMIP2016 steady-state initialization to (hopefully) speed up spinup
 
 ```
 
-We will use a reduction of `$$r=a/20$$` (Consistent with smallest earth used in Yessad and Wedi (2009)). 
+We will use a reduction of `$$r=a/10$` (Consistent with smallest earth used in Yessad and Wedi (2009)). 
 Reduction of lapse rate from 0.005 to 0.001 K/m is to address static instability observed in Skamarock DA MPAS paper.
 
 
@@ -28,7 +28,5 @@ Output plan:
 * T, p, geo
 
 Output frequency: every 6 hours.
-
-
 
 
