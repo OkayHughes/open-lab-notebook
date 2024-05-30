@@ -16,3 +16,7 @@ Link [here](https://docs.google.com/presentation/d/19nTfixk9-LP5194E0rxfxKdeRmlt
 
 
 Link [here](https://docs.google.com/presentation/d/1YfP9cvRDRiIlm8TxF7JAJx9IvGqhlW2G7FBiG416K5Q/edit?usp=sharing)
+
+
+
+Link to quals: [here](https://docs.google.com/presentation/d/1LMX7XvrkUsqbFF34wtANxzhECq27PHdVv1it4VjhJmI/edit?usp=sharing)
