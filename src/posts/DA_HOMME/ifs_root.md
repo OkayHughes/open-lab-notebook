@@ -9,15 +9,22 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
-Let `$$\eta_{\textrm{deep}}, \eta_{\textrm{shallow}}$$` be the deep and shallow mass coordinates,
-respectively. Analytic test cases, as well as, e.g., initializing from data,
-specify an invertible map `$$ \eta_{\textrm{shallow}} \mapsto z$$`. 
-When we read `$$\eta$$` values from a file in DA HOMME, these are `$$ \eta_{\textrm{deep}}$$` values.
+Let `$$\eta_{\textrm{d}}, \eta_{\textrm{s}}$$` be the deep and shallow mass coordinates,
+respectively. We define Analytic test cases, as well as, e.g., initializing from data,
+specify an invertible map `$$ \eta_{\textrm{s}} \mapsto z$$`. 
+When we read `$$\eta$$` values from a file in DA HOMME, these are `$$ \eta_{\textrm{d}}$$` values.
 We define the new mass coordinate such that
 `$$$
-\frac{\partial \pi}{\eta} = \rho g_0 \textrm{ becomes } 
+\frac{\partial \pi_\textrm{s}}{\partial \eta_{\textrm{s}}} = \rho g_0 \textrm{ becomes } \frac{\partial \pi_\textrm{d}}{\partial \eta_{\textrm{d}}} = \left(\frac{a+z}{a}\right)^2\rho g_0 = \left(\frac{r}{a}\right)^2 \rho g_0 = \hat{r}^2 \rho g_0
 $$$`
+and [Wood and Staniforth](https://rmets.onlinelibrary.wiley.com/doi/abs/10.1256/qj.02.153) find that height can be constructed as
+`$$$
+\begin{align*}
+ r^3 = r_s^3 - \frac{3a^2}{g} \int_{\pi'_\textrm{d} = \pi_\textrm{d}}^{\pi'_\textrm{d} = \pi_0} \frac{R_d T}{p} \,\mathrm{d}\pi_\textrm{d}\\
+ r^3 = r_s^3 - \frac{3a^2}{g} \int_{\pi'_\textrm{s} = \pi_\textrm{s}}^{\pi'_\textrm{s} = \pi_0} \hat{r}^2 \frac{R_d T}{p} \,\mathrm{d}\pi_\textrm{s}
 
+\end{align*}
+$$$`
 
 In [this article](https://www.ecmwf.int/sites/default/files/elibrary/2011/13179-hydrostatic-and-non-hydrostatic-global-model-ifsarpege-deep-layer-model-formulation-and.pdf)
 
