@@ -31,7 +31,7 @@ an isobaric upper boundary condition `$$p = \pi_0$$` at the top boundary in both
 Next step: 
 * determine ``$$\pi_s$$`` such that above integral gives correct `$$\Delta r$$` over entire atmosphere (ignore discretized `$$\eta$$` for the moment).
 * Reconstruct `$$\Delta \pi $$` from definition of hybrid coordinate.
-* partition `$$\Delta z_k $$` to incur least error
+* partition `$$\Delta z_k $$` to incur least error 
 
 
 
