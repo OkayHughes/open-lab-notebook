@@ -22,9 +22,9 @@ and [Wood and Staniforth](https://rmets.onlinelibrary.wiley.com/doi/abs/10.1256/
 \begin{align*}
  r^3 = r_s^3 - \frac{3a^2}{g} \int_{\pi'_\textrm{d} = \pi_\textrm{d}}^{\pi'_\textrm{d} = \pi_0} \frac{R_d T}{p} \,\mathrm{d}\pi_\textrm{d}\\
  r^3 = r_s^3 - \frac{3a^2}{g} \int_{\pi'_\textrm{s} = \pi_\textrm{s}}^{\pi'_\textrm{s} = \pi_0} \hat{r}^2 \frac{R_d T}{p} \,\mathrm{d}\pi_\textrm{s}
-
 \end{align*}
 $$$`
+At the topmost boundary, `$$\pi_\textrm{d} = \pi_{\textrm{s}} = \pi_0$$` 
 
 In [this article](https://www.ecmwf.int/sites/default/files/elibrary/2011/13179-hydrostatic-and-non-hydrostatic-global-model-ifsarpege-deep-layer-model-formulation-and.pdf)
 
