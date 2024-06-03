@@ -15,4 +15,5 @@ Define `$$A_F(\eta), B_F(\eta)$$` (where `$$F$$` could stand for something like 
 We seek modified internal model profiles `$$A_M(\eta), B_M(\eta)$$` that are suitable for small-planet
 simulation.
 
-
+In their parlance `$$\tilde{\pi}$$` is the deep-atmosphere column-integrated mass
+and `$$\pi$$` is the shallow-atmosphere column-integrated mass. 
