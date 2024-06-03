@@ -28,7 +28,8 @@ At the topmost boundary, `$$\pi_\textrm{d} = \pi_{\textrm{s}} = \pi_0$$`, though
 defines how `$$\pi_0$$` is interpreted is different in each model! Since we are using
 an isobaric upper boundary condition `$$p = \pi_0$$` at the top boundary in both models, this allows us to determine `$$z(\eta_{\textrm{d, top}}) = z(\eta_{\textrm{s, top}})$$`
 
-
+Next step: determine ``$$\pi_s$$`` such that above integral gives correct `$$\Delta r$$` over entire atmosphere (ignore discretized `$$\eta$$` for the moment)
+Reconstruct `$$\Delta \pi $$` from definition of hybrid coordinate.
 
 
 
