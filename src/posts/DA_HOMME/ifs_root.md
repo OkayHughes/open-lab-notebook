@@ -9,6 +9,10 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
+
+The general gist of the idea:
+* Given `$$T(\eta_\textrm{shallow}), z(\eta_\textrm{shallow}), p(\eta_\textrm{shallow})$$`, 
+
 In [this article](https://www.ecmwf.int/sites/default/files/elibrary/2011/13179-hydrostatic-and-non-hydrostatic-global-model-ifsarpege-deep-layer-model-formulation-and.pdf)
 
 Define `$$A_F(\eta), B_F(\eta)$$` (where `$$F$$` could stand for something like "file").
