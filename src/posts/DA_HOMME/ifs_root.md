@@ -26,7 +26,7 @@ and [Wood and Staniforth](https://rmets.onlinelibrary.wiley.com/doi/abs/10.1256/
 $$$`
 At the topmost boundary, `$$\pi_\textrm{d} = \pi_{\textrm{s}} = \pi_0$$`, though the integral that
 defines how `$$\pi_0$$` is interpreted is different in each model! Since we are using
-an isobaric upper boundary condition `$$p = \pi_0$$` at the top boundary in both models, this allows us to determine `$$z(\eta_{\textrm{d, top}},\eta_{\textrm{d, top}})$$`
+an isobaric upper boundary condition `$$p = \pi_0$$` at the top boundary in both models, this allows us to determine `$$z(\eta_{\textrm{d, top}}) = z(\eta_{\textrm{s, top}})$$`
 
 
 
