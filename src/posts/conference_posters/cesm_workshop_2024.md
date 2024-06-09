@@ -6,10 +6,11 @@ tags:
   - scientific-computing
 eleventyNavigation:
   parent: Conference posters
-  key: CESM Workshop 2023 Poster
+  key: CESM Workshop 2024 Poster
 layout: layouts/post.njk
 
 ---
+
 A digital version of the poster can be found [here](https://drive.google.com/file/d/1IA2y6olTZsGu_gv9bBuQh5i6OqKobqFH/view?usp=sharing) ([smaller file size](https://drive.google.com/file/d/18jnjwZGeC5WNAD85Hmlm9fFY10O0CuAf/view?usp=sharing)).
 
 ## References:
