@@ -30,7 +30,8 @@ In a particular basis `$$ \boldsymbol{u} \otimes \boldsymbol{v} = \mathbf{u} \ma
 The natural basis of the space of tensors can be constructed thusly in terms of `$$ \boldsymbol{e}_i \otimes \boldsymbol{e}_j$$`,
 for a suitably chosen basis. 
 
-We also define the double-product to be `$$\mathbf{A} : \mathbf{B} \equiv \sum_{i,j=1}^3 A_{ij}B_{ij}$$`
+We also define the double-product to be `$$\mathbf{A} : \mathbf{B} \equiv \sum_{i,j=1}^3 A_{ij}B_{ij}$$` (note, for this and higher-order tensors just use einstein notation)
+
 
 
 
