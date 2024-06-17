@@ -27,7 +27,15 @@ TR behavior boils down to a generalized Maxwell model
 and adequately describes the response to external loads around the working point `$$T_w$$` of the glass.
 The structural volume relaxation describes the processes in glassblowing that implicitly lead to brittle fracture
 either on the pipe or in the annealer. 
-Our initial implementation will solely describe the TR behavior 
+Our initial implementation will solely describe the TR behavior, which would be a qualitatively satisfying 
+(though slightly mathematically incorrect) description of glass if we artificially clamp `$$T > T_g$$` 
+(`$$T_g$$` is an empirical "glass transition temperature" used in the ceramic+glass literature).
+
+
+
+
+
+
 
 
 
