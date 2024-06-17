@@ -24,7 +24,11 @@ where the first operator is symmetric and the second operator is skew-symmetric.
 
 ## The dyadic product:
 We define `$$ (\boldsymbol{u} \otimes \boldsymbol{v}) \boldsymbol{w} \equiv (\boldsymbol{w} \cdot \boldsymbol{v}) \boldsymbol{u} $$`
-to be the dyadic product
+to be the dyadic product (specific case of tensor product). 
+In a particular basis `$$ \boldsymbol{u} \otimes \boldsymbol{v} = \mathbf{u} \mathbf{v}^\top$$`.
+
+The natural basis of the space of tensors can be constructed thusly in terms of `$$ \boldsymbol{e}_i \otimes \boldsymbol{e}_j$$`,
+for a suitably chosen basis. 
 
 
 
