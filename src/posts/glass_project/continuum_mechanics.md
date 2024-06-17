@@ -35,6 +35,15 @@ Our initial implementation will solely describe the TR behavior, which would be 
 Definitions:
 * Stress tensor: `$$ \sigma_{ij}$$`.
 * `$$G(t), K(t)$$` are the impulse response functions describing shear and bulk modulus for an isotropic material
+* `$$\varepsilon_ii $$` is trace of strain tensor
+* `$$e_ij$$` are the deviatoric strain tensor elements
+
+
+`$$$ \sigma_{ij} = 2\int_0^t G(t-t') \der{e_{ij}}{t'}(t') \intd{t'}  + \delta_{ij} \int_0^t K(t-t') \der{\varepsilon_{ii}}{t
+}(t') \intd{t'}$$$`
+(note: a factor of three has been absorbed here somewhere).
+
+
 
 
 
