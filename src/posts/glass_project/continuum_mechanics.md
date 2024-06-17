@@ -18,3 +18,17 @@ this should allow us to implement a rapid prototype in Jax+Fenics, where we can 
 automatic differentiation of the constitutive update with respect to input parameters 
 to do the Newton update step. 
 
+We start by working through the constitutive equation and volume relaxation given in 
+[this article](https://www.sciencedirect.com/science/article/pii/S0045794910001264)
+and [this thesis](https://backend.orbit.dtu.dk/ws/portalfiles/portal/5433989/Tempered+Glass.pdf).
+This approach splits the glass-like behavior into two components: thermo-rheologically simple (TR) viscoelasticity
+and structural volume relaxation. 
+TR behavior boils down to a generalized Maxwell model
+and adequately describes the response to external loads around the working point `$$T_w$$` of the glass.
+The structural volume relaxation describes the processes in glassblowing that implicitly lead to brittle fracture
+either on the pipe or in the annealer. 
+Our initial implementation will solely describe the TR behavior 
+
+
+
+
