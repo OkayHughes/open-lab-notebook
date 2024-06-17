@@ -1,0 +1,32 @@
+---
+date: 2021-08-30
+tags:
+  - posts
+  - finite_element
+  - glass_blowing
+eleventyNavigation:
+  parent: Main Glass Post
+  key: Continuum mechanics
+layout: layouts/post.njk
+---
+
+
+
+asdf
+
+# "Tensor analysis"
+
+
+* A 2-tensor `$$\mathbf{Q} $$` can be written as `$$ \mathbf{Q} = \frac{\mathbf{Q} + \mathbf{Q}^\top}{2} + \frac{\mathbf{Q} - \mathbf{Q}^\top}{2} $$`,
+where the first operator is symmetric and the second operator is skew-symmetric.
+* We also have `$$ \mathbf{Q} = \mathbf{R}\mathbf{S} $$` with `$$\mathbf{R}$$` orthogonal and `$$\mathbf{S} $$` symmetric.
+
+
+## The dyadic product:
+We define `$$ (\boldsymbol{u} \otimes \boldsymbol{v}) \boldsymbol{w} \equiv (\boldsymbol{w} \cdot \boldsymbol{v}) \boldsymbol{u} $$`
+to be the dyadic product
+
+
+
+
+
