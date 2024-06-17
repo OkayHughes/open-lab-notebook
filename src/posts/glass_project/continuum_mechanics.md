@@ -32,7 +32,14 @@ Our initial implementation will solely describe the TR behavior, which would be 
 (`$$T_g$$` is an empirical "glass transition temperature" used in the ceramic+glass literature).
 
 
+Definitions:
+* Stress tensor: `$$ \sigma_{ij}$$`.
+* `$$G(t), K(t)$$` are the impulse response functions describing shear and bulk modulus for an isotropic material
 
+
+
+
+## Misc explanations
 
 
 
