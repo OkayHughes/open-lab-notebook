@@ -36,8 +36,13 @@ This motivates defining the linear operators
 `$$ \left( \pder{}{\xi^i} \right)_p : f \in C^\infty(S) \mapsto \left(\pder{f}{\xi^i} \right)_p,$$`
 which satisfy
 `$$$ \left(\pder{\xi^i}{\rho^j} \right)_p  \left(\pder{}{\xi^i} \right)_p = \left(\pder{}{\rho^j} \right)_p,$$$`
-where the first term is a real scalar and then second two terms are linear operators.
+where the first term is a real scalar and then second two terms are linear operators. This gives
 `$$$
 \begin{align*}
-\der{}{t} f(\gamma(t))  &= 
+\der{}{t} f(\gamma(t))  &= \dot{\gamma}^i(t) \left(\pder{}{\xi^i}\right)_{\gamma(t)} [f] = \dot{\gamma}^i(t) \left[\left(\pder{\rho^j}{\xi^i}\right)_{\gamma(t)} \left(\pder{}{\rho^j}\right)_{\gamma(t)}\right] [f]
+\end{align*}
 $$$`
+motivating that we can either construct the tangent space from the typical cartesian product operators of 1d spaces
+`$$ \left( \pder{}{\xi^i} \right)_p $$`,
+or define it in terms of equivalence classes of `$$\dot{\gamma} $$`
+
