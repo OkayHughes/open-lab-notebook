@@ -35,8 +35,14 @@ For higher order tensors this is equivalent to einstein summation notation impli
 index. 
 
 # Kinematics
-We assume we have a map `$$\phi : \mathbb{R}^3 \times \mathbb{R}^+ \to \mathbb{R}^3$$` 
+We assume we have a map `$$\phi : \mathbb{R}^3 \times \mathbb{R}^+ \to \mathbb{R}^3$$` which maps `$$ \boldsymbol{X} \stackrel{\phi(\cdot, t)}{\to} \boldsymbol{x}$$`
 
+The lagrangian ("material") description of density and the eulerian ("spatial") description can therefore be unified as
+`$$ \rho = \rho(\boldsymbol{X}, t) = \rho(\phi(\boldsymbol{X}, t), t)$$`, showing that `$$\phi$$` is identified with
+the usual "flow map". 
+
+## The deformation gradient:
+Consider an element of the tangent space of a point `$$`
 
 
 
