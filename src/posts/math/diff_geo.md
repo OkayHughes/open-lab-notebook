@@ -18,6 +18,14 @@ we can define the coordinate transform `$$ \phi \circ \psi^{-1} : [\rho^i] \maps
 Use the usual tricks to define a smooth manifold, smooth functions by composing coordinates to get
 maps between `$$\mathbb{R}^n \mapsto \mathbb{R}^n$$` and calculating elementary partial derivatives.
 
-Note that for `$C^\infty$` coordinates, we have 
+Note that for `$$C^\infty$$` coordinates, we have 
 `$$$ \pder{\xi^i}{\rho^j} \pder{\rho^j}{\xi^k} = \delta_k^i $$$` 
-with `$$\delta_k^i$$` the kronecker delta symbol. 
+with `$$\delta_k^i$$` the kronecker delta symbol.
+This is just a reprasing of the multivariate chain rule applied to the 
+composition `$$ (\phi \circ \psi^{-1}) \circ (\phi \circ \psi^{-1})^{-1} = \textrm{id}.$$`
+Using the same linear map interpretation of the jacobian `$$ [\pder{\xi^i}{\rho^j}]$$`,
+we get `$$ \pder{f}{\rho^j} = \pder{\xi_i}{\rho_j} \pder{f}{\xi_i}$$`
+
+
+## Tangent space:
+Consider `$$\gamma : I \to S$$`, with `$$I\subset \mathbb{R}$$` an interval.  
