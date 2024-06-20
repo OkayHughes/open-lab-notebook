@@ -78,6 +78,7 @@ with `$$\boldsymbol{e} = \frac{1}{2}(\boldsymbol{I} - \boldsymbol{b}^{-1}) $$`
 
 ## Pushforward/pullback of tensor
 
-For a tensor `$$ \boldsymbol{B} : T_{} $$`
+For a tensor `$$ \boldsymbol{B} : T_{X_j}\boldsymbol{X} \times T_{X_j}^*\boldsymbol{X} \to \mathbb{R} $$` , `$$ \boldsymbol{B}() $$`
+the pushforward to the target is just `$$\boldsymbol{b}(d\boldsymbol{x}_i, \frac{\partial}{\partial \boldsymbol{x}_j}) \equiv \boldsymbol{B}(\phi_*(d\boldsymbol{x}_i), \phi_*^\top(\frac{\partial}{\partial \boldsymbol{x}_j})$$`
 
 
