@@ -69,3 +69,5 @@ is an assignment of an element in `$$[T_p]^q_r$$` to each point of `$$S$$`, e.g.
 `$$r$$` is the covariant degree and `$$q$$` is the contravariant degree (strictly speaking, the covariant degree are covector fields).
 Let `$$A$$` be a tensor field of type `$$q, r$$` and let `$$ X_1, \ldots, X_r$$` be vector fields,
 
+
+
