@@ -51,4 +51,14 @@ specified in one coordinates in terms of the reference coordinate.
 For notational convenience, we call `$$\left(\pder{}{\xi_i}\right)_p$$` the natural basis for 
 a coordinate `$$[\xi^i]$$`, and that the tangent space is `$$T_p(S) \equiv \left\{c^i \left(\pder{}{\xi^i}\right)_{p} \mid c_i \in \mathbb{R}\right\} $$`
 
-If we have `$$\lambda : S \to Q$$`, then we can define `$$ `
+If we have `$$\lambda : S \to Q$$`, and if `$$[\xi^i]$$` and `$$[\rho^j]$$` are coordinates for `$$S, Q$$` respectively, then
+`$$$
+(\textrm{d} \lambda)_p \left[\left(\pder{}{\xi^i}\right)_{p} \right] = \left(\pder{(\rho^j \circ \lambda)}{\xi^i}\right)_p \left(\pder{}{\rho^j}\right)_{\lambda(p)}
+$$$`
+
+## Vector fields:
+A map `$$ X : N \to T(S)$$` is a vector field. The choice of natural coordinates `$$[\partial_i] \equiv [\pder{}{\xi^i}] $$` (when this is unambigious)
+allows us to identify `$$\{X^1, X^2, X^3\}$$` with the coordinate functions such that `$$X(p) = X^i(p) (\partial_i)_p.$$`
+
+If we write in another basis `$$X = \tilde{X}^j(\tilde{\partial}_j)_p$$` then by the equations above,
+`$$X^ $$`
