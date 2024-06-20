@@ -63,10 +63,11 @@ ends up being called the right Cauchy-Green deformation tensor.
 In the other direction, 
 `$$$ 
 \begin{align*}
-\mathrm{d}\boldsymbol{X}_i \cdot \mathrm{d}\boldsymbol{X}_j &= \boldsymbol{F}^{-1}\mathrm{d}\boldsymbol{x}_i \cdot \boldsymbol{F}^{-1}\mathrm{d}\boldsymbol{x}_j   \\
-&= \mathrm{d}\boldsymbol{x}_i \cdot (\boldsymbol{F}^\top\boldsymbol{F}\mathrm{d}\boldsymbol{x}_j \\
-&\equiv \mathrm{d}\boldsymbol{X}_i \cdot \boldsymbol{C}\mathrm{d}\boldsymbol{X}_j \\
-\end{align*}$$$`
+\mathrm{d}\boldsymbol{X}_i \cdot \mathrm{d}\boldsymbol{X}_j &= \mathrm{d}\boldsymbol{x}_i \cdot \boldsymbol{F}^{-\top}\boldsymbol{F}^{-1}\mathrm{d}\boldsymbol{x}_j   
+\end{align*}
+$$$`
+and the left Cauchy-Green tensor is defined as `$$ \boldsymbol{b}^{-1} = \boldsymbol{F}^{-\top}\boldsymbol{F}^{-1} \implies \boldsymbol{b} = \boldsymbol{F} \boldsymbol{F}^{\top}$$`
+
 
 
 
