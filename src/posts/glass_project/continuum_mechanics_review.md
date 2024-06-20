@@ -68,7 +68,16 @@ In the other direction,
 $$$`
 and the left Cauchy-Green tensor is defined as `$$ \boldsymbol{b}^{-1} = \boldsymbol{F}^{-\top}\boldsymbol{F}^{-1} \implies \boldsymbol{b} = \boldsymbol{F} \boldsymbol{F}^{\top}$$`
 
+The difference in inner product induced by the flow map can thus be expressed in material form as
+`$$ \frac{1}{2}\left( \mathrm{d}\boldsymbol{x}_i \cdot \mathrm{d}\boldsymbol{x}_j - \mathrm{d}\boldsymbol{X}_i \cdot \mathrm{d}\boldsymbol{X}_j\right) = \mathrm{d}\boldsymbol{X}_i \cdot \boldsymbol{E} \mathrm{d}\boldsymbol{X}_j $$`
+with `$$\boldsymbol{E} = \frac{1}{2}(\boldsymbol{C} - \boldsymbol{I}) $$`
+and for the spatial form 
+`$$ \frac{1}{2}\left( \mathrm{d}\boldsymbol{x}_i \cdot \mathrm{d}\boldsymbol{x}_j - \mathrm{d}\boldsymbol{X}_i \cdot \mathrm{d}\boldsymbol{X}_j\right) = \mathrm{d}\boldsymbol{x}_i \cdot \boldsymbol{e} \mathrm{d}\boldsymbol{x}_j $$`
+with `$$\boldsymbol{e} = \frac{1}{2}(\boldsymbol{I} - \boldsymbol{b}^{-1}) $$`
 
 
+## Pushforward/pullback of tensor
+
+For a tensor `$$ \boldsymbol{B} : T_{} $$`
 
 
