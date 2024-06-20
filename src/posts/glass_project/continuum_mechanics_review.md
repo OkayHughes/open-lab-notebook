@@ -42,7 +42,12 @@ The lagrangian ("material") description of density and the eulerian ("spatial") 
 the usual "flow map". 
 
 ## The deformation gradient:
-Consider an element of the tangent space of a point `$$`
+Consider two elements of the tangent space of a point `$$\mathrm{d}\boldsymbol{X}_1, \mathrm{d}\boldsymbol{X}_2 $$`
+then the deformation gradient is just the differential of `$$\phi$$` written in coordinates,
+namely `$$$\boldsymbol{F} = \frac{\partial \phi_i}{\partial X_j} $$$`
+which has typing `$$ \boldsymbol{F} : T_{\boldsymbol{X}_j} \boldsymbol{X} \to T_{\phi(\boldsymbol{X}_j, t)} \boldsymbol{x} $$`
+
+
 
 
 
