@@ -34,5 +34,10 @@ from vector calculus.
 
 This motivates defining the linear operators 
 `$$ \left( \pder{}{\xi^i} \right)_p : f \in C^\infty(S) \mapsto \left(\pder{f}{\xi^i} \right)_p,$$`
-and thus 
-`$$$ \dot{\gamma}^i(t)  $$$`
+which satisfy
+`$$$ \left(\pder{\xi^i}{\rho^j} \right)_p  \left(\pder{}{\xi^i} \right)_p = \left(\pder{}{\rho^j} \right)_p,$$$`
+where the first term is a real scalar and then second two terms are linear operators.
+`$$$
+\begin{align*}
+\der{}{t} f(\gamma(t))  &= 
+$$$`
