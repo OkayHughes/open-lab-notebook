@@ -30,4 +30,6 @@ we get `$$ \pder{f}{\rho^j} = \pder{\xi_i}{\rho_j} \pder{f}{\xi_i}$$`
 ## Tangent space:
 Consider `$$\gamma : I \to S$$`, with `$$I\subset \mathbb{R}$$` an interval. Let `$$ f \in C^\infty(S)$$`.
 At a particular point we can define a space of linear operators 
-`$$ \left( \pder{}{\xi_i} \right) : C^\infty(S) `
+`$$ \left( \pder{}{\xi^i} \right)_p : f \in C^\infty(S) \mapsto \left(\pder{f}{\xi^i} \right)_p,$$`
+which are clearly linearly independent because `$$[\xi^i]$$` are coordinates.
+Thus if we let `$$\gamma^i = \xi^i(\gamma(t))$$`, then `$$$\der{}{t} f(\gamma(t))  = \left( \pder{f}{\xi^i} \right)_{\gamma(t)} \dot{\gamma}^i(t)$$$`
