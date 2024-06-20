@@ -44,5 +44,11 @@ where the first term is a real scalar and then second two terms are linear opera
 $$$`
 motivating that we can either construct the tangent space from the typical cartesian product operators of 1d spaces
 `$$ \left( \pder{}{\xi^i} \right)_p $$`,
-or define it in terms of equivalence classes of `$$\dot{\gamma} $$`
+or define it in terms of equivalence classes of `$$\dot{\gamma}^i$$` that calculate equivalent directional derivatives
+in the vector calculus sense. The chain rule specified above constructs a mapping between tangent vectors
+specified in one coordinates in terms of the reference coordinate.
 
+For notational convenience, we call `$$\left(\pder{}{\xi_i}\right)_p$$` the natural basis for 
+a coordinate `$$[\xi^i]$$`, and that the tangent space is `$$T_p(S) \equiv \left\{c^i \left(\pder{}{\xi^i}\right)_{p} \mid c_i \in \mathbb{R}\right\} $$`
+
+If we have `$$\lambda : S \to Q$$`, then we can define `$$ `
