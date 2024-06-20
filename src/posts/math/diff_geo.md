@@ -66,5 +66,6 @@ If we write in another basis `$$X = \tilde{X}^j(\tilde{\partial}_j)_p$$` then by
 Denote by `$$[T_p]^q_r$$` the multilinear mappings from `$$r$$` direct products of `$$T_p(S)$$` 
 to either `$$T_p$$` if `$$q=1$$` or `$$\mathbb{R}$$` if `$$q=0$$`. A tensor field of type `$$(q, r)$$`
 is an assignment of an element in `$$[T_p]^q_r$$` to each point of `$$S$$`, e.g. `$$ A : p \in S \mapsto A_p \in [T_p]^q_r$$`.
-`$$r$$` is the covariant degree and `$$q$$` is the contravariant degree.
-Let 
+`$$r$$` is the covariant degree and `$$q$$` is the contravariant degree (strictly speaking, the covariant degree are covector fields).
+Let `$$A$$` be a tensor field of type `$$q, r$$` and let `$$ X_1, \ldots, X_r$$` be vector fields,
+
