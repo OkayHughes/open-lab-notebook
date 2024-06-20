@@ -47,6 +47,7 @@ then the deformation gradient is just the differential of `$$\phi$$` written in 
 namely `$$$\boldsymbol{F} = \frac{\partial \phi_i}{\partial X_j} $$$`
 which has typing `$$ \boldsymbol{F} : T_{\boldsymbol{X}_j} \boldsymbol{X} \to T_{\phi(\boldsymbol{X}_j, t)} \boldsymbol{x} $$`
 
+We can use the standard argument to write `$$\mathmr`
 
 
 
