@@ -30,9 +30,12 @@ In a particular basis `$$ \boldsymbol{u} \otimes \boldsymbol{v} = \mathbf{u} \ma
 The natural basis of the space of tensors can be constructed thusly in terms of `$$ \boldsymbol{e}_i \otimes \boldsymbol{e}_j$$`,
 for a suitably chosen basis. 
 
-We also define the double-product to be `$$\mathbf{A} : \mathbf{B} \equiv \sum_{i,j=1}^3 A_{ij}B_{ij}$$` (note, for this and higher-order tensors just use einstein notation)
+We also define the double-product to be `$$\mathbf{A} : \mathbf{B} \equiv \sum_{i,j=1}^3 A_{ij}B_{ij}$$`.
+For higher order tensors this is equivalent to einstein summation notation implicitly specifying summation over the last
+index. 
 
-
+# Kinematics
+We assume we have a map `$$\phi : \mathbb{R}^3 \times \mathbb{R}^+ \to \mathbb{R}^3$$` 
 
 
 
