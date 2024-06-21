@@ -34,6 +34,8 @@ In [this article](https://www.ecmwf.int/sites/default/files/elibrary/2011/13179-
 
 ## Initializing by translating `$$\eta_{\textrm{deep}}$$` to `$$\eta_{\textrm{shallow}}$$`
 
-
-
-
+For simplicity of prototyping I assume that `$$p_{\textrm{top}} = \pi_{\textrm{top}}$$` (eventually this will be `$$p_{\textrm{top}} = \pi_{\textrm{top}}$$`)
+and that the initial data allows me to determine `$$ z_{\textrm{top}} $$` based on this pressure value. To initialize the atmosphere,
+first calculate 
+`$$$ \pi_{\textrm{deep, surf}} = \int_{z_\textrm{surf}}^{z_\textrm{top}} \hat{r}^2 \frac{p}{R_d T} \intd{z} $$$`
+and then use that to calculate `$$\pi(\eta_{\cdot,k}) = A(\eta_{\cdot, k}) \pi_0 + B(\eta_{\cdot, k}) \pi_s$$`
