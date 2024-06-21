@@ -83,7 +83,10 @@ $$$`
 ## averaging
 `$$$ 
 \begin{align*}
-  \frac{1}{z-z_0}\int_{z_0}^z \left( \frac{a+z}{a} \right)^2 \intd{z} &= \frac{1}{a^2(z-z_0)}\int_{z_0}^z \left( a+z \right)^2 \intd{z}\\
-  &= \frac{1}{a^2(z-z_0)}\left[ \frac{\left( a+z \right)^3}{3}\right]_{z_0}^z\\
+  \frac{1}{z_1-z_0}\int_{z_0}^{z_1} \left( \frac{a+z}{a} \right)^2 \intd{z} &= \frac{1}{a^2(z-z_0)}\int_{z_0}^{z_1} \left( a+z \right)^2 \intd{z}\\
+  &= \frac{1}{a^2(z-z_0)}\left[ \frac{\left( a+z \right)^3}{3}\right]_{z_0}^{z_1}\\
+  &= \frac{1}{a^2(z_1-z_0)}\left[ \frac{\left( (a+z_1) - (a+z_0) \right) \left( (a+z_1)^2 + (a+z_0)^2 + (a+z_0)(a+z_1)  \right)}{3} \right]\\
+  &=  \frac{\left( z_1 - z_0 \right) \left( (a+z_1)^2 + (a+z_0)^2 + (a+z_0)(a+z_1)  \right)}{3a^2(z_1-z_0)} \\
+  &=  \frac{1}{3}\left[\left(\frac{a+z_1}{a}\right)^2 + \left(\frac{a+z_0}{a}\right)^2 + \left(\frac{a+z_0}{a}\right)\left(\frac{a+z_1}{a}\right) \right]\\
 \end{align*}
 $$$`
