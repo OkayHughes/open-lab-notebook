@@ -39,11 +39,14 @@ and that the initial data allows me to determine `$$ z_{\textrm{top}} $$` based 
 first calculate 
 `$$$ \pi_{\textrm{deep, surf}} = \int_{z_\textrm{surf}}^{z_\textrm{top}} \hat{r}^2 \frac{p}{R_d T} \intd{z} $$$`.
 In practice, this integral proceeds from the top of the atmosphere. I do the integral in `$$z$$` coordinates 
-but the integrals in Wood and Staniforth provide the analogous integral in `$$\eta_{\textrm{shallow}}$$` coordinates (though height must be determined in any case).
+because I find it notationally easier to tell what's going on.
+That said, the integrals in Wood and Staniforth provide the analogous integral in `$$\eta_{\textrm{shallow}}$$` coordinates (though height must be determined in any case).
 and then use that to calculate `$$\pi_{\textrm{deep}}(\eta_{\cdot,k}) = A(\eta_{\cdot, k}) \pi_0 + B(\eta_{\cdot, k}) \pi_{\textrm{deep, surf}} $$`, for `$$\eta_{\textrm{int}, k}, \eta_{\textrm{model}, k}$$`
-Then perform a scan from the top of the atmosphere to get `$$z(\eta_{\cdot, k})$$` that satisfy `$$ \pi_{\textrm{deep}}(\eta_{\cdot,k})  $$`
+Then perform a scan from the top of the atmosphere to get `$$z(\eta_{\cdot, k})$$` that satisfy `$$ \pi_{\textrm{deep}}(\eta_{\cdot,k})  = \int_{z(\eta_{\cdot, k})}^{z_{\textrm{top}}} \hat{r}^2 \frac{p}{R_d T} \intd{z} $$`
+Then set `$$T_v, u, v, w, $$` based on either 
 
 
-
-* The preliminary integral to calculate the total mass in the column cannot be done at the same time as 
+### Notes:
+* The preliminary integral to calculate the total mass in the column cannot be done at the same time as the scan to determine `$$z(\eta_{\cdot, k})$$`, because determining the new `$$\pi_{\textrm{deep}}(\eta_{\cdot,k})$$`
+relies on knowledge of `$$\pi_{\textrm{deep, surf}}$$`
 * Note that `$$ \pi_{\textrm{deep, surf}} $$` becomes `ps_v` in the code, and may be totally different from the physical pressure at the surface!
