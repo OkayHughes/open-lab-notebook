@@ -5,7 +5,7 @@ tags:
   - misc
 eleventyNavigation:
   parent: Deep Atmosphere HOMME
-  key: Ugh
+  key: eta-to-eta initialization
 layout: layouts/post.njk
 ---
 
@@ -28,21 +28,12 @@ At the topmost boundary, `$$\pi_\textrm{d} = \pi_{\textrm{s}} = \pi_0$$`, though
 defines how `$$\pi_0$$` is interpreted is different in each model! Since we are using
 an isobaric upper boundary condition `$$p = \pi_0$$` at the top boundary in both models, this allows us to determine `$$z(\eta_{\textrm{d, top}}) = z(\eta_{\textrm{s, top}})$$`
 
-Next step: 
-* determine ``$$\pi_s$$`` such that above integral gives correct `$$\Delta r$$` over entire atmosphere (ignore discretized `$$\eta$$` for the moment).
-* Reconstruct `$$\Delta \pi $$` from definition of hybrid coordinate.
-* partition `$$\Delta z_k $$` to incur least error 
-
 
 
 In [this article](https://www.ecmwf.int/sites/default/files/elibrary/2011/13179-hydrostatic-and-non-hydrostatic-global-model-ifsarpege-deep-layer-model-formulation-and.pdf)
 
-Define `$$A_F(\eta), B_F(\eta)$$` (where `$$F$$` could stand for something like "file").
-We seek modified internal model profiles `$$A_M(\eta), B_M(\eta)$$` that are suitable for small-planet
-simulation.
+## Initializing by translating `$$\eta_{\textrm{deep}}$$` to `$$\eta_{\textrm{shallow}}$$`
 
-In their parlance `$$\tilde{\pi}$$` is the deep-atmosphere column-integrated mass
-and `$$\pi$$` is the shallow-atmosphere column-integrated mass. 
 
 
 
