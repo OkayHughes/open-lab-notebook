@@ -78,3 +78,12 @@ and thus
  \partial_{\Delta \phi_k} \mu &= -\frac{p_k}{\textrm{dp3d}_{\textrm{int}, k+1}} [\Delta \phi_{k}]^{-1}
 \end{align*}
 $$$`
+
+
+## averaging
+`$$$ 
+\begin{align*}
+  \frac{1}{z-z_0}\int_{z_0}^z \left( \frac{a+z}{a} \right)^2 \intd{z} &= \frac{1}{a^2(z-z_0)}\int_{z_0}^z \left( a+z \right)^2 \intd{z}\\
+  &= \frac{1}{a^2(z-z_0)}\left[ \frac{\left( a+z \right)^3}{3}\right]_{z_0}^z\\
+\end{align*}
+$$$`
