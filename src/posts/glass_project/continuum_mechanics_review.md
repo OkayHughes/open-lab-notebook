@@ -82,3 +82,4 @@ For a tensor `$$ \boldsymbol{B} : T_{X_j}\boldsymbol{X} \times T_{X_j}^*\boldsym
 the pushforward to the target is just `$$\boldsymbol{b}(d\boldsymbol{x}_i, \frac{\partial}{\partial \boldsymbol{x}_j}) \equiv \boldsymbol{B}(\phi_*(d\boldsymbol{x}_i), \phi_*^\top(\frac{\partial}{\partial \boldsymbol{x}_j})$$`
 
 
+
