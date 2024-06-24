@@ -75,7 +75,7 @@ and contravariant vectors transform according to the jacobian `$$  \frac{\partia
 `$$$
 \begin{align*}
   \textrm{contravariant: }& X = X^i \left(\frac{\partial}{\partial \xi^i} \right) = \tilde{X}^j \left(\frac{\partial}{\partial \rho^j} \right)  \in T_pM \implies X^i = \tilde{X}^j\pder{\xi^i}{\rho^j} \\
-  \textrm{covariant: }&  \omega = \omega^i \textrm{d}\xi_i = \tilde{\omega}^j   \in T_p^*M \implies \omega^i = \tilde{\omega}^j \frac{\partial \rho^j}{ \partial \xi^i} 
+  \textrm{covariant: }&  \omega = \omega_i \textrm{d}\xi_i = \tilde{\omega}_j \textrm{d}\rho_j  \in T_p^*M \implies \omega_i = \tilde{\omega}_j \frac{\partial \rho^j}{ \partial \xi^i} 
 \end{align*}
 $$$`
 
@@ -87,3 +87,7 @@ Let `$$A$$` be a tensor field of type `$$q, r$$` and let `$$ X_1, \ldots, X_r$$`
 
 
 Note that for natural coordinates, `$$\partial_i $$`, we can take `$$ \bigotimes_{i_l} \partial_{i_l}$$`
+
+
+## The metric:
+A metric is a (0, 2) tensor field that is symmetric and positive definite. If we denote this as `$$g() $$`
