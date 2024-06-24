@@ -63,8 +63,10 @@ allows us to identify `$$\{X^1, X^2, X^3\}$$` with the coordinate functions such
 If we write in another basis `$$X = \tilde{X}^j(\tilde{\partial}_j)_p$$` then by the equations above,
 `$$X^i = \tilde{X}^j\pder{\xi^i}{\rho^j}$$` and let `$$ \mathcal{T}$$` be the space of `$$C^\infty$$` vector fields. 
 
-To get cotangent space we start wi
-
+To get cotangent space we start by defining the differential of a smooth function
+`$$\mathrm{d}f \in T_p^*M $$` so that `$$ \mathrm{d}f\left(\partial^i \right) = \frac{\partial f}{\partial \xi^i}$$` We start by finding the dual basis
+`$$\textrm{d} \xi_i\left(\frac{\partial}{\partial \xi^i} \right) = \delta^i_j$$` 
+which allows us to find `$$  $$`
 
 Denote by `$$[T_p]^q_r$$` the multilinear mappings from `$$r$$` direct products of `$$T_p(S)$$` 
 to either `$$T_p$$` if `$$q=1$$` or `$$\mathbb{R}$$` if `$$q=0$$`. A tensor field of type `$$(q, r)$$`
