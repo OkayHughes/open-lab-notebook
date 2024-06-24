@@ -66,7 +66,10 @@ If we write in another basis `$$X = \tilde{X}^j(\tilde{\partial}_j)_p$$` then by
 To get cotangent space we start by defining the differential of a smooth function
 `$$\mathrm{d}f \in T_p^*M $$` so that `$$ \mathrm{d}f\left(\partial^i \right) = \frac{\partial f}{\partial \xi^i}$$` We start by finding the dual basis
 `$$\textrm{d} \xi_i\left(\frac{\partial}{\partial \xi^i} \right) = \delta^i_j$$` 
-which allows us to find `$$  $$`
+which allows us to find `$$ \textrm{d}f = \frac{\partial f}{\partial \xi^i} \mathrm{d} \xi_i.$$` This definition aligns with
+`$$ \nabla_X f = \mathrm{d}f(X^i \partial_i) = X^i\frac{\partial f}{\partial \xi^i}$$`.
+As a result, suppose we have a covector (covariant vector for physicists)`$$ \omega^i \textrm{d}\xi_i$$`,
+then `$$\tilde{\omega}^j \mathrm{d}\rho  $$`
 
 Denote by `$$[T_p]^q_r$$` the multilinear mappings from `$$r$$` direct products of `$$T_p(S)$$` 
 to either `$$T_p$$` if `$$q=1$$` or `$$\mathbb{R}$$` if `$$q=0$$`. A tensor field of type `$$(q, r)$$`
