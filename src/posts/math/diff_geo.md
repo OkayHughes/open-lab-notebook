@@ -60,10 +60,11 @@ $$$`
 A map `$$ X : N \to T(S)$$` is a vector field. The choice of natural coordinates `$$[\partial_i] \equiv [\pder{}{\xi^i}] $$` (when this is unambigious)
 allows us to identify `$$\{X^1, X^2, X^3\}$$` with the coordinate functions such that `$$X(p) = X^i(p) (\partial_i)_p.$$`
 
-
-
 If we write in another basis `$$X = \tilde{X}^j(\tilde{\partial}_j)_p$$` then by the equations above,
 `$$X^i = \tilde{X}^j\pder{\xi^i}{\rho^j}$$` and let `$$ \mathcal{T}$$` be the space of `$$C^\infty$$` vector fields. 
+
+To get cotangent space we start wi
+
 
 Denote by `$$[T_p]^q_r$$` the multilinear mappings from `$$r$$` direct products of `$$T_p(S)$$` 
 to either `$$T_p$$` if `$$q=1$$` or `$$\mathbb{R}$$` if `$$q=0$$`. A tensor field of type `$$(q, r)$$`
