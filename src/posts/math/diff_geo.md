@@ -86,8 +86,10 @@ is an assignment of an element in `$$[T_p]^q_r$$` to each point of `$$S$$`, e.g.
 Let `$$A$$` be a tensor field of type `$$q, r$$` and let `$$ X_1, \ldots, X_r$$` be vector fields,
 
 
-Note that for natural coordinates, `$$\partial_i $$`, we can take `$$ \bigotimes_{i_l} \partial_{i_l}$$`
+Note that for natural coordinates, `$$\partial_i $$`, we can take `$$ $$`
 
 
 ## The metric:
-A metric is a (0, 2) tensor field that is symmetric and positive definite. If we denote this as `$$g() $$`
+A metric is a (0, 2) tensor field that is symmetric and positive definite. 
+If we denote this as `$$g: T_pM \otimes T_pM \to \mathbb{R} $$`, then we get
+`$$ \omega_X \in T_p^*M : Y \mapsto g(X \otimes Y)$$`
