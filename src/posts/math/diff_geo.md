@@ -60,6 +60,8 @@ $$$`
 A map `$$ X : N \to T(S)$$` is a vector field. The choice of natural coordinates `$$[\partial_i] \equiv [\pder{}{\xi^i}] $$` (when this is unambigious)
 allows us to identify `$$\{X^1, X^2, X^3\}$$` with the coordinate functions such that `$$X(p) = X^i(p) (\partial_i)_p.$$`
 
+
+
 If we write in another basis `$$X = \tilde{X}^j(\tilde{\partial}_j)_p$$` then by the equations above,
 `$$X^i = \tilde{X}^j\pder{\xi^i}{\rho^j}$$` and let `$$ \mathcal{T}$$` be the space of `$$C^\infty$$` vector fields. 
 
@@ -70,4 +72,4 @@ is an assignment of an element in `$$[T_p]^q_r$$` to each point of `$$S$$`, e.g.
 Let `$$A$$` be a tensor field of type `$$q, r$$` and let `$$ X_1, \ldots, X_r$$` be vector fields,
 
 
-
+Note that for natural coordinates, `$$\partial_i $$`, we can take `$$ \bigotimes_{i_l} \partial_{i_l}$$`
