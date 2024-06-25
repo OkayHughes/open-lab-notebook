@@ -100,8 +100,14 @@ Indeed, on a purely formal level this leads us to consider `$$ X(Y(f))$$` or `$$
 Writing in coordinates we get `$$ X = X^i \partial_i, Y=Y^j\partial_j $$` and then see
 `$$$ 
 \begin{align*}
-  X(Y(f)) = X\left( Y^j \pder{f}{\xi^j}  \right) = 
+  X(Y(f)) &= X\left( Y^j \pder{f}{\xi^j}  \right) = X^i Y^j \frac{\partial^2 f}{\partial \xi^i\partial \xi^j} + X^i \pder{Y^j}{\xi^i} \pder{f}{\xi^j}  \\
+  Y(X(f)) &= Y\left( X^i \pder{f}{\xi^i}  \right) = X^i Y^j \frac{\partial^2 f}{\partial \xi^i\partial \xi^j} + Y^j \pder{X^i}{\xi^j} \pder{f}{\xi^i} \\
 \end{align*}
+$$$`
+There are common terms that cancel, motivating the definition 
+`$$$
+   [XY-YX](f) &= X^i \pder{Y^j}{\xi^i} \pder{f}{\xi^j} - Y^j \pder{X^i}{\xi^j} \pder{f}{\xi^i} \\
+   &= \left[X^i \frac{}{} \right]
 $$$`
 
 
