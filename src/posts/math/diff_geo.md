@@ -9,7 +9,8 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
-We follow the hyperspeed introduction to differential geometry (not topology!) given in [this monograph](https://bookstore.ams.org/mmono-191)
+We follow the hyperspeed introduction to differential geometry (not topology!) given in [this monograph](https://bookstore.ams.org/mmono-191).
+I've found that it's very helpful to include the first 60 pages of [do carmo](https://medusa.teodesian.net/docs/mathematics/Riemannian%20Geometry%20-%20M.%20doCarmo%20(1993)%20WW.pdf).
 
 Suppose we have a manifold `$$S$$` (without boundary), and let `$$\phi : S \to \mathbb{R}^n$$` be 
 a coordinate chart `$$ \phi(p) = [\xi^1(p), \ldots, \xi^n(p)]$$`. 
@@ -94,7 +95,14 @@ Recall the pushforward of a map `$$\phi : M \to M $$`. We can calculate the push
 
 In order to build up to characterizing the bracket operation, recall that we can 
 characterize vector fields as `$$X = X^i \pder{}{\xi^i} $$` which 
-are, strictly speaking, differential operators acting on smooth functions as `$$ X(f) =  $$`
+are, strictly speaking, differential operators acting on smooth functions as `$$ X(f) = X^i \pder{f}{\xi^i} $$`.
+Indeed, on a purely formal level this leads us to consider `$$ X(Y(f))$$` or `$$ Y(X(f))$$`. 
+Writing in coordinates we get `$$ X = X^i \partial_i, Y=Y^j\partial_j $$` and then see
+`$$$ 
+\begin{align*}
+  X(Y(f)) = X\left( Y^j \pder{f}{\xi^j}  \right) = 
+\end{align*}
+$$$`
 
 
 ## The metric:
