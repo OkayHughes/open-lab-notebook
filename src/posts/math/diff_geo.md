@@ -121,11 +121,17 @@ It's easy to see that the bracket is anticommutative and linear in smooth functi
 $$$`
 This is one natural way to derive a second vector field from two existing vector fields, but
 it is not immediately clear what it does. Using elementary ODE theory, one can
-derive a flow map `$$\phi_X(t, p)$$` such that `$$ [\partial_t \phi_X](t, p) = X_q, phi(0, q) = q$$` .
-We find that if `$$ X, Y$$` are smooth vector fields,
+derive a flow map `$$\phi_X(t, p)$$` such that `$$ [\partial_t \phi_X](t, p) = X_q, \phi(0, q) = q$$` .
+We find that if `$$ X, Y$$` are smooth vector fields, `$$\phi_{t} : p \in M \mapsto \phi(t, \cdot)$$`
 `$$$
-  [X, Y](p) = \lim_{\Delta t \to 0} \frac{1}{\Delta t}\left[\ \right] 
+\begin{align*}
+  [X, Y](p) &= \lim_{\Delta t \to 0} \frac{1}{\Delta t}\left[[\textrm{d} \phi_0] Y - [\textrm{d} \phi_{\Delta t}] Y \right](\phi_{\Delta t}(p))\\
+  &= \lim_{\Delta t \to 0} \frac{1}{\Delta t}\left[Y - [\textrm{d} \phi_{\Delta t}] Y \right](\phi_{\Delta t}(p))
+\end{align*}
 $$$`
+where the odd choice of sign comes from the fact that the ersatz derivative is being
+calculated by evaluating `$$Y, [\textrm{d} \phi_{\Delta t}] Y $$` at `$$ (\phi_{\Delta t}(p)) $$`
+
 
 ## The metric:
 A metric is a (0, 2) tensor field that is symmetric and positive definite. 
