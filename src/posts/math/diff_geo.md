@@ -207,10 +207,15 @@ denoted by `$$ (X, Y) \mapsto \nabla_X(Y)$$`. Note that we can characterize this
 in coordinates by `$$?_{ij}^k (\textrm{d}\xi_i \otimes \textrm{d}\xi_j \otimes \partial_k)$$`.
 
 It is specified to have the following properties
-1. `$$ \nabla_{fX + gY} Z = f \nabla_X Z g \nabla_Y Z$$` 
+1. `$$ \nabla_{fX + gY} Z = f \nabla_X Z + g \nabla_Y Z$$` 
 2. `$$ \nabla_X(Y + Z) = \nabla_X(Y) + \nabla_X(Z) $$`
 3. `$$ \nabla_X(fY) = f\nabla_X(Y) + X(f)Y$$`
 Interesting to note that (3) expresses that partial application of `$$X$$` to `$$\nabla$$` 
 induces a (1, 1) tensor that obeys a sort of leibniz rule. 
 
-This definition is a little baffling, but 
+This definition is a little baffling, but this might clarify it.
+Let `$$c$$` be a smooth curve and `$$V, W$$` be vector fields on the image of `$$c$$`, and `$$f$$` be a smooth function.
+The properties that we want a covariant derivative to satisfy are 
+1. `$$ \der{}{t}(V + W) = \der{V}{t} + \der{W}{t}$$`
+2. `$$ \der{}{t} (fV) = f\der{V}{t} + \der{f}{t}V $$`
+3. If `$$ V(t) = Y(c(t))  $$` for `$$Y$$` a vector field on `$$M$$`, then `$$ \der{V}{t} = \nabla_{\dot{c}} Y$$`
