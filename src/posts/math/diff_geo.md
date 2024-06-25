@@ -164,3 +164,5 @@ usual association between primal and dual vector spaces induced by an inner prod
 A useful exercise at some point would be to formally determine that `$$ \Gamma(M) \otimes \Gamma(M)$$` 
 has nice properties and is smooth and stuff.
 In any case, we can write `$$g =  g^{ij} (\partial_i \otimes \partial_j ) $$` as follows: 
+
+### Curve length:
