@@ -166,3 +166,12 @@ has nice properties and is smooth and stuff.
 In any case, we can write `$$g =  g^{ij} (\partial_i \otimes \partial_j ) $$` as follows: 
 
 ### Curve length:
+Recall from above that the velocity of a curve `$$ \gamma : (a, b) \to M $$` can be derived via smooth `$$f$$` as
+`$$$ \der{f(\gamma(t))}{t} = \pder{f}{\xi^i} \der{\xi^i(\gamma(t))}{t} \implies \dot{\gamma}(t) \simeq \dot{\gamma}^i \partial_i $$$`.
+Therefore, if `$$ [a', b'] \subset (a,b)$$` then
+`$$$
+\begin{align*}
+ \ell_{a'}^{b'} &\equiv \int_{a'}^{b'} \sqrt{g(\dot{\gamma}(t) \otimes \dot{\gamma}(t))} \intd{t} \\
+ &= \int_{a'}^{b'} \sqrt{g([\dot{\gamma}^i \partial_i] \otimes \dot{\gamma}(t)) \intd{t} \\
+\end{align*}
+$$$`
