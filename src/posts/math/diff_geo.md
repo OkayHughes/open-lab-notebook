@@ -88,9 +88,13 @@ Let `$$A$$` be a tensor field of type `$$q, r$$` and let `$$ X_1, \ldots, X_r$$`
 
 
 
-
 ## Characterizing the bracket:
+Recall the pushforward of a map `$$\phi : M \to M $$`. We can calculate the pushforward of a vector field 
+`$$ (\textrm{d}\phi(X))_0 : X_p \in T_pM \mapsto \textrm{d}\phi(X_p) \in T_{\phi(p)}M $$`.
 
+In order to build up to characterizing the bracket operation, recall that we can 
+characterize vector fields as `$$X = X^i \pder{}{\xi^i} $$` which 
+are, strictly speaking, differential operators acting on smooth functions as `$$ X(f) =  $$`
 
 
 ## The metric:
