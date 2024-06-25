@@ -12,6 +12,9 @@ layout: layouts/post.njk
 We follow the hyperspeed introduction to differential geometry (not topology!) given in [this monograph](https://bookstore.ams.org/mmono-191).
 I've found that it's very helpful to include the first 60 pages of [do carmo](https://medusa.teodesian.net/docs/mathematics/Riemannian%20Geometry%20-%20M.%20doCarmo%20(1993)%20WW.pdf).
 
+Note: exterior algebra makes my head hurt, so I've ommitted any treatment of it here.
+If this makes certain statements slightly wrong, I'm sorry. 
+
 Suppose we have a manifold `$$S$$` (without boundary), and let `$$\phi : S \to \mathbb{R}^n$$` be 
 a coordinate chart `$$ \phi(p) = [\xi^1(p), \ldots, \xi^n(p)]$$`. 
 If we have another suitably smooth coordinate chart `$$ \psi = [\rho^i]$$`,
@@ -188,4 +191,15 @@ to `$$S$$`. The derivative `$$ \der{V}{t}$$` is not necessarily tangent to `$$S$
 but can be projected onto the tangent space. This
 is the euclidean analogue of the covariant derivative. 
 In particular, the velocity vector `$$\textrm{d}c$$` can be differentiated 
-to yield an "acceleration" vector. In the euclidean case 
+to yield an "acceleration" vector. 
+In the euclidean case, one can show that the only curves having zero acceleration are 
+geodesics under the induced metric. 
+Therefore, in the setting of manifolds, we want to introduce a notion of covariant
+derivative that generalizes the notion that `$$\der{V}{t} = 0 $$` 
+indicates that `$$ V$$` is parallel to the manifold.
+
+### Affine connection
+Here we care only about affine connections in order to build up to the 
+unique connection induced by a choice of metric.
+
+An affine connection is a (1, 2) tensor 
