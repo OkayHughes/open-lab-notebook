@@ -92,4 +92,7 @@ Note that for natural coordinates, `$$\partial_i $$`, we can take `$$ $$`
 ## The metric:
 A metric is a (0, 2) tensor field that is symmetric and positive definite. 
 If we denote this as `$$g: T_pM \otimes T_pM \to \mathbb{R} $$`, then we get
-`$$ \omega_X \in T_p^*M : Y \mapsto g(X \otimes Y)$$`
+`$$ \omega_X \in T_p^*M : Y \mapsto g(X \otimes Y)$$`, i.e. the 
+usual association between primal and dual spaces induced by an inner product. 
+
+Todo: write this in coordinates!
