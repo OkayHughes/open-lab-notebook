@@ -163,4 +163,4 @@ If we denote this as `$$g: \Gamma(M) \otimes \Gamma(M) \to \mathbb{R} $$`, then 
 usual association between primal and dual vector spaces induced by an inner product. 
 A useful exercise at some point would be to formally determine that `$$ \Gamma(M) \otimes \Gamma(M)$$` 
 has nice properties and is smooth and stuff.
-This allows us to write `$$ g^{ij} =  $$`
+In any case, we can write `$$g =  g^{ij} (\partial_i \otimes \partial_j ) $$` as follows: 
