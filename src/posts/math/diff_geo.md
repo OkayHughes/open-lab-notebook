@@ -178,4 +178,14 @@ Therefore, if `$$ [a', b'] \subset (a,b)$$` then
 \end{align*}
 $$$`
 
-Interesting tidbit: if you're willing to 
+Interesting tidbit: if you're willing to introduce exterior algebra, then you can get volume from this.
+
+
+## Covariant derivatives and affine connections
+Shamelessly stealing from do carmo: suppose we have a surface `$$S \subset \mathbb{R}^3$$`,
+a curve `$$ c: (a, b) \to S$$`, and a vector field `$$V : (a, b) \to \mathbb{R}^3$$` that is tangent
+to `$$S$$`. The derivative `$$ \der{V}{t}$$` is not necessarily tangent to `$$S$$`, 
+but can be projected onto the tangent space. This
+is the euclidean analogue of the covariant derivative. 
+In particular, the velocity vector `$$\textrm{d}c$$` can be differentiated 
+to yield an "acceleration" vector. In the euclidean case 
