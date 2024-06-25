@@ -163,7 +163,8 @@ If we denote this as `$$g: \Gamma(M) \otimes \Gamma(M) \to \mathbb{R} $$`, then 
 usual association between primal and dual vector spaces induced by an inner product. 
 A useful exercise at some point would be to formally determine that `$$ \Gamma(M) \otimes \Gamma(M)$$` 
 has nice properties and is smooth and stuff.
-In any case, we can write `$$g =  g^{ij} (\partial_i \otimes \partial_j ) $$` as follows: 
+In any case, we can write `$$g =  g^{ij} (\partial_i \otimes \partial_j ) $$` so that `$$ g_{ij}g^{jk} = \delta_{i}^k$$`.
+
 
 ### Curve length:
 Recall from above that the velocity of a curve `$$ \gamma : (a, b) \to M $$` can be derived via smooth `$$f$$` as
@@ -172,6 +173,9 @@ Therefore, if `$$ [a', b'] \subset (a,b)$$` then
 `$$$
 \begin{align*}
  \ell_{a'}^{b'} &\equiv \int_{a'}^{b'} \sqrt{g(\dot{\gamma}(t) \otimes \dot{\gamma}(t))} \intd{t} \\
- &= \int_{a'}^{b'} \sqrt{g([\dot{\gamma}^i \partial_i] \otimes \dot{\gamma}(t)) \intd{t} \\
+ &= \int_{a'}^{b'} \sqrt{g([\dot{\gamma}^i \partial_i] \otimes [\dot{\gamma}^j \partial_j])} \intd{t} \\
+ &= \int_{a'}^{b'} \sqrt{g_{ij} \dot{\gamma}^i \dot{\gamma}^j} \intd{t} \\
 \end{align*}
 $$$`
+
+Interesting tidbit: if you're willing to 
