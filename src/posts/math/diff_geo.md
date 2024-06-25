@@ -134,6 +134,8 @@ calculated by evaluating `$$Y, [\textrm{d} \phi_{\Delta t}] Y $$` at `$$ (\phi_{
 where the apparent type error (`$$ T_pM \neq T_{\phi_{\Delta t}(p)}M$$`) disappears noting
 that the convergence is really a statement on vector fields instead of evaluations at a particular point.
 The proof comes down to evaluation of vector fields on smooth functions, making this precise. 
+Therefore, the bracket measures the rate of change of `$$Y$$` along the trajectories of `$$X$$`.
+
 
 
 ## The metric:
