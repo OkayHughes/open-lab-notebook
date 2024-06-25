@@ -86,7 +86,11 @@ is an assignment of an element in `$$[T_p]^q_r$$` to each point of `$$S$$`, e.g.
 Let `$$A$$` be a tensor field of type `$$q, r$$` and let `$$ X_1, \ldots, X_r$$` be vector fields,
 
 
-Note that for natural coordinates, `$$\partial_i $$`, we can take `$$ $$`
+
+
+
+## Characterizing the bracket:
+
 
 
 ## The metric:
