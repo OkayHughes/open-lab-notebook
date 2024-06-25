@@ -106,10 +106,26 @@ Writing in coordinates we get `$$ X = X^i \partial_i, Y=Y^j\partial_j $$` and th
 $$$`
 There are common terms that cancel, motivating the definition 
 `$$$
-   [XY-YX](f) &= X^i \pder{Y^j}{\xi^i} \pder{f}{\xi^j} - Y^j \pder{X^i}{\xi^j} \pder{f}{\xi^i} \\
-   &= \left[X^i \frac{}{} \right]
+\begin{align*}
+   (XY-YX)(f) &= X^i \pder{Y^j}{\xi^i} \pder{f}{\xi^j} - Y^j \pder{X^i}{\xi^j} \pder{f}{\xi^i} \\
+   &= \left[X^i \pder{Y^j}{\xi^i} \pder{}{\xi^j} - Y^j \pder{X^i}{\xi^j} \pder{}{\xi^j }\right]f
+\end{align*}
 $$$`
-
+which is clearly a unique vector field, which we call `$$[X,Y]$$`. 
+It's easy to see that the bracket is anticommutative and linear in smooth functions, but also satisfies two additional properties
+`$$$
+\begin{align*}
+  &[[X, Y], Z] + [[Y,Z], X] + [[Z, X], Y] = 0\\
+  &[fX, gY] = fg[X, Y] + fX(g)Y - gY(f)X.
+\end{align*}
+$$$`
+This is one natural way to derive a second vector field from two existing vector fields, but
+it is not immediately clear what it does. Using elementary ODE theory, one can
+derive a flow map `$$\phi_X(t, p)$$` such that `$$ [\partial_t \phi_X](t, p) = X_q, phi(0, q) = q$$` .
+We find that if `$$ X, Y$$` are smooth vector fields,
+`$$$
+  [X, Y](p) = \lim_{\Delta t \to 0} \frac{1}{\Delta t}\left[\ \right] 
+$$$`
 
 ## The metric:
 A metric is a (0, 2) tensor field that is symmetric and positive definite. 
