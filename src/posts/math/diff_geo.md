@@ -140,8 +140,14 @@ Therefore, the bracket measures the rate of change of `$$Y$$` along the trajecto
 
 ## The metric:
 A metric is a (0, 2) tensor field that is symmetric and positive definite. 
-If we denote this as `$$g: T_pM \otimes T_pM \to \mathbb{R} $$`, then we get
-`$$ \omega_X \in T_p^*M : Y \mapsto g(X \otimes Y)$$`, i.e. the 
-usual association between primal and dual spaces induced by an inner product. 
+We characterize the smoothness by either `$$ g_{ij} = g(\partial_i \otimes \partial_j) = g(\partial_j \otimes \partial_j) $$`
+being a smooth function, or `$$ g(X \otimes Y) $$` being a smooth function (these are clearly equivalent).
 
-Todo: write this in coordinates!
+
+
+
+If we denote this as `$$g: \Gamma(M) \otimes \Gamma(M) \to \mathbb{R} $$`, then we get
+`$$ \omega_X \in \Gamma^*(M) : Y \mapsto g(X \otimes Y)$$`, i.e. the 
+usual association between primal and dual vector spaces induced by an inner product. 
+A useful exercise at some point would be to formally determine that `$$ X \otimes Y$$`
+results in a smooth tensor field 
