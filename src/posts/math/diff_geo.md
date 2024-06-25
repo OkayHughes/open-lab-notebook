@@ -200,6 +200,17 @@ indicates that `$$ V$$` is parallel to the manifold.
 
 ### Affine connection
 Here we care only about affine connections in order to build up to the 
-unique connection induced by a choice of metric.
+unique connection induced by a choice of metric. 
 
-An affine connection is a (1, 2) tensor 
+An affine connection is a (1, 2) tensor (note for later: this signature foreshadows the christoffel symbols)
+denoted by `$$ (X, Y) \mapsto \nabla_X(Y)$$`. Note that we can characterize this
+in coordinates by `$$?_{ij}^k (\textrm{d}\xi_i \otimes \textrm{d}\xi_j \otimes \partial_k)$$`.
+
+It is specified to have the following properties
+1. `$$ \nabla_{fX + gY} Z = f \nabla_X Z g \nabla_Y Z$$` 
+2. `$$ \nabla_X(Y + Z) = \nabla_X(Y) + \nabla_X(Z) $$`
+3. `$$ \nabla_X(fY) = f\nabla_X(Y) + X(f)Y$$`
+Interesting to note that (3) expresses that partial application of `$$X$$` to `$$\nabla$$` 
+induces a (1, 1) tensor that obeys a sort of leibniz rule. 
+
+This definition is a little baffling, but 
