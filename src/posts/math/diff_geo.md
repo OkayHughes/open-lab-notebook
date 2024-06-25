@@ -130,7 +130,10 @@ We find that if `$$ X, Y$$` are smooth vector fields, `$$\phi_{t} : p \in M \map
 \end{align*}
 $$$`
 where the odd choice of sign comes from the fact that the ersatz derivative is being
-calculated by evaluating `$$Y, [\textrm{d} \phi_{\Delta t}] Y $$` at `$$ (\phi_{\Delta t}(p)) $$`
+calculated by evaluating `$$Y, [\textrm{d} \phi_{\Delta t}] Y $$` at `$$ (\phi_{\Delta t}(p)) $$`,
+where the apparent type error (`$$ T_pM \neq T_{\phi_{\Delta t}(p)}M$$`) disappears noting
+that the convergence is really a statement on vector fields instead of evaluations at a particular point.
+The proof comes down to evaluation of vector fields on smooth functions, making this precise. 
 
 
 ## The metric:
