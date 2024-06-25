@@ -146,11 +146,14 @@ I think this motivates the expression `$$ g \simeq g_{ij} (\textrm{d}\xi_i \otim
 giving the coordinate expression for `$$X = X^i \partial_i, Y = Y^j \partial_j$$` 
 `$$$
 \begin{align*}
-  g(X \otimes Y) = g_{ij}X^k Y^l (\textrm{d}\xi_i \otimes \textrm{d}\xi_j)(\partial_k \otimes \partial_l) = g_{ij}X^iY^j \delta_
+  g(X \otimes Y) = g_{ij}X^k Y^l (\textrm{d}\xi_i \otimes \textrm{d}\xi_j)(\partial_k \otimes \partial_l) = g_{ij}X^kY^l \delta_i^k \delta_j^l = g_{ij}X^iY^j
 \end{align*}
 $$$`
 and as before, the tensor basis `$$ (\textrm{d}\xi_i \otimes \textrm{d}\xi_j) $$` in which `$$g$$` is writen 
-transforms covariantly in each 
+transforms covariantly in each tensored covector. 
+*This clarifies my enduring confusion: a covariant argument of a tensor 
+means that in coordinates, those components of the tensor transform covariantly. 
+As a result, covariant arguments to a tensor take contravariant quantities as input.*
 
 
 
@@ -160,3 +163,4 @@ If we denote this as `$$g: \Gamma(M) \otimes \Gamma(M) \to \mathbb{R} $$`, then 
 usual association between primal and dual vector spaces induced by an inner product. 
 A useful exercise at some point would be to formally determine that `$$ \Gamma(M) \otimes \Gamma(M)$$` 
 has nice properties and is smooth and stuff.
+This allows us to write `$$ g^{ij} =  $$`
