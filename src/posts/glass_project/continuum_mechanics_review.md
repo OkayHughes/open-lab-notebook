@@ -42,44 +42,5 @@ The lagrangian ("material") description of density and the eulerian ("spatial") 
 the usual "flow map". 
 
 ## The deformation gradient:
-Consider two elements of the tangent space of a point `$$\mathrm{d}\boldsymbol{X}_1, \mathrm{d}\boldsymbol{X}_2 $$`
-then the deformation gradient is just the differential of `$$\phi$$` written in coordinates,
-namely `$$$\boldsymbol{F} = \frac{\partial \phi_i}{\partial X_j} $$$`
-which has typing `$$ \boldsymbol{F} : T_{\boldsymbol{X}_j} \boldsymbol{X} \to T_{\phi(\boldsymbol{X}_j, t)} \boldsymbol{x} $$`
 
-We can use the standard argument to write `$$\mathrm{d}\boldsymbol{x} = \phi_*(\mathrm{d}\boldsymbol{X}) = \boldsymbol{F}\mathrm{d}\boldsymbol{X}$$`
-`$$\mathrm{d}\boldsymbol{X} = \phi^{-1}_*(\mathrm{d}\boldsymbol{x}) = \boldsymbol{F}^{-1}\mathrm{d}\boldsymbol{x}$$`
-
-This therefore induces a metric 
-`$$$ 
-\begin{align*}
-\mathrm{d}\boldsymbol{x}_i \cdot \mathrm{d}\boldsymbol{x}_j &= \boldsymbol{F}\mathrm{d}\boldsymbol{X}_i \cdot \boldsymbol{F}\mathrm{d}\boldsymbol{X}_j   \\
-&= \mathrm{d}\boldsymbol{X}_i \cdot \boldsymbol{F}^\top\boldsymbol{F}\mathrm{d}\boldsymbol{X}_j \\
-&\equiv \mathrm{d}\boldsymbol{X}_i \cdot \boldsymbol{C}\mathrm{d}\boldsymbol{X}_j \\
-\end{align*}$$$`
-which can be shown by index juggling. `$$\boldsymbol{C}$$` 
-ends up being called the right Cauchy-Green deformation tensor. 
-
-In the other direction, 
-`$$$ 
-\begin{align*}
-\mathrm{d}\boldsymbol{X}_i \cdot \mathrm{d}\boldsymbol{X}_j &= \mathrm{d}\boldsymbol{x}_i \cdot \boldsymbol{F}^{-\top}\boldsymbol{F}^{-1}\mathrm{d}\boldsymbol{x}_j   
-\end{align*}
-$$$`
-and the left Cauchy-Green tensor is defined as `$$ \boldsymbol{b}^{-1} = \boldsymbol{F}^{-\top}\boldsymbol{F}^{-1} \implies \boldsymbol{b} = \boldsymbol{F} \boldsymbol{F}^{\top}$$`
-
-The difference in inner product induced by the flow map can thus be expressed in material form as
-`$$ \frac{1}{2}\left( \mathrm{d}\boldsymbol{x}_i \cdot \mathrm{d}\boldsymbol{x}_j - \mathrm{d}\boldsymbol{X}_i \cdot \mathrm{d}\boldsymbol{X}_j\right) = \mathrm{d}\boldsymbol{X}_i \cdot \boldsymbol{E} \mathrm{d}\boldsymbol{X}_j $$`
-with `$$\boldsymbol{E} = \frac{1}{2}(\boldsymbol{C} - \boldsymbol{I}) $$`
-and for the spatial form 
-`$$ \frac{1}{2}\left( \mathrm{d}\boldsymbol{x}_i \cdot \mathrm{d}\boldsymbol{x}_j - \mathrm{d}\boldsymbol{X}_i \cdot \mathrm{d}\boldsymbol{X}_j\right) = \mathrm{d}\boldsymbol{x}_i \cdot \boldsymbol{e} \mathrm{d}\boldsymbol{x}_j $$`
-with `$$\boldsymbol{e} = \frac{1}{2}(\boldsymbol{I} - \boldsymbol{b}^{-1}) $$`
-
-
-## Pushforward/pullback of tensor
-
-For a tensor `$$ \boldsymbol{B} : T_{X_j}\boldsymbol{X} \times T_{X_j}^*\boldsymbol{X} \to \mathbb{R} $$` , `$$ \boldsymbol{B}() $$`
-the pushforward to the target is just `$$\boldsymbol{b}(d\boldsymbol{x}_i, \frac{\partial}{\partial \boldsymbol{x}_j}) \equiv \boldsymbol{B}(\phi_*(d\boldsymbol{x}_i), \phi_*^\top(\frac{\partial}{\partial \boldsymbol{x}_j})$$`
-
-
-
+Let `$$ \$$` be a coo
