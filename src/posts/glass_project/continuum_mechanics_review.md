@@ -43,4 +43,8 @@ the usual "flow map".
 
 ## The deformation gradient:
 
-Let `$$ \$$` be a coo
+Let `$$ [\partial_i] $$` be a coordinate frame for the
+reference set `$$ \boldsymbol{X}$$` 
+so that a (covariant) vector field `$$ X^i \partial_i $$` on the source manifold `$$X$$` 
+and let `$$ \textrm{d}\xi_i$$` be the dual basis. 
+The pushforward `$$\textrm{d}\phi[\partial_i] = \pder{\rho^i\circ \phi }{\xi^i} \pder{}{\rho} $$`
