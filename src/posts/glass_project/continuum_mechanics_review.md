@@ -45,6 +45,7 @@ the usual "flow map".
 
 Let `$$ [\partial_i] $$` be a coordinate frame for the
 reference set `$$ \boldsymbol{X}$$` 
-so that a (covariant) vector field `$$ X^i \partial_i $$` on the source manifold `$$X$$` 
-and let `$$ \textrm{d}\xi_i$$` be the dual basis. 
-The pushforward `$$\textrm{d}\phi[\partial_i] = \pder{\rho^i\circ \phi }{\xi^i} \pder{}{\rho} $$`
+so that a (covariant) vector field `$$ X^i \partial_{X_i} $$` on the source manifold `$$X$$` 
+and let `$$ \textrm{d}X_i$$` be the dual basis. 
+The pushforward `$$\textrm{d}\phi[\partial_{X_i}] =  \pder{x_i}{X_j} \pder{}{x_i} $$`.
+
