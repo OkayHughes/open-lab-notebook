@@ -238,5 +238,28 @@ If we suppose such a derivative exists, we can use its properties to determine i
 If we write `$$ V = V^i \partial_i$$`, then 
 `$$$
 \begin{align*}
+  \frac{DV}{dt} = \der{V^j}{t} \partial_j + V^j \frac{D\partial_j}{dt}
 \end{align*}
 $$$`
+and using (c) we get 
+`$$$
+\begin{align*}
+   \frac{D\partial_j}{dt} &= \nabla_{\dot{c}^i \partial_i} \partial_j \\
+   &= \dot{c}^i \nabla_{\partial_i}\partial_j 
+\end{align*}
+$$$`
+which gives
+`$$$
+  \frac{DV}{dt} &= \der{V^j}{t} \partial_j + \dot{c}^i V^j \nabla_{\partial_i}\partial_j \\
+  &= \left[ \der{V^k}{t} + \dot{c}^i  \right]
+$$$`
+
+
+Todo:
+  * Covariant derivative
+  * Riemannian connection
+  * Contravariant tensor -> covariant tensor
+  * Divergence of vector field
+  * Divergence / covariant derivative of (rank 2) tensor field
+  * Induced metric
+  * Musical isomorphism
