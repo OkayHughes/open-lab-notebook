@@ -256,7 +256,21 @@ which gives
 \end{align*}
 $$$`
 
-This gives a useful definition of parallel for a vector field `$$V$$` along `$$c$$` as `$$ \frac{DV}{dt} = 0$$`
+This gives a useful definition of parallel for a vector field `$$V$$` along `$$c$$` as `$$ \frac{DV}{dt} = 0$$`.
+
+## Riemannian connection:
+An affine connection (equivalently: covariant derivative) is compatible with a metric if parallel `$$V, W$$`
+along `$$c$$`
+satisfy `$$g(V \otimes W) = \textrm{const} $$`. This is equivalent to 
+`$$$
+\der{}{t} g(V \otimes W) = g(\frac{DV}{dt} \otimes W) + g(V \otimes \frac{DW}{dt}) \textrm{ on } c
+$$$`
+which makes sense, as the parallel transport of parallel vector fields should preserve the "angle"
+between them induced by the metric.
+A symmetric affine connection satisfies `$$ \nabla_XY - \nabla_YX = [X,Y]$$`.
+
+Fact: there is a unique symmetric affine connection that is compatible with a Riemannian metric. 
+
 
 
 Todo:
