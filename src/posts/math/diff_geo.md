@@ -221,7 +221,8 @@ which motivates that `$$ \nabla_{\partial_i} \partial_j \equiv  \Gamma_{ij}^k \p
 so 
 `$$$
 \begin{align*}
-  \nabla_{X^i \partial_i} (Y^j \partial_j) &= X^i Y^j \nabla_{\partial_i}(\partial_j) + \pder{Y^j}{\xi^i } \partial_j  
+  \nabla_{X^i \partial_i} (Y^j \partial_j) &= X^i Y^j \Gamma_{ij}^k \partial_k + X^i\pder{Y^k}{\xi^i } \partial_k \\ 
+  &= (X^i Y^j \Gamma_{ij}^k + X^i\pder{Y^k}{\xi^i })\partial_k
 \end{align*}
 $$$`
 
@@ -233,3 +234,9 @@ The properties that we want a covariant derivative to satisfy are
 2. `$$ \der{}{t} (fV) = f\der{V}{t} + \der{f}{t}V $$`
 3. If `$$ V(t) = Y(c(t))  $$` for `$$Y$$` a vector field on `$$M$$`, then `$$ \der{V}{t} = \nabla_{\dot{c}} Y$$`
 
+If we suppose such a derivative exists, we can use its properties to determine its form.
+If we write `$$ V = V^i \partial_i$$`, then 
+`$$$
+\begin{align*}
+\end{align*}
+$$$`
