@@ -212,7 +212,17 @@ It is specified to have the following properties
 
 Writing in coordinates we find that for `$$ X = X^i \partial_i $$`, `$$Y = Y^j \partial_j $$`
 `$$$
-  \nabla_{X^i \partial_i} (Y^j \partial_j) = X^i \nabla_{\partial_i} 
+\begin{align*}
+  \nabla_{X^i \partial_i} (Y^j \partial_j) &= X^i \nabla_{\partial_i} Y^j \partial_j \\
+  &= X^i \left( Y^j \nabla_{\partial_i}(\partial_j) + \pder{Y^j}{\xi^i } \partial_j  \right)
+\end{align*}
+$$$`
+which motivates that `$$ \nabla_{\partial_i} \partial_j \equiv  \Gamma_{ij}^k \partial_k  $$`
+so 
+`$$$
+\begin{align*}
+  \nabla_{X^i \partial_i} (Y^j \partial_j) &= X^i Y^j \nabla_{\partial_i}(\partial_j) + \pder{Y^j}{\xi^i } \partial_j  
+\end{align*}
 $$$`
 
 
