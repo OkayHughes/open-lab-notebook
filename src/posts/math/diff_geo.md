@@ -250,9 +250,13 @@ and using (c) we get
 $$$`
 which gives
 `$$$
+\begin{align*}
   \frac{DV}{dt} &= \der{V^j}{t} \partial_j + \dot{c}^i V^j \nabla_{\partial_i}\partial_j \\
-  &= \left[ \der{V^k}{t} + \dot{c}^i  \right]
+  &= \left[ \der{V^k}{t} + \dot{c}^i V^j \Gamma_{ij}^k \right]\partial_k
+\end{align*}
 $$$`
+
+This gives a useful definition of parallel for a vector field `$$V$$` along `$$c$$` as `$$ \frac{DV}{dt} = 0$$`
 
 
 Todo:
