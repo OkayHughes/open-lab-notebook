@@ -270,6 +270,10 @@ between them induced by the metric.
 A symmetric affine connection satisfies `$$ \nabla_XY - \nabla_YX = [X,Y]$$`.
 
 Fact: there is a unique symmetric affine connection that is compatible with a Riemannian metric. 
+It can be derived from the equivalent characterization of compatibility as `$$ X(g(Y \otimes Z)) = g(\nabla_XY \otimes z) + g(Y \otimes \nabla_XZ)$$`
+
+It has christoffel symbols 
+`$$$ \Gamma_{ij}^m = \frac{1}{2} \left[\pder{g_{jk}}{x_i} + \pder{g_{ki}}{x_j} - \pder{g_{ij}}{x_k} \right]g^{km} $$$`
 
 
 
