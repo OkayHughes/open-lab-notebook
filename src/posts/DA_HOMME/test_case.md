@@ -79,6 +79,6 @@ $$$`
 Choose functional form
 `$$$
 \begin{align*}
-  T(r, \phi) = 
+  T(r, \phi) = \frac{a}{r} \hat{r}^2 \left[\tau_1(r) - \tau_2(r) \left( \left(\frac{r}{a} \cos\phi\right)^k - \left(\frac{k}{k+2} \left(\frac{r}{a} \cos\phi \right)^{k+2} \right) \right) \right]
 \end{align*}
 $$$`
