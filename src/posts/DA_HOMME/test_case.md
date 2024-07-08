@@ -82,3 +82,9 @@ Choose functional form
   T(r, \phi) = \frac{a}{r} \hat{r}^2 \left[\tau_1(r) - \tau_2(r) \left( \left(\frac{r}{a} \cos\phi\right)^k - \left(\frac{k}{k+2} \left(\frac{r}{a} \cos\phi \right)^{k+2} \right) \right) \right]
 \end{align*}
 $$$`
+
+`$$$
+\begin{align*}
+   \left[\sin(\phi)\partial_r - \frac{\cos\phi}{r} \partial_\phi  \right]\left(\frac{U}{T} \right) &=    \frac{g}{a}\partial_\phi \left[\hat{r}^2\frac{a}{rT}  \right]
+\end{align*}
+$$$`
