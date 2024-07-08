@@ -74,3 +74,11 @@ SW form of eqn:
    \left[\sin(\phi)\partial_r - \frac{\cos\phi}{r} \partial_\phi  \right]\left(\frac{U}{T} \right) &=    \frac{g}{a}\partial_\phi \left[\hat{r}^2\frac{a}{rT}  \right]
 \end{align*}
 $$$`
+
+
+Choose functional form
+`$$$
+\begin{align*}
+  T(r, \phi) = 
+\end{align*}
+$$$`
