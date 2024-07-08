@@ -52,18 +52,25 @@ $$$`
 
 `$$$
 \begin{align*}
-  \sin(\phi)\frac{U}{T} +  r\sin(\phi)\partial_r\left[\frac{U}{T} \right] &=  \sin\phi \frac{U}{T} - \cos\phi\partial_\phi \left[\frac{U}{T}\right]   + \partial_\phi \left[\frac{\cos\phi}{T}g \hat{r}^2 \right]
+  \sin(\phi)\frac{U}{T} +  r\sin(\phi)\partial_r\left[\frac{U}{T} \right] &=  \sin\phi \frac{U}{T} - \cos\phi\partial_\phi \left[\frac{U}{T}\right]   + \partial_\phi \left[\frac{1}{T}g \hat{r}^2 \right]
 \end{align*}
 $$$`
 
 `$$$
 \begin{align*}
-   \left[r\sin(\phi)\partial_r - \cos\phi \partial_\phi  \right]\left(\frac{U}{T} \right) &=    \partial_\phi \left[\frac{\cos\phi}{T}g \hat{r}^2 \right]
+   \left[r\sin(\phi)\partial_r - \cos\phi \partial_\phi  \right]\left(\frac{U}{T} \right) &=    \partial_\phi \left[\frac{1}{T}g \hat{r}^2 \right]
 \end{align*}
 $$$`
 
 `$$$
 \begin{align*}
-   \left[\sin(\phi)\partial_r - \frac{\cos\phi}{r} \partial_\phi  \right]\left(\frac{U}{T} \right) &=    \partial_\phi \left[\frac{\cos\phi}{rT}g \hat{r}^2 \right]
+   \left[\sin(\phi)\partial_r - \frac{\cos\phi}{r} \partial_\phi  \right]\left(\frac{U}{T} \right) &=    \partial_\phi \left[\frac{1}{rT}g \hat{r}^2 \right]
+\end{align*}
+$$$`
+
+SW form of eqn:
+`$$$
+\begin{align*}
+   \left[\sin(\phi)\partial_r - \frac{\cos\phi}{r} \partial_\phi  \right]\left(\frac{U}{T} \right) &=    \frac{g}{a}\partial_\phi \left[\hat{r}^2\frac{a}{rT}  \right]
 \end{align*}
 $$$`
