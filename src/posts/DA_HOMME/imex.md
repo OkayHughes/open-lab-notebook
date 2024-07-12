@@ -93,8 +93,12 @@ $$$`
 
 
 ## With good averaging:
-Let `$$ \hat{r}(\phi_{iph}, \phi_{imh})$$` be the energy-consistent average found above.
+Let `$$ \hat{r}^2(\phi_{iph}, \phi_{imh})$$` be the energy-consistent average found above.
 
 `$$$
-\mu_{iph} = \left(\frac{\phi_{iph}/g + R_0}{R_0}\right)^2 
+\mu_{iph} = \left(\frac{\phi_{iph}/g + R_0}{R_0}\right)^2  \frac{p_{ip1} - p_i}{\Delta\pi_{iph}}
+$$$`
+with 
+`$$$
+  \phi_{iph} - \phi_{imh} = 
 $$$`
