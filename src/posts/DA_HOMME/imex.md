@@ -90,3 +90,11 @@ $$$`
   &=  \frac{1}{3}\left[\left(\frac{a+z_1}{a}\right)^2 + \left(\frac{a+z_0}{a}\right)^2 + \left(\frac{a+z_0}{a}\right)\left(\frac{a+z_1}{a}\right) \right]\\
 \end{align*}
 $$$`
+
+
+## With good averaging:
+Let `$$ \hat{r}(\phi_{iph}, \phi_{imh})$$` be the energy-consistent average found above.
+
+`$$$
+\mu_{iph} = \left(\frac{\phi_{iph}/g + R_0}{R_0}\right)^2 
+$$$`
