@@ -20,4 +20,5 @@ stored at the particle position.
 In typical MPM literature this is given by 
 `$$$ N(x) = \begin{cases} \frac{1}{2} |x|^3 - x^2 + \frac{2}{3}, & 0 \leq |x| < 1 \\ -\frac{1}{6} |x|^3+ x^2 - 2|x| + \frac{4}{3} & 1 \leq |x| < 2 \\ 0 & \textrm{otherwise}\end{cases}$$$`
 and `$$N_i(x) = N(\frac{1}{h} \left(x_1 - ih \right)) N(\frac{1}{h} \left(x_2 - jh \right)) N(\frac{1}{h} \left(x_3 - kh \right))  $$`
+which bounds the 
 
