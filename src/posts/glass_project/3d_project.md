@@ -14,6 +14,6 @@ layout: layouts/post.njk
 describes a negligible-deformation constitutive equation for the Burgers model with material parameters 
 that are fit based on temperature. The paper makes the statement that
 this model is equivalent to a two-term Prony series. My understanding is that 
-this means that it is equivalent to a two-component Generalized Maxwell Model, 
-
+this means that it is equivalent to a two-component Generalized Maxwell Model.
+This intuitiion is confirmed in [this paper](https://www.mdpi.com/2311-5521/3/4/69) which 
 
