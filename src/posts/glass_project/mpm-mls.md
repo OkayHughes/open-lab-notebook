@@ -10,6 +10,11 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
+# PolyPIC:
+
+Suppose we have `$$ x_p^n$$` for `$$n=1,\ldots,N$$` 
+and an evenly-spaced Eulerian grid `$$ g_{ijk} $$`
+
 
 
 
