@@ -46,4 +46,14 @@ In what follows, we make the definition `$$C_p^n = B_p^n (D_p^n)^{-1}$$`.
 Suppose we have samples `$$ u_i = u(x_i) $$`. 
 To better condition the fit, we typically choose a base point `$$x$$` about which
 to center our linear fit, which in MPM is typically particle positions.
-If we have a (unconstrained) point `$$z$$` at which we 
+If we have a (unconstrained) point `$$z$$` at which we want to approximate, 
+we can try to reconstruct the value based on `$$P = [p_1(z-x), \ldots, p_n(z-x)]^\top$$`
+as `$$ u(z) = P(z-x)^\top c(x) $$`. We choose to minimize `$$ \sum_i \xi_i(x) \left(P(x_i - x)^\top c(x) - u_i \right)$$`
+where `$$\xi_i$$` is an interaction kernel with compact support.
+
+Solving this gives `$$u(z) = \xi_i(x) P(z-x) M^{-1}(x)P(x_i - x)u_i $$`
+with `$$ M = \sum_i \xi_i(x) P(x_i-x)^\top P(x_i-x)$$`. 
+Essentially, the second term in the sum are the weights found by MLS and the 
+multiplication by `$$P(z-x)^\top$$` follows from the equation above.
+
+THis motivates the MLS shape functions `$$ \Phi_i(z) = \xi_i(x_p)P(z - x_p)^\top M^{-1}   `
