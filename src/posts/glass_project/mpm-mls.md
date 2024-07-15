@@ -28,14 +28,16 @@ We're chiefly concerned with the particle-to-grid and grid-to-particle transfers
 `$$$
 \begin{align*}
 m_i^n &= \sum_p w_{i,p}^nm_p \\
-D_p^n = \sum_i w_{i,p}^n (x_i^n - x_p^n)(x_i^n - x_p^n)^\top\\
-m_i^n v_i^n = \sum_p w_{i,p}^nm_p (v_p^n + B_p^n (D_p^n)^{-1} (x_i^n - x_p^n))
+D_p^n &= \sum_i w_{i,p}^n (x_i^n - x_p^n)(x_i^n - x_p^n)^\top\\
+m_i^n v_i^n &= \sum_p w_{i,p}^nm_p (v_p^n + B_p^n (D_p^n)^{-1} (x_i^n - x_p^n))
 \end{align*}
 $$$`
 where `$$B_p$$` is transient and stored on particles. G2P reads as
 `$$$
 \begin{align*}
 v_p^{n+1}&= \sum_i w_{i,p}^n v_i^{n+1} \\
-B_p^{n+1} &= \sum_i w_{i,p}^n v_i^{n+1} (x_i^n - x_p^n)^\top
+B_p^{n+1} &= \sum_i w_{i,p}^n v_i^{n+1} (x_i^n - x_p^n)^\top.
 \end{align*}
 $$$`
+Together these describe a material-agnostic treatment of p2g and g2p transfers. 
+In what follows, we make the definition `$$C_p^n = B_p^n (D_p^n)^{-1}$$`.
