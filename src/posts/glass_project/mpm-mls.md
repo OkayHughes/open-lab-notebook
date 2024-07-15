@@ -56,4 +56,4 @@ with `$$ M = \sum_i \xi_i(x) P(x_i-x)^\top P(x_i-x)$$`.
 Essentially, the second term in the sum are the weights found by MLS and the 
 multiplication by `$$P(z-x)^\top$$` follows from the equation above.
 
-THis motivates the MLS shape functions `$$ \Phi_i(z) = \xi_i(x_p)P(z - x_p)^\top M^{-1}   `
+THis motivates the MLS shape functions `$$ \Phi_i(z) = \xi_i(x_p)P(z - x_p)^\top M^{-1}(x_p)P(x_i - x_p)$$`
