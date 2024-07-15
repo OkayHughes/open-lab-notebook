@@ -41,3 +41,5 @@ B_p^{n+1} &= \sum_i w_{i,p}^n v_i^{n+1} (x_i^n - x_p^n)^\top.
 $$$`
 Together these describe a material-agnostic treatment of p2g and g2p transfers. 
 In what follows, we make the definition `$$C_p^n = B_p^n (D_p^n)^{-1}$$`.
+
+
