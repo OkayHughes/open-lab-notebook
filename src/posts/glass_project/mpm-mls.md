@@ -44,4 +44,6 @@ In what follows, we make the definition `$$C_p^n = B_p^n (D_p^n)^{-1}$$`.
 
 # MLS reconstruction (before quadrature)
 Suppose we have samples `$$ u_i = u(x_i) $$`. 
-If we have a fixed set of 
+To better condition the fit, we typically choose a base point `$$x$$` about which
+to center our linear fit, which in MPM is typically particle positions.
+If we have a (unconstrained) point `$$z$$` at which we 
