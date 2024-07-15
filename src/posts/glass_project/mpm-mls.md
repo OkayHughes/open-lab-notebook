@@ -10,12 +10,12 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
-# PolyPIC:
+# APIC:
 
-Suppose we have `$$ x_p^n$$` for `$$n=1,\ldots,N$$` 
+Suppose we have `$$ x_p$$` 
 and an evenly-spaced Eulerian grid `$$ x_{i} $$`.
 Then associated with each (fixed) particle are a set of interaction weights
-`$$ w_p^{i,n}$$` that describe contribution of the value of a quantity `$$q^n_p$$`
+`$$ w_p^{i}$$` that describe contribution of the value of a quantity `$$q^n_p$$`
 stored at the particle position.
 In typical MPM literature this is given by 
 `$$$ N(x) = \begin{cases} \frac{1}{2} |x|^3 - x^2 + \frac{2}{3}, & 0 \leq |x| < 1 \\ -\frac{1}{6} |x|^3+ x^2 - 2|x| + \frac{4}{3} & 1 \leq |x| < 2 \\ 0 & \textrm{otherwise}\end{cases}$$$`
@@ -23,3 +23,19 @@ and `$$N_i(x) = N(\frac{1}{h} \left(x_1 - ih \right)) N(\frac{1}{h} \left(x_2 - 
 which impose 
 that points only apply to two neighbor points in each direction
 
+We're chiefly concerned with the particle-to-grid and grid-to-particle transfers given by
+
+`$$$
+\begin{align*}
+m_i^n &= \sum_p w_{i,p}^nm_p \\
+D_p^n = \sum_i w_{i,p}^n (x_i^n - x_p^n)(x_i^n - x_p^n)^\top\\
+m_i^n v_i^n = \sum_p w_{i,p}^nm_p (v_p^n + B_p^n (D_p^n)^{-1} (x_i^n - x_p^n))
+\end{align*}
+$$$`
+where `$$B_p$$` is transient and stored on particles. G2P reads as
+`$$$
+\begin{align*}
+v_p^{n+1}&= \sum_i w_{i,p}^n v_i^{n+1} \\
+B_p^{n+1} &= \sum_i w_{i,p}^n v_i^{n+1} (x_i^n - x_p^n)^\top
+\end{align*}
+$$$`
