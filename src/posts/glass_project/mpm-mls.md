@@ -42,4 +42,5 @@ $$$`
 Together these describe a material-agnostic treatment of p2g and g2p transfers. 
 In what follows, we make the definition `$$C_p^n = B_p^n (D_p^n)^{-1}$$`.
 
-
+# MLS reconstruction (before quadrature)
+Suppose we have unstructured samples `$$ `
