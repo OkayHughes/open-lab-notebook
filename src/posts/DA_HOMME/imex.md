@@ -100,5 +100,7 @@ Let `$$ \hat{r}^2(\phi_{iph}, \phi_{imh})$$` be the energy-consistent average fo
 $$$`
 with 
 `$$$
-  \phi_{iph} - \phi_{imh} = \frac{R_0^2}{(\phi_{iph}/g  + R_0)^2 + (\phi_{iph}/g + R_0)(\phi_{imh}/g + R_0) + (\phi_{imh}/g + R_0)^2 } R_d \Theta_i p_0^\kappa p_i^{\kappa}
+  \phi_{iph} - \phi_{imh} = \frac{R_0^2}{(\phi_{iph}/g  + R_0)^2 + (\phi_{iph}/g + R_0)(\phi_{imh}/g + R_0) + (\phi_{imh}/g + R_0)^2 } R_d \Theta_i p_0^\kappa p_i^{\kappa-1}
 $$$`
+We calculate the necessary partial derivatives `$$ \partial_{\phi_{iph+\{-1, 0, 1\}}} \mu_{iph}$$` using symbolic differentiation
+in [This notebook](https://colab.research.google.com/drive/1wfTwWYAt4iyODP3m5nTeWUkjBtNCGBT1?usp=sharing)
