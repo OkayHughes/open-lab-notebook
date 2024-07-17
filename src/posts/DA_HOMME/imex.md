@@ -100,5 +100,5 @@ Let `$$ \hat{r}^2(\phi_{iph}, \phi_{imh})$$` be the energy-consistent average fo
 $$$`
 with 
 `$$$
-  \phi_{iph} - \phi_{imh} = 
+  \phi_{iph} - \phi_{imh} = \frac{R_0^2}{(\phi_{iph}/g  + R_0)^2 + (\phi_{iph}/g + R_0)(\phi_{imh}/g + R_0) + (\phi_{imh}/g + R_0)^2 } R_d \Theta_i p_0^\kappa p_i^{\kappa}
 $$$`
