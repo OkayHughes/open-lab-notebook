@@ -104,3 +104,5 @@ with
 $$$`
 We calculate the necessary partial derivatives `$$ \partial_{\phi_{iph+\{-1, 0, 1\}}} \mu_{iph}$$` using symbolic differentiation
 in [This notebook](https://colab.research.google.com/drive/1wfTwWYAt4iyODP3m5nTeWUkjBtNCGBT1?usp=sharing)
+
+On interior points this gives:
