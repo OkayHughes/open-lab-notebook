@@ -112,5 +112,9 @@ On interior points this gives:
 $$$`
 
 `$$$
-   \partial_{\phi_{i+3/2}} \mu_{i+1/2} = \left(\frac{(\phi_{i+3/2} -\phi_{i+1/2})}{(R_d p_0^\kappa\Theta_{i+1} \hat{r}_{i+1}^2 }\right)^{1/(\kappa - 1)}*(-(\phi_{i+1/2} - \phi_{i+3/2})* \partial_{\phi_{i+3/2}} [\hat{r}_{i+1}^2] - \hat{r}_{i+1}^2)*\hat{r}_{i+\frac{1}{2}}^2 /(\pi_{i+1/2} *(\kappa - 1)*(\phi{i+1/2} - \phi_{i+3/2})* \hat{r}_{i+1}^2 
+   \partial_{\phi_{i+3/2}} \mu_{i+1/2} = \left(\frac{(\phi_{i+3/2} -\phi_{i+1/2})}{(R_d p_0^\kappa\Theta_{i+1} \hat{r}_{i+1}^2 }\right)^{1/(\kappa - 1)}\frac{((\phi_{i+3/2} - \phi_{i+1/2}) \partial_{\phi_{i+3/2}} [\hat{r}_{i+1}^2] - \hat{r}_{i+1}^2) \hat{r}_{i+\frac{3}{2}}^2 }{(\pi_{i+1/2} (\kappa - 1)(\phi_{i+1/2} - \phi_{i+3/2}) \hat{r}_{i+1}^2} 
+$$$`
+
+`$$$
+   \partial_{\phi_{i+1/2}} \mu_{i+1/2} = 
 $$$`
