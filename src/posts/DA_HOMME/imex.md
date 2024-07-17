@@ -105,7 +105,8 @@ $$$`
 We calculate the necessary partial derivatives `$$ \partial_{\phi_{iph+\{-1, 0, 1\}}} \mu_{iph}$$` using symbolic differentiation
 in [This notebook](https://colab.research.google.com/drive/1wfTwWYAt4iyODP3m5nTeWUkjBtNCGBT1?usp=sharing)
 
+If we let `$$ u = `
 On interior points this gives:
 `$$$
-   \partial_{\phi_{i-1/2}} \mu_{i+1/2} = \left(-(\phi_{i-1/2} - \phi_{i+1/2})*\frac{((R_0 g + \phi_{i-1/2})^2 + (R_0 g + \phi_{i-1/2})*(R_0 g + \phi{i+1/2}) + (R_0 g + \phi_{i+1/2})^2)}{(3 R_0^2 R_d g^2 p_0^\kappa \theta_{i})}\right)^{1/(\kappa - 1)}*(R_0g + \phi_{i+1/2})^2 (-(\phi_{i-1/2} - \phi_{i+1/2})*(3 R_0 g + 2\phi_{1/2} + \phi_{i+1/2}) - (R_0 g + \phi_{i-1/2})^2 - (R_0 g + \phi_{i-1/2}) (R_0 g + \phi_{i+1/2}) - (R_0 g + \phi_{i+1/2})^2)/(R_0^2 \pi_{i+1/2} g^2*(\kappa - 1) (\phi_{i-1/2} - \phi_{i+1/2}) ((R_0 g + \phi_{i-1/2})^2 + (R_0 g + \phi_{i-1/2}) (R_0 g + \phi_{i+1/2}) + (R_0 g + \phi_{i+1/2})^2))
+   \partial_{\phi_{i-1/2}} \mu_{i+1/2} = \left(( \phi_{i+1/2} - \phi_{i-1/2} )\frac{(R_0*g + \phi_{i-1/2})^2 + (R_0g + \phi_{i-1/2})*(R_0*g + \phi_{i+1/2}) + (R_0*g + \phi_{i+1/2})^2}{3 R_0^2 R_d g^2 p_0^\kappa*\Theta_i } \right)^{1/(kappa - 1)} (R_0 g + \phi_{i+1/2})^2 \frac{( \phi_{i+1/2} - \phi_{i-1/2})*(3 R_0 g + 2\phi_{i-1/2} + \phi_{i+1/2}) - (R_0 g + \phi_{i-1/2})^2 - (R_0 g + \phi_{i-1/2})*(R_0 g + \phi_{i+1/2}) - (R_0 g + \phi_{i+1/2})^2}{R_0^2 \pi_{i+1/2} g^2 (\kappa - 1)*(\phi_{i-1/2} - \phi_{i+1/2})*((R_0*g + \phi_{i-1/2})^2 + (R_0 g + \phi_{i-1/2}) (R_0 g + \phi_{i+1/2}) + (R_0 g + \phi_{i+1/2})^2)}
 $$$`
