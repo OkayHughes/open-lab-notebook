@@ -106,3 +106,6 @@ We calculate the necessary partial derivatives `$$ \partial_{\phi_{iph+\{-1, 0, 
 in [This notebook](https://colab.research.google.com/drive/1wfTwWYAt4iyODP3m5nTeWUkjBtNCGBT1?usp=sharing)
 
 On interior points this gives:
+`$$$
+   \partial_{\phi_{i-1/2}} \mu_{i+1/2} = (-(\phi_{i+1/2} - \phi_{i+1/2})*((R_0 g + \phi_{i-1/2})^2 + (R_0 g + \phi_{i-1/2})*(R_0 g + \phi{i+1/2}) + (R_0 g + \phi_{i+1/2})^2)/(3 R_0^2 R_d g^2 p_0^kappa \theta_{i}))^(1/(\kappa - 1))*(R_0g + \phi_{i+1/2})^2 (-(\phi_{i-1/2} - \phi_{i+1/2})*(3 R_0 g + 2\phi_{1/2} + \phi_{i+1/2}) - (R_0 g + \phi_{i-1/2})^2 - (R_0 g + \phi_{i-1/2}) (R_0 g + \phi_{i+1/2}) - (R_0 g + \phi_{i+1/2})**2)/(R_0**2*\pi_{i+1/2} g**2*(\kappa - 1)*(\phi_{i-1/2} - \phi_{i+1/2})*((R_0 g + \phi_{i-1/2})**2 + (R_0 g + \phi_{i-1/2})*(R_0 g + \phi_{i+1/2}) + (R_0 g + \phi_{i+1/2})**2))
+$$$`
