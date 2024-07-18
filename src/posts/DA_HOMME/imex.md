@@ -144,3 +144,13 @@ $$$`
    &= \frac{(\frac{(\phi_{i+1/2}-\phi_{i-1/2})}{(R_d p_0^\kappa \Theta_i \hat{r}_i^2 )})^{1/(\kappa - 1)}\hat{r}_{i+1/2}^2 }{\pi_{i+1/2} (\kappa - 1) (\phi_{i-1/2} - \phi_{i+1/2}) } + \frac{(\frac{(\phi_{i+3/2}-\phi_{i+1/2})}{(R_d p_0^\kappa \Theta_{i+1} \hat{r}_{i+1}^2)})^{1/(\kappa - 1)}   \hat{r}_{i+1/2}^2}{\pi_{i+1/2} (\kappa - 1) (\phi_{i-1/2} - \phi_{i+1/2}) }\\
 \end{align*}
 $$$`
+
+This means that, discarding product-rule terms that should be quite small in typical simulations,
+my IMEX routine should be nearly correct. Given the ridiculous additional computational expense of 
+calculating the product-rule terms, I would suggest omitting them from the operational analytic Jacobian,
+leaving a comment noting that these terms were ommitted, and possibly adding a conditional that
+uses the numerical Jacobian if the ratio of rearth/rearth0 is sufficiently small.
+To determine what "sufficiently small" means, consider `$$\varepsilon =  \partial_z \left[\left(\frac{R_0 + z}{R_0}\right)^2\right] = 2\frac{R_0 + z}{R_0^2}$$`.
+Assume that the model top is around 40 km. On a planet of Earth, `$$\varepsilon \approx 0.0003$$`.
+On a planet 100x smaller we see `$$\varepsilon \approx 0.05$$`, which is still quite small considering that
+an approximate Jacobian will 
