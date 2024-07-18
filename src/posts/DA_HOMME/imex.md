@@ -153,4 +153,5 @@ uses the numerical Jacobian if the ratio of rearth/rearth0 is sufficiently small
 To determine what "sufficiently small" means, consider `$$\varepsilon =  \partial_z \left[\left(\frac{R_0 + z}{R_0}\right)^2\right] = 2\frac{R_0 + z}{R_0^2}$$`.
 Assume that the model top is around 40 km. On a planet of Earth, `$$\varepsilon \approx 0.0003$$`.
 On a planet 100x smaller we see `$$\varepsilon \approx 0.05$$`, which is still quite small considering that
-an approximate Jacobian will 
+an approximate Jacobian typically still gives (slower) convergence. Running HOMME with a 100x reduction is radius is 
+quite rare, in any case.
