@@ -69,6 +69,13 @@ The calculation of plastic deformation in the solid phase follows
 from [this work](https://math.ucdavis.edu/~jteran/papers/SSCTS13.pdf)
 where excess deformation (measured by singular values of `$$F$$`) 
 is passed into `$$F_P$$`. In the fluid phase, we set 
-`$$ F_E = (J_E)^\frac{1}{d}I$$` at the end of a time step,
+`$$ F_E = (J_E)^\frac{1}{d}I$$` at the end of a time step, as deformation
+is effectively fully plastic.
 
-`$$$ $$$`
+The vanilla form of the energy functional is
+`$$$ 
+\begin{align*}
+\Psi_\mu(F_E) &= \mu \|F_E - R_E \|_{F}^2  \\
+\Psi_\lambda(J_E) = \Psi_\lambda(\textrm{det}(F_E)) = \frac{\lambda}{2}(J_E - 1)^2
+\end{align*}
+$$$`
