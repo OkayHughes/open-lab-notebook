@@ -88,5 +88,7 @@ we find `$$ \sigma_\mu = \frac{1}{J}  \pder{\hat{\Psi}_\mu}{F_E}F_E^\top $$`.
 This also indicates that an analogue of the Newtonian 
 stress-strain relationship is encoded by `$$ \mu $$`.
 It's clear we're using the fluid-mechanical decomposition `$$ \sigma = \sigma_\mu + \sigma_\lambda$$`,
-so we get by the chain rule `$$ \sigma_\lambda = \frac{1}{J} \left(\pder{\Psi_\lambda}{J_E} \pder{J_E}{F_E} \right)F_E^\top  $$`
+so we get by the chain rule 
+`$$$ \sigma_\lambda = \frac{1}{J} \left(\pder{\Psi_\lambda}{J_E} \pder{J_E}{F_E} \right)F_E^\top = \frac{1}{J_EJ_P} \pder{\Psi_\lambda}{J_E} J_E F_E^{-\top}F_E^\top = \left(\frac{1}{J_E} \pder{\Psi_\lambda}{J_E}\right) I   \equiv -pI $$$`
+Therefore we find that if deviatoric stress is dealt with either implicitly or explicitly 
 
