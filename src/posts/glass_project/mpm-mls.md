@@ -95,5 +95,13 @@ Deviatoric stress is dealt with either implicitly or explicitly using the MLS-MP
 In vanilla MPM, quantities needed to solve for pressure are then transfered to cell-centered grid points analogously to mass, e.g.
 `$$$ [J_{E}]_c^n = \frac{1}{m_c^n} \sum_p w_{c, p}^n m_p [J_{E}]_p^n  $$$`.
 
-The grid-space 
+
+The most economical grid-space equation for this (semi-incompressible) constitutive equation is 
+`$$$ 
+\begin{align*}
+\frac{J_P^n}{\lambda^n J_E^n} \frac{p^{n+1}}{\Delta t} - \delta t \nabla \cdot \left(\frac{1}{\rho_n} \nabla p^{n+1}\right) &= \frac{J_P^n}{\lambda^n J_E^n} \frac{p^n }{\Delta t} - \nabla \cdot v^* \\
+&= \frac{J_P^n}{\lambda^n J_E^n} \cdot \left(- \frac{1}{J_P^n} \lambda^n (J_E^n - 1) \right) - \nabla \cdot v^*
+\end{align*}
+$$$`
+which then gives `$$v^{n+1} = v^* + \frac{\Delta t}{\rho^n }\nabla p^{n+1} $$`
 
