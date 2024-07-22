@@ -57,3 +57,9 @@ Essentially, the second term in the sum are the weights found by MLS and the
 multiplication by `$$P(z-x)^\top$$` follows from the equation above.
 
 THis motivates the MLS shape functions `$$ \Phi_i(z) = \xi_i(x_p)P(z - x_p)^\top M^{-1}(x_p)P(x_i - x_p)$$`
+
+
+
+## Incompressible fixed corotated
+Graphics implementations of MPM phrase constitutive relations
+in terms of energy functionals. 
