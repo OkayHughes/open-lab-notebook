@@ -107,7 +107,8 @@ Using the MLS shape functions `$$q_\alpha = P^\top(x-x_p^n) M^{-1}(x_p^n )P(x-x_
 and using linear polynomials for `$$P$$` (APIC) and tensor-spline weights, we get
 `$$$
 \begin{align*}
-\pder{q_\alpha}{x_\beta} &= \pder{P^\top}{x_\beta}(x-x_p^n) M^{-1}(x_p^n )  \\
+\pder{q_\alpha}{x_\beta} &= \pder{P^\top}{x_\beta}(x-x_p^n) M^{-1}(x_p^n ) P(x_i-x_p^n)   \\
+&= M_p^{-1} N_i(x_p^n) (x_{i, \beta} - x_{p, \beta})
 \end{align*}
 $$$`
 
