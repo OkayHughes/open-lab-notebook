@@ -82,4 +82,9 @@ $$$`
 
 This gets modified to be suitable for highly incompressible materials according to
 `$$$ \hat{\Psi}(F_E) = \hat{\Psi}_{\mu}(F_E)  + \Psi_\lambda(J_E), \textrm{ where } \hat{\Psi}_\mu(F_E) = \Psi_\mu(J_E^{-1/d} F_E) $$$`
-which eliminates any contribution of the dilational component to `$$ \Psi_\lambda(F_E)$$` 
+which eliminates any contribution of the dilational component of deformation to `$$ \Psi_\lambda(F_E)$$` 
+Using concepts from hyperelasticity (see, e.g., [this classic](https://www.cambridge.org/core/books/nonlinear-continuum-mechanics-for-finite-element-analysis/67AD6DBAAB77E755C09E7FB82565DA0B))
+we find `$$ \sigma_\mu = \frac{1}{J}  \pder{\hat{\Psi}_\mu}{F_E}F_E^\top $$`.
+This also indicates that an analogue of the Newtonian 
+stress-strain relationship is encoded by `$$ \mu $$`.
+It's clear we're using the fluid-mechanical 
