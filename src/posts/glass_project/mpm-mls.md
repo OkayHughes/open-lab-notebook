@@ -93,7 +93,8 @@ so we get by the chain rule
 Deviatoric stress is dealt with either implicitly or explicitly using the MLS-MPM treatment of
 `$$$ \frac{v^* - v^n}{\Delta t} = \frac{1}{\rho_n} \nabla \cdot \sigma_\mu + g $$$`, resulting in gridpoint values of `$$v^*$$`.
 In vanilla MPM, quantities needed to solve for pressure are then transfered to cell-centered grid points analogously to mass, e.g.
-`$$$ [J_{E}]_c^n = \frac{1}{m_c^n} \sum_p w_{c, p}^n m_p [J_{E}]_p^n  $$$`.
+`$$$ [J_{E}]_c^n = \frac{1}{m_c^n} \sum_p w_{c, p}^n m_p [J_{E}]_p^n.  $$$`
+This is the most important 
 
 
 The most economical grid-space equation for this (semi-incompressible) constitutive equation is 
@@ -103,5 +104,7 @@ The most economical grid-space equation for this (semi-incompressible) constitut
 &= \frac{J_P^n}{\lambda^n J_E^n} \cdot \left(- \frac{1}{J_P^n} \lambda^n (J_E^n - 1) \right) - \nabla \cdot v^*
 \end{align*}
 $$$`
-which then gives `$$v^{n+1} = v^* + \frac{\Delta t}{\rho^n }\nabla p^{n+1} $$`
+which then gives a pressure correction `$$v^{n+1} = v^* + \frac{\Delta t}{\rho^n }\nabla p^{n+1} $$`.
+
+
 
