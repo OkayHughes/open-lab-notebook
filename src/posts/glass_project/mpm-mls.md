@@ -94,7 +94,16 @@ Deviatoric stress is dealt with either implicitly or explicitly using the MLS-MP
 `$$$ \frac{v^* - v^n}{\Delta t} = \frac{1}{\rho_n} \nabla \cdot \sigma_\mu + g $$$`, resulting in gridpoint values of `$$v^*$$`.
 In vanilla MPM, quantities needed to solve for pressure are then transfered to cell-centered grid points analogously to mass, e.g.
 `$$$ [J_{E}]_c^n = \frac{1}{m_c^n} \sum_p w_{c, p}^n m_p [J_{E}]_p^n.  $$$`
-This is the most important 
+This is the most important equation for determining a MLS-consistent 
+particle-to-grid for fluids.
+
+### MLS digression
+The continuum momentum equation we're solving looks like 
+`$$$ \rho \frac{D v}{Dt} = \nabla \cdot \sigma_\mu + \nabla \cdot \sigma_\lambda + \rho g = \nabla \cdot \sigma_\mu - \nabla p + \rho g $$$`
+The weak form of this equation looks like (hiding several invocations of the divergence theorem)
+`$$$\frac{1}{\Delta t} \int_{\Omega^n} \rho (v^*_\alpha - v^n_\alpha)  $$$`
+
+### Grid-space pressure correction:
 
 
 The most economical grid-space equation for this (semi-incompressible) constitutive equation is 
