@@ -63,3 +63,12 @@ THis motivates the MLS shape functions `$$ \Phi_i(z) = \xi_i(x_p)P(z - x_p)^\top
 ## Incompressible fixed corotated
 Graphics implementations of MPM phrase constitutive relations
 in terms of energy functionals. 
+The versatile one used in Stomakhin's work 
+uses a multiplicative plasticity flow law with `$$ F = F_E F_P$$`.
+The calculation of plastic deformation in the solid phase follows 
+from [this work](https://math.ucdavis.edu/~jteran/papers/SSCTS13.pdf)
+where excess deformation (measured by singular values of `$$F$$`) 
+is passed into `$$F_P$$`. In the fluid phase, we set 
+`$$ F_E = (J_E)^\frac{1}{d}I$$` at the end of a time step,
+
+`$$$ $$$`
