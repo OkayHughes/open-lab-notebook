@@ -35,3 +35,9 @@ and using hydrostatic balance we get
 $$$`
 
 and based on `$$p(z=\infty) = 0$$` we see `$$T_0 = \frac{g^2}{R_d N^2} $$`
+
+`$$$
+\begin{align*}
+  
+\end{align*}
+$$$`
