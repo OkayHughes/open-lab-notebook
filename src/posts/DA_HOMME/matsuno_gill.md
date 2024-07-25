@@ -33,3 +33,5 @@ and using hydrostatic balance we get
   \implies&  p^\kappa  =p_0^\kappa \left[1 -\frac{g^2}{R_d T_0 N^2} \left(1-\exp\left(-\frac{N^2}{g}z\right)\right) \right] \\
 \end{align*}
 $$$`
+
+and based on `$$p(z=\infty) = 0$$` we see `$$T_0 = \frac{g^2}{R_d N^2} $$`
