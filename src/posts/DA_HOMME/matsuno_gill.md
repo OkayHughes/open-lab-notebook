@@ -38,6 +38,11 @@ and based on `$$p(z=\infty) = 0$$` we see `$$T_0 = \frac{g^2}{R_d N^2} $$`
 
 `$$$
 \begin{align*}
-  
+  &p  = p_0 \left[1 -\frac{g^2}{R_d T_0 N^2} \left(1-\exp\left(-\frac{N^2}{g}z\right)\right) \right]^{1/\kappa} \\
+  \implies& \left(\frac{p}{p_0}\right)^\kappa  =  \left[1 -\frac{g^2}{R_d T_0 N^2} \left(1-\exp\left(-\frac{N^2}{g}z\right)\right) \right]\\
+  \implies& 1-\left(\frac{p}{p_0}\right)^\kappa  =  \frac{g^2}{R_d T_0 N^2} \left(1-\exp\left(-\frac{N^2}{g}z\right)\right)  \\
+  \implies& 1-\frac{R_d T_0 N^2}{g^2}\left[1-\left(\frac{p}{p_0}\right)^\kappa\right] =  \exp\left(-\frac{N^2}{g}z\right) \\
+  \implies& \log\left[1-\frac{R_d T_0 N^2}{g^2}\left(1-\left(\frac{p}{p_0}\right)^\kappa\right)\right] =  \left(-\frac{N^2}{g}z\right) \\
+  \implies& -\frac{g}{N^2}\log\left[1-\frac{R_d T_0 N^2}{g^2}\left(1-\left(\frac{p}{p_0}\right)^\kappa\right)\right] =  z 
 \end{align*}
 $$$`
