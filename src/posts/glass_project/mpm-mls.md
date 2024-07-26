@@ -100,7 +100,7 @@ particle-to-grid for fluids.
 ### MLS digression
 The continuum momentum equation we're solving looks like 
 `$$$ \rho \frac{D v}{Dt} = \nabla \cdot \sigma_\mu + \nabla \cdot \sigma_\lambda + \rho g = \nabla \cdot \sigma_\mu - \nabla p + \rho g $$$`
-The weak form of this equation looks like (hiding several invocations of the divergence theorem)
+The weak form of this equation looks like
 `$$$\frac{1}{\Delta t} \int_{\Omega^n} \rho (v^*_\alpha - v^n_\alpha) q_{\alpha} \intd{x} = \int_{\partial \Omega^n} T_\alpha  q_\alpha \intd{s} - \int_{\Omega^n} \sigma_{\alpha \beta} \pder{q_\alpha}{x_{\beta}} \intd{x} $$$`
 
 Using the MLS shape functions `$$q_\alpha = P^\top(x-x_p^n) M^{-1}(x_p^n )P(x-x_p^n)  $$`
