@@ -105,8 +105,13 @@ The weak form of this equation looks like
 
 Using the fact that `$$$ \nabla \cdot (\sigma q) = q \cdot (\nabla \cdot \sigma) + \nabla q : \sigma$$$` The derivation looks like 
 `$$$
+\begin{align*}
   &\rho \der{v}{t} = \nabla \cdot \sigma + \rho g \\
-  \implies& \left\langle \rho \der{v}{t}, 
+  \implies& \left\langle \rho \der{v}{t}, q \right\rangle = \left\langle\nabla \cdot \sigma, q \right\rangle + \left\langle\rho g, q \right\rangle\\
+  \implies& \int_\Omega \left\langle \rho \der{v}{t}, q \right\rangle \intd{x} = \int_\Omega \left\langle\nabla \cdot \sigma, q \right\rangle \intd{x} + \int_{\Omega} \left\langle\rho g, q \right\rangle \intd{x}\\
+  \implies& \int_\Omega \left\langle \rho \der{v}{t}, q \right\rangle \intd{x} = \int_\Omega \nabla \cdot (\sigma q)  \intd{x} - \int_\Omega \nabla q : \sigma \intd{x} +  \int_{\Omega} \left\langle\rho g, q \right\rangle \intd{x}\\
+  \implies& \int_\Omega \left\langle \rho \der{v}{t}, q \right\rangle \intd{x} = \int_{\partial \Omega \left\langle \sigma q, n \right\rangle \intd{s} - \int_\Omega \nabla q : \sigma \intd{x} +  \int_{\Omega} \left\langle\rho g, q \right\rangle \intd{x}\\
+\end{align*}
 $$$`
 Using the MLS shape functions `$$q_\alpha = P^\top(x-x_p^n) M^{-1}(x_p^n )P(x-x_p^n)  $$`
 and using linear polynomials for `$$P$$` (APIC) and tensor-spline weights, we get
