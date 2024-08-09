@@ -27,6 +27,8 @@ Next steps:
 ## Checking if rest of imex routines are broken:
 Hypothesis: treatment of Fn (residual) does not include QHE terms?
 Experiment: disable QHE terms in explicit. Is convergence better?
+  * If extra terms of QHE are omitted, numerical Jacobian converges in 3 iterations past day 10!
+  * Do addition of QHE change acoustic mode? 
 
 ## Update to residual definition?
 
