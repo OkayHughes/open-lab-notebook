@@ -37,7 +37,7 @@ Todo:
     
   * Verify analytic Jacobian is dogshit at 20 days without "hydrostatic" initial guess
     * With better initial guess: 5 iterations at 20 days.
-    * With explicit w initial guess:
+    * With explicit w initial guess: 10 iterations at 5 days
   * Contingent on this: analyze |J_analytic - J_numerical| test residual by level.
   * If it's bad at boundaries, life's good. If not, rework analytic Jacobian.
 
