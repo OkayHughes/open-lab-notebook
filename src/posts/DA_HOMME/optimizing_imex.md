@@ -29,6 +29,10 @@ Hypothesis: treatment of Fn (residual) does not include QHE terms?
 Experiment: disable QHE terms in explicit. Is convergence better?
   * If extra terms of QHE are omitted, numerical Jacobian converges in 3 iterations past day 10!
   * Do addition of QHE change acoustic mode? 
-
-## Update to residual definition?
+  
+Todo:
+  * Verify numerical Jacobian is stable to 20 days with "hydrostatic" initial guess
+  * Verify analytic Jacobian is dogshit at 20 days with "hydrostatic" initial guess
+  * Contingent on this: analyze |J_analytic - J_numerical| test residual by level.
+  * If it's bad at boundaries, life's good. If not, rework analytic Jacobian.
 
