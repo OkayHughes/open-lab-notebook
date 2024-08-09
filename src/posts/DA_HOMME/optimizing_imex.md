@@ -24,3 +24,6 @@ Next steps:
   * Identify tuning parameters for convergence and test sensitivity.
 
 
+## Checking if rest of imex routines are broken:
+Hypothesis: treatment of Fn (residual) does not include QHE terms?
+Experiment: disable QHE terms in explicit. Is convergence better?
