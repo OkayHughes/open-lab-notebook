@@ -32,7 +32,9 @@ Experiment: disable QHE terms in explicit. Is convergence better?
   
 Todo:
   * Verify numerical Jacobian is stable to 20 days with "hydrostatic" initial guess
+    * 10 days: 4 iterations.
     * Potential offshoot project: is quasi-hydrostatic guess better?
+    
   * Verify analytic Jacobian is dogshit at 20 days with "hydrostatic" initial guess
   * Contingent on this: analyze |J_analytic - J_numerical| test residual by level.
   * If it's bad at boundaries, life's good. If not, rework analytic Jacobian.
