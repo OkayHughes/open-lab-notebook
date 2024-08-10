@@ -155,3 +155,17 @@ Assume that the model top is around 40 km. On a planet of Earth, `$$\varepsilon 
 On a planet 100x smaller we see `$$\varepsilon \approx 0.05$$`, which is still quite small considering that
 an approximate Jacobian typically still gives (slower) convergence. Running HOMME with a 100x reduction is radius is 
 quite rare, in any case.
+
+
+## implementing the hell Jacobian:
+`$$$
+   \partial_{\phi_{i-1/2}} \mu_{i+1/2} = p_i \frac{((\phi_{i-1/2} - \phi_{i+1/2}) \partial_{\phi_{i-1/2}}[ \hat{r}_i^2] - \hat{r}_i^2)\hat{r}_{i+1/2}^2}{(\pi_{i+1/2}(\kappa - 1) (\phi_{i-1/2} - \phi_{i+1/2}) \hat{r}_{i}^2) }
+$$$`
+
+`$$$
+   \partial_{\phi_{i+3/2}} \mu_{i+1/2} = p_{i+1} \frac{((\phi_{i+3/2} - \phi_{i+1/2}) \partial_{\phi_{i+3/2}} [\hat{r}_{i+1}^2] - \hat{r}_{i+1}^2) \hat{r}_{i+\frac{1}{2}}^2 }{(\pi_{i+1/2} (\kappa - 1)(\phi_{i+1/2} - \phi_{i+3/2}) \hat{r}_{i+1}^2} 
+$$$`
+
+`$$$
+   \partial_{\phi_{i+1/2}} \mu_{i+1/2} = \frac{((\kappa - 1)(\phi_{i+1/2} - \phi_{i-1/2})(\phi_{i+1/2} - \phi_{i+3/2})( p_i - p_{i+1} ) \hat{r}_i^2  \hat{r}_{i+1}^2 \partial_{\phi_{i+1/2}}[\hat{r}_{i+1/2}^2] + ((\frac{(\phi_{i+1/2}-\phi_{i-1/2})}{(R_d p_0^\kappa \Theta_i \hat{r}_i^2 )})^{1/(\kappa - 1)} (\phi_{i+1/2} - \phi_{i+3/2}) ((\phi_{i-1/2} - \phi_{i+1/2})  \partial_{\phi_{i+1/2}}[\hat{r}_i^2] + \hat{r}_i^2) \hat{r}_{i+1}^2 + (\frac{(\phi_{i+3/2}-\phi_{i+1/2})}{(R_d p_0^\kappa \Theta_{i+1} \hat{r}_{i+1}^2)})^{1/(\kappa - 1)} (\phi_{i-1/2} - \phi_{i+1/2}) ((\phi_{i+3/2} - \phi_{i+1/2}) \partial_{\phi_{i+1/2}} [\hat{r}_{i+1}^2 ] + \hat{r}_{i+1}^2 ) \hat{r}_i^2)  \hat{r}_{i+1/2}^2)}{(\pi_{i+1/2} (\kappa - 1) (\phi_{i-1/2} - \phi_{i+1/2}) (\phi_{i+1/2} - \phi_{i+3/2}) \hat{r}_i^2 \hat{r}_{i+1}^2)}
+$$$`
