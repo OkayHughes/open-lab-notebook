@@ -12,7 +12,7 @@ layout: layouts/post.njk
 [Todo: read this paper](https://journals.ametsoc.org/view/journals/clim/19/21/jcli3990.1.xml)
 
 Components: 
-  * Idealized insolation + CO2
+  * Idealized insolation,  CO2, AND CLOUDS!
   * Kessler warm rain or LSC
   * Forcing scenarios
   
