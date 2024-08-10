@@ -181,5 +181,9 @@ $$$`
 so there are three new terms to calculate:
 `$$$
 \begin{align*}
-\endP
+q &= -\frac{( p_i - p_{i+1} )  \partial_{\phi_{i+1/2}}[\hat{r}_{i+1/2}^2]}{(\pi_{i+1/2}  )} \\
+d &=   \frac{    ((\phi_{i-1/2} - \phi_{i+1/2})  \partial_{\phi_{i+1/2}}[\hat{r}_i^2] + \hat{r}_i^2) }{ \hat{r}_i^2 }\\
+e &= \frac{  ((\phi_{i+3/2} - \phi_{i+1/2}) \partial_{\phi_{i+1/2}} [\hat{r}_{i+1}^2 ] + \hat{r}_{i+1}^2 ) }{ \hat{r}_{i+1}^2}\\
+\end{align*}
 $$$`
+todo: draw out a picture to figure out how to reuse these calculated values
