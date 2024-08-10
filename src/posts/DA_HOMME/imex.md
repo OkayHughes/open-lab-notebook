@@ -172,8 +172,14 @@ $$$`
    &= \frac{(\kappa - 1)(\phi_{i+1/2} - \phi_{i-1/2})(\phi_{i+1/2} - \phi_{i+3/2})( p_i - p_{i+1} ) \hat{r}_i^2  \hat{r}_{i+1}^2 \partial_{\phi_{i+1/2}}[\hat{r}_{i+1/2}^2]}{(\pi_{i+1/2} (\kappa - 1) (\phi_{i-1/2} - \phi_{i+1/2}) (\phi_{i+1/2} - \phi_{i+3/2}) \hat{r}_i^2 \hat{r}_{i+1}^2)} + 
    \frac{ p_i  (\phi_{i+1/2} - \phi_{i+3/2}) ((\phi_{i-1/2} - \phi_{i+1/2})  \partial_{\phi_{i+1/2}}[\hat{r}_i^2] + \hat{r}_i^2) \hat{r}_{i+1}^2 \hat{r}_{i+1/2}^2}{(\pi_{i+1/2} (\kappa - 1) (\phi_{i-1/2} - \phi_{i+1/2}) (\phi_{i+1/2} - \phi_{i+3/2}) \hat{r}_i^2 \hat{r}_{i+1}^2)} + 
    \frac{p_{i+1}  (\phi_{i-1/2} - \phi_{i+1/2}) ((\phi_{i+3/2} - \phi_{i+1/2}) \partial_{\phi_{i+1/2}} [\hat{r}_{i+1}^2 ] + \hat{r}_{i+1}^2 ) \hat{r}_i^2 \hat{r}_{i+1/2}^2}{(\pi_{i+1/2} (\kappa - 1) (\phi_{i-1/2} - \phi_{i+1/2}) (\phi_{i+1/2} - \phi_{i+3/2}) \hat{r}_i^2 \hat{r}_{i+1}^2)}\\
-   &= \frac{(\phi_{i+1/2} - \phi_{i-1/2})( p_i - p_{i+1} )  \partial_{\phi_{i+1/2}}[\hat{r}_{i+1/2}^2]}{(\pi_{i+1/2} (\phi_{i-1/2} - \phi_{i+1/2})  )} + 
-   \frac{ p_i   ((\phi_{i-1/2} - \phi_{i+1/2})  \partial_{\phi_{i+1/2}}[\hat{r}_i^2] + \hat{r}_i^2) \hat{r}_{i+1}^2 \hat{r}_{i+1/2}^2}{(\pi_{i+1/2} (\kappa - 1) (\phi_{i-1/2} - \phi_{i+1/2})  \hat{r}_i^2 \hat{r}_{i+1}^2)} + 
-   \frac{p_{i+1}   ((\phi_{i+3/2} - \phi_{i+1/2}) \partial_{\phi_{i+1/2}} [\hat{r}_{i+1}^2 ] + \hat{r}_{i+1}^2 ) \hat{r}_i^2 \hat{r}_{i+1/2}^2}{(\pi_{i+1/2} (\kappa - 1) (\phi_{i-1/2} - \phi_{i+1/2}) (\phi_{i+1/2} - \phi_{i+3/2}) \hat{r}_i^2 \hat{r}_{i+1}^2)}\\
+   &= -\frac{( p_i - p_{i+1} )  \partial_{\phi_{i+1/2}}[\hat{r}_{i+1/2}^2]}{(\pi_{i+1/2}  )} + 
+   \frac{ p_i   ((\phi_{i-1/2} - \phi_{i+1/2})  \partial_{\phi_{i+1/2}}[\hat{r}_i^2] + \hat{r}_i^2)  \hat{r}_{i+1/2}^2}{(\pi_{i+1/2} (\kappa - 1) (\phi_{i-1/2} - \phi_{i+1/2})  \hat{r}_i^2 )} + 
+   \frac{p_{i+1}   ((\phi_{i+3/2} - \phi_{i+1/2}) \partial_{\phi_{i+1/2}} [\hat{r}_{i+1}^2 ] + \hat{r}_{i+1}^2 )  \hat{r}_{i+1/2}^2}{(\pi_{i+1/2} (\kappa - 1) (\phi_{i+1/2} - \phi_{i+3/2})  \hat{r}_{i+1}^2)}\\
 \end{align*}
+$$$`
+
+so there are three new terms to calculate:
+`$$$
+\begin{align*}
+\endP
 $$$`
