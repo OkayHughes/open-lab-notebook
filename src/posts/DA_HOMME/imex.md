@@ -192,7 +192,7 @@ We make the definitions
 `$$$
 \begin{align*}
     a &= \frac{(\Delta t g)^2}{1-\kappa} \\
-    b_k &= \frac{a}{\delta \pi_k } \\
+    b_k &= \frac{a}{\Delta \pi_k } \\
     c_k &= \frac{p_k}{\Delta \phi_k}
 \end{align*}
 $$$`
