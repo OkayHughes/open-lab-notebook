@@ -199,7 +199,7 @@ $$$`
 and 
 `$$$
 \begin{align*}
-\frac{-2a^2 g^2 2}{(R0*g + phi1)^3} \\
-\frac{3 a^2 g^2 (-3 a g - \phi_{i-1/2} - 2 \phi_{i+1/2})/(( a g + \phi_{i-1/2})^2 + ( a g + \phi_{i-1/2})( a g + \phi_{i+1/2}) + (a g + \phi_{i+1/2})^2)^2
+\frac{2(a g + \phi_{i+1/2})}{(a^2 g^2)}\\
+\frac{(3 a g + \phi_{i-1/2} + 2 \phi_{i+1/2})}{(3 a^2 g^2)}
 \end{align*}
 $$$`
