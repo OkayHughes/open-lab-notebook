@@ -208,7 +208,8 @@ $$$`
 Top boundary:
 `$$$
 \begin{align*}
-(-\frac{\pi_0}{\hat{r}_{} + ((-phi1 + phi2)/(Rd*p0**kappa*theta15*rhatsq15(phi1, phi2)))**(1/(kappa - 1)))*Derivative(rhatsq1(phi1), phi1)/dp3d1 + (Rd*p0**kappa*theta15*((-phi1 + phi2)/(Rd*p0**kappa*theta15*rhatsq15(phi1, phi2)))**(1/(kappa - 1))*(-(-phi1 + phi2)*Derivative(rhatsq15(phi1, phi2), phi1)/(Rd*p0**kappa*theta15*rhatsq15(phi1, phi2)**2) - 1/(Rd*p0**kappa*theta15*rhatsq15(phi1, phi2)))*rhatsq15(phi1, phi2)/((kappa - 1)*(-phi1 + phi2)) + pi0*Derivative(rhatsq1(phi1), phi1)/rhatsq1(phi1)**2)*rhatsq1(phi1)/dp3d1
-((-phi1 + phi2)/(Rd*p0**kappa*theta15*rhatsq15(phi1, phi2)))**(1/(kappa - 1))*(-(phi1 - phi2)*Derivative(rhatsq15(phi1, phi2), phi2) - rhatsq15(phi1, phi2))*rhatsq1(phi1)/(dp3d1*(kappa - 1)*(phi1 - phi2)*rhatsq15(phi1, phi2))
+   \partial_{\phi_{1/2}} \mu_{1/2}  &= -\frac{( p_{1/2} - p_{1} )  \partial_{\phi_{1/2}}[\hat{r}_{1/2}^2]}{(\frac{1}{2}\pi_{1}  )} + 
+   \frac{ p_i   ((\phi_{i-1/2} - \phi_{i+1/2})  \partial_{\phi_{i+1/2}}[\hat{r}_i^2] + \hat{r}_i^2)  \hat{r}_{i+1/2}^2}{(\pi_{i+1/2} (\kappa - 1) (\phi_{i-1/2} - \phi_{i+1/2})  \hat{r}_i^2 )} + 
+   \frac{p_{i+1}   ((\phi_{i+3/2} - \phi_{i+1/2}) \partial_{\phi_{i+1/2}} [\hat{r}_{i+1}^2 ] + \hat{r}_{i+1}^2 )  \hat{r}_{i+1/2}^2}{(\pi_{i+1/2} (\kappa - 1) (\phi_{i+1/2} - \phi_{i+3/2})  \hat{r}_{i+1}^2)}\\
 \end{align*}
 $$$`
