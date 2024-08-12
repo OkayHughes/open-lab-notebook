@@ -181,9 +181,9 @@ $$$`
 so there are three new terms to calculate:
 `$$$
 \begin{align*}
-q &= -\frac{( p_i - p_{i+1} )  \partial_{\phi_{i+1/2}}[\hat{r}_{i+1/2}^2]}{(\pi_{i+1/2}  )} \\
-d &=   \frac{    ((\phi_{i-1/2} - \phi_{i+1/2})  \partial_{\phi_{i+1/2}}[\hat{r}_i^2] + \hat{r}_i^2) }{ \hat{r}_i^2 }\\
-e &= \frac{  ((\phi_{i+3/2} - \phi_{i+1/2}) \partial_{\phi_{i+1/2}} [\hat{r}_{i+1}^2 ] + \hat{r}_{i+1}^2 ) }{ \hat{r}_{i+1}^2}\\
+q_k &= -\frac{( p_i - p_{i+1} )  \partial_{\phi_{i+1/2}}[\hat{r}_{i+1/2}^2]}{(\pi_{i+1/2}  )} \\
+d_k &=   \frac{    ((\phi_{i-1/2} - \phi_{i+1/2})  \partial_{\phi_{i+1/2}}[\hat{r}_i^2] + \hat{r}_i^2) }{ \hat{r}_i^2 }\\
+e_k &= \frac{  ((\phi_{i+3/2} - \phi_{i+1/2}) \partial_{\phi_{i+1/2}} [\hat{r}_{i+1}^2 ] + \hat{r}_{i+1}^2 ) }{ \hat{r}_{i+1}^2}\\
 \end{align*}
 $$$`
 todo: draw out a picture to figure out how to reuse these calculated values.
@@ -192,15 +192,14 @@ We make the definitions
 `$$$
 \begin{align*}
     a &= \frac{(\Delta t g)^2}{1-\kappa} \\
-    b_k &= \frac{a}{\Delta \pi_k } \\
+    b_k &= \frac{a}{\Delta \pi_{k+1/2} } \\
     c_k &= \frac{p_k}{\Delta \phi_k}
 \end{align*}
 $$$`
 and given this we get
 `$$$
 \begin{align*}
-   \partial_{\phi_{i+1/2}} \mu_{i+1/2} &= -q + 
+   \partial_{\phi_{i+1/2}} \mu_{i+1/2} &= -q + \frac{bc_k \hat}{}
 \end{align*}
-  
 $$$`
 
