@@ -206,3 +206,9 @@ $$$`
 
 
 Top boundary:
+`$$$
+\begin{align*}
+(-\frac{\pi_0}{\hat{r}_{} + ((-phi1 + phi2)/(Rd*p0**kappa*theta15*rhatsq15(phi1, phi2)))**(1/(kappa - 1)))*Derivative(rhatsq1(phi1), phi1)/dp3d1 + (Rd*p0**kappa*theta15*((-phi1 + phi2)/(Rd*p0**kappa*theta15*rhatsq15(phi1, phi2)))**(1/(kappa - 1))*(-(-phi1 + phi2)*Derivative(rhatsq15(phi1, phi2), phi1)/(Rd*p0**kappa*theta15*rhatsq15(phi1, phi2)**2) - 1/(Rd*p0**kappa*theta15*rhatsq15(phi1, phi2)))*rhatsq15(phi1, phi2)/((kappa - 1)*(-phi1 + phi2)) + pi0*Derivative(rhatsq1(phi1), phi1)/rhatsq1(phi1)**2)*rhatsq1(phi1)/dp3d1
+((-phi1 + phi2)/(Rd*p0**kappa*theta15*rhatsq15(phi1, phi2)))**(1/(kappa - 1))*(-(phi1 - phi2)*Derivative(rhatsq15(phi1, phi2), phi2) - rhatsq15(phi1, phi2))*rhatsq1(phi1)/(dp3d1*(kappa - 1)*(phi1 - phi2)*rhatsq15(phi1, phi2))
+\end{align*}
+$$$`
