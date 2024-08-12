@@ -188,9 +188,17 @@ e &= \frac{  ((\phi_{i+3/2} - \phi_{i+1/2}) \partial_{\phi_{i+1/2}} [\hat{r}_{i+
 $$$`
 todo: draw out a picture to figure out how to reuse these calculated values.
 
+We make the definitions
+`$$$
+\begin{align*}
+    a &= \frac{(\Delta t g)^2}{1-\kappa} \\
+    b_k &= \frac{a}{\delta \pi_k } \\
+    c_k &= \frac{p_k}{\Delta \phi_k}
+\end{align*}
+$$$`
+
 Derivatives of `$$\hat{r}$$` are
 `$$$
   \partial_{\phi_{i+ 1/2}} \hat{r}_{i+1/2}^2 =  
 $$$`
 
-So therefore if 
