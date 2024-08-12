@@ -186,7 +186,7 @@ d_k &=   \frac{    ((\phi_{i-1/2} - \phi_{i+1/2})  \partial_{\phi_{i+1/2}}[\hat{
 e_k &= \frac{  ((\phi_{i+3/2} - \phi_{i+1/2}) \partial_{\phi_{i+1/2}} [\hat{r}_{i+1}^2 ] + \hat{r}_{i+1}^2 ) }{ \hat{r}_{i+1}^2}\\
 \end{align*}
 $$$`
-todo: draw out a picture to figure out how to reuse these calculated values.
+Since these all depend on the interface value of `$$\phi_{i+1/2}$$`, we can't reuse any of this.
 
 We make the definitions
 `$$$
@@ -196,9 +196,10 @@ We make the definitions
     c_k &= \frac{p_k}{\Delta \phi_k}
 \end{align*}
 $$$`
-and given this we get
+and 
 `$$$
 \begin{align*}
-  \partial_{\phi_{k}} \mu_{k} &= 
+\frac{-2a^2 g^2 2}{(R0*g + phi1)^3} \\
+\frac{3 a^2 g^2 (-3 a g - \phi_{i-1/2} - 2 \phi_{i+1/2})/(( a g + \phi_{i-1/2})^2 + ( a g + \phi_{i-1/2})( a g + \phi_{i+1/2}) + (a g + \phi_{i+1/2})^2)^2
 \end{align*}
 $$$`
