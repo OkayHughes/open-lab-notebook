@@ -192,3 +192,5 @@ Derivatives of `$$\hat{r}$$` are
 `$$$
   \partial_{\phi_{i+ 1/2}} \hat{r}_{i+1/2}^2 =  
 $$$`
+
+So therefore if 
