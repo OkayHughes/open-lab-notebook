@@ -196,9 +196,11 @@ We make the definitions
     c_k &= \frac{p_k}{\Delta \phi_k}
 \end{align*}
 $$$`
-
-Derivatives of `$$\hat{r}$$` are
+and given this we get
 `$$$
-  \partial_{\phi_{i+ 1/2}} \hat{r}_{i+1/2}^2 =  
+\begin{align*}
+   \partial_{\phi_{i+1/2}} \mu_{i+1/2} &= -q + 
+\end{align*}
+  
 $$$`
 
