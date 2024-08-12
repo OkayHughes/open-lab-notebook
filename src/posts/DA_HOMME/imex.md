@@ -186,4 +186,9 @@ d &=   \frac{    ((\phi_{i-1/2} - \phi_{i+1/2})  \partial_{\phi_{i+1/2}}[\hat{r}
 e &= \frac{  ((\phi_{i+3/2} - \phi_{i+1/2}) \partial_{\phi_{i+1/2}} [\hat{r}_{i+1}^2 ] + \hat{r}_{i+1}^2 ) }{ \hat{r}_{i+1}^2}\\
 \end{align*}
 $$$`
-todo: draw out a picture to figure out how to reuse these calculated values
+todo: draw out a picture to figure out how to reuse these calculated values.
+
+Derivatives of `$$\hat{r}$$` are
+`$$$
+  \partial_{\phi_{i+ 1/2}} \hat{r}_{i+1/2}^2 =  
+$$$`
