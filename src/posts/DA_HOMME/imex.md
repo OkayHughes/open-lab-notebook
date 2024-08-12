@@ -199,7 +199,6 @@ $$$`
 and given this we get
 `$$$
 \begin{align*}
-   \partial_{\phi_{i+1/2}} \mu_{i+1/2} &= -q + \frac{bc_k \hat}{}
+  \partial_{\phi_{k}} \mu_{k} &= 
 \end{align*}
 $$$`
-
