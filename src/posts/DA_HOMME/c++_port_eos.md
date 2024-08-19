@@ -17,6 +17,10 @@ indicates that there is an implementation of the function `compute_pnh_and_exner
 which contains all necessary info to calculate new EOS. 
 This implementation then calls the `compute_pnh_and_exner` taking only `dphi` (hidden in the `exner` variable).
 
+
+* cxx/EquationOfState.hpp:105
+* cxx/DirkFunctorImpl.hpp:577
+
 Thankfully 
 <details>
   <summary>Invocations of function</summary>
