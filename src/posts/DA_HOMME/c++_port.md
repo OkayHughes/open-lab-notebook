@@ -9,6 +9,9 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
+Fine grain todo:
+* ~~Rework dirk calling interface so code compiles~~
+* verify eos does not pass
 
 Coarse-grained todo:
 * Ensure unit tests failing for DA HOMME
