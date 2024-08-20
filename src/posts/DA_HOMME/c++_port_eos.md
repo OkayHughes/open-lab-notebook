@@ -24,8 +24,11 @@ This implementation then calls the `compute_pnh_and_exner` taking only `dphi` (h
 
 
 Todo:
-* `compute_phi_i` called in remap. Uses old EOS
-* 
+* Ensure `compute_phi_i` calls in remap are hydrostatic
+  * If `compute_phi_i` is comparable to `phi_from_eos` in fortran code
+* Update calls to compute_pnh_and_exner
+  * 
+* Update calls to compute_dpnh_dp_i
 
 
 
