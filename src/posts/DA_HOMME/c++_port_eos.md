@@ -21,7 +21,10 @@ This implementation then calls the `compute_pnh_and_exner` taking only `dphi` (h
 * cxx/EquationOfState.hpp:105
 * cxx/DirkFunctorImpl.hpp:577
 
-* DirkFunctorImpl 333 gives recipe for calculating phi_i
+## DirkFunctorImpl 
+* 281: add phi_np1 to method call `pnh_and_exner_from_eos`
+* 
+  
 
 
 
