@@ -23,7 +23,7 @@ This implementation then calls the `compute_pnh_and_exner` taking only `dphi` (h
 
 ## DirkFunctorImpl 
 * 281: add phi_np1 to method call `pnh_and_exner_from_eos`
-* 
+* 322: `run_initial_guess` contains pattern for computing scans optimally
   
 
 
