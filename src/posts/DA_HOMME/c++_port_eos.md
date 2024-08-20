@@ -24,6 +24,6 @@ This implementation then calls the `compute_pnh_and_exner` taking only `dphi` (h
 
 
 Todo:
-* `compute_dphi` at line 200
+* `compute_phi_i` called in remap. Uses old EOS
 
 
