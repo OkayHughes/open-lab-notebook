@@ -27,7 +27,7 @@ Todo:
 * Ensure `compute_phi_i` calls in remap are hydrostatic
   * If `compute_phi_i` is comparable to `phi_from_eos` in fortran code
 * Update calls to compute_pnh_and_exner
-  * 
+    * 577 in dirk is a PROBLEM
 * Update calls to compute_dpnh_dp_i
 
 
