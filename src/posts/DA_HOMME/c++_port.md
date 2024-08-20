@@ -16,7 +16,8 @@ Fine grain todo:
 
 Coarse-grained todo:
 * Ensure unit tests failing for DA HOMME
-* Identify other unit tests that may be helpful
+* get EOS unit test working.
+* Refactor scan_dphi to remove potential duplicate work.
 * Get caar_ut unit test to pass (CAAR seems easier?)
 * get dirk unit test to pass (dirk seems easier?)
 
