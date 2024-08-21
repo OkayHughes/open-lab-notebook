@@ -11,7 +11,7 @@ layout: layouts/post.njk
 
 ---
 
-A digital version of the poster can be found [here]() ([smaller file size]()).
+A digital version of the poster can be found [here](https://drive.google.com/file/d/1yqEiH8qoNKJY29V6Yn12e3z_GuCNV03b/view?usp=sharing).
 
 ## References:
 1. Thuburn, J., N.Wood, and A. Staniforth, 2002a: Normal modes of deep atmospheres. I: Spherical geometry. Quart. J. Roy. Meteor. Soc., 128, 1771–1792, doi:10.1256/003590002320603403.
