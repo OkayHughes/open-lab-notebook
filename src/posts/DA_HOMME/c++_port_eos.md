@@ -29,6 +29,10 @@ This implementation then calls the `compute_pnh_and_exner` taking only `dphi` (h
 
 ## Debugging notes:
 * When division by rhatinvsq_m is disabled, exner test passes. 
+  * Three possibilities
+  * phi_i in calling code is different between fortran and c++ (fucked up transpose)
+  * phi_i indexing in calculation of rhatinvsq_m is 
+  * phi_i division in compute_pnh_and_exner? 
 
 
 Todo:
