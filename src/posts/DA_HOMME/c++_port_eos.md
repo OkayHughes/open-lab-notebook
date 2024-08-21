@@ -27,6 +27,8 @@ This implementation then calls the `compute_pnh_and_exner` taking only `dphi` (h
 * Currently: just use `scan_dphi`, which is horribly inefficient
   
 
+## Debugging notes:
+* When division by rhatinvsq_m is disabled, exner test passes. 
 
 
 Todo:
