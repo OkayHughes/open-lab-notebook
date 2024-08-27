@@ -42,7 +42,9 @@ Todo:
     * 577 in dirk is a PROBLEM
 * Update calls to compute_dpnh_dp_i
 
-
+Debugging notes:
+* Let's say you set `phi_i` to 5 in the internal call to compute_pnh_and_exner.
+  * 
 
 
 
