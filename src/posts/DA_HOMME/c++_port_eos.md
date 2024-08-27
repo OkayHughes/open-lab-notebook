@@ -1,4 +1,4 @@
----
+npd---
 date: 2023-11-06
 tags:
   - posts
@@ -43,8 +43,10 @@ Todo:
 * Update calls to compute_dpnh_dp_i
 
 Debugging notes:
-* Let's say you set `phi_i` to 5 in the internal call to compute_pnh_and_exner.
-  * 
+* Let's say you set `phi_i` to 5 in the internal call to compute_pnh_and_exne  * 
 
+hen the tests pass.
+  * Calculation of `dphi` agrees still.
+  * Problem is in indexing when calculating rhatinv_mh
 
-
+T
