@@ -54,4 +54,5 @@ hen the tests pass.
   * hypothesis: memory view indexing doesn't behave how I think it does
 
 * When rhatinvm is overwritten with, e.g., 12.0, value is correct (pnh, exner don't fail in 1000 random tests)
+  * When 12.0/5.0 is used, then test starts failing. 
 * When rhat_next=5.0, rhat_prev=6.0 are overwritten, exner and pnh fails
