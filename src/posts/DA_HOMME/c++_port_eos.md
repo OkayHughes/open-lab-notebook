@@ -49,4 +49,7 @@ hen the tests pass.
   * Calculation of `dphi` agrees still.
   * Problem is in indexing when calculating rhatinv_mh
 
+* when phi_i(ilev) passed as rhatinv_m, test passes.
+  * when phi_i(ilev+1) passed, test fails. when phi_i(ilev-1) passed, nan occurs.
+  * hypothesis: memory view indexing doesn't behave how I think it does
 T
