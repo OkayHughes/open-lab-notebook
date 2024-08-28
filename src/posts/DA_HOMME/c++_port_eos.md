@@ -42,7 +42,7 @@ Todo:
     * 577 in dirk is a PROBLEM
 * Update calls to compute_dpnh_dp_i
 
-Debugging notes:
+## Debugging notes:
 * Let's say you set `phi_i` to 5 in the internal call to compute_pnh_and_exne  * 
 
 hen the tests pass.
@@ -52,4 +52,6 @@ hen the tests pass.
 * when phi_i(ilev) passed as rhatinv_m, test passes.
   * when phi_i(ilev+1) passed, test fails. when phi_i(ilev-1) passed, nan occurs.
   * hypothesis: memory view indexing doesn't behave how I think it does
-T
+
+* When rhatinvm is overwritten with, e.g., 12.0, value is correct (pnh, exner don't fail in 1000 random tests)
+* When rhat_next=5.0, rhat_prev=6.0 are overwritten, exner and pnh fails
