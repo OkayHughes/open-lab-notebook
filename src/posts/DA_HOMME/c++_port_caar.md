@@ -33,6 +33,11 @@ List of changes:
   * compute_accumulated_quantities
     * Nothing to do, all eulerian and diagnostics *(if diagnostics tested, then oops)*
   * compute_w_and_phi_tens
+  
+Adding fcorcos:
+  * src/share/cxx/ElementsGeometry.cpp
+  * src/theta-l_kokkos/cxx/cxx_f90_interface_theta.cpp
+  * src/theta-l_kokkos/cxx/CaarFunctorImpl.hpp
     
   
   
