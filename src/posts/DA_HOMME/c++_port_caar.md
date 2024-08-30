@@ -24,7 +24,14 @@ List of changes:
   * div_vdp
     * Need to access multiple levels phinh_i
     * Use ColumnOps::compute_midpoint_values
+  * compute_scan_quantities:
+    * divergence of pi is used only for diagnostic omega. Ignore for now
+  * compute_interface_quantities
+    * Nothing to do 
+  * compute_vertical_advection
+    * Ignoring eulerian vcoord for now
   * 
+    
   
   
   
