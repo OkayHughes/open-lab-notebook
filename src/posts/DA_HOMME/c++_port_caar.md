@@ -23,8 +23,8 @@ TagPreExchange
 List of changes:
   * div_vdp
     * Need to access multiple levels phinh_i
-    Idea: ThreadVectorRange(kv.team, NUM_LEV)
-    * Idea: allocate buffer for DA?
+    * Use ColumnOps::compute_midpoint_values
+  * 
   
   
   
