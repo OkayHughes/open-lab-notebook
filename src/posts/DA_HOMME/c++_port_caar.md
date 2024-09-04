@@ -38,7 +38,8 @@ List of changes:
   * compute_dp_and_theta_tens:
     * Requires inv rhat at model level. (line 1025)
   * compute_v_tens
-      *     
+
+# NOTE NOTE NOTE: change earth's radius back.
     
   const auto& fcor = m_geometry.m_fcor(kv.ie,igp,jgp); 
   
