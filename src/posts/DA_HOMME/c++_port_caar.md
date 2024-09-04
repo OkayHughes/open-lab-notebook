@@ -34,7 +34,7 @@ List of changes:
     * Nothing to do, all eulerian and diagnostics *(if diagnostics tested, then oops)*
   * compute_w_and_phi_tens
     * Modify gradient -> done
-    * Add w tendency term
+    * Add w tendency term, calculate fcorcos
   
 Adding fcorcos:
   * src/share/cxx/ElementsGeometry.cpp
