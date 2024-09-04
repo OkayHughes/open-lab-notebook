@@ -35,6 +35,8 @@ List of changes:
   * compute_w_and_phi_tens
     * Modify gradient -> done
     * Add w tendency term, calculate fcorcos
+    
+  const auto& fcor = m_geometry.m_fcor(kv.ie,igp,jgp); 
   
 Adding fcorcos:
   * src/share/cxx/ElementsGeometry.cpp
