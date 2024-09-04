@@ -37,7 +37,8 @@ List of changes:
     * Add w tendency term, calculate fcorcos
   * compute_dp_and_theta_tens:
     * Requires inv rhat at model level. (line 1025)
-    
+  * compute_v_tens
+      *     
     
   const auto& fcor = m_geometry.m_fcor(kv.ie,igp,jgp); 
   
@@ -51,3 +52,4 @@ Adding fcorcos:
   
 ### m_policy_post
   * TagPostExchange
+
