@@ -57,7 +57,7 @@ If `$$\frac{\Delta \tilde{x}}{\Delta \tilde{t}} = 1$$`, then
 Therefore, if I keep `$$\beta$$` constant on a larger earth, then the wave will travel at a speed that depends only on the depth of the atmosphere and the
 B-V frequency.
 
-Since `$$\beta = \frac{2\Omega \cos(\phi_0)}{a}$$`, then if we set `$a = 10a_0$$` and `$$\Omega = \frac{\Omega_0}{10}$$`,
+Since `$$\beta = \frac{2\Omega \cos(\phi_0)}{a}$$`, then if we set `$$a = 10a_0$$` and `$$\Omega = \frac{\Omega_0}{10}$$`,
 then `$$ \beta = \frac{2 \cdot \Omega_0}{10 \cdot 10 a} = \frac{\beta_0}{100}$$`.
 The conclusion is that Rossby radius of deformation `$$\frac{NH}{\pi f}$$` should be kept constant by keeping `$$f$$` constant!
 
