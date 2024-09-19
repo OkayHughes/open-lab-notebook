@@ -49,8 +49,15 @@ The paper states that in this nondimensional form it moves with unit speed (veri
 so it exhibits spatial decay rate `$$\varepsilon$$`. 
 
 ### Implications for large-earth simulation:
-The wave moves at unit speed when `$$ 1 \sim \tilde{x} = \frac{x}{\sqrt{\frac{c}{2\beta}}} $$`
+The wave moves at unit speed when `$$ 1 \sim \tilde{x} = x\sqrt{\frac{c}{2\beta}} $$`, `$$ 1 \sim \tilde{t} = t \sqrt{\frac{1}{2\beta c}}$$`.
+Since we won't be varying `$$N$$` or `$$D$$`, we can assume `$$c = 1$$`. 
+If `$$\frac{\Delta \tilde{x}}{\Delta \tilde{t}} = 1$$`, then 
+`$$\frac{\Delta x}{ \Delta t} = \frac{\sqrt{\frac{c}{2\beta}}}{\sqrt{\frac{1}{2\beta c}}} = \sqrt{\frac{2c^2 \beta}{2\beta}} = c.$$`
 
+Therefore, if I keep `$$\beta$$` constant on a larger earth, then the wave will travel at a speed that depends only on the depth of the atmosphere and the
+B-V frequency.
+
+Since `$$\beta = \frac{}{}`
 
 ## BV frequency derivation (slightly wrong, there's a typo)
 Assume `$$p(z=0) = p_0, T(z=0) = T_0$$`.
