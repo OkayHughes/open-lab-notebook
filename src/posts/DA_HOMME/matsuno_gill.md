@@ -41,12 +41,15 @@ steady-state kelvin wave takes the form
 u &= p = \frac{1}{2} q_0(x) \exp(-\frac{1}{4} y^2) \\
 v &= 0 \\
 w &= \frac{1}{2}(\varepsilon q_0(x) + F(x)) \exp(-\frac{1}{4}y^2) \\
-\varepsilon q_0 + \der{q_0}{x} = -F(x) \stackrel{?}= 
+\varepsilon q_0 + \der{q_0}{x} \stackrel{?}{=}&  -F(x) \propto \cos(x) \\
 \end{align*}
 $$$`
+From the last equation we see that the Kelvin wave has spatial decay rate `$$\varepsilon$$`.
+The paper states that in this nondimensional form it moves with unit speed (verify this?),
+so 
 
 
-## BV frequency derivation (slightly wrong)
+## BV frequency derivation (slightly wrong, there's a typo)
 Assume `$$p(z=0) = p_0, T(z=0) = T_0$$`.
 A constant BV frequency gives `$$ \frac{g}{\theta}\pder{\theta}{z} = N^2 $$` so
 `$$$ 
