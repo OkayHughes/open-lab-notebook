@@ -14,7 +14,7 @@ layout: layouts/post.njk
 Gill's paper nondimensionalizes the equations using the
 length scale corresponding to the equatorial rossby radius on
 a `$$\beta$$` plane (`$$\beta = \frac{2\Omega \cos(0)}{a}$$`) Letting `$$c = \frac{ND}{\pi} $$`, with `$$z_{\textrm{top}} = D$$` and `$$N$$` the B-V frequency,
-then the equatorial Rossby radius is `$$ \sqrt{\frac{c}{2\beta}} $$` and the time scale `$$\sqrt{\frac{1}{2\beta c}} $$`. The resulting equations of motion are
+then the equatorial Rossby radius is `$$ \sqrt{\frac{c}{2\beta}} $$` and the time scale `$$\sqrt{\frac{1}{2\beta c}} $$` . The resulting equations of motion are
 `$$$
 \begin{align*}
   \pder{u}{t} - \frac{1}{2} y v &= -\pder{p}{x} \\
@@ -46,7 +46,10 @@ w &= \frac{1}{2}(\varepsilon q_0(x) + F(x)) \exp(-\frac{1}{4}y^2) \\
 $$$`
 From the last equation we see that the Kelvin wave has spatial decay rate `$$\varepsilon$$`.
 The paper states that in this nondimensional form it moves with unit speed (verify this?),
-so 
+so it exhibits spatial decay rate `$$\varepsilon$$`. 
+
+### Implications for large-earth simulation:
+The wave moves at unit speed when `$$ 1 \sim \tilde{x} = \frac{x}{\sqrt{\frac{c}{2\beta}}} $$`
 
 
 ## BV frequency derivation (slightly wrong, there's a typo)
