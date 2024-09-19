@@ -9,6 +9,14 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
+## Slow-wave MG
+
+Gill's paper nondimensionalizes the equations using the
+length scale corresponding to the equatorial rossby radius on
+a `$$\beta$$` plane (`$$\beta = \frac{2\Omega \cos(0)}{a}$$`) Letting `$$c = \frac{ND}{\pi} $$`, with `$$z_{\textrm{top}} = D$$` and `$$N$$` the B-V frequency,
+then the equatorial Rossby radius is `$$ \sqrt{\frac{c}{2\beta}} $$` and the time scale `$$\sqrt{\frac{1}{2\beta c}} $$`
+
+## BV frequency derivation (slightly wrong)
 Assume `$$p(z=0) = p_0, T(z=0) = T_0$$`.
 A constant BV frequency gives `$$ \frac{g}{\theta}\pder{\theta}{z} = N^2 $$` so
 `$$$ 
@@ -46,3 +54,5 @@ and based on `$$p(z=\infty) = 0$$` we see `$$T_0 = \frac{g^2}{R_d N^2} $$`
   \implies& -\frac{g}{N^2}\log\left[1-\frac{R_d T_0 N^2}{g^2}\left(1-\left(\frac{p}{p_0}\right)^\kappa\right)\right] =  z 
 \end{align*}
 $$$`
+
+
