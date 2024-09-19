@@ -14,7 +14,37 @@ layout: layouts/post.njk
 Gill's paper nondimensionalizes the equations using the
 length scale corresponding to the equatorial rossby radius on
 a `$$\beta$$` plane (`$$\beta = \frac{2\Omega \cos(0)}{a}$$`) Letting `$$c = \frac{ND}{\pi} $$`, with `$$z_{\textrm{top}} = D$$` and `$$N$$` the B-V frequency,
-then the equatorial Rossby radius is `$$ \sqrt{\frac{c}{2\beta}} $$` and the time scale `$$\sqrt{\frac{1}{2\beta c}} $$`
+then the equatorial Rossby radius is `$$ \sqrt{\frac{c}{2\beta}} $$` and the time scale `$$\sqrt{\frac{1}{2\beta c}} $$`. The resulting equations of motion are
+`$$$
+\begin{align*}
+  \pder{u}{t} - \frac{1}{2} y v &= -\pder{p}{x} \\
+  \pder{v}{t} + \frac{1}{2} y u &= -\pder{p}{y} \\
+  \pder{p}{t} + \pder{u}{x} + \pder{v}{y} &= -Q
+\end{align*}
+$$$`
+with `$$Q$$` our forced heating.
+We then add ODE damping to heat and wind, under which the steady state equations look like
+
+`$$$
+\begin{align*}
+  \varepsilon u - \frac{1}{2} y v &= -\pder{p}{x} \\
+  \varepsilon v+ \frac{1}{2} y u &= -\pder{p}{y} \\
+  \varepsilon p + \pder{u}{x} + \pder{v}{y} &= -Q \\
+  (w &= \varepsilon p + Q) \\
+\end{align*}
+$$$`
+
+Under the cosine-x-gaussian heating profile, the 
+steady-state kelvin wave takes the form
+`$$$
+\begin{align*}
+u &= p = \frac{1}{2} q_0(x) \exp(-\frac{1}{4} y^2) \\
+v &= 0 \\
+w &= \frac{1}{2}(\varepsilon q_0(x) + F(x)) \exp(-\frac{1}{4}y^2) \\
+\varepsilon q_0 + \der{q_0}{x} = -F(x) \stackrel{?}= 
+\end{align*}
+$$$`
+
 
 ## BV frequency derivation (slightly wrong)
 Assume `$$p(z=0) = p_0, T(z=0) = T_0$$`.
