@@ -39,6 +39,7 @@ List of changes:
     * Requires inv rhat at model level. (line 1025)
   * compute_v_tens
     * previously computed grad_phinh?? Where does this happen?
+    * w_and_phi_tens.
 
 # NOTE NOTE NOTE: change earth's radius back.
     
