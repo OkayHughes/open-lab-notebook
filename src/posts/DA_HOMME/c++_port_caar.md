@@ -38,6 +38,7 @@ List of changes:
   * compute_dp_and_theta_tens:
     * Requires inv rhat at model level. (line 1025)
   * compute_v_tens
+    * previously computed grad_phinh?? Where does this happen?
 
 # NOTE NOTE NOTE: change earth's radius back.
     
