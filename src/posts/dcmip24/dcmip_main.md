@@ -22,4 +22,7 @@ We will be using `$$c \equiv 1$$`.
 
 ## special considerations:
 Suppose we want `$$ \Delta z $$` to have a specific (approximate) height profile, e.g. [in Skamarock, et al.](https://journals.ametsoc.org/view/journals/mwre/147/7/mwr-d-19-0043.1.xml).
-Suppose we have already found `$$ p_k, k=K+1`
+Suppose we have already found `$$ p_k, k=K+1, \dots, k$$` (`$$\eta_{\textrm{top}} $$` is a free parameter, while bad things happend if `$$ \eta_{s}\neq 1$$`)
+
+Assume the atmosphere is in hydrostatic balance.
+Assume that `$$ p(z) = p_0 \left(\frac \frac{T_0 - \Gamma z}{}\right)`
