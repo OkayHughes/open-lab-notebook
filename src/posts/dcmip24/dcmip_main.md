@@ -13,7 +13,7 @@ Brief digression:
 Under the profile `$$T(z) = T_0$$`, the pressure looks like `$$ p = p_0 \exp\left(\frac{z}{R_d T_0 g^{-1}} \right)$$`
 while under `$$T(z) = T_0 - \Gamma z$$` the pressure looks like `$$p = p_0\left(\frac{T_0 - \Gamma z}{T_0} \right)^{\frac{g}{R_d \Gamma}} $$`.
 
-We can rewrite `$$\log(p) = \log(p_0) + \frac{\gamma}{} $$`
+We can rewrite `$$\log(p) = \log(p_0) +  \log\left(\left[\frac{T_0 - \Gamma z}{T_0} \right]^{\frac{g}{R_d \Gamma}} \right)$$`
 
 ## Main content:
 
