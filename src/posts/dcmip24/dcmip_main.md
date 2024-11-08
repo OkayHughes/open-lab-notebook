@@ -14,5 +14,12 @@ We use the definition `$$ p(\eta) = A(\eta) p_0 + B(\eta) p_s$$`
 
 1. Establishing a reference temperature profile `$$T(z)$$`.
 2. Use this to determine pressure levels `$$p_{\textrm{int}, k} = p(z_{\textrm{int}, k}) $$`
-3. Calculate sigma levels assuming isobaric surface pressure, `$$\sigma_{\textrm{int}, k} = \frac{p_{\textrm{int}, k} - p_{\textrm{int}, 1}}{p_{\textrm{int}, N+1} - p_{\textrm{int}, 1}}$$`
-4. Define `$$A(\eta) = \eta - B(\eta)`
+4. Define `$$A(\eta) = \eta - B(\eta)$$`, and `$$ B = \left(\frac{\eta - \eta_{\textrm{top}}}{1 - \eta_{\textrm{top}}}\right)^c$$`, `$$\eta(z) \equiv \frac{p(z)}{p_s}$$`
+5. Calculate full model levels by averaging interfaces.
+
+We will be using `$$c \equiv 1$$`.
+
+
+## special considerations:
+Suppose we want `$$ \Delta z $$` to have a specific (approximate) height profile, e.g. [in Skamarock, et al.](https://journals.ametsoc.org/view/journals/mwre/147/7/mwr-d-19-0043.1.xml).
+Suppose we have already found `$$ p_k, k=K+1`
