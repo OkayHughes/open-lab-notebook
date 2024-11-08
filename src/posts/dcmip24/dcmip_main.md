@@ -22,8 +22,17 @@ An intermediate step in integrating the hydrostatic integral reads
 \end{align*}
 $$$`
 
-Noting that the numerator and denominator rewrite lets us write 
-`$$$ \lim  $$$`
+Noting that the numerator and denominator are both differentiable functions of `$$\Gamma$$`, we then find 
+`$$$ 
+\begin{align*}
+  \lim_{\Gamma \to 0^+} \log(p/p_0) = \log(p/p_0) &= \lim_{\Gamma \to 0^+} \frac{\log\left(\left[\frac{T_0 - \Gamma z}{T_0} \right]^{\frac{g}{R_d}} \right)}{\Gamma}  \\
+  &= \lim_{\Gamma \to 0^+} \frac{\partial_\Gamma \left[\frac{g}{R_d}\log\left(\frac{T_0 - \Gamma z}{T_0} \right)\right]}{\partial_\Gamma \Gamma} \\
+  &= \lim_{\Gamma \to 0^+} \frac{g}{R_d}\cdot -\frac{z}{T_0}\cdot\frac{T_0}{T_0 - \Gamma z} \\
+  &= -\frac{z}{R_d T_0 g^{-1}}
+\end{align*}
+$$$`
+
+Unfortunately, this makes it very difficult to find, e.g., a unified expression for `$$p(z)$$` that agrees in both cases in floating point arithmetic :(.
 
 ## Main content:
 
