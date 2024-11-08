@@ -9,6 +9,14 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
+Brief digression:
+Under the profile `$$T(z) = T_0$$`, the pressure looks like `$$ p = p_0 \exp\left(\frac{z}{R_d T_0 g^{-1}} \right)$$`
+while under `$$T(z) = T_0 - \Gamma z$$` the pressure looks like `$$p = p_0\left(\frac{T_0 - \Gamma z}{T_0} \right)^{\frac{g}{R_d \Gamma}} $$`.
+
+We can rewrite `$$\log(p) = \log(p_0) + \frac{\gamma}{} $$`
+
+## Main content:
+
 We're going to follow the strategy outlined in DCMIP 2008.
 We use the definition `$$ p(\eta) = A(\eta) p_0 + B(\eta) p_s$$`
 
@@ -26,7 +34,8 @@ Suppose we have already found `$$ p_k, k=K+1, \dots, k$$` (`$$\eta_{\textrm{top}
 
 Assume the atmosphere is in hydrostatic balance.
 Under a constant lapse rate, `$$ p(z) = p_0 \left(\frac{T_0 - \Gamma z}{T_0}\right)^{\frac{g}{\Gamma R_d}}$$`
-The temperature is then `$$T(p) = T_0 \left(\frac{p}{p_0} \right)^{-\frac{R_d \Gamma}{g}} $$`
+The temperature is then `$$T(p) = T_0 \left(\frac{p}{p_0} \right)^{-\frac{R_d \Gamma}{g}} $$`,
+and the height is `$$z(p) = \frac{T_0}{\Gamma} \left[1 - \left( \frac{p}{p_0} \right)^{\frac{R_d \Gamma}{g}} \right] $$`
 
 Suppose we have `$$p_{\textrm{int}, k+1}, z_{\textrm{int}, k+1}$$`.
 
@@ -38,3 +47,4 @@ The equation that's easy to solve is `$$ \Delta z\left(p_{\textrm{int, k+1}} \ri
 or `$$p_{k+1} = p(\Delta z\left(p_{\textrm{int, k+1}}) +z(p_{\textrm{int}, k+1}) \right) $$`
 
 This is an approximation, but we are making several other approximations that won't hold since we have topography.
+
