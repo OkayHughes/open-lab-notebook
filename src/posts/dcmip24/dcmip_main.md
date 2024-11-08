@@ -9,30 +9,6 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
-## Brief digression:
-Under the profile `$$T(z) = T_0$$`, the pressure looks like `$$ p = p_0 \exp\left(\frac{z}{R_d T_0 g^{-1}} \right)$$`
-while under `$$T(z) = T_0 - \Gamma z$$` the pressure looks like `$$p = p_0\left(\frac{T_0 - \Gamma z}{T_0} \right)^{\frac{g}{R_d \Gamma}} $$`.
-The fact that these don't immediately agree when `$$\Gamma = 0$$` has always irritated me. Here's why that is:
-
-An intermediate step in integrating the hydrostatic integral reads
-`$$$
-\begin{align*}
-  \log(p) &= \log(p_0) +  \log\left(\left[\frac{T_0 - \Gamma z}{T_0} \right]^{\frac{g}{R_d \Gamma}} \right) \\
-  &= \log(p_0) +  \frac{\log\left(\left[\frac{T_0 - \Gamma z}{T_0} \right]^{\frac{g}{R_d}} \right)}{\Gamma}
-\end{align*}
-$$$`
-
-Noting that the numerator and denominator are both differentiable functions of `$$\Gamma$$`, we then find 
-`$$$ 
-\begin{align*}
-  \lim_{\Gamma \to 0^+} \log(p/p_0) = \log(p/p_0) &= \lim_{\Gamma \to 0^+} \frac{\log\left(\left[\frac{T_0 - \Gamma z}{T_0} \right]^{\frac{g}{R_d}} \right)}{\Gamma}  \\
-  &= \lim_{\Gamma \to 0^+} \frac{\partial_\Gamma \left[\frac{g}{R_d}\log\left(\frac{T_0 - \Gamma z}{T_0} \right)\right]}{\partial_\Gamma \Gamma} \\
-  &= \lim_{\Gamma \to 0^+} \frac{g}{R_d}\cdot -\frac{z}{T_0}\cdot\frac{T_0}{T_0 - \Gamma z} \\
-  &= -\frac{z}{R_d T_0 g^{-1}}
-\end{align*}
-$$$`
-
-Unfortunately, this makes it very difficult to find, e.g., a unified expression for `$$p(z)$$` that agrees in both cases in floating point arithmetic :(.
 
 ## Main content:
 
@@ -67,3 +43,30 @@ or `$$p_{k+1} = p(\Delta z\left(p_{\textrm{int, k+1}}) +z(p_{\textrm{int}, k+1})
 
 This is an approximation, but we are making several other approximations that won't hold since we have topography.
 
+
+
+
+## Brief digression:
+Under the profile `$$T(z) = T_0$$`, the pressure looks like `$$ p = p_0 \exp\left(\frac{z}{R_d T_0 g^{-1}} \right)$$`
+while under `$$T(z) = T_0 - \Gamma z$$` the pressure looks like `$$p = p_0\left(\frac{T_0 - \Gamma z}{T_0} \right)^{\frac{g}{R_d \Gamma}} $$`.
+The fact that these don't immediately agree when `$$\Gamma = 0$$` has always irritated me. Here's why that is:
+
+An intermediate step in integrating the hydrostatic integral reads
+`$$$
+\begin{align*}
+  \log(p) &= \log(p_0) +  \log\left(\left[\frac{T_0 - \Gamma z}{T_0} \right]^{\frac{g}{R_d \Gamma}} \right) \\
+  &= \log(p_0) +  \frac{\log\left(\left[\frac{T_0 - \Gamma z}{T_0} \right]^{\frac{g}{R_d}} \right)}{\Gamma}
+\end{align*}
+$$$`
+
+Noting that the numerator and denominator are both differentiable functions of `$$\Gamma$$`, we then find 
+`$$$ 
+\begin{align*}
+  \lim_{\Gamma \to 0^+} \log(p/p_0) = \log(p/p_0) &= \lim_{\Gamma \to 0^+} \frac{\log\left(\left[\frac{T_0 - \Gamma z}{T_0} \right]^{\frac{g}{R_d}} \right)}{\Gamma}  \\
+  &= \lim_{\Gamma \to 0^+} \frac{\partial_\Gamma \left[\frac{g}{R_d}\log\left(\frac{T_0 - \Gamma z}{T_0} \right)\right]}{\partial_\Gamma \Gamma} \\
+  &= \lim_{\Gamma \to 0^+} \frac{g}{R_d}\cdot -\frac{z}{T_0}\cdot\frac{T_0}{T_0 - \Gamma z} \\
+  &= -\frac{z}{R_d T_0 g^{-1}}
+\end{align*}
+$$$`
+
+Unfortunately, this makes it very difficult to find, e.g., a unified expression for `$$p(z)$$` that agrees in both cases in floating point arithmetic :(.
