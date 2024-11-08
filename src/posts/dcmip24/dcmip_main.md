@@ -9,11 +9,21 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
-Brief digression:
+## Brief digression:
 Under the profile `$$T(z) = T_0$$`, the pressure looks like `$$ p = p_0 \exp\left(\frac{z}{R_d T_0 g^{-1}} \right)$$`
 while under `$$T(z) = T_0 - \Gamma z$$` the pressure looks like `$$p = p_0\left(\frac{T_0 - \Gamma z}{T_0} \right)^{\frac{g}{R_d \Gamma}} $$`.
+The fact that these don't immediately agree when `$$\Gamma = 0$$` has always irritated me. Here's why that is:
 
-We can rewrite `$$\log(p) = \log(p_0) +  \log\left(\left[\frac{T_0 - \Gamma z}{T_0} \right]^{\frac{g}{R_d \Gamma}} \right)$$`
+An intermediate step in integrating the hydrostatic integral reads
+`$$$
+\begin{align*}
+  \log(p) &= \log(p_0) +  \log\left(\left[\frac{T_0 - \Gamma z}{T_0} \right]^{\frac{g}{R_d \Gamma}} \right) \\
+  &= \log(p_0) +  \frac{\log\left(\left[\frac{T_0 - \Gamma z}{T_0} \right]^{\frac{g}{R_d}} \right)}{\Gamma}
+\end{align*}
+$$$`
+
+Noting that the numerator and denominator rewrite lets us write 
+`$$$ \lim  $$$`
 
 ## Main content:
 
