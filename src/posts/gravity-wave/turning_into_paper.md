@@ -12,13 +12,21 @@ layout: layouts/post.njk
 ## What do I need for a story:
 * Relevance to actual modeling.
 * Method of addressing problem.
-
-
+* Actual cause of problem
 
 ## Relevance to modeling:
-  * What
+  * Complex topography with 
+    * isothermal no flow
+    * isothermal SBR
 
-## Anelastic projection
+Todo:
+  * Read in topography from netcdf file
+  * Learn how to use 
+
+## Dependence on topography
+  * flat BW vs bw-topo test.
+
+## Anelastic projection?
 
 Todo:
 * Get HOMME model running again 
