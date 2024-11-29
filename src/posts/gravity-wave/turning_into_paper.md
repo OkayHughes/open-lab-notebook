@@ -21,7 +21,7 @@ layout: layouts/post.njk
 
 Todo:
   * Read in topography from netcdf file
-  * Learn how to use 
+  * Learn how to use https://github.com/NCAR/Topo
 
 ## Dependence on topography
   * flat BW vs bw-topo test.
