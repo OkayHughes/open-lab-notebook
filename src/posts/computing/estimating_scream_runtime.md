@@ -25,13 +25,19 @@ Here are (some of) my starting assumptions:
 
 With that in mind, I think you can (approximately) compute the cost basically by counting elements and accounting for the new time step `$$\Delta t$$`.
 One way to do this if you don't yet have a particular grid in mind is by defining some density function over the surface of the earth with units of, e.g., Grid Points/sq km 
-that matches the final and integrate over the surface of the earth. For a constant function `$$ f(\cdot, \cdot) = \frac{1}{30^2} \textrm{Grid Point}~\textrm{km}^{-1}$$`,
-we get 566,738 gridpoints, which is approximately right. 
+that matches the final and integrate over the surface of the earth. For a constant function `$$ f(\cdot, \cdot) = \frac{1}{120^2} \textrm{Grid Point}~\textrm{km}^{-1}$$`,
+we get approximately 35,000 gridpoints, which is approximately right. 
 
 The time step decreases approximately linearly with the nominal distance between gridpoints, so if the smallest grid spacing in your
 variable resolution mesh is, e.g., `$$\frac{120~\textrm{km}}{40}$$`, then the time step is `$$\frac{\Delta t_{120~\textrm{km}}}{40} $$`, 
-so you must take 40 times as many time steps. If we have `$$ T_{120~\textrm{km}} $$` the total runtime for, e.g., 1 year of total simulation,
-then we can use that to calculate the number of time steps `$$\frac{3.1536\cdot10^7~\textrm{s} `
+so you must take 40 times as many time steps. If we have `$$ c_{120~\textrm{km, total}} $$` the total cost (however you want to do your accounting) for, e.g., 1 year of total simulation,
+then we can use that to calculate the number of time steps `$$n_{\textrm{ts}} = \frac{3.1536\cdot10^7~\textrm{s}}{\Delta t_{120~\textrm{km}}}$$`.
+The computational cost per timestep is then `$$c_{\textrm{ts}} = \frac{c_{120~\textrm{km}}}{n_{\textrm{ts}}}$$`. 
+If the number of grid cells in the reference run is `$$n_{\textrm{gc}}$$`, 
+then the cost per timestep per element is then `$$ c_{\textrm{gc}} = \frac{c_{\textrm{ts}}}{n_{\textrm{gc}}} $$`.
+Under the assumptions above, then the re
+
+
 
 
 
