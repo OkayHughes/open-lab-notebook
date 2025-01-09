@@ -1,12 +1,12 @@
 ---
-title: Some slurm hacks
+title: Estimating the cost of a variable resolution simulation.
 date: 2021-08-31
 tags:
   - posts
   - slurm
   - scientific-computing
 eleventyNavigation:
-  key: SCREAM computational cost?
+  key: Variable resolution computational cost estimation!
   parent: Scientific Computing
 layout: layouts/post.njk
 ---
@@ -25,17 +25,21 @@ Here are (some of) my starting assumptions:
 
 With that in mind, I think you can (approximately) compute the cost basically by counting elements and accounting for the new time step `$$\Delta t$$`.
 One way to do this if you don't yet have a particular grid in mind is by defining some density function over the surface of the earth with units of, e.g., Grid Points/sq km 
-that matches the final and integrate over the surface of the earth. For a constant function `$$ f(\cdot, \cdot) = \frac{1}{120^2} \textrm{Grid Point}~\textrm{km}^{-1}$$`,
-we get approximately 35,000 gridpoints, which is approximately right. 
+that matches the final and integrate over the surface of the earth. For a constant function `$$ f(\cdot, \cdot) = \frac{1}{120^2} \textrm{Grid Point}~\textrm{km}^{-2}$$`,
+we get approximately 35,000 gridpoints, which is approximately right. Discarding a couple of constant coefficients, this means that you can specify an `$$g$$` that 
+describes the nominal radius of a grid cell and then calculate `$$ n_{\textrm{gc}} \approx \int_{\mathbb{S}^2} g^2 \intd{A}$$`
 
 The time step decreases approximately linearly with the nominal distance between gridpoints, so if the smallest grid spacing in your
 variable resolution mesh is, e.g., `$$\frac{120~\textrm{km}}{40}$$`, then the time step is `$$\frac{\Delta t_{120~\textrm{km}}}{40} $$`, 
-so you must take 40 times as many time steps. If we have `$$ c_{120~\textrm{km, total}} $$` the total cost (however you want to do your accounting) for, e.g., 1 year of total simulation,
+so you must take 40 times as many time steps. If we have `$$ c_{120~\textrm{km, total}} $$` the total cost (in whatever units you want to do your accounting in) for, e.g., 1 year of total simulation,
 then we can use that to calculate the number of time steps `$$n_{\textrm{ts}} = \frac{3.1536\cdot10^7~\textrm{s}}{\Delta t_{120~\textrm{km}}}$$`.
 The computational cost per timestep is then `$$c_{\textrm{ts}} = \frac{c_{120~\textrm{km}}}{n_{\textrm{ts}}}$$`. 
 If the number of grid cells in the reference run is `$$n_{\textrm{gc}}$$`, 
-then the cost per timestep per element is then `$$ c_{\textrm{gc}} = \frac{c_{\textrm{ts}}}{n_{\textrm{gc}}} $$`.
-Under the assumptions above, then the re
+then the cost per timestep per element is then `$$ c_{\textrm{ts, gc}} = \frac{c_{\textrm{ts}}}{n_{\textrm{gc}}} $$`.
+Under the assumptions above, then the final cost just requires multiplying `$$c_{\textrm{ts, gc}} \cdot n_{\textrm{gc, variable}} \cdot n_{\textrm{ts, variable}} $$`.
+
+Interesting note: I could test how well this analysis works using CESM on greatlakes with, e.g., a variable resolution CAM4 physics Aquaplanet run or something,
+
 
 
 
