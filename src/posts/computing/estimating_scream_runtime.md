@@ -17,7 +17,8 @@ If you know the cost of running an ESM configuration whose compute time is almos
 at nominal 1º resolution, can you compute the cost of running a regionally refined model configuration?
 
 Here are (some of) my starting assumptions:
-  * The compute cost of advancing one "time step" (time step will be a shorthand for everything that happens between physics updates.)
+  * The (compute) cost of advancing one "time step" (time step will be a shorthand for everything that happens between physics updates) does not change with the size of grid cell.
+  * The nominal 1º reference simulation uses a grid partition 
 
 
 
