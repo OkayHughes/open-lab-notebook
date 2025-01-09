@@ -18,7 +18,13 @@ at nominal 1º resolution, can you compute the cost of running a regionally refi
 
 Here are (some of) my starting assumptions:
   * The (compute) cost of advancing one "time step" (time step will be a shorthand for everything that happens between physics updates) does not change with the size of grid cell.
-  * The nominal 1º reference simulation uses a grid partition 
+  * The nominal 1º reference simulation uses a grid partition/load balancing such that the amount of inter-node communication required is comparable to 
+  what it will be for the variable resolution run. E.g., a simulation performed with all physics/dynamics work performed within a single node (even if it uses multiple sockets) may be a bad reference cost.
+  * The model has been tailored to the target computer such that increasing the number of nodes in a simulation does not cause drastic increases 
+  in time spent in MPI calls and, what is possibly more troubling, filesystem and IO calls. 
+  * Remapping, e.g. for file output, is a negligible percentage of total runtime.
+  * A model like SE that decouples physics and dynamics columns (c.f. the `pg` system)
+  
 
 
 
