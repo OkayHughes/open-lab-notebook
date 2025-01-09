@@ -22,8 +22,11 @@ Here are (some of) my starting assumptions:
   * The model has been tailored to the target computer such that increasing the number of nodes in a simulation does not cause drastic increases 
   in time spent in MPI calls and, what is possibly more troubling, filesystem and IO calls. 
   * Remapping, e.g. for file output, is a negligible percentage of total runtime.
-  * 
-  
+
+With that in mind, I think you can (approximately) compute the cost basically by counting elements and accounting for the new time step `$$\Delta t$$`.
+One way to do this if you don't yet have a particular grid in mind is by defining some density function over the surface of the earth with units of, e.g., Grid Points/sq km 
+that matches the final and integrate over the surface of the earth. For a constant function `$$ f(\cdot, \cdot) = \frac{1}{30} \textrm{Grid Point}~\textrm{km}^{-1}$$`, 
+
   
 
 
