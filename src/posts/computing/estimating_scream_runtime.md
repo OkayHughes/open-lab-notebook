@@ -34,9 +34,9 @@ variable resolution mesh is, e.g., `$$\frac{\Delta x_{\textrm{reference}}}{X} \s
 so you must take `$$X$$` times as many time steps. Suppose we find the total cost `$$ c_{\textrm{reference,~total}} $$`  (in whatever units you want to do your accounting in) for, e.g., `$$T_{\textrm{reference}} = 1 \textrm{~year} = 3.1536\cdot 10^7 \textrm{~s}$$` of total simulation.
 We can calculate the number of time steps `$$n_{\textrm{ts, reference}} = \frac{T_{\textrm{reference}}}{\Delta t_{\textrm{reference}}}$$`.
 The computational cost per timestep is then `$$c_{\textrm{ts, reference}} = \frac{c_{\textrm{reference,~total}}}{n_{\textrm{ts}}}$$`. 
-If the number of grid cells in the reference run is `$$n_{\textrm{gc}}$$`, 
-then the cost per timestep per element is then `$$ c_{\textrm{ts, gc}} = \frac{c_{\textrm{ts}}}{n_{\textrm{gc}}} $$`.
-Under the assumptions above, then the final cost just requires multiplying `$$c_{\textrm{ts, gc}} \cdot n_{\textrm{gc, variable}} \cdot n_{\textrm{ts, variable}} $$`.
+If the number of grid cells in the reference run is `$$n_{\textrm{gc, reference}}$$`, 
+then the cost per timestep per element is then `$$ c_{\textrm{ts, gc, reference}} = \frac{c_{\textrm{ts, reference}}}{n_{\textrm{gc, reference}}} $$`.
+Under the assumptions above, then the final cost just requires multiplying `$$c_{\textrm{ts, gc,reference}} \cdot n_{\textrm{gc, variable}} \cdot n_{\textrm{ts, variable}} $$`.
 
 Interesting note: I could test how well this analysis works using CESM on greatlakes with, e.g., a variable resolution CAM4 physics Aquaplanet run or something,
 
