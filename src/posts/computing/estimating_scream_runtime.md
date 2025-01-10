@@ -17,7 +17,7 @@ at nominal 1º resolution, can you compute the cost of running a regionally refi
 
 Here are (some of) my starting assumptions:
   * The (compute) cost of advancing one "time step" within a grid cell (time step will be a shorthand for everything that happens between physics updates) does not change with the size of a grid cell.
-  * The nominal 1º reference simulation uses a grid partition/load balancing such that the amount of inter-node communication required is comparable to 
+  * The nominal 1º reference simulation uses a grid partition/load balancing such that the amount of inter-node communication required for a node is comparable to 
   what it will be for the variable resolution run. E.g., a simulation performed with all physics/dynamics work performed within a single node (even if it uses multiple sockets) may be a bad reference cost.
   * The model has been tailored to the target computer such that increasing the number of nodes in a simulation does not cause drastic increases 
   in time spent in MPI calls and, what is possibly more troubling, filesystem and IO calls. 
@@ -25,8 +25,8 @@ Here are (some of) my starting assumptions:
 
 With that in mind, I think you can (approximately) compute the cost basically by counting elements and accounting for the new time step `$$\Delta t$$`.
 One way to do this if you don't yet have a particular grid in mind is by defining some density function over the surface of the earth with units of, e.g., Grid Points/sq km 
-that matches the final and integrate over the surface of the earth. For a constant function `$$ f(\cdot, \cdot) = \frac{1}{120^2} \textrm{Grid Point}~\textrm{km}^{-2}$$`,
-we get approximately 35,000 gridpoints, which is approximately right. Discarding a couple of constant coefficients, this means that you can specify an `$$g$$` that 
+that matches the final grid and integrate over the surface of the earth. For a constant function `$$ f(\cdot, \cdot) = \frac{1}{120^2} \textrm{Grid Point}~\textrm{km}^{-2}$$`,
+we get approximately 35,000 gridpoints, which is approximately right for a grid with nominal 1º grid spacing. Discarding a couple of constant coefficients, this means that you can specify a `$$g$$` that 
 describes the nominal radius of a grid cell and then calculate `$$ n_{\textrm{gc}} \approx \int_{\mathbb{S}^2} g^2 \intd{A}$$`
 
 The time step decreases approximately linearly with the nominal distance between gridpoints, so if the smallest grid spacing in your
