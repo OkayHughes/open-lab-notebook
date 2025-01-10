@@ -30,10 +30,10 @@ we get approximately 35,000 gridpoints, which is approximately right for a grid 
 describes the nominal radius of a grid cell and then calculate `$$ n_{\textrm{gc}} \approx \int_{\mathbb{S}^2} g^2 \intd{A}$$`
 
 The time step decreases approximately linearly with the nominal distance between gridpoints, so if the smallest grid spacing in your
-variable resolution mesh is, e.g., `$$\frac{120~\textrm{km}}{40} = 3~\textrm{km}$$`, then the time step is `$$\frac{\Delta t_{120~\textrm{km}}}{40} $$`, 
-so you must take 40 times as many time steps. If we have `$$ c_{120~\textrm{km, total}} $$` the total cost (in whatever units you want to do your accounting in) for, e.g., 1 year of total simulation,
-then we can use that to calculate the number of time steps `$$n_{\textrm{ts}} = \frac{3.1536\cdot10^7~\textrm{s}}{\Delta t_{120~\textrm{km}}}$$`.
-The computational cost per timestep is then `$$c_{\textrm{ts}} = \frac{c_{120~\textrm{km}}}{n_{\textrm{ts}}}$$`. 
+variable resolution mesh is, e.g., `$$\frac{\Delta x_{\textrm{reference}}}{X} \stackrel{\textrm{e.g.}}{=} \frac{120~\textrm{km}}{40} = 3~\textrm{km}$$`, then the time step is `$$\frac{\Delta t_{\textrm{reference}}}{X} $$`, 
+so you must take `$$X$$` times as many time steps. Suppose we find the total cost `$$ c_{\textrm{reference,~total}} $$`  (in whatever units you want to do your accounting in) for, e.g., `$$T_{\textrm{reference}} = 1 \textrm{~year} = 3.1536\cdot 10^7 \textrm{~s}$$` of total simulation.
+We can calculate the number of time steps `$$n_{\textrm{ts, reference}} = \frac{T_{\textrm{reference}}}{\Delta t_{\textrm{reference}}}$$`.
+The computational cost per timestep is then `$$c_{\textrm{ts, reference}} = \frac{c_{\textrm{reference,~total}}}{n_{\textrm{ts}}}$$`. 
 If the number of grid cells in the reference run is `$$n_{\textrm{gc}}$$`, 
 then the cost per timestep per element is then `$$ c_{\textrm{ts, gc}} = \frac{c_{\textrm{ts}}}{n_{\textrm{gc}}} $$`.
 Under the assumptions above, then the final cost just requires multiplying `$$c_{\textrm{ts, gc}} \cdot n_{\textrm{gc, variable}} \cdot n_{\textrm{ts, variable}} $$`.
