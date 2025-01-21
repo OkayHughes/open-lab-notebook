@@ -30,5 +30,5 @@ layout: layouts/post.njk
 * Relative differences of 10-20 percent (higher when `$$H_x/H_y = 2$$`).
 * Phase speed of 50 days. Results are not sensitive to this.
   
-## Explanation of how?
+## Explanation of what's happening:
 * 
