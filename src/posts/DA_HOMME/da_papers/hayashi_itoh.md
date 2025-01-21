@@ -9,3 +9,5 @@ eleventyNavigation:
 layout: layouts/post.njk
 ---
 
+## Setup
+* Linearize the QHE on an equatorial `$$\beta$$` plane with rayleigh dampiong of velocity (bizarrely )
