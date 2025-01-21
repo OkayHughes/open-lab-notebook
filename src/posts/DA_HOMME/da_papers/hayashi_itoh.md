@@ -23,7 +23,7 @@ layout: layouts/post.njk
 
 
 ## Linear eigenproblem:
-* Heating profile looks like  `$$$Q_a \cos\left(\frac{\pi y}{H_y}\right) \cos\left(\frac{\pi x}{H_x}\right)  \sin\left(\frac{\pi z}{z_h}\right) \exp\left(\frac{z}{2H}\right) \exp\left(-\i\omega t right)     $$$` on `$$[-H_x/2, H_x/2] \times [-H_y/2,H_y/2] \times [0, z_h] $$`
+* Heating profile looks like  `$$$Q_a \cos\left(\frac{\pi y}{H_y}\right) \cos\left(\frac{\pi x}{H_x}\right)  \sin\left(\frac{\pi z}{z_h}\right) \exp\left(\frac{z}{2H}\right) \exp\left(-\i\omega t right) $$$` on `$$[-H_x/2, H_x/2] \times [-H_y/2,H_y/2] \times [0, z_h] $$`
 * Reaches maximum at approx 9km.
 * `$$Q_a$$` is 10 K/day.
 * Constant lapse rate atmosphere for base state. No background wind.
@@ -31,4 +31,4 @@ layout: layouts/post.njk
 * Phase speed of 50 days. Results are not sensitive to this.
   
 ## Explanation of what's happening:
-* 
+* Strength of heating determines `$$\pder{w_{\textrm{deep}}}{y}$$` 
