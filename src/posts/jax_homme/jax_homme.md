@@ -38,5 +38,7 @@ E2 [      ] E3
 * An unstructured grid is a set of pairs `$$( (\textrm{pos}_1, \textrm{pos}_2, \textrm{pos}_3, \textrm{pos}_4), ((\textrm{elem}_{E_1},  \textrm{vert id}_{v_1}, \textrm{vert id}_{v_2} ), \ldots, (\textrm{elem}_{E_4},  \textrm{vert id}_{v_3}, \textrm{vert id}_{v_4} ))) $$`
 where `$$\textrm{pos}_i $$` are specified as lat-lon points on the sphere.
 * Set of transformations is `$$[-1, 1]^2 \mapsto \textrm{Cube} \mapsto \mathbb{S}^2$$`
-* Converting this into metric terms for the sphere requires mapping the GLL points 
+* Converting this into metric terms for the sphere requires mapping the GLL points in the reference grid to the sphere and taking the product of the consequent Jacobians.
+  * Requires DSS of metric terms, as mappings from reference element to cube often results in coincident points having different Jacobian values.
+* Standard quasi-homogeneous cube has topology (assuming dice labeling) of 
 
