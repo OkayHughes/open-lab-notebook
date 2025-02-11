@@ -13,7 +13,7 @@ Parent post for the jax homme project.
 ### Notes:
 * Prognostic equations use strong derivatives, but Laplacian is calculated weakly in diffusion, even in `sweqx`.
 * Element access must be order-agnostic outside of boundary exchange routines!
-
+* Internal grid is constructed 
 
 
 ### Todo:
