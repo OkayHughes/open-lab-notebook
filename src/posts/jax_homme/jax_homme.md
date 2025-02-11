@@ -17,10 +17,20 @@ Parent post for the jax homme project.
 
 
 ### Todo:
+* Create topology and gridgen :((
 * Create structs 
 * Implement metric terms + quadrature
 * Implement boundary exchange/DSS
 * Verify boundary exchange/DSS on sphere
 * implement derivatives
 * Implement compute_and_apply_rhs for sweqx. 
+
+
+### Gridgen notes:
+* Ordering is 
+```
+[1 2]
+[3 4]
+```
+* Set of transformations is `$$[-1, 1]^2 \mapsto \textrm{Cube} \mapsto \mathbb{S}^2$$`
 
