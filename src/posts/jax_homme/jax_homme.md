@@ -27,10 +27,16 @@ Parent post for the jax homme project.
 
 
 ### Gridgen notes:
-* Ordering is 
+* Ordering within a reference element is 
 ```
-[1 2]
-[3 4]
+      E1
+   [v1  v2]
+E2 [      ] E3
+   [v3  v4]
+      E4
 ```
+* An unstructured grid is a set of pairs `$$( (\textrm{pos}_1, \textrm{pos}_2, \textrm{pos}_3, \textrm{pos}_4), ((\textrm{elem}_{E_1},  \textrm{vert id}_{v_1}, \textrm{vert id}_{v_2} ), \ldots, (\textrm{elem}_{E_4},  \textrm{vert id}_{v_3}, \textrm{vert id}_{v_4} ))) $$`
+where `$$\textrm{pos}_i $$` are specified as lat-lon points on the sphere.
 * Set of transformations is `$$[-1, 1]^2 \mapsto \textrm{Cube} \mapsto \mathbb{S}^2$$`
+* Converting this into metric terms for the sphere requires mapping the GLL points 
 
