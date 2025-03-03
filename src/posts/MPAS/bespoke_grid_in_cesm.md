@@ -96,7 +96,10 @@ but I've had mixed success with this).
 
 You will need to create a case directory, which I typically pattern off of [this example](https://www2.mmm.ucar.edu/projects/mpas/test_cases/v7.0/jw_baroclinic_wave.tar.gz)
 There are two relevant lines in the namelist `namelist.init_atmosphere` that you will need to change: `config_nvertlevels = 26` and `config_init_case = 2`.
-`config_nvertlevels` i
+`config_nvertlevels` is slightly confusing, as for a CAM configuration that's listed has having 30 levels, `config_nvertlevels` should be set to 32.
+
+Specifying topography requires modifying source code. If the root of your MPAS installation is `${MPAS_SRC}`, then 
+
 
 
 
