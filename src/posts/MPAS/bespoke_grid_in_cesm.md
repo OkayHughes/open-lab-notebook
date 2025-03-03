@@ -94,9 +94,13 @@ but I've had mixed success with this).
 
 ## Step 1: Generating a 3D grid with metric terms
 
-Follow one of the [MPAS tutorials](https://www2.mmm.ucar.edu/projects/mpas/tutorial/Boulder2019/index.html)
-Use their tutorials to find an atmospheric configuration that matches the run you want to do (I'll explain what I mean in
-a moment).
+You will need to create a case directory, which I typically pattern off of [this example](https://www2.mmm.ucar.edu/projects/mpas/test_cases/v7.0/jw_baroclinic_wave.tar.gz)
+There are two relevant lines in the namelist `namelist.init_atmosphere` that you will need to change: `config_nvertlevels = 26` and `config_init_case = 2`.
+`config_nvertlevels` i
+
+
+
+
 
 
 
