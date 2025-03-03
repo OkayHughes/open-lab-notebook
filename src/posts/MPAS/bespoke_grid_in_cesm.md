@@ -87,7 +87,7 @@ of 120km and a minimum grid spacing of 30km.
 * `${GRID_DIR}/${GRID_PREFIX}.grid.nc` contains a 2d representation of your MPAS grid connectivity.
 * Several files `${GRID_DIR}/${GRID_PREFIX}.graph.info.part.${NPROC}` where `${NPROC}` includes
 any number of MPI processes with which you want to run an MPAS model. It should probably be a multiple of the 
-number of physical cores in a node within your cluster (or threads if your system has [HT](https://en.wikipedia.org/wiki/Hyper-threading, 
+number of physical cores in a node within your cluster (or threads if your system has [HT](https://en.wikipedia.org/wiki/Hyper-threading), 
 but I've had mixed success with this).
 * `${GRID_DIR}/${GRID_PREFIX}.esmf.coupling.nc` which will be needed by the coupler within CAM.
 
@@ -98,10 +98,10 @@ Follow one of the [MPAS tutorials](https://www2.mmm.ucar.edu/projects/mpas/tutor
 Use their tutorials to find an atmospheric configuration that matches the run you want to do (I'll explain what I mean in
 a moment).
 
-<span class="todo">Include a concrete example of what to do here</span>
-Make sure to look in namelist files for referenced grid files and change them to 
-your custom generated mesh files. I would recommended symlinking them to 
-your case directory with 
+
+
+
+
 ```
 ln -s ${GRID_DIR}/${GRID_PREFIX}.grid.nc ${MPAS_CASE_DIR} 
 ln -s ${GRID_DIR}/$GRID_PREFIX}.graph.info.part.${NPROC} ${MPAS_CASE_DIR}
@@ -123,7 +123,6 @@ Similarly <span class="todo">_your vertical level number and location will be se
 creating this file. Ensure it matches the CAM vertical level configuration that you want to use._
 </span>
 
-<span class="todo">Todo: expand section about how to specify different vertical configurations.</span>
 
 
 
