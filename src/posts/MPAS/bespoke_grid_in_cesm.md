@@ -95,10 +95,14 @@ but I've had mixed success with this).
 ## Step 1: Generating a 3D grid with metric terms
 
 You will need to create a case directory, which I typically pattern off of [this example](https://www2.mmm.ucar.edu/projects/mpas/test_cases/v7.0/jw_baroclinic_wave.tar.gz)
-There are two relevant lines in the namelist `namelist.init_atmosphere` that you will need to change: `config_nvertlevels = 26` and `config_init_case = 2`.
+There are two relevant lines in the namelist `namelist.init_atmosphere` that you will need to change: `config_nvertlevels = 26` and `config_init_case = {CASE_NUMBER}`.
 `config_nvertlevels` is slightly confusing, as for a CAM configuration that's listed has having 30 levels, `config_nvertlevels` should be set to 32.
 
 Specifying topography requires modifying source code. If the root of your MPAS installation is `${MPAS_SRC}`, then 
+the file `src/core_init_atm/mpas_init_atm_cases.F`. I typically modify the DCMIP2008 mountain wave test case, which has multiple topographic smoothing profiles. 
+I typically modify this test case, which is `config_init_case = 6`, and the subroutine `init_atm_case_mtn_wave` within `mpas_init_atm_cases.F`.
+
+
 
 
 
