@@ -102,6 +102,7 @@ Specifying topography requires modifying source code. If the root of your MPAS i
 the file `src/core_init_atm/mpas_init_atm_cases.F`. I typically modify the DCMIP2008 mountain wave test case, which has multiple topographic smoothing profiles. 
 I typically modify this test case, which is `config_init_case = 6`, and the subroutine `init_atm_case_mtn_wave` within `mpas_init_atm_cases.F`.
 
+Around line 2212, the variable `hx` sets the topography. Lines 2244-2275 are where 
 
 
 
