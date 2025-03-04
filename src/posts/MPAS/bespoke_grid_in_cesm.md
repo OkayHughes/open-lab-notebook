@@ -104,7 +104,8 @@ I typically modify this test case, which is `config_init_case = 6`, and the subr
 
 * The nature of the hybrid coordinates is set between lines 2139-2164. Setting `ah(k) = 0` defines pure terrain-following coordinates. 
 I typically uncomment the line `ah(k) = 1.-cos(.5*pii*(k-1)*dz/zt)**6` if I have significant topography.
-This is where you can define constant-height positions, e.g. by creating a local variable `real (kind=RKIND), dimension(nVertLevels+1) :: heightpos = (/ ... /)` and then doing `zc(k) = heightpos(k)` 
+This loop is where you can define constant-height positions, e.g. by creating a local variable `real (kind=RKIND), dimension(nVertLevels+1) :: heightpos = (/ ... /)` at the start of the subroutine, 
+then doing `zc(k) = heightpos(k)`. These should correspond to desired interface level positions in meters, e.g. derived from CAM 
 * Around line 2212, the variable `hx` sets the topography. 
 * Lines 2244-2275 are where metric terms are defined, but they use the `ah` and `zc` terms you modified earlier.
 
