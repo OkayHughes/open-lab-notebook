@@ -107,9 +107,9 @@ I typically uncomment the line `ah(k) = 1.-cos(.5*pii*(k-1)*dz/zt)**6` if I have
 This loop is where you can define constant-height positions, e.g. by creating a local variable `real (kind=RKIND), dimension(nVertLevels+1) :: heightpos = (/ ... /)` at the start of the subroutine, 
 then doing `zc(k) = heightpos(k)`. These should correspond to desired interface level positions in meters, e.g. derived from CAM 
 * Around line 2212, the variable `hx` sets the topography. 
-* Lines 2244-2275 are where metric terms are defined, but they use the `ah` and `zc` terms you modified earlier.
+* Lines 2244-2275 are where metric terms are defined, but they use the `ah` and `zc` terms you modified earlier. You needn't modify any of this.
 
-_Note: when you re-run 
+_Note: when you modify this code, you must rerun `make ifort CORE=init_atmosphere PRECISION=single`_. You can rename the resulting `init_atmosphere_model` that is generated in the `${MPAS_SRC_DIR}$` executable if you want to have multiple versions!
 
 
 ```
