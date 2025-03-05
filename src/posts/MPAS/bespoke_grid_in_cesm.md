@@ -3,14 +3,14 @@ date: 2021-08-16
 tags:
   - posts
 eleventyNavigation:
-  key: Adding a variable resolution grid to CAM via CIME
+  key: Adding a variable resolution grid to CAM via CIM
   parent: MPAS tutorials
 layout: layouts/post.njk
 ---
 
 ## Introduction
 A recent version of [the Community Atmosphere Model](https://github.com/ESCOMP/CAM/tree/cam_development)
-added limited support for the Model for Prediction Across Scales (MPAS) atmospheric dynamical core.
+added support for the Model for Prediction Across Scales (MPAS) atmospheric dynamical core.
 MPAS is a dynamical core with support for a non-hydrostatic equation set built in. It is based on a C-grid discretization on
 Spherical Centroidal Voronoi Tesselation (SCVT) horizontal mesh. As such 
 it is designed to support variable resolution grids when it is run in its own codebase.
@@ -20,7 +20,7 @@ necessarily limits the number of horizontal grid spacings that you can use.
 This post is designed to show you how to add a new variable resolution MPAS grid
 to CIME. <span class="todo">I have used this for aquaplanet runs, but I have not tried AMIP runs _yet_.</span>
 
-In order to run this you will regrettably need access to a working standalone version of the MPAS-A model
+In order to run this you will need access to a working standalone version of the MPAS-A model
 available [here](https://github.com/MPAS-Dev/MPAS-Model).
 I am working on a containerized version that is easy to run on a laptop [here](https://open-lab-notebook.glitch.me/posts/MPAS/singularity_mpas_def/)
 which is currently a work in progress.
@@ -131,10 +131,6 @@ As such, <span class="todo">_any topography that you intend to include in your C
 Similarly <span class="todo">_your vertical level number and location will be set by
 creating this file. Ensure it matches the CAM vertical level configuration that you want to use._
 </span>
-
-
-
-
 
 
 ## Modifying CIME!
