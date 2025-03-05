@@ -30,17 +30,17 @@ which is currently a work in progress.
 For the time being, I have [instructions](https://open-lab-notebook.glitch.me/posts/installing-mpas/) on how I installed MPAS on the [Great Lakes Cluster](https://arc.umich.edu/greatlakes/)
 located at the University of Michigan.
 
-If you have access to NCAR's Cheyenne, then your life is _much_ easier.
+If you have access to NCAR's Derecho, then your life is _much_ easier.
 
-In order to compile MPAS on Cheyenne as of 2022-04-11, you can use the following scripts:
+In order to compile MPAS on Derecho as of 2025-03-05, you can use the following scripts:
 
 <details>
   <summary><code>setup.mpas.sh</code></summary>
   
 
 <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">module unload netcdf
-module load intel/19.1.1  mpt/2.22
-module load netcdf-mpi/4.7.4 pnetcdf/1.12.1 pio/2.5.2
+module load ncarenv-basic/23.06  intel/2023.0.0  cray-mpich/8.1.25
+module load parallel-netcdf/1.12.3 parallelio/2.5.10
 </pre></div>
 
 
@@ -109,6 +109,7 @@ then doing `zc(k) = heightpos(k)`. These should correspond to desired interface 
 * Around line 2212, the variable `hx` sets the topography. 
 * Lines 2244-2275 are where metric terms are defined, but they use the `ah` and `zc` terms you modified earlier.
 
+_Note: when you re-run 
 
 
 ```
