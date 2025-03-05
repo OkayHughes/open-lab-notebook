@@ -3,7 +3,7 @@ date: 2021-08-16
 tags:
   - posts
 eleventyNavigation:
-  key: Adding a variable resolution grid to CAM via CIM
+  key: Adding custom topography to CAM 
   parent: MPAS tutorials
 layout: layouts/post.njk
 ---
