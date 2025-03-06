@@ -28,7 +28,7 @@ which is currently a work in progress.
 ## Step -1: install MPAS
 
 For the time being, I have [instructions](https://open-lab-notebook.glitch.me/posts/installing-mpas/) on how I installed MPAS on the [Great Lakes Cluster](https://arc.umich.edu/greatlakes/)
-located at the University of Michigan.
+located at the University of Michigan.  You can download the file, e.g., [here](https://github.com/MPAS-Dev/MPAS-Model/releases/tag/v8.2.2).
 
 If you have access to NCAR's Derecho, then your life is _much_ easier.
 
