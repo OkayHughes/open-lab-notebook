@@ -102,7 +102,7 @@ Specifying topography requires modifying source code. If the root of your MPAS i
 the file `src/core_init_atm/mpas_init_atm_cases.F`. I typically modify the DCMIP2008 mountain wave test case, which has multiple hybrid transition profiles. 
 I typically modify this test case, which is `config_init_case = 6`, and the subroutine `init_atm_case_mtn_wave` within `mpas_init_atm_cases.F`.
 
-* 
+* Note: ztop and specification of zeta
 * The nature of the hybrid coordinates is set between lines 2139-2164. Setting `ah(k) = 0` defines pure terrain-following coordinates. 
 I typically uncomment the line `ah(k) = 1.-cos(.5*pii*(k-1)*dz/zt)**6`  if I have significant topography.
 
