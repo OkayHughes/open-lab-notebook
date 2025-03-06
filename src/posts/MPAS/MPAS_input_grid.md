@@ -102,15 +102,18 @@ Specifying topography requires modifying source code. If the root of your MPAS i
 the file `src/core_init_atm/mpas_init_atm_cases.F`. I typically modify the DCMIP2008 mountain wave test case, which has multiple hybrid transition profiles. 
 I typically modify this test case, which is `config_init_case = 6`, and the subroutine `init_atm_case_mtn_wave` within `mpas_init_atm_cases.F`.
 
+* 
 * The nature of the hybrid coordinates is set between lines 2139-2164. Setting `ah(k) = 0` defines pure terrain-following coordinates. 
-I typically uncomment the line `ah(k) = 1.-cos(.5*pii*(k-1)*dz/zt)**6` if I have significant topography.
-This loop is where you can define constant-height positions, e.g. by creating a local variable `real (kind=RKIND), dimension(nVertLevels+1) :: heightpos = (/ ... /)` at the start of the subroutine, 
-then doing `zc(k) = heightpos(k)`. These should correspond to desired interface level positions in meters, e.g. derived from CAM 
-* Around line 2212, the variable `hx` sets the topography. 
+I typically uncomment the line `ah(k) = 1.-cos(.5*pii*(k-1)*dz/zt)**6`  if I have significant topography.
+
+  * This loop is where you could define constant-height positions, e.g. by creating a local variable `real (kind=RKIND), dimension(nVertLevels+1) :: heightpos = (/ ... /)` at the start of the subroutine, 
+then doing `zc(k) = heightpos(k)`. These should correspond to desired interface level positions in meters, e.g. derived from CAM. You do not get constant height positions if you have topography!
+* Around line 2212, the variable `hx` sets the topography (in meters). 
 * Lines 2244-2275 are where metric terms are defined, but they use the `ah` and `zc` terms you modified earlier. You needn't modify any of this.
 
 _Note: when you modify this code, you must rerun `make ifort CORE=init_atmosphere PRECISION=single`_. You can rename the resulting `init_atmosphere_model` that is generated in the `${MPAS_SRC_DIR}$` executable if you want to have multiple versions!
 
+* The horizontal resolution is set via the namelist.
 
 ```
 ln -s ${GRID_DIR}/${GRID_PREFIX}.grid.nc ${MPAS_CASE_DIR} 
