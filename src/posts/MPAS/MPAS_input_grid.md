@@ -99,7 +99,7 @@ There are two relevant lines in the namelist `namelist.init_atmosphere` that you
 `config_nvertlevels` is slightly confusing, as for a CAM configuration that's listed has having 30 levels, `config_nvertlevels` should be set to 32.
 
 Specifying topography requires modifying source code. If the root of your MPAS installation is `${MPAS_SRC}`, then 
-the file `src/core_init_atm/mpas_init_atm_cases.F`. I typically modify the DCMIP2008 mountain wave test case, which has multiple topographic smoothing profiles. 
+the file `src/core_init_atm/mpas_init_atm_cases.F`. I typically modify the DCMIP2008 mountain wave test case, which has multiple hybrid transition profiles. 
 I typically modify this test case, which is `config_init_case = 6`, and the subroutine `init_atm_case_mtn_wave` within `mpas_init_atm_cases.F`.
 
 * The nature of the hybrid coordinates is set between lines 2139-2164. Setting `ah(k) = 0` defines pure terrain-following coordinates. 
