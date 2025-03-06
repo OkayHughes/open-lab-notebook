@@ -136,7 +136,7 @@ creating this file. Ensure it matches the CAM vertical level configuration that 
 If you are using a standard MPAS resolution that already has CIME defaults, then all you need to do to include the topography is to point the 
 `ncdata` namelist parameter at your `${GRID_PREFIX}.init.nc`.
 
-# Regridding output to a lat-lon grid:
+## Regridding output to a lat-lon grid:
 
 Download the [following repository](https://github.com/mgduda/convert_mpas) and build the `convert_mpas` tool.
 
