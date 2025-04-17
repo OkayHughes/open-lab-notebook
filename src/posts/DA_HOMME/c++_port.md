@@ -30,3 +30,8 @@ Coarse-grained todo:
 
 
 
+
+## Next phase
+* Dirk doesn't pass on 1000x smaller planet. Why?
+
+* 
