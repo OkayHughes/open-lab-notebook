@@ -19,6 +19,5 @@ The compatibility condition is, letting `$$U \equiv 2\Omega u + \frac{u^2}{r\cos
 The 2011 paper indicates that one specifies the latitudinal dependence and then leave `$$\tau_1, \tau_2$$` underdetermined.
 
 `$$$ 
-\tau_2\partial 
-
+\tau_2\pder{}{\phi} \left[ \tau_3 \left(\frac{r}{a} \cos \phi \right) \right] = \left(\sin \phi \pder{}{r} + \frac{\cos \phi}{r} \pder{}{\phi} \right) \left[ \left( \frac{a^2}{r^2} \int_a^r \frac{r'}{a}\tau_2(r') \intd{r} \right)  \right]
 $$$`
