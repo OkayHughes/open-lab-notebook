@@ -28,4 +28,11 @@ This work involves two intermediate steps:
 * `get_sum_species_1hd` **Check that `dp` is being used correctly.**
 * `get_sum_species_2hd`: No direct changes
 * `get_dp_1hd`: **Check if `dp` is being used correctly. Also, check whether invoked on physics side**
-
+* `get_dp_2hd`: No direct changes
+* `get_pmid_from_dpdry_1hd`: No direct changes
+* `get_pmid_from_dp_1hd`: **Check if pmid is thermodynamic pressure in invocation. Addition of QHE terms? Modification of upper boundary?**
+* `get_exner_1hd`: No direct changes
+* `get_virtual_theta_1hd`: No direct changes
+* `get_gz_from_dp_dry_ptop_temp_1hd`: Little to no direct changes
+* `get_gz_given_dp_Tv_Rdry_1hd`: **MAJOR CHANGES**
+* `get_gz_given_dp_Tv_Rdry_2hd`: No direct changes
