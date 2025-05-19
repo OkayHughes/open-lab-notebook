@@ -53,4 +53,7 @@ This work involves two intermediate steps:
 * `get_molecular_diff_coef_reference` No changes
 * `cam_thermo_calc_kappav_2hd`: Dear god, hopefully no changes
 
+
+## EOS considerations:
+In the dry-mass SE vertical coordinate, 
 ### Notes on `get_pmid_from_dp`:
