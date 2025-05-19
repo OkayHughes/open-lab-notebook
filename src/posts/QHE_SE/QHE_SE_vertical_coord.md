@@ -40,4 +40,7 @@ p = \left(\rho^{[d]}R^{[d]} + \rho^{[wv]} R^{[wv]}\right)T
 $$$`
 
 This gets rewritten (letting `$$\varepsilon = \frac{R^{[d]}}{R^{[wv]}} $$`) as
-`$$p = \rho R^{[d]} \left(\frac{1 + \frac{1}{\varepsilon} m^{[wv]}}{\sum_{l \in \mathcal{L}_{\textrm{all}}}} \right) $$`
+`$$p = \rho R^{[d]} \left(\frac{1 + \frac{1}{\varepsilon} m^{[wv]}}{\sum_{l \in \mathcal{L}_{\textrm{all}}} m^{[l]}} \right)T \equiv \rho R^{[d]} T_v $$`
+
+## Mass coordinate definition:
+The dry-`$$\eta$$` coordinate can be specified in terms of `$$\eta^{[d]} = h\left(\int\right)`
