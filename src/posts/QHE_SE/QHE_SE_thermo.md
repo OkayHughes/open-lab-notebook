@@ -36,3 +36,17 @@ This work involves two intermediate steps:
 * `get_gz_from_dp_dry_ptop_temp_1hd`: Little to no direct changes
 * `get_gz_given_dp_Tv_Rdry_1hd`: **MAJOR CHANGES**
 * `get_gz_given_dp_Tv_Rdry_2hd`: No direct changes
+* `get_Richardson_number_1hd`: No direct changes
+* `get_ps_1hd`: **Ensure `dp` is consistent across physics/dynamics**
+* `get_ps_2hd`: No direct changes
+* `get_kappa_dry_1hd`: No direct changes
+* `get_kappa_dry_2hd`: No direct changes
+* `get_dp_ref_1hd`: **Check how this subroutine is used**
+* `get_dp_ref_2hd`: No direct changes
+* `get_rho_dry_1hd`: **Likely several changes**
+* `get_rho_dry_2hd`: No direct changes
+* `get_molecular_diff_coef_1hd`: No direct changes for now
+* `get_molecular_diff_coef_2hd`: No direct changes
+* `get_molecular_diff_coef_reference` No changes
+* `cam_thermo_calc_kappav_2hd`: Dear god, hopefully no changes
+* `get_hydrostatic_energy_1hd` **Major changes, 
