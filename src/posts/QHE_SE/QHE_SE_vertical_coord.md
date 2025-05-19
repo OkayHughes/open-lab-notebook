@@ -26,4 +26,18 @@ The moist (physical) density is then given by
 No changes have been made thus far, as these are physical definitions.
 ## IGL + `$$T_v$$`
 
-The partial pressure of dry air (which is strongly decoupled from the mass coordinate, even in )
+The IGL governs the gaseous components, not the condensates! 
+The most general governing law for the dry species reads as `$$p^{[d]} V^{[gas]} = N^{[d]} k_B T $$`,
+which gets rewritten in typical atmospheric science fashion as
+`$$$
+p^{[d]} V^{[gas]} - V \rho^{[d]} R^{[d]} T
+$$$`
+with an analogous equation for `$$p^{[wv]}$$`. We make the assumption that `$$ V = V^{[gas]}$$`, 
+by virtue of assuming that condensate species are incompressible and take up negligible volume.
+We end up with
+`$$$
+p = \left(\rho^{[d]}R^{[d]} + \rho^{[wv]} R^{[wv]}\right)T
+$$$`
+
+This gets rewritten (letting `$$\varepsilon = \frac{R^{[d]}}{R^{[wv]}} $$`) as
+`$$p = \rho R^{[d]} \left(\frac{1 + \frac{1}{\varepsilon} m^{[wv]}}{\sum_{l \in \mathcal{L}_{\textrm{all}}}} \right) $$`
