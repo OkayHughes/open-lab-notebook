@@ -28,6 +28,8 @@ This work involves two intermediate steps:
 * `get_dp_ref_1hd`: **Check how this subroutine is used**
 * `get_rho_dry_1hd`: **Likely several changes**
 * `get_hydrostatic_energy_1hd` **Major changes, 
+
+
 * `cam_thermo_init` No changes
 * `cam_thermo_dry_air_update` no direct changes
 * `cam_thermo_water_update` no direct changes
