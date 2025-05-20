@@ -43,5 +43,5 @@ This gets rewritten (letting `$$\varepsilon = \frac{R^{[d]}}{R^{[wv]}} $$`) as
 `$$p = \rho R^{[d]} \left(\frac{1 + \frac{1}{\varepsilon} m^{[wv]}}{\sum_{l \in \mathcal{L}_{\textrm{all}}} m^{[l]}} \right)T \equiv \rho R^{[d]} T_v $$`
 
 ## Mass coordinate definition:
-The dry-`$$\eta$$` coordinate can be specified in terms of `$$\eta^{[d]}(s) = h\left(\int_{z' = z(s)}^{z'=\infty} \rho^{[d]}\intd{z'}, \int_{z' = z(1)}^{z'=\infty} \rho^{[d]}\intd{z'}\right)`
+The dry-`$$\eta$$` coordinate can be specified in terms of `$$\eta^{[d]}(s) = h\left(\int_{z' = z(s)}^{z'=\infty} \rho^{[d]}\intd{z'}, \int_{z' = z(1)}^{z'=\infty} \rho^{[d]}\intd{z'}\right)$$`
 with `$$\eta^{[d]}(0) = 0$$` and `$$\eta^{[d]}(1) = 1$$`.

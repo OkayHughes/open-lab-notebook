@@ -21,3 +21,13 @@ The 2011 paper indicates that one specifies the latitudinal dependence and then 
 `$$$ 
 \tau_2\pder{}{\phi} \left[ \tau_3 \left(\frac{r}{a} \cos \phi \right) \right] = \left(\sin \phi \pder{}{r} + \frac{\cos \phi}{r} \pder{}{\phi} \right) \left[ \left( \frac{a^2}{r^2} \int_a^r \frac{r'}{a}\tau_2(r') \intd{r} \right)  \right]
 $$$`
+
+
+
+
+`$$$
+\begin{align*}
+  &\left(\sin\phi \pder{}{r} + \frac{\cos\phi}{r} \pder{}{\phi} \right) \left[ \frac{a^2}{r^2} \int_a^{r'} \frac{r'}{a} \tau_2(r') \intd{r'}\left( \left(\frac{r}{a}\right)^{k+1} \cos(\phi)^{k-1} - \left(\frac{r}{a} \right)^{k+3} \cos(\phi)^{k+1} \right)\right]\\
+  &= \left(\sin\phi \pder{}{r} + \frac{\cos\phi}{r} \pder{}{\phi} \right) \left[ \frac{a^2}{r^2} \int_a^{r'} \frac{r'}{a} \tau_2(r') \intd{r'}\left( \left(\frac{r}{a}\right)^{k+1} \cos(\phi)^{k-1} - \left(\frac{r}{a} \right)^{k+3} \cos(\phi)^{k+1} \right)\right]
+\end{align*}
+$$$`
