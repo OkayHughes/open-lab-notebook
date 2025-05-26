@@ -19,3 +19,6 @@ I \equiv c_p \Theta_v \Pi - \pder{\pi}{s}\frac{1}{\rho}p + p_{\textrm{top}} \phi
 P \equiv \frac{\pi}{s} \phi
 \end{align*}
 $$$`
+
+If we assume that this code will always be invoked as a column integral, then 
+`$$ \int p \pder{\phi}{s} - \frac{\p_{\textrm{top}}}{\hat{r}^2} \phi_{\textrm{top}}  \intd{s}`
