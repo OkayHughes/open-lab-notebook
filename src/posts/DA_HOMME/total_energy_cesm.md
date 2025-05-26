@@ -21,4 +21,9 @@ P \equiv \frac{\pi}{s} \phi
 $$$`
 
 If we assume that this code will always be invoked as a column integral, then 
-`$$ \int p \pder{\phi}{s} - \frac{\p_{\textrm{top}}}{\hat{r}^2} \phi_{\textrm{top}}  \intd{s}`
+`$$$
+\begin{align*}
+     \int p \pder{\phi}{s}   \intd{s} - \frac{\p_{\textrm{top}}}{\hat{r}^2} \phi_{\textrm{top}} = \pder{p}{s} \phi 
+$$$`
+
+Note: bottom boundary does not disappear outside of time derivative!
