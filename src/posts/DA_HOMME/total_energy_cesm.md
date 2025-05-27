@@ -20,10 +20,12 @@ P \equiv \pder{\pi}{s} \phi
 \end{align*}
 $$$`
 
-If we assume that this code will always be invoked as a column integral, then 
+Using the equation of state `$$\pder{\phi}{s} = - \hat{r}^{-2} R_d \Theta_v \frac{\Pi}{p} \implies \pder{\pi}{s} = -\pder{\phi}{s} \rho \hat{r}^2 $$`,
+we can write `$$-\left(\rho^{-1}\pder{\pi}{s} \right) p = p\hat{r}^2 \pder{\phi}{s}  $$`
 `$$$
 \begin{align*}
-     \int p \pder{\phi}{s}   \intd{s} - \frac{\p_{\textrm{top}}}{\hat{r}^2} \phi_{\textrm{top}} = \pder{p}{s} \phi 
+     \int p \hat{r}^2 \pder{\phi}{s} \intd{s} - p_{\textrm{top}} \phi_{\textrm{top}} = 
+\end{align*} 
 $$$`
 
 Note: bottom boundary does not disappear outside of time derivative!
