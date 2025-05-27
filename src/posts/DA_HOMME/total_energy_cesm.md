@@ -15,7 +15,7 @@ According to Taylor et al. (2020), the continuum energy budget is defined as
 \begin{align*}
 K + I + P \\
 K \equiv \frac{1}{2} \pder{\pi}{s} \boldsymbol{v}^2 \\
-I \equiv c_p \Theta_v \Pi - \pder{\pi}{s}\frac{1}{\rho}p + \pi_{\textrm{top}} \phi_{\textrm{top}} \equiv c_p \Theta_v \Pi + \pder{}{s}\left[\hat{r}^2 p \right] \phi  + \pi_{\textrm{top}} \phi_{\textrm{top}}  \\
+I \equiv c_p \Theta_v \Pi - \pder{\pi}{s}\frac{1}{\rho}p + \pi_{\textrm{top}} \phi_{\textrm{top}} \equiv c_p \Theta_v \Pi + \hat{r}^2 p \pder{\phi}{s}  + \pi_{\textrm{top}} \phi_{\textrm{top}}  \\
 P \equiv \pder{\pi}{s} \phi
 \end{align*}
 $$$`
