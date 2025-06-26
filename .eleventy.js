@@ -64,6 +64,7 @@ module.exports = function(eleventyConfig) {
   \\newcommand{\\probe}{\\mathbb{E}}
   \\newcommand{\\probv}{\\mathbb{V}}
   \\newcommand{\\rt}[1]{\\textcolor{darkred}{#1}}
+  \\newcommand{\\half}{\\frac{1}{2}}
   \\renewcommand{\\Re}{\\operatorname{Re}}
   \\renewcommand{\\Im}{\\operatorname{Im}}
   `, {macros, globalGroup: true});
