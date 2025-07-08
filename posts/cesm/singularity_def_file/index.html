@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/cesm/singularity_def_file/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/cesm/singularity_def_file/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/cesm/singularity_def_file/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>A singularity container for CESM</h1>
+
+    
+    
+    
+    <h1>cesm.def</h1>
+<pre><code>Bootstrap: docker
+From: almalinux:8.6
+
+
+%post
+tee &gt; /tmp/oneAPI.repo &lt;&lt; EOF
+[oneAPI]
+name=Intel® oneAPI repository
+baseurl=https://yum.repos.intel.com/oneapi
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+EOF
+    mv /tmp/oneAPI.repo /etc/yum.repos.d
+
+    dnf -y update
+    dnf install -y epel-release
+    dnf install -y intel-basekit
+    dnf -y install gcc-gfortran
+    dnf update -y &amp;&amp; \
+        dnf groupinstall -y 'Development Tools' &amp;&amp; \
+        dnf install -y \
+        openssl-devel \
+        libuuid-devel \
+        libseccomp-devel \
+        wget \
+        squashfs-tools
+
+
+    dnf -y install cmake
+    dnf install -y python3 svn vim
+    export PATH=&quot;/usr/local/bin:$PATH&quot;
+    ln -s /bin/python3 /bin/python
+    env python
+    
+
+
+    hostname singularity
+
+    mkdir -p /usr/local/
+    mkdir -p /usr/local/sources
+    cd /usr/local/sources
+    wget --inet4-only http://www.mpich.org/static/downloads/3.3.2/mpich-3.3.2.tar.gz
+    wget --inet4-only https://support.hdfgroup.org/ftp/lib-external/szip/2.1.1/src/szip-2.1.1.tar.gz
+    wget --inet4-only https://hdf-wordpress-1.s3.amazonaws.com/wp-content/uploads/manual/HDF5/HDF5_1_10_6/source/hdf5-1.10.6.tar.gz
+    wget --inet4-only https://github.com/Unidata/netcdf-c/archive/v4.7.3.tar.gz
+    wget --inet4-only https://github.com/Unidata/netcdf-cxx4/archive/v4.3.1.tar.gz
+    wget --inet4-only https://github.com/Unidata/netcdf-fortran/archive/v4.4.4.tar.gz
+    wget --inet4-only https://parallel-netcdf.github.io/Release/pnetcdf-1.12.1.tar.gz
+
+
+
+    # build mpich
+    tar xzf mpich-3.3.2.tar.gz
+    cd mpich-3.3.2
+    export CC=gcc
+    export CXX=g++
+    export FC=gfortran
+    ./configure --prefix=/usr/local/
+    make -j32 &amp;&amp; make -j32 install
+    cd ..
+
+    export CFLAGS='-I/usr/local/include'
+    export CXXFLAGS='-I/usr/local/include'
+    export LDFLAGS='-L/usr/local/lib'
+    export LD_LIBRARY_PATH=&quot;/usr/local/lib/:/usr/local/lib64:$LD_LIBRARY_PATH&quot;
+
+
+
+    # build parallel szip
+    tar xzf szip-2.1.1.tar.gz
+    cd szip-2.1.1
+   export CC=mpicc
+    export CXX=mpicxx
+    export FC=mpif90
+    ./configure 
+    make -j32 &amp;&amp; make -j32 install
+    cd ..
+
+    # build parallel hdf5
+    rm -rf hdf5-1.10.6
+    tar xzf hdf5-1.10.6.tar.gz
+    cd hdf5-1.10.6
+    export CC=mpicc
+    export MPICC=mpicc
+    export CXX=mpicxx
+    export MPICXX=mpicxx
+    export FC=mpif90
+    export MPIF90=mpif90
+    export MPIFC=mpif90
+    ./configure  --prefix=/usr/local  --enable-parallel --enable-shared
+    make -j32 &amp;&amp; make -j32 install
+    cd ..
+    # build serial netcdf
+    tar xzf v4.7.3.tar.gz
+    cd netcdf-c-4.7.3
+    ./configure --prefix=/usr/local --disable-dap --enable-netcdf-4 --enable-static
+    make -j32 &amp;&amp; make -j32 install
+    cd ..
+
+    tar xzf v4.3.1.tar.gz
+    cd netcdf-cxx4-4.3.1
+    ./configure  --prefix=/usr/local --disable-dap --enable-netcdf-4 --enable-static
+    make -j32 &amp;&amp; make -j32  install
+    cd ..
+
+
+
+    tar xzf v4.4.4.tar.gz
+    cd netcdf-fortran-4.4.4
+    ./configure  --prefix=/usr/local --disable-dap --enable-netcdf-4 --enable-static --enable-valgrind-tests --enable-serial-tests --enable-extra-tests --enable-extra-example-tests
+    make -j32 &amp;&amp; make -j32 install
+    cd ..
+
+    # build parallel netcdf
+    rm -rf netcdf-c-4.7.3
+    tar xzf v4.7.3.tar.gz
+    cd netcdf-c-4.7.3
+    ./configure  --prefix=/usr/local --disable-dap --enable-netcdf-4 --enable-static 
+    make -j32 &amp;&amp; make -j32 install
+    cd ..
+
+    rm -rf netcdf-cxx4-4.3.1
+    tar xzf v4.3.1.tar.gz
+    cd netcdf-cxx4-4.3.1
+    cd ..
+
+    rm -rf netcdf-fortran-4.4.4
+    tar xzf v4.4.4.tar.gz 
+    cd netcdf-fortran-4.4.4
+    ./configure  --prefix=/usr/local  --disable-dap --enable-netcdf-4 --enable-static --enable-valgrind-tests --enable-parallel-tests --enable-extra-tests --enable-extra-example-tests
+    make -j32 &amp;&amp; make -j32 install
+    cd ..
+
+
+    # build pnetcdf
+    tar xzf pnetcdf-1.12.1.tar.gz
+    cd pnetcdf-1.12.1
+    ./configure  --prefix=/usr/local  --disable-in-place-swap
+    make -j32 &amp;&amp; make -j32 install
+
+    mkdir -p /opt
+    git clone https://github.com/escomp/cesm.git /opt/cesm_2.1.3
+    cd /opt/cesm_2.1.3
+    git checkout release-cesm2.1.3
+#    chmod 755 /opt/cesm_2.1.3
+</code></pre>
+<h1></h1>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/cesm/cesm-parent/">Community Earth System Model lifehacks</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

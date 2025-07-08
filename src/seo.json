@@ -1,7 +1,0 @@
-{
-  "glitch-help-instructions": "For a custom domain, change the 'url' parameter from 'glitch-default' to your domain _without_ a traling slash, like 'https://www.example.com'",
-  "title": "Open Lab Notebook",
-  "description": "A blog which serves as my lab notebook, but which is visible to the world because I'm a masochist.",
-  "url": "glitch-default",
-  "image": "https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233"
-}

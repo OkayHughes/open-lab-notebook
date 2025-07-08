@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/leatgrakes/login/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/leatgrakes/login/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/leatgrakes/login/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Login</h1>
+
+    
+    
+    
+    <p>How to log in:</p>
+<p>Obtain a <code>user_name.ovpn</code> file from okay. I'll also give you your password.</p>
+<ul>
+<li>Obtain the OTP seed code/QR code and and set up an authenticator like at <a href="https://docs.opnsense.org/manual/how-tos/two_factor.html">this link</a>.</li>
+<li>Obtain an OpenVPN client e.g. <a href="https://openvpn.net/vpn-client/">OpenVPN Connect</a></li>
+<li>Activate the OpenVPN session by logging in using <code>[6 digit OTP]YOUR_PASSWORD</code> as the password.</li>
+<li>Tryin pinging <code>69.43.2.0.254</code> or <code>ipmi.miganich.leatgrakes</code>. This is the board management system for the login node which has 32 Haswell cores and cores and ~256Gb of memory.</li>
+<li>The login node itself is located at <code>miganich.leatgrakes</code>, but this won't be ping-able if the server is off.</li>
+<li>Your login name should be the same as your vpn login, same with password. You can SSH in.</li>
+</ul>
+<p>If the server is off for some reason, then you should use the console at <a href="http://ipmi.miganich.leatgrakes">http://ipmi.miganich.leatgrakes</a>.
+The login for bmc should be your account username and the password is the first two dicewords from your supplied password with the same separator.
+Under <code>Power Management</code> you can access the virtual power button.
+If you want to access a remote console, it can be downloaded <a href="https://support.hpe.com/connect/s/product?language=en_US&amp;kmpmoid=1009143853&amp;tab=driversAndSoftware&amp;driversAndSoftwareFilter=8000078&amp;driversAndSoftwareQuery=remote%20console">here</a></p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/leatgrakes/">LeatGrakes</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

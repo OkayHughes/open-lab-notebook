@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/installing-mpas/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/installing-mpas/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/installing-mpas/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Installing MPAS on GreatLakes</h1>
+
+    
+    
+    
+    <h2>Introductory notes:</h2>
+<h3>Installation was done without shared libraries.</h3>
+<p>This was done in order to rectify linker errors that occured during MPAS compilation. There may be a combination of compile flags and environment variables that does not have errors, but I have not tested it.</p>
+<h3>The gcc compiler was used for the final install.</h3>
+<p>It is likely that the compilation would succeed when an intel compiler was used, however a installation was never performed with any version of the intel compiler.</p>
+<h3>Compilation of dependencies must be performed in a directory on <code>/scratch</code></h3>
+<p>The network volume that hosts your <code>$HOME</code> directory uses an NFS filesystem with caching enabled. This prevents installation of the <code>mpich</code> dependency. <code>/scratch</code> is a GPFS (general purpose file system), and thus works.
+I have not tested whether install files can be moved to $HOME after compilation, or even whether it is stable to write to non-<code>/scratch</code> directories. Initial tests writing small files to <code>$HOME</code> indicate that it works, but it may fail silently for larger files or with more nodes.</p>
+<h2>Dependencies: their versions and interdependence</h2>
+<h3>0. Create a directory on <code>/scratch</code></h3>
+<ol start="0">
+<li>Ensure by running <code>echo $PATH</code> or examining your <code>.bashrc</code> that your bash has no modules loaded (e.g. due to CESM build). In particular, <em>Ensure that you have not loaded any version of OpenMPI</em></li>
+<li>Define a variable in your <code>.bashrc</code> that points to your scratch directory, and call it ${scratch}. This variable is used throughout the provided scripts.</li>
+<li>create a subdirectory to hold your dependencies and their source files. The following list shows the directory structure that I use:</li>
+</ol>
+<ul>
+<li><code>${scratch}/dependencies</code>: contains install directories for dependencies
+<ul>
+<li><code>${scratch}/dependencies/src</code>: contains all source files for dependencies</li>
+</ul>
+</li>
+</ul>
+<h3>1. gcc</h3>
+<ol>
+<li>Run <code>module load gcc/8.2.0</code>.
+This will load the executables <code>gfortran</code> and <code>gcc</code>.</li>
+</ol>
+<p><strong>Checks</strong>:</p>
+<ol>
+<li>run <code>which gfortran</code> and ensure that it points to the one for the gcc 8.2.0 package, as opposed to <code>/usr/bin</code></li>
+<li>run <code>which gcc</code> to do the same check</li>
+</ol>
+<h3>2. mpich 3.3.2</h3>
+<ol>
+<li>While in the directory <code>$scratch/dependencies/src</code> run <code>wget http://www.mpich.org/static/downloads/3.3.2/mpich-3.3.2.tar.gz</code></li>
+<li>Extract the file, e.g. <code>tar -xf mpich-3.3.2.tar.gz</code></li>
+<li><code>cd $scratch/dependencies/src/mpich-3.3.2</code></li>
+<li>See the file <code>setup_mpich.sh</code> in appendix below, and put this in a bash script, e.g. <code>$scratch/dependencies/src/mpich-3.3.2/setup_mpich.sh</code></li>
+<li>Modify the <code>prefix=...</code> to point to the directory in which you want your dependencies to install.</li>
+<li>I recommend creating a new bash shell at this point, e.g. running <code>bash</code>. We will be setting many environment variables.</li>
+<li>Run <code>source setup_mpich.sh</code></li>
+<li>Run <code>make</code>
+* In the event of problems, run <code>make clean</code> and <code>make VERBOSE=1</code>, or see <a href="https://www.mpich.org/static/downloads/3.3.2/mpich-3.3.2-installguide.pdf">This document</a></li>
+<li>If installation is successful, run <code>make install</code></li>
+<li>Close out of the nested bash shell, e.g. press control-d</li>
+</ol>
+<p>####Checks</p>
+<ol>
+<li>Check the folder that the variable <code>$prefix</code> points to. Does it contain <code>bin</code>, <code>include</code>, <code>lib</code>, and <code>share</code>?</li>
+</ol>
+<h4>Notes:</h4>
+<p>When building HDF5 with support for parallel I/O, using either of the OpenMPI versions provided on GreatLakes causes tests in the HDF5 test suite to fail, for more info see <a href="https://forum.hdfgroup.org/t/hdf5-and-openmpi/5437">Here</a>. This is why we install a separate MPI implementation.</p>
+<h3>3. zlib 1.2.11</h3>
+<ol>
+<li>In your <code>$scratch/dependencies/src</code> run <code>wget http://www.zlib.net/zlib-1.2.11.tar.gz</code></li>
+<li>decompress resulting file, e.g. <code>tar -xf zlib-1.2.11.tar.gz</code></li>
+<li><code>cd $scratch/dependencies/src/zlib-1.2.11</code></li>
+<li>See the file <code>setup_zlib.sh</code> below, and put it in a bash script in this folder, e.g. <code>$scratch/dependencies/src/zlib-1.2.11/setup_zlib.sh</code></li>
+<li>Modify the line <code>export PATH=$scratch/dependencies/mpich/bin:$PATH</code> to point to your mpich install bin directory.</li>
+<li>Modify the line <code>prefix=...</code> to point to your zlib install dir.</li>
+<li>Create a new bash shell, e.g. run <code>bash</code></li>
+<li>Run <code>source setup_zlib.sh</code></li>
+<li>Run <code>make</code></li>
+<li>Run <code>make check</code></li>
+<li>Run <code>make install</code></li>
+<li>Close out of the nested bash shell</li>
+</ol>
+<p>####Checks:</p>
+<ol>
+<li><code>make check</code> will test for correct functionality of the compiled libraries.</li>
+<li>Ensure that libraries are installed in the folder that the <code>$prefix</code> variable above points to.</li>
+</ol>
+<h4>Notes:</h4>
+<p>I only found the <code>make</code> commands in <code>zlib</code> to fail because the <code>mpicc</code> executable created by <code>mpich</code> was misconfigured. Ensure that the variable <code>MPICH_CC</code> is actually being exported correctly.</p>
+<h3>4. curl 7.71.1</h3>
+<ol>
+<li>In your <code>$scratch/dependencies/src</code> directory run <code>wget https://curl.haxx.se/download/curl-7.71.1.tar.gz</code></li>
+<li>Uncompress the resultant file, e.g. <code>tar -xf curl-7.71.1.tar.gz</code></li>
+<li><code>cd curl-7.71.1</code></li>
+<li>See the script <code>setup_curl.sh</code> in the appendix. Copy this to a script in the current directory, e.g. <code>$scratch/dependencies/src/curl-7.71.1/setup_curl.sh</code></li>
+<li>Ensure that the <code>export PATH...</code> line points to your mpich bin install.</li>
+<li>Set the <code>$prefix</code> variable to where curl should be installed.</li>
+<li>Create a nested bash shell</li>
+<li>Run <code>source setup_curl.sh</code></li>
+<li>Run <code>make</code></li>
+<li>Run <code>make install</code></li>
+<li>Close out of nested bash shell</li>
+</ol>
+<h3>5. hdf5 1.10.6</h3>
+<ol>
+<li>in your <code>$scratch/dependencies/src</code> directory run <code>wget -O hdf5-1.10.6.tar.gz https://www.hdfgroup.org/package/hdf5-1-10-6-tar-gz/?wpdmdl=14135&amp;refresh=5f161604d93fc1595282948</code></li>
+<li>Decompress the file, e.g. <code>tar -xf hdf5-1.10.6.tar.gz</code></li>
+<li><code>cd hdf5-1.10.6</code></li>
+<li>See the script <code>setup_hdf5.sh</code> below, and transfer it to a script in this directory, e.g. <code>$scratch/dependencies/src/hdf5-1.10.6/setup_hdf5.sh</code>.</li>
+<li>Ensure that the $PATH and $prefix variables are set correctly. See above.</li>
+<li>Ensure that the $zlib variable points to your zlib install location.</li>
+<li>Create a nested bash shell</li>
+<li>Run <code>source setup_hdf5.sh</code></li>
+<li>Run <code>make</code></li>
+<li>Run <code>make check</code></li>
+<li>Run <code>make install</code></li>
+<li>Close out of nested bash shell.</li>
+</ol>
+<h4>Notes:</h4>
+<p>The versions up to this point are not all that important, however having a version of hdf5 &gt; 1.10 appears to be important when compiling ParallelIO later.
+Also, the <code>make check</code> will take a long time. I recommend actually taking the time as if it fails it may silently cause huge problems down the line.
+Note that running <code>make</code> before <code>make check</code> isn't redundant: tests will fail if you do not run <code>make</code> first.</p>
+<h3>6. netcdf-c 4.7.4 (without parallel)</h3>
+<ol>
+<li>In the directory <code>$scratch/dependencies/src</code> run <code>wget https://github.com/Unidata/netcdf-c/archive/v4.7.4.tar.gz</code></li>
+<li>Decompress file, e.g. <code>tar -xf v4.7.4.tar.gz</code></li>
+<li><code>cd netcdf-c-4.7.4</code></li>
+<li>See script <code>setup_netcdf_c_no_pnetcdf.sh</code> below. Copy it to the current directory e.g. <code>$scratch/dependencies/src/netcdf-c-4.7.4/setup_netcdf_c_no_pnetcdf.sh</code></li>
+<li>Ensure that the $prefix and $PATH variables are set correctly.</li>
+<li>Ensure that the $zlib and $hdf5 variables point to the install locations you specified previously.</li>
+<li>Create a nested bash shell</li>
+<li>run <code>source setup_netcdf_c_no_pnetcdf.sh</code></li>
+<li>run <code>make</code></li>
+<li>run <code>make check</code></li>
+<li>run <code>make install</code></li>
+<li>Close out of nested bash shell</li>
+</ol>
+<h4>Notes:</h4>
+<p>Eventually we will need netcdf-c to be compiled with PNetCDF compatibility. However, the PNetCDF library requires netcdf-c as a dependency. Thus we will need to compile both netcdf-c and netcdf-fortran before compiling PNetCDF, and then again afterwards.</p>
+<h3>7. netcdf-fortran 4.5.3</h3>
+<ol>
+<li>In the directory <code>$scratch/dependencies/src</code> run <code>wget https://github.com/Unidata/netcdf-fortran/archive/v4.5.3.tar.gz</code></li>
+<li>Decompress file, e.g. <code>tar -xf v4.5.3.tar.gz</code></li>
+<li><code>cd netcdf-fortran-4.5.3</code></li>
+<li>See script <code>setup_netcdf_fortran_no_pnetcdf.sh</code> in appendix below, and copy it to a script e.g. <code>$scratch/dependencies/src/netcdf-fortran-4.5.3/setup_netcdf_fortran_no_pnetcdf.sh</code></li>
+<li>Ensure that the $prefix and $PATH variable are set correctly</li>
+<li>Ensure that the $hdf5, $zlib, $curld, and $NETCDF_C variables are set to the install locations of their respective libraries</li>
+<li>Create nested bash shell</li>
+<li>run <code>source setup_netcdf_fortran_no_pnetcdf.sh</code></li>
+<li>run <code>make</code></li>
+<li>run <code>make check</code></li>
+<li>run <code>make install</code></li>
+<li>Close out of nested bash shell</li>
+</ol>
+<h3>8. pnetcdf 1.11.2</h3>
+<ol>
+<li>In the directory <code>$scratch/dependencies/src</code> run <code>wget http://cucis.ece.northwestern.edu/projects/PnetCDF/Release/pnetcdf-1.11.2.tar.gz</code></li>
+<li>Decompress file, e.g. <code>tar -xf pnetcdf-1.11.2.tar.gz</code></li>
+<li><code>cd pnetcdf-1.11.2</code></li>
+<li>See script <code>setup_pnetcdf.sh</code> in appendix, copy to a script in current directory e.g. <code>$scratch/dependencies/src/pnetcdf-1.11.2/setup_pnetcdf.sh</code></li>
+<li>Ensure that $PATH variable is set correctly, and that the $PNETCDF variable points to the install location for the pnetcdf library.</li>
+<li>Ensure that the $NETCDF_C and $NETCDF_F variables are set to the install locations of the respective libraries.</li>
+<li>Create a nested bash shell</li>
+<li>run <code>source setup_pnetcdf.sh</code></li>
+<li>run <code>make</code></li>
+<li>run <code>make check</code></li>
+<li>run <code>make ptests</code></li>
+<li>run <code>make install</code></li>
+<li>Close out of nested bash shell</li>
+</ol>
+<h3>9. netcdf-c with pnetcdf</h3>
+<p>Run through previous netcdf-c instructions but with the bash script <code>setup_netcdf_c_with_pnetcdf.sh</code> below.</p>
+<h3>10. netcdf-fortran with pnetcdf</h3>
+<p>Run through previous netcdf-fortran instructions but with the bash script <code>setup_netcdf_fortran_with_pnetcdf.sh</code> below.</p>
+<h4>Notes:</h4>
+<p>This step may not be necessary. I include it out of an abundance of caution and a paranoid distrust of anything to do with the linker.</p>
+<h3>11. ParallelIO (<em>shudders</em>)</h3>
+<ol>
+<li>In the directory <code>$scratch/dependencies/src</code> run <code>git clone https://github.com/NCAR/ParallelIO.git</code> or just ask me for a gzip of the code. See notes below.</li>
+<li><code>cd ParallelIO</code></li>
+<li>See script <code>setup_PIO.sh</code> below, and copy it to a script in the current directory, e.g. <code>$scratch/dependencies/src/ParallelIO/setup_PIO.sh</code></li>
+<li>Ensure that the $PATH and $prefix variables are set correctly</li>
+<li>Ensure that the $NETCDF_C, $NETCDF_F, $PNETCDF, $hdf5, and $zlib variables point to the install locations of their respective libraries.</li>
+<li>Create a nested bash shell</li>
+<li>run <code>source setup_PIO.sh</code></li>
+<li>run <code>make</code></li>
+<li>run <code>make check</code></li>
+<li>run <code>make install</code></li>
+<li>exit nested bash shell</li>
+</ol>
+<h4>Notes:</h4>
+<p>When testing this library with any released version from 2.4.3 to 2.5 I could not get tests to pass successfully. As of my writing this there is a new release (2.5.1) which I have not tested. I could only get these tests to pass by cloning the master branch of the repository. If this code has changed since I wrote this, I can send you the gzip of the source.</p>
+<h2>Installing MPAS itself:</h2>
+<ol>
+<li>The MPAS installation can be done in a subdirectory of $HOME. In whatever directory you want your MPAS source code in, run <code>wget https://github.com/MPAS-Dev/MPAS-Model/archive/v7.0.tar.gz</code></li>
+<li>Decompress file, e.g. <code>tar -xf v7.0.tar.gz</code></li>
+<li><code>cd MPAS-Model-7.0</code></li>
+<li>See script <code>setup_MPAS.sh</code> below, and copy into a script in this directory.</li>
+<li>ensure that the $PATH variable is set correctly.</li>
+<li>ensure that the $NETCDF variable points to your netcdf-c install directory, your $NETCDFF variable points to your netcdf-fortran install directory, your $PIO variable points to your ParallelIO install and your $PNETCDF, $hdf5, and $zlib variables point to their respective libraries' install locations.</li>
+<li>Create a nested bash shell</li>
+<li>Run <code>source setup_MPAS.sh</code></li>
+<li>Run <code>make gfortran CORE=init_atmosphere PRECISION=single</code></li>
+<li>Run <code>make clean CORE=atmosphere</code></li>
+<li>Run <code>make gfortran CORE=atmosphere PRECISION=single</code></li>
+</ol>
+<h4>Notes:</h4>
+<p>See <a href="https://www2.mmm.ucar.edu/projects/mpas/tutorial/Boulder2018/index.html">This tutorial</a> for more information.</p>
+<h1>Appendix:</h1>
+<p>====================================================================
+This appendix contains the bash scripts referenced elsewhere in this document for reference.</p>
+<h2>setup_mpich.sh</h2>
+<hr>
+<pre><code>  module load gcc/8.2.0
+  export CC=gcc
+  export CXX=g++
+  export FC=gfortran
+  export F77=gfortran
+  prefix=$scratch/dependencies/mpich
+  ./configure --prefix=$prefix --enable-shared
+</code></pre>
+<hr>
+<h2>setup_zlib.sh</h2>
+<hr>
+<pre><code>module load gcc/8.2.0
+export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export CC=mpicc
+export FC=mpif90
+prefix=$scratch/dependencies/zlib
+export LD_LIBRARY_PATH=$scratch/dependencies/mpich/lib:${LD_LIBRARY_PATH}
+./configure --prefix=$prefix --enable-shared
+</code></pre>
+<hr>
+<h2>setup_curl.sh</h2>
+<hr>
+<pre><code>module load gcc/8.2.0
+module load gcc/8.2.0
+export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export CC=mpicc
+export FC=mpif90
+export LD_LIBRARY_PATH=$scratch/dependencies/mpich/lib:${LD_LIBRARY_PATH}
+prefix=$HOME/dependencies/curl
+./configure --prefix=$prefix --enable-shared
+</code></pre>
+<hr>
+<h2>setup_hdf5.sh</h2>
+<hr>
+<pre><code>module load gcc/8.2.0
+export PATH=&quot;$scratch/dependencies/mpich/bin:$PATH&quot;
+export MPICH_CC=gcc
+export MPICH_FC=gfortran
+export CC=mpicc
+export CXX=mpicc
+export FC=mpif90
+prefix=&quot;$scratch/dependencies/hdf5&quot;
+zlib=&quot;$scratch/dependencies/zlib&quot;
+
+export LD_LIBRARY_PATH=$scratch/dependencies/mpich/lib:${zlib}/lib:${LD_LIBRARY_PATH}
+export LIBS=&quot;-ldl&quot;
+export CFLAGS=&quot;-g&quot;
+
+./configure --prefix=$prefix --with-zlib=$zlib --enable-parallel --enable-shared
+</code></pre>
+<hr>
+<h2>setup_netcdf_c_no_pnetcdf.sh</h2>
+<hr>
+<pre><code>module load gcc/8.2.0
+export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export MPICH_FC=gfortran
+export CC=mpicc
+export FC=mpif90
+hdf5=$scratch/dependencies/hdf5
+zlib=$scratch/dependencies/zlib
+prefix=$scratch/dependencies/netcdf_c
+export CPPFLAGS=&quot;-I$hdf5/include -I$zlib/include&quot;
+export LDFLAGS=&quot;-L$hdf5/lib -L$zlib/lib&quot;
+export LIBS=&quot;-ldl -lhdf5&quot;
+export CFLAGS=&quot;-g -Wall&quot;
+export LD_LIBRARY_PATH=$scratch/dependencies/mpich/lib:${zlib}/lib:${hdf5}/lib:${LD_LIBRARY_PATH}
+./configure --prefix=$prefix --enable-shared --enable-static --enable-netcdf4 --disable-dap --enable-cdf5
+</code></pre>
+<hr>
+<h2>setup_netcdf_fortran_no_pnetcdf.sh</h2>
+<hr>
+<pre><code>export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export MPICH_FC=gfortran
+export MPICH_F90=gfortran
+export CC=mpicc
+export FC=mpif90
+export NETCDF_C=$scratch/dependencies/netcdf_c
+export prefix=$scratch/dependencies/netcdf_fortran
+hdf5=$scratch/dependencies/hdf5
+zlib=$scratch/dependencies/zlib
+curld=$scratch/dependencies/curl
+export CPPFLAGS=&quot;-I${NETCDF_C}/include -I$hdf5/include -I$zlib/include -I$curld/include&quot;
+export LDFLAGS=&quot;-L${NETCDF_C}/lib -L$hdf5/lib -L$zlib/lib -L$curld/lib&quot;
+export LIBS=&quot;-lnetcdf -lhdf5_hl -lm -lz -ldl -lhdf5&quot;
+export LD_LIBRARY_PATH=$scratch/dependencies/mpich/lib:${zlib}/lib:${hdf5}/lib:${NETCDF_C}/lib:${LD_LIBRARY_PATH}
+./configure --prefix=$prefix --enable-shared --enable-static
+</code></pre>
+<hr>
+<h2>setup_pnetcdf.sh</h2>
+<hr>
+<pre><code>module load gcc/8.2.0
+export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export MPICH_FC=gfortran
+export MPICH_F90=gfortran
+export NETCDF_C=$scratch/dependencies/netcdf_c
+export NETCDF_F=$scratch/dependencies/netcdf_fortran
+export PNETCDF=$scratch/dependencies/pnetcdf
+export CC=mpicc
+export CXX=mpic++
+export FC=mpif90
+export CPPFLAGS=&quot;-I$NETCDF_C/include -I$NETCDF_F/include&quot;
+export LD_LIBRARY_PATH=$scratch/dependencies/mpich/lib:${zlib}/lib:${hdf5}/lib:${NETCDF_C}/lib:${NETCDF_F}/lib:${LD_LIBRARY_PATH}
+prefix=$PNETCDF
+./configure --enable-fortran --enable-static --enable-shared --prefix=$prefix
+</code></pre>
+<hr>
+<h2>setup_netcdf_c_with_pnetcdf.sh</h2>
+<hr>
+<pre><code>module load gcc/8.2.0
+export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export MPICH_FC=gfortran
+export CC=mpicc
+export FC=mpif90
+hdf5=$scratch/dependencies/hdf5
+zlib=$scratch/dependencies/zlib
+pnetcdf=$scratch/dependencies/pnetcdf
+prefix=$scratch/dependencies/netcdf_c
+export CPPFLAGS=&quot;-I$hdf5/include -I$zlib/include -I$pnetcdf/include&quot;
+export LDFLAGS=&quot;-L$hdf5/lib -L$zlib/lib -L$pnetcdf/lib&quot;
+export LIBS=&quot;-ldl -lhdf5 -lpnetcdf&quot;
+export CFLAGS=&quot;-g -Wall&quot;
+export LD_LIBRARY_PATH=$scratch/dependencies/mpich/lib:${zlib}/lib:${hdf5}/lib:${NETCDF_C}/lib:${NETCDF_F}/lib:${pnetcdf}/lib:${LD_LIBRARY_PATH}
+./configure --prefix=$prefix --enable-shared --enable-parallel-tests --enable-static --enable-pnetcdf --enable-netcdf4 --disable-dap --enable-cdf5
+</code></pre>
+<hr>
+<h2>setup_netcdf_fortran_with_pnetcdf.sh</h2>
+<hr>
+<pre><code>module load gcc/8.2.0
+export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export MPICH_FC=gfortran
+export MPICH_F90=gfortran
+export CC=mpicc
+export FC=mpif90
+export NETCDF_C=$scratch/dependencies/netcdf_c
+export NETCDF_F=$scratch/dependencies/netcdf_fortran
+export PNETCDF=$scratch/dependencies/pnetcdf
+hdf5=$scratch/dependencies/hdf5
+zlib=$scratch/dependencies/zlib
+curld=$scratch/dependencies/curl
+export CPPFLAGS=&quot;-I${NETCDF_C}/include -I$hdf5/include -I$zlib/include -I$curld/include&quot;
+export LDFLAGS=&quot;-L${NETCDF_C}/lib -L$hdf5/lib -L$zlib/lib -L$curld/lib -L$PNETCDF/lib&quot;
+export LIBS=&quot;-lnetcdf -lhdf5_hl -lm -lz -ldl -lhdf5 -lpnetcdf&quot;
+export LD_LIBRARY_PATH=$scratch/dependencies/mpich/lib:${zlib}/lib:${hdf5}/lib:${NETCDF_C}/lib:${NETCDF_F}/lib:${PNETCDF}/lib:${LD_LIBRARY_PATH}
+./configure --prefix=$NETCDF_F --enable-shared --enable-static
+</code></pre>
+<hr>
+<h2>setup_PIO.sh</h2>
+<hr>
+<pre><code>module load gcc/8.2.0
+module load cmake/3.17.3
+export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export MPICH_FC=gfortran
+export MPICH_F77=gfortran
+export MPICH_F90=gfortran
+export CC=mpicc
+export FC=mpifort
+NETCDF_C=$scratch/dependencies/netcdf_c
+NETCDF_F=$scratch/dependencies/netcdf_fortran
+PNETCDF=$scratch/dependencies/pnetcdf
+hdf5=$scratch/dependencies/hdf5
+zlib=$scratch/dependencies/zlib
+export CPPFLAGS=&quot;-I${NETCDF_C}/include -I${NETCDF_F}/include -I${PNETCDF}/include -I$hdf5/include -I$zlib/include -I&quot;
+export LDFLAGS=&quot;-L${NETCDF_C}/lib -L${NETCDF_F}/lib -L${PNETCDF}/lib -L${hdf5}/lib -L${zlib}/lib&quot;
+export LD_LIBRARY_PATH=&quot;$PNETCDF/lib:${NETCDF_C}/lib:${NETCDF_F}/lib:${hdf5}/lib:${zlib}/lib:${LD_LIBRARY_PATH}&quot;
+export LIBS=&quot;-lnetcdf -lpnetcdf -lhdf5_hl -lm -lz -lcurl -ldl -lhdf5&quot;
+export CFLAGS=&quot;-g -Wall -std=c11&quot;
+prefix=$scratch/dependencies/PIO
+cmake   -DNetCDF_C_PATH=$NETCDF_C -DNetCDF_Fortran_PATH=$NETCDF_F -DPnetCDF_PATH=$PNETCDF -DHDF5_PATH=$hdf5 -DCMAKE_INSTALL_PREFIX=$prefix -DPIO_USE_MALLOC=ON -DCMAKE_VERBOSE_MAKEFILE=true -DPIO_ENABLE_TIMING=OFF
+</code></pre>
+<hr>
+<h2>setup_MPAS.sh</h2>
+<hr>
+<pre><code>module load gcc/8.2.0
+export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export MPICH_FC=gfortran
+export MPICH_F90=gfortran
+export CC=mpicc
+export FC=mpif90
+export NETCDF=$scratch/dependencies/netcdf_c
+export NETCDFF=$scratch/dependencies/netcdf_fortran
+export PNETCDF=$scratch/dependencies/pnetcdf
+export PIO=$scratch/dependencies/PIO
+hdf5=$scratch/dependencies/hdf5
+zlib=$scratch/dependencies/zlib
+export MPAS_EXTERNAL_INCLUDES=&quot;-I$hdf5/include -I$zlib/include&quot;
+export MPAS_EXTERNAL_LIBS=&quot;-L${hdf5}/lib -L$zlib/lib -lhdf5_hl -lhdf5 -lz -ldl&quot;
+export LD_LIBRARY_PATH=&quot;${PIO}/lib:$PNETCDF/lib:${NETCDF_C}/lib:${NETCDF_F}/lib:${hdf5}/lib:${zlib}/lib:${LD_LIBRARY_PATH}&quot;
+export FFLAGS=&quot;-freal-4-real-8&quot;
+</code></pre>
+<hr>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/installing/">Installing Dycores</a></li></ul>
+      
+      
+      
+          <h3>
+            Descendent posts:
+          </h3>
+          <ul><li><a href="/your-repo-name/posts/MPAS/singularity_mpas_def/">mpas.def</a></li></ul>
+
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/411/411_final_paper_outline/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/411/411_final_paper_outline/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/411/411_final_paper_outline/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Final paper 411</h1>
+
+    
+    
+    
+    <p>Final concentration: Correcting LWP and IWP biases for Arctic mixed-phase clouds in CAM5</p>
+<p>Introduction:</p>
+<h1>Observational background</h1>
+<h2>physics of AMPCs</h2>
+<ul>
+<li>Mixed phase clouds at warm temperatures (which??) are microphysically unstable. [RESILIENCE]
+<ul>
+<li>WBF can glaciate in hours</li>
+<li>But observations of mixed phase clouds show they can persist for days or weeks.</li>
+<li>Arctic MPCs different (HOW?)</li>
+</ul>
+</li>
+</ul>
+<h2>Replenishing moisture</h2>
+<ul>
+<li>Turbulence and cloud-scale upward air motion seem to be critical in maintaining mixed-phase clouds under weak synoptic-scale updrafts [RESILIENCE]</li>
+<li>Strong enough updrafts -&gt; supersaturated w.r.t. ice and water (both grow simultaneously) [RESILIENCE]</li>
+<li>supercooled droplets lead to strong longwave radiative cooling (60K per day near cloud top whoa)</li>
+<li>Coupling to synoptic conditions: Large scale advection creates frequent moisture inversions near cloud top</li>
+<li>Entrainment of above-cloud air actually replenishes cloud water lost to (ice) precip</li>
+<li>Unlike lower latitudes, Special: AMPCs can persist and be replenished even if not dynamically coupled to surface fluxes</li>
+<li>&quot;Weak solar heating, coupled with strong inversions and and a combination of sea ice and ocean at the lower boundary procude clouds with stable temperature profiles&quot; [MPACE]</li>
+</ul>
+<h2>Surface coupling:</h2>
+<ul>
+<li>Radiative cooling of SC water warms surface, cools atmosphere</li>
+<li>Source of static instability: sensible heat flux and moisture drawn upwards into cloud</li>
+<li>Ice often only forms after SC water is present (even if there is substantial ice-supersaturation before LW is present)</li>
+<li>Modeling of these clouds is tremendously difficult [RESILIENCE] last paragraph</li>
+</ul>
+<p>These clouds are complex to model</p>
+<h2>Measuring AMPCs</h2>
+<ul>
+<li>
+<p>Atmospheric Radiation Measurement program set up in alaska:</p>
+<ul>
+<li>Barrow (another name) -&gt; oliktok point 0&gt; toolik lake 0-&gt;  atqasuk</li>
+<li>Approximates grid cell of GCM, for use in the Single Column Modeling methodology</li>
+</ul>
+</li>
+<li>
+<p>Barrow site:</p>
+<ul>
+<li>High Spectral Resolution Lidar</li>
+<li>depolarization lidar</li>
+<li>Atmospheric Emitted Radiance Interferometer</li>
+<li>Instrumented aircrafts</li>
+<li>Citation</li>
+<li>High Volume Precipitation Sampler</li>
+<li>Counterflow Virtaul Impactor</li>
+<li>Continuous flow ice thermal diffusion chamber.</li>
+<li>Above-clouddeck flights combined with in-situ measurements constrain both radiative budget at cloud boundary as well as concentration of species in cloud</li>
+</ul>
+</li>
+<li>
+<p>27 sept 2004 to 22 oct 2004</p>
+</li>
+<li>
+<p>Three separate exemplary clouds.</p>
+</li>
+<li>
+<p>Main event for us: Single layer stratoform mixed phase</p>
+<ul>
+<li>High pressure over ice pack</li>
+<li>transient low draws moisture to NSA site.</li>
+</ul>
+</li>
+<li>
+<p>9-11 of october: single layer stratus cloud</p>
+</li>
+<li>
+<p>Low level northeasterly flow off the ipack ice and over ocean. Persistent low-level clouds under a sharp inversion for entire period</p>
+</li>
+<li>
+<p>Include: Figure 6 is ground truth.</p>
+<ul>
+<li>Ice precipitation indicated persistently underneath cloud base</li>
+<li>Cloud base at 900m.</li>
+</ul>
+</li>
+<li>
+<p>Cloud top values for temperature, liquid water content, mean diameter were -16.9C, 0.36g/m^3, 25 um.</p>
+<ul>
+<li>Number concentration 25 #/cm^3 throughout</li>
+</ul>
+</li>
+<li>
+<p>Figure 7: explains background state given above</p>
+</li>
+<li>
+<p>Narrow cloud drop distribution. Heterogeneous ice crystals through entire cloud body.</p>
+</li>
+<li>
+<p>Mixed phase present even with cloud-top temperatures as low as -30C</p>
+</li>
+<li>
+<p>Fig 1 [MPACE_MIP]: aerial picture of clouds</p>
+</li>
+</ul>
+<h1>Modeling Background</h1>
+<ul>
+<li>Retrievals from this stratiform cloud case were used to create cloud physical and dynamical fluxes</li>
+<li>mm wavelength cloud radar</li>
+<li>lidar, microwave radiometer.</li>
+<li>Fields:
+<ul>
+<li>cloud top/base</li>
+<li>liquid water/ice water content</li>
+<li>effective particle sizes of liquid/ice</li>
+</ul>
+</li>
+<li>Uncertainties:
+<ul>
+<li>20g/m^-2 for liquid water path</li>
+<li>ice water content: 0.002 g/m^-3 based on minimal detectable radar signal (dubious)</li>
+</ul>
+</li>
+<li>well mixed and capped by inversion</li>
+<li>cloud-topped boundary layer</li>
+<li>Cloud top initially pure liquid</li>
+<li>Temperature and water mixing ration advection calculated from ECMWF reanalysis data</li>
+<li>No <em>in-situ</em> observations of surface fluxes. Taken from ECMWF data</li>
+<li>Focus on single-vs-double moment schemes:
+<ul>
+<li>Mixed-phase processes such as the Wegener Bergeron Findeisen process rely on ice crystal concentration number</li>
+<li>Single moment schemes have only mass, not number concentration</li>
+<li>10 SCMs with single moment and 10 with double-moment schemes in this paper</li>
+<li>Discussion of bin microphysics schemes beyond scope of this paper</li>
+</ul>
+</li>
+<li>Table IV:</li>
+<li>160 pm 60 g/m^2 for liquid water and 7-30 g /m^2 of ice water path.
+<ul>
+<li>Aircraft IWP much higher than remote sensing IWP</li>
+</ul>
+</li>
+<li>Single model with T-dep ice/liquid partitioning: 21.2 g/m^2</li>
+<li>Single moment but separate ice/water microphysics: 72.8 g/m^2</li>
+<li>double moment: 100 g/m^2</li>
+<li>Ice water path: 33.8, 31.8, 19.9
+<ul>
+<li>That is, models with higher-complexity treatment of ice microphysics are closer to observed values.</li>
+<li>Figure 8: water content vs aircraft retrievals, ice water vs retrievals</li>
+<li>LWC</li>
+<li>Figure 10: ICNC vs liquid water path: absurd scatter across models (should include this)</li>
+<li>No agreement about ICNC</li>
+</ul>
+</li>
+</ul>
+<p>High degree of heterogeneity among models. Even those that share, e.g., a double moment scheme.</p>
+<h1>Modeling Interventions</h1>
+<h1>Summary of CAM5</h1>
+<ul>
+<li>
+<p>CAM 3 had single-moment microphysics.</p>
+</li>
+<li>
+<p>But CAM 5 has double moment microphysics</p>
+<ul>
+<li>Microphysics predicts both number and mass concentration for ice and water</li>
+<li>precipitation in ice and snow is diagnosed (from what?)</li>
+<li>Particle distributions treated as gamma functions</li>
+</ul>
+</li>
+<li>
+<p>Double moment schemes allow cloud properties to be physically coupled to aerosols</p>
+</li>
+<li>
+<p>Modal aerosol module:</p>
+<ul>
+<li>MAM activates aerosols with appropriate properties to be CCN/INP and generates droplets and ice crystals</li>
+<li>Interactive aerosol effects on both warm and cold clouds</li>
+</ul>
+</li>
+<li>
+<p>Separate WBF for ice crystals/snow (four fields)</p>
+</li>
+<li>
+<p>CAM 5 with FV dycore at f19 resolution,</p>
+</li>
+<li>
+<p>Initialized with MERRA data beginning of each day for M-PACE</p>
+</li>
+<li>
+<p>Temperature of homogeneous freezing (but only for rain!) increased form -40C to -5C in released cam 5 to tune arctic surface flux</p>
+</li>
+<li>
+<p>Ice nucleation linked with aerosol properties in this model</p>
+<ul>
+<li>Homogeneous nucleation of sulfate competing with heterogeneous nucleation in mineral dust for ice clouds.</li>
+<li>Mixed phase clouds: deposition/condensation nucleation drawn from Meyers 1992</li>
+<li>Constant IN concentration for T&lt;-20C</li>
+<li>Contact freezing by mineral dust, and Hallet-Mossop SIP are included.</li>
+<li>Immersion of cloud freezing is included.</li>
+</ul>
+</li>
+<li>
+<p>Limitations of Meyers parameterization:</p>
+<ul>
+<li>Constant amount of IN means that particles are implicitly replenished when ice crystals scavenge INPs.</li>
+<li>Shown in Prenni '07 that Meyers produces too many IN for MPACE case (might be worth a note)</li>
+</ul>
+</li>
+<li>
+<p>Purpose of this study:</p>
+<ul>
+<li>What happens when Meyers is changed out for Phillips IN scheme</li>
+</ul>
+<ul>
+<li>Empirically derived relationship between mineral dust, black carbon, and hydrophobic organics with temperature</li>
+</ul>
+</li>
+</ul>
+<h2>Results:</h2>
+<ul>
+<li>CAM5 underestimates LWC by 70% and overestimates IWC by factor of 2</li>
+<li>Figure 6 (qualitative over/under estimates)</li>
+<li>Figure 7: cloud fraction is good, but persistent biases in LWC, IWC</li>
+<li>From 5-12th october, cam5 undreestimates downward LW radiative fluxes by 20-40 W/m^2
+<ul>
+<li>Largely due to underestimate of cloud liquid mixing ratio</li>
+<li>Overestimates OLWR by 10 W m^2</li>
+</ul>
+</li>
+<li>Two processes for turning cloud liquid into snow in CAM5:
+<ul>
+<li>Collection of water by snow</li>
+<li>Evaporation/deposition by WBF</li>
+</ul>
+</li>
+<li>Figure 10: Ice/Water Budgets
+<ul>
+<li>Fixing instantaneous freezing fixes budget substantially</li>
+</ul>
+</li>
+<li>Cam5 significantly underestimates aerosol optical depth (is this reanalysis artifact?)</li>
+<li>Tuning parameter for autoconversion from</li>
+</ul>
+<h2>WBF</h2>
+<ul>
+<li>Mixed-phase clouds are likely spatially heterogeneous (pockets of ice/water) on the scale of 10^2 m
+<ul>
+<li>Separation of ice from water also slows WBF</li>
+</ul>
+</li>
+<li>In this study: replace Meyers IN parameterization with calssical nucleation theory
+<ul>
+<li>Nucleation is stochastic, depends on number and size of aerosol particles</li>
+<li>Note: different from above. Same goal</li>
+</ul>
+</li>
+<li>New WBF:
+<ul>
+<li>WBF process largely depends on contact volume between supercooled liquid droplets and ice crystals</li>
+<li>Typical contact volume in homogeneous gridcell:10^3<em>10^5</em>10^5</li>
+<li>in heterogenous grid cell: 10<em>10^3</em>10^3 if 100 m pockets of liquid and ice butt against each other.</li>
+<li>Relaxation timescale is inversely proportional to contact volume.</li>
+</ul>
+</li>
+<li>Mass weighted water vapor:
+<ul>
+<li>Certain work indicates RH in mixed phase clouds indicate RH should be close to 100%.</li>
+<li>Heterogeneity could explain observed deviance from the SVP expected if ice and snow are homogeneously mixed.</li>
+</ul>
+</li>
+<li>Figure 4: comparable to figures from other paper
+<ul>
+<li>Most aggressive slowdown in WBF still underestimates LWC by factor of two.</li>
+</ul>
+</li>
+<li>Figure 6: Breakdown by microphysical process
+<ul>
+<li>liquid water detrailment from shallow convection is liquid source in ctrl</li>
+<li>WBF process major sink in CTL</li>
+</ul>
+</li>
+<li>Figure 8:
+<ul>
+<li>If you also decrease accretion rate of liquid rain by snow by same amount as WBF, then you match LWC</li>
+<li>High enough vertical resolution is crucial for maintenance of cloud liquid layers!</li>
+</ul>
+</li>
+<li>Recommendation:
+<ul>
+<li>Physically based representation of heterogeneous structure rather than tuning parameter.</li>
+</ul>
+</li>
+</ul>
+<h2>Integrated sensitivity</h2>
+<h1>Conclusions</h1>
+<ul>
+<li>Bin microphysics and SIP</li>
+</ul>
+<p>Lonely science: can it be studied in isolation?</p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/411/411_main/">climate411</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

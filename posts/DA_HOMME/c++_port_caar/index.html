@@ -1,0 +1,78 @@
+<p>npd---
+date: 2023-11-06
+tags:</p>
+<ul>
+<li>posts</li>
+<li>misc
+eleventyNavigation:
+key: CaarFunctorImpl update
+parent: Porting DA HOMME to C++
+layout: layouts/post.njk</li>
+</ul>
+<hr>
+<h2>updating Caar</h2>
+<p>run() outlines the sequence of policies</p>
+<ul>
+<li>m_policy_pre</li>
+<li>m_plicy_post</li>
+</ul>
+<h3>m_policy_pre</h3>
+<p>TagPreExchange</p>
+<p>List of changes:</p>
+<ul>
+<li>div_vdp
+<ul>
+<li>Need to access multiple levels phinh_i</li>
+<li>Use ColumnOps::compute_midpoint_values</li>
+</ul>
+</li>
+<li>compute_scan_quantities:
+<ul>
+<li>divergence of pi is used only for diagnostic omega. Ignore for now</li>
+</ul>
+</li>
+<li>compute_interface_quantities
+<ul>
+<li>Nothing to do</li>
+</ul>
+</li>
+<li>compute_vertical_advection
+<ul>
+<li>Ignoring eulerian vcoord for now</li>
+</ul>
+</li>
+<li>compute_accumulated_quantities
+<ul>
+<li>Nothing to do, all eulerian and diagnostics <em>(if diagnostics tested, then oops)</em></li>
+</ul>
+</li>
+<li>compute_w_and_phi_tens
+<ul>
+<li>Modify gradient -&gt; done</li>
+<li>Add w tendency term, calculate fcorcos</li>
+</ul>
+</li>
+<li>compute_dp_and_theta_tens:
+<ul>
+<li>Requires inv rhat at model level. (line 1025)</li>
+</ul>
+</li>
+<li>compute_v_tens
+<ul>
+<li>previously computed grad_phinh?? Where does this happen?</li>
+<li>w_and_phi_tens.</li>
+</ul>
+</li>
+</ul>
+<h1>NOTE NOTE NOTE: change earth's radius back.</h1>
+<p>const auto&amp; fcor = m_geometry.m_fcor(kv.ie,igp,jgp);</p>
+<p>Adding fcorcos:</p>
+<ul>
+<li>src/share/cxx/ElementsGeometry.cpp</li>
+<li>src/theta-l_kokkos/cxx/cxx_f90_interface_theta.cpp</li>
+<li>src/theta-l_kokkos/cxx/CaarFunctorImpl.hpp</li>
+</ul>
+<h3>m_policy_post</h3>
+<ul>
+<li>TagPostExchange</li>
+</ul>

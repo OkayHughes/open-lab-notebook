@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/papers/bw_topo/code/SE_NE60_L30_evolution/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/papers/bw_topo/code/SE_NE60_L30_evolution/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/papers/bw_topo/code/SE_NE60_L30_evolution/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>SE_NE60L30_evolution.ncl</h1>
+
+    
+    
+    
+    <pre><code>;*************************************
+; SE_NE50L30_evolution.ncl
+; Example usage: 
+; ncl level=850 'pfmt=&quot;eps&quot;'
+;***********************************************
+
+
+load &quot;$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl&quot;  
+load &quot;$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl&quot;  
+load &quot;$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl&quot;  
+
+;************************************************
+begin
+
+;=====
+; declare the CAM directory and file
+;=====
+  fdir = &quot;/nfs/turbo/cjablono2/owhughes/mountain_test_case_netcdf/&quot;
+  f1 = addfile(fdir+&quot;ne60.nc&quot;,&quot;r&quot;)
+
+
+;=====
+ dycore   = &quot;SEne60L30&quot;             ; label in plot, name your dycore
+
+;=====
+; complete the plotname
+;=====
+    plotname = dycore+&quot;_moist_evolution&quot;
+
+
+; ========
+; define the times at which to plot
+; ========
+
+  times = (/ 12, 16, 20, 24 /)
+
+ 
+;=====
+; input parameter, may be specified in the command line
+;=====
+  if (isvar(&quot;pfmt&quot;)) then         ; plot format specified on command line?
+      type = pfmt                 ; command line 
+  else
+      type = &quot;x11&quot;                ; default X11 window
+      type = &quot;eps&quot;                ; default X11 window
+  end if
+
+;************************************************
+; read grid variables
+;************************************************
+  lev  = f1-&gt;lev
+  lon  = f1-&gt;lon
+  lat  = f1-&gt;lat
+  klev   = getfilevardimsizes(f1, &quot;lev&quot; ) ; read number of vertical levels (hybrid coordinates)
+  
+  P0   = 100000.      ; Pa
+  P0mb = P0*0.01      ; hPa
+
+;************************************************
+;plot resources [options]
+;************************************************
+  plot = new(2 * 4,graphic)
+  plot_over = new(2 * 4,graphic)
+  wks = gsn_open_wks(type,plotname)
+  
+; ********************
+; FOR LOOP STARTS HERE
+; ********************
+do i=0,3
+  pday = times(i)  ; day 5
+;*************   
+; read surface geopotential (first time index)
+;*************   
+  phis    = f1-&gt;PHIS(pday,:,:)
+  
+  gravity = 9.80616         ; gravitational acceleration in m/s^2
+  zs      = phis/gravity    ; surface elevation
+  copy_VarCoords (phis,zs)
+  zs@units = &quot;m&quot;
+  zs@long_name = &quot;Surface height&quot;
+
+;************************************************
+; read psl moist run 
+;************************************************
+  ps1      = f1-&gt;PSL(pday,:,:)                       ; (lat,lon)
+  ps1_mb   = ps1*0.01
+  copy_VarMeta (ps1,ps1_mb)
+  ps1_mb@units = &quot;hPa&quot;
+  printMinMax(ps1_mb,True)
+  PRECL = f1-&gt;PRECL(pday,:,:)
+  PRECL   = PRECL*8.64e7
+  PRECL@units = &quot;mm/day&quot;
+  PRECL@long_name = &quot;Precipitation rate&quot;
+  
+;=======
+; open plot and define color table
+;=======
+;  gsn_define_colormap(wks,&quot;WhBlGrYeRe&quot;)       ; select color table
+  gsn_define_colormap(wks,&quot;WhViBlGrYeOrRe&quot;)
+;  gsn_define_colormap(wks,&quot;WhViBlGrYeOrReWh&quot;)
+;  gsn_define_colormap(wks,&quot;gui_default&quot;)
+;  gsn_define_colormap(wks,&quot;precip3_16lev&quot;)
+;  gsn_define_colormap(wks,&quot;cosam12&quot;)
+;  gsn_define_colormap(wks,&quot;gui_default&quot;)
+
+  res_overlay := True
+  res_overlay@gsnDraw           = False              ; panel ... set to False
+  res_overlay@gsnFrame          = False
+  res_overlay@cnFillOn          = False
+  res_overlay@lbLabelAutoStride = True
+  res_overlay@tiMainString      = &quot;&quot;
+  res_overlay@gsnLeftString     = &quot;&quot;
+  res_overlay@gsnRightString    = &quot;&quot;
+  res_overlay@vpWidthF          = 0.475
+  res_overlay@vpHeightF         = 0.19
+  res_overlay@cnLinesOn         = True
+  res_overlay@cnLevelSelectionMode = &quot;ManualLevels&quot;
+  res_overlay@cnMinLevelValF    = 0.                  ; set min contour level
+  res_overlay@cnMaxLevelValF    = 2000.               ; set max contour level
+  res_overlay@cnLevelSpacingF   = 400.                ; set contour spacing
+;  res_overlay@cnLineColor        = &quot;gray&quot;
+  res_overlay@cnLineLabelsOn    = False
+  res_overlay@cnInfoLabelOn     = False
+
+  res := True  
+  res@gsnDraw           = False              ; panel ... set to False
+  res@gsnFrame          = False
+  res@cnFillOn          = True
+  res@gsnSpreadColors   = True
+;  res@gsnSpreadColorEnd = 100          ; 
+  res@gsnSpreadColorStart = 7
+
+  res@lbLabelAutoStride = True
+  res@tiMainString      = &quot;&quot;
+  res@vpKeepAspect      = True
+  res@vpWidthF          = 0.475
+  res@vpHeightF         = 0.19
+  res@cnLinesOn         = False
+  res@cnLinesOn         = True
+  res@cnLineLabelsOn    = False
+  res@cnInfoLabelOn     = False
+  res@lbLabelBarOn      = False
+;  res@pmLabelBarOrthogonalPosF  = 0.03                  ; moves label bar (up[-], down[+]) default 0.02
+  res@gsnCenterString      = &quot;Day &quot;+pday/4.
+
+  res@tmXBLabelFontHeightF = 0.015                 ; resize tick labels
+  res@tmYLLabelFontHeightF = 0.015
+  res@gsnStringFontHeightF = 0.015
+  res@lbLabelFontHeightF = 0.015
+
+
+  res@cnLevelSelectionMode = &quot;ManualLevels&quot;
+  res@cnMinLevelValF    = 950.                  ; set min contour level
+  res@cnMaxLevelValF    = 1010.               ; set max contour level
+  res@cnLevelSpacingF   = 10.                ; set contour spacing
+
+;  res@gsnCenterString   = &quot;Day &quot;+pday
+  
+  plot(i) = gsn_csm_contour(wks,ps1_mb({0:90},{30:255}),res)
+  plot_over(i) = gsn_csm_contour(wks,zs({0:90},{30:255}),res_overlay)
+  overlay (plot(i),plot_over(i))
+
+  res@cnLevelSelectionMode = &quot;ExplicitLevels&quot; 
+  res@cnLevels             = (/ 0.10, 0.50, 1.00, 3, 5, 7.5, 10, 15, 20, 30, 40, 50, 75, 100 /)
+  plot(4 + i) = gsn_csm_contour(wks,PRECL({0:90},{30:255}),res)
+  plot_over(4 + i) = gsn_csm_contour(wks,zs({0:90},{30:255}),res_overlay)
+  overlay (plot(4 + i),plot_over(4 + i))
+  
+
+  
+ 
+
+end do
+   pres := True               ; panel
+;  pres@gsnMaximize = True   ; [e]ps, pdf  make  large 
+  pres@gsnMaximize = False   ; [e]ps, pdf  make  large 
+;  pres@txString    = dycore+&quot;, &quot;+diff+&quot;, &quot;+plev+&quot; hPa level&quot;
+;  pres@txString    = dycore+&quot;, &quot;+plev+&quot; hPa level&quot;
+  pres@gsnPanelYWhiteSpacePercent = 0
+  pres@gsnPanelXWhiteSpacePercent = 3
+  pres@gsnPanelLabelBar           = True
+  pres@lbLabelFontHeightF       = 0.014
+  pres@pmLabelBarOrthogonalPosF = -0.005           ; negative moves down like -0.03
+  pres@gsnPanelFigureStringsFontHeightF = 0.011
+  pres@amJust           = &quot;TopLeft&quot;
+  pres@gsnFrame         = False   
+
+  
+  gsn_panel(wks,plot(0:3),(/1,4/),pres)
+  frame(wks)    ; now frame the plot and we're done
+  gsn_panel(wks,plot(4:7),(/1,4/),pres)
+  frame(wks)    ; now frame the plot and we're done
+
+
+end
+
+</code></pre>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/papers/">Papers</a></li>
+<li><a href="/your-repo-name/posts/papers/bw_topo/bw_topo_master/">Baroclinic Wave Test Case with Topography</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

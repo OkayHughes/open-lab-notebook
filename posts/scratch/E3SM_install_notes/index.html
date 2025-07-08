@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/scratch/E3SM_install_notes/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/scratch/E3SM_install_notes/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/scratch/E3SM_install_notes/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>E3SM 2.0 install notes</h1>
+
+    
+    
+    
+    <h3>Joe's excellent notes:</h3>
+<p><a href="https://github.com/jhollowed/e3sm_greatlakes_install">Here</a></p>
+<h3>Installing</h3>
+<p>After installing public ssh key for greatlakes, I ran
+<code>git clone -b v2.0.0 --recursive git@github.com:sandialabs/CLDERA-E3SM.git</code> in my <code>~</code> directory.</p>
+<p>Ran correctly.</p>
+<h3>Creating case</h3>
+<details>
+<summary>Create case log</summary>
+<pre><code>Compset longname is 2000_XATM_XLND_XICE_XOCN_XROF_XGLC_XWAV
+Compset specification file is /home/owhughes/E3SM/CLDERA-E3SM/driver-mct/cime_config/config_compsets.xml
+Automatically adding SIAC to compset
+Automatically adding SESP to compset
+Compset forcing is 
+Com forcing is present day:
+ATM component is Dead atm component
+LND component is Dead land component
+ICE component is Dead ice component
+OCN component is Dead ocean component
+ROF component is Dead river component
+GLC component is Dead land-ice component
+WAV component is Dead wave component
+IAC component is Stub iac component
+ESP component is Stub external system processing (ESP) component
+Pes     specification file is /home/owhughes/E3SM/CLDERA-E3SM/driver-mct/cime_config/config_pes.xml
+Machine is greatlakes
+Variable MAX_GPUS_PER_NODE not defined for machine greatlakes
+Pes setting: grid          is a%1.9x2.5_l%1.9x2.5_oi%gx1v6_r%r05_g%null_w%null_z%null_m%gx1v6 
+Pes setting: compset       is 2000_XATM_XLND_XICE_XOCN_XROF_XGLC_XWAV_SIAC_SESP 
+Pes setting: tasks       is {'NTASKS_ATM': -1, 'NTASKS_ROF': -1, 'NTASKS_OCN': -1, 'NTASKS_ICE': -1, 'NTASKS_CPL': -1, 'NTASKS_LND': -1, 'NTASKS_GLC': -1, 'NTASKS_WAV': -1, 'NTASKS_IAC': -1, 'NTASKS_ESP': -1} 
+Pes setting: threads     is {'NTHRDS_ATM': 1, 'NTHRDS_LND': 1, 'NTHRDS_ROF': 1, 'NTHRDS_ICE': 1, 'NTHRDS_OCN': 1, 'NTHRDS_GLC': 1, 'NTHRDS_WAV': 1, 'NTHRDS_IAC': 1, 'NTHRDS_ESP': 1, 'NTHRDS_CPL': 1} 
+Pes setting: rootpe      is {'ROOTPE_ATM': 0, 'ROOTPE_ROF': 0, 'ROOTPE_ICE': 0, 'ROOTPE_OCN': 0, 'ROOTPE_CPL': 0, 'ROOTPE_LND': 0, 'ROOTPE_GLC': 0, 'ROOTPE_WAV': 0, 'ROOTPE_IAC': 0, 'ROOTPE_ESP': 0} 
+Pes setting: pstrid      is {} 
+Pes other settings: {}
+Pes comments: none
+setting additional fields from config_pes: {}
+Compset is: 2000_XATM_XLND_XICE_XOCN_XROF_XGLC_XWAV_SIAC_SESP 
+Grid is: a%1.9x2.5_l%1.9x2.5_oi%gx1v6_r%r05_g%null_w%null_z%null_m%gx1v6 
+Components in compset are: ['xatm', 'xlnd', 'xice', 'xocn', 'xrof', 'xglc', 'xwav', 'siac', 'sesp'] 
+No project info available
+No charge_account info available, using value from PROJECT
+e3sm model version found: 1e754ed
+Batch_system_type is slurm
+job is case.run USER_REQUESTED_WALLTIME None USER_REQUESTED_QUEUE None WALLTIME_FORMAT %H:%M:%S
+job is case.st_archive USER_REQUESTED_WALLTIME None USER_REQUESTED_QUEUE None WALLTIME_FORMAT %H:%M:%S
+Creating Case directory /home/owhughes/E3SM/X_case
+
+</code></pre>
+</details>
+<details>
+<summary> Results of ./case.setup</summary>
+<pre><code>
+Setting resource.RLIMIT_STACK to -1 from (-1, -1)
+/home/owhughes/E3SM/X_case/env_mach_specific.xml already exists, delete to replace
+/home/owhughes/E3SM/X_case/env_mach_specific.xml already exists, delete to replace
+job is case.run USER_REQUESTED_WALLTIME None USER_REQUESTED_QUEUE None WALLTIME_FORMAT %H:%M:%S
+Creating batch scripts
+Writing case.run script from input template /home/owhughes/E3SM/CLDERA-E3SM/cime_config/machines/template.case.run
+Creating file .case.run
+Writing case.st_archive script from input template /home/owhughes/E3SM/CLDERA-E3SM/cime_config/machines/template.st_archive
+Creating file case.st_archive
+Creating file .case.run.sh
+Creating user_nl_xxx files for components and cpl
+If an old case build already exists, might want to run 'case.build --clean' before building
+Generating component namelists as part of setup
+2021-12-02 16:48:44 atm 
+Create namelist for component xatm
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xatm/cime_config/buildnml
+2021-12-02 16:48:44 lnd 
+Create namelist for component xlnd
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xlnd/cime_config/buildnml
+2021-12-02 16:48:44 ice 
+Create namelist for component xice
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xice/cime_config/buildnml
+2021-12-02 16:48:44 ocn 
+Create namelist for component xocn
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xocn/cime_config/buildnml
+2021-12-02 16:48:44 rof 
+Create namelist for component xrof
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xrof/cime_config/buildnml
+2021-12-02 16:48:44 glc 
+Create namelist for component xglc
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xglc/cime_config/buildnml
+2021-12-02 16:48:44 wav 
+Create namelist for component xwav
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xwav/cime_config/buildnml
+2021-12-02 16:48:44 iac 
+Create namelist for component siac
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/stub_comps/siac/cime_config/buildnml
+2021-12-02 16:48:44 esp 
+Create namelist for component sesp
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/stub_comps/sesp/cime_config/buildnml
+2021-12-02 16:48:44 cpl 
+Create namelist for component drv
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/driver-mct/cime_config/buildnml
+File not found: atm2ocn_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/fv1.9x2.5/map_fv1.9x2.5_TO_gx1v6_aave.130322.nc, will attempt to download in check_input_data phase
+File not found: atm2ocn_smapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/fv1.9x2.5/map_fv1.9x2.5_TO_gx1v6_blin.130322.nc, will attempt to download in check_input_data phase
+File not found: atm2ocn_vmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/fv1.9x2.5/map_fv1.9x2.5_TO_gx1v6_patc.130322.nc, will attempt to download in check_input_data phase
+File not found: ocn2atm_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/gx1v6/map_gx1v6_TO_fv1.9x2.5_aave.130322.nc, will attempt to download in check_input_data phase
+File not found: ocn2atm_smapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/gx1v6/map_gx1v6_TO_fv1.9x2.5_aave.130322.nc, will attempt to download in check_input_data phase
+File not found: atm2ice_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/fv1.9x2.5/map_fv1.9x2.5_TO_gx1v6_aave.130322.nc, will attempt to download in check_input_data phase
+File not found: atm2ice_smapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/fv1.9x2.5/map_fv1.9x2.5_TO_gx1v6_blin.130322.nc, will attempt to download in check_input_data phase
+File not found: atm2ice_vmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/fv1.9x2.5/map_fv1.9x2.5_TO_gx1v6_patc.130322.nc, will attempt to download in check_input_data phase
+File not found: ice2atm_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/gx1v6/map_gx1v6_TO_fv1.9x2.5_aave.130322.nc, will attempt to download in check_input_data phase
+File not found: ice2atm_smapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/gx1v6/map_gx1v6_TO_fv1.9x2.5_aave.130322.nc, will attempt to download in check_input_data phase
+File not found: lnd2rof_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/lnd/clm2/mappingdata/maps/1.9x2.5/map_1.9x2.5_nomask_to_0.5x0.5_nomask_aave_da_c120522.nc, will attempt to download in check_input_data phase
+File not found: rof2lnd_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/lnd/clm2/mappingdata/maps/1.9x2.5/map_0.5x0.5_nomask_to_1.9x2.5_nomask_aave_da_c120709.nc, will attempt to download in check_input_data phase
+File not found: atm2rof_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/lnd/clm2/mappingdata/maps/1.9x2.5/map_1.9x2.5_nomask_to_0.5x0.5_nomask_aave_da_c120522.nc, will attempt to download in check_input_data phase
+File not found: atm2rof_smapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/lnd/clm2/mappingdata/maps/1.9x2.5/map_1.9x2.5_nomask_to_0.5x0.5_nomask_aave_da_c120522.nc, will attempt to download in check_input_data phase
+File not found: rof2ocn_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/cpl6/map_r05_TO_g16_aave.120920.nc, will attempt to download in check_input_data phase
+File not found: rof2ocn_liq_rmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/cpl6/map_r05_to_gx1v6_e1000r300_090226.nc, will attempt to download in check_input_data phase
+File not found: rof2ocn_ice_rmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/cpl6/map_r05_to_gx1v6_e1000r300_090226.nc, will attempt to download in check_input_data phase
+You can now run './preview_run' to get more info on how your case will be run
+</code></pre>
+</details>
+<details>
+<summary>Results of ./preview_run</summary>
+<pre><code>CASE INFO:
+nodes: 1
+total tasks: 36
+tasks per node: 36
+thread count: 1
+ngpus per node: 0
+
+BATCH INFO:
+FOR JOB: case.run
+  ENV:
+    Setting Environment LD_LIBRARY_PATH=/sw/arcts/centos7/stacks/intel/18.0.5/netcdf-fortran/4.4.5/lib:/sw/arcts/centos7/stacks/intel/18.0.5/netcdf-c/4.6.2/lib:/sw/arcts/centos7/stacks/intel/18.0.5/hdf5/1.8.21/lib:/sw/arcts/centos7/stacks/intel/18.0.5/szip/2.1.1/lib:/sw/arcts/centos7/stacks/intel/18.0.5/openmpi/3.1.4/lib:/sw/arcts/centos7/intel/18.0.5/compilers_and_libraries_2018.5.274/linux/compiler/lib/intel64:/sw/arcts/centos7/intel/18.0.5/compilers_and_libraries_2018.5.274/linux/compiler/lib/intel64_lin:/sw/arcts/centos7/intel/18.0.5/compilers_and_libraries_2018.5.274/linux/ipp/lib/intel64:/sw/arcts/centos7/intel/18.0.5/compilers_and_libraries_2018.5.274/linux/mkl/lib/intel64_lin:/sw/arcts/centos7/intel/18.0.5/compilers_and_libraries_2018.5.274/linux/tbb/lib/intel64/gcc4.7:/sw/arcts/centos7/intel/18.0.5/debugger_2018/iga/lib:/sw/arcts/centos7/intel/18.0.5/debugger_2018/libipt/intel64/lib:/sw/arcts/centos7/intel/18.0.5/compilers_and_libraries_2018.5.274/linux/daal/lib/intel64_lin:/sw/arcts/centos7/intel/18.0.5/compilers_and_libraries_2018.5.274/linux/tbb/lib/intel64_lin/gcc4.4:/opt/slurm/lib64::
+    Setting Environment NETCDF_C_PATH=/sw/arcts/centos7/stacks/intel/18.0.5/netcdf-c/4.6.2
+    Setting Environment NETCDF_FORTRAN_PATH=/sw/arcts/centos7/stacks/intel/18.0.5/netcdf-fortran/4.4.5
+    Setting Environment OMP_NUM_THREADS=1
+    Setting Environment OMP_STACKSIZE=256M
+
+  SUBMIT CMD:
+    sbatch -t 00:20:00 --mail-type END --mail-type FAIL .case.run --resubmit
+
+  MPIRUN (job=case.run):
+    mpiexec -n 36 /scratch/cjablono_root/cjablono1/owhughes/E3SM/E3SMv2/X_case/bld/e3sm.exe   &gt;&gt; e3sm.log.$LID 2&gt;&amp;1 
+
+
+</code></pre>
+</details>
+<details>
+<summary>Build log</summary>
+<pre><code>Building case in directory /home/owhughes/E3SM/X_case
+sharedlib_only is False
+model_only is False
+Setting resource.RLIMIT_STACK to -1 from (-1, -1)
+Generating component namelists as part of build
+2021-12-02 16:57:58 atm 
+Create namelist for component xatm
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xatm/cime_config/buildnml
+2021-12-02 16:57:58 lnd 
+Create namelist for component xlnd
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xlnd/cime_config/buildnml
+2021-12-02 16:57:58 ice 
+Create namelist for component xice
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xice/cime_config/buildnml
+2021-12-02 16:57:58 ocn 
+Create namelist for component xocn
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xocn/cime_config/buildnml
+2021-12-02 16:57:58 rof 
+Create namelist for component xrof
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xrof/cime_config/buildnml
+2021-12-02 16:57:58 glc 
+Create namelist for component xglc
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xglc/cime_config/buildnml
+2021-12-02 16:57:58 wav 
+Create namelist for component xwav
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xwav/cime_config/buildnml
+2021-12-02 16:57:58 iac 
+Create namelist for component siac
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/stub_comps/siac/cime_config/buildnml
+2021-12-02 16:57:58 esp 
+Create namelist for component sesp
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/stub_comps/sesp/cime_config/buildnml
+2021-12-02 16:57:58 cpl 
+Create namelist for component drv
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/driver-mct/cime_config/buildnml
+File not found: atm2ocn_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/fv1.9x2.5/map_fv1.9x2.5_TO_gx1v6_aave.130322.nc, will attempt to download in check_input_data phase
+File not found: atm2ocn_smapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/fv1.9x2.5/map_fv1.9x2.5_TO_gx1v6_blin.130322.nc, will attempt to download in check_input_data phase
+File not found: atm2ocn_vmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/fv1.9x2.5/map_fv1.9x2.5_TO_gx1v6_patc.130322.nc, will attempt to download in check_input_data phase
+File not found: ocn2atm_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/gx1v6/map_gx1v6_TO_fv1.9x2.5_aave.130322.nc, will attempt to download in check_input_data phase
+File not found: ocn2atm_smapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/gx1v6/map_gx1v6_TO_fv1.9x2.5_aave.130322.nc, will attempt to download in check_input_data phase
+File not found: atm2ice_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/fv1.9x2.5/map_fv1.9x2.5_TO_gx1v6_aave.130322.nc, will attempt to download in check_input_data phase
+File not found: atm2ice_smapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/fv1.9x2.5/map_fv1.9x2.5_TO_gx1v6_blin.130322.nc, will attempt to download in check_input_data phase
+File not found: atm2ice_vmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/fv1.9x2.5/map_fv1.9x2.5_TO_gx1v6_patc.130322.nc, will attempt to download in check_input_data phase
+File not found: ice2atm_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/gx1v6/map_gx1v6_TO_fv1.9x2.5_aave.130322.nc, will attempt to download in check_input_data phase
+File not found: ice2atm_smapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/gridmaps/gx1v6/map_gx1v6_TO_fv1.9x2.5_aave.130322.nc, will attempt to download in check_input_data phase
+File not found: lnd2rof_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/lnd/clm2/mappingdata/maps/1.9x2.5/map_1.9x2.5_nomask_to_0.5x0.5_nomask_aave_da_c120522.nc, will attempt to download in check_input_data phase
+File not found: rof2lnd_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/lnd/clm2/mappingdata/maps/1.9x2.5/map_0.5x0.5_nomask_to_1.9x2.5_nomask_aave_da_c120709.nc, will attempt to download in check_input_data phase
+File not found: atm2rof_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/lnd/clm2/mappingdata/maps/1.9x2.5/map_1.9x2.5_nomask_to_0.5x0.5_nomask_aave_da_c120522.nc, will attempt to download in check_input_data phase
+File not found: atm2rof_smapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/lnd/clm2/mappingdata/maps/1.9x2.5/map_1.9x2.5_nomask_to_0.5x0.5_nomask_aave_da_c120522.nc, will attempt to download in check_input_data phase
+File not found: rof2ocn_fmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/cpl6/map_r05_TO_g16_aave.120920.nc, will attempt to download in check_input_data phase
+File not found: rof2ocn_liq_rmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/cpl6/map_r05_to_gx1v6_e1000r300_090226.nc, will attempt to download in check_input_data phase
+File not found: rof2ocn_ice_rmapname = /home/owhughes/E3SM/CLDERA-E3SM/inputData/cpl/cpl6/map_r05_to_gx1v6_e1000r300_090226.nc, will attempt to download in check_input_data phase
+Building gptl with output to file /scratch/cjablono_root/cjablono1/owhughes/E3SM/E3SMv2/X_case/bld/gptl.bldlog.211202-165757
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/share/build/buildlib.gptl
+Building mct with output to file /scratch/cjablono_root/cjablono1/owhughes/E3SM/E3SMv2/X_case/bld/mct.bldlog.211202-165757
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/cime/src/build_scripts/buildlib.mct
+Building pio with output to file /scratch/cjablono_root/cjablono1/owhughes/E3SM/E3SMv2/X_case/bld/pio.bldlog.211202-165757
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/cime/src/build_scripts/buildlib.pio
+Building csm_share with output to file /scratch/cjablono_root/cjablono1/owhughes/E3SM/E3SMv2/X_case/bld/csm_share.bldlog.211202-165757
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/share/build/buildlib.csm_share
+Component csm_share build complete with 20 warnings
+Configuring full e3sm model with output to file /scratch/cjablono_root/cjablono1/owhughes/E3SM/E3SMv2/X_case/bld/e3sm.bldlog.211202-165757
+ Calling cmake directly, see top of log file for specific call
+Building e3sm model with output to file /scratch/cjablono_root/cjablono1/owhughes/E3SM/E3SMv2/X_case/bld/e3sm.bldlog.211202-165757
+ Calling make, see top of log file for specific call
+Total build time: 192.428459 seconds
+MODEL BUILD HAS FINISHED SUCCESSFULLY
+
+
+</code></pre>
+</details>
+<details>
+<summary> Run log</summary>
+<pre><code>2021-12-02 17:35:20 CASE.RUN BEGINS HERE
+2021-12-02 17:35:20 RUN_MODEL BEGINS HERE
+2021-12-02 17:35:20 PRE_RUN_CHECK BEGINS HERE
+Setting resource.RLIMIT_STACK to -1 from (-1, -1)
+2021-12-02 17:35:21 NAMELIST CREATION BEGINS HERE
+Generating namelists for /home/owhughes/E3SM/X_case
+2021-12-02 17:35:21 atm 
+Create namelist for component xatm
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xatm/cime_config/buildnml
+2021-12-02 17:35:21 lnd 
+Create namelist for component xlnd
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xlnd/cime_config/buildnml
+2021-12-02 17:35:21 ice 
+Create namelist for component xice
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xice/cime_config/buildnml
+2021-12-02 17:35:21 ocn 
+Create namelist for component xocn
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xocn/cime_config/buildnml
+2021-12-02 17:35:21 rof 
+Create namelist for component xrof
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xrof/cime_config/buildnml
+2021-12-02 17:35:21 glc 
+Create namelist for component xglc
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xglc/cime_config/buildnml
+2021-12-02 17:35:21 wav 
+Create namelist for component xwav
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/xcpl_comps/xwav/cime_config/buildnml
+2021-12-02 17:35:21 iac 
+Create namelist for component siac
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/stub_comps/siac/cime_config/buildnml
+2021-12-02 17:35:21 esp 
+Create namelist for component sesp
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/components/stub_comps/sesp/cime_config/buildnml
+2021-12-02 17:35:21 cpl 
+Create namelist for component drv
+ Calling /home/owhughes/E3SM/CLDERA-E3SM/driver-mct/cime_config/buildnml
+2021-12-02 17:35:21 NAMELIST CREATION HAS FINISHED
+-------------------------------------------------------------------------
+- Prestage required restarts into /scratch/cjablono_root/cjablono1/owhughes/E3SM/E3SMv2/X_case/run
+- Case input data directory (DIN_LOC_ROOT) is /home/owhughes/E3SM/CLDERA-E3SM/inputData 
+- Checking for required input datasets in DIN_LOC_ROOT
+-------------------------------------------------------------------------
+2021-12-02 17:35:21 PRE_RUN_CHECK HAS FINISHED
+run command is mpiexec -n 36 /scratch/cjablono_root/cjablono1/owhughes/E3SM/E3SMv2/X_case/bld/e3sm.exe   &gt;&gt; e3sm.log.$LID 2&gt;&amp;1  
+2021-12-02 17:35:21 SAVE_PRERUN_PROVENANCE BEGINS HERE
+Setting resource.RLIMIT_STACK to -1 from (-1, -1)
+2021-12-02 17:35:22 SAVE_PRERUN_PROVENANCE HAS FINISHED
+2021-12-02 17:35:22 MODEL EXECUTION BEGINS HERE
+2021-12-02 17:35:38 MODEL EXECUTION HAS FINISHED
+2021-12-02 17:35:38 POST_RUN_CHECK BEGINS HERE
+2021-12-02 17:35:38 POST_RUN_CHECK HAS FINISHED
+2021-12-02 17:35:38 RUN_MODEL HAS FINISHED
+2021-12-02 17:35:38 GET_TIMING BEGINS HERE
+2021-12-02 17:35:38 GET_TIMING HAS FINISHED
+2021-12-02 17:35:38 SAVE_POSTRUN_PROVENANCE BEGINS HERE
+2021-12-02 17:35:38 SAVE_POSTRUN_PROVENANCE HAS FINISHED
+check for resubmit
+dout_s False 
+mach greatlakes 
+resubmit_num 0
+2021-12-02 17:35:38 CASE.RUN HAS FINISHED
+
+
+</code></pre>
+</details>
+<h3>Details of the aquaplanet build</h3>
+<p>The error that I'm encountering is in kokkos, and the most informative line is</p>
+<pre><code>
+C++14-compliant compiler detected, but unable to compile C++14 or later
+  program.  Verify that Intel:18.0.5.20180823 is set up correctly (e.g.,
+  check that correct library headers are being used). 
+  
+</code></pre>
+<p><a href="https://github.com/kokkos/kokkos/pull/3809">Good info</a></p>
+<p>Idea: use <code>module load make/4.3</code> to fix the issue</p>
+<ul>
+<li>Add <code>module load make/4.3</code> to <code>~/.cime/bash.source</code></li>
+<li>On line 75 of <code>~/.cime/config_machines.xml</code> change <code>&lt;GMAKE&gt;gmake&lt;/GMAKE&gt;</code> to <code>&lt;GMAKE&gt;make&lt;/GMAKE&gt;</code>
+Unsuccessful</li>
+</ul>
+<p>Idea: modify kokkos configuration to force it not to use <code>/usr/bin/gmake</code></p>
+<p>The central issue:
+<code>/home/owhughes/E3SM/CLDERA-E3SM/externals/kokkos/cmake/compile_tests/cplusplus14.cpp</code> will not compile
+correctly with <code>mpicc -std=c++14 cplusplus14.cpp</code> with <code>openmpi/3.1.4</code> on the <code>intel 18.2</code> stack.</p>
+<p>Current attempt: change <code>gnu</code> to the default compiler stack</p>
+<p>Need to modify <code>~/.cime/config_compilers.xml</code> to match the intel stack (deleted some intel specific options)</p>
+<p>NB: it appears that using Kokkos on the intel stack with C++14 features necessary is
+pretty demonstrably scuffed, c.f. <a href="https://github.com/trilinos/Trilinos/issues/8710">This issue</a></p>
+<p>Kokkos now builds, but there is a linker time error because Lapack can't be found</p>
+<p>Ok, the idea is to include MKL, which has support for the gnu stack.
+However, this is the most miserable library to link against.
+In your module loads add <code>module load mkl/2018.0.4</code></p>
+<p>Tool for linking against this library <a href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl-link-line-advisor.html">here</a></p>
+<p>In order to get this blasted library to build:
+add the line <code>&lt;command name=&quot;load&quot;&gt;mkl/2018.0.4&lt;/command&gt;</code> to around line 135 in <code>~/.cime/config_machines.mkl</code>.</p>
+<p>Using the above library tool, we add the following lines to <code>~/.cime/config_compilers.xml</code>:</p>
+<pre><code>&lt;compiler COMPILER=&quot;gnu&quot; MACH=&quot;greatlakes&quot;&gt;
+
+  &lt;!-- This varibale seems to be completely ignored by E3SM 
+       (test this by appending some bogus flags; they will not appear in the logs)
+  --&gt;
+  &lt;!-- 
+  &lt;CFLAGS&gt;
+    &lt;append&gt; -I$ENV{MKL_INCLUDE} &lt;/append&gt; 
+  &lt;/CFLAGS&gt;
+  
+
+  
+  &lt;FFLAGS&gt;
+    &lt;append&gt;  -I$ENV{MKL_INCLUDE}&lt;/append&gt;
+  &lt;/FFLAGS&gt;
+  --&gt;
+  &lt;LDFLAGS&gt;
+    &lt;append&gt; -L$ENV{MKL_LIB} -lmkl_scalapack_ilp64 -Wl,--no-as-needed -lmkl_intel_ilp64 -lmkl_gnu_thread -lmkl_core -lmkl_blacs_intelmpi_ilp64 -lgomp -lpthread -lm -ldl  &lt;/append&gt;
+  &lt;/LDFLAGS&gt;
+
+
+  &lt;!-- needed here for E3SM, not just in config_machines --&gt;
+  &lt;!-- https://github.com/E3SM-Project/E3SM/issues/2974 --&gt;
+  &lt;NETCDF_C_PATH&gt;$ENV{NCDIR}&lt;/NETCDF_C_PATH&gt;
+  &lt;NETCDF_FORTRAN_PATH&gt;$ENV{NFDIR}&lt;/NETCDF_FORTRAN_PATH&gt;
+
+&lt;/compiler&gt;
+
+</code></pre>
+<p><a href="https://community.intel.com/t5/Intel-oneAPI-Math-Kernel-Library/problem-with-dgetrf/td-p/818787">Why this fucks up</a></p>
+<p>Solution: use <code>lp</code> rather than <code>ilp</code>. Back to the intel link advisor.</p>
+<p>Presently trying to run it with 32 bit integer interfaces. Builds, but 99% chance it crashes instantly.</p>
+<p>Ok so attempting with a fortran 32 bit interface causes fewer problems, but still causes segfaults. I'm going to try the intel stack
+again because it's less jank.</p>
+<h2>Trying intel stack again</h2>
+<p><a href="https://community.intel.com/t5/Intel-C-Compiler/icpc-c-fail-std-c-14-with-gcc-version-4-8-5/td-p/1153327">Maybe this will work</a></p>
+<p>The central problem: we need to delineate between <code>mpicc</code> and <code>mpic++</code></p>
+<p>Nope: the command being called is <code>/sw/arcts/centos7/intel/18.0.5/compilers_and_libraries_2018.5.274/linux/bin/intel64/icpc</code>. Resulting error is:</p>
+<pre><code>
+
+Error: A license for Comp-CL could not be obtained (-1,359,2).
+
+Is your license file in the right location and readable?
+The location of your license file should be specified via
+the $INTEL_LICENSE_FILE environment variable.
+
+License file(s) used were (in this order):
+**  1.  /sw/arcts/centos7/intel/18.0.5/compilers_and_libraries_2018.5.274/linux/bin/intel64/../../Licenses
+**  2.  /home/owhughes/Licenses
+**  3.  /opt/intel/licenses
+**  4.  /Users/Shared/Library/Application Support/Intel/Licenses
+**  5.  /sw/arcts/centos7/intel/18.0.5/compilers_and_libraries_2018.5.274/linux/bin/intel64/*.lic
+
+</code></pre>
+<p>Let's fuck around with configure_compilers to fix this.</p>
+<p>Alright how do I install gnu headers without unloading the intel stack?</p>
+<p>Ok following a clue from <a href="https://stackoverflow.com/questions/46355820/compiling-c-code-with-intel-compiler-on-mac-error-expected-an-identifier">this link</a></p>
+<p>I've made the following change using the executable directory that gets added to <code>$PATH</code> when you run <code>module load gcc/8.2.0</code>.
+On or around line 160 of <code>~/.cime/config_machines.xml</code> add the following line</p>
+<pre><code>  &lt;env name=&quot;PATH&quot;&gt;/sw/arcts/centos7/gcc/8.2.0/bin/gcc:$ENV{PATH}&lt;/env&gt;
+</code></pre>
+<p>After you do this the model builds successfully. Model hasn't started running yet. Will update this later.</p>
+<p>Execution fails with segfault. Attempting to change to openmpi 4.0.2.</p>
+<p>Next attempt is to literally just do all of the compiler config myself with my MPAS dependencies.</p>
+<h3><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="script">L</mi><mi mathvariant="script">O</mi><mi mathvariant="script">B</mi><mi mathvariant="script">O</mi><mi mathvariant="script">T</mi><mi mathvariant="script">O</mi><mi mathvariant="script">M</mi><mi mathvariant="script">Y</mi></mrow><mtext> </mtext><mrow><mi mathvariant="script">T</mi><mi mathvariant="script">I</mi><mi mathvariant="script">M</mi><mi mathvariant="script">E</mi></mrow></mrow><annotation encoding="application/x-tex"> \mathscr{LOBOTOMY}\ \mathscr{TIME} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7em;"></span><span class="mord"><span class="mord mathscr" style="margin-right:0.2939em;">LOBOTOMY</span></span><span class="mspace"> </span><span class="mord"><span class="mord mathscr" style="margin-right:0.18583em;">TIME</span></span></span></span></span></h3>
+<p>Alright let's entirely replace the infrastructure. Here's a backup of my <code>~/.cime/config_machines.xml</code></p>
+<h3>Another useful github issue</h3>
+<p>[https://github.com/trilinos/Trilinos/issues/8720]</p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/scratch/">scratch</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

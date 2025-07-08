@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/FV3/testing_dycore/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/FV3/testing_dycore/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/FV3/testing_dycore/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Identifying problems with dycore</h1>
+
+    
+    
+    
+    <p>Let us test the following configurations / aspects that caused issues in the 2020 FV3 version as integrated in the CAM development branch used for the class (Jan. 2022):</p>
+<ul>
+<li>Missing timing information after the job completes, even the setting of  <code>xmlchange SAVE_TIMING=TRUE</code>
+does not cure the problem. Other dycores have the same issue (dycore independent).</li>
+<li>Found by Anthony in class project 3: with FVC96 hord=5 (see the non-diffusive settings for FV3 in class project 3) the dry UMJS14 baroclinic wave blows up shortly after day 18 (in CAM development with original FV3) with default time steps and 6th order div damping (nord=2)
+Anthony found that a switch to the more diffusive hord=6 setting cured the problem
+also happens for moist bw with FV3C48 with hord=5</li>
+<li>FV3 fails to start from its own IC file (generated with inithist FV3C24L93 in /glade/scratch/cjablono/CAM_Jan22.FV3C24.L93.fhs94_RF_physics_ic_file/run )
+This file might not exist any longer. The point is that I created an IC file for a Held-Suarez run via inithist, and was not able to start a fresh run (without the analytic_ic setting that HS has by default) that uses this file as the IC file. Runs failed at the initialization step.*</li>
+<li>fv3_kord_tm = 9 fails (mapping of potential temperature), does this work now?</li>
+<li>On Cheyenne: is this relevant?: no C24, C192, C384 meshes in  /glade/p/cesmdata/cseg/inputdata/share/meshes/</li>
+<li>default coupling frequency / time step stays constant, is (for FV3C24, C48, C96, C192): ATM_NCPL: 48 (double check)</li>
+<li>fv3_nord = 3 (default) is unstable for baroclinic wave, lots of grid imprinting, ultimately blows up (needs to be confirmed), affects both hord=5 and hord=6 as I recall</li>
+<li>With mountain-generated bw test: fv3_d_ext creates numerical noise at cubed-sphere interfaces in C96 d_ext=0.01, 0.015 and 0.02 tested (default is fv3_d_ect=0), C192L30 with d_ext=0.02 blows up</li>
+<li>does the new FV3 accept FV3 code changes in SourceMods/src.cam now? These were ignored in the 2020 version.</li>
+<li>FV3 aqua-planet: missing input files for L30 for all resolutions except C96 in /glade/p/cesmdata/cseg/inputdata/atm/cam/inic/fv3</li>
+<li>only L26 and L32 supported for all resolutions</li>
+<li>C48 default build namelist fails for the ocean</li>
+<li>/glade/u/home/cjablono/CAM_Jan22/components/cdeps/docn/cime_config/buildnml
+and complains about the missing mesh file: /glade/p/cesmdata/cseg/inputdata/share/meshes/C48_181018_ESMFmesh.nc
+during the build of the ocean namelist file docn_in
+The reason for the failure is that the name of the input mesh file changed to /glade/p/cesmdata/cseg/inputdata/share/meshes/C48_ESMFmesh_c20200824.nc
+<ul>
+<li>cured by CJ:</li>
+<li>user_nl_docn was changed to include the settings:
+<code>model_maskfile = &quot;/glade/p/cesmdata/cseg/inputdata/share/meshes/C48_ESMFmesh_c20200824.nc</code>
+<code>model_meshfile = &quot;/glade/p/cesmdata/cseg/inputdata/share/meshes/C48_ESMFmesh_c20200824.nc&quot;</code>
+and the ocean namelist docn_in was built correctly.</li>
+<li>However, the file in the scratch directory
+nuopc.runconfig  still lists the wrong mesh files for the entries <code>mesh_atm, mesh_ice, mesh_ocn</code>
+despite the <code>user_nl_docn</code> changes (point a)</li>
+<li>cured by: manually specify the mesh file settings in the case directory <code>xmlchange ATM_DOMAIN_MESH=/glade/p/cesmdata/cseg/inputdata/share/meshes/C48_ESMFmesh_c20200824.nc</code></li>
+<li><code>xmlchange ICE_DOMAIN_MESH=/glade/p/cesmdata/cseg/inputdata/share/meshes/C48_ESMFmesh_c20200824.nc</code></li>
+<li><code>xmlchange OCN_DOMAIN_MESH=/glade/p/cesmdata/cseg/inputdata/share/meshes/C48_ESMFmesh_c20200824.nc</code></li>
+<li>This corrects the nuopc.runconfig in the scratch directory and also leads to a successful case.submit</li>
+</ul>
+</li>
+<li>C384 did not run (memory problem?) Does this run now for the UMJS14 test?</li>
+<li>FV3 slab ocean: fails due to missing QFLUX files on Cheyenne</li>
+<li>RCE configurations fails (all dycores)</li>
+</ul>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/FV3/FV3_parent/">FV3 Dycore Posts</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

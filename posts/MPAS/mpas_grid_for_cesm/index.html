@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/MPAS/mpas_grid_for_cesm/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/MPAS/mpas_grid_for_cesm/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/MPAS/mpas_grid_for_cesm/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Adding a variable resolution grid to CAM via CIME</h1>
+
+    
+    
+    
+    <h2>Introduction</h2>
+<p>A recent version of <a href="https://github.com/ESCOMP/CAM/tree/cam_development">the Community Atmosphere Model</a>
+added limited support for the Model for Prediction Across Scales (MPAS) atmospheric dynamical core.
+MPAS is a dynamical core with support for a non-hydrostatic equation set built in. It is based on a C-grid discretization on
+Spherical Centroidal Voronoi Tesselation (SCVT) horizontal mesh. As such
+it is designed to support variable resolution grids when it is run in its own codebase.
+The CIME infrastructure that makes creating new cases and component sets
+necessarily limits the number of horizontal grid spacings that you can use.</p>
+<p>This post is designed to show you how to add a new variable resolution MPAS grid
+to CIME. <span class="todo">I have used this for aquaplanet runs, but I have not tried AMIP runs <em>yet</em>.</span></p>
+<p>In order to run this you will regrettably need access to a working standalone version of the MPAS-A model
+available <a href="https://github.com/MPAS-Dev/MPAS-Model">here</a>.
+I am working on a containerized version that is easy to run on a laptop <a href="https://open-lab-notebook.glitch.me/posts/MPAS/singularity_mpas_def/">here</a>
+which is currently a work in progress.</p>
+<h2>Step -1: install MPAS</h2>
+<p>For the time being, I have <a href="https://open-lab-notebook.glitch.me/posts/installing-mpas/">instructions</a> on how I installed MPAS on the <a href="https://arc.umich.edu/greatlakes/">Great Lakes Cluster</a>
+located at the University of Michigan.</p>
+<p>If you have access to NCAR's Cheyenne, then your life is <em>much</em> easier.</p>
+<p>In order to compile MPAS on Cheyenne as of 2022-04-11, you can use the following scripts:</p>
+<details>
+  <summary><code>setup.mpas.sh</code></summary>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">module unload netcdf
+<p>module load intel/19.1.1  mpt/2.22
+module load netcdf-mpi/4.7.4 pnetcdf/1.12.1 pio/2.5.2
+</pre></div></p>
+</details>
+<p>and</p>
+<details>
+<summary><code>build.mpas.sh</code></summary>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">make ifort <span style="color: #aa0000">CORE</span>=init_atmosphere <span style="color: #aa0000">PRECISION</span>=single <span style="color: #aa0000">USE_PIO2</span>=<span style="color: #00aaaa">true</span>
+<p>make clean <span style="color: #aa0000">CORE</span>=atmosphere
+make ifort <span style="color: #aa0000">CORE</span>=atmosphere <span style="color: #aa0000">PRECISION</span>=single <span style="color: #aa0000">USE_PIO2</span>=<span style="color: #00aaaa">true</span>
+</pre></div></p>
+</details>
+<ul>
+<li>Before you proceed, run <code>source ${SOURCE_TO_SCRIPT}/setup.mpas.sh</code>.</li>
+<li>Download the MPAS code mentioned above.</li>
+<li>Change directories into the root of the repository.</li>
+<li>Run the commands in order listed in <code>build.mpas.sh</code>.</li>
+</ul>
+<h2>Step 0: generating the horizontal grid</h2>
+<p>Follow the instructions in my <a href="https://open-lab-notebook.glitch.me/posts/MPAS/made_to_measure_mpas/">other post</a>.</p>
+<p>At this point I assume that you have a folder referred to by the variable <code>${GRID_DIR}</code>, and that
+your grid has a unique prefix referred to in the variable <code>${GRID_PREFIX}</code>. This
+prefix needs to uniquely identify your grid files so that they don't overlap with other MPAS files
+in <code>${GRID_DIR}</code>.</p>
+<p>In these instructions I will be using my particular use case as an example.
+On Cheyenne, <code>GRID_DIR=&quot;${HOME}/grids/${GRID_PREFIX}/&quot;</code> and <code>GRID_PREFIX=&quot;x4.92067&quot;</code> where <code>x4</code> refers
+to a 4x grid refinement in a band near the equator and the resulting grid has <code>92067</code> horizontal cells.
+I'm going to call this grid <code>mpasa120-30</code> because on a full-radius grid it has a maximum grid spacing
+of 120km and a minimum grid spacing of 30km.</p>
+<p><strong>I make the assumption that you have generated the following files:</strong></p>
+<ul>
+<li><code>${GRID_DIR}/${GRID_PREFIX}.grid.nc</code> contains a 2d representation of your MPAS grid connectivity.</li>
+<li>Several files <code>${GRID_DIR}/${GRID_PREFIX}.graph.info.part.${NPROC}</code> where <code>${NPROC}</code> includes
+any number of MPI processes with which you want to run an MPAS model. It should probably be a multiple of the
+number of physical cores in a node within your cluster (or threads if your system has [HT](https://en.wikipedia.org/wiki/Hyper-threading,
+but I've had mixed success with this).</li>
+<li><code>${GRID_DIR}/${GRID_PREFIX}.esmf.coupling.nc</code> which will be needed by the coupler within CAM.</li>
+</ul>
+<h2>Step 1: Generating a 3D grid with metric terms</h2>
+<p>Follow one of the <a href="https://www2.mmm.ucar.edu/projects/mpas/tutorial/Boulder2019/index.html">MPAS tutorials</a>
+Use their tutorials to find an atmospheric configuration that matches the run you want to do (I'll explain what I mean in
+a moment).</p>
+<p><span class="todo">Include a concrete example of what to do here</span>
+Make sure to look in namelist files for referenced grid files and change them to
+your custom generated mesh files. I would recommended symlinking them to
+your case directory with</p>
+<pre><code>ln -s ${GRID_DIR}/${GRID_PREFIX}.grid.nc ${MPAS_CASE_DIR} 
+ln -s ${GRID_DIR}/$GRID_PREFIX}.graph.info.part.${NPROC} ${MPAS_CASE_DIR}
+</code></pre>
+<p>Continue until you call <code>mpirun -n ${NPROC} ./init_atmosphere_model</code> which generates a NetCDF file
+that contains a dimension called <code>nVertLevels.</code>
+I'm going to assume that this file is moved to <code>${GRID_DIR}/${GRID_PREFIX}.init.nc</code>.</p>
+<h3>Vital considerations:</h3>
+<p>As of 2022-04-11 the CAM MPAS implementation does not understand how to generate 3d metric terms for
+MPAS. My understanding is that it knows how to correctly overwrite prognostic fields like edge wind flux
+components. However, because MPAS uses height as a vertical coordinate, generation of
+terrain following coordinates is rather involved.
+As such, <span class="todo"><em>any topography that you intend to include in your CAM run must be in
+your <code>${GRID_DIR}/${GRID_PREFIX}.init.nc</code></em></span></p>
+<p>Similarly <span class="todo"><em>your vertical level number and location will be set by
+creating this file. Ensure it matches the CAM vertical level configuration that you want to use.</em>
+</span></p>
+<p><span class="todo">Todo: expand section about how to specify different vertical configurations.</span></p>
+<h2>Modifying CIME!</h2>
+<h3>Modifications to <code>${CAM_ROOT}/bld/namelist_files/namelist_defaults_cam.xml</code></h3>
+<h4>analytic initialization grid files</h4>
+<p>In this file there are lines reading something like</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;ncdata</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120&quot;</span> <span style="color: #a6e22e">nlev=</span><span style="color: #e6db74">&quot;32&quot;</span> <span style="color: #a6e22e">analytic_ic=</span><span style="color: #e6db74">&quot;1&quot;</span> <span style="color: #a6e22e">phys=</span><span style="color: #e6db74">&quot;cam_dev&quot;</span> <span style="color: #f92672">&gt;</span>atm/cam/inic/mpas/mpasa120_L32_topo_coords_c201022.nc<span style="color: #f92672">&lt;/ncdata&gt;</span>
+<p></pre></div></p>
+<p>Here <code>mpasa120</code> refers to an approximately <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>1</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">1^\circ </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6741em;"></span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6741em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span></span></span></span></code> grid with a nominal grid spacing of 120km.
+These files are used in the case that you are starting from analytic initial conditions, such as
+the <a href="https://www.cesm.ucar.edu/models/simpler-models-indev/fkessler/index.html">UMJS Moist Baroclinic Wave</a>
+which can be used to spin up aquaplanets. The purpose of these files is
+to provide vertical levels and associated metric terms for such a run.</p>
+<p>I make use of the file that I generated using the standalone version of MPAS, and make the following definition</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;ncdata</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120-30&quot;</span> <span style="color: #a6e22e">nlev=</span><span style="color: #e6db74">&quot;32&quot;</span> <span style="color: #a6e22e">analytic_ic=</span><span style="color: #e6db74">&quot;1&quot;</span> <span style="color: #f92672">&gt;</span>/glade/u/home/owhughes/grids/x4.92067/x4.92067.init.nc<span style="color: #f92672">&lt;/ncdata&gt;</span>
+<p></pre></div></p>
+<h4>problem: <code>bnd_topo</code> grid file</h4>
+<p>The definition</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"> <span style="color: #f92672">&lt;bnd_topo</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120&quot;</span> <span style="color: #f92672">&gt;</span>atm/cam/topo/mpas/mpas_120_nc3000_Co060_Fi001_MulG_PF_Nsw042_c200921.nc<span style="color: #f92672">&lt;/bnd_topo&gt;</span>
+<p></pre></div></p>
+<p>sets the location of a topography file. <span class="todo"> I don't know how to generate
+this file yet.</span></p>
+<h4><code>drydep_srf_file</code></h4>
+<p>The definition</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;drydep_srf_file</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120&quot;</span><span style="color: #f92672">&gt;</span>atm/cam/chem/trop_mam/atmsrf_mpasa120_c090720.nc<span style="color: #f92672">&lt;/drydep_srf_file&gt;</span>
+<p></pre></div></p>
+<p>defines land use fields that are required when doing an aquaplanet run for some reason.</p>
+<p>For the sake of my current runs I create a dummy file which has the correct dimensions but all
+fields are identically 0. Assuming that you have access to the <code>xarray</code> and <code>numpy</code> python packages (
+e.g. by installing <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a> and running <code>conda install xarray</code>)
+then you can use the following python script:</p>
+<details>
+  <summary><code>create_srf.py</code></summary>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">xarray</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">xr</span>
+<p><span style="color: #f92672">import</span> <span style="color: #f8f8f2">numpy</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">np</span></p>
+<p><span style="color: #f8f8f2">ncol</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">92067</span> <span style="color: #75715e"># modify this to match your grid!</span>
+<span style="color: #f8f8f2">nclass</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">11</span>
+<span style="color: #f8f8f2">nmonth</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">12</span>
+<span style="color: #f8f8f2">fraction_landuse</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros((nclass,</span> <span style="color: #f8f8f2">ncol))</span>
+<span style="color: #f8f8f2">soilw</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros((nmonth,ncol))</span>
+<span style="color: #f8f8f2">ds</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">xr</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Dataset(</span>
+<span style="color: #f8f8f2">{</span>
+<span style="color: #e6db74">&quot;fraction_landuse&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">([</span><span style="color: #e6db74">&quot;class&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;ncol&quot;</span><span style="color: #f8f8f2">],</span> <span style="color: #f8f8f2">fraction_landuse),</span>
+<span style="color: #e6db74">&quot;soilw&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">([</span><span style="color: #e6db74">&quot;month&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;ncol&quot;</span><span style="color: #f8f8f2">],</span> <span style="color: #f8f8f2">soilw),</span>
+<span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">)</span></p>
+<p><span style="color: #f8f8f2">ds</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">to_netcdf(path</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;atmsrf_mpasa120-30.nc&quot;</span><span style="color: #f8f8f2">)</span>
+</pre></div></p>
+</details>
+<p>I then add the following definition to the xml file:</p>
+<!-- HTML generated using hilite.me --><div style="background: #172822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;drydep_srf_file</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120-30&quot;</span><span style="color: #f92672">&gt;</span>/glade/u/home/owhughes/grids/stub_data/atmsrf_mpasa120-30.nc<span style="color: #f92672">&lt;/drydep_srf_file&gt;</span>
+<p></pre></div></p>
+<p>(note that I have put this in a separate directory from <code>${GRID_DIR}</code>).</p>
+<h4>Default timestep and diffusion:</h4>
+<p>You will find a line similar to</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;mpas_dt</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120&quot;</span>     <span style="color: #f92672">&gt;</span>  900.0D0 <span style="color: #f92672">&lt;/mpas_dt&gt;</span>
+<p></pre></div></p>
+<p>This sets the dynamics timestep for the MPAS dynamical core. <span class="todo">
+You will need to set <code>ATM_NCPL</code> using <code>./xmlchange</code> so that the total physics timestep
+(i.e. <code>86400/ATM_NCPL</code>) is an integer multiple of <code>mpas_dt</code>. Otherwise CAM will throw a
+runtime error right at the beginning of the run.</span></p>
+<p>This time step is chosen to obey numerical stability conditions (namely the <a href="https://en.wikipedia.org/wiki/Courant%E2%80%93Friedrichs%E2%80%93Lewy_condition">CFL</a> condition).
+For practical purposes, <code>900.0</code> seconds is sufficient for a <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>1</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">1^\circ </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6741em;"></span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6741em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span></span></span></span></code> grid. When you halve the
+horizontal grid spacing, you must also halve the time step. Accordingly, for a grid with
+minimum grid spacing <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mfrac><mn>1</mn><mn>4</mn></mfrac><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">\frac{1}{4}^\circ </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2541em;vertical-align:-0.345em;"></span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9091em;"><span style="top:-3.298em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span></span></span></span></code>,
+a timestep of 200 seconds is sufficient. I thus add the line</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;mpas_dt</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120-30&quot;</span>     <span style="color: #f92672">&gt;</span>  200.0D0 <span style="color: #f92672">&lt;/mpas_dt&gt;</span>
+<p></pre></div></p>
+<p>MPAS's default diffusion scheme requires only one parameter
+which is set via a line like</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;mpas_len_disp</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120&quot;</span><span style="color: #f92672">&gt;</span>120000.0D0<span style="color: #f92672">&lt;/mpas_len_disp&gt;</span>
+<p></pre></div></p>
+<p>This value is set to the minimum grid spacing in meters, and thus we add</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;mpas_len_disp</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120-30&quot;</span><span style="color: #f92672">&gt;</span>30000.0D0<span style="color: #f92672">&lt;/mpas_len_disp&gt;</span>
+<p></pre></div></p>
+<h4>Block decomposition files:</h4>
+<p>You will find a line similar to</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;mpas_block_decomp_file_prefix</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120&quot;</span><span style="color: #f92672">&gt;</span>atm/cam/inic/mpas/mpasa120.graph.info.part.<span style="color: #f92672">&lt;/mpas_block_decomp_file_prefix&gt;</span>
+<p></pre></div></p>
+<p>Here we leverage the processor decompositions we created when we generated our grid (mind you,
+if you want to change the number of processors you're using for your run, you must ensure that
+you have a suitable file in your <code>${GRID_DIR}</code> directory.) I thus add the line:</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="background:none;margin: 0; line-height: 125%"><span style="color: #f92672">&lt;mpas_block_decomp_file_prefix</span> <span style="color: #a6e22e">hgrid=</span><span style="color: #e6db74">&quot;mpasa120-30&quot;</span><span style="color: #f92672">&gt;</span>glade/u/home/owhughes/grids/x4.92067/x4.92067.graph.info.part.<span style="color: #f92672">&lt;/mpas_block_decomp_file_prefix&gt;</span>
+<p></pre></div></p>
+<h3>Modifications to <code>${CAM_ROOT}/cime/config/cesm/config_grids.xml</code></h3>
+<p>Note we have changed xml files</p>
+<h4>Defining a grid alias</h4>
+<p>In this file you will find a snippet of text similar to</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">    <span style="color: #f92672">&lt;model_grid</span> <span style="color: #a6e22e">alias=</span><span style="color: #e6db74">&quot;mpasa120_mpasa120&quot;</span> <span style="color: #a6e22e">not_compset=</span><span style="color: #e6db74">&quot;_POP&quot;</span><span style="color: #f92672">&gt;</span>
+<p><span style="color: #f92672">&lt;grid</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;atm&quot;</span><span style="color: #f92672">&gt;</span>mpasa120<span style="color: #f92672">&lt;/grid&gt;</span>
+<span style="color: #f92672">&lt;grid</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;lnd&quot;</span><span style="color: #f92672">&gt;</span>mpasa120<span style="color: #f92672">&lt;/grid&gt;</span>
+<span style="color: #f92672">&lt;grid</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;ocnice&quot;</span><span style="color: #f92672">&gt;</span>mpasa120<span style="color: #f92672">&lt;/grid&gt;</span>
+<span style="color: #f92672">&lt;mask&gt;</span>gx1v7<span style="color: #f92672">&lt;/mask&gt;</span>
+<span style="color: #f92672">&lt;/model_grid&gt;</span>
+</pre></div></p>
+<p>This defines the grids on which different components are defined. So far I have only
+run aquaplanet simulations which are fairly robust to grid changes. The following definitions
+work for running aquaplanet configurations but may break if you try to run AMIP.
+<span class="todo">Test whether this is true lol.</span>
+I add the following lines for my custom grid:</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">&lt;model_grid</span> <span style="color: #a6e22e">alias=</span><span style="color: #e6db74">&quot;mpasa120-30_mpasa120-30&quot;</span> <span style="color: #a6e22e">not_compset=</span><span style="color: #e6db74">&quot;_POP&quot;</span><span style="color: #f92672">&gt;</span>
+<p><span style="color: #f92672">&lt;grid</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;atm&quot;</span><span style="color: #f92672">&gt;</span>mpasa120-30<span style="color: #f92672">&lt;/grid&gt;</span>
+<span style="color: #f92672">&lt;grid</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;lnd&quot;</span><span style="color: #f92672">&gt;</span>mpasa120-30<span style="color: #f92672">&lt;/grid&gt;</span>
+<span style="color: #f92672">&lt;grid</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;ocnice&quot;</span><span style="color: #f92672">&gt;</span>mpasa120-30<span style="color: #f92672">&lt;/grid&gt;</span>
+<span style="color: #f92672">&lt;mask&gt;</span>gx1v7<span style="color: #f92672">&lt;/mask&gt;</span>
+<span style="color: #f92672">&lt;/model_grid&gt;</span>
+</pre></div></p>
+<p>This will allow us to do something like the following when we're creating a new case:</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #66d9ef">${</span><span style="color: #f8f8f2">SRC_DIR</span><span style="color: #66d9ef">}</span>/cime/scripts/create_newcase --compset <span style="color: #e6db74">&quot;${COMPSET}&quot;</span> --res <span style="color: #e6db74">&quot;mpasa120-30_mpasa120-30&quot;</span> --case <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">CASE_DIR</span><span style="color: #66d9ef">}</span>/<span style="color: #66d9ef">${</span><span style="color: #f8f8f2">CASE_NAME</span><span style="color: #66d9ef">}</span> --run-unsupported --project <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">PROJECT</span><span style="color: #66d9ef">}</span> --pecount <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">NPROCS</span><span style="color: #66d9ef">}</span>
+<p></pre></div></p>
+<p>which uses the alias we set in the xml snippet above.</p>
+<h4>Creating a grid specification</h4>
+<p>We find a snippet of text like</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">&lt;domain</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;mpasa120&quot;</span><span style="color: #f92672">&gt;</span>
+<p><span style="color: #f92672">&lt;nx&gt;</span>40962<span style="color: #f92672">&lt;/nx&gt;</span> <span style="color: #f92672">&lt;ny&gt;</span>1<span style="color: #f92672">&lt;/ny&gt;</span>
+<span style="color: #f92672">&lt;mesh</span> <span style="color: #a6e22e">driver=</span><span style="color: #e6db74">&quot;nuopc&quot;</span><span style="color: #f92672">&gt;</span>$DIN_LOC_ROOT/share/meshes/mpasa120z32_ESMFmesh_cdf5_c20210120.nc<span style="color: #f92672">&lt;/mesh&gt;</span>
+<span style="color: #f92672">&lt;desc&gt;</span>MPAS-A 120-km quasi-uniform mesh:<span style="color: #f92672">&lt;/desc&gt;</span>
+<span style="color: #f92672">&lt;/domain&gt;</span>
+</pre></div></p>
+<p>The <code>mesh</code> specification is what will force us to use the <code>${GRID_PREFIX}.esmf.coupling.nc</code> that we
+created above. Because MPAS is an unstructured grid, the only dimension you
+need to specify is the <code>nx</code> tag, which contains the number of columns. In my case I add
+the following text:</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">&lt;domain</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;mpasa120-30&quot;</span><span style="color: #f92672">&gt;</span>
+<p><span style="color: #f92672">&lt;nx&gt;</span>92067<span style="color: #f92672">&lt;/nx&gt;</span> <span style="color: #f92672">&lt;ny&gt;</span>1<span style="color: #f92672">&lt;/ny&gt;</span>
+<span style="color: #f92672">&lt;mesh</span> <span style="color: #a6e22e">driver=</span><span style="color: #e6db74">&quot;nuopc&quot;</span><span style="color: #f92672">&gt;</span>/glade/u/home/owhughes/grids/x4.92067/x4.92067.esmf.coupling.nc<span style="color: #f92672">&lt;/mesh&gt;</span>
+<span style="color: #f92672">&lt;desc&gt;</span>MPAS-A 120km-30km variable resolution grid:<span style="color: #f92672">&lt;/desc&gt;</span>
+<span style="color: #f92672">&lt;/domain&gt;</span>
+</pre></div></p>
+<h2>Step 4 creating and running a case</h2>
+<p>The following process was used to create, build, and run an aquaplanet configuration in CAM on 2022/04/11.
+I use the <a href="https://kfirlavi.herokuapp.com/blog/2012/11/14/defensive-bash-programming/">defensive bash</a>
+scripting style to create my case in a repeatable way.</p>
+<details>
+<summary><code>create_case.sh</code></summary>
+  <!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f8f8f2">export CESMDATAROOT</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$SCRATCH</span>/CESM_INPUT
+<p><span style="color: #f8f8f2">readonly CESM_PREFIX</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;CAM_Jan22_var_res&quot;</span>
+<span style="color: #f8f8f2">readonly COMPSET</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;2000_CAM40_SLND_SICE_DOCN%AQP1_SROF_SGLC_SWAV&quot;</span>
+<span style="color: #f8f8f2">readonly GRID_NAME</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;mpasa120-30_mpasa120-30&quot;</span>
+<span style="color: #f8f8f2">readonly GROUP_NAME</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;589_final_project&quot;</span>
+<span style="color: #f8f8f2">readonly CASE_ID</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;AQP_spinup&quot;</span>
+<span style="color: #f8f8f2">readonly PROJECT</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;UMIC0087&quot;</span>
+<span style="color: #f8f8f2">readonly NPROCS</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;288&quot;</span></p>
+<p><span style="color: #75715e"># =================</span>
+<span style="color: #f8f8f2">readonly CASE_DIR</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;${HOME}/CESM_CASE_DIRS/${CESM_PREFIX}_CASES/${CESM_PREFIX}/${GROUP_NAME}&quot;</span>
+<span style="color: #f8f8f2">readonly SRC_DIR</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;${HOME}/CESM_SRC_DIRS/${CESM_PREFIX}&quot;</span>
+<span style="color: #f8f8f2">readonly CASE_NAME</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;${CESM_PREFIX}.${GRID_NAME}.${COMPSET}.${GROUP_NAME}.${CASE_ID}&quot;</span>
+<span style="color: #f8f8f2">readonly BUILD_ROOT</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;/glade/scratch/${USER}/$CASE_NAME&quot;</span>
+<span style="color: #75715e"># =================</span></p>
+<p>change_cesm<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+<span style="color: #f8f8f2">local cesm_prefix</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span>
+rm <span style="color: #e6db74">&quot;${HOME}/cesm_src&quot;</span>
+rm <span style="color: #e6db74">&quot;${HOME}/cesm_cases&quot;</span>
+<span style="color: #f8f8f2">local src_dir</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;${HOME}/CESM_SRC_DIRS/$cesm_prefix/&quot;</span>
+<span style="color: #66d9ef">if </span>is_dir <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">src_dir</span><span style="color: #66d9ef">}</span>; <span style="color: #66d9ef">then</span>
+<span style="color: #66d9ef">        </span>ln -s <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">src_dir</span><span style="color: #66d9ef">}</span> <span style="color: #e6db74">&quot;${HOME}/cesm_src&quot;</span>
+<span style="color: #66d9ef">else</span>
+<span style="color: #66d9ef">        </span><span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;${src_dir} does not exist!&quot;</span>
+<span style="color: #f8f8f2">exit</span>
+<span style="color: #f8f8f2">    </span><span style="color: #66d9ef">fi</span>
+<span style="color: #66d9ef">    </span><span style="color: #f8f8f2">local case_dir</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;${HOME}/CESM_CASE_DIRS/${cesm_prefix}_CASES/&quot;</span>
+<span style="color: #66d9ef">if </span>is_dir <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">case_dir</span><span style="color: #66d9ef">}</span>; <span style="color: #66d9ef">then</span>
+<span style="color: #66d9ef">        </span>ln -s <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">case_dir</span><span style="color: #66d9ef">}</span> <span style="color: #e6db74">&quot;${HOME}/cesm_cases&quot;</span>
+<span style="color: #66d9ef">else</span>
+<span style="color: #66d9ef">        </span><span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;${case_dir} does not exist!&quot;</span>
+<span style="color: #f8f8f2">exit</span>
+<span style="color: #f8f8f2">    </span><span style="color: #66d9ef">fi</span></p>
+<p><span style="color: #f92672">}</span></p>
+<p>handle_case_exists<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+<span style="color: #f8f8f2">local abs_case_dir</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span>
+cat <span style="color: #e6db74">&lt;&lt; EOF</span>
+<span style="color: #e6db74">Case directory </span>
+<span style="color: #e6db74">${abs_case_dir} </span>
+<span style="color: #e6db74">already exists! </span></p>
+<p><span style="color: #e6db74">Cowardly refusing to overwrite it :(</span></p>
+<p><span style="color: #e6db74">EOF</span>
+<span style="color: #f8f8f2">exit </span>1</p>
+<p><span style="color: #f92672">}</span></p>
+<p>create_case<span style="color: #f92672">(){</span>
+is_dir <span style="color: #e6db74">&quot;${CASE_DIR}/${CASE_NAME}&quot;</span> <span style="color: #ae81ff">&lt;/span&gt;
+<span style="color: #f92672">&amp;&amp;</span> handle_case_exists <span style="color: #e6db74">&quot;${CASE_DIR}/${CASE_NAME}&quot;</span>
+yes r | <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">SRC_DIR</span><span style="color: #66d9ef">}</span>/cime/scripts/create_newcase --compset <span style="color: #e6db74">&quot;${COMPSET}&quot;</span> --res <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">GRID_NAME</span><span style="color: #66d9ef">}</span> --case <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">CASE_DIR</span><span style="color: #66d9ef">}</span>/<span style="color: #66d9ef">${</span><span style="color: #f8f8f2">CASE_NAME</span><span style="color: #66d9ef">}</span> --run-unsupported --project <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">PROJECT</span><span style="color: #66d9ef">}</span> --pecount <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">NPROCS</span><span style="color: #66d9ef">}</span>
+<span style="color: #f92672">}</span></p>
+<p>create_xml_config_helper<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+<span style="color: #f8f8f2">local config_script</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;$CASE_DIR/${CASE_NAME}/xml_config_helper.sh&quot;</span>
+cat <span style="color: #e6db74">&lt;&lt; EOF &gt; $config_script</span></p>
+<p><span style="color: #e6db74"># ------------------</span></p>
+<p><span style="color: #e6db74">readonly DEBUG=FALSE</span></p>
+<p><span style="color: #e6db74"># ------------------</span>
+<span style="color: #e6db74"># set this to true if you want an archive directory</span></p>
+<p><span style="color: #e6db74">readonly DOUT_S=FALSE</span></p>
+<p><span style="color: #e6db74">#-------------------</span>
+<span style="color: #e6db74"># valid options for this value are:</span>
+<span style="color: #e6db74">#  nsteps, nseconds, nminutes, nhours, ndays, nmonths, nyears</span></p>
+<p><span style="color: #e6db74">readonly STOP_OPTION=nmonths</span></p>
+<p><span style="color: #e6db74"># ------------------</span></p>
+<p><span style="color: #e6db74">readonly STOP_N=24</span></p>
+<p><span style="color: #e6db74">readonly ATM_NCPL=288</span></p>
+<p><span style="color: #e6db74"># ------------------</span>
+<span style="color: #e6db74"># Set the frequency at which files for restarting the model (e.g. in the </span>
+<span style="color: #e6db74"># case of a blowup) are written. If TRUE, make sure to set REST_N</span></p>
+<p><span style="color: #e6db74">readonly REST_OPTION=nmonths</span>
+<span style="color: #e6db74">readonly REST_N=1</span></p>
+<p><span style="color: #e6db74"># ====================</span>
+<span style="color: #e6db74"># CAM build flag (note: this is quite finicky and causes compiler errors if done wrong)</span></p>
+<p><span style="color: #e6db74">readonly CAM_CONFIG_OPTS=&quot;--phys cam4 --aquaplanet --analytic_ic --nlev=30&quot;</span></p>
+<p><span style="color: #e6db74"># --------------------</span>
+<span style="color: #e6db74"># Maximum runtime:</span></p>
+<p><span style="color: #e6db74">readonly HOURS=11</span>
+<span style="color: #e6db74">readonly MINUTES=50</span>
+<span style="color: #e6db74">readonly SECONDS=00</span></p>
+<p><span style="color: #e6db74"># --------------------</span></p>
+<p><span style="color: #e6db74">main() {</span>
+<span style="color: #e6db74">    ./xmlchange DEBUG=${DEBUG},DOUT_S=${DOUT_S},STOP_OPTION=${STOP_OPTION},STOP_N=${STOP_N},REST_OPTION=${REST_OPTION},REST_N=${REST_N},ATM_NCPL=${ATM_NCPL} &lt;/span&gt;
+<span style="color: #e6db74">        &amp;&amp; ./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val &quot;${CAM_CONFIG_OPTS}&quot; &lt;/span&gt;
+<span style="color: #e6db74">        &amp;&amp; ./xmlquery CAM_CONFIG_OPTS &lt;/span&gt;
+<span style="color: #e6db74">        &amp;&amp; ./xmlchange JOB_WALLCLOCK_TIME=${HOURS}:${MINUTES}:${SECONDS} &lt;/span&gt;
+<span style="color: #e6db74">        &amp;&amp; ./case.setup</span></p>
+<p><span style="color: #e6db74">}</span></p>
+<p><span style="color: #e6db74">main</span>
+<span style="color: #e6db74">EOF</span>
+<span style="color: #f92672">}</span></p>
+<p>create_user_nl_cam<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+<span style="color: #f8f8f2">local config_script</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;$CASE_DIR/${CASE_NAME}/user_nl_cam&quot;</span>
+cat <span style="color: #e6db74">&lt;&lt; EOF &gt; $config_script</span>
+<span style="color: #e6db74">    ncdata  = '/glade/u/home/owhughes/grids/x4.92067/x4.92067.init.deep.nc'</span>
+<span style="color: #e6db74">    mpas_block_decomp_file_prefix = &quot;/glade/u/home/owhughes/grids/x4.92067/x4.92067.graph.info.part.&quot;</span>
+<span style="color: #e6db74">    drydep_srf_file=&quot;/glade/u/home/owhughes/grids/stub_data/atmsrf_mpasa120-30.nc&quot;</span>
+<span style="color: #e6db74">    mpas_dt = 100.0</span>
+<span style="color: #e6db74">    omega   = 0.00014584 </span>
+<span style="color: #e6db74">    rearth  = 3185500.0</span>
+<span style="color: #e6db74">    mpas_len_disp = 15000</span>
+<span style="color: #e6db74">    analytic_ic_type = 'moist_baroclinic_wave_dcmip2016'</span>
+<span style="color: #e6db74">    empty_htapes     = .TRUE.</span>
+<span style="color: #e6db74">    NDENS            = 2,2</span>
+<span style="color: #e6db74">    fincl1           = 'SST:A','PHIS:A','PS:A','T:A','U:A','V:A','OMEGA:A','Q:A','ATMEINT:A','CLDICE:A','CLDLIQ:A','CLOUD:A','CLDTOT:A','PRECL:A','PRECC:A','PRECT:A','TMQ:A','TMCLDICE:A','TMCLDLIQ:A','SHFLX:A','LHFLX:A','QFLX:A','RELHUM:A','FLUT:A','U200:A','V200:A'</span>
+<span style="color: #e6db74">    fincl2           = 'PS:I','SHFLX:I','LHFLX:I','FLUT:I','TMQ:I','CLDTOT:I','PRECC:I','PRECT:I','U200:I','V200:I'</span>
+<span style="color: #e6db74">    MFILT            = 280, 721</span>
+<span style="color: #e6db74">    NHTFRQ           = -720, -24</span>
+<span style="color: #e6db74">    inithist         = 'ENDOFRUN'</span></p>
+<p><span style="color: #e6db74">EOF</span></p>
+<p><span style="color: #f92672">}</span></p>
+<p>create_preview_namelists_helper<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+<span style="color: #f8f8f2">local config_script</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;$CASE_DIR/${CASE_NAME}/preview_namelists_helper.sh&quot;</span>
+cat <span style="color: #e6db74">&lt;&lt; EOF &gt; $config_script</span>
+<span style="color: #e6db74">./preview_namelists &gt; preview_namelists.log 2&gt; preview_namelists.err </span>
+<span style="color: #e6db74">EOF</span>
+<span style="color: #f92672">}</span></p>
+<p>create_case_build_helper<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+<span style="color: #f8f8f2">local config_script</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;$CASE_DIR/${CASE_NAME}/case_build_helper.sh&quot;</span>
+<span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;qcmd -A ${PROJECT} -- ${CASE_DIR}/${CASE_NAME}/case.build&quot;</span> &gt; <span style="color: #f8f8f2">$config_script</span>
+<span style="color: #f92672">}</span></p>
+<p>main<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+change_cesm <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">CESM_PREFIX</span><span style="color: #66d9ef">}</span>
+create_case <span style="color: #ae81ff">&lt;/span&gt;
+<span style="color: #f92672">&amp;&amp;</span> create_xml_config_helper <span style="color: #ae81ff">&lt;/span&gt;
+<span style="color: #f92672">&amp;&amp;</span> create_user_nl_cam <span style="color: #ae81ff">&lt;/span&gt;
+<span style="color: #f92672">&amp;&amp;</span> create_preview_namelists_helper <span style="color: #ae81ff">&lt;/span&gt;
+<span style="color: #f92672">&amp;&amp;</span> create_case_build_helper</p>
+<p><span style="color: #f92672">}</span></p>
+<p><span style="color: #75715e"># ============================================================================</span>
+<span style="color: #75715e"># begin namelist</span>
+<span style="color: #75715e"># ============================================================================</span></p>
+<p><span style="color: #75715e"># ===========================================================================</span></p>
+<p><span style="color: #75715e"># ============================================================================</span>
+<span style="color: #75715e"># begin boilerplate </span>
+<span style="color: #75715e"># ============================================================================</span></p>
+<p><span style="color: #f8f8f2">readonly PROGNAME</span><span style="color: #f92672">=</span><span style="color: #66d9ef">$(</span>basename <span style="color: #f8f8f2">$0</span><span style="color: #66d9ef">)</span>
+<span style="color: #f8f8f2">readonly PROGDIR</span><span style="color: #f92672">=</span><span style="color: #66d9ef">$(</span>readlink -m <span style="color: #66d9ef">$(</span>dirname <span style="color: #f8f8f2">$0</span><span style="color: #66d9ef">))</span>
+<span style="color: #f8f8f2">readonly ARGS</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;$@&quot;</span></p>
+<p>is_empty<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+<span style="color: #f8f8f2">local var</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span></p>
+<pre><code>&lt;span style=&quot;color: #f92672&quot;&gt;[[&lt;/span&gt; -z &lt;span style=&quot;color: #f8f8f2&quot;&gt;$var&lt;/span&gt; &lt;span style=&quot;color: #f92672&quot;&gt;]]&lt;/span&gt;
+</code></pre>
+<p><span style="color: #f92672">}</span></p>
+<p>is_not_empty<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+<span style="color: #f8f8f2">local var</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span></p>
+<pre><code>&lt;span style=&quot;color: #f92672&quot;&gt;[[&lt;/span&gt; -n &lt;span style=&quot;color: #f8f8f2&quot;&gt;$var&lt;/span&gt; &lt;span style=&quot;color: #f92672&quot;&gt;]]&lt;/span&gt;
+</code></pre>
+<p><span style="color: #f92672">}</span></p>
+<p>is_file<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+<span style="color: #f8f8f2">local file</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span></p>
+<pre><code>&lt;span style=&quot;color: #f92672&quot;&gt;[[&lt;/span&gt; -f &lt;span style=&quot;color: #f8f8f2&quot;&gt;$file&lt;/span&gt; &lt;span style=&quot;color: #f92672&quot;&gt;]]&lt;/span&gt;
+</code></pre>
+<p><span style="color: #f92672">}</span></p>
+<p>is_link<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+<span style="color: #f8f8f2">local var</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span></p>
+<pre><code>&lt;span style=&quot;color: #f92672&quot;&gt;[[&lt;/span&gt; &lt;span style=&quot;color: #e6db74&quot;&gt;`&lt;/span&gt;&lt;span style=&quot;color: #f8f8f2&quot;&gt;test&lt;/span&gt; -L &lt;span style=&quot;color: #f8f8f2&quot;&gt;$1&lt;/span&gt;&lt;span style=&quot;color: #e6db74&quot;&gt;`&lt;/span&gt; &lt;span style=&quot;color: #f92672&quot;&gt;]]&lt;/span&gt;
+</code></pre>
+<p><span style="color: #f92672">}</span></p>
+<p>is_dir<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+<span style="color: #f8f8f2">local dir</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span></p>
+<pre><code>&lt;span style=&quot;color: #f92672&quot;&gt;[[&lt;/span&gt; -d &lt;span style=&quot;color: #f8f8f2&quot;&gt;$dir&lt;/span&gt; &lt;span style=&quot;color: #f92672&quot;&gt;]]&lt;/span&gt;
+</code></pre>
+<p><span style="color: #f92672">}</span></p>
+<p><span style="color: #75715e"># =================================================================</span>
+<span style="color: #75715e"># end boilerplate</span>
+<span style="color: #75715e"># =================================================================</span></p>
+<p>main
+</pre></div></p>
+</details>
+<p>Where you navigate to the case directory and run the following in order:</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">bash xml_config_helper.sh
+<p>bash case_build_helper.sh
+./case.submit
+</pre></div></p>
+<h3>Regridding output to a lat-lon grid:</h3>
+<p>Download the <a href="https://github.com/mgduda/convert_mpas">following repository</a> and build the <code>convert_mpas</code> tool.</p>
+<p>The tl;dr of how to use this tool is</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #66d9ef">${</span><span style="color: #f8f8f2">ABSOLUTE_PATH_TO_CONVERT_MPAS</span><span style="color: #66d9ef">}</span>/convert_mpas <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">GRID_DIR</span><span style="color: #66d9ef">}</span>/<span style="color: #66d9ef">${</span><span style="color: #f8f8f2">GRID_PREFIX</span><span style="color: #66d9ef">}</span>.init.nc <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">ABSOLUTE_PATH_TO_NETCDF</span><span style="color: #66d9ef">}</span>/output_on_mpas_grid.nc
+<p></pre></div></p>
+<p>The first file specifies all of the metric terms and topography that were used for your run. The second file is the output data.
+After this command is finished it will have created a file called <code>latlon.nc</code> which you can view with your NetCDF
+viewer of choice.</p>
+<p><span class="todo">If you run this command multiple times in the same directory, make sure to run <code>rm latlon.nc</code>
+(or some similar command) in between. Even if the files have the same structure, calling the command again
+will silently overwrite <code>latlon.nc</code> if it exists. If the variables or dimensions
+of the file you're trying to regrid changes, it will do something very strange. I think it only regrids
+the variables that exist in the existing <code>latlon.nc</code> file along the dimensions that exist.</span></p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/MPAS/MPAS_tutorials/">MPAS tutorials</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

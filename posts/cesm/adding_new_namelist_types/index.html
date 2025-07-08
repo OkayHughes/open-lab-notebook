@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/cesm/adding_new_namelist_types/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/cesm/adding_new_namelist_types/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/cesm/adding_new_namelist_types/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Adding new namelist options</h1>
+
+    
+    
+    
+    <p>In this writeup I will add a namelist parameter to control the Brunt Vaisala frequency
+in the Jablonowski-Williamson 2006 dry baroclinic wave test case.</p>
+<h3>definitions</h3>
+<p>I use <code>${SRCROOT}</code> to denote the root of your CAM source.</p>
+<h3>how I figured out how to do this</h3>
+<p>In order to figure out how to set up this namelist parameter I first found one that
+should be available in the similar routines to the ones where I want to get this parameter. I used <code>analytic_ic_type</code>.</p>
+<p>In order to figure out where this is used in the code run</p>
+<pre><code>grep -r &quot;analytic_ic_type&quot; ${SRCROOT}
+</code></pre>
+<h2>actually adding my own namelist doohickey</h2>
+<h3>step 1:</h3>
+<p>In the file <code>${SRCROOT}/bld/namelist_files/namelist_definition.xml</code>
+add the following text</p>
+<details>
+<summary><code>namelist_definition.xml</code>  changes</summary>
+<pre><code>&lt;entry id=&quot;jw_06_BV_factor&quot; type=&quot;real&quot; category=&quot;dyn_test&quot;
+       group=&quot;analytic_ic_nl&quot;
+       valid_values=&quot;&quot;&gt;
+Factor by which to modify Brunt-Vaisala frequency in the moist baroclinic wave test case. Floating point.
+May introduce static instability and rapid onset of turbuluence. Use with caution.
+&lt;/entry&gt;
+</code></pre>
+</details>
+<p>the <code>id</code> field is what you will put e.g. in your <code>user_nl_cam</code> file e.g. <code>jw_06_BV_factor = 2.0</code>.
+<code>type</code> is the Fortran type. Look around the <code>namelist_definition.xml</code> to find other <code>types</code>
+and how to specify them.</p>
+<p><em>Important</em>: the <code>group</code> field will be used to get this parameter into Fortran. I think that the <code>category</code>
+is used for generating documentation. It doesn't appear to be used in the code.</p>
+<p><code>valid values</code> is used primarily for <code>char</code> variables, but look elsewhere in the file for how to use it.</p>
+<p>If you don't add a good description, I'm judging you.</p>
+<h3>step 2:</h3>
+<p>In the file <code>${SRCROOT}/bld/namelist_files/namelist_defaults_cam.xml</code> add namelist defaults.
+I figured out how to do this by using <code>analytic_ic_type</code> as a reference in order to find the conditions under which
+different defaults should be set.</p>
+<p>I added the following defaults:</p>
+<details>
+<summary>
+  <code>namelist_defaults_cam.xml</code> changes  
+</summary>
+<pre><code>&lt;jw_06_BV_factor &gt; 1.0 &lt;/jw_06_BV_factor&gt;
+&lt;jw_06_BV_factor phys=&quot;adiabatic&quot;&gt; 1.0 &lt;/jw_06_BV_factor&gt;
+&lt;jw_06_BV_factor phys=&quot;kessler&quot;&gt; 1.0 &lt;/jw_06_BV_factor&gt;
+</code></pre>
+</details>
+<p>Chains of different CIME variables can be used e.g.</p>
+<pre><code>&lt;jw_06_BV_factor phys=&quot;kessler&quot; hgrid=&quot;C24&quot;&gt; 1.0 &lt;/jw_06_BV_factor&gt;
+</code></pre>
+<h3>step 3:</h3>
+<p>This is going to vary based on which module you want to read your namelist variable from.
+In order to figure out where this was done in my case I used grep to find a F90 file that contained
+<code>analytic_ic_nl.</code> In my case this is <code>${SRCROOT}/src/dynamics/tests/inic_analytic_utils.F90</code>. Where private
+module variables are declared, add e.g.</p>
+<pre><code>real                                         :: jw_06_BV_factor
+</code></pre>
+<p>There should be a line such
+as this where it actually reads in the variable:</p>
+<pre><code>namelist /analytic_ic_nl/ analytic_ic_type, jw_06_BV_factor
+</code></pre>
+<p>add your variable to this line, as I already did.</p>
+<p>Next find the part of the file where the namelist is broadcast to all MPI ranks:</p>
+<pre><code>call mpi_bcast(jw_06_BV_factor, 1, mpi_real8, masterprocid, mpicom, ierr)
+</code></pre>
+<p>I followed the conventions of the <code>inic_analytic_utils</code> and created an getter function. At the top where
+public interfaces are declared, add:</p>
+<pre><code>public :: jw_06_brunt_vaisala ! accessor
+</code></pre>
+<p>and add the definition of this function below the <code>contains</code> statement</p>
+<pre><code>
+real function jw_06_brunt_vaisala()
+  jw_06_brunt_vaisala = jw_06_BV_factor
+end function jw_06_brunt_vaisala
+
+</code></pre>
+<p>Another potential alternative to using a <code>private</code> variable with a getter function is using the
+<code>public, protected</code> keyword, in which subroutines within the module are allowed to modify this variable
+but not modules that <code>use</code> the module in which it is defined. This keyword was introduced in Fortran 2003,
+so I don't know how well it will play with different compilers.</p>
+<p>Within the subroutine in which you call <code>mpi_bcast</code> before this is called, you can modify or validate the value
+of your namelist variable. You can report issues using <code>write(iulog, *) msg</code> with <code>use cam_logfile, only: iulog</code>
+at the top of your module.</p>
+<h3>step 4:</h3>
+<p>In the case directory, I make the following definitions:</p>
+<ul>
+<li>In <code>user_nl_cam</code> I add <code>jw_06_BV_factor  = 2.0</code>.</li>
+<li>In <code>SourceMods/src.cam/ic_baro_dry_jw06.F90</code> I add <code>use inic_analytic_utils, only: jw_06_brunt_vaisala</code> and <code>gamma = jw_06_brunt_vaisala() * gamma_0</code></li>
+</ul>
+<p>If you use the <code>public, protected</code> style of accessor then you could, I think, just do <code>gamma = jw_06_BV_factor * gamma_0</code></p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/cesm/cesm-parent/">Community Earth System Model lifehacks</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

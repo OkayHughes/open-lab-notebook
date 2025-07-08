@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/E3SM/singularity_config_machines/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/E3SM/singularity_config_machines/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/E3SM/singularity_config_machines/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>config_machines.xml</h1>
+
+    
+    
+    
+    <pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!-- This is an ordered list, not all fields are required, optional fields are noted below. --&gt;
+&lt;config_machines version=&quot;2.0&quot;&gt;
+&lt;!-- MACH is the name that you will use in machine options --&gt;
+
+  &lt;machine MACH=&quot;singularity_gl&quot;&gt;
+    &lt;DESC&gt;Singularity container&lt;/DESC&gt;
+    &lt;NODENAME_REGEX&gt;singularity&lt;/NODENAME_REGEX&gt;
+    &lt;OS&gt;LINUX&lt;/OS&gt;
+    &lt;COMPILERS&gt;gnu&lt;/COMPILERS&gt;
+    &lt;MPILIBS&gt;mpich&lt;/MPILIBS&gt;
+    &lt;CIME_OUTPUT_ROOT&gt;$ENV{MY_E3SM_SCRATCH}/E3SMv2&lt;/CIME_OUTPUT_ROOT&gt;
+    &lt;DIN_LOC_ROOT&gt;$ENV{DIN_LOC_ROOT}&lt;/DIN_LOC_ROOT&gt;
+    &lt;DIN_LOC_ROOT_CLMFORC&gt;$ENV{MY_E3SM_ROOT}/shared_lmwg&lt;/DIN_LOC_ROOT_CLMFORC&gt;
+    &lt;DOUT_S_ROOT&gt;$CIME_OUTPUT_ROOT/archive/$CASE&lt;/DOUT_S_ROOT&gt;
+    &lt;BASELINE_ROOT&gt;$ENV{MY_E3SM_ROOT}/e3sm_baselines&lt;/BASELINE_ROOT&gt;
+    &lt;CCSM_CPRNC&gt;$ENV{MY_E3SM_ROOT}/cime/tools/cprnc/&lt;/CCSM_CPRNC&gt;
+    &lt;GMAKE&gt;make&lt;/GMAKE&gt;
+    &lt;GMAKE_J&gt;8&lt;/GMAKE_J&gt;
+    &lt;TESTS&gt;e3sm_developer&lt;/TESTS&gt;
+    &lt;BATCH_SYSTEM&gt;none&lt;/BATCH_SYSTEM&gt;
+    &lt;SUPPORTED_BY&gt;lukasz at uchicago dot edu&lt;/SUPPORTED_BY&gt;
+    &lt;MAX_TASKS_PER_NODE&gt;36&lt;/MAX_TASKS_PER_NODE&gt;
+    &lt;MAX_MPITASKS_PER_NODE&gt;36&lt;/MAX_MPITASKS_PER_NODE&gt;
+    &lt;mpirun mpilib=&quot;default&quot;&gt;
+      &lt;executable&gt;mpirun&lt;/executable&gt;
+      &lt;arguments&gt;
+        &lt;arg name=&quot;num_tasks&quot;&gt; -launcher fork -hosts localhost -bind-to=core -np &lt;/arg&gt;
+      &lt;/arguments&gt;
+    &lt;/mpirun&gt;
+    &lt;module_system type=&quot;none&quot;/&gt;
+    &lt;RUNDIR&gt;$CIME_OUTPUT_ROOT/$CASE/run&lt;/RUNDIR&gt;
+    &lt;EXEROOT&gt;$CIME_OUTPUT_ROOT/$CASE/bld&lt;/EXEROOT&gt;
+    &lt;environment_variables&gt;
+      &lt;env name=&quot;E3SM_SRCROOT&quot;&gt;$SRCROOT&lt;/env&gt;
+    &lt;/environment_variables&gt;
+    &lt;environment_variables mpilib=&quot;mpi-serial&quot;&gt;
+      &lt;env name=&quot;NETCDF_PATH&quot;&gt;/usr/local/packages/netcdf-serial&lt;/env&gt;
+      &lt;env name=&quot;PATH&quot;&gt;/usr/local/packages/cmake/bin:/usr/local/packages/hdf5-serial/bin:/usr/local/packages/netcdf-serial/bin:$ENV{PATH}&lt;/env&gt;
+      &lt;env name=&quot;LD_LIBRARY_PATH&quot;&gt;/usr/local/packages/szip/lib:/usr/local/packages/hdf5-serial/lib:/usr/local/packages/netcdf-serial/lib&lt;/env&gt;
+    &lt;/environment_variables&gt;
+    &lt;environment_variables mpilib=&quot;!mpi-serial&quot;&gt;
+      &lt;env name=&quot;NETCDF_PATH&quot;&gt;/usr/local/packages/netcdf-parallel&lt;/env&gt;
+      &lt;env name=&quot;PNETCDF_PATH&quot;&gt;/usr/local/packages/pnetcdf&lt;/env&gt;
+      &lt;env name=&quot;HDF5_PATH&quot;&gt;/usr/local/packages/hdf5-parallel&lt;/env&gt;
+      &lt;env name=&quot;PATH&quot;&gt;/usr/local/packages/cmake/bin:/usr/local/packages/mpich/bin/:/usr/local/packages/hdf5-parallel/bin:/usr/local/packages/netcdf-parallel/bin:/usr/local/packages/pnetcdf/bin:$ENV{PATH}&lt;/env&gt;
+      &lt;env name=&quot;LD_LIBRARY_PATH&quot;&gt;/usr/local/packages/mpich/lib:/usr/local/packages/szip/lib:/usr/local/packages/hdf5-parallel/lib:/usr/local/packages/netcdf-parallel/lib:/usr/local/packages/pnetcdf/lib&lt;/env&gt;
+    &lt;/environment_variables&gt;
+  &lt;/machine&gt;
+
+&lt;/config_machines&gt;
+</code></pre>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/scratch/">scratch</a></li>
+<li><a href="/your-repo-name/posts/E3SM/">E3SM</a></li>
+<li><a href="/your-repo-name/posts/E3SM/E3SM_2.0_greatlakes/">Installing E3SM 2.0 on Greatlakes using my jank MPAS dependencies</a></li>
+<li><a href="/your-repo-name/posts/E3SM/singularity_E3SM/">Singularity Container</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/cesm/avg_regridding/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/cesm/avg_regridding/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/cesm/avg_regridding/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Average regridding</h1>
+
+    
+    
+    
+    <p>In order to go between latlon gridded data in a way that's consistent with e.g. treating low-resolution
+data as an area average of high-resolution data (i.e. precipitation data). The python script is</p>
+<details>
+<summary>remap.py</summary>
+<pre><code>import xarray as xr
+import numpy as np
+from os.path import join
+
+def create_grid(dlon, dlat, time):
+	lat = np.arange(-90, 90 + 1e-5, dlat, dtype=np.float32)
+	lon = np.arange(0, 360, dlon, dtype=np.float32)
+	data = np.zeros((lat.size, lon.size, time.size))
+	ds = xr.DataArray(data=data,
+			  dims=[&quot;lat&quot;, &quot;lon&quot;, &quot;time&quot;],
+			  coords={&quot;lat&quot;: lat, 
+				  &quot;lon&quot;: lon,
+				  &quot;time&quot;: time},
+			  attrs={&quot;units&quot;:&quot;m/s&quot;, &quot;long_name&quot;:&quot;Large-scale (stable) precipitation rate (liq + ice)&quot;})
+	return xr.Dataset(data_vars= {&quot;PRECL&quot;: ds})
+
+#def set_covars(ds):
+#	colat = ds[&quot;lat&quot;].values
+#	colat = 0.5 * (colat[1:] + colat[:-1])
+#	colon = ds[&quot;lon&quot;].values
+#	colon = np.append(colon, colon[0:1] + 360) 
+#	colon = (0.5 * (colon[1:] + colon[:-1]) ) % 360
+#	return ds.assign_coords(colon=colon, colat=colat)
+
+lat_matrix = None
+lon_matrix = None
+
+def get_matrices(in_data, out_data):
+	global lat_matrix, lon_matrix
+	if lat_matrix is None:
+		in_lat = in_data['lat'].values
+		out_lat = out_data['lat'].values
+		lat_matrix = np.zeros((out_lat.size, in_lat.size))
+		for lindi, lati in enumerate(in_lat[:-1]):
+			for lindo, lato in enumerate(out_lat[:-1]):
+				left = max(in_lat[lindi], out_lat[lindo])
+				right = min(in_lat[lindi+1], out_lat[lindo+1]) 
+				dlat = right - left
+				if dlat &lt; 0:
+					dlat = 0
+				lat_matrix[lindo, lindi] += 0.5 * dlat
+				lat_matrix[lindo+1, lindi] += 0.5 * dlat
+		lat_matrix[0, :] *= 2
+		lat_matrix[-1, :] *= 2
+	if lon_matrix is None:
+		in_lon = in_data['lon'].values
+		in_nlon = in_lon.size
+		out_lon = out_data['lon'].values
+		out_nlon = out_lon.size
+		lon_matrix = np.zeros((out_lon.size, in_lon.size))
+		for lindi, loni in enumerate(in_lon):
+			for lindo, lono in enumerate(out_lon):
+				left = max(in_lon[lindi], out_lon[lindo])
+				right = min(in_lon[(lindi+1) % in_nlon], out_lon[(lindo+1) % out_nlon])
+				dlon = right - left
+				if dlon &lt; 0:
+					dlon = 0	
+				lon_matrix[lindo, lindi] += 0.5 * dlon
+				lon_matrix[(lindo+1) % out_nlon, lindi] += 0.5 * dlon
+		lon_matrix[0, :] *= 2
+		lon_matrix[-1, :] *= 2
+	return (lat_matrix, lon_matrix)
+		
+
+
+def remap(in_data, out_data, t, t_ind, opath):
+	#assume that lat is non-periodic
+	#assume that lon is periodic
+	(lat_matrix, lon_matrix) = get_matrices(in_data, out_data)
+	out_lat = out_data['lat'].values
+	out_lon = out_data['lon'].values
+	
+	vals = np.einsum(&quot;jl,ik,lk-&gt;ji&quot;, lat_matrix, lon_matrix, in_data.values)
+	vals = np.expand_dims(vals, axis=2)
+	t = t.expand_dims(dim=&quot;time&quot;)
+	
+	da = xr.DataArray(data=vals,
+			  name=&quot;PRECL&quot;,
+		  dims=[&quot;lat&quot;, &quot;lon&quot;, &quot;time&quot;],
+		  coords={&quot;lat&quot;: out_lat,
+			  &quot;lon&quot;: out_lon,
+			  &quot;time&quot;: t},
+		  attrs={&quot;units&quot;:&quot;m/s&quot;, &quot;long_name&quot;:&quot;Large-scale (stable) precipitation rate (liq + ice)&quot;})
+	string = t.dt.strftime(&quot;%b_%d_%Y_%R&quot;).values[0] + &quot;.nc&quot;
+	write_netcdf(opath, str(t_ind).zfill(4) + &quot;.nc&quot;, da)
+
+def log(process, fname, message):
+	with open(&quot;log/{}_{}.txt&quot;.format(fname, str(process).zfill(4)), &quot;a&quot;) as f:
+		f.write(message)
+		f.write(&quot;\n&quot;)
+
+def write_netcdf(fdir, fname, data):
+	data.to_netcdf(path=join(fdir, fname), mode='w', unlimited_dims={'time':True})
+if __name__ == &quot;__main__&quot;:
+	from mpi4py import MPI
+	from sys import argv
+	from os import makedirs
+	comm = MPI.COMM_WORLD
+	rank = comm.Get_rank()
+	size = comm.Get_size()
+	
+	fdir = &quot;/nfs/turbo/cjablono2/owhughes/mountain_test_case_netcdf&quot;
+	fname = argv[1]
+	out_dir = join(fdir, &quot;precip_regrid&quot;, fname)
+	makedirs(out_dir, exist_ok=True)
+	ds = xr.open_dataset(join(fdir, fname))
+	deg_1 = create_grid(1, 1, ds[&quot;time&quot;])
+	time = ds[&quot;time&quot;]
+	for i in range(rank, time.size, size):
+		log(rank, fname, &quot;Beginning time {}&quot;.format(i))
+		ds_tmp = xr.Dataset(data_vars= {&quot;PRECL&quot;: ds.loc[{&quot;time&quot;: time[i]}][&quot;PRECL&quot;]})
+		da = ds_tmp[&quot;PRECL&quot;]
+		remap(da, deg_1, time[i], i, out_dir)
+	print(&quot;Rank {} done!&quot;.format(rank))
+</code></pre>
+</details>
+<p>Remap submission script.</p>
+<details>
+<summary>remap.sh</summary>
+<pre><code>#!/bin/bash
+#
+#SBATCH --job-name remapping
+#SBATCH --account=cjablono1
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=36
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=1000m 
+#SBATCH --time=0:60:00
+#
+# 25 nodes, 30min sufficient for all 5 runs
+# 12 nodes, 10min for r400 an r100
+# 
+source /home/owhughes/.bashrc
+
+conda activate avg_downsample
+
+mpirun -bind-to=core -np 36 python3.8 remap.py ne30.nc  
+</code></pre>
+</details>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/cesm/cesm-parent/">Community Earth System Model lifehacks</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

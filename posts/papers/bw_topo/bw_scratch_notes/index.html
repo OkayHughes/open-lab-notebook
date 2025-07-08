@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/papers/bw_topo/bw_scratch_notes/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/papers/bw_topo/bw_scratch_notes/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/papers/bw_topo/bw_scratch_notes/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>BW Scratch notes</h1>
+
+    
+    
+    
+    <h2>Notes on precipitation histograms:</h2>
+<p>Interesting paper <a href="https://journals.ametsoc.org/view/journals/hydr/18/6/jhm-d-16-0209_1.xml">https://journals.ametsoc.org/view/journals/hydr/18/6/jhm-d-16-0209_1.xml</a></p>
+<p>Useful term: &quot;Hydrograph&quot;</p>
+<p>Paper that uses gridpoint histograms to evaluate accuracy of prediction
+at (I think) nominal 50km spacing <a href="https://journals.ametsoc.org/view/journals/clim/16/22/1520-0442_2003_016_3841_tsooas_2.0.co_2.xml">Temporal–Spatial Scales of Observed and Simulated Precipitation in Central U.S. Climate</a></p>
+<ul>
+<li>Todo: check whether validation paper references contain anything fruitful</li>
+</ul>
+<p>Atmospheric river specific: (ttps://www.nature.com/articles/ngeo2894)[https://www.nature.com/articles/ngeo2894]</p>
+<p>Precipitation intercomparison: [https://link.springer.com/article/10.1007/s00382-015-2959-5](A multimodel intercomparison of resolution effects on precipitation: simulations and theory)</p>
+<p>2014 evaluation: [https://link.springer.com/article/10.1007/s10584-014-1117-0](Changes in extremes and hydroclimatic regimes in the CREMA ensemble projections)
+(Contains mentions of some useful precipitation metrics</p>
+<p><a href="https://journals.ametsoc.org/view/journals/clim/27/14/jcli-d-13-00320.1.xml#bib5">How Well Are the Distribution and Extreme Values of Daily Precipitation over North America Represented in the Community Climate System Model? A Comparison to Reanalysis, Satellite, and Gridded Station Data </a></p>
+<p><a href="https://journals.ametsoc.org/view/journals/clim/21/7/2007jcli1494.1.xml">On the Verification and Comparison of Extreme Rainfall Indices from Climate Models</a></p>
+<h2>Methodology:</h2>
+<ul>
+<li>
+<p>Using the area average interpretation of model intercomparison output, choose a nominal grid spacing most consistent with the coarsest grid spacing chosen (nominally 1 degree or so).</p>
+</li>
+<li>
+<p>Remap by averaging across spatial scales (use area average assumption to deal with offsets in latlon grid) to coarse grid at each 6h output</p>
+</li>
+</ul>
+<p>Question: What is treated as an IID sample?</p>
+<h2>Concatenating netcdf files along unlimited dimension</h2>
+<p><code>ncrcat 0*.nc -O precip_all.nc</code></p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/papers/">Papers</a></li>
+<li><a href="/your-repo-name/posts/papers/bw_topo/bw_topo_master/">Baroclinic Wave Test Case with Topography</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

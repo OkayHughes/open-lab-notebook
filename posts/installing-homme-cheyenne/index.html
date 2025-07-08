@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/installing-homme-cheyenne/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/installing-homme-cheyenne/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/installing-homme-cheyenne/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Installing HOMME on Cheyenne</h1>
+
+    
+    
+    
+    <h3>1: Download the code</h3>
+<p>The E3SM source seems to be available <a href="https://github.com/E3SM-Project/E3SM">here</a>.
+<em>Note, you should clone this code rather than rely on any releases.</em>
+Run <code>git checkout maint-1.2</code>.
+<span class="todo">
+Notes: apparently if you don't run this checkout, the cime directory is empty. So don't worry if this happens! (it took me like half an hour to figure this out when I was first doing this install.)
+</span></p>
+<p>Clone this into <code>${HOME}/E3SM/E3SM</code> (I use this extra directory because I have several versions
+of E3SM to keep track of, e.g. <code>${HOME}/E3SM/E3SM_v2</code>).</p>
+<h3>2: Create script which configures shell env and source it</h3>
+<p>Cheyenne-specific configuration is done in a file that I placed at <code>${HOME}/.e3sm.source.bash</code></p>
+<details>
+<summary>.e3sm.source.bash</summary>
+<pre><code>  
+module load intel/18.0.5  openmpi/4.0.5
+module load netcdf-mpi/4.7.4
+module load pnetcdf/1.12.2
+
+eval &quot;$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib):&quot;
+export PERL5LIB=$HOME/perl5:$PERL5LIB
+
+
+export E3SM=&quot;$HOME/E3SM/E3SM&quot;
+export HOMME=&quot;$E3SM/components/homme&quot;
+export wdir=&quot;/glade/scratch/${USER}/HOMME&quot;
+export mach=&quot;${HOMME}/cmake/machineFiles/cheyenne.cmake&quot;
+  
+</code></pre>
+</details>
+<p>At this point run <code>source ${HOME}/.e3sm.source.bash</code> this the perl command will cause an error message.
+This is actually fine for the moment.</p>
+<h3>3: Install <code>perl</code> dependencies</h3>
+<p>The file <code>cime/scripts/Tools/e3sm_check_env</code>  shows that some perl modules need to be installed.</p>
+<ul>
+<li>Run <code>cpanm LWP</code></li>
+<li>The <code>${E3SM}/cime/scripts/Tools/e3sm_check_env</code> script has a bug in it: line 54 should read <code>stat = run_cmd('perl -e &quot;require {};&quot;'.format(module_name))[0] </code>
+<span class="todo"> You might not need to fix this if you're using newer code than I am.</span></li>
+<li>Then for every module listed in <code>e3sm_check_env</code>, run <code>cpan {MODULENAME}</code>, e.g. <code>cpan XML::LibXML &amp;&amp; cpan XML::SAX &amp;&amp; cpan XML::SAX::Exception &amp;&amp; cpan Switch</code></li>
+</ul>
+<h3>4: Creating a Cheyenne-specific machine file</h3>
+<p><span class="todo">This is very brittle to the compilers and netcdf verions that
+you use</span></p>
+<p>My machine file is located at <code>mach = $homme/cmake/machineFiles/cheyenne.cmake</code></p>
+<details>
+<summary>cheyenne.cmake</summary>
+<pre><code>SET (CMAKE_Fortran_COMPILER mpif90 CACHE FILEPATH &quot;&quot;)
+SET (CMAKE_C_COMPILER mpicc CACHE FILEPATH &quot;&quot;)
+SET (CMAKE_CXX_COMPILER mpicc CACHE FILEPATH &quot;&quot;)
+SET (NetCDF_C /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/ CACHE FILEPATH &quot;&quot;) 
+SET (NetCDF_C_LIBRARY /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/lib/libnetcdf.so CACHE FILEPATH &quot;&quot;)
+SET (NetCDF_C_INCLUDE_DIR /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/include CACHE FILEPATH &quot;&quot;)
+SET (NetCDF_Fortran /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/ CACHE FILEPATH &quot;&quot;) 
+SET (NetCDF_Fortran_LIBRARY /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/lib/libnetcdff.so CACHE FILEPATH &quot;&quot;)
+SET (NetCDF_Fortran_INCLUDE_DIR /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/include CACHE FILEPATH &quot;&quot;)
+SET (HDF5_C_LIBRARY /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/lib/libhdf5.so CACHE FILEPATH &quot;&quot;)
+SET (HDF5_C_INCLUDE_DIR /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/include CACHE FILEPATH &quot;&quot;)
+SET (HDF5_HL_LIBRARY /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/lib/libhdf5_hl.so CACHE FILEPATH &quot;&quot;)
+SET (HDF5_HL_INCLUDE_DIR /glade/u/apps/ch/opt/netcdf-mpi/4.7.4/openmpi/4.0.5/intel/18.0.5/include CACHE FILEPATH &quot;&quot;)
+SET (PNETCDF_DIR /glade/u/apps/ch/opt/pnetcdf/1.12.2/openmpi/4.0.5/intel/18.0.5/ CACHE FILEPATH &quot;&quot;)
+
+
+
+
+
+
+SET (WITH_PNETCDF TRUE CACHE FILEPATH &quot;&quot;)
+
+# hack until findnetcdf is updated to look for netcdf.mod
+#SET (ADD_Fortran_FLAGS &quot;-I/usr/lib64/gfortran/modules&quot; CACHE STRING &quot;&quot;)
+
+SET (USE_QUEUING FALSE CACHE BOOL &quot;&quot;)
+SET (HOMME_FIND_BLASLAPACK TRUE CACHE BOOL &quot;&quot;)
+
+
+</code></pre>
+</details>
+<h3>5: Check point</h3>
+<p>This is probably extraneous for people are fluent in</p>
+<ul>
+<li>Ensure that your <code>.e3sm.source.bash</code> points to the correct directories.</li>
+<li>Ensure that you have checked if there is an error in <code>${E3SM}/cime/scripts/Tools/e3sm_check_env</code>, then it is fixed</li>
+<li>Ensure that the necessary <code>perl</code> dependencies are installed.</li>
+<li>Ensure that the file <code>${HOMME}/cmake/machineFiles/cheyenne.cmake</code> exists and points to
+folders that are consistent with the modules loaded in <code>.e3sm.source.bash</code>.</li>
+<li>Ensure that you have run <code>source ${HOME}/.e3sm.source.bash</code> in your current shell.</li>
+</ul>
+<h3>6: Build the dycore executables</h3>
+<ul>
+<li>Run <code>cd $wdir</code></li>
+<li>Run <code>cmake -C  $mach $HOMME</code></li>
+<li>In order to check whether compilation works, run <code>make -j8 all</code></li>
+</ul>
+<h3>7: Prepare the acid test</h3>
+<ul>
+<li>Run <code>cd $wdir/dcmip_tests/dcmip2012_test2.0_steady_state_with_orography/preqx/</code></li>
+<li>Run <code>make install</code> (note, this generates default namelist files and such)</li>
+</ul>
+<h3>8: The jobscript for submitting</h3>
+<p>This is a modified submission script that seems to work on cheyenne. Add it to the folder that you just <code>cd</code>'d into.</p>
+<details>
+<summary>
+preqx.jobscript-cheyenne.sh
+</summary>
+<pre><code>#!/bin/bash
+#
+#PBS -N PREQX_ACID_TEST
+#PBS -A YOUR_PROJECT
+#PBS -l walltime=01:00:00
+#PBS -q regular
+#PBS -M YOUR_USERNAME
+#PBS -l select=1:ncpus=36:mpiprocs=36
+#
+# 25 nodes, 30min sufficient for all 5 runs
+# 12 nodes, 10min for r400 an r100
+# 
+
+source ${HOME}/.e3sm.source.bash
+export OMP_NUM_THREADS=2
+export MV2_ENABLE_AFFINITY=0
+NCPU=36
+EXEC=../../../test_execs/preqx-nlev30-interp/preqx-nlev30-interp
+
+
+
+function run { 
+local NCPU=$1
+echo &quot;NCPU = $NCPU&quot;
+namelist=namelist-$prefix.nl
+\cp -f $namelist input.nl
+date
+mpirun -np ${NCPU} $EXEC &lt; input.nl
+date
+
+}
+
+prefix=default    ; run $(($NCPU&gt;384?384:NCPU))
+
+
+</code></pre>
+</details>
+<h3>9: Running the model and viewing output</h3>
+<ul>
+<li>As usual, run <code>qsub preqx.jobscript-cheyenne.sh</code></li>
+<li>Use your NetCDF viewer of choice to view <code>$wdir/dcmip_tests/dcmip2012_test2.0_steady_state_with_orography/preqx/movies/dcmip2012_test2_01.nc</code></li>
+</ul>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/installing/">Installing Dycores</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

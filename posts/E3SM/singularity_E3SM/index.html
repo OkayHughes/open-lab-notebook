@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/E3SM/singularity_E3SM/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/E3SM/singularity_E3SM/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/E3SM/singularity_E3SM/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Singularity Container</h1>
+
+    
+    
+    
+    <h1>Quickstart:</h1>
+<p>Go through <a href="https://github.com/jhollowed/e3sm_greatlakes_install">Joe's installation process</a>.</p>
+<p>Install the <code>mpich</code> mpi library, see e.g. <a href="https://open-lab-notebook.glitch.me/posts/installing-mpas/">here</a></p>
+<p>Load the singularity module:</p>
+<pre><code>module load singularity
+</code></pre>
+<p>Get the singularity image:</p>
+<pre><code>PATH_TO_IMAGE=&quot;/set/your/path/here&quot;
+cp /nfs/turbo/cjablono2/owhughes/e3sm.sif ${PATH_TO_IMAGE}
+</code></pre>
+<p>Clone <a href="https://github.com/OkayHughes/cime.e3sm.singularity">this repo</a> into <code>~/.cime</code>.</p>
+<p>Modify <code>~/.cime/bash.source</code> to match your setup.</p>
+<p>Run:</p>
+<pre><code>singularity shell ${PATH_TO_IMAGE} 
+source ~/.cime/bash.source
+</code></pre>
+<p>Modify the case creation script <code>~/.cime/singularity_create_aquaplanet.sh</code> (you can ctrl-f &quot;fail&quot; to see where to change things)</p>
+<p>From within the singularity container, run the case script. After it finishes
+navigate to the <code>case_scripts</code> directory in our aquaplanet case
+and run <code>./case.build</code> again, because the build script seems to not
+install all the files that need to be placed somewhere.</p>
+<p>Once this is done, copy <code>~/.cime/submit.sh</code> to the <code>case_scripts</code> directory.</p>
+<p>Modify this verison of <code>submit.sh</code> to match your filesystem.</p>
+<p>Run <code>sbatch submit.sh.</code> See if it works.</p>
+<h1>Step 0:</h1>
+<ul>
+<li>If you're on Mac, install <a href="https://docs.docker.com/desktop/mac/install/">Docker</a> and create an Ubuntu image.</li>
+<li>Install an Ubuntu 18.04 image.</li>
+<li>Install singularity within this image.</li>
+</ul>
+<p>The <code>e3sm.def</code> file for building the <code>e3sm.sif</code> file is given <a href="https://open-lab-notebook.glitch.me/posts/E3SM/e3sm_container/">here</a></p>
+<p>Look up a tutorial for how to build this image using singularity within ubuntu.</p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/E3SM/">E3SM</a></li></ul>
+      
+      
+      
+          <h3>
+            Descendent posts:
+          </h3>
+          <ul><li><a href="/your-repo-name/posts/E3SM/e3sm_container/">e3sm.def</a></li>
+<li><a href="/your-repo-name/posts/E3SM/singularity_bash_source/">bash.source</a></li>
+<li><a href="/your-repo-name/posts/E3SM/singularity_config_compilers/">config_compilers.xml</a></li>
+<li><a href="/your-repo-name/posts/E3SM/singularity_config_machines/">config_machines.xml</a></li>
+<li><a href="/your-repo-name/posts/E3SM/singularity_run_e3sm/">singularity_create_aquaplanet.sh</a></li>
+<li><a href="/your-repo-name/posts/E3SM/submit_bash/">submit.sh</a></li></ul>
+
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

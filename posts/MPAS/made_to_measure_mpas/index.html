@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/MPAS/made_to_measure_mpas/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/MPAS/made_to_measure_mpas/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/MPAS/made_to_measure_mpas/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Creating a Made to Measure MPAS grid.</h1>
+
+    
+    
+    
+    <h2>How to create a variable resolution MPAS grid for the MPAS-A model.</h2>
+<p><span class="todo"> Add introduction here</span></p>
+<p>I'm doing this work on NCAR's cheyenne so I defaultly have access to the Netcdf Cinematic Universe without much setup.</p>
+<h2>Step 0: get code</h2>
+<p>I based my code on the wonderful repository that Pedro Peixoto has put online, which can be found <a href="https://github.com/pedrospeixoto/MPAS-PXT">here</a>.
+However, I have uploaded my modified version of the code <a href="https://github.com/OkayHughes/MPAS_grid_gen">here</a></p>
+<h2>Step 1 installation:</h2>
+<p>This package plays very nicely with the <code>conda</code> environment manager for python. I cannot recommend enough following
+an install process based on this toolkit. A minimal <code>conda</code> install can be done by running one of the scripts
+found <a href="https://docs.conda.io/en/latest/miniconda.html">here</a> (it doesn't even need <code>root</code> permissions!!).</p>
+<p>Once you have your shell configured to run <code>conda</code>, you can follow these instructions:
+asdfasdf</p>
+<details>
+  <summary><code>create_env.run_once.sh</code></summary>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">conda create --name mpas_grid_gen <span style="color: #aa0000">python</span>=3.8 
+<p><span style="color: #aaaaaa; font-style: italic"># I typically specify a python version which differs</span>
+<span style="color: #aaaaaa; font-style: italic"># from the system version so that e.g. python and python3 both</span>
+<span style="color: #aaaaaa; font-style: italic"># point to the conda version of python.</span>
+conda activate mpas_grid_gen
+conda install --file dev-spec.txt
+conda install mpas_tools
+</pre></div></p>
+</details>
+<p>Actually running the code must be done after running <code>conda activate mpas_grid_gen</code>.</p>
+<p><span class="todo">Warning: the original code from Peixoto specifies grid spacings in km on a sphere
+of radius <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mn>6371</mn><mrow><mi mathvariant="normal">k</mi><mi mathvariant="normal">m</mi></mrow></mrow><annotation encoding="application/x-tex">a=6371\mathrm{km} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">6371</span><span class="mord"><span class="mord mathrm">km</span></span></span></span></span></code> but my code uses a reduced radius sphere with <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mn>3185</mn><mrow><mi mathvariant="normal">k</mi><mi mathvariant="normal">m</mi></mrow></mrow><annotation encoding="application/x-tex">a=3185\mathrm{km} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">3185</span><span class="mord"><span class="mord mathrm">km</span></span></span></span></span></code></span></p>
+<p>The function <code>localrevVsLatLon</code> inside of <code>jigsaw_util.py</code> defines the density function. In this project I
+care about creating a factor of 4 refinement of the grid in an axisymmetric band about the equator.
+If we define  the smallest grid spacing <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mn>0</mn></msub><mo>=</mo><mn>15</mn><mrow><mi mathvariant="normal">k</mi><mi mathvariant="normal">m</mi></mrow><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">r_0 =15\mathrm{km}, </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">15</span><span class="mord"><span class="mord mathrm">km</span></span><span class="mpunct">,</span></span></span></span></code> the nominal width of the band of refinement <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>φ</mi><mn>0</mn></msub><mo>=</mo><msup><mn>7</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">\varphi_0 = 7^\circ </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">φ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6741em;"></span><span class="mord"><span class="mord">7</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6741em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span></span></span></span></code>
+and the power which defines the sharpness of transition (larger power means sharper transition) to be <code>p = 4</code> then
+the density function which has units of kilometers is given by
+<code><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>dist</mtext><mo stretchy="false">(</mo><mi>φ</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi>r</mi><mn>0</mn></msub><mrow><mo fence="true">(</mo><mn>4</mn><mo>−</mo><mn>3</mn><mrow><mo fence="true">[</mo><mfrac><mn>1</mn><mrow><msup><mrow><mo fence="true">(</mo><mfrac><mi>φ</mi><msub><mi>φ</mi><mn>0</mn></msub></mfrac><mo fence="true">)</mo></mrow><mi>p</mi></msup><mo>+</mo><mn>1</mn></mrow></mfrac><mo fence="true">]</mo></mrow><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex"> \textrm{dist}(\varphi) = r_0 \left(4 - 3 \left[ \frac{1}{\left(\frac{\varphi}{\varphi_0}\right)^p + 1} \right] \right) </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord textrm">dist</span></span><span class="mopen">(</span><span class="mord mathnormal">φ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3.7943em;vertical-align:-1.7443em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-2.25em;"><span class="pstrut" style="height:3.155em;"></span><span class="delimsizinginner delim-size4"><span>⎝</span></span></span><span style="top:-3.397em;"><span class="pstrut" style="height:3.155em;"></span><span style="height:0.016em;width:0.875em;"><svg xmlns="http://www.w3.org/2000/svg" width='0.875em' height='0.016em' style='width:0.875em' viewBox='0 0 875 16' preserveAspectRatio='xMinYMin'><path d='M291 0 H417 V16 H291z M291 0 H417 V16 H291z'/></svg></span></span><span style="top:-4.05em;"><span class="pstrut" style="height:3.155em;"></span><span class="delimsizinginner delim-size4"><span>⎛</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-2.25em;"><span class="pstrut" style="height:3.155em;"></span><span class="delimsizinginner delim-size4"><span>⎣</span></span></span><span style="top:-3.397em;"><span class="pstrut" style="height:3.155em;"></span><span style="height:0.016em;width:0.6667em;"><svg xmlns="http://www.w3.org/2000/svg" width='0.6667em' height='0.016em' style='width:0.6667em' viewBox='0 0 666.67 16' preserveAspectRatio='xMinYMin'><path d='M319 0 H403 V16 H319z M319 0 H403 V16 H319z'/></svg></span></span><span style="top:-4.05em;"><span class="pstrut" style="height:3.155em;"></span><span class="delimsizinginner delim-size4"><span>⎡</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.11em;"><span class="pstrut" style="height:3.2043em;"></span><span class="mord"><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7475em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">φ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3173em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4461em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">φ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4811em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.2043em;"><span style="top:-3.6029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span></span></span><span style="top:-3.4343em;"><span class="pstrut" style="height:3.2043em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.8813em;"><span class="pstrut" style="height:3.2043em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.7443em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-2.25em;"><span class="pstrut" style="height:3.155em;"></span><span class="delimsizinginner delim-size4"><span>⎦</span></span></span><span style="top:-3.397em;"><span class="pstrut" style="height:3.155em;"></span><span style="height:0.016em;width:0.6667em;"><svg xmlns="http://www.w3.org/2000/svg" width='0.6667em' height='0.016em' style='width:0.6667em' viewBox='0 0 666.67 16' preserveAspectRatio='xMinYMin'><path d='M263 0 H347 V16 H263z M263 0 H347 V16 H263z'/></svg></span></span><span style="top:-4.05em;"><span class="pstrut" style="height:3.155em;"></span><span class="delimsizinginner delim-size4"><span>⎤</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-2.25em;"><span class="pstrut" style="height:3.155em;"></span><span class="delimsizinginner delim-size4"><span>⎠</span></span></span><span style="top:-3.397em;"><span class="pstrut" style="height:3.155em;"></span><span style="height:0.016em;width:0.875em;"><svg xmlns="http://www.w3.org/2000/svg" width='0.875em' height='0.016em' style='width:0.875em' viewBox='0 0 875 16' preserveAspectRatio='xMinYMin'><path d='M457 0 H583 V16 H457z M457 0 H583 V16 H457z'/></svg></span></span><span style="top:-4.05em;"><span class="pstrut" style="height:3.155em;"></span><span class="delimsizinginner delim-size4"><span>⎞</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span></span></span></span></span></span></code></p>
+<p>you can play with this functional form <a href="https://www.desmos.com/calculator/xx4sypedm4">here</a>.</p>
+<p>My implementation of the above density function is given</p>
+<details>
+<summary>here:</summary>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%;background:none"><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">localrefVsLatLon</span><span style="color: #f8f8f2">(r,</span> <span style="color: #f8f8f2">earth_radius</span><span style="color: #f92672">=</span><span style="color: #ae81ff">6371e3</span><span style="color: #f92672">/</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">p</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">False):</span>
+<p><span style="color: #e6db74">&quot;&quot;&quot;</span>
+<span style="color: #e6db74">  Create cell width array for this mesh on a locally refined latitude-longitude grid.</span>
+<span style="color: #e6db74">  Input</span>
+<span style="color: #e6db74">  ---------</span>
+<span style="color: #e6db74">  r : float</span>
+<span style="color: #e6db74">      minimun desired cell width resolution in km</span>
+<span style="color: #e6db74">  Returns</span>
+<span style="color: #e6db74">  -------</span>
+<span style="color: #e6db74">  cellWidth : ndarray</span>
+<span style="color: #e6db74">      m x n array of cell width in km</span>
+<span style="color: #e6db74">  lon : ndarray</span>
+<span style="color: #e6db74">      longitude in degrees (length n and between -180 and 180)</span>
+<span style="color: #e6db74">  lat : ndarray</span>
+<span style="color: #e6db74">      longitude in degrees (length m and between -90 and 90)</span>
+<span style="color: #e6db74">  &quot;&quot;&quot;</span>
+<span style="color: #f8f8f2">dlat</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0.125</span> <span style="color: #75715e">#Make the lat-lon grid ~ 10x finer than resolution at equator, where 1deg ~ 100km</span>
+<span style="color: #f8f8f2">dlon</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">dlat</span>
+<span style="color: #f8f8f2">constantCellWidth</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">r</span>  <span style="color: #75715e">#in km</span></p>
+<p><span style="color: #f8f8f2">nlat</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">int(</span><span style="color: #ae81ff">180.</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">dlat)</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">1</span>
+<span style="color: #f8f8f2">nlon</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">int(</span><span style="color: #ae81ff">360.</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">dlon)</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">1</span></p>
+<p><span style="color: #f8f8f2">lat</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">linspace(</span><span style="color: #f92672">-</span><span style="color: #ae81ff">90.</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">90.</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">nlat)</span>
+<span style="color: #f8f8f2">lon</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">linspace(</span><span style="color: #f92672">-</span><span style="color: #ae81ff">180.</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">180.</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">nlon)</span></p>
+<p><span style="color: #f8f8f2">lons,</span> <span style="color: #f8f8f2">lats</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">meshgrid(lon,</span> <span style="color: #f8f8f2">lat)</span></p>
+<p><span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">p:</span>
+<span style="color: #f8f8f2">h</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">contourf(lons,</span> <span style="color: #f8f8f2">lats,</span> <span style="color: #f8f8f2">dists)</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">axis(</span><span style="color: #e6db74">'scaled'</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">colorbar()</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">show()</span></p>
+<p><span style="color: #75715e">#Parameters</span>
+<span style="color: #75715e">#------------------------------</span></p>
+<p><span style="color: #75715e"># Radius (in degrees) of high resolution area</span>
+<span style="color: #f8f8f2">maxdist</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">7</span>
+<span style="color: #75715e">#ratio of largest grid spacing to smallest grid spacing</span>
+<span style="color: #f8f8f2">reduction_factor</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">4.0</span>
+<span style="color: #75715e"># defines sharpness of transition. You can play with how this looks here:</span>
+<span style="color: #75715e"># https://www.desmos.com/calculator/xx4sypedm4</span>
+<span style="color: #f8f8f2">power</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">4</span></p>
+<p><span style="color: #75715e"># initialize with resolution = r (min resolution)</span>
+<span style="color: #f8f8f2">factor</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1.0</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">(np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">power(</span><span style="color: #ae81ff">1</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">maxdist</span>  <span style="color: #f8f8f2">lats,</span> <span style="color: #f8f8f2">power)</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">resolution</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">r</span>  <span style="color: #f8f8f2">(reduction_factor</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">(reduction_factor</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">factor)</span></p>
+<p><span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">p:</span>
+<span style="color: #f8f8f2">h</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">contourf(lons,</span> <span style="color: #f8f8f2">lats,</span> <span style="color: #f8f8f2">resolution,</span> <span style="color: #f8f8f2">cmap</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;viridis&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">levels</span><span style="color: #f92672">=</span><span style="color: #ae81ff">100</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">axis(</span><span style="color: #e6db74">'scaled'</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">colorbar()</span>
+<span style="color: #f8f8f2">plt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">show()</span></p>
+<p><span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">min(resolution),</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">max(resolution))</span></p>
+<p><span style="color: #f8f8f2">cellWidth</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">resolution</span> <span style="color: #75715e">#constantCellWidth * np.ones((lat.size, lon.size))</span></p>
+<p><span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">cellWidth,</span> <span style="color: #f8f8f2">lon,</span> <span style="color: #f8f8f2">lat</span>
+</pre></div></p>
+</details>
+<p>I use the file <code>invoke.sh</code> to generate grids. This activates the <code>conda</code> environment I need to activate and calls
+the python script. <span class="todo">This script must be called like <code>bash -l invoke.sh</code> because <code>conda</code> expects to run in
+a login shell.</span></p>
+<p>Breaking down the invocation,</p>
+<pre><code>python spherical_grid.py -r &quot;15&quot; -o &quot;120_30_grid&quot;  -g &quot;localref&quot; #--plot 0
+</code></pre>
+<ul>
+<li><code>-r &quot;15&quot;</code> specifies that the minimum grid spacing is <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>15</mn><mrow><mi mathvariant="normal">k</mi><mi mathvariant="normal">m</mi></mrow></mrow><annotation encoding="application/x-tex">15\mathrm{km} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">15</span><span class="mord"><span class="mord mathrm">km</span></span></span></span></span></code> on a sphere with <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mn>3185</mn><mrow><mi mathvariant="normal">k</mi><mi mathvariant="normal">m</mi></mrow></mrow><annotation encoding="application/x-tex"> a=3185 \mathrm{km} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">3185</span><span class="mord"><span class="mord mathrm">km</span></span></span></span></span></code></li>
+<li><code>-o &quot;120_30_grid&quot;</code> specifies the output directory and grid prefix that the command will generate.</li>
+<li><code>-g &quot;localref&quot;</code> indicates that you want to generate a locally refined unstructured grid. Other options
+are icosahedral grids, or quasiuniform grids.</li>
+<li><code>--plot 0</code> specifies that you want to see numpy plots of the density function. This takes forever.</li>
+</ul>
+<p>Invoking this command will create a folder called <code>120_30_grid</code> which contains a file called <code>120_30_grid_mpas.nc</code> which is the file which is the closest analogue of the mesh files provided on the MPAS
+website.</p>
+<p>I copy this file to a new directory <code>~/grids/x4.${NCELLS}/x4.${NCELLS}.grid.nc</code> where <code>x4</code> designates
+a 4x grid refinement and <code>$NCELLS</code> can be found by running <code>ncdump -h 120_30_grid/120_30_grid_mpas.nc</code> and looking
+for the <code>nCells</code> dimension.</p>
+<h2>Step 2: Creating processor decompositions</h2>
+<ul>
+<li>Download the MPAS-Tools repository <a href="https://github.com/MPAS-Dev/MPAS-Tools">here</a></li>
+<li>in the base directory of the repository, run <code>cd mesh_tools/processor_decompositions</code></li>
+</ul>
+<p>This directory contains a utility to generate processor decompositions so that
+your grid can be used with different numbers of MPI processes.</p>
+<h3>Installing metis:</h3>
+<p>This repository requires the use of the <code>gpmetis</code> program.
+You can download the source by running (note the last command is very bash-specific)</p>
+<pre><code>wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz \
+  &amp;&amp; tar -xf http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz \
+  &amp;&amp; cd metis-5.1.0 \
+  &amp;&amp; make config \
+  &amp;&amp; make \
+  &amp;&amp; find ~+ -name &quot;gpmetis&quot;
+</code></pre>
+<p>Note the output from the last line. This is the value for <code>${PATH_TO_GPMETIS}</code> referenced below.</p>
+<p>I use the following script to create processor decomposition files and automatically move them to the <code>~/grids/x4.${NCELLS}</code>
+directory I mentioned earlier.</p>
+<details>
+<summary><code>invoke.sh</code></summary>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">conda activate project_2
+<p><span style="color: #00aaaa">readonly </span><span style="color: #aa0000">NCELLS</span>=<span style="color: #aa5500">&quot;92067&quot;</span>
+<span style="color: #00aaaa">readonly </span><span style="color: #aa0000">GRID_PREFIX</span>=<span style="color: #aa5500">&quot;x4.${NCELLS}&quot;</span>
+<span style="color: #00aaaa">readonly </span><span style="color: #aa0000">GRID_DIR</span>=<span style="color: #aa5500">&quot;/glade/u/home/owhughes/grids/x4.92067&quot;</span>
+<span style="color: #00aaaa">readonly </span><span style="color: #aa0000">FILE</span>=<span style="color: #aa5500">&quot;${GRID_DIR}/${GRID_PREFIX}.grid.nc&quot;</span>
+<span style="color: #00aaaa">readonly </span><span style="color: #aa0000">METIS_PATH</span>=<span style="color: #aa5500">&quot;${PATH_TO_GPMETIS}&quot;</span>
+<span style="color: #00aaaa">readonly </span><span style="color: #aa0000">NPROC</span>=<span style="color: #aa5500">&quot;288&quot;</span>
+<span style="color: #00aaaa">readonly </span><span style="color: #aa0000">NBLOCK</span>=<span style="color: #aa5500">&quot;288&quot;</span>
+python make_partition_files.py --file <span style="color: #0000aa">${</span><span style="color: #aa0000">FILE</span><span style="color: #0000aa">}</span> --metis <span style="color: #0000aa">${</span><span style="color: #aa0000">METIS_PATH</span><span style="color: #0000aa">}</span> --procs <span style="color: #0000aa">${</span><span style="color: #aa0000">NPROC</span><span style="color: #0000aa">}</span> --blocks <span style="color: #0000aa">${</span><span style="color: #aa0000">NBLOCK</span><span style="color: #0000aa">}</span></p>
+<p>mv <span style="color: #aa5500">&quot;graph.info.part.${NPROC}&quot;</span> <span style="color: #aa5500">&quot;${GRID_DIR}/${GRID_PREFIX}.graph.info.part.${NPROC}&quot;</span>
+mv <span style="color: #aa5500">&quot;block.graph.info.part.${NPROC}&quot;</span> <span style="color: #aa5500">&quot;${GRID_DIR}/${GRID_PREFIX}.block.graph.info.part.${NPROC}&quot;</span>
+</pre></div></p>
+</details>
+<p>And note once again that this must be called as <code>bash -l invoke.sh.</code>
+Here <code>${NPROC}</code> references the number of MPI processes. <code>${NBLOCK}</code> sets the decomposition
+so that processes are split up so that grid cells assigned to a particular MPI process will
+be in the memory of that node, and minimize communication. I rarely use this and only see minor
+performance decreases. It doesn't play very well with the CESM CIME framework.</p>
+<p>This file will create the following files for <code>x4.${NCELLS}.block.graph.info.part.${NBLOCK}</code> and
+<code>x4.${NCELLS}.graph.info.part.${NPROC}</code> files in <code>${GRID_DIR}</code>.</p>
+<p>This will allow you to invoke MPI-enabled MPAS executables using <code>mpirun -np ${NPROC} ${PATH_TO_EXECUTABLE}</code></p>
+<h2>Step 3: creating ESMF and SCRIP files for this grid</h2>
+<p>If you want to use your generated grid with any non-MPAS related grid utilities, follow the instructions in this section.</p>
+<p>In the root of the MPAS-Tools repository, run <code>cd mesh_tools/mpas2esmf</code>.</p>
+<p>Run <code>make</code> (just that command, nothing else needed) and keep adding dependencies until it compiles correctly.</p>
+<p>In order to generate the files run</p>
+<pre><code>./mpas2esmf ${GRID_DIR}/x4.${NCELLS}.grid.nc &quot;${informative_description_of_grid}&quot; `date &quot;+%F&quot;` 
+
+</code></pre>
+<p>The output file <code>mpas_esmf.nc</code> contains an <a href="https://earthsystemmodeling.org/regrid/">ESMF</a> description
+of the file. <span class="todo">This is crucial for using your grid within the CIME/CESM framework.</span></p>
+<p>The <code>mpas_scrip.nc</code> is useful for regridding. I'll write more about this if I end up using it at some point.</p>
+<p>I move <code>mpas_esmf.nc</code> to <code>~/grids/x4.${NCELLS}/x4.${NCELLS}.esmf.coupling.nc</code>.</p>
+<p>If you know how to use MPAS, then you can now use these exactly like the files provided by MPAS themselves.</p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/MPAS/MPAS_tutorials/">MPAS tutorials</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

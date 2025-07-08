@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/cesm/netcdf_in_python/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/cesm/netcdf_in_python/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/cesm/netcdf_in_python/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Getting started with NetCDF4 and Python.</h1>
+
+    
+    
+    
+    <p>This isn't authoritative and it probably won't be the perfect method for how you use python, but
+it's a good first step. I also don't know much about using python
+on Windows outside of the WSL (Ubuntu but linux). If anyone has any suggestions that I should add
+please do let me know.</p>
+<h3>Getting <code>miniconda</code>:</h3>
+<p>Follow the instructions on <a href="https://docs.conda.io/en/latest/miniconda.html">this site</a>
+if you don't already have anaconda.</p>
+<h3>The packages:</h3>
+<h4><code>NetCDF4</code></h4>
+<p>This is a low-level
+interface for reading <code>.nc</code> files efficiently. It's a pain to work with in most cases,
+but you need to install this library so you can open Netcdf4 files (<code>scipy</code> only
+can read netcdf3 and will throw weird errors).</p>
+<p>Run <code>conda install -c anaconda netcdf4</code></p>
+<h4><code>xarray</code></h4>
+<p><a href="http://xarray.pydata.org/en/stable/getting-started-guide/quick-overview.html">Documentation</a>
+This is the nice interface that will allow you to manipulate data less painfully. It conforms
+to the conventions of python libraries: <code>DataArrays</code> behave like numpy arrays with a few extra
+moving parts, while <code>DataSet</code>s behave somewhat like Pandas dataframes.</p>
+<p>Run <code>conda install xarray</code></p>
+<h4><code>Cartopy</code></h4>
+<p><a href="https://scitools.org.uk/cartopy/docs/latest/getting_started/index.html">Documentation</a>
+This is a plotting library that's really good
+for geospatial data. It's sometimes a bit idiosyncratic but it's usually worth trying
+if you want to make good global plots (it interfaces well with matplotlib).</p>
+<p>Run <code>conda install cartopy</code>.</p>
+<h3>Optional:</h3>
+<h4><code>wrf-python</code></h4>
+<p><a href="https://wrf-python.readthedocs.io/en/latest/installation.html">Documentation</a>
+This is from the Weather Research and Forecasting model and contains some useful interpolation
+and geophysical routines. <span class="todo">Use with caution</span>, it uses variable conventions
+that don't always agree with the models that generated the data you're working with.</p>
+<p>Run <code>conda install -c conda-forge wrf-python</code></p>
+<h4><code>pynio</code></h4>
+<p><a href="https://www.pyngl.ucar.edu/Nio.shtml">Documentation</a>
+This is a project that is slowly porting NCL's functionality to python, it's the one that Joe mentioned.
+It might have what you're looking for, it might not. It's worth a look.</p>
+<p>Run <code>conda install -c conda-forge pynio</code></p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/cesm/cesm-parent/">Community Earth System Model lifehacks</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

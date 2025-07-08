@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>A quick to set up trash alias for bash - Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/computing/defensive_bash_boilerplate/">
+
+<meta property="og:title" content="A quick to set up trash alias for bash - Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/computing/defensive_bash_boilerplate/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/computing/defensive_bash_boilerplate/">
+<meta name="twitter:title" content="A quick to set up trash alias for bash - Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Defensive Bash Boilerplate</h1>
+
+    
+    
+    
+    <pre><code>readonly EXAMPLE_VAR=&quot;example_val&quot;
+
+
+write_file() {
+    local config_script=&quot;$1&quot;
+    cat &lt;&lt; EOF &gt; $config_script
+Sample File
+
+EOF
+
+}
+
+
+
+main() {
+    command_1 \
+        &amp;&amp; command_2 \
+        &amp;&amp; command_3
+
+}
+
+
+
+# ============================================================================
+# begin boilerplate 
+# ============================================================================
+
+readonly PROGNAME=$(basename $0)
+readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly ARGS=&quot;$@&quot;
+
+is_empty() {
+    local var=$1
+
+    [[ -z $var ]]
+}
+
+is_not_empty() {
+    local var=$1
+
+    [[ -n $var ]]
+}
+
+is_file() {
+    local file=$1
+
+    [[ -f $file ]]
+}
+
+is_link() {
+    local var=$1
+
+    [[ `test -L $1` ]]
+}
+
+is_dir() {
+    local dir=$1
+
+    [[ -d $dir ]]
+}
+
+
+# =================================================================
+# end boilerplate
+# =================================================================
+
+main
+
+
+</code></pre>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/computing/scientific-computing/">Scientific Computing</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

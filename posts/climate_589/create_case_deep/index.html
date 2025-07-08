@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/climate_589/create_case_deep/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/climate_589/create_case_deep/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/climate_589/create_case_deep/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Make deep atmosphere aquaplanet</h1>
+
+    
+    
+    
+    <pre><code>export CESMDATAROOT=$SCRATCH/CESM_INPUT
+readonly CESM_PREFIX=&quot;CAM_Jan22_deep_mpas_fix&quot;
+readonly COMPSET=&quot;2000_CAM40_SLND_SICE_DOCN%AQP1_SROF_SGLC_SWAV&quot;
+readonly GRID_NAME=&quot;mpasa120-30_mpasa120-30&quot;
+readonly GROUP_NAME=&quot;589_final_project&quot;
+readonly CASE_ID=&quot;AQP_spinup&quot;
+readonly PROJECT=&quot;UMIC0087&quot;
+readonly NPROCS=&quot;288&quot;
+
+# =================
+readonly CASE_DIR=&quot;${HOME}/CESM_CASE_DIRS/${CESM_PREFIX}_CASES/${CESM_PREFIX}/${GROUP_NAME}&quot;
+readonly SRC_DIR=&quot;${HOME}/CESM_SRC_DIRS/${CESM_PREFIX}&quot;
+readonly CASE_NAME=&quot;${CESM_PREFIX}.${GRID_NAME}.${COMPSET}.${GROUP_NAME}.${CASE_ID}&quot;
+readonly BUILD_ROOT=&quot;/glade/scratch/${USER}/$CASE_NAME&quot;
+# =================
+
+
+change_cesm() {
+    local cesm_prefix=$1
+    rm &quot;${HOME}/cesm_src&quot;
+    rm &quot;${HOME}/cesm_cases&quot;https://open-lab-notebook.glitch.me/posts/climate_589/create_case_deep/
+    local src_dir=&quot;${HOME}/CESM_SRC_DIRS/$cesm_prefix/&quot;
+    if is_dir ${src_dir}; then
+        ln -s ${src_dir} &quot;${HOME}/cesm_src&quot;
+    else
+        echo &quot;${src_dir} does not exist!&quot;
+        exit
+    fi
+    local case_dir=&quot;${HOME}/CESM_CASE_DIRS/${cesm_prefix}_CASES/&quot;
+    if is_dir ${case_dir}; then
+        ln -s ${case_dir} &quot;${HOME}/cesm_cases&quot;
+    else
+        echo &quot;${case_dir} does not exist!&quot;
+        exit
+    fi
+    
+}
+
+handle_case_exists() {
+    local abs_case_dir=$1
+    cat &lt;&lt; EOF
+Case directory 
+${abs_case_dir} 
+already exists! 
+
+Cowardly refusing to overwrite it :(
+
+EOF
+    exit 1
+
+}
+
+create_case(){
+    is_dir &quot;${CASE_DIR}/${CASE_NAME}&quot; \
+        &amp;&amp; handle_case_exists &quot;${CASE_DIR}/${CASE_NAME}&quot;
+    yes r | ${SRC_DIR}/cime/scripts/create_newcase --compset &quot;${COMPSET}&quot; --res ${GRID_NAME} --case ${CASE_DIR}/${CASE_NAME} --run-unsupported --project ${PROJECT} --pecount ${NPROCS}
+}
+
+create_xml_config_helper() {
+    local config_script=&quot;$CASE_DIR/${CASE_NAME}/xml_config_helper.sh&quot;
+    cat &lt;&lt; EOF &gt; $config_script
+
+# ------------------
+
+readonly DEBUG=FALSE
+
+# ------------------
+# set this to true if you want an archive directory
+
+readonly DOUT_S=FALSE
+
+#-------------------
+# valid options for this value are:
+#  nsteps, nseconds, nminutes, nhours, ndays, nmonths, nyears
+
+# ------------------
+
+readonly DEBUG=FALSE
+
+# ------------------
+# set this to true if you want an archive directory
+
+readonly DOUT_S=FALSE
+
+#-------------------
+# valid options for this value are:
+#  nsteps, nseconds, nminutes, nhours, ndays, nmonths, nyears
+
+readonly STOP_OPTION=nmonths
+
+# ------------------
+
+readonly STOP_N=24
+
+
+readonly ATM_NCPL=288
+
+# ------------------
+# Set the frequency at which files for restarting the model (e.g. in the 
+# case of a blowup) are written. If TRUE, make sure to set REST_N
+
+readonly REST_OPTION=nmonths
+readonly REST_N=1
+
+# ====================
+# CAM build flag (note: this is quite finicky and causes compiler errors if done wrong)
+
+readonly CAM_CONFIG_OPTS=&quot;--phys cam4 --aquaplanet --analytic_ic --nlev=30&quot;
+
+# --------------------
+# Maximum runtime:
+
+readonly HOURS=11
+readonly MINUTES=50
+readonly SECONDS=00
+
+# --------------------
+
+main() {
+    ./xmlchange DEBUG=${DEBUG},DOUT_S=${DOUT_S},STOP_OPTION=${STOP_OPTION},STOP_N=${STOP_N},REST_OPTION=${REST_OPTION},REST_N=${REST_N},ATM_NCPL=${ATM_NCPL}         &amp;&amp; ./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val &quot;${CAM_CONFIG_OPTS}&quot;         &amp;&amp; ./xmlquery CAM_CONFIG_OPTS         &amp;&amp; ./xmlchange JOB_WALLCLOCK_TIME=${HOURS}:${MINUTES}:${SECONDS}         &amp;&amp; ./case.setup
+
+}
+
+
+main
+
+readonly STOP_OPTION=nmonths
+
+# ------------------
+
+readonly STOP_N=24
+
+
+readonly ATM_NCPL=288
+
+# ------------------
+# Set the frequency at which files for restarting the model (e.g. in the 
+# case of a blowup) are written. If TRUE, make sure to set REST_N
+
+readonly REST_OPTION=nmonths
+readonly REST_N=1
+
+# ====================
+# CAM build flag (note: this is quite finicky and causes compiler errors if done wrong)
+
+readonly CAM_CONFIG_OPTS=&quot;--phys cam4 --aquaplanet --analytic_ic --nlev=30&quot;
+https://open-lab-notebook.glitch.me/posts/climate_589/create_case_deep/
+# --------------------
+# Maximum runtime:
+
+readonly HOURS=11
+readonly MINUTES=50
+readonly SECONDS=00
+
+# --------------------
+
+main() {
+    ./xmlchange DEBUG=\${DEBUG},DOUT_S=\${DOUT_S},STOP_OPTION=\${STOP_OPTION},STOP_N=\${STOP_N},REST_OPTION=\${REST_OPTION},REST_N=\${REST_N},ATM_NCPL=\${ATM_NCPL} \
+        &amp;&amp; ./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val &quot;\${CAM_CONFIG_OPTS}&quot; \
+        &amp;&amp; ./xmlquery CAM_CONFIG_OPTS \
+        &amp;&amp; ./xmlchange JOB_WALLCLOCK_TIME=\${HOURS}:\${MINUTES}:\${SECONDS} \
+        &amp;&amp; ./case.setup
+
+}
+
+
+main
+EOF
+}
+
+create_user_nl_cam() {
+    local config_script=&quot;$CASE_DIR/${CASE_NAME}/user_nl_cam&quot;
+    cat &lt;&lt; EOF &gt; $config_script
+    ncdata  = '/glade/u/home/owhughes/grids/x4.92067/x4.92067.init.deep.nc'
+    mpas_block_decomp_file_prefix = &quot;/glade/u/home/owhughes/grids/x4.92067/x4.92067.graph.info.part.&quot;
+    drydep_srf_file=&quot;/glade/u/home/owhughes/grids/stub_data/atmsrf_mpasa120-30.nc&quot;
+    mpas_dt = 100.0
+    omega   = 0.00014584 
+    rearth  = 3185500.0
+    mpas_len_disp = 15000
+    analytic_ic_type = 'moist_baroclinic_wave_dcmip2016'
+    empty_htapes     = .TRUE.
+    NDENS            = 2,2
+    fincl1           = 'SST:A','PHIS:A','PS:A','T:A','U:A','V:A','OMEGA:A','Q:A','ATMEINT:A','CLDICE:A','CLDLIQ:A','CLOUD:A','CLDTOT:A','PRECL:A','PRECC:A','PRECT:A','TMQ:A','TMCLDICE:A','TMCLDLIQ:A','SHFLX:A','LHFLX:A','QFLX:A','RELHUM:A','FLUT:A','U200:A','V200:A'
+    fincl2           = 'PS:I','SHFLX:I','LHFLX:I','FLUT:I','TMQ:I','CLDTOT:I','PRECC:I','PRECT:I','U200:I','V200:I'
+    MFILT            = 280, 721
+    NHTFRQ           = -720, -24
+    inithist         = 'ENDOFRUN'
+
+EOF
+
+}
+
+create_preview_namelists_helper() {
+    local config_script=&quot;$CASE_DIR/${CASE_NAME}/preview_namelists_helper.sh&quot;
+    cat &lt;&lt; EOF &gt; $config_script
+./preview_namelists &gt; preview_namelists.log 2&gt; preview_namelists.err 
+EOF
+}
+
+create_case_build_helper() {
+    local config_script=&quot;$CASE_DIR/${CASE_NAME}/case_build_helper.sh&quot; 
+    echo &quot;qcmd -A ${PROJECT} -- ${CASE_DIR}/${CASE_NAME}/case.build&quot; &gt; $config_script
+}
+
+
+
+
+main() {
+    change_cesm ${CESM_PREFIX}
+    create_case \
+        &amp;&amp; create_xml_config_helper \
+        &amp;&amp; create_user_nl_cam \
+        &amp;&amp; create_preview_namelists_helper \
+        &amp;&amp; create_case_build_helper
+    
+}
+
+
+# ============================================================================
+# begin namelist
+# ============================================================================
+
+# ===========================================================================
+
+
+# ============================================================================
+# begin boilerplate 
+# ============================================================================
+
+readonly PROGNAME=$(basename $0)
+readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly ARGS=&quot;$@&quot;
+
+is_empty() {
+    local var=$1
+
+    [[ -z $var ]]
+}
+export CESMDATAROOT=$SCRATCH/CESM_INPUT
+readonly CESM_PREFIX=&quot;CAM_Jan22_deep_mpas_fix&quot;
+readonly COMPSET=&quot;2000_CAM40_SLND_SICE_DOCN%AQP1_SROF_SGLC_SWAV&quot;
+readonly GRID_NAME=&quot;mpasa120-30_mpasa120-30&quot;
+readonly GROUP_NAME=&quot;589_final_project&quot;
+readonly CASE_ID=&quot;AQP_spinup&quot;
+readonly PROJECT=&quot;UMIC0087&quot;
+readonly NPROCS=&quot;288&quot;
+
+# =================
+readonly CASE_DIR=&quot;${HOME}/CESM_CASE_DIRS/${CESM_PREFIX}_CASES/${CESM_PREFIX}/${GROUP_NAME}&quot;
+readonly SRC_DIR=&quot;${HOME}/CESM_SRC_DIRS/${CESM_PREFIX}&quot;
+readonly CASE_NAME=&quot;${CESM_PREFIX}.${GRID_NAME}.${COMPSET}.${GROUP_NAME}.${CASE_ID}&quot;
+readonly BUILD_ROOT=&quot;/glade/scratch/${USER}/$CASE_NAME&quot;
+# =================
+
+
+change_cesm() {
+    local cesm_prefix=$1
+    rm &quot;${HOME}/cesm_src&quot;
+    rm &quot;${HOME}/cesm_cases&quot;
+    local src_dir=&quot;${HOME}/CESM_SRC_DIRS/$cesm_prefix/&quot;
+    if is_dir ${src_dir}; then
+        ln -s ${src_dir} &quot;${HOME}/cesm_src&quot;
+    else
+        echo &quot;${src_dir} does not exist!&quot;
+        exit
+    fi
+    local case_dir=&quot;${HOME}/CESM_CASE_DIRS/${cesm_prefix}_CASES/&quot;
+    if is_dir ${case_dir}; then
+        ln -s ${case_dir} &quot;${HOME}/cesm_cases&quot;
+    else
+        echo &quot;${case_dir} does not exist!&quot;
+        exit
+    fi
+    
+}
+
+handle_case_exists() {
+    local abs_case_dir=$1
+    cat &lt;&lt; EOF
+Case directory 
+${abs_case_dir} 
+already exists! 
+
+Cowardly refusing to overwrite it :(
+
+EOF
+    exit 1
+
+}
+
+create_case(){
+    is_dir &quot;${CASE_DIR}/${CASE_NAME}&quot; \
+        &amp;&amp; handle_case_exists &quot;${CASE_DIR}/${CASE_NAME}&quot;
+    yes r | ${SRC_DIR}/cime/scripts/create_newcase --compset &quot;${COMPSET}&quot; --res ${GRID_NAME} --case ${CASE_DIR}/${CASE_NAME} --run-unsupported --project ${PROJECT} --pecount ${NPROCS}
+}
+
+create_xml_config_helper() {
+    local config_script=&quot;$CASE_DIR/${CASE_NAME}/xml_config_helper.sh&quot;
+    cat &lt;&lt; EOF &gt; $config_script
+
+# ------------------
+
+readonly DEBUG=FALSE
+
+# ------------------
+# set this to true if you want an archive directory
+
+readonly DOUT_S=FALSE
+
+#-------------------
+# valid options for this value are:
+#  nsteps, nseconds, nminutes, nhours, ndays, nmonths, nyears
+
+readonly STOP_OPTION=nmonths
+
+# ------------------
+
+readonly STOP_N=24
+
+
+readonly ATM_NCPL=288
+
+# ------------------
+# Set the frequency at which files for restarting the model (e.g. in the 
+# case of a blowup) are written. If TRUE, make sure to set REST_N
+
+readonly REST_OPTION=nmonths
+readonly REST_N=1
+
+# ====================
+# CAM build flag (note: this is quite finicky and causes compiler errors if done wrong)
+
+readonly CAM_CONFIG_OPTS=&quot;--phys cam4 --aquaplanet --analytic_ic --nlev=30&quot;
+
+# --------------------
+# Maximum runtime:
+
+readonly HOURS=11
+readonly MINUTES=50
+readonly SECONDS=00
+
+# --------------------
+
+main() {
+    ./xmlchange DEBUG=\${DEBUG},DOUT_S=\${DOUT_S},STOP_OPTION=\${STOP_OPTION},STOP_N=\${STOP_N},REST_OPTION=\${REST_OPTION},REST_N=\${REST_N},ATM_NCPL=\${ATM_NCPL} \
+        &amp;&amp; ./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val &quot;\${CAM_CONFIG_OPTS}&quot; \
+        &amp;&amp; ./xmlquery CAM_CONFIG_OPTS \
+        &amp;&amp; ./xmlchange JOB_WALLCLOCK_TIME=\${HOURS}:\${MINUTES}:\${SECONDS} \
+        &amp;&amp; ./case.setup
+
+}
+
+
+main
+EOF
+}
+
+create_user_nl_cam() {
+    local config_script=&quot;$CASE_DIR/${CASE_NAME}/user_nl_cam&quot;
+    cat &lt;&lt; EOF &gt; $config_script
+    ncdata  = '/glade/u/home/owhughes/grids/x4.92067/x4.92067.init.deep.nc'
+    mpas_block_decomp_file_prefix = &quot;/glade/u/home/owhughes/grids/x4.92067/x4.92067.graph.info.part.&quot;
+    drydep_srf_file=&quot;/glade/u/home/owhughes/grids/stub_data/atmsrf_mpasa120-30.nc&quot;
+    mpas_dt = 100.0
+    omega   = 0.00014584 
+    rearth  = 3185500.0
+    mpas_len_disp = 15000
+    analytic_ic_type = 'moist_baroclinic_wave_dcmip2016'
+    empty_htapes     = .TRUE.
+    NDENS            = 2,2
+    fincl1           = 'SS
+# ------------------
+
+readonly DEBUG=FALSE
+
+# ------------------
+# set this to true if you want an archive directory
+
+readonly DOUT_S=FALSE
+
+#-------------------
+# valid options for this value are:
+#  nsteps, nseconds, nminu
+# ------------------
+
+readonly DEBUG=FALSE
+
+# ------------------
+# set this to true if you want an archive directory
+
+readonly DOUT_S=FALSE
+
+#-------------------
+# valid options for this value are:
+#  nsteps, nseconds, nminutes, nhours, ndays, nmonths, nyears
+
+readonly STOP_OPTION=nmonths
+
+# ------------------
+
+readonly STOP_N=24
+
+
+readonly ATM_NCPL=288
+
+# ------------------
+# Set the frequency at which files for restarting the model (e.g. in the 
+# case of a blowup) are written. If TRUE, make sure to set REST_N
+
+readonly REST_OPTION=nmonths
+readonly REST_N=1
+
+# ====================
+# CAM build flag (note: this is quite finicky and causes compiler errors if done wrong)
+
+readonly CAM_CONFIG_OPTS=&quot;--phys cam4 --aquaplanet --analytic_ic --nlev=30&quot;
+
+# --------------------
+# Maximum runtime:
+
+readonly HOURS=11
+readonly MINUTES=50
+readonly SECONDS=00
+
+# --------------------
+
+main() {
+    ./xmlchange DEBUG=${DEBUG},DOUT_S=${DOUT_S},STOP_OPTION=${STOP_OPTION},STOP_N=${STOP_N},REST_OPTION=${REST_OPTION},REST_N=${REST_N},ATM_NCPL=${ATM_NCPL}         &amp;&amp; ./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val &quot;${CAM_CONFIG_OPTS}&quot;         &amp;&amp; ./xmlquery CAM_CONFIG_OPTS         &amp;&amp; ./xmlchange JOB_WALLCLOCK_TIME=${HOURS}:${MINUTES}:${SECONDS}         &amp;&amp; ./case.setup
+
+}
+
+
+main
+tes, nhours, ndays, nmonths, nyears
+
+readonly STOP_OPTION=nmonths
+
+# ------------------
+
+readonly STOP_N=24
+
+
+readonly ATM_NCPL=288
+
+# ------------------
+# Set the frequency at which files for restarting the model (e.g. in the 
+# case of a blowup) are written. If TRUE, make sure to set REST_N
+
+readonly REST_OPTION=nmonths
+readonly REST_N=1
+
+# ====================
+# CAM build flag (note: this is quite finicky and causes compiler errors if done wrong)
+
+readonly CAM_CONFIG_OPTS=&quot;--phys cam4 --aquaplanet --analytic_ic --nlev=30&quot;
+
+# --------------------
+# Maximum runtime:
+
+readonly HOURS=11
+readonly MINUTES=50
+readonly SECONDS=00
+
+# --------------------
+
+main() {
+    ./xmlchange DEBUG=${DEBUG},DOUT_S=${DOUT_S},STOP_OPTION=${STOP_OPTION},STOP_N=${STOP_N},REST_OPTION=${REST_OPTION},REST_N=${REST_N},ATM_NCPL=${ATM_NCPL}         &amp;&amp; ./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val &quot;${CAM_CONFIG_OPTS}&quot;         &amp;&amp; ./xmlquery CAM_CONFIG_OPTS         &amp;&amp; ./xmlchange JOB_WALLCLOCK_TIME=${HOURS}:${MINUTES}:${SECONDS}         &amp;&amp; ./case.setup
+
+}
+
+
+main
+T:A','PHIS:A','PS:A','T:A','U:A','V:A','OMEGA:A','Q:A','ATMEINT:A','CLDICE:A','CLDLIQ:A','CLOUD:A','CLDTOT:A','PRECL:A','PRECC:A','PRECT:A','TMQ:A','TMCLDICE:A','TMCLDLIQ:A','SHFLX:A','LHFLX:A','QFLX:A','RELHUM:A','FLUT:A','U200:A','V200:A'
+    fincl2           = 'PS:I','SHFLX:I','LHFLX:I','FLUT:I','TMQ:I','CLDTOT:I','PRECC:I','PRECT:I','U200:I','V200:I'
+    MFILT            = 280, 721
+    NHTFRQ           = -720, -24
+    inithist         = 'ENDOFRUN'
+
+EOF
+
+}
+
+create_preview_namelists_helper() {
+    local config_script=&quot;$CASE_DIR/${CASE_NAME}/preview_namelists_helper.sh&quot;
+    cat &lt;&lt; EOF &gt; $config_script
+./preview_namelists &gt; preview_namelists.log 2&gt; preview_namelists.err 
+EOF
+}
+
+create_case_build_helper() {
+    local config_script=&quot;$CASE_DIR/${CASE_NAME}/case_build_helper.sh&quot; 
+    echo &quot;qcmd -A ${PROJECT} -- ${CASE_DIR}/${CASE_NAME}/case.build&quot; &gt; $config_script
+}
+
+
+
+
+main() {
+    change_cesm ${CESM_PREFIX}
+    create_case \
+        &amp;&amp; create_xml_config_helper \
+        &amp;&amp; create_user_nl_cam \
+        &amp;&amp; create_preview_namelists_helper \
+        &amp;&amp; create_case_build_helper
+    
+}
+
+
+# ============================================================================
+# begin namelist
+# ============================================================================
+
+# ===========================================================================
+
+
+# ============================================================================
+# begin boilerplate 
+# ============================================================================
+
+readonly PROGNAME=$(basename $0)
+readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly ARGS=&quot;$@&quot;
+
+is_empty() {
+    local var=$1
+
+    [[ -z $var ]]
+}
+
+is_not_empty() {
+    local var=$1
+
+    [[ -n $var ]]
+}
+
+is_file() {
+    local file=$1
+
+    [[ -f $file ]]
+}
+
+is_link() {
+    local var=$1
+
+    [[ `test -L $1` ]]
+}
+
+
+is_dir() {
+    local dir=$1
+
+    [[ -d $dir ]]
+}
+
+
+# =================================================================
+# end boilerplate
+# =================================================================
+
+main
+
+is_not_empty() {
+    local var=$1
+
+    [[ -n $var ]]
+}
+
+is_file() {
+    local file=$1
+
+    [[ -f $file ]]
+}
+
+is_link() {
+    local var=$1
+
+    [[ `test -L $1` ]]
+}
+
+
+is_dir() {
+    local dir=$1
+
+    [[ -d $dir ]]
+}
+
+
+# =================================================================
+# end boilerplate
+# =================================================================
+
+main
+
+
+
+</code></pre>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/climate_589/589_root/">Climate 589</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

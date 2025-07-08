@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/MPAS/MPAS_input_grid/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/MPAS/MPAS_input_grid/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/MPAS/MPAS_input_grid/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Adding custom topography to CAM</h1>
+
+    
+    
+    
+    <h2>Introduction</h2>
+<p>A recent version of <a href="https://github.com/ESCOMP/CAM/tree/cam_development">the Community Atmosphere Model</a>
+added support for the Model for Prediction Across Scales (MPAS) atmospheric dynamical core.
+MPAS is a dynamical core with support for a non-hydrostatic equation set built in. It is based on a C-grid discretization on
+Spherical Centroidal Voronoi Tesselation (SCVT) horizontal mesh. As such
+it is designed to support variable resolution grids when it is run in its own codebase.
+The CIME infrastructure that makes creating new cases and component sets
+necessarily limits the number of horizontal grid spacings that you can use.</p>
+<p>This post is designed to show you how to add a new variable resolution MPAS grid
+to CIME. <span class="todo">I have used this for aquaplanet runs, but I have not tried AMIP runs <em>yet</em>.</span></p>
+<p>In order to run this you will need access to a working standalone version of the MPAS-A model
+available <a href="https://github.com/MPAS-Dev/MPAS-Model">here</a>.
+I am working on a containerized version that is easy to run on a laptop <a href="https://open-lab-notebook.glitch.me/posts/MPAS/singularity_mpas_def/">here</a>
+which is currently a work in progress.</p>
+<h2>Step -1: install MPAS</h2>
+<p>For the time being, I have <a href="https://open-lab-notebook.glitch.me/posts/installing-mpas/">instructions</a> on how I installed MPAS on the <a href="https://arc.umich.edu/greatlakes/">Great Lakes Cluster</a>
+located at the University of Michigan.  You can download the file, e.g., <a href="https://github.com/MPAS-Dev/MPAS-Model/releases/tag/v8.2.2">here</a>.</p>
+<p>If you have access to NCAR's Derecho, then your life is <em>much</em> easier.</p>
+<p>In order to compile MPAS on Derecho as of 2025-03-05, you can use the following scripts:</p>
+<details>
+  <summary><code>setup.mpas.sh</code></summary>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">module unload netcdf
+<p>module load ncarenv-basic/23.06  intel/2023.0.0  cray-mpich/8.1.25
+module load parallel-netcdf/1.12.3 parallelio/2.5.10
+</pre></div></p>
+</details>
+<p>and</p>
+<details>
+<summary><code>build.mpas.sh</code></summary>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">make ifort <span style="color: #aa0000">CORE</span>=init_atmosphere <span style="color: #aa0000">PRECISION</span>=single <span style="color: #aa0000">USE_PIO2</span>=<span style="color: #00aaaa">true</span>
+<p>make clean <span style="color: #aa0000">CORE</span>=atmosphere
+make ifort <span style="color: #aa0000">CORE</span>=atmosphere <span style="color: #aa0000">PRECISION</span>=single <span style="color: #aa0000">USE_PIO2</span>=<span style="color: #00aaaa">true</span>
+</pre></div></p>
+</details>
+<ul>
+<li>Before you proceed, run <code>source ${SOURCE_TO_SCRIPT}/setup.mpas.sh</code>.</li>
+<li>Download the MPAS code mentioned above.</li>
+<li>Change directories into the root of the repository.</li>
+<li>Run the commands in order listed in <code>build.mpas.sh</code>.</li>
+</ul>
+<h2>Step 0: Download a grid:</h2>
+<p>Download a grid from <a href="https://mpas-dev.github.io/">here</a></p>
+<p>At this point I assume that you have a folder referred to by the variable <code>${GRID_DIR}</code>, and that
+your grid has a unique prefix referred to in the variable <code>${GRID_PREFIX}</code>. This
+prefix needs to uniquely identify your grid files so that they don't overlap with other MPAS files
+in <code>${GRID_DIR}</code>.</p>
+<p>In these instructions I will be using my particular use case as an example.
+On Derecho, <code>GRID_DIR=&quot;${HOME}/grids/${GRID_PREFIX}/&quot;</code> and <code>GRID_PREFIX=&quot;x4.92067&quot;</code> where <code>x4</code> refers
+to a 4x grid refinement in a band near the equator and the resulting grid has <code>92067</code> horizontal cells.
+I'm going to call this grid <code>mpasa120-30</code> because on a full-radius grid it has a maximum grid spacing
+of 120km and a minimum grid spacing of 30km.</p>
+<p><strong>I make the assumption that you have generated the following files:</strong></p>
+<ul>
+<li><code>${GRID_DIR}/${GRID_PREFIX}.grid.nc</code> contains a 2d representation of your MPAS grid connectivity.</li>
+<li>Several files <code>${GRID_DIR}/${GRID_PREFIX}.graph.info.part.${NPROC}</code> where <code>${NPROC}</code> includes
+any number of MPI processes with which you want to run an MPAS model. It should probably be a multiple of the
+number of physical cores in a node within your cluster (or threads if your system has <a href="https://en.wikipedia.org/wiki/Hyper-threading">HT</a>,
+but I've had mixed success with this).</li>
+</ul>
+<h2>Step 1: Generating a 3D grid with metric terms</h2>
+<p>You will need to create a case directory, which I typically pattern off of <a href="https://www2.mmm.ucar.edu/projects/mpas/test_cases/v7.0/jw_baroclinic_wave.tar.gz">this example</a>
+There are two relevant lines in the namelist <code>namelist.init_atmosphere</code> that you will need to change: <code>config_nvertlevels = 26</code> and <code>config_init_case = {CASE_NUMBER}</code>.
+<code>config_nvertlevels</code> is slightly confusing, as for a CAM configuration that's listed has having 30 levels, <code>config_nvertlevels</code> should be set to 32.</p>
+<p>Specifying topography requires modifying source code. If the root of your MPAS installation is <code>${MPAS_SRC}</code>, then
+the file <code>src/core_init_atm/mpas_init_atm_cases.F</code>. I typically modify the DCMIP2008 mountain wave test case, which has multiple hybrid transition profiles.
+I typically modify this test case, which is <code>config_init_case = 6</code>, and the subroutine <code>init_atm_case_mtn_wave</code> within <code>mpas_init_atm_cases.F</code>.</p>
+<ul>
+<li>
+<p>Note: ztop and specification of zeta</p>
+</li>
+<li>
+<p>The nature of the hybrid coordinates is set between lines 2139-2164. Setting <code>ah(k) = 0</code> defines pure terrain-following coordinates.
+I typically uncomment the line <code>ah(k) = 1.-cos(.5*pii*(k-1)*dz/zt)**6</code>  if I have significant topography.</p>
+<ul>
+<li>This loop is where you could define constant-height positions, e.g. by creating a local variable <code>real (kind=RKIND), dimension(nVertLevels+1) :: heightpos = (/ ... /)</code> at the start of the subroutine,
+then doing <code>zc(k) = heightpos(k)</code>. These should correspond to desired interface level positions in meters, e.g. derived from CAM. You do not get constant height positions if you have topography!</li>
+</ul>
+</li>
+<li>
+<p>Around line 2212, the variable <code>hx</code> sets the topography (in meters).</p>
+</li>
+<li>
+<p>Lines 2244-2275 are where metric terms are defined, but they use the <code>ah</code> and <code>zc</code> terms you modified earlier. You needn't modify any of this.</p>
+</li>
+</ul>
+<p><em>Note: when you modify this code, you must rerun <code>make ifort CORE=init_atmosphere PRECISION=single</code></em>. You can rename the resulting <code>init_atmosphere_model</code> that is generated in the <code>${MPAS_SRC_DIR}$</code> executable if you want to have multiple versions!</p>
+<ul>
+<li>The horizontal resolution is set via the namelist.</li>
+</ul>
+<pre><code>ln -s ${GRID_DIR}/${GRID_PREFIX}.grid.nc ${MPAS_CASE_DIR} 
+ln -s ${GRID_DIR}/$GRID_PREFIX}.graph.info.part.${NPROC} ${MPAS_CASE_DIR}
+</code></pre>
+<p>Continue until you call <code>mpirun -n ${NPROC} ./init_atmosphere_model</code> which generates a NetCDF file
+that contains a dimension called <code>nVertLevels.</code>
+I'm going to assume that this file is moved to <code>${GRID_DIR}/${GRID_PREFIX}.init.nc</code>.</p>
+<h3>Vital considerations:</h3>
+<p>As of 2025-03-06 the CAM MPAS implementation does not understand how to generate 3d metric terms for
+MPAS. My understanding is that it knows how to correctly overwrite prognostic fields like edge wind flux
+components.
+As such, <span class="todo"><em>any topography that you intend to include in your CAM run must be in
+your <code>${GRID_DIR}/${GRID_PREFIX}.init.nc</code></em></span></p>
+<p>Similarly <span class="todo"><em>your vertical level number and location will be set by
+creating this file. Ensure it matches the CAM vertical level configuration that you want to use.</em>
+</span></p>
+<p>If you are using a standard MPAS resolution that already has CIME defaults, then all you need to do to include the topography is to point the
+<code>ncdata</code> namelist parameter at your <code>${GRID_PREFIX}.init.nc</code>.</p>
+<h2>Regridding output to a lat-lon grid:</h2>
+<p>Download the <a href="https://github.com/mgduda/convert_mpas">following repository</a> and build the <code>convert_mpas</code> tool.</p>
+<p>The tl;dr of how to use this tool is</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #66d9ef">${</span><span style="color: #f8f8f2">ABSOLUTE_PATH_TO_CONVERT_MPAS</span><span style="color: #66d9ef">}</span>/convert_mpas <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">GRID_DIR</span><span style="color: #66d9ef">}</span>/<span style="color: #66d9ef">${</span><span style="color: #f8f8f2">GRID_PREFIX</span><span style="color: #66d9ef">}</span>.init.nc <span style="color: #66d9ef">${</span><span style="color: #f8f8f2">ABSOLUTE_PATH_TO_NETCDF</span><span style="color: #66d9ef">}</span>/output_on_mpas_grid.nc
+<p></pre></div></p>
+<p>The first file specifies all of the metric terms and topography that were used for your run. The second file is the output data.
+After this command is finished it will have created a file called <code>latlon.nc</code> which you can view with your NetCDF
+viewer of choice.</p>
+<p><span class="todo">If you run this command multiple times in the same directory, make sure to run <code>rm latlon.nc</code>
+(or some similar command) in between. Even if the files have the same structure, calling the command again
+will silently overwrite <code>latlon.nc</code> if it exists. If the variables or dimensions
+of the file you're trying to regrid changes, it will do something very strange. I think it only regrids
+the variables that exist in the existing <code>latlon.nc</code> file along the dimensions that exist.</span></p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/MPAS/MPAS_tutorials/">MPAS tutorials</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

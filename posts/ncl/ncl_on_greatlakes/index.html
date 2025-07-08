@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/ncl/ncl_on_greatlakes/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/ncl/ncl_on_greatlakes/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/ncl/ncl_on_greatlakes/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Installing NCL on greatlakes (03/22/2023)</h1>
+
+    
+    
+    
+    <h1>Installing via Conda</h1>
+<h2>1. Install conda:</h2>
+<ul>
+<li>Follow <a href="https://docs.conda.io/en/latest/miniconda.html">this link</a> and download the Linux 64-bit (that is, x86_64) installer script.</li>
+<li>Run <code>bash ${FILE_NAME}</code> substituting the name of the downloaded script (it begins with <code>Miniconda</code> if you want to use tab completion).</li>
+<li>Follow the prompts. Ensure that the conda root is located on a partition that can hold several gigabytes of data. That is,
+if you use the default directory <code>${HOME}/miniconda3/</code>, then installed software counts against your <code>home</code> allocation on Greatlakes.
+For me this has only been an issue if I'm installing Cuda versions.</li>
+</ul>
+<h2>Create a conda environment and install ncl</h2>
+<ul>
+<li>Create a conda environment using the command <code>conda create --name ${NCL_ENV_NAME} -c conda-forge ncl</code> (or whatever you want your environment to be named-if you forget,
+you can run <code>conda info --env</code> to find all the conda environments on your system). <em>This only needs to be run once.</em></li>
+<li>Run <code>conda activate ${NCL_ENV_NAME}</code>. <em>After installation, this must be run any time you want to access the</em> <code>ncl</code> <em>command</em>.</li>
+</ul>
+<p>And you're done!</p>
+<h1>Installing from source:</h1>
+<p>On a non-x86_64 machine, binaries may not be available from conda. It appears that even the NCL team has not tried building for machines with an ARM-based M1 Mac.
+However, it appears that the <a href="https://ports.macports.org/port/ncarg/details/">MacPorts package manager</a> may install it from source. This is probably the
+option that requires the least effort on your part, according to this <a href="https://github.com/NCAR/ncl/issues/187">NCL Github issue</a>.</p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/ncl/ncl-parent/">NCL Script Documentation</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

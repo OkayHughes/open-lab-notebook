@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/computing/submission-scripts/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/computing/submission-scripts/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/computing/submission-scripts/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Efficiently allocating resources in sbatch scripts</h1>
+
+    
+    
+    
+    <p>Something that trips me up literally every time I write my own submissions scripts is slurm's method of allocation.</p>
+<p>If I later find the resources that I used to get to this understanding, I'll come back and put them here.\</p>
+<h3>An example submission script:</h3>
+<p>This is the job submission file taken from my HOMME-E3SM custom install on greatlakes.</p>
+<pre><code>#!/bin/bash
+#
+#SBATCH --job-name ${JOBNAME}
+#SBATCH --account=cjablono1
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=36
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=1000m 
+#SBATCH --time=0:60:00
+#
+# 25 nodes, 30min sufficient for all 5 runs
+# 12 nodes, 10min for r400 an r100
+# 
+
+source /home/owhughes/HOMME/E3SM/setup.sh
+export OMP_NUM_THREADS=6
+export MV2_ENABLE_AFFINITY=0
+NCPU=36
+EXEC=../../../test_execs/theta-l-nlev30/theta-l-nlev30
+
+
+
+function run { 
+local NCPU=$1
+echo &quot;NCPU = $NCPU&quot;
+namelist=namelist-$prefix.nl
+\cp -f $namelist input.nl
+date
+mpirun -bind-to=core -np 36 $EXEC &lt; input.nl
+date
+
+ncl plot-baroclinicwave-init.ncl
+ncl plot-lat-lon-TPLSPS.ncl 'var_choice=1'
+ncl plot-lat-lon-TPLSPS.ncl 'var_choice=2'
+ncl plot-lat-lon-TPLSPS.ncl 'var_choice=3'
+\mv -f plot_baroclinicwave_init.pdf  ${prefix}_init.pdf
+\mv -f preqx-test16-1latlonT850.pdf  ${prefix}_T850.pdf
+\mv -f preqx-test16-1latlonPS.pdf  ${prefix}_PS.pdf
+\mv -f preqx-test16-1latlonPRECL.pdf  ${prefix}_PRECL.pdf
+
+\mv -f movies/dcmip2016_test11.nc    movies/${prefix}_dcmip2016_test11.nc
+}
+
+prefix=r400    ; run $(($NCPU&gt;384?384:NCPU))
+
+prefix=r100-dry; run $NCPU
+prefix=r100-h  ; run $NCPU
+prefix=r100    ; run $NCPU
+
+prefix=r50    ; run $NCPU
+
+</code></pre>
+<p>As far as I can tell this indicates that <code>ntasks-per-node</code> dictates the number of tasks that can be directly spawned by
+mpirun. <code>-bind-to=core</code> seems to play better with hyperthreaded processors? THIS IS THE IMPORTANT ONE!</p>
+<p>However, one can increase <code>$OMP_NUM_THREADS</code> seemingly <em>ad infinitum</em> without it complaining; seemingly it can support more than
+36 threads at a time on one node. (Note: I haven't directly checked that it's allocating only one node to my job).</p>
+<p>However, this appears to be the correct approach to allocating resources as all jobs from ne4 up to ne60 seem to run reasonably fast.</p>
+<p>Note: When <code>-bind-to=core</code> is applied to MPAS, it runs in a much more sensible time frame and complains less. My guess
+is that the default is that it tries to bind to a socket, and that causes it to hang, or at least eat up an absurdly wasteful
+amount of resources.</p>
+<h3><code>seff ${JOBID}</code></h3>
+<p>Evidently you can do <code>seff ${JOBID}</code></p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/computing/scientific-computing/">Scientific Computing</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

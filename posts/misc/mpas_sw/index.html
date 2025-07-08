@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/misc/mpas_sw/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/misc/mpas_sw/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/misc/mpas_sw/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Building and running the MPAS shallow water core</h1>
+
+    
+    
+    
+    <h2>First steps:</h2>
+<p>Do the dependency process listed <a href="https://open-lab-notebook.glitch.me/posts/installing-mpas">here</a></p>
+<h2>Shallow-water specific:</h2>
+<h3>Clean build system</h3>
+<p>Try the command <code>make clean CORE=${PREVIOUS_CORE_BUILD}</code> if you have a previous build left on the filesystem</p>
+<h3>Make shallow water core:</h3>
+<p>Try the command <code>make gfortran CORE=sw PRECISION=single</code>. Let's see what happens</p>
+<p>Seems to need <code>make gfortran CORE=sw PRECISION=single USE_PIO2=true</code>.</p>
+<p>This command seems to finish correctly. I'm going to search for either the Williamson or Galewsky shallow water test cases.</p>
+<p>It appears that in the file <code>src/core_sw/mpas_sw_test_cases.F</code> there are several Williamson shallow water test cases.</p>
+<h3>Trying to get <code>sw_test_case_5</code> working:</h3>
+<p>This is the &quot;Zonal flow over an idealized mountain&quot; test case.</p>
+<p>First I'm going to see if I can find an example shallow water namelist on the mpas repository (I'm not hopeful.)</p>
+<p>Turns out a good default namelist is found in <code>src/core_sw/default_inputs/namelist.sw</code> and <code>streams.sw</code>.</p>
+<p>Let's try creating a case directory after the fashion of <code>core_atmosphere</code>:</p>
+<p>The executable we need is <code>src/sw_model</code>.</p>
+<p>The correct file to get all of the dependencies set up (assuming you built with shared libraries) is</p>
+<details>
+<summary>View setup.sh </summary>
+<pre><code>
+module load gcc/8.2.0
+export PATH=$scratch/dependencies/mpich/bin:$PATH
+export MPICH_CC=gcc
+export MPICH_FC=gfortran
+export MPICH_F90=gfortran
+export CC=mpicc
+export FC=mpif90
+export NETCDF=$scratch/dependencies/netcdf_c
+export NETCDFF=$scratch/dependencies/netcdf_fortran
+export PNETCDF=$scratch/dependencies/pnetcdf
+export PIO=$scratch/dependencies/PIO
+hdf5=$scratch/dependencies/hdf5
+zlib=$scratch/dependencies/zlib
+export MPAS_EXTERNAL_INCLUDES=&quot;-I$hdf5/include -I$zlib/include&quot;
+export MPAS_EXTERNAL_LIBS=&quot;-L${hdf5}/lib -L$zlib/lib -lhdf5_hl -lhdf5 -lz -ldl&quot;
+export LD_LIBRARY_PATH=&quot;$PNETCDF/lib:${NETCDF}/lib:${hdf5}/lib:${hdf5}/lib:${PIO}/lib:${NETCDFF}/lib:${LD_LIBRARY_PATH}&quot;
+export FFLAGS=&quot;-freal-4-real-8&quot;
+
+</code></pre>
+</details>
+<p>where you have to ensure that the shell variables point to the base directory of the
+corresponding dependency installs (i.e. it should have <code>bin</code>, <code>lib</code>, <code>include</code> subdirectories etc)</p>
+<p>I created a case directory as follows:</p>
+<pre><code>mkdir ${MPAS_ROOT}/cases
+mkdir ${MPAS_ROOT}/cases/shallow_water_test_case_5
+
+
+ln -s ${MPAS_ROOT}/MPAS-skamaroc/sw_model ${MPAS_ROOT}/shallow_water/test_case_5/
+# This copies the default namelists to our case version
+cp ${MPAS_ROOT}/MPAS-skamaroc/src/core_sw/default_inputs/* ${MPAS_ROOT}/shallow_water/test_case_5/
+
+</code></pre>
+<p>where <code>MPAS_ROOT</code> is an absolute path to the directory. I have multiple source versions of MPAS in my <code>$MPAS_ROOT</code>
+directory, hence why I've called one version <code>MPAS-skamaroc</code>. Yours is probably just called <code>MPAS</code> or something.</p>
+<p><s>For cost's sake, I'll download the grid file from <a href="http://www2.mmm.ucar.edu/projects/mpas/atmosphere_meshes/x1.2562.tar.gz">here</a>
+with a nominal grid resolution of 480km.</s></p>
+<p><s>From within your case directory, run</s></p>
+<pre><code>#wget http://www2.mmm.ucar.edu/projects/mpas/atmosphere_meshes/x1.2562.tar.gz
+#tar -xf ./x1.2562.tar.gz
+
+</code></pre>
+<p><em>NOTE: SEE BELOW, THESE GRID FILES ARE INCOMPATIBLE WITH THE SHALLOW WATER CORE AND MORE WORK IS NEEDED</em>. You can download a quickstart grid that
+I generated <a href="https://drive.google.com/file/d/1TEfbfk68jsO_NRYXNZZXbAr8qCBu9g7I/view?usp=sharing">here</a></p>
+<p>This gets you the mesh files.</p>
+<p>In order to use my case management infrastructure, make sure that the <code>${mpas_output}</code> variable
+points to a directory where you want to spit out mpas output files (which in general might be <em>very</em> large).</p>
+<p>I use a file called <code>CONFIG.sh</code> to configure my MPAS directory structure:</p>
+<details>
+<summary>View CONFIG.sh </summary>
+<pre><code>if [ -z ${mpas_output+x} ]
+then
+	echo &quot;\$mpas_output is not set in the current environment&quot;
+	exit 1
+fi
+
+case_group=&quot;shallow_water&quot;
+casename=&quot;test_case_5&quot;
+# CHANGE THIS TO MATCH YOUR MPAS LOCATION
+case_dir=&quot;${HOME}/MPAS/cases/${case_group}/${casename}&quot;
+out_dir=&quot;${mpas_output}/${case_group}/${casename}&quot;
+# MAKE SURE THIS AGREES WITH YOUR GRID FILES
+grid_prefix=&quot;x1.2562&quot;
+log_dir=&quot;${case_dir}/logs&quot;
+
+
+# ==================================================
+# Ensure configure variables are set correctly
+# ==================================================
+
+if [ -z ${case_dir+x} ] || [ -z ${out_dir+x} ] || [ -z ${casename+x} ] || [ -z ${grid_prefix+x} ] || [ -z ${log_dir+x} ]
+then
+	echo &quot;CONFIG.sh is misconfigured, ensure it contains case_dir, out_dir, casename, grid_prefix, log_dir&quot;
+	exit 1
+fi
+
+if [ ! -d &quot;${case_dir}&quot; ]
+then
+	echo &quot;Case directory ${case_dir} does not exist! &quot;
+	exit 1
+fi
+
+if [ ! -f &quot;${case_dir}/${grid_prefix}.grid.nc&quot; ] &amp;&amp; [ ! -f &quot;${out_dir}/${grid_prefix}.grid.nc&quot; ]
+then
+	echo &quot;File ${grid_prefix}.grid.nc should exist in either ${case_dir} or ${out_dir}&quot;
+	exit 1
+fi
+
+mkdir -p $out_dir 
+
+mkdir -p $log_dir
+
+</code></pre>
+</details>
+<p>where you need to make sure that <code>${case_dir}</code> actually points to your case directory.</p>
+<p>Next, the slurm script I use to submit the job to the compute nodes in the cluster is given here:</p>
+<details>
+<summary>View run.sh </summary>
+<pre><code>  
+#!/bin/bash
+
+#SBATCH --job-name=sw_test_case_5
+
+#SBATCH --mail-user=owhughes@umich.edu
+#SBATCH --mail-type=BEGIN,END
+#SBATCH --time=12:00:00
+#SBATCH --account=cjablono1
+#SBATCH --ntasks-per-node=8
+#SBATCH --cpus-per-task 1
+#SBATCH --nodes=1
+#SBATCH --mem=1000m 
+
+source ~/.MPAS/setup.bash
+
+source CONFIG.sh
+
+
+count=-1
+if [ -f &quot;${out_dir}/output.nc&quot; ] 
+then
+	count=0
+	while [ -f &quot;${out_dir}/output.${count}.nc&quot; ]
+	do
+		count=$((count+1))
+	done
+	echo &quot;Moving ${out_dir}/output.nc to ${out_dir}/output.${count}.nc&quot;
+	mv ${out_dir}/output.nc ${out_dir}/output.${count}.nc
+fi 
+
+if [ -f &quot;${out_dir}/diag.moist.nc&quot; ]
+then
+	mv ${out_dir}/diag.moist.nc ${out_dir}/diag.moist.old.nc
+fi
+
+if [ ! -f &quot;${case_dir}/${grid_prefix}.graph.info.part.${SLURM_NTASKS}&quot; ] 
+then
+	echo &quot;Missing ${grid_prefix}.graph.info.part.${SLURM_NTASKS} or a symlink to it&quot;
+	exit 1
+fi
+
+ln -sf &quot;${case_dir}/${grid_prefix}.grid.nc&quot; &quot;${case_dir}/grid.nc&quot;
+ln -sf &quot;${case_dir}/${grid_prefix}.graph.info.part.${SLURM_NTASKS}&quot; &quot;${case_dir}/graph.info.part.${SLURM_NTASKS}&quot;
+
+command=&quot;./sw_model&quot;
+
+current_dir=`pwd`
+ls ${case_dir} | xargs -n1 -I {} ln -sf $case_dir/{} $out_dir/{}
+cd $out_dir
+mpiexec -bind-to=core -n ${SLURM_NTASKS} $command
+find $out_dir -type l | xargs -n1 rm
+cd $current_dir
+
+
+
+
+run_log_dir=${log_dir}/run/$((count + 1))
+
+mkdir -p ${run_log_dir}
+if [ `ls $out_dir/log.* | wc -l` -gt 0 ]
+then
+	ls $out_dir/log.* | xargs -n1 -I {} mv {} ${run_log_dir}
+fi
+cp ${case_dir}/namelist.atmosphere ${run_log_dir}
+
+</code></pre>
+</details>
+<p>Note that the file <code>setup.sh</code> should be sourced at the top of the run script,
+i.e., <code>source ${PATH_TO_SETUP}.sh</code> should come after the slurm directives a the top of the file.</p>
+<h2>Running the model:</h2>
+<p>Make sure to configure <code>config_stop_time = &quot;YEAR-MM-DD_HH:MM:SS&quot;</code> in <code>namelist.sw</code>.
+I'm going to run for 5 days, or <code>config_stop_time = '0000-01-05_00:00:00'</code>.</p>
+<h2>A problem</h2>
+<p>When I'm running the model I'm getting the following error:</p>
+<pre><code>CRITICAL ERROR: Dimension 'nTracers' required by field 'tracers' was neither read nor defined.
+</code></pre>
+<p><s>Which means that it's not generating an input file. I need to determine why that is.</s></p>
+<p><s>The function <code>sw_core_init</code> in <code>core_sw/mpas_sw_core.F</code> probably has info.</s></p>
+<p><s>Let's try to figure out where <code>sw_core_init</code> is called:</s></p>
+<p>Ok so I've found the problem: in commit <code>55a0fc8ea754547434c847751d30a8bbf555572d</code> in the MPAS-tools
+supplemental repository, the following problem is introduced:</p>
+<blockquote>
+<p>The periodic_hex mesh generator previously added fields to the grid.nc
+file to serve as placeholders for ICs for the shallow-water model.
+However, these fields are not part of the MPAS mesh specification, and
+have been removed. Specifically, the following fields are deleted in
+this commit:
+*fEdge
+*fVertex
+*h_s
+*u
+*uBC
+*v
+*h
+*vh
+*circulation
+*vorticity
+*ke
+*tracers
+Additionally, the dimensions nVertLevels and nTracers have also been
+removed.</p>
+</blockquote>
+<p>For more info see <a href="https://github.com/MPAS-Dev/MPAS-Tools/pull/241">this github issue</a></p>
+<p>So this will take some cleverness:</p>
+<h2>Building a modified MPAS-tools</h2>
+<!--
+Clone the repository []()
+
+Run the following:
+```
+
+git checkout 50300ae871fb183421517b909fc4e6d1867f8829 -- mesh_tools/periodic_hex/module_write_netcdf.F
+git checkout 50300ae871fb183421517b909fc4e6d1867f8829 -- mesh_tools/periodic_hex/periodic_grid.F
+```
+
+
+Make sure that you go into your netcdf dependencies and symlink all of the files in your netcdf_fortran `include, lib, bin` files
+to your netcdf_c dependency `include, lib, bin` folders. 
+
+Now run `make` in the directory `mesh_tools/periodic_hex/`
+
+Note: running `./periodic_grid` will generate a mesh. The namelist options for this 
+grid are given in `mesh_tools/periodic_hex/namelist.input`.
+
+My example grid can be found at [this link](https://drive.google.com/file/d/1nvzUdMqfNWcUmBRP2m6QyBPTw4zyWVnd/view?usp=sharing)
+-->
+<h3>Building the software:</h3>
+<p>Run:</p>
+<pre><code>git clone https://github.com/MPAS-Dev/MPAS-Tools.git.
+cd MPAS-Tools/mesh_tools/points-mpas
+</code></pre>
+<p>Ensure that <code>${NETCDF}</code> points to a directory containing the <code>include, lib, bin</code> files for a static build of
+the netcdf-c and netcdf-c++ library.</p>
+<p>Install the netcdf-c++ library i.e. run <code>https://www.unidata.ucar.edu/downloads/netcdf/ftp/netcdf-cxx-4.2.tar.gz</code>
+and use the <code>setup.sh</code> file from the netcdf-c setup. Symlink the contents of
+<code>$NETCDF_CPP_LOCATION/include</code> to <code>$NETCDF_C_LOCATION/include</code> and the same for the <code>lib</code> folder.</p>
+<p>In the directory <code>MPAS-Tools/mesh_tools/points-mpas/</code> run <code>make</code>.</p>
+<h3>Creating the input files to <code>PointsToMpas.x</code></h3>
+<p>The main files you need to use to generate a grid are <code>SaveVertices</code>, <code>SaveTriangles</code> and <code>Params</code>. The <code>readme</code> for
+this code describes how it works. Change <code>Params</code> to use
+lat-lon coordinates, e.g.</p>
+<details>
+<summary>View Params </summary>
+<pre><code>Is the input Cartesian or Latitude-Longitude (0 - Cartesian, 1 - Lat-lon)
+1
+Are the triangles base zero or base one? (0 - base 0, 1 - base 1)
+1
+What is the radius of the sphere these points are defined on?
+1.0
+How many vertical levels do you want in the output grid?
+1
+How many tracers do you want in the output grid?
+1
+What was the convergence criteria used to make this grid?
+0.0
+Should this grid be vordraw compatible?
+0
+
+</code></pre>
+</details>
+The fact that the radius of the sphere is considered to be 1 is an MPAS default that exists in the prefab meshes that 
+can be downloaded from MPAS' website.
+<p>You can use the following python script  to turn the files that you can download from [https://mpas-dev.github.io/] into <code>SaveVertices</code> and <code>SaveTriangles</code>
+files. Start by doing something like</p>
+<pre><code>module load python3.8-anaconda;
+yes | conda create --name mpas_gridding
+conda activate mpas_gridding
+yes | conda install netcdf4
+yes | conda install xarray
+</code></pre>
+<p>Then you can use the following python script:</p>
+<details>
+<summary>View mpas_to_text.py </summary>
+<pre><code>import xarray as xr
+import numpy as np
+
+ds_disk = xr.open_dataset(&quot;x1.2562.grid.nc&quot;) #change this to the grid file downloaded from the MPAS website
+
+edge_info = ds_disk[&quot;cellsOnEdge&quot;].values
+neighbors = {}
+for edge_id in range(edge_info.shape[0]):
+        edge = edge_info[edge_id]
+        if edge[0] not in neighbors.keys():
+                neighbors[edge[0]] = []
+        if edge[1] not in neighbors.keys():
+                 neighbors[edge[1]] = []
+        neighbors[edge[0]].append(edge[1])
+        neighbors[edge[1]].append(edge[0]) 
+
+tris = set()
+for cell in neighbors.keys():
+        for neighbor in neighbors[cell]:
+                for neighbor_2 in set(neighbors[cell]).intersection(set(neighbors[neighbor])):
+                        tris.add(frozenset({cell, neighbor, neighbor_2}))
+
+
+tris = np.array([list(x) for x in tris], dtype=np.int32)
+
+lat_cell = ds_disk[&quot;latCell&quot;].values
+lon_cell = ds_disk[&quot;lonCell&quot;].values
+  
+np.savetxt(&quot;SaveVertices&quot;, np.stack((lat_cell, lon_cell)).T, fmt=&quot;%.8f&quot;)
+np.savetxt(&quot;SaveTriangles&quot;, tris, fmt=&quot;%d&quot;)
+  
+</code></pre>
+</details>
+<p>Once you have <code>SaveVertices</code> and <code>SaveTriangles</code> ,
+copy them into the <code>MPAS-Tools/mesh_tools/points-mpas</code> directory (delete the file that's named something like <code>SaveDensity</code>).
+This generates a MPAS grid file called <code>grid.nc</code>
+and a graph partitioning file called <code>graph.info</code>, see below for more on this.</p>
+<h3>Grid decomposition</h3>
+<p>If you want to run MPAS in parallel (i.e. on 8 cores a 10 day shallow water run will take 11 seconds),
+then you need to install Metis, which partitions MPAS grids for parallel computing, i.e. run</p>
+<pre><code>wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz
+
+tar -xf metis-5.1.0.tar.gz
+module load cmake/3.21.3
+make
+</code></pre>
+<p>and follow the instructions. The result will be a file called <code>metis-5.1.0/build/Linux-x86_64/programs/gpmetis</code>,
+and this can be invoked like</p>
+<pre><code>${PATH_TO_METIS}/build/Linux-x86_64/programs/gpmetis ${PATH_TO_graph.info}/graph.info ${NPROCS}
+</code></pre>
+<p>which creates a <code>graph.info.part.${NPROCS}</code> file. Copy these into your MPAS directory.
+Make sure that your <code>grid.nc</code> file and your <code>graph.info.part.{}</code> have a prefix that agrees with <code>${grid_prefix}</code>
+if you're using my <code>CONFIG.sh</code> script above. i.e. in this case I would rename <code>grid.nc</code> to <code>x1.2562.grid.nc</code>
+and <code>graph.info.part.8</code> to <code>x1.2562.graph.info.part.8</code>.</p>
+<p>Once you do this you can run <code>sbatch run.sh</code> and a file will be generated in your <code>${MPAS_OUTPUT}/${case_name}</code>
+directory called <code>output.nc</code>. Follow the instructions below to visualize this.</p>
+<h3>Making <code>convert_mpas</code></h3>
+<p>Make sure that you go into your netcdf dependencies and symlink all of the files in your netcdf_fortran <code>include, lib, bin</code> files
+to your netcdf_c dependency <code>include, lib, bin</code> folders.</p>
+<p>Run</p>
+<pre><code>git clone https://github.com/mgduda/convert_mpas.git
+cd convert_mpas
+source #${some setup.sh file that sets the necessary variables}
+make
+</code></pre>
+<p>You can then run this like</p>
+<pre><code>${PATH_TO_convert_mpas}/convert_mpas ${OPTIONAL_GRID_FILE} output.nc
+</code></pre>
+<p>In order to preserve features like topography, replace <code>${OPTIONAL_GRID_FILE}</code> with something like <code>x1.2562.grid.nc</code>.</p>
+<p>This will create a netcdf file on a lat-lon grid which you can view by doing</p>
+<pre><code>module load ncview
+ncview latlon.nc
+
+</code></pre>
+
+    <div class="controls">
+
+    
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

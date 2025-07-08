@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/QHE_SE/QHE_SE_thermo/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/QHE_SE/QHE_SE_thermo/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/QHE_SE/QHE_SE_thermo/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>QHE-SE thermo</h1>
+
+    
+    
+    
+    <p>A number of things in <code>src/utils/cam_thermo.F90</code> need to change in order to create quasi-hydrostatic equilibrium.</p>
+<p>The most immediate changes will be to <code>get_pmid_from_dp</code> and <code>get_gz</code>. We'll possibly need to change <code>get_rho_dry</code>, <code>get_ps</code>,
+and <code>get_dp</code>.</p>
+<p>This work involves two intermediate steps:</p>
+<ul>
+<li>Implement QHE in reconstruction of geopotential (This should basically make AAM budget fine)</li>
+<li>Add <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mover accent="true"><mi>r</mi><mo>^</mo></mover><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\hat{r}^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6944em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1944em;"><span class="mord">^</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></code> terms to pseudodensity, <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>r</mi><mo>^</mo></mover></mrow><annotation encoding="application/x-tex">\hat{r}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6944em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1944em;"><span class="mord">^</span></span></span></span></span></span></span></span></span></span></code> terms to prognostic equations</li>
+</ul>
+<h2>List of subroutines and possible changes to make:</h2>
+<ul>
+<li>
+<p><code>get_enthalpy_1hd</code>: <strong>Is <code>dp</code> invoked correctly here? i.e.</strong></p>
+</li>
+<li>
+<p><code>get_virtual_temp_1hd</code>: <strong>Check that <code>dp</code> is being used correctly. Possible change to EOS?</strong></p>
+</li>
+<li>
+<p><code>get_sum_species_1hd</code> <strong>Check that <code>dp</code> is being used correctly.</strong></p>
+</li>
+<li>
+<p><code>get_dp_1hd</code>: <strong>Check if <code>dp</code> is being used correctly. Also, check whether invoked on physics side</strong></p>
+</li>
+<li>
+<p><code>get_pmid_from_dp_1hd</code>: <strong>Check if pmid is thermodynamic pressure in invocation. Addition of QHE terms? Modification of upper boundary?</strong></p>
+</li>
+<li>
+<p><code>get_gz_given_dp_Tv_Rdry_1hd</code>: <strong>MAJOR CHANGES</strong></p>
+</li>
+<li>
+<p><code>get_ps_1hd</code>: <strong>Ensure <code>dp</code> is consistent across physics/dynamics</strong></p>
+</li>
+<li>
+<p><code>get_dp_ref_1hd</code>: <strong>Check how this subroutine is used</strong></p>
+</li>
+<li>
+<p><code>get_rho_dry_1hd</code>: <strong>Likely several changes</strong></p>
+</li>
+<li>
+<p><code>get_hydrostatic_energy_1hd</code> **Major changes,</p>
+</li>
+<li>
+<p><code>cam_thermo_init</code> No changes</p>
+</li>
+<li>
+<p><code>cam_thermo_dry_air_update</code> no direct changes</p>
+</li>
+<li>
+<p><code>cam_thermo_water_update</code> no direct changes</p>
+</li>
+<li>
+<p><code>get_enthalpy_2h</code>: No direct changes</p>
+</li>
+<li>
+<p><code>get_virtual_temp_2hd</code> no direct changes</p>
+</li>
+<li>
+<p><code>get_sum_species_2hd</code>: No direct changes</p>
+</li>
+<li>
+<p><code>get_dp_2hd</code>: No direct changes</p>
+</li>
+<li>
+<p><code>get_pmid_from_dpdry_1hd</code>: No direct changes</p>
+</li>
+<li>
+<p><code>get_exner_1hd</code>: No direct changes</p>
+</li>
+<li>
+<p><code>get_virtual_theta_1hd</code>: No direct changes</p>
+</li>
+<li>
+<p><code>get_gz_from_dp_dry_ptop_temp_1hd</code>: Little to no direct changes</p>
+</li>
+<li>
+<p><code>get_gz_given_dp_Tv_Rdry_2hd</code>: No direct changes</p>
+</li>
+<li>
+<p><code>get_Richardson_number_1hd</code>: No direct changes</p>
+</li>
+<li>
+<p><code>get_ps_2hd</code>: No direct changes</p>
+</li>
+<li>
+<p><code>get_kappa_dry_1hd</code>: No direct changes</p>
+</li>
+<li>
+<p><code>get_kappa_dry_2hd</code>: No direct changes</p>
+</li>
+<li>
+<p><code>get_dp_ref_2hd</code>: No direct changes</p>
+</li>
+<li>
+<p><code>get_rho_dry_2hd</code>: No direct changes</p>
+</li>
+<li>
+<p><code>get_molecular_diff_coef_1hd</code>: No direct changes for now</p>
+</li>
+<li>
+<p><code>get_molecular_diff_coef_2hd</code>: No direct changes</p>
+</li>
+<li>
+<p><code>get_molecular_diff_coef_reference</code> No changes</p>
+</li>
+<li>
+<p><code>cam_thermo_calc_kappav_2hd</code>: Dear god, hopefully no changes</p>
+</li>
+</ul>
+<h2>EOS considerations:</h2>
+<p>In the dry-mass SE vertical coordinate,</p>
+<h3>Notes on <code>get_pmid_from_dp</code>:</h3>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/your-repo-name/posts/QHE_SE/">Quasi-hydrostatic CAM-SE</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>
