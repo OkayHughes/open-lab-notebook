@@ -5,7 +5,7 @@
   "scripts": {
     "start": "eleventy --serve",
     "build": "NODE_ENV=production eleventy",
-    "build-ghpages": "npx @11ty/eleventy --pathprefix=/your-repo-name/"
+    "build-ghpages": "npx @11ty/eleventy --pathprefix=/open-lab-notebook/"
   },
   "dependencies": {
     "eleventy-plugin-seo": "^0.5.2",
