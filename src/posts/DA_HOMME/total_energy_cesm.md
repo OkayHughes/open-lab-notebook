@@ -30,4 +30,14 @@ we can write `$$-\left(\rho^{-1}\pder{\pi}{s} \right) p = p\hat{r}^2 \pder{\phi}
 \end{align*} 
 $$$`
 
+Note that the form of `$$I$$` is equivalent (once integrated) to `$$ \int c_p T_v - \pder{}{s} \left( \hat{r}^2 p \right) \phi \intd{s} + p_s \hat{r}^2_s \phi_s  $$` which is analogous to `$$q = c_p \mathrm{d}{T_v} - \frac{1}{\rho} \mathrm{d}{p}$$`
+
+This motivates the grouping
+`$$$ 
+\begin{align*}
+ \int c_p \Theta_v \Pi + \hat{r}^2 p \pder{\phi}{s} + \pi_{\textrm{top}} \phi_{\textrm{top}} + \pder{\pi}{s} \phi \intd{s}  = p_s \hat{r}_s^2 \phi_s + \int c_p T_v + \left( \pder{\pi}{s} - \pder{}{s}(\hat{r}^2 p) \right) \phi \intd{s} 
+\end{align*}
+$$$`
+where the first term (assuming `$$p_s = p_{s, \textrm{hydro}}$$`) is just the hydrostatic potential energy. So CAM's convention is including the correction in the second term?  
+
 Note: bottom boundary does not disappear outside of time derivative!
