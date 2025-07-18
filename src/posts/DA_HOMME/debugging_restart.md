@@ -63,7 +63,7 @@ In the momentum equation in Navier Stokes, the pressure gradient and diffusion t
 
 Here's what we can conclude from this: the steps to design a reasonable tensor for your application should read something like this
 * Transform to a tangent plane to the sphere using elem%lat in x-y coordinates (optional, but likely reduces mess when designing the stress tensor)
-* Design a tensor $V$ that measures the "stress in the deformed configuration" (e.g. a Cauchy stress tensor)
+* Design a tensor `$$\boldsymbol{V}(\nabla \Phi_s)$$` that measures the "stress in the deformed configuration" (e.g. a Cauchy stress tensor)
 * By using that tensor in laplacian_sphere_wk, your artificial diffusion will induce the time tendency necessary to relax the "deformed state" to a "reference state" with lower stress.
 
 
