@@ -69,6 +69,12 @@ Here's what we can conclude from this: the steps to design a reasonable tensor f
 
 The section on normal and shear stress in the [Cauchy stress tensor wikipedia page](https://en.wikipedia.org/wiki/Cauchy_stress_tensor#Normal_and_shear_stresses) will be helpful for defining this. 
 
+## bigger picture:
+
+I'm not entirely sure that laplacian is the right tool to use here, as it seems to me it would be an artificial source/sink of moisture. That seems pretty undesirable to have within the dycore.
+ If you're looking to penalize diffusion of moisture against topographic gradients, my first thought would be to identify the source of that diffusion and eliminate it, rather than make an ad hoc 
+tool to cancel it out. You could also introduce artificial flow into the wind that's used by tracer advection to counteract it, which I think would cause minor thermodynamic inconsistency.
+
 
 
 
