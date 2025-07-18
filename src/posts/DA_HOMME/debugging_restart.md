@@ -46,7 +46,31 @@ $$`
 
 There are several different methods for calculating `$$V$$` (none of which are physical, per se) but its purpose is to be able to input a constant value `nu_const` as, e.g., a namelist setting, and get reasonable hyperviscosity in a refined mesh.
  
- 
+## notes on modifying the tensor
+
+Technically what we are computing is the Laplace-Beltrami operator, which in coordinates reads `$$ \nabla^2 f = \frac{1}{\sqrt{|g|}} \sum_{i}\sum_{j} \pder{}{x_i} \left(\sqrt{|g|} g^{i,j} \pder{f}{x_j} \right)$$`, with `$$g^{i,j}$$` the inverse of the metric tensor. 
+
+Let's work using strong derivatives for the moment. Then let `$$ D^{-1}$$` be the change-of-variables transformation as in the HOMME literature (contains cosine weighting). Let `$$x_1, x_2$$` be local
+coordinates in the reference element.
+Then `$$$ \nabla^2 u = \frac{1}{\sqrt{|D^{\top}D|}} \begin{pmatrix}\pder{}{x_1} \\ \pder{}{x_2}\end{pmatrix}^\top  \sqrt{|D^{\top}D|} D^{-\top}\left[D^{-1} \begin{pmatrix} \pder{f}{x_1} \\ \pder{f}{x_2} \end{pmatrix} \right]. $$$` 
+Recall that `$$D^{-\top}D^{-1}$$` is precisely `$$g^{i,j}$$` in the above expression, as a change-of-variables with Jacobian `$$D$$` induces a metric `$$D^\top D$$`. The quantity in the brackets is what comes from `gradient_sphere`. When the tensorVisc quantity is used, it then reads as
+
+Then `$$$ \nabla^2 u = \frac{1}{\sqrt{|D^{\top}D|}} \begin{pmatrix}\pder{}{x_1} \\ \pder{}{x_2}\end{pmatrix}^\top  \sqrt{|D^{\top}D|} D^{-\top}V\left[D^{-1} \begin{pmatrix} \pder{f}{x_1} \\ \pder{f}{x_2} \end{pmatrix} \right]. $$$` 
+
+
+## Connection between laplacian and diffusion
+In the momentum equation in Navier Stokes, the pressure gradient and diffusion terms both result from the Cauchy momentum equation `$$\frac{\mathrm{D}\boldsymbol{v}}{\mathrm{D}t} = \frac{1}{\rho} \nabla \cdot \boldsymbol{\sigma} $$`, with the particular choice of stress tensor `$$ \boldsymbol{\sigma} = -p\boldsymbol{I} + \lambda \textrm{Tr}(\boldsymbol{\varepsilon})\boldsymbol{I} + 2\mu\boldsymbol{\varepsilon}$$` with `$$\boldsymbol{\varepsilon} = \frac{1}{2} \left(\nabla \boldsymbol{v} + (\nabla \boldsymbol{v}^\top) \right)$$`. The laplacian results from `$$ \nabla \cdot \mu \boldsymbol{\varepsilon} = \mu \nabla \cdot \nabla \boldsymbol{v}$$`. 
+
+Here's what we can conclude from this: the steps to design a reasonable tensor for your application should read something like this
+* Transform to a tangent plane to the sphere using elem%lat in x-y coordinates (optional, but likely reduces mess when designing the stress tensor)
+* Design a tensor $V$ that measures the "stress in the deformed configuration" (e.g. a Cauchy stress tensor)
+* By using that tensor in laplacian_sphere_wk, your artificial diffusion will induce the time tendency necessary to relax the "deformed state" to a "reference state" with lower stress.
+
+
+The section on normal and shear stress in the [Cauchy stress tensor wikipedia page](https://en.wikipedia.org/wiki/Cauchy_stress_tensor#Normal_and_shear_stresses) will be helpful for defining this. 
+
+
+
 
 
 
