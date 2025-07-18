@@ -149,6 +149,10 @@ M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">â
 <li>By using that tensor in laplacian_sphere_wk, your artificial diffusion will induce the time tendency necessary to relax the &quot;deformed state&quot; to a &quot;reference state&quot; with lower stress.</li>
 </ul>
 <p>The section on normal and shear stress in the <a href="https://en.wikipedia.org/wiki/Cauchy_stress_tensor#Normal_and_shear_stresses">Cauchy stress tensor wikipedia page</a> will be helpful for defining this.</p>
+<h2>bigger picture:</h2>
+<p>I'm not entirely sure that laplacian is the right tool to use here, as it seems to me it would be an artificial source/sink of moisture. That seems pretty undesirable to have within the dycore.
+If you're looking to penalize diffusion of moisture against topographic gradients, my first thought would be to identify the source of that diffusion and eliminate it, rather than make an ad hoc
+tool to cancel it out. You could also introduce artificial flow into the wind that's used by tracer advection to counteract it, which I think would cause minor thermodynamic inconsistency.</p>
 
     <div class="controls">
 
