@@ -57,13 +57,24 @@ Recall that `$$D^{-\top}D^{-1}$$` is precisely `$$g^{i,j}$$` in the above expres
 
 Then `$$$ \nabla^2 u = \frac{1}{\sqrt{|D^{\top}D|}} \begin{pmatrix}\pder{}{x_1} \\ \pder{}{x_2}\end{pmatrix}^\top  \sqrt{|D^{\top}D|} D^{-\top}V\left[D^{-1} \begin{pmatrix} \pder{f}{x_1} \\ \pder{f}{x_2} \end{pmatrix} \right]. $$$` 
 
+The construction of `$$V$$` (detailed in `cube_mod.F90`) then leads to
+`$$$ 
+\begin{align*}
+     \nabla^2 u &= \frac{1}{\sqrt{|D^{\top}D|}} \begin{pmatrix}\pder{}{x_1} \\ \pder{}{x_2}\end{pmatrix}^\top  \sqrt{|D^{\top}D|} D^{-\top}D^\top E^{-\top}\Lambda^*\Lambda E^{-1} D\left[D^{-1} \begin{pmatrix} \pder{f}{x_1} \\ \pder{f}{x_2} \end{pmatrix} \right] \\
+     &= \frac{1}{\sqrt{|D^{\top}D|}} \begin{pmatrix}\pder{}{x_1} \\ \pder{}{x_2}\end{pmatrix}^\top  \sqrt{|D^{\top}D|} E^{-\top}\Lambda^*\Lambda E^{-1}  \begin{pmatrix} \pder{f}{x_1} \\ \pder{f}{x_2} \end{pmatrix}
+\end{align*}$$$`
+where `$$E$$` diagonalizes `$$ D^\top D = E^\top \Lambda E$$` and `$$\Lambda^*$$` is an ad-hoc diagonal matrix.
+
+
+
+
 
 ## Connection between laplacian and diffusion
 In the momentum equation in Navier Stokes, the pressure gradient and diffusion terms both result from the Cauchy momentum equation `$$\frac{\mathrm{D}\boldsymbol{v}}{\mathrm{D}t} = \frac{1}{\rho} \nabla \cdot \boldsymbol{\sigma} $$`, with the particular choice of stress tensor `$$ \boldsymbol{\sigma} = -p\boldsymbol{I} + \lambda \textrm{Tr}(\boldsymbol{\varepsilon})\boldsymbol{I} + 2\mu\boldsymbol{\varepsilon}$$` with `$$\boldsymbol{\varepsilon} = \frac{1}{2} \left(\nabla \boldsymbol{v} + (\nabla \boldsymbol{v}^\top) \right)$$`. The laplacian results from `$$ \nabla \cdot \mu \boldsymbol{\varepsilon} = \mu \nabla \cdot \nabla \boldsymbol{v}$$`. 
 
 Here's what we can conclude from this: the steps to design a reasonable tensor for your application should read something like this
 * Transform to a tangent plane to the sphere using elem%lat in x-y coordinates (optional, but likely reduces mess when designing the stress tensor)
-* Design a tensor `$$\boldsymbol{V}(\nabla \Phi_s)$$` that measures the "stress in the deformed configuration" (e.g. a Cauchy stress tensor)
+* Design a tensor `$$\boldsymbol{V}(\Phi_s)$$` that measures the "stress in the deformed configuration" (e.g. a Cauchy stress tensor)
 * By using that tensor in laplacian_sphere_wk, your artificial diffusion will induce the time tendency necessary to relax the "deformed state" to a "reference state" with lower stress.
 
 
