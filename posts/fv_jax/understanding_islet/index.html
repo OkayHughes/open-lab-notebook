@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/open-lab-notebook/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/open-lab-notebook/public/fonts/cmu.css" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+ 
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/fv_jax/understanding_islet/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/fv_jax/understanding_islet/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/fv_jax/understanding_islet/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Islet?</h1>
+
+    
+    
+    
+    <p>Islet is an interpolated SL method, and in this document we're only concerning outselves with the CG variant.</p>
+<p>Let <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold-italic">r</mi><mo>∈</mo><mo stretchy="false">[</mo><mo>−</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><msup><mo stretchy="false">]</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\boldsymbol{r}\in [-1, 1]^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right:0.03194em;">r</span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">−</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></code> be the element-local reference coordinate. <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold-italic">x</mi><mo>=</mo><msub><mi>m</mi><mi>e</mi></msub><mo stretchy="false">(</mo><mi mathvariant="bold-italic">r</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\boldsymbol{x} = m_e(\boldsymbol{r})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4444em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol">x</span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right:0.03194em;">r</span></span></span><span class="mclose">)</span></span></span></span></code>. Let <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo>=</mo><mi>E</mi><mo stretchy="false">(</mo><mi mathvariant="bold-italic">x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">e = E(\boldsymbol{x})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">e</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mord boldsymbol">x</span></span></span><span class="mclose">)</span></span></span></span></code> be a single-valued integer returning exactly one index of an element containing <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold-italic">x</mi></mrow><annotation encoding="application/x-tex"> \boldsymbol{x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4444em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol">x</span></span></span></span></span></span></code>. We will retain the manifold generalization because it very well may be artistically interesting.</p>
+<p>Define <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>normalize</mtext><mo stretchy="false">(</mo><mi mathvariant="bold-italic">x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mi mathvariant="bold-italic">x</mi><mrow><mi mathvariant="normal">∥</mi><mi mathvariant="bold-italic">x</mi><msub><mi mathvariant="normal">∥</mi><mn>2</mn></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">\textrm{normalize}(\boldsymbol{x}) = \frac{\boldsymbol{x}}{\|\boldsymbol{x}\|_2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord textrm">normalize</span></span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mord boldsymbol">x</span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2251em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7051em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∥</span><span class="mord mtight"><span class="mord mtight"><span class="mord boldsymbol mtight">x</span></span></span><span class="mord mtight"><span class="mord mtight">∥</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3173em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord boldsymbol mtight">x</span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></code></p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/posts/fv_jax/">fv jax</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

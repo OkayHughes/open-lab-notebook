@@ -417,29 +417,24 @@ create_case <span style="color: #ae81ff">&lt;/span&gt;
 <span style="color: #f8f8f2">readonly ARGS</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;$@&quot;</span></p>
 <p>is_empty<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
 <span style="color: #f8f8f2">local var</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span></p>
-<pre><code>&lt;span style=&quot;color: #f92672&quot;&gt;[[&lt;/span&gt; -z &lt;span style=&quot;color: #f8f8f2&quot;&gt;$var&lt;/span&gt; &lt;span style=&quot;color: #f92672&quot;&gt;]]&lt;/span&gt;
-</code></pre>
-<p><span style="color: #f92672">}</span></p>
+<p><span style="color: #f92672">[[</span> -z <span style="color: #f8f8f2">$var</span> <span style="color: #f92672">]]</span>
+<span style="color: #f92672">}</span></p>
 <p>is_not_empty<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
 <span style="color: #f8f8f2">local var</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span></p>
-<pre><code>&lt;span style=&quot;color: #f92672&quot;&gt;[[&lt;/span&gt; -n &lt;span style=&quot;color: #f8f8f2&quot;&gt;$var&lt;/span&gt; &lt;span style=&quot;color: #f92672&quot;&gt;]]&lt;/span&gt;
-</code></pre>
-<p><span style="color: #f92672">}</span></p>
+<p><span style="color: #f92672">[[</span> -n <span style="color: #f8f8f2">$var</span> <span style="color: #f92672">]]</span>
+<span style="color: #f92672">}</span></p>
 <p>is_file<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
 <span style="color: #f8f8f2">local file</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span></p>
-<pre><code>&lt;span style=&quot;color: #f92672&quot;&gt;[[&lt;/span&gt; -f &lt;span style=&quot;color: #f8f8f2&quot;&gt;$file&lt;/span&gt; &lt;span style=&quot;color: #f92672&quot;&gt;]]&lt;/span&gt;
-</code></pre>
-<p><span style="color: #f92672">}</span></p>
+<p><span style="color: #f92672">[[</span> -f <span style="color: #f8f8f2">$file</span> <span style="color: #f92672">]]</span>
+<span style="color: #f92672">}</span></p>
 <p>is_link<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
 <span style="color: #f8f8f2">local var</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span></p>
-<pre><code>&lt;span style=&quot;color: #f92672&quot;&gt;[[&lt;/span&gt; &lt;span style=&quot;color: #e6db74&quot;&gt;`&lt;/span&gt;&lt;span style=&quot;color: #f8f8f2&quot;&gt;test&lt;/span&gt; -L &lt;span style=&quot;color: #f8f8f2&quot;&gt;$1&lt;/span&gt;&lt;span style=&quot;color: #e6db74&quot;&gt;`&lt;/span&gt; &lt;span style=&quot;color: #f92672&quot;&gt;]]&lt;/span&gt;
-</code></pre>
-<p><span style="color: #f92672">}</span></p>
+<p><span style="color: #f92672">[[</span> <span style="color: #e6db74"><code>&lt;/span&gt;&lt;span style=&quot;color: #f8f8f2&quot;&gt;test&lt;/span&gt; -L &lt;span style=&quot;color: #f8f8f2&quot;&gt;$1&lt;/span&gt;&lt;span style=&quot;color: #e6db74&quot;&gt;</code></span> <span style="color: #f92672">]]</span>
+<span style="color: #f92672">}</span></p>
 <p>is_dir<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
 <span style="color: #f8f8f2">local dir</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span></p>
-<pre><code>&lt;span style=&quot;color: #f92672&quot;&gt;[[&lt;/span&gt; -d &lt;span style=&quot;color: #f8f8f2&quot;&gt;$dir&lt;/span&gt; &lt;span style=&quot;color: #f92672&quot;&gt;]]&lt;/span&gt;
-</code></pre>
-<p><span style="color: #f92672">}</span></p>
+<p><span style="color: #f92672">[[</span> -d <span style="color: #f8f8f2">$dir</span> <span style="color: #f92672">]]</span>
+<span style="color: #f92672">}</span></p>
 <p><span style="color: #75715e"># =================================================================</span>
 <span style="color: #75715e"># end boilerplate</span>
 <span style="color: #75715e"># =================================================================</span></p>
@@ -472,7 +467,7 @@ the variables that exist in the existing <code>latlon.nc</code> file along the d
           <h3>
             Parent post:
       </h3>
-          <ul><li><a href="/open-lab-notebook/posts/MPAS/MPAS_tutorials/">MPAS tutorials</a></li></ul>
+          <ul><li><a href="/posts/MPAS/MPAS_tutorials/">MPAS tutorials</a></li></ul>
       
       
       

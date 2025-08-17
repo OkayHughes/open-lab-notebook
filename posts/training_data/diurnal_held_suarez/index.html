@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/open-lab-notebook/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/open-lab-notebook/public/fonts/cmu.css" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonts/cmu.css" />
+ 
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/training_data/diurnal_held_suarez/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/training_data/diurnal_held_suarez/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/training_data/diurnal_held_suarez/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Diurnal Held Suarez</h1>
+
+    
+    
+    
+    <p>The stock Held-Suarez uses tendencies like
+<code><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mi mathvariant="normal">∂</mi><mi>T</mi></mrow><mrow><mi mathvariant="normal">∂</mi><mi>t</mi></mrow></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><msub><mi>k</mi><mi>T</mi></msub><mo stretchy="false">(</mo><msub><mi>T</mi><mtext>ref</mtext></msub><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo><mo>−</mo><mi>T</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mi mathvariant="normal">∂</mi><msub><mi mathvariant="bold-italic">v</mi><mi>h</mi></msub></mrow><mrow><mi mathvariant="normal">∂</mi><mi>t</mi></mrow></mfrac></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mo>−</mo><msub><mi>k</mi><mi>v</mi></msub><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo><msub><mi mathvariant="bold-italic">v</mi><mi>h</mi></msub></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex"> \begin{align*} \pder{T}{t} &amp;= k_T (T_{\textrm{ref}}(p) - T) \\ \pder{\boldsymbol{v}_h}{t} &amp;= -k_v(p) \boldsymbol{v}_h  \end{align*} </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.7149em;vertical-align:-2.1074em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.6074em;"><span style="top:-4.6074em;"><span class="pstrut" style="height:3.3714em;"></span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord mathnormal">t</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.3714em;"></span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord mathnormal">t</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord"><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right:0.03704em;">v</span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">h</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.1074em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.6074em;"><span style="top:-4.6074em;"><span class="pstrut" style="height:3.3714em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord textrm mtight">ref</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">p</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mclose">)</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.3714em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">−</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">p</span><span class="mclose">)</span><span class="mord"><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right:0.03704em;">v</span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">h</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.1074em;"><span></span></span></span></span></span></span></span></span></span></span></span></code></p>
+<p>This means that Ertel's Potential Vorticity and potential temperature
+are not conserved, as the flow is not adiabatic.
+For the purpose of examining the physicality of the flows predicted by ML
+weather models, one possible way of quantitatively diagnosing aphysical predictions is by comparing these two conserved quantities under adiabatic flow. The benefit of HS is that a model run can be simulated for decades and develop a statistically stationary climate.</p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/posts/training_data/training/">Training data</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

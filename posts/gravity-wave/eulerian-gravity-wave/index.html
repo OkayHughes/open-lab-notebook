@@ -249,15 +249,12 @@ fnames = (/ &quot;cesm_2.1.3.ne30_ne30_mg16.FADIAB.gravity_wave.two_mountain_ne3
 &quot;cesm_2.1.3.T341_f02_t12.FADIAB.gravity_wave.two_mountain_eulerian_base.cam.h0.0001-01-01-00000.nc&quot;/)
 labels = (/ &quot;NE60&quot;, &quot;T341&quot;/)
 time_mult = (/ 1, 1/)</p>
-<pre><code>;fname = &quot;flat.cam.h0.nc&quot;
+<p>;fname = &quot;flat.cam.h0.nc&quot;
 dir_fig = &quot;T341_ne30_compare&quot;
 time_ind = 2 ; the time in days that we want to plot
 comp_identifier =  &quot;time_&quot; + time_ind
-;fname = &quot;flat.cam.h0.nc&quot;
-
-
-i = 0
-</code></pre>
+;fname = &quot;flat.cam.h0.nc&quot;</p>
+<p>i = 0</p>
 <p>; Setup workstation and figure render presets
 label = &quot;OMEGA&quot;
 out = systemfunc(&quot;mkdir -p &quot; + &quot;figures/&quot; + dir_fig + &quot;/&quot; + comp_identifier)
@@ -265,7 +262,7 @@ wks_type = &quot;png&quot;
 wks_type@wkWidth = 1024
 wks_type@wkHeight = 1024
 wks_frame = gsn_open_wks(wks_type, &quot;figures/&quot; + dir_fig + &quot;/&quot; +  label + time_ind )</p>
-<pre><code>dimsz = dimsizes(fnames)
+<p>dimsz = dimsizes(fnames)
 plot_tmp = new(2 * (dimsz(0)),graphic)
 plot = new(dimsz(0),graphic)
 minval = (/ -0.1, -0.1 /)
@@ -277,82 +274,72 @@ lat_end = 90
 lon_begin = -360
 lon_end = 360
 do while(i.lt. dimsz(0))
-	print(i)
-	f     = addfile(diris(i) + fnames(i),&quot;r&quot;)
-	time := f-&gt;time
-	lat := f-&gt;lat
-	lon := f-&gt;lon
-	latsize := dimsizes(lat)
-	phi_dims = getfilevardimsizes(f, &quot;PHIS&quot;)
-	nlat := 0
-            if (product(dimsizes(phi_dims)) .eq. 2) then 
-                    phi_surf_all := f-&gt;PHIS({lat_begin:lat_end}, {lon_begin:lon_end}) 
-            else
-                    phi_surf_all := f-&gt;PHIS(0, {lat_begin:lat_end}, {lon_begin:lon_end}) 
-            end if  
-	phi_surf := phi_surf_all
-	var_all := f-&gt;OMEGA850({time_ind}, :, :)
-	Z3 := f-&gt;Z3({time_ind}, :, :, :)
-	var := var_all({-360:360}, {-360:360}) 
-	t_out := time({time_ind})
-	
-	
-
-
-
-	res                     = True         ; plot modifications desired
-	res@gsnDraw  = False
-	res@gsnFrame = False
-	res@vpWidthF             = 0.9
-	res@vpHeightF            = 0.225
-	res@gsnMaximize         = True         ; Maximize size of plot in frame
-	res@cnFillOn            = True
-	res@cnFillPalette       = &quot;MPL_rainbow&quot;
-	res@cnLinesOn           = False
-	res@cnLineLabelsOn      = False
-	res@lbLabelAngleF       = 90
-	res@tiMainString        = &quot;&quot;
-	res@tiMainOn = False
-	res@tiYAxisString = labels(i)
-	res@cnLevelSelectionMode = &quot;ManualLevels&quot;
-	res@cnMinLevelValF  = minval(i)
-	res@cnMaxLevelValF  = maxval(i)
-	res@cnLevelSpacingF = (maxval(i)-minval(i)) / 10
-	plot_tmp(2 * i) = gsn_csm_contour(wks_frame,var(:, :),res)
-	res_geo                     = True
-	res_geo@gsnDraw  = False
-	res_geo@gsnFrame = False
-	res_geo@cnConstFLabelOn = False
-	res_geo@vpWidthF             = 0.9
-	res_geo@vpHeightF            = 0.225
-	res_geo@gsnMaximize         = True 
-	res_geo@cnFillOn = False
-	res_geo@cnLinesOn = True
-	res_geo@cnLineLabelsOn = False
-	res_geo@tiMainString = &quot;&quot;
-	res_geo@gsnRightString   = &quot;&quot;
-	res_geo@gsnLeftString    = &quot;&quot;
-	res_geo@gsnCenterString  = &quot;&quot;
-	res_geo@cnLineColor      = &quot;black&quot;
-	res_geo@cnInfoLabelOn = False
-            res_geo@cnLevelSelectionMode = &quot;ExplicitLevels&quot;
-            res_geo@cnLevels = (/ 0.1 * max(phi_surf(:, :)), max(phi_surf(:, :)) / 2, 0.9 * max(phi_surf(:, :)) /)
-	res_geo@cnLineLabelBackgroundColor = &quot;transparent&quot;
-	plot_tmp(2*i + 1) =  gsn_csm_contour(wks_frame,phi_surf(:, :),res_geo)
-
-
-	overlay(plot_tmp(2 * i), plot_tmp(2 * i + 1))
-	plot(i) = plot_tmp(2 * i)
-
-	i = i + 1
-
-end do
+print(i)
+f     = addfile(diris(i) + fnames(i),&quot;r&quot;)
+time := f-&gt;time
+lat := f-&gt;lat
+lon := f-&gt;lon
+latsize := dimsizes(lat)
+phi_dims = getfilevardimsizes(f, &quot;PHIS&quot;)
+nlat := 0
+if (product(dimsizes(phi_dims)) .eq. 2) then
+phi_surf_all := f-&gt;PHIS({lat_begin:lat_end}, {lon_begin:lon_end})
+else
+phi_surf_all := f-&gt;PHIS(0, {lat_begin:lat_end}, {lon_begin:lon_end})
+end if<br>
+phi_surf := phi_surf_all
+var_all := f-&gt;OMEGA850({time_ind}, :, :)
+Z3 := f-&gt;Z3({time_ind}, :, :, :)
+var := var_all({-360:360}, {-360:360})
+t_out := time({time_ind})</p>
+<p>res                     = True         ; plot modifications desired
+res@gsnDraw  = False
+res@gsnFrame = False
+res@vpWidthF             = 0.9
+res@vpHeightF            = 0.225
+res@gsnMaximize         = True         ; Maximize size of plot in frame
+res@cnFillOn            = True
+res@cnFillPalette       = &quot;MPL_rainbow&quot;
+res@cnLinesOn           = False
+res@cnLineLabelsOn      = False
+res@lbLabelAngleF       = 90
+res@tiMainString        = &quot;&quot;
+res@tiMainOn = False
+res@tiYAxisString = labels(i)
+res@cnLevelSelectionMode = &quot;ManualLevels&quot;
+res@cnMinLevelValF  = minval(i)
+res@cnMaxLevelValF  = maxval(i)
+res@cnLevelSpacingF = (maxval(i)-minval(i)) / 10
+plot_tmp(2 * i) = gsn_csm_contour(wks_frame,var(:, :),res)
+res_geo                     = True
+res_geo@gsnDraw  = False
+res_geo@gsnFrame = False
+res_geo@cnConstFLabelOn = False
+res_geo@vpWidthF             = 0.9
+res_geo@vpHeightF            = 0.225
+res_geo@gsnMaximize         = True
+res_geo@cnFillOn = False
+res_geo@cnLinesOn = True
+res_geo@cnLineLabelsOn = False
+res_geo@tiMainString = &quot;&quot;
+res_geo@gsnRightString   = &quot;&quot;
+res_geo@gsnLeftString    = &quot;&quot;
+res_geo@gsnCenterString  = &quot;&quot;
+res_geo@cnLineColor      = &quot;black&quot;
+res_geo@cnInfoLabelOn = False
+res_geo@cnLevelSelectionMode = &quot;ExplicitLevels&quot;
+res_geo@cnLevels = (/ 0.1 * max(phi_surf(:, :)), max(phi_surf(:, :)) / 2, 0.9 * max(phi_surf(:, :)) /)
+res_geo@cnLineLabelBackgroundColor = &quot;transparent&quot;
+plot_tmp(2*i + 1) =  gsn_csm_contour(wks_frame,phi_surf(:, :),res_geo)</p>
+<p>overlay(plot_tmp(2 * i), plot_tmp(2 * i + 1))
+plot(i) = plot_tmp(2 * i)</p>
+<p>i = i + 1</p>
+<p>end do
 res_panel = True
 res_panel@gsnPanelMainString        = label + &quot; &quot;  + &quot; day &quot; + sprintf(&quot;%5.2f&quot;    , t_out)
 gsn_panel(wks_frame,plot,(/2, 1/), res_panel)
-</code></pre>
 </code>
-</pre>
+</pre></p>
 </p>
 </details>
 <img class="center small" alt="Omega 850 day 0.5" src="https://open-lab-notebook-assets.glitch.me/assets/gravity_wave/eulerian_dycore_compare/OMEGA0.5.png">
@@ -462,7 +449,7 @@ analytic_ic_type = 'dry_baroclinic_wave_dcmip2016'
           <h3>
             Parent post:
       </h3>
-          <ul><li><a href="/open-lab-notebook/posts/gravity-wave-header/">The two-mountain gravity wave</a></li></ul>
+          <ul><li><a href="/posts/gravity-wave-header/">The two-mountain gravity wave</a></li></ul>
       
       
       
