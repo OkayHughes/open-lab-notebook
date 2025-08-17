@@ -5,19 +5,21 @@
   "scripts": {
     "start": "eleventy --serve",
     "build": "NODE_ENV=production eleventy",
-    "build-ghpages": "npx @11ty/eleventy --pathprefix=/open-lab-notebook/"
+    "postinstall": "patch-package",
+    "build-ghpages": "NODE_ENV=production npx @11ty/eleventy --pathprefix='open-lab-notebook'"
   },
   "dependencies": {
-    "eleventy-plugin-seo": "^0.5.2",
-    "luxon": "^2.0.2",
-    "katex": "^0.13.16",
-    "eleventy-plugin-link_to": "^0.4.0",
     "@11ty/eleventy-navigation": "^0.3.2",
+    "eleventy-plugin-link_to": "^0.4.0",
+    "eleventy-plugin-seo": "^0.5.2",
+    "eleventy-plugin-toc": "^1.1.5",
     "highlight.js": "^11.1.0",
-    "eleventy-plugin-toc": "^1.1.5"
+    "katex": "^0.16.22",
+    "luxon": "^2.0.2",
+    "patch-package": "^8.0.0"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^0.11.1"
+    "@11ty/eleventy": "^3.1.2"
   },
   "engines": {
     "node": "12"

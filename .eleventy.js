@@ -88,7 +88,6 @@ module.exports = function(eleventyConfig) {
   });
   eleventyConfig.addPlugin(linkTo);
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
-
   
   eleventyConfig.setBrowserSyncConfig({ ghostMode: false });
 
@@ -96,6 +95,7 @@ module.exports = function(eleventyConfig) {
      - Read the Next Steps post to learn how to extend this
   */
   eleventyConfig.addCollection("posts", function(collection) {
+	  console.log(eleventyConfig.pathPrefix);
     
     /* The posts collection includes all posts that list 'posts' in the front matter 'tags'
        - https://www.11ty.dev/docs/collections/
