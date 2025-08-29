@@ -1,16 +1,59 @@
-<p>npd---
-date: 2023-11-06
-tags:</p>
-<ul>
-<li>posts</li>
-<li>misc
-eleventyNavigation:
-key: bfb transport
-parent: Porting DA HOMME to C++
-layout: layouts/post.njk</li>
-</ul>
-<hr>
-<h3>Porting changes to transport code</h3>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/open-lab-notebook/public/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/open-lab-notebook/public/fonts/cmu.css"/>
+ 
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/DA_HOMME/c++_port_transport/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/DA_HOMME/c++_port_transport/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/DA_HOMME/c++_port_transport/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>bfb transport</h1>
+
+    
+    
+    
+    <h3>Porting changes to transport code</h3>
 <p>changes in:</p>
 <ul>
 <li><code>components/homme/src/share/prim_driver_base.F90</code></li>
@@ -27,5 +70,76 @@ layout: layouts/post.njk</li>
 including <code>maint-1.2</code>, <code>maint-2.0</code>, <code>maint-3.0</code>, as well as the original commit that DA HOMME branched from.
 Therefore, the subset of executables needed to run the case must be calculated.
 From cmake output, we find that the command should be something like</p>
-<pre><code>make -j8 swtcA swtcB baroC baroCam baroCam-acc theta-l-nlev20 theta-l-nlev20 preqx-nlev30-interp theta-l-nlev30 tool-nlev26 theta-l-nlev10-native preqx-nlev10-native  theta-l-nlev20-native preqx-nlev10-native-kokkos theta-l-nlev30-kokkos theta-l-nlev20-native-kokkos theta-l-nlev10-native-kokkos preqx-nlev26 preqx-nlev26-kokkos preqx-nlev72 preqx-nlev72-kokkos preqx-nlev72 preqx-nlev72-kokkos theta-nlev128 theta-nlev128-kokkos
+<pre><code>make -j8 swtcA swtcB baroC baroCam baroCam-acc theta-l-nlev20 theta-l-nlev20 preqx-nlev30-interp theta-l-nlev30 tool-nlev26 theta-l-nlev10-native preqx-nlev10-native  theta-l-nlev20-native preqx-nlev10-native-kokkos theta-l-nlev30-kokkos theta-l-nlev20-native-kokkos theta-l-nlev10-native-kokkos preqx-nlev26 preqx-nlev26-kokkos preqx-nlev72 preqx-nlev72-kokkos preqx-nlev72 preqx-nlev72-kokkos theta-nlev128 theta-nlev128-kokkos dirk_ut caar_ut compose_ut eos_ut baseline cprnc
 </code></pre>
+<p>The issue in cprnc is due to improper preprocessor defines that result in the preprocessor variable indicating the integer datatype not being defined.
+These problems occur because there are spaces before the <code>#</code> character.</p>
+<p>The command to run an individual test is <code>ctest -R ${testname}</code>, and <code>make baseline</code> generates reference files to ensure that your changes didn't break anything important.</p>
+<p>Comparison tests:</p>
+<pre><code>-- Creating cxx-f90 comparison test preqx-nhgw_cxx_vs_f90
+-- Creating cxx-f90 comparison test preqx-nhgw-slice_cxx_vs_f90
+-- Creating cxx-f90 comparison test thetah-sl-test11conv-r0t1-cdr30-rrm_cxx_vs_f90
+-- Creating cxx-f90 comparison test thetanh-moist-bubble_cxx_vs_f90
+-- Creating cxx-f90 comparison test thetanh-dry-bubble_cxx_vs_f90
+-- Creating cxx-f90 comparison test thetah-nhgw_cxx_vs_f90
+-- Creating cxx-f90 comparison test thetanh-nhgw_cxx_vs_f90
+-- Creating cxx-f90 comparison test thetah-nhgw-slice_cxx_vs_f90
+-- Creating cxx-f90 comparison test thetanh-nhgw-slice_cxx_vs_f90
+-- Creating cxx-f90 comparison test preqx-nlev26-dry-r0-samenu-consthv-lim8-q1-ne2-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test preqx-nlev72-dry-r3-diffnu-consthv-lim9-q6-ne2-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test preqx-nlev72-moist-r3-samenu-tensorhv-lim9-q1-ne2-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test theta-f1-tt10-hvs1-hvst0-r2-qz10-nutopoff-GB-sl-ne2-nu3.4e18-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test theta-fhs1-ne2-nu3.4e18-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test theta-fhs2-ne2-nu3.4e18-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test theta-fhs3-ne2-nu3.4e18-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test theta-fdc12-test21-ne2-nu3.4e18-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test theta-fdc12-test22-ne2-nu3.4e18-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test theta-fdc12-test3-ne2-nu3.4e18-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test theta-f0-tt5-hvs1-hvst0-r3-qz1-nutopoff-ne2-nu3.4e18-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test theta-f1-tt5-hvs1-hvst0-r3-qz1-nutopoff-ne2-nu3.4e18-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test theta-f1-tt5-hvs1-hvst0-r0-qz1-nutopoff-ne2-nu3.4e18-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test theta-f1-tt10-hvs3-hvst0-r3-qz1-nutopoff-ne2-nu3.4e18-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test theta-f1-tt10-hvs3-hvst5-r3-qz1-nutopon-ne2-nu3.4e18-ndays1_cxx_vs_f90
+-- Creating cxx-f90 comparison test theta-f1-tt10-hvs1-hvst0-r2-qz10-nutopoff-GB-ne2-nu3.4e18-ndays1_cxx_vs_f90
+</code></pre>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/open-lab-notebook/posts/DA_HOMME/">Deep Atmosphere HOMME</a></li>
+<li><a href="/open-lab-notebook/posts/DA_HOMME/c++_port/">Porting DA HOMME to C++</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

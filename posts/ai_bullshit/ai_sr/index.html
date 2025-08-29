@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/open-lab-notebook/public/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/open-lab-notebook/public/fonts/cmu.css"/>
+ 
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/ai_bullshit/ai_sr/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/ai_bullshit/ai_sr/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/ai_bullshit/ai_sr/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>super-resolution</h1>
+
+    
+    
+    
+    <h1>Note: I'm experimenting with generating tutorials from deepseek r1. That's where this comes from.</h1>
+<h1>Diffusion-Based Super-Resolution Tutorial with Code References</h1>
+<p>This tutorial explains a simplified implementation of a diffusion-based super-resolution model, with explicit references to where each mathematical concept appears in the code.</p>
+<h2>Complete Python Implementation</h2>
+<pre><code class="language-python">import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import numpy as np
+from torch.utils.data import DataLoader
+from torchvision import datasets, transforms
+import matplotlib.pyplot as plt
+
+# Set device
+device = torch.device(&quot;cuda&quot; if torch.cuda.is_available() else &quot;cpu&quot;)
+
+# Define the U-Net model for noise prediction
+class UNet(nn.Module):
+    def __init__(self, in_channels=3, out_channels=3, base_channels=32):
+        super(UNet, self).__init__()
+        
+        # Encoder (downsampling)
+        self.enc1 = self._block(in_channels, base_channels)
+        self.enc2 = self._block(base_channels, base_channels*2)
+        self.pool = nn.MaxPool2d(2)
+        
+        # Bottleneck
+        self.bottleneck = self._block(base_channels*2, base_channels*4)
+        
+        # Decoder (upsampling)
+        self.upconv2 = nn.ConvTranspose2d(base_channels*4, base_channels*2, kernel_size=2, stride=2)
+        self.dec2 = self._block(base_channels*4, base_channels*2)  # Skip connection doubles channels
+        self.upconv1 = nn.ConvTranspose2d(base_channels*2, base_channels, kernel_size=2, stride=2)
+        self.dec1 = self._block(base_channels*2, base_channels)  # Skip connection doubles channels
+        
+        # Final output layer
+        self.out = nn.Conv2d(base_channels, out_channels, kernel_size=1)
+        
+    def _block(self, in_channels, out_channels):
+        return nn.Sequential(
+            nn.Conv2d(in_channels, out_channels, 3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(out_channels, out_channels, 3, padding=1),
+            nn.ReLU(inplace=True)
+        )
+    
+    def forward(self, x, t):
+        # Add time embedding (simplified)
+        # REF: Time embedding implementation
+        t_embed = t.view(-1, 1, 1, 1).expand(x.size(0), 1, x.size(2), x.size(3))
+        x = torch.cat([x, t_embed], dim=1)
+        
+        # Encoder
+        enc1 = self.enc1(x)
+        enc2 = self.enc2(self.pool(enc1))
+        
+        # Bottleneck
+        bottleneck = self.bottleneck(self.pool(enc2))
+        
+        # Decoder with skip connections
+        dec2 = self.upconv2(bottleneck)
+        dec2 = torch.cat([dec2, enc2], dim=1)
+        dec2 = self.dec2(dec2)
+        
+        dec1 = self.upconv1(dec2)
+        dec1 = torch.cat([dec1, enc1], dim=1)
+        dec1 = self.dec1(dec1)
+        
+        return self.out(dec1)
+
+# Define the diffusion process
+class DiffusionProcess:
+    def __init__(self, T=1000, beta_start=1e-4, beta_end=0.02):
+        self.T = T
+        
+        # Linear noise schedule
+        # REF: Equation for beta schedule
+        self.betas = torch.linspace(beta_start, beta_end, T)
+        # REF: α_t = 1 - β_t
+        self.alphas = 1 - self.betas
+        # REF: ᾱ_t = ∏_{s=1}^t α_s
+        self.alpha_bars = torch.cumprod(self.alphas, dim=0)
+        
+    def forward_process(self, x0, t):
+        &quot;&quot;&quot;Add noise to image at timestep t&quot;&quot;&quot;
+        # REF: √(ᾱ_t)
+        sqrt_alpha_bar = torch.sqrt(self.alpha_bars[t]).view(-1, 1, 1, 1).to(x0.device)
+        # REF: √(1 - ᾱ_t)
+        sqrt_one_minus_alpha_bar = torch.sqrt(1 - self.alpha_bars[t]).view(-1, 1, 1, 1).to(x0.device)
+        epsilon = torch.randn_like(x0)
+        
+        # REF: Equation x_t = √(ᾱ_t) * x_0 + √(1 - ᾱ_t) * ε
+        xt = sqrt_alpha_bar * x0 + sqrt_one_minus_alpha_bar * epsilon
+        return xt, epsilon
+    
+    def reverse_process(self, model, x, t, condition=None):
+        &quot;&quot;&quot;Remove noise from image at timestep t using the model&quot;&quot;&quot;
+        with torch.no_grad():
+            # Predict the noise
+            # REF: ε_θ(x_t, t, y) where y is the condition
+            epsilon_pred = model(x, t)
+            
+            # Calculate coefficients for reverse process
+            # REF: α_t
+            alpha_t = self.alphas[t].view(-1, 1, 1, 1).to(x.device)
+            # REF: ᾱ_t
+            alpha_bar_t = self.alpha_bars[t].view(-1, 1, 1, 1).to(x.device)
+            # REF: β_t
+            beta_t = self.betas[t].view(-1, 1, 1, 1).to(x.device)
+            
+            # REF: Equation for reverse process
+            # x_{t-1} = (1/√(α_t)) * (x_t - (β_t/√(1-ᾱ_t)) * ε_θ) + σ_t * z
+            if t &gt; 0:
+                z = torch.randn_like(x)
+            else:
+                z = 0
+                
+            sigma_t = torch.sqrt(beta_t)
+            x_prev = (1 / torch.sqrt(alpha_t)) * (x - (beta_t / torch.sqrt(1 - alpha_bar_t)) * epsilon_pred) + sigma_t * z
+            
+            return x_prev
+
+# Training function
+def train_diffusion(model, diffusion, dataloader, optimizer, epochs=10):
+    model.train()
+    for epoch in range(epochs):
+        total_loss = 0
+        for i, (hr_imgs, _) in enumerate(dataloader):
+            hr_imgs = hr_imgs.to(device)
+            
+            # Create low-resolution version (condition)
+            # REF: y = low-resolution condition
+            lr_imgs = F.interpolate(hr_imgs, scale_factor=0.25, mode='bilinear')
+            lr_imgs = F.interpolate(lr_imgs, size=hr_imgs.shape[2:], mode='bilinear')
+            
+            # Random timestep
+            # REF: t ~ Uniform(1, T)
+            t = torch.randint(0, diffusion.T, (hr_imgs.size(0),), device=device)
+            
+            # Add noise to high-resolution images
+            # REF: Forward process q(x_t|x_0)
+            noisy_imgs, true_noise = diffusion.forward_process(hr_imgs, t)
+            
+            # Concatenate low-resolution condition with noisy image
+            # REF: Conditioning the model on y
+            model_input = torch.cat([noisy_imgs, lr_imgs], dim=1)
+            
+            # Predict noise
+            # REF: ε_θ(x_t, t, y)
+            pred_noise = model(model_input, t)
+            
+            # Calculate loss
+            # REF: Loss function L = E[||ε - ε_θ(x_t, t, y)||^2]
+            loss = F.mse_loss(pred_noise, true_noise)
+            
+            # Backward pass
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            
+            total_loss += loss.item()
+            
+            if i % 100 == 0:
+                print(f&quot;Epoch {epoch+1}/{epochs}, Batch {i}, Loss: {loss.item():.4f}&quot;)
+        
+        print(f&quot;Epoch {epoch+1}/{epochs}, Average Loss: {total_loss/len(dataloader):.4f}&quot;)
+
+# Sampling function
+def sample_diffusion(model, diffusion, lr_img, img_size=(32, 32)):
+    model.eval()
+    
+    # Start from random noise
+    # REF: x_T ~ N(0, I)
+    x = torch.randn(1, 3, *img_size).to(device)
+    
+    # Upsample low-resolution image to target size
+    # REF: Prepare condition y
+    lr_img = F.interpolate(lr_img, size=img_size, mode='bilinear')
+    
+    # Reverse process
+    # REF: p_θ(x_{0:T}|y) = p(x_T) ∏_{t=1}^T p_θ(x_{t-1}|x_t, y)
+    for t in range(diffusion.T-1, -1, -1):
+        # Create tensor of current timestep
+        t_tensor = torch.tensor([t], device=device)
+        
+        # Concatenate with condition
+        model_input = torch.cat([x, lr_img], dim=1)
+        
+        # Reverse process step
+        # REF: p_θ(x_{t-1}|x_t, y)
+        x = diffusion.reverse_process(model, model_input, t_tensor)
+        
+        # Clamp values to valid range
+        x = torch.clamp(x, -1.0, 1.0)
+        
+    return x
+
+# Main execution
+if __name__ == &quot;__main__&quot;:
+    # Hyperparameters
+    batch_size = 32
+    learning_rate = 1e-4
+    epochs = 5
+    T = 1000  # Number of diffusion steps
+    
+    # Load and preprocess data
+    transform = transforms.Compose([
+        transforms.Resize((32, 32)),
+        transforms.ToTensor(),
+        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+    ])
+    
+    train_dataset = datasets.CIFAR10(root='./data', train=True, download=True, transform=transform)
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    
+    # Initialize model and diffusion process
+    model = UNet(in_channels=6, out_channels=3).to(device)  # 6 channels: 3 for noisy image + 3 for LR condition
+    diffusion = DiffusionProcess(T=T)
+    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+    
+    # Train the model
+    print(&quot;Starting training...&quot;)
+    train_diffusion(model, diffusion, train_loader, optimizer, epochs=epochs)
+    
+    # Test with a sample image
+    test_img, _ = next(iter(train_loader))
+    test_img = test_img[0:1].to(device)  # Take one image
+    
+    # Create low-resolution version
+    lr_img = F.interpolate(test_img, scale_factor=0.25, mode='bilinear')
+    lr_img = F.interpolate(lr_img, size=test_img.shape[2:], mode='bilinear')
+    
+    # Generate super-resolution image
+    print(&quot;Generating super-resolution image...&quot;)
+    sr_img = sample_diffusion(model, diffusion, lr_img, img_size=test_img.shape[2:])
+    
+    # Visualize results
+    fig, axes = plt.subplots(1, 3, figsize=(12, 4))
+    
+    axes[0].imshow(test_img[0].cpu().permute(1, 2, 0) * 0.5 + 0.5)
+    axes[0].set_title(&quot;Original HR Image&quot;)
+    axes[0].axis('off')
+    
+    axes[1].imshow(lr_img[0].cpu().permute(1, 2, 0) * 0.5 + 0.5)
+    axes[1].set_title(&quot;LR Input&quot;)
+    axes[1].axis('off')
+    
+    axes[2].imshow(sr_img[0].cpu().permute(1, 2, 0) * 0.5 + 0.5)
+    axes[2].set_title(&quot;Generated SR Image&quot;)
+    axes[2].axis('off')
+    
+    plt.tight_layout()
+    plt.savefig('super_resolution_result.png')
+    plt.show()
+</code></pre>
+<h2>Tutorial: How Diffusion-Based Super-Resolution Works</h2>
+<h3>1. Introduction to Diffusion Models</h3>
+<p>Diffusion models are a class of generative models that work by gradually adding noise to data (forward process) and then learning to reverse this process (reverse process). For super-resolution, we condition this process on a low-resolution image to generate a high-resolution version.</p>
+<h3>2. Mathematical Foundation</h3>
+<h4>Forward Process (Adding Noise)</h4>
+<p>The forward process is defined as a Markov chain that gradually adds Gaussian noise to the data:</p>
+<p>[
+q(\mathbf{x}<em>t|\mathbf{x}</em>{t-1}) = \mathcal{N}(\mathbf{x}<em>t; \sqrt{1-\beta_t}\mathbf{x}</em>{t-1}, \beta_t\mathbf{I})
+]</p>
+<p>Where:</p>
+<ul>
+<li>(\mathbf{x}_0) is the original high-resolution image</li>
+<li>(\beta_t) is the noise schedule at timestep (t)</li>
+<li>(T) is the total number of diffusion steps</li>
+</ul>
+<p><strong>Code Reference</strong>: In the <code>DiffusionProcess.__init__</code> method, we define the linear noise schedule:</p>
+<pre><code class="language-python">self.betas = torch.linspace(beta_start, beta_end, T)
+</code></pre>
+<p>After applying the forward process for (t) steps, we can directly sample (\mathbf{x}_t) from (\mathbf{x}_0):</p>
+<p>[
+q(\mathbf{x}_t|\mathbf{x}_0) = \mathcal{N}(\mathbf{x}_t; \sqrt{\bar{\alpha}_t}\mathbf{x}_0, (1-\bar{\alpha}_t)\mathbf{I})
+]</p>
+<p>Where:</p>
+<ul>
+<li>(\alpha_t = 1 - \beta_t)</li>
+<li>(\bar{\alpha}<em>t = \prod</em>{s=1}^{t} \alpha_s)</li>
+</ul>
+<p><strong>Code Reference</strong>: In the <code>DiffusionProcess.__init__</code> method, we compute these values:</p>
+<pre><code class="language-python">self.alphas = 1 - self.betas
+self.alpha_bars = torch.cumprod(self.alphas, dim=0)
+</code></pre>
+<p><strong>Code Reference</strong>: In the <code>forward_process</code> method, we implement the equation:</p>
+<pre><code class="language-python">xt = sqrt_alpha_bar * x0 + sqrt_one_minus_alpha_bar * epsilon
+</code></pre>
+<h4>Reverse Process (Denoising)</h4>
+<p>The reverse process learns to denoise the image:</p>
+<p>[
+p_\theta(\mathbf{x}<em>{t-1}|\mathbf{x}<em>t, \mathbf{y}) = \mathcal{N}(\mathbf{x}</em>{t-1}; \mu</em>\theta(\mathbf{x}<em>t, t, \mathbf{y}), \Sigma</em>\theta(\mathbf{x}_t, t, \mathbf{y}))
+]</p>
+<p>Where:</p>
+<ul>
+<li>(\mathbf{y}) is the low-resolution conditioning image</li>
+<li>(\theta) represents the model parameters</li>
+</ul>
+<p>In practice, we train a model (\epsilon_\theta) to predict the noise (\epsilon) that was added:</p>
+<p>[
+\mathcal{L} = \mathbb{E}_{t,\mathbf{x}<em>0,\epsilon}[|\epsilon - \epsilon</em>\theta(\sqrt{\bar{\alpha}_t}\mathbf{x}_0 + \sqrt{1-\bar{\alpha}_t}\epsilon, t, \mathbf{y})|^2]
+]</p>
+<p><strong>Code Reference</strong>: In the <code>train_diffusion</code> function, we implement this loss:</p>
+<pre><code class="language-python">loss = F.mse_loss(pred_noise, true_noise)
+</code></pre>
+<h3>3. Key Components Explained</h3>
+<h4>U-Net Architecture</h4>
+<p>The U-Net is used to predict the noise at each timestep. It has:</p>
+<ol>
+<li><strong>Encoder</strong>: Downsampling path that captures context</li>
+<li><strong>Bottleneck</strong>: Bridge between encoder and decoder</li>
+<li><strong>Decoder</strong>: Upsampling path that enables precise localization</li>
+<li><strong>Skip connections</strong>: Preserve spatial information</li>
+</ol>
+<p><strong>Code Reference</strong>: The U-Net architecture is implemented in the <code>UNet</code> class.</p>
+<p>For conditional generation, we concatenate the low-resolution image with the noisy input at each timestep.</p>
+<p><strong>Code Reference</strong>: In the <code>train_diffusion</code> and <code>sample_diffusion</code> functions:</p>
+<pre><code class="language-python">model_input = torch.cat([noisy_imgs, lr_imgs], dim=1)
+</code></pre>
+<h4>Noise Schedule</h4>
+<p>The noise schedule controls how much noise is added at each step. We use a linear schedule:</p>
+<ul>
+<li>(\beta) starts small ((10^{-4})) and increases linearly to a maximum value (0.02)</li>
+<li>This ensures a smooth transition from data to noise</li>
+</ul>
+<p><strong>Code Reference</strong>: In the <code>DiffusionProcess.__init__</code> method:</p>
+<pre><code class="language-python">self.betas = torch.linspace(beta_start, beta_end, T)
+</code></pre>
+<h4>Training Process</h4>
+<ol>
+<li>Sample a clean image (\mathbf{x}_0) from the dataset</li>
+<li>Create a low-resolution version (\mathbf{y}) by downsampling</li>
+<li>Sample a random timestep (t \sim \text{Uniform}(1, T))</li>
+<li>Sample noise (\epsilon \sim \mathcal{N}(0, \mathbf{I}))</li>
+<li>Create a noisy image (\mathbf{x}_t = \sqrt{\bar{\alpha}_t}\mathbf{x}_0 + \sqrt{1-\bar{\alpha}_t}\epsilon)</li>
+<li>Train the model to predict (\epsilon) from (\mathbf{x}_t), (t), and (\mathbf{y})</li>
+</ol>
+<p><strong>Code Reference</strong>: In the <code>train_diffusion</code> function, we implement these steps:</p>
+<pre><code class="language-python"># Steps 1-2: Get HR image and create LR version
+hr_imgs = hr_imgs.to(device)
+lr_imgs = F.interpolate(hr_imgs, scale_factor=0.25, mode='bilinear')
+
+# Step 3: Random timestep
+t = torch.randint(0, diffusion.T, (hr_imgs.size(0),), device=device)
+
+# Steps 4-5: Add noise
+noisy_imgs, true_noise = diffusion.forward_process(hr_imgs, t)
+
+# Step 6: Train model to predict noise
+pred_noise = model(model_input, t)
+loss = F.mse_loss(pred_noise, true_noise)
+</code></pre>
+<h4>Sampling Process</h4>
+<ol>
+<li>Start with pure noise (\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I}))</li>
+<li>For (t = T, T-1, \ldots, 1):
+<ul>
+<li>Predict the noise (\epsilon_\theta(\mathbf{x}_t, t, \mathbf{y}))</li>
+<li>Use the reverse process to obtain (\mathbf{x}_{t-1})</li>
+</ul>
+</li>
+<li>The final result (\mathbf{x}_0) is the super-resolved image</li>
+</ol>
+<p><strong>Code Reference</strong>: In the <code>sample_diffusion</code> function, we implement these steps:</p>
+<pre><code class="language-python"># Step 1: Start from random noise
+x = torch.randn(1, 3, *img_size).to(device)
+
+# Step 2: Reverse process loop
+for t in range(diffusion.T-1, -1, -1):
+    # Predict noise and reverse the process
+    x = diffusion.reverse_process(model, model_input, t_tensor)
+</code></pre>
+<h3>4. Implementation Details</h3>
+<ul>
+<li><strong>Conditioning</strong>: We concatenate the low-resolution image with the noisy image at each step</li>
+<li><strong>Time embedding</strong>: We add information about the current timestep to the model</li>
+</ul>
+<p><strong>Code Reference</strong>: In the <code>UNet.forward</code> method:</p>
+<pre><code class="language-python">t_embed = t.view(-1, 1, 1, 1).expand(x.size(0), 1, x.size(2), x.size(3))
+x = torch.cat([x, t_embed], dim=1)
+</code></pre>
+<ul>
+<li><strong>Loss function</strong>: Mean squared error between predicted and actual noise</li>
+</ul>
+<p><strong>Code Reference</strong>: In the <code>train_diffusion</code> function:</p>
+<pre><code class="language-python">loss = F.mse_loss(pred_noise, true_noise)
+</code></pre>
+<h3>5. Practical Considerations</h3>
+<ul>
+<li>This implementation is simplified for educational purposes</li>
+<li>Real-world implementations would use more sophisticated architectures (e.g., with attention mechanisms)</li>
+<li>Training diffusion models requires significant computational resources</li>
+<li>The number of diffusion steps (T) affects both quality and sampling time</li>
+</ul>
+<h3>6. Extensions and Improvements</h3>
+<ol>
+<li><strong>Classifier-free guidance</strong>: Improves sample quality by randomly dropping the condition during training</li>
+<li><strong>Progressive distillation</strong>: Reduces the number of sampling steps</li>
+<li><strong>Improved noise schedules</strong>: Cosine schedule often works better than linear</li>
+<li><strong>Architectural improvements</strong>: Transformer components, adaptive normalization</li>
+</ol>
+<p>This tutorial provides a foundation for understanding diffusion-based super-resolution with explicit references to where each mathematical concept is implemented in the code. For state-of-the-art results, researchers combine these concepts with more advanced techniques and larger-scale training.</p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/open-lab-notebook/posts/ai_bullshit/ai/">ai bullshit</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>
