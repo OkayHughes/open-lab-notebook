@@ -357,26 +357,26 @@ The self-attention mechanism is based on three learned projections:
 
 #### Query, Key, and Value
 
-For an input feature map \(X \in \mathbb{R}^{C \times H \times W}\):
+For an input feature map `$$X \in \mathbb{R}^{C \times H \times W}$$`:
 
-\[
+`$$$
 Q = W_Q \cdot X, \quad K = W_K \cdot X, \quad V = W_V \cdot X
-\]
+$$$`
 
 Where:
-- \(W_Q, W_K, W_V\) are learned weight matrices
-- \(Q, K, V\) are the query, key, and value representations
+- `$$W_Q, W_K, W_V$$` are learned weight matrices
+- `$$Q, K, V$$` are the query, key, and value representations
 
 #### Attention Calculation
 
 The attention weights are computed as:
 
-\[
+`$$$
 \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
-\]
+$$$`
 
 Where:
-- \(d_k\) is the dimension of the key vectors (used for scaling)
+- `$$d_k$$` is the dimension of the key vectors (used for scaling)
 - The softmax ensures the attention weights sum to 1
 
 **Code Reference**: In the `SelfAttention.forward` method:
@@ -394,11 +394,11 @@ out = torch.bmm(V, attention.permute(0, 2, 1))  # (B, C, N)
 
 To ensure stable training, we use a residual connection:
 
-\[
+`$$$
 \text{Output} = \gamma \cdot \text{Attention}(Q, K, V) + X
-\]
+$$$`
 
-Where \(\gamma\) is a learnable parameter that starts at 0 and is gradually learned during training.
+Where `$$\gamma$$` is a learnable parameter that starts at 0 and is gradually learned during training.
 
 **Code Reference**: In the `SelfAttention.forward` method:
 ```python
@@ -471,8 +471,8 @@ Different image regions require different levels of processing. Attention allows
 #### Computational Cost
 
 Attention mechanisms increase computational requirements:
-- Memory: \(O(N^2)\) where N is the number of pixels
-- Computation: \(O(N^2)\) for the attention matrix multiplication
+- Memory: `$$O(N^2)$$` where N is the number of pixels
+- Computation: `$$O(N^2)$$` for the attention matrix multiplication
 
 **Mitigation strategies**:
 1. Use attention only at lower resolutions

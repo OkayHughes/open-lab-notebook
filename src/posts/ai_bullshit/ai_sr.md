@@ -280,29 +280,29 @@ Diffusion models are a class of generative models that work by gradually adding 
 
 The forward process is defined as a Markov chain that gradually adds Gaussian noise to the data:
 
-\[
+`$$$
 q(\mathbf{x}_t|\mathbf{x}_{t-1}) = \mathcal{N}(\mathbf{x}_t; \sqrt{1-\beta_t}\mathbf{x}_{t-1}, \beta_t\mathbf{I})
-\]
+$$$`
 
 Where:
-- \(\mathbf{x}_0\) is the original high-resolution image
-- \(\beta_t\) is the noise schedule at timestep \(t\)
-- \(T\) is the total number of diffusion steps
+- `$$\mathbf{x}_0$$` is the original high-resolution image
+- `$$\beta_t$$` is the noise schedule at timestep `$$t$$`
+- `$$T$$` is the total number of diffusion steps
 
 **Code Reference**: In the `DiffusionProcess.__init__` method, we define the linear noise schedule:
 ```python
 self.betas = torch.linspace(beta_start, beta_end, T)
 ```
 
-After applying the forward process for \(t\) steps, we can directly sample \(\mathbf{x}_t\) from \(\mathbf{x}_0\):
+After applying the forward process for `$$t$$` steps, we can directly sample `$$\mathbf{x}_t$$` from `$$\mathbf{x}_0$$`:
 
-\[
+`$$$
 q(\mathbf{x}_t|\mathbf{x}_0) = \mathcal{N}(\mathbf{x}_t; \sqrt{\bar{\alpha}_t}\mathbf{x}_0, (1-\bar{\alpha}_t)\mathbf{I})
-\]
+$$$`
 
 Where:
-- \(\alpha_t = 1 - \beta_t\)
-- \(\bar{\alpha}_t = \prod_{s=1}^{t} \alpha_s\)
+- `$$\alpha_t = 1 - \beta_t$$`
+- `$$\bar{\alpha}_t = \prod_{s=1}^{t} \alpha_s$$`
 
 **Code Reference**: In the `DiffusionProcess.__init__` method, we compute these values:
 ```python
@@ -319,19 +319,19 @@ xt = sqrt_alpha_bar * x0 + sqrt_one_minus_alpha_bar * epsilon
 
 The reverse process learns to denoise the image:
 
-\[
+`$$$
 p_\theta(\mathbf{x}_{t-1}|\mathbf{x}_t, \mathbf{y}) = \mathcal{N}(\mathbf{x}_{t-1}; \mu_\theta(\mathbf{x}_t, t, \mathbf{y}), \Sigma_\theta(\mathbf{x}_t, t, \mathbf{y}))
-\]
+$$$`
 
 Where:
-- \(\mathbf{y}\) is the low-resolution conditioning image
-- \(\theta\) represents the model parameters
+- `$$\mathbf{y}$$` is the low-resolution conditioning image
+- `$$\theta$$` represents the model parameters
 
-In practice, we train a model \(\epsilon_\theta\) to predict the noise \(\epsilon\) that was added:
+In practice, we train a model `$$\epsilon_\theta$$` to predict the noise `$$\epsilon$$` that was added:
 
-\[
+`$$$
 \mathcal{L} = \mathbb{E}_{t,\mathbf{x}_0,\epsilon}[\|\epsilon - \epsilon_\theta(\sqrt{\bar{\alpha}_t}\mathbf{x}_0 + \sqrt{1-\bar{\alpha}_t}\epsilon, t, \mathbf{y})\|^2]
-\]
+$$$`
 
 **Code Reference**: In the `train_diffusion` function, we implement this loss:
 ```python
@@ -360,7 +360,7 @@ model_input = torch.cat([noisy_imgs, lr_imgs], dim=1)
 #### Noise Schedule
 
 The noise schedule controls how much noise is added at each step. We use a linear schedule:
-- \(\beta\) starts small (\(10^{-4}\)) and increases linearly to a maximum value (0.02)
+- `$$\beta$$` starts small (`$$10^{-4}$$`) and increases linearly to a maximum value (0.02)
 - This ensures a smooth transition from data to noise
 
 **Code Reference**: In the `DiffusionProcess.__init__` method:
@@ -370,12 +370,12 @@ self.betas = torch.linspace(beta_start, beta_end, T)
 
 #### Training Process
 
-1. Sample a clean image \(\mathbf{x}_0\) from the dataset
-2. Create a low-resolution version \(\mathbf{y}\) by downsampling
-3. Sample a random timestep \(t \sim \text{Uniform}(1, T)\)
-4. Sample noise \(\epsilon \sim \mathcal{N}(0, \mathbf{I})\)
-5. Create a noisy image \(\mathbf{x}_t = \sqrt{\bar{\alpha}_t}\mathbf{x}_0 + \sqrt{1-\bar{\alpha}_t}\epsilon\)
-6. Train the model to predict \(\epsilon\) from \(\mathbf{x}_t\), \(t\), and \(\mathbf{y}\)
+1. Sample a clean image `$$\mathbf{x}_0$$` from the dataset
+2. Create a low-resolution version `$$\mathbf{y}$$` by downsampling
+3. Sample a random timestep `$$t \sim \text{Uniform}(1, T)$$`
+4. Sample noise `$$\epsilon \sim \mathcal{N}(0, \mathbf{I})$$`
+5. Create a noisy image `$$\mathbf{x}_t = \sqrt{\bar{\alpha}_t}\mathbf{x}_0 + \sqrt{1-\bar{\alpha}_t}\epsilon$$`
+6. Train the model to predict `$$\epsilon$$` from `$$\mathbf{x}_t$$`, `$$t$$`, and `$$\mathbf{y}$$`
 
 **Code Reference**: In the `train_diffusion` function, we implement these steps:
 ```python
@@ -396,11 +396,11 @@ loss = F.mse_loss(pred_noise, true_noise)
 
 #### Sampling Process
 
-1. Start with pure noise \(\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I})\)
-2. For \(t = T, T-1, \ldots, 1\):
-   - Predict the noise \(\epsilon_\theta(\mathbf{x}_t, t, \mathbf{y})\)
-   - Use the reverse process to obtain \(\mathbf{x}_{t-1}\)
-3. The final result \(\mathbf{x}_0\) is the super-resolved image
+1. Start with pure noise `$$\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I})$$`
+2. For `$$t = T, T-1, \ldots, 1$$`:
+   - Predict the noise `$$\epsilon_\theta(\mathbf{x}_t, t, \mathbf{y})$$`
+   - Use the reverse process to obtain `$$\mathbf{x}_{t-1}$$`
+3. The final result `$$\mathbf{x}_0$$` is the super-resolved image
 
 **Code Reference**: In the `sample_diffusion` function, we implement these steps:
 ```python
@@ -436,7 +436,7 @@ loss = F.mse_loss(pred_noise, true_noise)
 - This implementation is simplified for educational purposes
 - Real-world implementations would use more sophisticated architectures (e.g., with attention mechanisms)
 - Training diffusion models requires significant computational resources
-- The number of diffusion steps \(T\) affects both quality and sampling time
+- The number of diffusion steps `$$T$$` affects both quality and sampling time
 
 ### 6. Extensions and Improvements
 
