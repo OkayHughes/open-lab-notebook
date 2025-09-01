@@ -103,7 +103,7 @@ Suddenly, we can compute `$$\int_I f \intd{x} = \sum_n f_n w_n = \langle \mathbf
 `$$ \langle \cdot, \cdot \rangle $$` is the standard inner (dot) product on `$$\mathbb{R}^3$$` (see below).
 This is one way in which integration can be represented as a linear operator (in this case, the matrix representation of `$$w_n$$` would be the "row vector" `$$ (w_1, \ldots, w_n) $$`.
 
-# The relationship between bases, linear operators, and matrices
+# You actually do need to learn what a basis is
 
 First we need to talk about what bases are. 
 In `$$\mathbb{R}^n$$`, a basis is a set of `$$n$$` vectors `$$\mathbf{b}_k$$` such that any `$$ \mathbf{x} \in \mathbb{R}^n$$` can be written as `$$ \sum_k b_k \mathbf{b}_k = \mathbf{x}$$` (where `$$b_k \in \mathbb{R}$$` in exactly one way. 
@@ -154,7 +154,7 @@ $$$`
 What this means is, the coefficient `$$ e_k $$` in the sum above can be calculated simply from `$$ \langle x, e_k \rangle $$`. You don't have to solve a full system. 
 
 
-# A concrete example from function approximation
+## A concrete example from function approximation
 
 Let's return to the example of polynomial quadrature above. It turns out that for, e.g., `$$ f, g \in V^3_1 (\mathbb{R})$$`, making the definition `$$ \langle f, g \rangle \equiv \int_I fg \intd{x} $$` satisfies the requirements of an inner product! Suppose we have some `$$h \in V^3_1(\mathbb{R})$$`, but it's expressed in terms of another basis. Specifically, let's say we know `$$ h = \sum_i l_l \mathbf{l}_i$$`, where `$$ \mathbf{l}_i $$` are the legendre polynomials. Legendre polynomials are purposefully constructed so that `$$$ \int_{[-1, 1]} \boldsymbol{l}_i \boldsymbol{l}_j \intd{x} = \begin{cases} 1 \textrm{ if } i = j \\ 0 \textrm{ otherwise} \end{cases}$$$`. We've seen that before: that means the Legendre polynomials can be used to construct an orthonormal basis of `$$ V^n_1(\mathbb{R})$$`. What if we wanted to find `$$ a_{k}$$` that reconstruct `$$h$$` in the monomial basis, like `$$ h = \sum_k a_k x^k$$`. There are several equivalent (in the continuum) ways of doing this, including finding the coefficients `$$c_{k,l}$$` that reconstruct the `$$l$$`th legendre polynomial in the monomial basis, that is `$$ \mathbf{l}_l = \sum_k c_{k, l} x^k $$`. This requires at least the complexity of a matrix multiplication. 
 
