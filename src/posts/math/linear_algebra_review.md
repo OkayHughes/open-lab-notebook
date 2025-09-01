@@ -156,9 +156,22 @@ What this means is, the coefficient `$$ e_k $$` in the sum above can be calculat
 
 ## A concrete example from function approximation
 
-Let's return to the example of polynomial quadrature above. It turns out that for, e.g., `$$ f, g \in V^3_1 (\mathbb{R})$$`, making the definition `$$ \langle f, g \rangle \equiv \int_I fg \intd{x} $$` satisfies the requirements of an inner product! Suppose we have some `$$h \in V^3_1(\mathbb{R})$$`, but it's expressed in terms of another basis. Specifically, let's say we know `$$ h = \sum_i l_l \mathbf{l}_i$$`, where `$$ \mathbf{l}_i $$` are the legendre polynomials. Legendre polynomials are purposefully constructed so that `$$$ \int_{[-1, 1]} \boldsymbol{l}_i \boldsymbol{l}_j \intd{x} = \begin{cases} 1 \textrm{ if } i = j \\ 0 \textrm{ otherwise} \end{cases}$$$`. We've seen that before: that means the Legendre polynomials can be used to construct an orthonormal basis of `$$ V^n_1(\mathbb{R})$$`. What if we wanted to find `$$ a_{k}$$` that reconstruct `$$h$$` in the monomial basis, like `$$ h = \sum_k a_k x^k$$`. There are several equivalent (in the continuum) ways of doing this, including finding the coefficients `$$c_{k,l}$$` that reconstruct the `$$l$$`th legendre polynomial in the monomial basis, that is `$$ \mathbf{l}_l = \sum_k c_{k, l} x^k $$`. This requires at least the complexity of a matrix multiplication. 
 
-However, if we  
+### The construction of the Legendre polynomials
+
+Let's return to the example of polynomial quadrature above. It turns out that for, e.g., `$$ f, g \in V^3_1 (\mathbb{R})$$`, making the definition `$$ \langle f, g \rangle \equiv \int_I fg \intd{x} $$` satisfies the requirements of an inner product! Starting with the convention `$$\mathbf{l}_1 = 1$$`, and requiring that the polynomial `$$\mathbf{l}_{k+1}$$` satisfy `$$ \langle \mathbf{l}_{k+1}, \mathbf{l}_l \rangle = 0$$` for `$$ l \leq k $$` (this is analogous to gram-schmidt, if you've encountered that), you generate a sequence of polynomials that are an orthogonal (easily made orthonormal) basis for `$$V_1^n(\mathbb{R})$$`. Using the standard (unweighted) inner product `$$ \int fg \intd{x} $$`, this generates the Legendre polynomials. 
+
+For the second part of our derivation, recall that for any set of `$$n$$` points, we can uniquely fit a polynomial of degree `$$ n-1 $$` through those points (the coefficients, e.g., in the monomial
+basis can be calculated by solving a linear system! An excellent exercise is to formulate this system and solve it in, e.g., python and seeing how it becomes very numerically unstable as `$$n$$` increases, if you choose your interpolation points arbitrarily).
+The idea behind Gauss-Lobatto quadrature is to take the roots (zeros) of the `$$m$$`th Legendre polynomial, `$$x_1, \ldots, x_m$$` (when we eventually get to SE, we will include the endpoints of the interval `$$[-1, 1]$$`, but for now we ignore this). Then let `$$q_k$$` be the interpolating polynomial that satisfies `$$$ q_k(x_l) = \begin{cases} 1 \textrm{ if } k=l \\ 0 \textrm{ otherwise} \end{cases}. $$$` 
+
+If we have a polynomial `$$f$$` and its evaluations `$$ f_k = f(x_k)$$`, then if we define `$$w_k = \int_{[-1, 1]} q_k \intd{x} $$` and calculate `$$ \sum_k w_k f_k$$`, then this sum exactly computes `$$ \int_{[-1, 1]} f \intd{x}$$` so long as `$$f$$` is of degree `$$ 2n-1$$` or less.
+
+Ok, so we have constructed `$$ \sum_k w_k f_k $$` as a way to calculate an integral. It turns out that this also allows us to define an inner product, `$$ \langle f, g \rangle = \sum_k w_k f(x_k) g(x_k) $$`. First observe that `$$\langle q_k, q_l \rangle = \int q_k q_l \intd{x} = \sum_m w_m q_k(x_m) q_l(x_m) = \begin{cases} w_m \textrm{ if } k = l \\ 0 \textrm{ otherwise} \end{cases}  $$`, so `$$q_k$$` are an orthogonal basis. 
+Now we're prepared to see why orthonormal bases are so useful. Suppose I have a polynomial `$$ h = \sum_k a_k q_k(x) $$`. If I want to determine the coefficients `$$ b_k $$` in the monomial basis, so `$$ h = \sum_k b_k x^k $$`, then I would need to solve the linear system I described several paragraphs ago (the monomial basis is emphatically not orthogonal). However, if I had a polynomial `$$ f = \sum_k b_k x^k$$` and I want to calculate its coefficients in the `$$q_k$$` basis, then we find `$$ \sum_k \langle f, q_k \rangle q_k = \sum_k \int f q_k \intd{x} q_k = \sum_k \left( \sum_l w_l f(x_l) q_k(x_l)\right)q_k = \sum_k f(x_k) q_k $$`
+
+  
+
 
 
 # Galerkin
