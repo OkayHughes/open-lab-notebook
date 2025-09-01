@@ -120,19 +120,23 @@ Indeed, if you have a vector `$$ \mathbf{x} = \sum x_k \mathbf{e}_k$$`, with `$$
 then solving the system `$$$ \begin{bmatrix} \mathbf{b}_1 & \ldots & \mathbf{b}_k \end{bmatrix} \mathbf{x}_\mathbf{b} = \mathbf{x}_\mathbf{e}$$$` 
 finds `$$ \mathbf{x}_\mathbf{b} = (b_1, \ldots, b_n)$$` that reconstruct `$$\mathbf{x}$$` in the `$$\mathbf{b}_k$$` basis.
 
-Let's pretend that we have a linear operator `$$ A $$` that behaves "like a matrix" (most concisely, for `$$ a, b \in \mathbb{R}$$`, `$$\mathbf{x}, \mathbf{y} \in \mathbb{R}^n \textrm{ (maybe even } V)$$`, `$$ A(a\mathbf{x} + b \mathbf{y}) = aA\mathbf{x} + bA\mathbf{y} $$`) and that we have a basis `$$ \mathbf{b}_k$$`. 
-If we have a vector `$$ \mathbf{x}_\mathbf{b} = \sum b_k \mathbf{b}_k$$`,  then we can examine the behavior of our linear operator on this vector by
+<!--Let's pretend that we have a linear operator `$$ A $$` that behaves "like a matrix" (most concisely, for `$$ a, b \in \mathbb{R}$$`, `$$\mathbf{x}, \mathbf{y} \in \mathbb{R}^n \textrm{ (maybe even } V)$$`, `$$ A(a\mathbf{x} + b \mathbf{y}) = aA\mathbf{x} + bA\mathbf{y} $$`) and that we have a basis `$$ \mathbf{b}_k$$`. 
+First, let's write `$$ \mathbf{x} = \sum_l e_{l} \mathbf{e}_l$$` (`$$e_{l}$$` are just the entries of `$$\mathbf{x}$$` in a column vector!). What happens when we look at how `$$A$$` behaves on `$$\mathbf{x} $$`
 `$$$
 \begin{align*}
-  A\left( \sum_k b_k \mathbf{b}_k \right) = \sum_k b_k A(\mathbf{b}_k)
+  A\left(\mathbf{x} \right) &= A\left(\sum_l e_{l} \mathbf{e}_l \right) \\
+    &= \sum_l e_{l} A\left( \mathbf{e}_l \right) \\
+    &= \sum_l e_{l} \mathbf{a}_l, 
 \end{align*}
 $$$`
+BUT: `$$ \mathbf{a}_l$$` is the image of the basis vector `$$ \mathbf{e}_l$$` under `$$A$$`. If `$$A$$` were a matrix, this would be the `$$l$$`th column of the matrix (do the multiplication yourself to
+convince yourself this is right).   -->
 
 
 # Inner product structure, duals
 
 An inner product is an additional operation `$$\langle \cdot, \cdot \rangle $$` that one can add to a vector space. 
-It must satisfy certain [requirements](https://en.wikipedia.org/wiki/Inner_product_space). 
+It must satisfy certain [requirements](https://en.wikipedia.org/wiki/Inner_product_space). The most important one for our purposes is that for `$$ a \in \mathbb{R}$$`, `$$ \mathbf{x}, \mathbf{y}, \mathbf{z} \in \mathbb{R}^n$$`, `$$ \langle a\mathbf{x} + \mathbf{y}, \mathbf{z} \rangle = a\langle \mathbf{x}, \mathbf{z} \rangle + \langle \mathbf{y}, \mathbf{z} \rangle $$`
 It is a generalization of the dot product on `$$\mathbb{R}^n$$`, `$$ \langle \mathbf{x}, \mathbf{y} \rangle = \sum_k x_k y_k $$`. 
 The aforementioned requirements are the minimal set of constraints required to guarantee that the inner product you defined on your vector space `$$V$$`, gets you the properties that make the dot product useful.
 
@@ -141,9 +145,20 @@ Bases do not require an inner product to be defined and analyzed. However, if we
 The standard basis `$$ \mathbf{e}_k$$` satisfies `$$$ \langle \mathbf{e}_i, \mathbf{e}_j \rangle = \begin{cases} 1 \textrm{ if } i = j \\ 0 \textrm{ otherwise} \end{cases} $$$`,
 meaning that for distinct `$$ \mathbf{e}_i, \mathbf{e}_j$$`, the vectors are at 90º to each other. A basis that satisfies this latter property alone is called "orthogonal"; if, additionally, `$$\langle e_i, e_i \rangle = 1$$`, then the basis is called "orthonormal".  
 
-Recall that for a general basis `$$\mathbf{b}_k $$`, solving the coefficients of 
+Recall that for a general basis `$$\mathbf{b}_k $$`, solving for the coefficients `$$ b_k $$` that reconstruct a vector `$$\mathbf{x}$$` as `$$ \mathbf{x} = \sum b_k \mathbf{b_k}$$` requires a full linear solve. 
+However, let `$$ \mathbf{e}_l $$` be an orthonormal basis. First, suppose we do the full solve to reconstruct `$$ \mathbf{x} = \sum e_l \mathbf{e}_l$$`.  
+Then we can calculate 
+`$$$
+\langle x, \mathbf{e}_k \rangle = \langle \sum e_l \mathbf{e}_l, \mathbf{e}_k \rangle = \sum e_l \langle \mathbf{e}_l, \mathbf{e}_k \rangle = \sum e_l \begin{cases}1 \textrm{ if } k = l \\ 0 \textrm{ otherwise}\end{cases} = e_k.
+$$$`
+What this means is, the coefficient `$$ e_k $$` in the sum above can be calculated simply from `$$ \langle x, e_k \rangle $$`. You don't have to solve a full system. 
 
-## What is a dual space?
+
+# A concrete example from function approximation
+
+Let's return to the example of polynomial quadrature above. It turns out that for, e.g., `$$ f, g \in V^3_1 (\mathbb{R})$$`, making the definition `$$ \langle f, g \rangle \equiv \int_I fg \intd{x} $$` satisfies the requirements of an inner product! Suppose we have some `$$h \in V^3_1(\mathbb{R})$$`, but it's expressed in terms of another basis. Specifically, let's say we know `$$ h = \sum_i l_l \mathbf{l}_i$$`, where `$$ \mathbf{l}_i $$` are the legendre polynomials. Legendre polynomials are purposefully constructed so that `$$$ \int_{[-1, 1]} \boldsymbol{l}_i \boldsymbol{l}_j \intd{x} = \begin{cases} 1 \textrm{ if } i = j \\ 0 \textrm{ otherwise} \end{cases}$$$`. We've seen that before: that means the Legendre polynomials can be used to construct an orthonormal basis of `$$ V^n_1(\mathbb{R})$$`. What if we wanted to find `$$ a_{k}$$` that reconstruct `$$h$$` in the monomial basis, like `$$ h = \sum_k a_k x^k$$`. There are several equivalent (in the continuum) ways of doing this, including finding the coefficients `$$c_{k,l}$$` that reconstruct the `$$l$$`th legendre polynomial in the monomial basis, that is `$$ \mathbf{l}_l = \sum_k c_{k, l} x^k $$`. This requires at least the complexity of a matrix multiplication. 
+
+However, if we  
 
 
 # Galerkin
