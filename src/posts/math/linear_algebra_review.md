@@ -103,14 +103,8 @@ Suddenly, we can compute `$$\int_I f \intd{x} = \sum_n f_n w_n = \langle \mathbf
 `$$ \langle \cdot, \cdot \rangle $$` is the standard inner (dot) product on `$$\mathbb{R}^3$$` (see below).
 This is one way in which integration can be represented as a linear operator (in this case, the matrix representation of `$$w_n$$` would be the "row vector" `$$ (w_1, \ldots, w_n) $$`.
 
-# Inner product structure, duals
+# The relationship between bases, linear operators, and matrices
 
-An inner product is an additional operation `$$\langle \cdot, \cdot \rangle $$` that one can add to a vector space. 
-It must satisfy certain [requirements](https://en.wikipedia.org/wiki/Inner_product_space). 
-It is a generalization of the dot product on `$$\mathbb{R}^n$$`, `$$ \langle \mathbf{x}, \mathbf{y} \rangle = \sum_k x_k y_k $$`. 
-The aforementioned requirements are the minimal set of constraints required to guarantee that the inner product you defined on your vector space `$$V$$`, gets you the properties that make the dot product useful.
-
-## Why are orthogonal bases good?
 First we need to talk about what bases are. 
 In `$$\mathbb{R}^n$$`, a basis is a set of `$$n$$` vectors `$$\mathbf{b}_k$$` such that any `$$ \mathbf{x} \in \mathbb{R}^n$$` can be written as `$$ \sum_k b_k \mathbf{b}_k = \mathbf{x}$$` (where `$$b_k \in \mathbb{R}$$` in exactly one way. 
 It can be shown that a basis must contain exactly `$$n$$` vectors. 
@@ -126,11 +120,28 @@ Indeed, if you have a vector `$$ \mathbf{x} = \sum x_k \mathbf{e}_k$$`, with `$$
 then solving the system `$$$ \begin{bmatrix} \mathbf{b}_1 & \ldots & \mathbf{b}_k \end{bmatrix} \mathbf{x}_\mathbf{b} = \mathbf{x}_\mathbf{e}$$$` 
 finds `$$ \mathbf{x}_\mathbf{b} = (b_1, \ldots, b_n)$$` that reconstruct `$$\mathbf{x}$$` in the `$$\mathbf{b}_k$$` basis.
 
+Let's pretend that we have a linear operator `$$ A $$` that behaves "like a matrix" (most concisely, for `$$ a, b \in \mathbb{R}$$`, `$$\mathbf{x}, \mathbf{y} \in \mathbb{R}^n \textrm{ (maybe even } V)$$`, `$$ A(a\mathbf{x} + b \mathbf{y}) = aA\mathbf{x} + bA\mathbf{y} $$`) and that we have a basis `$$ \mathbf{b}_k$$`. 
+If we have a vector `$$ \mathbf{x}_\mathbf{b} = \sum b_k \mathbf{b}_k$$`,  then we can examine the behavior of our linear operator on this vector by
+`$$$
+\begin{align*}
+  A\left( \sum_k b_k \mathbf{b}_k \right) = \sum_k b_k A(\mathbf{b}_k)
+\end{align*}
+$$$`
+
+
+# Inner product structure, duals
+
+An inner product is an additional operation `$$\langle \cdot, \cdot \rangle $$` that one can add to a vector space. 
+It must satisfy certain [requirements](https://en.wikipedia.org/wiki/Inner_product_space). 
+It is a generalization of the dot product on `$$\mathbb{R}^n$$`, `$$ \langle \mathbf{x}, \mathbf{y} \rangle = \sum_k x_k y_k $$`. 
+The aforementioned requirements are the minimal set of constraints required to guarantee that the inner product you defined on your vector space `$$V$$`, gets you the properties that make the dot product useful.
+
+## Why are orthogonal bases good?
 Bases do not require an inner product to be defined and analyzed. However, if we have an inner product, we can define a condition for a basis to be particularly nice.
 The standard basis `$$ \mathbf{e}_k$$` satisfies `$$$ \langle \mathbf{e}_i, \mathbf{e}_j \rangle = \begin{cases} 1 \textrm{ if } i = j \\ 0 \textrm{ otherwise} \end{cases} $$$`,
 meaning that for distinct `$$ \mathbf{e}_i, \mathbf{e}_j$$`, the vectors are at 90º to each other. A basis that satisfies this latter property alone is called "orthogonal"; if, additionally, `$$\langle e_i, e_i \rangle = 1$$`, then the basis is called "orthonormal".  
 
-Recall that for a general basis `$$\mathbf{b}_k $$`
+Recall that for a general basis `$$\mathbf{b}_k $$`, solving the coefficients of 
 
 ## What is a dual space?
 
