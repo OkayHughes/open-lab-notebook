@@ -155,7 +155,7 @@ Some exercises:
     * Letting the standard monomial basis be identified with `$$ \mathbf{e}_k$$`, and this new basis be `$$ \mathbf{b}_l$$`, write each new basis vector in terms of 
     the "standard" monomial basis, i.e. find `$$e_{k, l}$$` so that `$$ \mathbf{b}_k = \sum_{l=1}^4 e_{k, l} \mathbf{e}_l$$`. Hint: `$$ e_{2,2} = 1$$`, `$$e_{2, \{1, 3, 4\}} = 0$$`. 
     * Use these coefficients to form the matrix equation `$$ \begin{bmatrix} \mathbf{b}_1 ~ \ldots ~ \mathbf{b}_k \end{bmatrix} \mathbf{x}_\mathbf{b} = \mathbf{x}_\mathbf{e}.$$` How
-    does this equation show that `$$1, -x, x^2, -x^3$$` form a basis? (Hint: use invertibility and the determinant).
+    does this equation show that `$$-1, x, -x^2, x^3$$` form a basis? (Hint: use invertibility and the determinant).
     * Redo the process above to derive the derivative operator in the `$$\mathbf{b}_k$$` basis. Show that the derivative of a constant polynomial is still zero.
 
 Note: this exercise shows that the matrix representation of `$$ \der{}{x} $$` is different for different bases. However, it can be shown that features of the linear operator `$$\der{}{x}$$` like
