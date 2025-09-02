@@ -43,7 +43,9 @@ It turns out that this is because for `$$ \mathbf{n} = (0, 0, 1)^\top$$`,  `$$ A
 Therefore if we have a solution to `$$A\mathbf{x} = \mathbf{b}$$`, then `$$A (\mathbf{x} + a\mathbf{n}) = A\mathbf{x} + aA\mathbf{n} = A\mathbf{x} + 0 = b$$`, so `$$\mathbf{x} + a\mathbf{n}$$` is also a solution. Therefore this system of linear equations has an infinite number of solutions.
 Suppose your calculus teacher asked you to find functions `$$f$$` that satisfy `$$ \der{f}{x} = x^2$$`. 
 You would immediately go "well, there are infinitely many such `$$f$$`, because `$$ \der{}{x}\left[f + C \right] = \der{f}{x}$$` for any constant `$$C$$`". 
-Therefore for any `$$f$$` that is a solution to that equation, `$$ f + C $$` is also a solution. You can see where I'm going here.
+Therefore for any `$$f$$` that is a solution to that equation, `$$ f + C $$` is also a solution. In both cases, non-uniqueness of solutions to a linear equation
+can be derived from the fact that the linear operators (`$$A, \der{}{x}$$`) have certain non-zero vectors that they squash (the space of such vectors is called the nullspace). 
+By talking about linear operators more generally, we can use the tools of linear algebra to examine the properties of operators like `$$\der{}{x}$$`.
 
 
 This means that there should be some analogy between a summation `$$ (0, 0, 1)^\top + (0, 1, 0)^\top = (0, 1, 1)^\top $$` and `$$ f + g$$`, right? 
