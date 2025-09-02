@@ -13,6 +13,15 @@ Let's say that you're mostly familiar with vectors of the form `$$x \in \mathbb{
 formulating linear systems of equations in terms of `$$ A\mathbf{x} = \mathbf{b}$$`, where `$$A \in \mathbb{R}^{n\times m}$$`, `$$\mathbf{x} \in \mathbb{R}^m$$`,
 and `$$ \mathbf{b} \in \mathbb{R}^n$$`. 
 
+Throughout this work, we will work with what I call the "column sum" characterization of matrix multiplication, in which (working in `$$\mathbb{R}^3$$` for concreteness)
+`$$$
+\begin{align*}
+\begin{pmatrix}1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{pmatrix} \begin{pmatrix}x_1 \\ x_2 \\ x_3 \end{pmatrix}
+&= x_1 \begin{pmatrix} 1 \\ 4 \\ 5 \end{pmatrix} + x_2 \begin{pmatrix} 2 \\ 5 \\ 8 \end{pmatrix} + x_3 \begin{pmatrix} 3 \\ 6 \\ 9 \end{pmatrix} \\
+&\stackrel{\textrm{algorithmic definition}}{=} \begin{pmatrix} x_1 + 2x_2 + 3x_3 \\ 4x_1 + 5x_2 + 6x_3 \\ 7x_1 + 8x_2 + 9x_3 \end{pmatrix}
+\end{align*}
+$$$`
+
 # Linear structure
 
 ## Why would we want more generality than this? 
@@ -122,6 +131,34 @@ Indeed, if you have a vector `$$ \mathbf{x} = \sum x_k \mathbf{e}_k$$`, with `$$
 then solving the system `$$$ \begin{bmatrix} \mathbf{b}_1 & \ldots & \mathbf{b}_k \end{bmatrix} \mathbf{x}_\mathbf{b} = \mathbf{x}_\mathbf{e}$$$` 
 finds `$$ \mathbf{x}_\mathbf{b} = (b_1, \ldots, b_n)$$` that reconstruct `$$\mathbf{x}$$` in the `$$\mathbf{b}_k$$` basis.
 
+
+Ok, let's see how matrices and bases are related using the concrete example of the polynomial space above.
+Let's suppose we have `$$f = \sum_{k=1}^4 f_k x^{k-1}$$`, and that I want to characterize the `$$\der{}{x}$$` operator.
+Then we find `$$$ \der{f}{x} = \der{}{x} \left[ \sum_{k=1}^4 f_k x^{k-1} \right]  = \sum_{k=1}^4 f_k \der{}{x} \left[ x^{k-1} \right] = \sum_{k=1}^4 f_k (k-1)x^{k-2} $$$`.
+If we make the association we made earlier, with `$$ x^{0} \simeq (1, 0, 0, 0)^\top, x \simeq (0, 1, 0, 0)^\top, x^2 \simeq (0, 0, 1, 0)^\top, x^3 \simeq (0, 0, 0, 1)^\top $$`
+then we find that the matrix representation of our differentiation operator, `$$D$$` should satisfy
+`$$$
+\begin{align*}
+    \der{f}{x} &= f_1 \der{}{x} \left[1 \right] + f_2 \der{}{x} \left[x \right] + f_3\cdot \der{}{x} \left[x^2 \right] + f_4 \cdot \der{}{x}\left[ x^3\right]   \\
+    &= f_1 (0) + f_2 \cdot 1  + f_3\cdot 2 x + f_4 \cdot 3x^2   \\
+&\simeq f_1 \cdot 0 + f_2 \cdot 1 \begin{pmatrix}1 \\ 0 \\ 0 \\ 0 \end{pmatrix} + f_3 \cdot 2 \begin{pmatrix}0 \\ 1 \\ 0 \\ 0 \end{pmatrix} + f_4 \cdot 3 \begin{pmatrix}0 \\ 0 \\ 1 \\ 0 \end{pmatrix} \\
+&= f_1 \begin{pmatrix}0 \\ 0 \\ 0 \\ 0 \end{pmatrix} + f_2 \begin{pmatrix}1 \\ 0 \\ 0 \\ 0 \end{pmatrix} + f_3 \begin{pmatrix}0 \\ 2 \\ 0 \\ 0 \end{pmatrix} + f_4 \begin{pmatrix}0 \\ 0 \\ 3 \\ 0 \end{pmatrix}  \\
+&= \begin{pmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & 2 & 0 \\ 0 & 0 & 0 & 3 \\ 0 & 0 & 0 & 0 \end{pmatrix}\begin{pmatrix}f_1 \\ f_2 \\ f_3 \\ f_4 \end{pmatrix} 
+\end{align*}
+$$$` 
+which means that we have found a matrix representation of `$$\der{}{x}$$` just by examining how it acts on a basis of `$$ V_1^3(\mathbb{R})$$`. 
+
+Some exercises:
+* The polynomials `$$ -1, x, -x^2, x^3 $$` also form a basis of `$$ V_1^3(\mathbb{R})$$`. 
+    * Letting the standard monomial basis be identified with `$$ \mathbf{e}_k$$`, and this new basis be `$$ \mathbf{b}_l$$`, write each new basis vector in terms of 
+    the "standard" monomial basis, i.e. find `$$e_{k, l}$$` so that `$$ \mathbf{b}_k = \sum_{l=1}^4 e_{k, l} \mathbf{e}_l$$`. Hint: `$$ e_{2,2} = 1$$`, `$$e_{k, 1, 3, 4} = 0$$`. 
+    * Use these coefficients to form the matrix equation `$$ \begin{bmatrix} \mathbf{b}_1 ~ \ldots ~ \mathbf{b}_k \end{bmatrix} \mathbf{x}_\mathbf{b} = \mathbf{x}_\mathbf{e}.$$` How
+    does this equation show that `$$1, -x, x^2, -x^3$$` form a basis? (Hint: use invertibility and the determinant).
+    * Redo the process above to derive the derivative operator in the `$$\mathbf{b}_k$$` basis. Show that the derivative of a constant polynomial is still zero.
+
+Note: this exercise shows that the matrix representation of `$$ \der{}{x} $$` is different for different bases. However, it can be shown that features of the linear operator `$$\der{}{x}$$` like
+the nullspace do not depend on this choice of basis. As a result, while representation of linear operators in a basis (i.e., as a matrix) are helpful for calculations (and certain bases can make it easy to read off properties of your linear operator from the matrix itself), most properties of `$$A$$` do not depend on what basis you write it in.
+
 <!--Let's pretend that we have a linear operator `$$ A $$` that behaves "like a matrix" (most concisely, for `$$ a, b \in \mathbb{R}$$`, `$$\mathbf{x}, \mathbf{y} \in \mathbb{R}^n \textrm{ (maybe even } V)$$`, `$$ A(a\mathbf{x} + b \mathbf{y}) = aA\mathbf{x} + bA\mathbf{y} $$`) and that we have a basis `$$ \mathbf{b}_k$$`. 
 First, let's write `$$ \mathbf{x} = \sum_l e_{l} \mathbf{e}_l$$` (`$$e_{l}$$` are just the entries of `$$\mathbf{x}$$` in a column vector!). What happens when we look at how `$$A$$` behaves on `$$\mathbf{x} $$`
 `$$$
@@ -172,7 +209,7 @@ If we have a polynomial `$$f$$` and its evaluations `$$ f_k = f(x_k)$$`, then if
 Ok, so we have constructed `$$ \sum_k w_k f_k $$` as a way to calculate an integral. It turns out that this also allows us to define an inner product, `$$ \langle f, g \rangle = \sum_k w_k f(x_k) g(x_k) $$`. First observe that `$$\langle q_k, q_l \rangle = \int q_k q_l \intd{x} = \sum_m w_m q_k(x_m) q_l(x_m) = \begin{cases} w_m \textrm{ if } k = l \\ 0 \textrm{ otherwise} \end{cases}  $$`, so `$$q_k$$` are an orthogonal basis. 
 Now we're prepared to see why orthonormal bases are so useful. Suppose I have a polynomial `$$ h = \sum_k a_k q_k(x) $$`. If I want to determine the coefficients `$$ b_k $$` in the monomial basis, so `$$ h = \sum_k b_k x^k $$`, then I would need to solve the linear system I described several paragraphs ago (the monomial basis is emphatically not orthogonal). However, if I had a polynomial `$$ f = \sum_k b_k x^k$$` and I want to calculate its coefficients in the `$$q_k$$` basis, then we find `$$ \sum_k \langle f, q_k \rangle q_k = \sum_k \int f q_k \intd{x} q_k = \sum_k \left( \sum_l w_l f(x_l) q_k(x_l)\right)q_k = \sum_k f(x_k) q_k $$`
 
-  
+## The adjoint (basically, transpose)  
 
 
 
