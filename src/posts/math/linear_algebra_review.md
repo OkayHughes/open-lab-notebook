@@ -21,6 +21,8 @@ Throughout this work, we will work with what I call the "column sum" characteriz
 &\stackrel{\textrm{algorithmic definition}}{=} \begin{pmatrix} x_1 + 2x_2 + 3x_3 \\ 4x_1 + 5x_2 + 6x_3 \\ 7x_1 + 8x_2 + 9x_3 \end{pmatrix}
 \end{align*}
 $$$`
+Within this characterization of matrix multiplication, each column can be thought of in the "arrow" sense of vectors, and matrix multiplication
+is simply scaling each column vector by a particular amount, then joining the scaled vectors end-to-end.
 
 # Linear structure
 
