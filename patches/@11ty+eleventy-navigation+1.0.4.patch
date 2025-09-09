@@ -1,8 +1,8 @@
 diff --git a/node_modules/@11ty/eleventy-navigation/eleventy-navigation.js b/node_modules/@11ty/eleventy-navigation/eleventy-navigation.js
-index 395e924..e599ab5 100644
+index d361d93..e8e7143 100644
 --- a/node_modules/@11ty/eleventy-navigation/eleventy-navigation.js
 +++ b/node_modules/@11ty/eleventy-navigation/eleventy-navigation.js
-@@ -68,7 +68,7 @@ function findBreadcrumbEntries(nodes, activeKey, options = {}) {
+@@ -113,7 +113,7 @@ function findBreadcrumbEntries(nodes, activeKey, options = {}) {
  function getUrlFilter(eleventyConfig) {
  	// eleventyConfig.pathPrefix was first available in Eleventy 2.0.0-canary.15
  	// And in Eleventy 2.0.0-canary.15 we recommend the a built-in transform for pathPrefix
@@ -11,10 +11,3 @@ index 395e924..e599ab5 100644
  		return function(url) {
  			return url;
  		};
-@@ -162,5 +162,5 @@ module.exports = {
- 	findNavigationEntries,
- 	findBreadcrumbEntries,
- 	toHtml: navigationToHtml,
--	toMarkdown: navigationToMarkdown
-+	toMarkdown: navigationToMarkdown,
- };

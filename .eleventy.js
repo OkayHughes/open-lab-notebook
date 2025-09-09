@@ -4,6 +4,8 @@ const linkTo = require('eleventy-plugin-link_to');
 const katex = require('katex');
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const pluginTOC = require('eleventy-plugin-toc')
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+//import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 
 
 
@@ -32,6 +34,7 @@ module.exports = function(eleventyConfig) {
     "tar.gz"
   ]);
   eleventyConfig.addPassthroughCopy("public");
+  eleventyConfig.addPlugin(syntaxHighlight);
 
   /* From: https://github.com/artstorm/eleventy-plugin-seo
   

@@ -37,6 +37,13 @@ The issue in cprnc is due to improper preprocessor defines that result in the pr
 These problems occur because there are spaces before the `#` character. 
 
 The command to run an individual test is `ctest -R ${testname}`, and `make baseline` generates reference files to ensure that your changes didn't break anything important.
+When `cmake` is called in a working directory where the test suite will be run, use `-DUSE_NUM_PROCS=24` so regression tests will run faster.
+
+
+# How to make DA HOMME mergeable
+* Generate baseline test results from commit that `og/da` branch branched off from
+* Ensure that `-DWITH_DA=OFF` HOMME passes regression tests
+* Ensure that cxx/f90 comparison tests are bfb
 
 Comparison tests:
 ```
