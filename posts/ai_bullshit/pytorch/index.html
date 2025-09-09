@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5-1.ico?v=1630525741731" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/open-lab-notebook/public/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/open-lab-notebook/public/fonts/cmu.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/themes/prism-twilight.min.css" rel="stylesheet" />
+ 
+    <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
+    
+    <title>Open Lab Notebook</title>
+
+<meta name="description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://undefined.glitch.me/posts/ai_bullshit/pytorch/">
+
+<meta property="og:title" content="Open Lab Notebook">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://undefined.glitch.me/posts/ai_bullshit/pytorch/">
+<meta property="og:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta property="og:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://undefined.glitch.me/posts/ai_bullshit/pytorch/">
+<meta name="twitter:title" content="Open Lab Notebook">
+<meta name="twitter:description" content="A blog which serves as my lab notebook, but which is visible to the world because I&apos;m a masochist.">
+<meta name="twitter:image" content="https://cdn.glitch.com/8af1b7af-efae-4a35-b1d7-e47b835582bc%2Fall_TMQ_moist_day5.png?v=1630525127233">
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>pytorch crash course</h1>
+
+    
+    
+    
+    <h1>PyTorch Tutorial for Applied and Computational Mathematicians</h1>
+<h2>Introduction</h2>
+<p>This tutorial is designed for someone with a background in applied/computational mathematics and solid Python skills. We'll focus on how PyTorch implements mathematical concepts you're already familiar with, particularly focusing on tensors, automatic differentiation, and optimization.</p>
+<h2>1. Tensors: The Fundamental Data Structure</h2>
+<p>Tensors are PyTorch's fundamental data structure - generalized matrices with N dimensions.</p>
+<pre class="language-python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+
+<span class="token comment"># Creating tensors (similar to numpy arrays)</span>
+x <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token number">3.0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>          <span class="token comment"># 1D tensor (vector)</span>
+A <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>         <span class="token comment"># 2D tensor (matrix)</span>
+T <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>                   <span class="token comment"># 3D tensor</span>
+
+<span class="token comment"># Tensor operations (familiar from linear algebra)</span>
+v <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token number">3.0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+w <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">4.0</span><span class="token punctuation">,</span> <span class="token number">5.0</span><span class="token punctuation">,</span> <span class="token number">6.0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+dot_product <span class="token operator">=</span> torch<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>v<span class="token punctuation">,</span> w<span class="token punctuation">)</span>              <span class="token comment"># Dot product</span>
+matrix_vector <span class="token operator">=</span> A @ v<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span>                  <span class="token comment"># Matrix-vector multiplication</span>
+matrix_matrix <span class="token operator">=</span> A @ A<span class="token punctuation">.</span>T                    <span class="token comment"># Matrix multiplication</span>
+
+<span class="token comment"># Special tensor types</span>
+identity <span class="token operator">=</span> torch<span class="token punctuation">.</span>eye<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>                    <span class="token comment"># Identity matrix</span>
+zeros <span class="token operator">=</span> torch<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>                  <span class="token comment"># Zero matrix</span>
+ones <span class="token operator">=</span> torch<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>                    <span class="token comment"># Matrix of ones</span>
+
+<span class="token comment"># Converting between numpy and torch (shared memory)</span>
+np_array <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+torch_tensor <span class="token operator">=</span> torch<span class="token punctuation">.</span>from_numpy<span class="token punctuation">(</span>np_array<span class="token punctuation">)</span>  <span class="token comment"># Convert numpy to torch</span>
+back_to_numpy <span class="token operator">=</span> torch_tensor<span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span>       <span class="token comment"># Convert torch to numpy</span></code></pre>
+<h2>2. Automatic Differentiation: The Mathematical Core</h2>
+<p>PyTorch's autograd system automatically computes gradients, which is essential for optimization.</p>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Variables for which we want to compute gradients</span>
+x <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+y <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token number">3.0</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Define a function (e.g., f(x,y) = x²y + y + 2)</span>
+z <span class="token operator">=</span> x<span class="token operator">**</span><span class="token number">2</span> <span class="token operator">*</span> y <span class="token operator">+</span> y <span class="token operator">+</span> <span class="token number">2</span>
+
+<span class="token comment"># Compute gradients (∇z = [∂z/∂x, ∂z/∂y])</span>
+z<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Access gradients</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>grad<span class="token punctuation">)</span>  <span class="token comment"># ∂z/∂x = 2xy = 12.0</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>y<span class="token punctuation">.</span>grad<span class="token punctuation">)</span>  <span class="token comment"># ∂z/∂y = x² + 1 = 5.0</span></code></pre>
+<h3>More complex example: Gradient of a vector function</h3>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Jacobian-vector product example</span>
+x <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">2.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+y <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span>x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">**</span><span class="token number">2</span> <span class="token operator">+</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># If we want dy/dx, we need to provide a vector for v in v^T * J</span>
+v <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+y<span class="token punctuation">.</span>backward<span class="token punctuation">(</span>v<span class="token punctuation">)</span>  <span class="token comment"># Computes v^T * J</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>grad<span class="token punctuation">)</span>  <span class="token comment"># [∂(y1+y2)/∂x1, ∂(y1+y2)/∂x2] = [2x1 + x2, 1 + x1] = [4, 2]</span></code></pre>
+<h2>3. Solving Optimization Problems</h2>
+<p>Let's implement gradient descent to solve a simple minimization problem.</p>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Minimize f(x) = x^4 - 3x^3 + 2</span>
+<span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> x<span class="token operator">**</span><span class="token number">4</span> <span class="token operator">-</span> <span class="token number">3</span><span class="token operator">*</span>x<span class="token operator">**</span><span class="token number">3</span> <span class="token operator">+</span> <span class="token number">2</span>
+
+<span class="token comment"># Gradient descent</span>
+x <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token number">0.0</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>  <span class="token comment"># Initial guess</span>
+learning_rate <span class="token operator">=</span> <span class="token number">0.01</span>
+iterations <span class="token operator">=</span> <span class="token number">1000</span>
+
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>iterations<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># Compute function value and gradient</span>
+    loss <span class="token operator">=</span> f<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+    loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># Compute gradient ∇f(x)</span>
+    
+    <span class="token comment"># Update x (gradient descent step)</span>
+    <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># Temporarily disable gradient tracking</span>
+        x <span class="token operator">-=</span> learning_rate <span class="token operator">*</span> x<span class="token punctuation">.</span>grad
+        
+    <span class="token comment"># Zero the gradient for the next iteration</span>
+    x<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>zero_<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">if</span> i <span class="token operator">%</span> <span class="token number">100</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Iteration </span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token punctuation">}</span></span><span class="token string">: x = </span><span class="token interpolation"><span class="token punctuation">{</span>x<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">, f(x) = </span><span class="token interpolation"><span class="token punctuation">{</span>loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Minimum at x = </span><span class="token interpolation"><span class="token punctuation">{</span>x<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">, f(x) = </span><span class="token interpolation"><span class="token punctuation">{</span>f<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></code></pre>
+<h2>4. Linear Algebra Operations</h2>
+<p>PyTorch includes a comprehensive linear algebra module.</p>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Matrix operations</span>
+A <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">3.</span><span class="token punctuation">,</span> <span class="token number">1.</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1.</span><span class="token punctuation">,</span> <span class="token number">2.</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">9.</span><span class="token punctuation">,</span> <span class="token number">8.</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Solve linear system Ax = b (like numpy.linalg.solve)</span>
+x <span class="token operator">=</span> torch<span class="token punctuation">.</span>linalg<span class="token punctuation">.</span>solve<span class="token punctuation">(</span>A<span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Solution to Ax=b: </span><span class="token interpolation"><span class="token punctuation">{</span>x<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+
+<span class="token comment"># Eigen decomposition</span>
+eigenvalues<span class="token punctuation">,</span> eigenvectors <span class="token operator">=</span> torch<span class="token punctuation">.</span>linalg<span class="token punctuation">.</span>eig<span class="token punctuation">(</span>A<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Eigenvalues: </span><span class="token interpolation"><span class="token punctuation">{</span>eigenvalues<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Eigenvectors: </span><span class="token interpolation"><span class="token punctuation">{</span>eigenvectors<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+
+<span class="token comment"># Singular Value Decomposition (SVD)</span>
+U<span class="token punctuation">,</span> S<span class="token punctuation">,</span> V <span class="token operator">=</span> torch<span class="token punctuation">.</span>svd<span class="token punctuation">(</span>A<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Singular values: </span><span class="token interpolation"><span class="token punctuation">{</span>S<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+
+<span class="token comment"># Matrix inversion</span>
+A_inv <span class="token operator">=</span> torch<span class="token punctuation">.</span>inverse<span class="token punctuation">(</span>A<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Inverse of A: </span><span class="token interpolation"><span class="token punctuation">{</span>A_inv<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></code></pre>
+<h2>5. Solving Differential Equations</h2>
+<p>Let's solve a simple ODE using PyTorch's autograd.</p>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Solve u'' + u = 0 with u(0)=0, u(π/2)=1</span>
+<span class="token comment"># This is a boundary value problem</span>
+
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+
+<span class="token keyword">class</span> <span class="token class-name">NeuralNetwork</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>layers <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Tanh<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Tanh<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+    
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>layers<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+<span class="token comment"># Create model and optimizer</span>
+model <span class="token operator">=</span> NeuralNetwork<span class="token punctuation">(</span><span class="token punctuation">)</span>
+optimizer <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>Adam<span class="token punctuation">(</span>model<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Training to satisfy the ODE and boundary conditions</span>
+<span class="token keyword">for</span> step <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    
+    <span class="token comment"># Sample points in the domain [0, π/2]</span>
+    x_internal <span class="token operator">=</span> torch<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>torch<span class="token punctuation">.</span>pi<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span>
+    x_internal<span class="token punctuation">.</span>requires_grad <span class="token operator">=</span> <span class="token boolean">True</span>
+    
+    <span class="token comment"># Compute solution and its derivatives</span>
+    u <span class="token operator">=</span> model<span class="token punctuation">(</span>x_internal<span class="token punctuation">)</span>
+    u_x <span class="token operator">=</span> torch<span class="token punctuation">.</span>autograd<span class="token punctuation">.</span>grad<span class="token punctuation">(</span>u<span class="token punctuation">,</span> x_internal<span class="token punctuation">,</span> grad_outputs<span class="token operator">=</span>torch<span class="token punctuation">.</span>ones_like<span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">,</span> 
+                             create_graph<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    u_xx <span class="token operator">=</span> torch<span class="token punctuation">.</span>autograd<span class="token punctuation">.</span>grad<span class="token punctuation">(</span>u_x<span class="token punctuation">,</span> x_internal<span class="token punctuation">,</span> grad_outputs<span class="token operator">=</span>torch<span class="token punctuation">.</span>ones_like<span class="token punctuation">(</span>u_x<span class="token punctuation">)</span><span class="token punctuation">,</span> 
+                              create_graph<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    
+    <span class="token comment"># ODE residual: u'' + u</span>
+    residual <span class="token operator">=</span> u_xx <span class="token operator">+</span> u
+    
+    <span class="token comment"># Boundary conditions</span>
+    u0 <span class="token operator">=</span> model<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    u_pi_half <span class="token operator">=</span> model<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span>torch<span class="token punctuation">.</span>pi<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    
+    <span class="token comment"># Loss = MSE of residual + boundary condition penalties</span>
+    loss <span class="token operator">=</span> <span class="token punctuation">(</span>residual<span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>u0 <span class="token operator">-</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token operator">**</span><span class="token number">2</span> <span class="token operator">+</span> <span class="token punctuation">(</span>u_pi_half <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">**</span><span class="token number">2</span>
+    
+    loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">if</span> step <span class="token operator">%</span> <span class="token number">1000</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Step </span><span class="token interpolation"><span class="token punctuation">{</span>step<span class="token punctuation">}</span></span><span class="token string">, Loss: </span><span class="token interpolation"><span class="token punctuation">{</span>loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+
+<span class="token comment"># Analytical solution is sin(x), let's compare</span>
+test_x <span class="token operator">=</span> torch<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> torch<span class="token punctuation">.</span>pi<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    predicted <span class="token operator">=</span> model<span class="token punctuation">(</span>test_x<span class="token punctuation">)</span>
+    analytical <span class="token operator">=</span> torch<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>test_x<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Max error:"</span><span class="token punctuation">,</span> torch<span class="token punctuation">.</span><span class="token builtin">max</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span><span class="token builtin">abs</span><span class="token punctuation">(</span>predicted <span class="token operator">-</span> analytical<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<h2>6. Fourier Transforms and Signal Processing</h2>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Signal processing operations</span>
+t <span class="token operator">=</span> torch<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+signal <span class="token operator">=</span> torch<span class="token punctuation">.</span>sin<span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> torch<span class="token punctuation">.</span>pi <span class="token operator">*</span> <span class="token number">5</span> <span class="token operator">*</span> t<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">0.5</span> <span class="token operator">*</span> torch<span class="token punctuation">.</span>sin<span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> torch<span class="token punctuation">.</span>pi <span class="token operator">*</span> <span class="token number">10</span> <span class="token operator">*</span> t<span class="token punctuation">)</span>
+
+<span class="token comment"># Fourier transform</span>
+freq_domain <span class="token operator">=</span> torch<span class="token punctuation">.</span>fft<span class="token punctuation">.</span>fft<span class="token punctuation">(</span>signal<span class="token punctuation">)</span>
+frequencies <span class="token operator">=</span> torch<span class="token punctuation">.</span>fft<span class="token punctuation">.</span>fftfreq<span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>signal<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Power spectrum</span>
+power_spectrum <span class="token operator">=</span> torch<span class="token punctuation">.</span><span class="token builtin">abs</span><span class="token punctuation">(</span>freq_domain<span class="token punctuation">)</span><span class="token operator">**</span><span class="token number">2</span>
+
+<span class="token comment"># Find dominant frequencies</span>
+dominant_freq_idx <span class="token operator">=</span> torch<span class="token punctuation">.</span>argsort<span class="token punctuation">(</span>power_spectrum<span class="token punctuation">,</span> descending<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Dominant frequencies (Hz):"</span><span class="token punctuation">,</span> frequencies<span class="token punctuation">[</span>dominant_freq_idx<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span></code></pre>
+<h2>7. Custom Autograd Functions</h2>
+<p>For implementing custom mathematical operations with automatic differentiation.</p>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Custom function: f(x) = x^3 if x >= 0, 0 otherwise</span>
+<span class="token keyword">class</span> <span class="token class-name">CustomCubic</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>autograd<span class="token punctuation">.</span>Function<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token decorator annotation punctuation">@staticmethod</span>
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        ctx<span class="token punctuation">.</span>save_for_backward<span class="token punctuation">(</span>x<span class="token punctuation">)</span>  <span class="token comment"># Save for backward pass</span>
+        <span class="token keyword">return</span> torch<span class="token punctuation">.</span>where<span class="token punctuation">(</span>x <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">,</span> x<span class="token operator">**</span><span class="token number">3</span><span class="token punctuation">,</span> torch<span class="token punctuation">.</span>zeros_like<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    
+    <span class="token decorator annotation punctuation">@staticmethod</span>
+    <span class="token keyword">def</span> <span class="token function">backward</span><span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> grad_output<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x<span class="token punctuation">,</span> <span class="token operator">=</span> ctx<span class="token punctuation">.</span>saved_tensors
+        <span class="token comment"># Derivative: 3x^2 if x >= 0, 0 otherwise</span>
+        grad_input <span class="token operator">=</span> grad_output <span class="token operator">*</span> torch<span class="token punctuation">.</span>where<span class="token punctuation">(</span>x <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token operator">*</span>x<span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">,</span> torch<span class="token punctuation">.</span>zeros_like<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> grad_input
+
+<span class="token comment"># Use our custom function</span>
+x <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">2.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+y <span class="token operator">=</span> CustomCubic<span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+<span class="token comment"># Compute gradient</span>
+y<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"x:"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"f(x):"</span><span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"f'(x):"</span><span class="token punctuation">,</span> x<span class="token punctuation">.</span>grad<span class="token punctuation">)</span></code></pre>
+<h2>8. Performance: GPU Acceleration</h2>
+<p>One of PyTorch's key advantages is seamless GPU acceleration.</p>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Check if GPU is available</span>
+device <span class="token operator">=</span> torch<span class="token punctuation">.</span>device<span class="token punctuation">(</span><span class="token string">'cuda'</span> <span class="token keyword">if</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>is_available<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">else</span> <span class="token string">'cpu'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Using device: </span><span class="token interpolation"><span class="token punctuation">{</span>device<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+
+<span class="token comment"># Move tensors to GPU</span>
+x <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+y <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+
+<span class="token comment"># Matrix multiplication on GPU (much faster for large matrices)</span>
+z <span class="token operator">=</span> x @ y
+
+<span class="token comment"># Move back to CPU if needed</span>
+z_cpu <span class="token operator">=</span> z<span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<h2>9. Solving a Linear System with Constraints</h2>
+<p>Let's solve a quadratic programming problem: minimize ½xᵀQx + cᵀx subject to Ax = b.</p>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Example: min ½xᵀQx + cᵀx subject to Ax = b</span>
+Q <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">2.</span><span class="token punctuation">,</span> <span class="token number">0.</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0.</span><span class="token punctuation">,</span> <span class="token number">4.</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+c <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1.</span><span class="token punctuation">,</span> <span class="token number">1.</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+A <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1.</span><span class="token punctuation">,</span> <span class="token number">1.</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1.</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Using Lagrange multipliers: [Q, Aᵀ; A, 0] [x; λ] = [-c; b]</span>
+M <span class="token operator">=</span> torch<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+M<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> Q
+M<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> A<span class="token punctuation">.</span>T
+M<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> A
+
+rhs <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">-</span>c<span class="token punctuation">,</span> b<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+solution <span class="token operator">=</span> torch<span class="token punctuation">.</span>linalg<span class="token punctuation">.</span>solve<span class="token punctuation">(</span>M<span class="token punctuation">,</span> rhs<span class="token punctuation">)</span>
+x_opt <span class="token operator">=</span> solution<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span>
+lambda_opt <span class="token operator">=</span> solution<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Optimal x: </span><span class="token interpolation"><span class="token punctuation">{</span>x_opt<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Lagrange multiplier: </span><span class="token interpolation"><span class="token punctuation">{</span>lambda_opt<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span></code></pre>
+<h2>Conclusion</h2>
+<p>This tutorial covered the core mathematical aspects of PyTorch:</p>
+<ol>
+<li><strong>Tensors</strong> as generalized matrices with efficient operations</li>
+<li><strong>Automatic differentiation</strong> for computing gradients</li>
+<li><strong>Optimization algorithms</strong> for solving minimization problems</li>
+<li><strong>Linear algebra operations</strong> for matrix computations</li>
+<li><strong>Solving differential equations</strong> with neural networks</li>
+<li><strong>Signal processing</strong> with Fourier transforms</li>
+<li><strong>Custom mathematical operations</strong> with autograd support</li>
+<li><strong>GPU acceleration</strong> for performance</li>
+</ol>
+<p>PyTorch provides a powerful framework for mathematical computing that combines the flexibility of Python with the performance of optimized native code. Its automatic differentiation capabilities make it particularly valuable for solving optimization problems and differential equations that are common in applied mathematics.</p>
+<p>For further learning, explore:</p>
+<ul>
+<li>PyTorch's <code>torch.linalg</code> module for advanced linear algebra</li>
+<li>The <code>torch.optim</code> module for optimization algorithms</li>
+<li>PyTorch's neural network capabilities for solving PDEs</li>
+<li>GPU programming patterns for high-performance computing</li>
+</ul>
+<h1>PyTorch Tutorial: Neural Network Architectures</h1>
+<h2>Introduction</h2>
+<p>This augmentation to the PyTorch tutorial focuses on implementing two fundamental neural network architectures: a Multi-Layer Perceptron (MLP) for image classification and a Convolutional Neural Network (CNN) for more advanced image recognition tasks. We'll use common datasets (MNIST and CIFAR-10) and cover the complete training pipeline.</p>
+<h2>Prerequisites</h2>
+<pre class="language-python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>optim <span class="token keyword">as</span> optim
+<span class="token keyword">import</span> torchvision
+<span class="token keyword">import</span> torchvision<span class="token punctuation">.</span>transforms <span class="token keyword">as</span> transforms
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> DataLoader
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np</code></pre>
+<h2>10. Multi-Layer Perceptron (MLP) for MNIST Classification</h2>
+<h3>Data Preparation</h3>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Transform to normalize data and convert to tensor</span>
+transform <span class="token operator">=</span> transforms<span class="token punctuation">.</span>Compose<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    transforms<span class="token punctuation">.</span>Normalize<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Download and load the MNIST dataset</span>
+train_dataset <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>MNIST<span class="token punctuation">(</span>
+    root<span class="token operator">=</span><span class="token string">'./data'</span><span class="token punctuation">,</span> 
+    train<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> 
+    download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> 
+    transform<span class="token operator">=</span>transform
+<span class="token punctuation">)</span>
+
+test_dataset <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>MNIST<span class="token punctuation">(</span>
+    root<span class="token operator">=</span><span class="token string">'./data'</span><span class="token punctuation">,</span> 
+    train<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> 
+    download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> 
+    transform<span class="token operator">=</span>transform
+<span class="token punctuation">)</span>
+
+<span class="token comment"># Create data loaders</span>
+batch_size <span class="token operator">=</span> <span class="token number">64</span>
+train_loader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>train_dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span>batch_size<span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+test_loader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>test_dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span>batch_size<span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span></code></pre>
+<h3>Model Architecture</h3>
+<pre class="language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">MLP</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> input_size<span class="token punctuation">,</span> hidden_size<span class="token punctuation">,</span> num_classes<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>MLP<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>fc1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>input_size<span class="token punctuation">,</span> hidden_size<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>relu <span class="token operator">=</span> nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>fc2 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>hidden_size<span class="token punctuation">,</span> hidden_size<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>fc3 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span>hidden_size<span class="token punctuation">,</span> num_classes<span class="token punctuation">)</span>
+        
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># Flatten the input images</span>
+        x <span class="token operator">=</span> x<span class="token punctuation">.</span>view<span class="token punctuation">(</span>x<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        out <span class="token operator">=</span> self<span class="token punctuation">.</span>fc1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        out <span class="token operator">=</span> self<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
+        out <span class="token operator">=</span> self<span class="token punctuation">.</span>fc2<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
+        out <span class="token operator">=</span> self<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
+        out <span class="token operator">=</span> self<span class="token punctuation">.</span>fc3<span class="token punctuation">(</span>out<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> out
+
+<span class="token comment"># Initialize model</span>
+input_size <span class="token operator">=</span> <span class="token number">28</span> <span class="token operator">*</span> <span class="token number">28</span>  <span class="token comment"># MNIST images are 28x28</span>
+hidden_size <span class="token operator">=</span> <span class="token number">128</span>
+num_classes <span class="token operator">=</span> <span class="token number">10</span>
+model <span class="token operator">=</span> MLP<span class="token punctuation">(</span>input_size<span class="token punctuation">,</span> hidden_size<span class="token punctuation">,</span> num_classes<span class="token punctuation">)</span></code></pre>
+<h3>Training Loop</h3>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Loss and optimizer</span>
+criterion <span class="token operator">=</span> nn<span class="token punctuation">.</span>CrossEntropyLoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+optimizer <span class="token operator">=</span> optim<span class="token punctuation">.</span>Adam<span class="token punctuation">(</span>model<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span><span class="token number">0.001</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Training function</span>
+<span class="token keyword">def</span> <span class="token function">train_model</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> train_loader<span class="token punctuation">,</span> criterion<span class="token punctuation">,</span> optimizer<span class="token punctuation">,</span> num_epochs<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    model<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    total_step <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span>
+    loss_history <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    
+    <span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>num_epochs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> i<span class="token punctuation">,</span> <span class="token punctuation">(</span>images<span class="token punctuation">,</span> labels<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token comment"># Forward pass</span>
+            outputs <span class="token operator">=</span> model<span class="token punctuation">(</span>images<span class="token punctuation">)</span>
+            loss <span class="token operator">=</span> criterion<span class="token punctuation">(</span>outputs<span class="token punctuation">,</span> labels<span class="token punctuation">)</span>
+            
+            <span class="token comment"># Backward and optimize</span>
+            optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            
+            <span class="token comment"># Record loss</span>
+            loss_history<span class="token punctuation">.</span>append<span class="token punctuation">(</span>loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">100</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Epoch [</span><span class="token interpolation"><span class="token punctuation">{</span>epoch<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>num_epochs<span class="token punctuation">}</span></span><span class="token string">], Step [</span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>total_step<span class="token punctuation">}</span></span><span class="token string">], Loss: </span><span class="token interpolation"><span class="token punctuation">{</span>loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">return</span> loss_history
+
+<span class="token comment"># Train the model</span>
+loss_history <span class="token operator">=</span> train_model<span class="token punctuation">(</span>model<span class="token punctuation">,</span> train_loader<span class="token punctuation">,</span> criterion<span class="token punctuation">,</span> optimizer<span class="token punctuation">,</span> num_epochs<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span></code></pre>
+<h3>Evaluation</h3>
+<pre class="language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">evaluate_model</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> test_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    model<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        correct <span class="token operator">=</span> <span class="token number">0</span>
+        total <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">for</span> images<span class="token punctuation">,</span> labels <span class="token keyword">in</span> test_loader<span class="token punctuation">:</span>
+            outputs <span class="token operator">=</span> model<span class="token punctuation">(</span>images<span class="token punctuation">)</span>
+            _<span class="token punctuation">,</span> predicted <span class="token operator">=</span> torch<span class="token punctuation">.</span><span class="token builtin">max</span><span class="token punctuation">(</span>outputs<span class="token punctuation">.</span>data<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            total <span class="token operator">+=</span> labels<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+            correct <span class="token operator">+=</span> <span class="token punctuation">(</span>predicted <span class="token operator">==</span> labels<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        
+        accuracy <span class="token operator">=</span> <span class="token number">100</span> <span class="token operator">*</span> correct <span class="token operator">/</span> total
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Test Accuracy: </span><span class="token interpolation"><span class="token punctuation">{</span>accuracy<span class="token punctuation">:</span><span class="token format-spec">.2f</span><span class="token punctuation">}</span></span><span class="token string">%'</span></span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> accuracy
+
+<span class="token comment"># Evaluate the model</span>
+accuracy <span class="token operator">=</span> evaluate_model<span class="token punctuation">(</span>model<span class="token punctuation">,</span> test_loader<span class="token punctuation">)</span></code></pre>
+<h3>Visualization</h3>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Plot training loss</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>loss_history<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Training Loss History'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'Iterations'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'Loss'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Display some test results</span>
+<span class="token keyword">def</span> <span class="token function">visualize_predictions</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> test_loader<span class="token punctuation">,</span> num_images<span class="token operator">=</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    model<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    images_so_far <span class="token operator">=</span> <span class="token number">0</span>
+    fig <span class="token operator">=</span> plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> images<span class="token punctuation">,</span> labels <span class="token keyword">in</span> test_loader<span class="token punctuation">:</span>
+            outputs <span class="token operator">=</span> model<span class="token punctuation">(</span>images<span class="token punctuation">)</span>
+            _<span class="token punctuation">,</span> preds <span class="token operator">=</span> torch<span class="token punctuation">.</span><span class="token builtin">max</span><span class="token punctuation">(</span>outputs<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            
+            <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>images<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                images_so_far <span class="token operator">+=</span> <span class="token number">1</span>
+                ax <span class="token operator">=</span> plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span>num_images<span class="token operator">//</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> images_so_far<span class="token punctuation">)</span>
+                ax<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'off'</span><span class="token punctuation">)</span>
+                ax<span class="token punctuation">.</span>set_title<span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Predicted: </span><span class="token interpolation"><span class="token punctuation">{</span>preds<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string">, True: </span><span class="token interpolation"><span class="token punctuation">{</span>labels<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+                
+                <span class="token comment"># Convert image back to display format</span>
+                img <span class="token operator">=</span> images<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>transpose<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                img <span class="token operator">=</span> np<span class="token punctuation">.</span>clip<span class="token punctuation">(</span>img <span class="token operator">*</span> <span class="token number">0.5</span> <span class="token operator">+</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment"># Unnormalize</span>
+                
+                plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>img<span class="token punctuation">.</span>squeeze<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> cmap<span class="token operator">=</span><span class="token string">'gray'</span><span class="token punctuation">)</span>
+                
+                <span class="token keyword">if</span> images_so_far <span class="token operator">==</span> num_images<span class="token punctuation">:</span>
+                    <span class="token keyword">return</span>
+                
+visualize_predictions<span class="token punctuation">(</span>model<span class="token punctuation">,</span> test_loader<span class="token punctuation">)</span></code></pre>
+<h2>11. Convolutional Neural Network (CNN) for CIFAR-10</h2>
+<h3>Data Preparation</h3>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Data augmentation and normalization for training</span>
+<span class="token comment"># Just normalization for validation</span>
+transform_train <span class="token operator">=</span> transforms<span class="token punctuation">.</span>Compose<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    transforms<span class="token punctuation">.</span>RandomHorizontalFlip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    transforms<span class="token punctuation">.</span>RandomCrop<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    transforms<span class="token punctuation">.</span>Normalize<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">0.4914</span><span class="token punctuation">,</span> <span class="token number">0.4822</span><span class="token punctuation">,</span> <span class="token number">0.4465</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0.2023</span><span class="token punctuation">,</span> <span class="token number">0.1994</span><span class="token punctuation">,</span> <span class="token number">0.2010</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+transform_test <span class="token operator">=</span> transforms<span class="token punctuation">.</span>Compose<span class="token punctuation">(</span><span class="token punctuation">[</span>
+    transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    transforms<span class="token punctuation">.</span>Normalize<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">0.4914</span><span class="token punctuation">,</span> <span class="token number">0.4822</span><span class="token punctuation">,</span> <span class="token number">0.4465</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0.2023</span><span class="token punctuation">,</span> <span class="token number">0.1994</span><span class="token punctuation">,</span> <span class="token number">0.2010</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Download and load CIFAR-10 dataset</span>
+train_dataset <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>CIFAR10<span class="token punctuation">(</span>
+    root<span class="token operator">=</span><span class="token string">'./data'</span><span class="token punctuation">,</span> 
+    train<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> 
+    download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> 
+    transform<span class="token operator">=</span>transform_train
+<span class="token punctuation">)</span>
+
+test_dataset <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>CIFAR10<span class="token punctuation">(</span>
+    root<span class="token operator">=</span><span class="token string">'./data'</span><span class="token punctuation">,</span> 
+    train<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> 
+    download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> 
+    transform<span class="token operator">=</span>transform_test
+<span class="token punctuation">)</span>
+
+<span class="token comment"># Create data loaders</span>
+batch_size <span class="token operator">=</span> <span class="token number">128</span>
+train_loader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>train_dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span>batch_size<span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+test_loader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>test_dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span>batch_size<span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Class names for CIFAR-10</span>
+classes <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'plane'</span><span class="token punctuation">,</span> <span class="token string">'car'</span><span class="token punctuation">,</span> <span class="token string">'bird'</span><span class="token punctuation">,</span> <span class="token string">'cat'</span><span class="token punctuation">,</span> <span class="token string">'deer'</span><span class="token punctuation">,</span> <span class="token string">'dog'</span><span class="token punctuation">,</span> <span class="token string">'frog'</span><span class="token punctuation">,</span> <span class="token string">'horse'</span><span class="token punctuation">,</span> <span class="token string">'ship'</span><span class="token punctuation">,</span> <span class="token string">'truck'</span><span class="token punctuation">)</span></code></pre>
+<h3>CNN Architecture</h3>
+<pre class="language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">CNN</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> num_classes<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>CNN<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv2 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv3 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>pool <span class="token operator">=</span> nn<span class="token punctuation">.</span>MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>fc1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">128</span> <span class="token operator">*</span> <span class="token number">4</span> <span class="token operator">*</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>fc2 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">512</span><span class="token punctuation">,</span> num_classes<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>dropout <span class="token operator">=</span> nn<span class="token punctuation">.</span>Dropout<span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>relu <span class="token operator">=</span> nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># Convolutional layers</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>pool<span class="token punctuation">(</span>self<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>conv1<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>pool<span class="token punctuation">(</span>self<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>conv2<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>pool<span class="token punctuation">(</span>self<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>conv3<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        
+        <span class="token comment"># Flatten</span>
+        x <span class="token operator">=</span> x<span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">128</span> <span class="token operator">*</span> <span class="token number">4</span> <span class="token operator">*</span> <span class="token number">4</span><span class="token punctuation">)</span>
+        
+        <span class="token comment"># Fully connected layers</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>dropout<span class="token punctuation">(</span>self<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>self<span class="token punctuation">.</span>fc1<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>fc2<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> x
+
+<span class="token comment"># Initialize model</span>
+model_cnn <span class="token operator">=</span> CNN<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<h3>Training with Learning Rate Scheduling</h3>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Loss and optimizer</span>
+criterion <span class="token operator">=</span> nn<span class="token punctuation">.</span>CrossEntropyLoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+optimizer <span class="token operator">=</span> optim<span class="token punctuation">.</span>Adam<span class="token punctuation">(</span>model_cnn<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span><span class="token number">0.001</span><span class="token punctuation">)</span>
+scheduler <span class="token operator">=</span> optim<span class="token punctuation">.</span>lr_scheduler<span class="token punctuation">.</span>StepLR<span class="token punctuation">(</span>optimizer<span class="token punctuation">,</span> step_size<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span> gamma<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Training function with validation</span>
+<span class="token keyword">def</span> <span class="token function">train_cnn</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> train_loader<span class="token punctuation">,</span> test_loader<span class="token punctuation">,</span> criterion<span class="token punctuation">,</span> optimizer<span class="token punctuation">,</span> scheduler<span class="token punctuation">,</span> num_epochs<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    train_loss_history <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    val_accuracy_history <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    
+    <span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>num_epochs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># Training phase</span>
+        model<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        running_loss <span class="token operator">=</span> <span class="token number">0.0</span>
+        <span class="token keyword">for</span> i<span class="token punctuation">,</span> <span class="token punctuation">(</span>images<span class="token punctuation">,</span> labels<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token comment"># Forward pass</span>
+            outputs <span class="token operator">=</span> model<span class="token punctuation">(</span>images<span class="token punctuation">)</span>
+            loss <span class="token operator">=</span> criterion<span class="token punctuation">(</span>outputs<span class="token punctuation">,</span> labels<span class="token punctuation">)</span>
+            
+            <span class="token comment"># Backward and optimize</span>
+            optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            
+            running_loss <span class="token operator">+=</span> loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">100</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Epoch [</span><span class="token interpolation"><span class="token punctuation">{</span>epoch<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>num_epochs<span class="token punctuation">}</span></span><span class="token string">], Step [</span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token builtin">len</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string">], Loss: </span><span class="token interpolation"><span class="token punctuation">{</span>loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+        
+        <span class="token comment"># Calculate average training loss</span>
+        avg_train_loss <span class="token operator">=</span> running_loss <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span>
+        train_loss_history<span class="token punctuation">.</span>append<span class="token punctuation">(</span>avg_train_loss<span class="token punctuation">)</span>
+        
+        <span class="token comment"># Validation phase</span>
+        model<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        correct <span class="token operator">=</span> <span class="token number">0</span>
+        total <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">for</span> images<span class="token punctuation">,</span> labels <span class="token keyword">in</span> test_loader<span class="token punctuation">:</span>
+                outputs <span class="token operator">=</span> model<span class="token punctuation">(</span>images<span class="token punctuation">)</span>
+                _<span class="token punctuation">,</span> predicted <span class="token operator">=</span> torch<span class="token punctuation">.</span><span class="token builtin">max</span><span class="token punctuation">(</span>outputs<span class="token punctuation">.</span>data<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                total <span class="token operator">+=</span> labels<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+                correct <span class="token operator">+=</span> <span class="token punctuation">(</span>predicted <span class="token operator">==</span> labels<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        
+        accuracy <span class="token operator">=</span> <span class="token number">100</span> <span class="token operator">*</span> correct <span class="token operator">/</span> total
+        val_accuracy_history<span class="token punctuation">.</span>append<span class="token punctuation">(</span>accuracy<span class="token punctuation">)</span>
+        
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Epoch [</span><span class="token interpolation"><span class="token punctuation">{</span>epoch<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>num_epochs<span class="token punctuation">}</span></span><span class="token string">], Train Loss: </span><span class="token interpolation"><span class="token punctuation">{</span>avg_train_loss<span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">, Val Accuracy: </span><span class="token interpolation"><span class="token punctuation">{</span>accuracy<span class="token punctuation">:</span><span class="token format-spec">.2f</span><span class="token punctuation">}</span></span><span class="token string">%'</span></span><span class="token punctuation">)</span>
+        
+        <span class="token comment"># Step the scheduler</span>
+        scheduler<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">return</span> train_loss_history<span class="token punctuation">,</span> val_accuracy_history
+
+<span class="token comment"># Train the CNN</span>
+train_loss<span class="token punctuation">,</span> val_accuracy <span class="token operator">=</span> train_cnn<span class="token punctuation">(</span>model_cnn<span class="token punctuation">,</span> train_loader<span class="token punctuation">,</span> test_loader<span class="token punctuation">,</span> criterion<span class="token punctuation">,</span> optimizer<span class="token punctuation">,</span> scheduler<span class="token punctuation">,</span> num_epochs<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span></code></pre>
+<h3>Advanced Evaluation</h3>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Plot training and validation results</span>
+fig<span class="token punctuation">,</span> <span class="token punctuation">(</span>ax1<span class="token punctuation">,</span> ax2<span class="token punctuation">)</span> <span class="token operator">=</span> plt<span class="token punctuation">.</span>subplots<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+ax1<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>train_loss<span class="token punctuation">)</span>
+ax1<span class="token punctuation">.</span>set_title<span class="token punctuation">(</span><span class="token string">'Training Loss'</span><span class="token punctuation">)</span>
+ax1<span class="token punctuation">.</span>set_xlabel<span class="token punctuation">(</span><span class="token string">'Epoch'</span><span class="token punctuation">)</span>
+ax1<span class="token punctuation">.</span>set_ylabel<span class="token punctuation">(</span><span class="token string">'Loss'</span><span class="token punctuation">)</span>
+
+ax2<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>val_accuracy<span class="token punctuation">)</span>
+ax2<span class="token punctuation">.</span>set_title<span class="token punctuation">(</span><span class="token string">'Validation Accuracy'</span><span class="token punctuation">)</span>
+ax2<span class="token punctuation">.</span>set_xlabel<span class="token punctuation">(</span><span class="token string">'Epoch'</span><span class="token punctuation">)</span>
+ax2<span class="token punctuation">.</span>set_ylabel<span class="token punctuation">(</span><span class="token string">'Accuracy (%)'</span><span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>tight_layout<span class="token punctuation">(</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Per-class accuracy</span>
+<span class="token keyword">def</span> <span class="token function">class_accuracy</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> test_loader<span class="token punctuation">,</span> classes<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    model<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    class_correct <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token number">0.</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    class_total <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token number">0.</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> images<span class="token punctuation">,</span> labels <span class="token keyword">in</span> test_loader<span class="token punctuation">:</span>
+            outputs <span class="token operator">=</span> model<span class="token punctuation">(</span>images<span class="token punctuation">)</span>
+            _<span class="token punctuation">,</span> predicted <span class="token operator">=</span> torch<span class="token punctuation">.</span><span class="token builtin">max</span><span class="token punctuation">(</span>outputs<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            c <span class="token operator">=</span> <span class="token punctuation">(</span>predicted <span class="token operator">==</span> labels<span class="token punctuation">)</span><span class="token punctuation">.</span>squeeze<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            
+            <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>labels<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                label <span class="token operator">=</span> labels<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+                class_correct<span class="token punctuation">[</span>label<span class="token punctuation">]</span> <span class="token operator">+=</span> c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span>
+                class_total<span class="token punctuation">[</span>label<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token number">1</span>
+    
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Accuracy of </span><span class="token interpolation"><span class="token punctuation">{</span>classes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string">: </span><span class="token interpolation"><span class="token punctuation">{</span><span class="token number">100</span> <span class="token operator">*</span> class_correct<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">/</span> class_total<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token format-spec">.2f</span><span class="token punctuation">}</span></span><span class="token string">%'</span></span><span class="token punctuation">)</span>
+
+class_accuracy<span class="token punctuation">(</span>model_cnn<span class="token punctuation">,</span> test_loader<span class="token punctuation">,</span> classes<span class="token punctuation">)</span>
+
+<span class="token comment"># Confusion matrix</span>
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> confusion_matrix
+<span class="token keyword">import</span> seaborn <span class="token keyword">as</span> sns
+
+<span class="token keyword">def</span> <span class="token function">plot_confusion_matrix</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> test_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    model<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    all_preds <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    all_labels <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    
+    <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> images<span class="token punctuation">,</span> labels <span class="token keyword">in</span> test_loader<span class="token punctuation">:</span>
+            outputs <span class="token operator">=</span> model<span class="token punctuation">(</span>images<span class="token punctuation">)</span>
+            _<span class="token punctuation">,</span> predicted <span class="token operator">=</span> torch<span class="token punctuation">.</span><span class="token builtin">max</span><span class="token punctuation">(</span>outputs<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            all_preds<span class="token punctuation">.</span>extend<span class="token punctuation">(</span>predicted<span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            all_labels<span class="token punctuation">.</span>extend<span class="token punctuation">(</span>labels<span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    
+    cm <span class="token operator">=</span> confusion_matrix<span class="token punctuation">(</span>all_labels<span class="token punctuation">,</span> all_preds<span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    sns<span class="token punctuation">.</span>heatmap<span class="token punctuation">(</span>cm<span class="token punctuation">,</span> annot<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> fmt<span class="token operator">=</span><span class="token string">'d'</span><span class="token punctuation">,</span> cmap<span class="token operator">=</span><span class="token string">'Blues'</span><span class="token punctuation">,</span> 
+                xticklabels<span class="token operator">=</span>classes<span class="token punctuation">,</span> yticklabels<span class="token operator">=</span>classes<span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Confusion Matrix'</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'True Label'</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'Predicted Label'</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+plot_confusion_matrix<span class="token punctuation">(</span>model_cnn<span class="token punctuation">,</span> test_loader<span class="token punctuation">)</span></code></pre>
+<h3>Saving and Loading Models</h3>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Save the trained model</span>
+torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>model_cnn<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'cifar10_cnn.pth'</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Load the model (for later use)</span>
+loaded_model <span class="token operator">=</span> CNN<span class="token punctuation">(</span><span class="token punctuation">)</span>
+loaded_model<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">'cifar10_cnn.pth'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+loaded_model<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Test the loaded model</span>
+loaded_accuracy <span class="token operator">=</span> evaluate_model<span class="token punctuation">(</span>loaded_model<span class="token punctuation">,</span> test_loader<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Loaded model accuracy: </span><span class="token interpolation"><span class="token punctuation">{</span>loaded_accuracy<span class="token punctuation">:</span><span class="token format-spec">.2f</span><span class="token punctuation">}</span></span><span class="token string">%'</span></span><span class="token punctuation">)</span></code></pre>
+<h2>12. Using GPU Acceleration</h2>
+<pre class="language-python"><code class="language-python"><span class="token comment"># Check if GPU is available</span>
+device <span class="token operator">=</span> torch<span class="token punctuation">.</span>device<span class="token punctuation">(</span><span class="token string">'cuda'</span> <span class="token keyword">if</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>is_available<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">else</span> <span class="token string">'cpu'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Using device: </span><span class="token interpolation"><span class="token punctuation">{</span>device<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+
+<span class="token comment"># Modify models to use GPU</span>
+model_mlp <span class="token operator">=</span> MLP<span class="token punctuation">(</span>input_size<span class="token punctuation">,</span> hidden_size<span class="token punctuation">,</span> num_classes<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+model_cnn <span class="token operator">=</span> CNN<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+
+<span class="token comment"># Modify training functions to move data to GPU</span>
+<span class="token keyword">def</span> <span class="token function">train_gpu</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> train_loader<span class="token punctuation">,</span> criterion<span class="token punctuation">,</span> optimizer<span class="token punctuation">,</span> num_epochs<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    model<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>num_epochs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> i<span class="token punctuation">,</span> <span class="token punctuation">(</span>images<span class="token punctuation">,</span> labels<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token comment"># Move data to GPU</span>
+            images <span class="token operator">=</span> images<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+            labels <span class="token operator">=</span> labels<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+            
+            <span class="token comment"># Forward pass</span>
+            outputs <span class="token operator">=</span> model<span class="token punctuation">(</span>images<span class="token punctuation">)</span>
+            loss <span class="token operator">=</span> criterion<span class="token punctuation">(</span>outputs<span class="token punctuation">,</span> labels<span class="token punctuation">)</span>
+            
+            <span class="token comment"># Backward and optimize</span>
+            optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">100</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Epoch [</span><span class="token interpolation"><span class="token punctuation">{</span>epoch<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>num_epochs<span class="token punctuation">}</span></span><span class="token string">], Step [</span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token builtin">len</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string">], Loss: </span><span class="token interpolation"><span class="token punctuation">{</span>loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+
+<span class="token comment"># Train on GPU</span>
+train_gpu<span class="token punctuation">(</span>model_cnn<span class="token punctuation">,</span> train_loader<span class="token punctuation">,</span> criterion<span class="token punctuation">,</span> optimizer<span class="token punctuation">,</span> num_epochs<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span></code></pre>
+<h2>Conclusion</h2>
+<p>This tutorial extension has covered:</p>
+<ol>
+<li><strong>MLP Implementation</strong>: Built a fully connected network for MNIST digit classification</li>
+<li><strong>CNN Implementation</strong>: Created a convolutional neural network for CIFAR-10 image classification</li>
+<li><strong>Data Handling</strong>: Downloaded and preprocessed standard datasets</li>
+<li><strong>Training Pipelines</strong>: Implemented complete training loops with validation</li>
+<li><strong>Evaluation</strong>: Analyzed model performance with accuracy metrics and visualizations</li>
+<li><strong>Model Persistence</strong>: Saved and loaded trained models</li>
+<li><strong>GPU Acceleration</strong>: Utilized GPU resources for faster training</li>
+</ol>
+<p>These implementations demonstrate fundamental concepts in deep learning with PyTorch. You can extend these architectures by:</p>
+<ul>
+<li>Adding more layers for increased capacity</li>
+<li>Experimenting with different optimization algorithms</li>
+<li>Implementing regularization techniques like dropout and batch normalization</li>
+<li>Trying more advanced architectures like ResNet or Transformer networks</li>
+</ul>
+<p>The mathematical foundation provided in the first part of the tutorial combined with these practical implementations gives you a comprehensive understanding of PyTorch for both mathematical computing and deep learning applications.</p>
+
+    <div class="controls">
+
+    
+      
+          <h3>
+            Parent post:
+      </h3>
+          <ul><li><a href="/open-lab-notebook/posts/ai_bullshit/ai/">ai bullshit</a></li></ul>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        </div>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/remix/glitch-hello-eleventy">
+        <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" alt="" /> 
+        Remix on Glitch
+        </a>
+        <a class="btn--remix" target="_top" href="https://glitch.com/edit/#!/open-lab-notebook">
+        Edit
+        </a>
+      </footer>
+    
+  </main>
+   
+  </body>
+</html>

@@ -10,6 +10,7 @@
     <meta name="description" content="Your new 11ty blog" />
     <link rel="stylesheet" type="text/css" href="/open-lab-notebook/public/style.css"/>
     <link rel="stylesheet" type="text/css" href="/open-lab-notebook/public/fonts/cmu.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/themes/prism-twilight.min.css" rel="stylesheet" />
  
     <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
     
@@ -57,256 +58,255 @@
 <h1>Diffusion-Based Super-Resolution Tutorial with Code References</h1>
 <p>This tutorial explains a simplified implementation of a diffusion-based super-resolution model, with explicit references to where each mathematical concept appears in the code.</p>
 <h2>Complete Python Implementation</h2>
-<pre><code class="language-python">import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import numpy as np
-from torch.utils.data import DataLoader
-from torchvision import datasets, transforms
-import matplotlib.pyplot as plt
+<pre class="language-python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>functional <span class="token keyword">as</span> F
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">import</span> DataLoader
+<span class="token keyword">from</span> torchvision <span class="token keyword">import</span> datasets<span class="token punctuation">,</span> transforms
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
 
-# Set device
-device = torch.device(&quot;cuda&quot; if torch.cuda.is_available() else &quot;cpu&quot;)
+<span class="token comment"># Set device</span>
+device <span class="token operator">=</span> torch<span class="token punctuation">.</span>device<span class="token punctuation">(</span><span class="token string">"cuda"</span> <span class="token keyword">if</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>is_available<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">else</span> <span class="token string">"cpu"</span><span class="token punctuation">)</span>
 
-# Define the U-Net model for noise prediction
-class UNet(nn.Module):
-    def __init__(self, in_channels=3, out_channels=3, base_channels=32):
-        super(UNet, self).__init__()
+<span class="token comment"># Define the U-Net model for noise prediction</span>
+<span class="token keyword">class</span> <span class="token class-name">UNet</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> in_channels<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> out_channels<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> base_channels<span class="token operator">=</span><span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>UNet<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
         
-        # Encoder (downsampling)
-        self.enc1 = self._block(in_channels, base_channels)
-        self.enc2 = self._block(base_channels, base_channels*2)
-        self.pool = nn.MaxPool2d(2)
+        <span class="token comment"># Encoder (downsampling)</span>
+        self<span class="token punctuation">.</span>enc1 <span class="token operator">=</span> self<span class="token punctuation">.</span>_block<span class="token punctuation">(</span>in_channels<span class="token punctuation">,</span> base_channels<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>enc2 <span class="token operator">=</span> self<span class="token punctuation">.</span>_block<span class="token punctuation">(</span>base_channels<span class="token punctuation">,</span> base_channels<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>pool <span class="token operator">=</span> nn<span class="token punctuation">.</span>MaxPool2d<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
         
-        # Bottleneck
-        self.bottleneck = self._block(base_channels*2, base_channels*4)
+        <span class="token comment"># Bottleneck</span>
+        self<span class="token punctuation">.</span>bottleneck <span class="token operator">=</span> self<span class="token punctuation">.</span>_block<span class="token punctuation">(</span>base_channels<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">,</span> base_channels<span class="token operator">*</span><span class="token number">4</span><span class="token punctuation">)</span>
         
-        # Decoder (upsampling)
-        self.upconv2 = nn.ConvTranspose2d(base_channels*4, base_channels*2, kernel_size=2, stride=2)
-        self.dec2 = self._block(base_channels*4, base_channels*2)  # Skip connection doubles channels
-        self.upconv1 = nn.ConvTranspose2d(base_channels*2, base_channels, kernel_size=2, stride=2)
-        self.dec1 = self._block(base_channels*2, base_channels)  # Skip connection doubles channels
+        <span class="token comment"># Decoder (upsampling)</span>
+        self<span class="token punctuation">.</span>upconv2 <span class="token operator">=</span> nn<span class="token punctuation">.</span>ConvTranspose2d<span class="token punctuation">(</span>base_channels<span class="token operator">*</span><span class="token number">4</span><span class="token punctuation">,</span> base_channels<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>dec2 <span class="token operator">=</span> self<span class="token punctuation">.</span>_block<span class="token punctuation">(</span>base_channels<span class="token operator">*</span><span class="token number">4</span><span class="token punctuation">,</span> base_channels<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span>  <span class="token comment"># Skip connection doubles channels</span>
+        self<span class="token punctuation">.</span>upconv1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>ConvTranspose2d<span class="token punctuation">(</span>base_channels<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">,</span> base_channels<span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>dec1 <span class="token operator">=</span> self<span class="token punctuation">.</span>_block<span class="token punctuation">(</span>base_channels<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">,</span> base_channels<span class="token punctuation">)</span>  <span class="token comment"># Skip connection doubles channels</span>
         
-        # Final output layer
-        self.out = nn.Conv2d(base_channels, out_channels, kernel_size=1)
+        <span class="token comment"># Final output layer</span>
+        self<span class="token punctuation">.</span>out <span class="token operator">=</span> nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span>base_channels<span class="token punctuation">,</span> out_channels<span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
         
-    def _block(self, in_channels, out_channels):
-        return nn.Sequential(
-            nn.Conv2d(in_channels, out_channels, 3, padding=1),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(out_channels, out_channels, 3, padding=1),
-            nn.ReLU(inplace=True)
-        )
+    <span class="token keyword">def</span> <span class="token function">_block</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> in_channels<span class="token punctuation">,</span> out_channels<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span>in_channels<span class="token punctuation">,</span> out_channels<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span>inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span>out_channels<span class="token punctuation">,</span> out_channels<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span>inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
     
-    def forward(self, x, t):
-        # Add time embedding (simplified)
-        # REF: Time embedding implementation
-        t_embed = t.view(-1, 1, 1, 1).expand(x.size(0), 1, x.size(2), x.size(3))
-        x = torch.cat([x, t_embed], dim=1)
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">,</span> t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># Add time embedding (simplified)</span>
+        <span class="token comment"># REF: Time embedding implementation</span>
+        t_embed <span class="token operator">=</span> t<span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>expand<span class="token punctuation">(</span>x<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> x<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> x<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>x<span class="token punctuation">,</span> t_embed<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
         
-        # Encoder
-        enc1 = self.enc1(x)
-        enc2 = self.enc2(self.pool(enc1))
+        <span class="token comment"># Encoder</span>
+        enc1 <span class="token operator">=</span> self<span class="token punctuation">.</span>enc1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        enc2 <span class="token operator">=</span> self<span class="token punctuation">.</span>enc2<span class="token punctuation">(</span>self<span class="token punctuation">.</span>pool<span class="token punctuation">(</span>enc1<span class="token punctuation">)</span><span class="token punctuation">)</span>
         
-        # Bottleneck
-        bottleneck = self.bottleneck(self.pool(enc2))
+        <span class="token comment"># Bottleneck</span>
+        bottleneck <span class="token operator">=</span> self<span class="token punctuation">.</span>bottleneck<span class="token punctuation">(</span>self<span class="token punctuation">.</span>pool<span class="token punctuation">(</span>enc2<span class="token punctuation">)</span><span class="token punctuation">)</span>
         
-        # Decoder with skip connections
-        dec2 = self.upconv2(bottleneck)
-        dec2 = torch.cat([dec2, enc2], dim=1)
-        dec2 = self.dec2(dec2)
+        <span class="token comment"># Decoder with skip connections</span>
+        dec2 <span class="token operator">=</span> self<span class="token punctuation">.</span>upconv2<span class="token punctuation">(</span>bottleneck<span class="token punctuation">)</span>
+        dec2 <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>dec2<span class="token punctuation">,</span> enc2<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+        dec2 <span class="token operator">=</span> self<span class="token punctuation">.</span>dec2<span class="token punctuation">(</span>dec2<span class="token punctuation">)</span>
         
-        dec1 = self.upconv1(dec2)
-        dec1 = torch.cat([dec1, enc1], dim=1)
-        dec1 = self.dec1(dec1)
+        dec1 <span class="token operator">=</span> self<span class="token punctuation">.</span>upconv1<span class="token punctuation">(</span>dec2<span class="token punctuation">)</span>
+        dec1 <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>dec1<span class="token punctuation">,</span> enc1<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+        dec1 <span class="token operator">=</span> self<span class="token punctuation">.</span>dec1<span class="token punctuation">(</span>dec1<span class="token punctuation">)</span>
         
-        return self.out(dec1)
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>out<span class="token punctuation">(</span>dec1<span class="token punctuation">)</span>
 
-# Define the diffusion process
-class DiffusionProcess:
-    def __init__(self, T=1000, beta_start=1e-4, beta_end=0.02):
-        self.T = T
+<span class="token comment"># Define the diffusion process</span>
+<span class="token keyword">class</span> <span class="token class-name">DiffusionProcess</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> T<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span> beta_start<span class="token operator">=</span><span class="token number">1e-4</span><span class="token punctuation">,</span> beta_end<span class="token operator">=</span><span class="token number">0.02</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>T <span class="token operator">=</span> T
         
-        # Linear noise schedule
-        # REF: Equation for beta schedule
-        self.betas = torch.linspace(beta_start, beta_end, T)
-        # REF: α_t = 1 - β_t
-        self.alphas = 1 - self.betas
-        # REF: ᾱ_t = ∏_{s=1}^t α_s
-        self.alpha_bars = torch.cumprod(self.alphas, dim=0)
+        <span class="token comment"># Linear noise schedule</span>
+        <span class="token comment"># REF: Equation for beta schedule</span>
+        self<span class="token punctuation">.</span>betas <span class="token operator">=</span> torch<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span>beta_start<span class="token punctuation">,</span> beta_end<span class="token punctuation">,</span> T<span class="token punctuation">)</span>
+        <span class="token comment"># REF: α_t = 1 - β_t</span>
+        self<span class="token punctuation">.</span>alphas <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">-</span> self<span class="token punctuation">.</span>betas
+        <span class="token comment"># REF: ᾱ_t = ∏_{s=1}^t α_s</span>
+        self<span class="token punctuation">.</span>alpha_bars <span class="token operator">=</span> torch<span class="token punctuation">.</span>cumprod<span class="token punctuation">(</span>self<span class="token punctuation">.</span>alphas<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
         
-    def forward_process(self, x0, t):
-        &quot;&quot;&quot;Add noise to image at timestep t&quot;&quot;&quot;
-        # REF: √(ᾱ_t)
-        sqrt_alpha_bar = torch.sqrt(self.alpha_bars[t]).view(-1, 1, 1, 1).to(x0.device)
-        # REF: √(1 - ᾱ_t)
-        sqrt_one_minus_alpha_bar = torch.sqrt(1 - self.alpha_bars[t]).view(-1, 1, 1, 1).to(x0.device)
-        epsilon = torch.randn_like(x0)
+    <span class="token keyword">def</span> <span class="token function">forward_process</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x0<span class="token punctuation">,</span> t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""Add noise to image at timestep t"""</span>
+        <span class="token comment"># REF: √(ᾱ_t)</span>
+        sqrt_alpha_bar <span class="token operator">=</span> torch<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>self<span class="token punctuation">.</span>alpha_bars<span class="token punctuation">[</span>t<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>x0<span class="token punctuation">.</span>device<span class="token punctuation">)</span>
+        <span class="token comment"># REF: √(1 - ᾱ_t)</span>
+        sqrt_one_minus_alpha_bar <span class="token operator">=</span> torch<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> self<span class="token punctuation">.</span>alpha_bars<span class="token punctuation">[</span>t<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>x0<span class="token punctuation">.</span>device<span class="token punctuation">)</span>
+        epsilon <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn_like<span class="token punctuation">(</span>x0<span class="token punctuation">)</span>
         
-        # REF: Equation x_t = √(ᾱ_t) * x_0 + √(1 - ᾱ_t) * ε
-        xt = sqrt_alpha_bar * x0 + sqrt_one_minus_alpha_bar * epsilon
-        return xt, epsilon
+        <span class="token comment"># REF: Equation x_t = √(ᾱ_t) * x_0 + √(1 - ᾱ_t) * ε</span>
+        xt <span class="token operator">=</span> sqrt_alpha_bar <span class="token operator">*</span> x0 <span class="token operator">+</span> sqrt_one_minus_alpha_bar <span class="token operator">*</span> epsilon
+        <span class="token keyword">return</span> xt<span class="token punctuation">,</span> epsilon
     
-    def reverse_process(self, model, x, t, condition=None):
-        &quot;&quot;&quot;Remove noise from image at timestep t using the model&quot;&quot;&quot;
-        with torch.no_grad():
-            # Predict the noise
-            # REF: ε_θ(x_t, t, y) where y is the condition
-            epsilon_pred = model(x, t)
+    <span class="token keyword">def</span> <span class="token function">reverse_process</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> model<span class="token punctuation">,</span> x<span class="token punctuation">,</span> t<span class="token punctuation">,</span> condition<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""Remove noise from image at timestep t using the model"""</span>
+        <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token comment"># Predict the noise</span>
+            <span class="token comment"># REF: ε_θ(x_t, t, y) where y is the condition</span>
+            epsilon_pred <span class="token operator">=</span> model<span class="token punctuation">(</span>x<span class="token punctuation">,</span> t<span class="token punctuation">)</span>
             
-            # Calculate coefficients for reverse process
-            # REF: α_t
-            alpha_t = self.alphas[t].view(-1, 1, 1, 1).to(x.device)
-            # REF: ᾱ_t
-            alpha_bar_t = self.alpha_bars[t].view(-1, 1, 1, 1).to(x.device)
-            # REF: β_t
-            beta_t = self.betas[t].view(-1, 1, 1, 1).to(x.device)
+            <span class="token comment"># Calculate coefficients for reverse process</span>
+            <span class="token comment"># REF: α_t</span>
+            alpha_t <span class="token operator">=</span> self<span class="token punctuation">.</span>alphas<span class="token punctuation">[</span>t<span class="token punctuation">]</span><span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>x<span class="token punctuation">.</span>device<span class="token punctuation">)</span>
+            <span class="token comment"># REF: ᾱ_t</span>
+            alpha_bar_t <span class="token operator">=</span> self<span class="token punctuation">.</span>alpha_bars<span class="token punctuation">[</span>t<span class="token punctuation">]</span><span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>x<span class="token punctuation">.</span>device<span class="token punctuation">)</span>
+            <span class="token comment"># REF: β_t</span>
+            beta_t <span class="token operator">=</span> self<span class="token punctuation">.</span>betas<span class="token punctuation">[</span>t<span class="token punctuation">]</span><span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>x<span class="token punctuation">.</span>device<span class="token punctuation">)</span>
             
-            # REF: Equation for reverse process
-            # x_{t-1} = (1/√(α_t)) * (x_t - (β_t/√(1-ᾱ_t)) * ε_θ) + σ_t * z
-            if t &gt; 0:
-                z = torch.randn_like(x)
-            else:
-                z = 0
+            <span class="token comment"># REF: Equation for reverse process</span>
+            <span class="token comment"># x_{t-1} = (1/√(α_t)) * (x_t - (β_t/√(1-ᾱ_t)) * ε_θ) + σ_t * z</span>
+            <span class="token keyword">if</span> t <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">:</span>
+                z <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn_like<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                z <span class="token operator">=</span> <span class="token number">0</span>
                 
-            sigma_t = torch.sqrt(beta_t)
-            x_prev = (1 / torch.sqrt(alpha_t)) * (x - (beta_t / torch.sqrt(1 - alpha_bar_t)) * epsilon_pred) + sigma_t * z
+            sigma_t <span class="token operator">=</span> torch<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>beta_t<span class="token punctuation">)</span>
+            x_prev <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">/</span> torch<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>alpha_t<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>x <span class="token operator">-</span> <span class="token punctuation">(</span>beta_t <span class="token operator">/</span> torch<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> alpha_bar_t<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> epsilon_pred<span class="token punctuation">)</span> <span class="token operator">+</span> sigma_t <span class="token operator">*</span> z
             
-            return x_prev
+            <span class="token keyword">return</span> x_prev
 
-# Training function
-def train_diffusion(model, diffusion, dataloader, optimizer, epochs=10):
-    model.train()
-    for epoch in range(epochs):
-        total_loss = 0
-        for i, (hr_imgs, _) in enumerate(dataloader):
-            hr_imgs = hr_imgs.to(device)
+<span class="token comment"># Training function</span>
+<span class="token keyword">def</span> <span class="token function">train_diffusion</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> diffusion<span class="token punctuation">,</span> dataloader<span class="token punctuation">,</span> optimizer<span class="token punctuation">,</span> epochs<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    model<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>epochs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        total_loss <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">for</span> i<span class="token punctuation">,</span> <span class="token punctuation">(</span>hr_imgs<span class="token punctuation">,</span> _<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>dataloader<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            hr_imgs <span class="token operator">=</span> hr_imgs<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
             
-            # Create low-resolution version (condition)
-            # REF: y = low-resolution condition
-            lr_imgs = F.interpolate(hr_imgs, scale_factor=0.25, mode='bilinear')
-            lr_imgs = F.interpolate(lr_imgs, size=hr_imgs.shape[2:], mode='bilinear')
+            <span class="token comment"># Create low-resolution version (condition)</span>
+            <span class="token comment"># REF: y = low-resolution condition</span>
+            lr_imgs <span class="token operator">=</span> F<span class="token punctuation">.</span>interpolate<span class="token punctuation">(</span>hr_imgs<span class="token punctuation">,</span> scale_factor<span class="token operator">=</span><span class="token number">0.25</span><span class="token punctuation">,</span> mode<span class="token operator">=</span><span class="token string">'bilinear'</span><span class="token punctuation">)</span>
+            lr_imgs <span class="token operator">=</span> F<span class="token punctuation">.</span>interpolate<span class="token punctuation">(</span>lr_imgs<span class="token punctuation">,</span> size<span class="token operator">=</span>hr_imgs<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span> mode<span class="token operator">=</span><span class="token string">'bilinear'</span><span class="token punctuation">)</span>
             
-            # Random timestep
-            # REF: t ~ Uniform(1, T)
-            t = torch.randint(0, diffusion.T, (hr_imgs.size(0),), device=device)
+            <span class="token comment"># Random timestep</span>
+            <span class="token comment"># REF: t ~ Uniform(1, T)</span>
+            t <span class="token operator">=</span> torch<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> diffusion<span class="token punctuation">.</span>T<span class="token punctuation">,</span> <span class="token punctuation">(</span>hr_imgs<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> device<span class="token operator">=</span>device<span class="token punctuation">)</span>
             
-            # Add noise to high-resolution images
-            # REF: Forward process q(x_t|x_0)
-            noisy_imgs, true_noise = diffusion.forward_process(hr_imgs, t)
+            <span class="token comment"># Add noise to high-resolution images</span>
+            <span class="token comment"># REF: Forward process q(x_t|x_0)</span>
+            noisy_imgs<span class="token punctuation">,</span> true_noise <span class="token operator">=</span> diffusion<span class="token punctuation">.</span>forward_process<span class="token punctuation">(</span>hr_imgs<span class="token punctuation">,</span> t<span class="token punctuation">)</span>
             
-            # Concatenate low-resolution condition with noisy image
-            # REF: Conditioning the model on y
-            model_input = torch.cat([noisy_imgs, lr_imgs], dim=1)
+            <span class="token comment"># Concatenate low-resolution condition with noisy image</span>
+            <span class="token comment"># REF: Conditioning the model on y</span>
+            model_input <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>noisy_imgs<span class="token punctuation">,</span> lr_imgs<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
             
-            # Predict noise
-            # REF: ε_θ(x_t, t, y)
-            pred_noise = model(model_input, t)
+            <span class="token comment"># Predict noise</span>
+            <span class="token comment"># REF: ε_θ(x_t, t, y)</span>
+            pred_noise <span class="token operator">=</span> model<span class="token punctuation">(</span>model_input<span class="token punctuation">,</span> t<span class="token punctuation">)</span>
             
-            # Calculate loss
-            # REF: Loss function L = E[||ε - ε_θ(x_t, t, y)||^2]
-            loss = F.mse_loss(pred_noise, true_noise)
+            <span class="token comment"># Calculate loss</span>
+            <span class="token comment"># REF: Loss function L = E[||ε - ε_θ(x_t, t, y)||^2]</span>
+            loss <span class="token operator">=</span> F<span class="token punctuation">.</span>mse_loss<span class="token punctuation">(</span>pred_noise<span class="token punctuation">,</span> true_noise<span class="token punctuation">)</span>
             
-            # Backward pass
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
+            <span class="token comment"># Backward pass</span>
+            optimizer<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            optimizer<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
             
-            total_loss += loss.item()
+            total_loss <span class="token operator">+=</span> loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span>
             
-            if i % 100 == 0:
-                print(f&quot;Epoch {epoch+1}/{epochs}, Batch {i}, Loss: {loss.item():.4f}&quot;)
+            <span class="token keyword">if</span> i <span class="token operator">%</span> <span class="token number">100</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Epoch </span><span class="token interpolation"><span class="token punctuation">{</span>epoch<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>epochs<span class="token punctuation">}</span></span><span class="token string">, Batch </span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token punctuation">}</span></span><span class="token string">, Loss: </span><span class="token interpolation"><span class="token punctuation">{</span>loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
         
-        print(f&quot;Epoch {epoch+1}/{epochs}, Average Loss: {total_loss/len(dataloader):.4f}&quot;)
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Epoch </span><span class="token interpolation"><span class="token punctuation">{</span>epoch<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>epochs<span class="token punctuation">}</span></span><span class="token string">, Average Loss: </span><span class="token interpolation"><span class="token punctuation">{</span>total_loss<span class="token operator">/</span><span class="token builtin">len</span><span class="token punctuation">(</span>dataloader<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">.4f</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
 
-# Sampling function
-def sample_diffusion(model, diffusion, lr_img, img_size=(32, 32)):
-    model.eval()
+<span class="token comment"># Sampling function</span>
+<span class="token keyword">def</span> <span class="token function">sample_diffusion</span><span class="token punctuation">(</span>model<span class="token punctuation">,</span> diffusion<span class="token punctuation">,</span> lr_img<span class="token punctuation">,</span> img_size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    model<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     
-    # Start from random noise
-    # REF: x_T ~ N(0, I)
-    x = torch.randn(1, 3, *img_size).to(device)
+    <span class="token comment"># Start from random noise</span>
+    <span class="token comment"># REF: x_T ~ N(0, I)</span>
+    x <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token operator">*</span>img_size<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
     
-    # Upsample low-resolution image to target size
-    # REF: Prepare condition y
-    lr_img = F.interpolate(lr_img, size=img_size, mode='bilinear')
+    <span class="token comment"># Upsample low-resolution image to target size</span>
+    <span class="token comment"># REF: Prepare condition y</span>
+    lr_img <span class="token operator">=</span> F<span class="token punctuation">.</span>interpolate<span class="token punctuation">(</span>lr_img<span class="token punctuation">,</span> size<span class="token operator">=</span>img_size<span class="token punctuation">,</span> mode<span class="token operator">=</span><span class="token string">'bilinear'</span><span class="token punctuation">)</span>
     
-    # Reverse process
-    # REF: p_θ(x_{0:T}|y) = p(x_T) ∏_{t=1}^T p_θ(x_{t-1}|x_t, y)
-    for t in range(diffusion.T-1, -1, -1):
-        # Create tensor of current timestep
-        t_tensor = torch.tensor([t], device=device)
+    <span class="token comment"># Reverse process</span>
+    <span class="token comment"># REF: p_θ(x_{0:T}|y) = p(x_T) ∏_{t=1}^T p_θ(x_{t-1}|x_t, y)</span>
+    <span class="token keyword">for</span> t <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>diffusion<span class="token punctuation">.</span>T<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># Create tensor of current timestep</span>
+        t_tensor <span class="token operator">=</span> torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span>t<span class="token punctuation">]</span><span class="token punctuation">,</span> device<span class="token operator">=</span>device<span class="token punctuation">)</span>
         
-        # Concatenate with condition
-        model_input = torch.cat([x, lr_img], dim=1)
+        <span class="token comment"># Concatenate with condition</span>
+        model_input <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>x<span class="token punctuation">,</span> lr_img<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
         
-        # Reverse process step
-        # REF: p_θ(x_{t-1}|x_t, y)
-        x = diffusion.reverse_process(model, model_input, t_tensor)
+        <span class="token comment"># Reverse process step</span>
+        <span class="token comment"># REF: p_θ(x_{t-1}|x_t, y)</span>
+        x <span class="token operator">=</span> diffusion<span class="token punctuation">.</span>reverse_process<span class="token punctuation">(</span>model<span class="token punctuation">,</span> model_input<span class="token punctuation">,</span> t_tensor<span class="token punctuation">)</span>
         
-        # Clamp values to valid range
-        x = torch.clamp(x, -1.0, 1.0)
+        <span class="token comment"># Clamp values to valid range</span>
+        x <span class="token operator">=</span> torch<span class="token punctuation">.</span>clamp<span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">)</span>
         
-    return x
+    <span class="token keyword">return</span> x
 
-# Main execution
-if __name__ == &quot;__main__&quot;:
-    # Hyperparameters
-    batch_size = 32
-    learning_rate = 1e-4
-    epochs = 5
-    T = 1000  # Number of diffusion steps
+<span class="token comment"># Main execution</span>
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    <span class="token comment"># Hyperparameters</span>
+    batch_size <span class="token operator">=</span> <span class="token number">32</span>
+    learning_rate <span class="token operator">=</span> <span class="token number">1e-4</span>
+    epochs <span class="token operator">=</span> <span class="token number">5</span>
+    T <span class="token operator">=</span> <span class="token number">1000</span>  <span class="token comment"># Number of diffusion steps</span>
     
-    # Load and preprocess data
-    transform = transforms.Compose([
-        transforms.Resize((32, 32)),
-        transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
-    ])
+    <span class="token comment"># Load and preprocess data</span>
+    transform <span class="token operator">=</span> transforms<span class="token punctuation">.</span>Compose<span class="token punctuation">(</span><span class="token punctuation">[</span>
+        transforms<span class="token punctuation">.</span>Resize<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        transforms<span class="token punctuation">.</span>Normalize<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">]</span><span class="token punctuation">)</span>
     
-    train_dataset = datasets.CIFAR10(root='./data', train=True, download=True, transform=transform)
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    train_dataset <span class="token operator">=</span> datasets<span class="token punctuation">.</span>CIFAR10<span class="token punctuation">(</span>root<span class="token operator">=</span><span class="token string">'./data'</span><span class="token punctuation">,</span> train<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> transform<span class="token operator">=</span>transform<span class="token punctuation">)</span>
+    train_loader <span class="token operator">=</span> DataLoader<span class="token punctuation">(</span>train_dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span>batch_size<span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
     
-    # Initialize model and diffusion process
-    model = UNet(in_channels=6, out_channels=3).to(device)  # 6 channels: 3 for noisy image + 3 for LR condition
-    diffusion = DiffusionProcess(T=T)
-    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+    <span class="token comment"># Initialize model and diffusion process</span>
+    model <span class="token operator">=</span> UNet<span class="token punctuation">(</span>in_channels<span class="token operator">=</span><span class="token number">6</span><span class="token punctuation">,</span> out_channels<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>  <span class="token comment"># 6 channels: 3 for noisy image + 3 for LR condition</span>
+    diffusion <span class="token operator">=</span> DiffusionProcess<span class="token punctuation">(</span>T<span class="token operator">=</span>T<span class="token punctuation">)</span>
+    optimizer <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>Adam<span class="token punctuation">(</span>model<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr<span class="token operator">=</span>learning_rate<span class="token punctuation">)</span>
     
-    # Train the model
-    print(&quot;Starting training...&quot;)
-    train_diffusion(model, diffusion, train_loader, optimizer, epochs=epochs)
+    <span class="token comment"># Train the model</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Starting training..."</span><span class="token punctuation">)</span>
+    train_diffusion<span class="token punctuation">(</span>model<span class="token punctuation">,</span> diffusion<span class="token punctuation">,</span> train_loader<span class="token punctuation">,</span> optimizer<span class="token punctuation">,</span> epochs<span class="token operator">=</span>epochs<span class="token punctuation">)</span>
     
-    # Test with a sample image
-    test_img, _ = next(iter(train_loader))
-    test_img = test_img[0:1].to(device)  # Take one image
+    <span class="token comment"># Test with a sample image</span>
+    test_img<span class="token punctuation">,</span> _ <span class="token operator">=</span> <span class="token builtin">next</span><span class="token punctuation">(</span><span class="token builtin">iter</span><span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    test_img <span class="token operator">=</span> test_img<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>  <span class="token comment"># Take one image</span>
     
-    # Create low-resolution version
-    lr_img = F.interpolate(test_img, scale_factor=0.25, mode='bilinear')
-    lr_img = F.interpolate(lr_img, size=test_img.shape[2:], mode='bilinear')
+    <span class="token comment"># Create low-resolution version</span>
+    lr_img <span class="token operator">=</span> F<span class="token punctuation">.</span>interpolate<span class="token punctuation">(</span>test_img<span class="token punctuation">,</span> scale_factor<span class="token operator">=</span><span class="token number">0.25</span><span class="token punctuation">,</span> mode<span class="token operator">=</span><span class="token string">'bilinear'</span><span class="token punctuation">)</span>
+    lr_img <span class="token operator">=</span> F<span class="token punctuation">.</span>interpolate<span class="token punctuation">(</span>lr_img<span class="token punctuation">,</span> size<span class="token operator">=</span>test_img<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span> mode<span class="token operator">=</span><span class="token string">'bilinear'</span><span class="token punctuation">)</span>
     
-    # Generate super-resolution image
-    print(&quot;Generating super-resolution image...&quot;)
-    sr_img = sample_diffusion(model, diffusion, lr_img, img_size=test_img.shape[2:])
+    <span class="token comment"># Generate super-resolution image</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Generating super-resolution image..."</span><span class="token punctuation">)</span>
+    sr_img <span class="token operator">=</span> sample_diffusion<span class="token punctuation">(</span>model<span class="token punctuation">,</span> diffusion<span class="token punctuation">,</span> lr_img<span class="token punctuation">,</span> img_size<span class="token operator">=</span>test_img<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
     
-    # Visualize results
-    fig, axes = plt.subplots(1, 3, figsize=(12, 4))
+    <span class="token comment"># Visualize results</span>
+    fig<span class="token punctuation">,</span> axes <span class="token operator">=</span> plt<span class="token punctuation">.</span>subplots<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
     
-    axes[0].imshow(test_img[0].cpu().permute(1, 2, 0) * 0.5 + 0.5)
-    axes[0].set_title(&quot;Original HR Image&quot;)
-    axes[0].axis('off')
+    axes<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>test_img<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>permute<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">0.5</span> <span class="token operator">+</span> <span class="token number">0.5</span><span class="token punctuation">)</span>
+    axes<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>set_title<span class="token punctuation">(</span><span class="token string">"Original HR Image"</span><span class="token punctuation">)</span>
+    axes<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'off'</span><span class="token punctuation">)</span>
     
-    axes[1].imshow(lr_img[0].cpu().permute(1, 2, 0) * 0.5 + 0.5)
-    axes[1].set_title(&quot;LR Input&quot;)
-    axes[1].axis('off')
+    axes<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>lr_img<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>permute<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">0.5</span> <span class="token operator">+</span> <span class="token number">0.5</span><span class="token punctuation">)</span>
+    axes<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>set_title<span class="token punctuation">(</span><span class="token string">"LR Input"</span><span class="token punctuation">)</span>
+    axes<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'off'</span><span class="token punctuation">)</span>
     
-    axes[2].imshow(sr_img[0].cpu().permute(1, 2, 0) * 0.5 + 0.5)
-    axes[2].set_title(&quot;Generated SR Image&quot;)
-    axes[2].axis('off')
+    axes<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>sr_img<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>permute<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">0.5</span> <span class="token operator">+</span> <span class="token number">0.5</span><span class="token punctuation">)</span>
+    axes<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>set_title<span class="token punctuation">(</span><span class="token string">"Generated SR Image"</span><span class="token punctuation">)</span>
+    axes<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'off'</span><span class="token punctuation">)</span>
     
-    plt.tight_layout()
-    plt.savefig('super_resolution_result.png')
-    plt.show()
-</code></pre>
+    plt<span class="token punctuation">.</span>tight_layout<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>savefig<span class="token punctuation">(</span><span class="token string">'super_resolution_result.png'</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
 <h2>Tutorial: How Diffusion-Based Super-Resolution Works</h2>
 <h3>1. Introduction to Diffusion Models</h3>
 <p>Diffusion models are a class of generative models that work by gradually adding noise to data (forward process) and then learning to reverse this process (reverse process). For super-resolution, we condition this process on a low-resolution image to generate a high-resolution version.</p>
@@ -331,8 +331,7 @@ M1001 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <li><code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span></code> is the total number of diffusion steps</li>
 </ul>
 <p><strong>Code Reference</strong>: In the <code>DiffusionProcess.__init__</code> method, we define the linear noise schedule:</p>
-<pre><code class="language-python">self.betas = torch.linspace(beta_start, beta_end, T)
-</code></pre>
+<pre class="language-python"><code class="language-python">self<span class="token punctuation">.</span>betas <span class="token operator">=</span> torch<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span>beta_start<span class="token punctuation">,</span> beta_end<span class="token punctuation">,</span> T<span class="token punctuation">)</span></code></pre>
 <p>After applying the forward process for <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span></span></span></span></code> steps, we can directly sample <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="bold">x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{x}_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5944em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathbf">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></code> from <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="bold">x</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\mathbf{x}_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5944em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathbf">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></code>:</p>
 <p><code><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><msub><mi mathvariant="bold">x</mi><mi>t</mi></msub><mi mathvariant="normal">∣</mi><msub><mi mathvariant="bold">x</mi><mn>0</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><msub><mi mathvariant="bold">x</mi><mi>t</mi></msub><mo separator="true">;</mo><msqrt><msub><mover accent="true"><mi>α</mi><mo>ˉ</mo></mover><mi>t</mi></msub></msqrt><msub><mi mathvariant="bold">x</mi><mn>0</mn></msub><mo separator="true">,</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msub><mover accent="true"><mi>α</mi><mo>ˉ</mo></mover><mi>t</mi></msub><mo stretchy="false">)</mo><mi mathvariant="bold">I</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> q(\mathbf{x}_t|\mathbf{x}_0) = \mathcal{N}(\mathbf{x}_t; \sqrt{\bar{\alpha}_t}\mathbf{x}_0, (1-\bar{\alpha}_t)\mathbf{I}) </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord mathbf">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.0928em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.14736em;">N</span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8428em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.8028em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
 c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
@@ -352,12 +351,10 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <li><code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover accent="true"><mi>α</mi><mo>ˉ</mo></mover><mi>t</mi></msub><mo>=</mo><msubsup><mo>∏</mo><mrow><mi>s</mi><mo>=</mo><mn>1</mn></mrow><mi>t</mi></msubsup><msub><mi>α</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">\bar{\alpha}_t = \prod_{s=1}^{t} \alpha_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7178em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2332em;vertical-align:-0.2997em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∏</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9335em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></code></li>
 </ul>
 <p><strong>Code Reference</strong>: In the <code>DiffusionProcess.__init__</code> method, we compute these values:</p>
-<pre><code class="language-python">self.alphas = 1 - self.betas
-self.alpha_bars = torch.cumprod(self.alphas, dim=0)
-</code></pre>
+<pre class="language-python"><code class="language-python">self<span class="token punctuation">.</span>alphas <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">-</span> self<span class="token punctuation">.</span>betas
+self<span class="token punctuation">.</span>alpha_bars <span class="token operator">=</span> torch<span class="token punctuation">.</span>cumprod<span class="token punctuation">(</span>self<span class="token punctuation">.</span>alphas<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span></code></pre>
 <p><strong>Code Reference</strong>: In the <code>forward_process</code> method, we implement the equation:</p>
-<pre><code class="language-python">xt = sqrt_alpha_bar * x0 + sqrt_one_minus_alpha_bar * epsilon
-</code></pre>
+<pre class="language-python"><code class="language-python">xt <span class="token operator">=</span> sqrt_alpha_bar <span class="token operator">*</span> x0 <span class="token operator">+</span> sqrt_one_minus_alpha_bar <span class="token operator">*</span> epsilon</code></pre>
 <h4>Reverse Process (Denoising)</h4>
 <p>The reverse process learns to denoise the image:</p>
 <p><code><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>p</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><msub><mi mathvariant="bold">x</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mi mathvariant="normal">∣</mi><msub><mi mathvariant="bold">x</mi><mi>t</mi></msub><mo separator="true">,</mo><mi mathvariant="bold">y</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><msub><mi mathvariant="bold">x</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo separator="true">;</mo><msub><mi>μ</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><msub><mi mathvariant="bold">x</mi><mi>t</mi></msub><mo separator="true">,</mo><mi>t</mi><mo separator="true">,</mo><mi mathvariant="bold">y</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><msub><mi mathvariant="normal">Σ</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><msub><mi mathvariant="bold">x</mi><mi>t</mi></msub><mo separator="true">,</mo><mi>t</mi><mo separator="true">,</mo><mi mathvariant="bold">y</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> p_\theta(\mathbf{x}_{t-1}|\mathbf{x}_t, \mathbf{y}) = \mathcal{N}(\mathbf{x}_{t-1}; \mu_\theta(\mathbf{x}_t, t, \mathbf{y}), \Sigma_\theta(\mathbf{x}_t, t, \mathbf{y})) </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord mathbf">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathbf" style="margin-right:0.01597em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.14736em;">N</span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">μ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathbf" style="margin-right:0.01597em;">y</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">Σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathbf" style="margin-right:0.01597em;">y</span><span class="mclose">))</span></span></span></span></span></code></p>
@@ -391,8 +388,7 @@ s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
 c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
 M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.1589em;"><span></span></span></span></span></span><span class="mord mathnormal">ϵ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">t</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathbf" style="margin-right:0.01597em;">y</span><span class="mclose">)</span><span class="mord"><span class="mord">∥</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span></span></code></p>
 <p><strong>Code Reference</strong>: In the <code>train_diffusion</code> function, we implement this loss:</p>
-<pre><code class="language-python">loss = F.mse_loss(pred_noise, true_noise)
-</code></pre>
+<pre class="language-python"><code class="language-python">loss <span class="token operator">=</span> F<span class="token punctuation">.</span>mse_loss<span class="token punctuation">(</span>pred_noise<span class="token punctuation">,</span> true_noise<span class="token punctuation">)</span></code></pre>
 <h3>3. Key Components Explained</h3>
 <h4>U-Net Architecture</h4>
 <p>The U-Net is used to predict the noise at each timestep. It has:</p>
@@ -405,8 +401,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <p><strong>Code Reference</strong>: The U-Net architecture is implemented in the <code>UNet</code> class.</p>
 <p>For conditional generation, we concatenate the low-resolution image with the noisy input at each timestep.</p>
 <p><strong>Code Reference</strong>: In the <code>train_diffusion</code> and <code>sample_diffusion</code> functions:</p>
-<pre><code class="language-python">model_input = torch.cat([noisy_imgs, lr_imgs], dim=1)
-</code></pre>
+<pre class="language-python"><code class="language-python">model_input <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>noisy_imgs<span class="token punctuation">,</span> lr_imgs<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span></code></pre>
 <h4>Noise Schedule</h4>
 <p>The noise schedule controls how much noise is added at each step. We use a linear schedule:</p>
 <ul>
@@ -414,8 +409,7 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <li>This ensures a smooth transition from data to noise</li>
 </ul>
 <p><strong>Code Reference</strong>: In the <code>DiffusionProcess.__init__</code> method:</p>
-<pre><code class="language-python">self.betas = torch.linspace(beta_start, beta_end, T)
-</code></pre>
+<pre class="language-python"><code class="language-python">self<span class="token punctuation">.</span>betas <span class="token operator">=</span> torch<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span>beta_start<span class="token punctuation">,</span> beta_end<span class="token punctuation">,</span> T<span class="token punctuation">)</span></code></pre>
 <h4>Training Process</h4>
 <ol>
 <li>Sample a clean image <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="bold">x</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\mathbf{x}_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5944em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathbf">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></code> from the dataset</li>
@@ -448,20 +442,19 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
 <li>Train the model to predict <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span></code> from <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="bold">x</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{x}_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5944em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathbf">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></code>, <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span></span></span></span></code>, and <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">y</mi></mrow><annotation encoding="application/x-tex">\mathbf{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6389em;vertical-align:-0.1944em;"></span><span class="mord mathbf" style="margin-right:0.01597em;">y</span></span></span></span></code></li>
 </ol>
 <p><strong>Code Reference</strong>: In the <code>train_diffusion</code> function, we implement these steps:</p>
-<pre><code class="language-python"># Steps 1-2: Get HR image and create LR version
-hr_imgs = hr_imgs.to(device)
-lr_imgs = F.interpolate(hr_imgs, scale_factor=0.25, mode='bilinear')
+<pre class="language-python"><code class="language-python"><span class="token comment"># Steps 1-2: Get HR image and create LR version</span>
+hr_imgs <span class="token operator">=</span> hr_imgs<span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
+lr_imgs <span class="token operator">=</span> F<span class="token punctuation">.</span>interpolate<span class="token punctuation">(</span>hr_imgs<span class="token punctuation">,</span> scale_factor<span class="token operator">=</span><span class="token number">0.25</span><span class="token punctuation">,</span> mode<span class="token operator">=</span><span class="token string">'bilinear'</span><span class="token punctuation">)</span>
 
-# Step 3: Random timestep
-t = torch.randint(0, diffusion.T, (hr_imgs.size(0),), device=device)
+<span class="token comment"># Step 3: Random timestep</span>
+t <span class="token operator">=</span> torch<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> diffusion<span class="token punctuation">.</span>T<span class="token punctuation">,</span> <span class="token punctuation">(</span>hr_imgs<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> device<span class="token operator">=</span>device<span class="token punctuation">)</span>
 
-# Steps 4-5: Add noise
-noisy_imgs, true_noise = diffusion.forward_process(hr_imgs, t)
+<span class="token comment"># Steps 4-5: Add noise</span>
+noisy_imgs<span class="token punctuation">,</span> true_noise <span class="token operator">=</span> diffusion<span class="token punctuation">.</span>forward_process<span class="token punctuation">(</span>hr_imgs<span class="token punctuation">,</span> t<span class="token punctuation">)</span>
 
-# Step 6: Train model to predict noise
-pred_noise = model(model_input, t)
-loss = F.mse_loss(pred_noise, true_noise)
-</code></pre>
+<span class="token comment"># Step 6: Train model to predict noise</span>
+pred_noise <span class="token operator">=</span> model<span class="token punctuation">(</span>model_input<span class="token punctuation">,</span> t<span class="token punctuation">)</span>
+loss <span class="token operator">=</span> F<span class="token punctuation">.</span>mse_loss<span class="token punctuation">(</span>pred_noise<span class="token punctuation">,</span> true_noise<span class="token punctuation">)</span></code></pre>
 <h4>Sampling Process</h4>
 <ol>
 <li>Start with pure noise <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="bold">x</mi><mi>T</mi></msub><mo>∼</mo><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi mathvariant="bold">I</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{x}_T \sim \mathcal{N}(0, \mathbf{I})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5944em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathbf">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.14736em;">N</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathbf">I</span><span class="mclose">)</span></span></span></span></code></li>
@@ -474,29 +467,26 @@ loss = F.mse_loss(pred_noise, true_noise)
 <li>The final result <code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="bold">x</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\mathbf{x}_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5944em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathbf">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></code> is the super-resolved image</li>
 </ol>
 <p><strong>Code Reference</strong>: In the <code>sample_diffusion</code> function, we implement these steps:</p>
-<pre><code class="language-python"># Step 1: Start from random noise
-x = torch.randn(1, 3, *img_size).to(device)
+<pre class="language-python"><code class="language-python"><span class="token comment"># Step 1: Start from random noise</span>
+x <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token operator">*</span>img_size<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span>device<span class="token punctuation">)</span>
 
-# Step 2: Reverse process loop
-for t in range(diffusion.T-1, -1, -1):
-    # Predict noise and reverse the process
-    x = diffusion.reverse_process(model, model_input, t_tensor)
-</code></pre>
+<span class="token comment"># Step 2: Reverse process loop</span>
+<span class="token keyword">for</span> t <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>diffusion<span class="token punctuation">.</span>T<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># Predict noise and reverse the process</span>
+    x <span class="token operator">=</span> diffusion<span class="token punctuation">.</span>reverse_process<span class="token punctuation">(</span>model<span class="token punctuation">,</span> model_input<span class="token punctuation">,</span> t_tensor<span class="token punctuation">)</span></code></pre>
 <h3>4. Implementation Details</h3>
 <ul>
 <li><strong>Conditioning</strong>: We concatenate the low-resolution image with the noisy image at each step</li>
 <li><strong>Time embedding</strong>: We add information about the current timestep to the model</li>
 </ul>
 <p><strong>Code Reference</strong>: In the <code>UNet.forward</code> method:</p>
-<pre><code class="language-python">t_embed = t.view(-1, 1, 1, 1).expand(x.size(0), 1, x.size(2), x.size(3))
-x = torch.cat([x, t_embed], dim=1)
-</code></pre>
+<pre class="language-python"><code class="language-python">t_embed <span class="token operator">=</span> t<span class="token punctuation">.</span>view<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>expand<span class="token punctuation">(</span>x<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> x<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> x<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+x <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>x<span class="token punctuation">,</span> t_embed<span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span></code></pre>
 <ul>
 <li><strong>Loss function</strong>: Mean squared error between predicted and actual noise</li>
 </ul>
 <p><strong>Code Reference</strong>: In the <code>train_diffusion</code> function:</p>
-<pre><code class="language-python">loss = F.mse_loss(pred_noise, true_noise)
-</code></pre>
+<pre class="language-python"><code class="language-python">loss <span class="token operator">=</span> F<span class="token punctuation">.</span>mse_loss<span class="token punctuation">(</span>pred_noise<span class="token punctuation">,</span> true_noise<span class="token punctuation">)</span></code></pre>
 <h3>5. Practical Considerations</h3>
 <ul>
 <li>This implementation is simplified for educational purposes</li>

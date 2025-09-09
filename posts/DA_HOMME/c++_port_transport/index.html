@@ -10,6 +10,7 @@
     <meta name="description" content="Your new 11ty blog" />
     <link rel="stylesheet" type="text/css" href="/open-lab-notebook/public/style.css"/>
     <link rel="stylesheet" type="text/css" href="/open-lab-notebook/public/fonts/cmu.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/themes/prism-twilight.min.css" rel="stylesheet" />
  
     <link rel="stylesheet" href="https://unpkg.com/katex@latest/dist/katex.min.css" />
     
@@ -74,7 +75,14 @@ From cmake output, we find that the command should be something like</p>
 </code></pre>
 <p>The issue in cprnc is due to improper preprocessor defines that result in the preprocessor variable indicating the integer datatype not being defined.
 These problems occur because there are spaces before the <code>#</code> character.</p>
-<p>The command to run an individual test is <code>ctest -R ${testname}</code>, and <code>make baseline</code> generates reference files to ensure that your changes didn't break anything important.</p>
+<p>The command to run an individual test is <code>ctest -R ${testname}</code>, and <code>make baseline</code> generates reference files to ensure that your changes didn't break anything important.
+When <code>cmake</code> is called in a working directory where the test suite will be run, use <code>-DUSE_NUM_PROCS=24</code> so regression tests will run faster.</p>
+<h1>How to make DA HOMME mergeable</h1>
+<ul>
+<li>Generate baseline test results from commit that <code>og/da</code> branch branched off from</li>
+<li>Ensure that <code>-DWITH_DA=OFF</code> HOMME passes regression tests</li>
+<li>Ensure that cxx/f90 comparison tests are bfb</li>
+</ul>
 <p>Comparison tests:</p>
 <pre><code>-- Creating cxx-f90 comparison test preqx-nhgw_cxx_vs_f90
 -- Creating cxx-f90 comparison test preqx-nhgw-slice_cxx_vs_f90
