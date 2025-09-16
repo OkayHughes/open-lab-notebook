@@ -177,14 +177,14 @@ convince yourself this is right).   -->
 # Inner product structure, duals
 
 An inner product is an additional operation `$$\langle \cdot, \cdot \rangle $$` that one can add to a vector space. 
-It must satisfy certain [requirements](https://en.wikipedia.org/wiki/Inner_product_space). The most important one for our purposes is that for `$$ a \in \mathbb{R}$$`, `$$ \mathbf{x}, \mathbf{y}, \mathbf{z} \in \mathbb{R}^n$$`, `$$ \langle a\mathbf{x} + \mathbf{y}, \mathbf{z} \rangle = a\langle \mathbf{x}, \mathbf{z} \rangle + \langle \mathbf{y}, \mathbf{z} \rangle $$`
+It must satisfy certain [requirements](https://en.wikipedia.org/wiki/Inner_product_space). 
 It is a generalization of the dot product on `$$\mathbb{R}^n$$`, `$$ \langle \mathbf{x}, \mathbf{y} \rangle = \sum_k x_k y_k $$`. 
-The aforementioned requirements are the minimal set of constraints required to guarantee that the inner product you defined on your vector space `$$V$$`, gets you the properties that make the dot product useful.
+The aforementioned requirements are the minimal set of constraints required to guarantee that the inner product you defined on your vector space `$$V$$`, gets you the properties that make the dot product useful. The most concise way to state these properties are that for  `$$x, y, z \in V $$`, `$$a, b \in \mathbb{R} $$`, `$$\langle x, y \rangle = \langle y, x \rangle $$` (this changes if you have a complex vector space!), `$$ \langle ax + by, z \rangle = a\langle x, z \rangle + b\langle y, x \rangle $$`, and `$$ \langle x, x \rangle > 0, \langle x, x \rangle = 0 \iff x = 0 $$`. 
 
 ## Why are orthogonal bases good?
 Bases do not require an inner product to be defined and analyzed. However, if we have an inner product, we can define a condition for a basis to be particularly nice.
 The standard basis `$$ \mathbf{e}_k$$` satisfies `$$$ \langle \mathbf{e}_i, \mathbf{e}_j \rangle = \begin{cases} 1 \textrm{ if } i = j \\ 0 \textrm{ otherwise} \end{cases} $$$`,
-meaning that for distinct `$$ \mathbf{e}_i, \mathbf{e}_j$$`, the vectors are at 90º to each other. A basis that satisfies this latter property alone is called "orthogonal"; if, additionally, `$$\langle e_i, e_i \rangle = 1$$`, then the basis is called "orthonormal".  
+meaning that for distinct `$$ \mathbf{e}_i, \mathbf{e}_j$$`, the vectors are at 90º to each other. A basis that satisfies this latter property alone is called "orthogonal"; if, additionally, `$$\langle e_i, e_i \rangle = 1$$`, then the basis is called "orthonormal". 
 
 Recall that for a general basis `$$\mathbf{b}_k $$`, solving for the coefficients `$$ b_k $$` that reconstruct a vector `$$\mathbf{x}$$` as `$$ \mathbf{x} = \sum b_k \mathbf{b_k}$$` requires a full linear solve. 
 However, let `$$ \mathbf{e}_l $$` be an orthonormal basis. First, suppose we do the full solve to reconstruct `$$ \mathbf{x} = \sum e_l \mathbf{e}_l$$`.  
@@ -206,20 +206,93 @@ For the second part of our derivation, recall that for any set of `$$n$$` points
 basis can be calculated by solving a linear system! An excellent exercise is to formulate this system and solve it in, e.g., python and seeing how it becomes very numerically unstable as `$$n$$` increases, if you choose your interpolation points arbitrarily).
 The idea behind Gauss-Lobatto quadrature is to take the roots (zeros) of the `$$m$$`th Legendre polynomial, `$$x_1, \ldots, x_m$$` (when we eventually get to SE, we will include the endpoints of the interval `$$[-1, 1]$$`, but for now we ignore this). Then let `$$q_k$$` be the interpolating polynomial that satisfies `$$$ q_k(x_l) = \begin{cases} 1 \textrm{ if } k=l \\ 0 \textrm{ otherwise} \end{cases}. $$$` 
 
-If we have a polynomial `$$f$$` and its evaluations `$$ f_k = f(x_k)$$`, then if we define `$$w_k = \int_{[-1, 1]} q_k \intd{x} $$` and calculate `$$ \sum_k w_k f_k$$`, then this sum exactly computes `$$ \int_{[-1, 1]} f \intd{x}$$` so long as `$$f$$` is of degree `$$ 2n-1$$` or less.
+If we have a polynomial `$$f$$` and its evaluations `$$ f_k = f(x_k)$$`, then if we define `$$w_k = \int_{[-1, 1]} q_k \intd{x} $$` and calculate `$$ \sum_k w_k f_k$$`, then this sum exactly computes `$$ \int_{[-1, 1]} f \intd{x}$$` so long as `$$f$$` is of degree `$$ 2n-1$$` or less. (Note: in practice, `$$w_k$$` can be calculated from the derivatives of legendre polynomials).
 
-Ok, so we have constructed `$$ \sum_k w_k f_k $$` as a way to calculate an integral. It turns out that this also allows us to define an inner product, `$$ \langle f, g \rangle = \sum_k w_k f(x_k) g(x_k) $$`. First observe that `$$\langle q_k, q_l \rangle = \int q_k q_l \intd{x} = \sum_m w_m q_k(x_m) q_l(x_m) = \begin{cases} w_m \textrm{ if } k = l \\ 0 \textrm{ otherwise} \end{cases}  $$`, so `$$q_k$$` are an orthogonal basis. 
-Now we're prepared to see why orthonormal bases are so useful. Suppose I have a polynomial `$$ h = \sum_k a_k q_k(x) $$`. If I want to determine the coefficients `$$ b_k $$` in the monomial basis, so `$$ h = \sum_k b_k x^k $$`, then I would need to solve the linear system I described several paragraphs ago (the monomial basis is emphatically not orthogonal). However, if I had a polynomial `$$ f = \sum_k b_k x^k$$` and I want to calculate its coefficients in the `$$q_k$$` basis, then we find `$$ \sum_k \langle f, q_k \rangle q_k = \sum_k \int f q_k \intd{x} q_k = \sum_k \left( \sum_l w_l f(x_l) q_k(x_l)\right)q_k = \sum_k f(x_k) q_k $$`
-
-## The adjoint (basically, transpose)  
+Ok, so we have constructed `$$ \sum_k w_k f_k $$` as a way to calculate an integral. It turns out that this also allows us to define an inner product, `$$ \langle f, g \rangle = \sum_k w_k f(x_k) g(x_k) $$`. First observe that `$$\langle q_k, q_l \rangle = \int q_k q_l \intd{x} = \sum_m w_m q_k(x_m) q_l(x_m) = \begin{cases} w_m \textrm{ if } k = l \\ 0 \textrm{ otherwise} \end{cases}  $$`, so `$$q_k$$` are an orthogonal basis.  
 
 
+Now we're prepared to see why orthonormal bases are so useful. Suppose I have polynomials `$$ h = \sum_k a_k q_k(x) $$`, `$$ g = \sum_k b_k q_k(x)$$`. Then `$$ \langle g,h \rangle = \int \sum_k \sum_{k'} a_k b_{k'} q_k(x) q_{k'}(x) \intd{x} = \sum_k w_k a_k b_k $$`. For a non-orthogonal basis, that inner product operation would require `$$N^2$$` operations, while here it requires only `$$n$$`. 
+
+## The adjoint, and bilinear mappings
+While the adjoint of an operator can be defined without any reference to an inner product, it is much easier to talk about them when we do have an inner product.
+
+Let's first work in `$$\mathbb{R}^n$$`. Suppose we have some linear operator `$$A : \mathbb{R}^n \mapsto \mathbb{R}^n $$`, which can be written in the standard basis with entries `$$ A_{i,j}$$`.  You can extract this matrix representation by computing
+`$$$
+ \langle e_j, A(e_i) \rangle = \mathbf{e}_j^\top A \mathbf{e}_i  = A_{i,j}.
+$$$`
+
+This gives some indication that all of the information contained in the linear operator `$$ A $$` can be extracted by the construction `$$ b_A(x, y) = \langle x, Ay \rangle $$`. One can verify that `$$b_A(x, y)$$` is linear in each argument, and returns a real number (this is called a bilinear form). For reasons that we will see soon, it will be worth asking the question, is there a linear operator `$$A'$$` such that`$$\langle x, A(y) \rangle = \langle A'(x), y \rangle   $$`? Well, let's see if we can figure it out by working in a basis:
+`$$$
+\begin{align*}
+     \langle e_k, A(e_i) \rangle &= \langle A'(e_j), e_i \rangle \\
+       &= \langle e_i, A'(e_j) \rangle,
+\end{align*}
+$$$`
+but we know that the final line extracts the entries of `$$A'$$` in the standard basis, therefore we see `$$ A_{i,j} = A'_{j,i}$$`, or, instead `$$ A' = A^\top $$`. This shows
+that for a real vector space, the adjoint of an operator can be characterized by the transpose of a matrix representation.
+## Weak form of an equation
+
+The Galerkin method first derives from the fact that differential equations can often be rewritten equivalently 
+by using integration by parts to transfer differential operators into integral ones. We will discuss a prototypical example, `$$ \nabla^2 u = f $$`
+We can rewrite this as `$$ \nabla \cdot \nabla u = f$$`, and then if we multiply by a suitable function `$$v$$` and integrate both sides of the equation, we get
+`$$$
+\begin{align*}
+    \int fv \intd{x} &= \int v\nabla \cdot \nabla u \\
+        &= 0 - \int \nabla v \cdot \nabla u \intd{x} 
+\end{align*}
+$$$`
+
+For technical reasons, there are solutions `$$u$$` to this rewritten (weak form) equation that do not satisfy `$$ \nabla^2 u = f$$` (strong form), but any `$$u$$` that satisfies the 
+strong form satisfy the weak form. 
+
+If are vector-valued functions `$$ \mathbf{q}, \mathbf{r} : \mathbb{R}^n \to \mathbb{R}^n$$`, then `$$ \langle \mathbf{q}, \mathbf{r} \rangle  \equiv \int \mathbf{q} \cdot \mathbf{r} \intd{x}$$` is an inner product on that space of functions. As one final jargon explanation, `$$ \tilde{f}(v) = \int fv \intd{x} $$` is linear in `$$v$$` and returns a real value. We refer to functions like `$$\tilde{f}$$` as "linear functionals".
+
+Therefore, we can rewrite our strong equation `$$ \nabla^2 u = f$$` as `$$ \int \nabla v \cdot \nabla u \intd{x} \equiv \langle \nabla u, \nabla v \rangle  = \tilde{f}(v) \equiv \int fv \intd{x} $$`.
+Note that `$$ a(u, v) = \langle \nabla u, \nabla v \rangle $$` is a bilinear form, and indeed `$$ a(v, u) = \langle \nabla u, \nabla v \rangle = \langle \nabla v, \nabla a \rangle = a(u, v)$$` so `$$a$$` 
+is symmetric.  
 
 # Galerkin
 
-## Weak form of an equation
-
+Galerkin methods start with assuming that `$$u, v$$` are elements of some function space `$$V$$` that's typically infinite dimensional (frequently `$$L^2$$` or `$$H^1$$`) complete normed vector spaces.
+Bilinear forms, like `$$a(u,v)$$` can be defined without a defined inner product, but the inner product allows you to construct bilinear forms very naturally. 
+Let `$$a(u, v) $$` be a bilinear form and a linear functional `$$f$$`, and say we want to solve the equation `$$a(u,v) = f(v)$$`. Many PDEs can be rewritten in this form (the general idea here
+is very naturally extended to forms that are not bilinear, but which are linearized as part of newton's method). If we know that this problem is well posed (i.e. it has a unique solution),
+then we want a sequence of finite-dimensional problems whose solutions `$$u_n$$` will approach (converge to) the infinite-dimensional solution `$$u$$` as the size of our
+approximation of the function space increases.
 ## Bobunov-Galerkin
+For simplicity let `$$V$$` be a nice space of functions of two real variables. Let `$$V_2^n$$` be, e.g., the space of at-most-n-degree polynomials in two real variables. `$$V_2^n \subset V$$` is called a subspace (a subset that is a vector space in which vector addition and scalar multiplication agree on `$$ V_2^n \cap V$$`). 
+The finite-dimensional approximation of our problem then looks like: find `$$u_n$$` such that  for all`$$ v \in V_2^n$$`, `$$ a(u_n, v) = f(v)$$`.
+In finite dimensions, it suffices to let `$$v_1, \ldots, v_n$$` be a basis. Let us use the concrete problem above to see what this looks like. Let `$$v_k$$` be some nice polynomial basis.
+`$$$
+\begin{align*}
+  \int f v_k \intd{x} &= \int \nabla u \cdot \nabla v_k \intd{x} \\
+    &= \int  \sum_l \left(u_l \nabla  v_l \right)  \cdot \nabla v_k \intd{x}
+\end{align*}
+$$$` 
 
+If we let `$$A$$` be the matrix with entries `$$A_{k, l} = \langle \nabla v_l, \nabla v_k \rangle $$`, and `$$ \mathbf{b}$$` be the vector with entries `$$ b_k = \int f v_k \intd{x} $$`,
+then the above equation becomes
+`$$$
+    A \mathbf u = \mathbf{b},
+$$$`
+which can be solved however you like! It can be shown that for large classes of `$$a(u, v)$$`, `$$\lim_{n\to\infty}  \| u_n - u \|_V = 0$$`, i.e., that 
+our finite dimensional approximations will approach the infinite dimensional solution.
 
 ## Petrov-Galerkin
+
+Test functions `$$w_n$$` don't have to live in the same vector space as trial functions `$$u_n = \sum_k u_k v_k $$`. This situation
+arises a lot when you have boundary conditions, and also equations with operators of odd order. 
+You can also get faster numerical convergence by choosing `$$w_n$$` to be a different function space, e.g., by
+weighting test functions upstream of the flow.
+
+In this case, the galerkin problem looks like letting `$$ V_n \subset V$$`, `$$W_n \subset W$$`, and satisfying (in infinite dimensions)
+`$$$
+    a(u, w) = f(w) \forall w \in W 
+$$$`
+and discretely
+`$$$
+    a(u, w_n) = f(w_n) \textrm{ for } w = w_1, \ldots, w_n
+$$$`
+which can be used to write a concrete linear system 
+just as above.
+
