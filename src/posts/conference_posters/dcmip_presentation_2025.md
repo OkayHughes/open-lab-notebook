@@ -14,3 +14,4 @@ layout: layouts/post.njk
 
 [Link to presentation](https://docs.google.com/presentation/d/1Ex9588Ds8YtWmGsWBlJPNAJ4tccFxUoEn1VIrVeYj5o/edit?usp=sharing)
 [download](https://drive.google.com/file/d/1o3QdDRwV-N2k6P36uwwngPeYuQa9kT6l/view)
+[Link to presentation](https://docs.google.com/presentation/d/1MtZO6MqL-JbVPQcUIITk2JOYQhquVjC1zH9aq8QDyZw/edit?usp=sharing)
